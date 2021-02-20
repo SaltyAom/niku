@@ -2,8 +2,8 @@
 Initialize project
 
 Add support for 
-- [Niku](https://github.com/saltyaom/niku/blob/main/docs/niku.md)
-  - Niku extension for `TextFormField`
+- [Niku](https://github.com/saltyaom/niku/blob/main/docs/base.md)
+  - Niku base for styling widget
 - [NikuText](https://github.com/saltyaom/niku/blob/main/docs/text.md)
   - Niku extension for `Text`
 - [Column](https://github.com/saltyaom/niku/blob/main/docs/column.md)
