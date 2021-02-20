@@ -2,7 +2,7 @@
 Property builder for styling Widget
 
 <p align="center">
-  <img src="https://github.com/saltyaom/niku/blob/main/docs/images/niku.png" alt="Niku" width="300" />
+  <img src="https://github.com/saltyaom/niku/blob/main/doc/images/niku.png" alt="Niku" width="300" />
 </p>
 
 ## Why
@@ -69,19 +69,19 @@ Then you're ready to create your awesome Flutter project with effortless styling
 Currently, Niku is experimental library for styling user interface.
 
 Niku contains available Widget:
-- [Niku](https://github.com/saltyaom/niku/blob/main/docs/base.md)
+- [Niku](https://github.com/saltyaom/niku/blob/main/doc/base.md)
   - Niku base for styling widget
-- [NikuText](https://github.com/saltyaom/niku/blob/main/docs/text.md)
+- [NikuText](https://github.com/saltyaom/niku/blob/main/doc/text.md)
   - Niku extension for `Text`
-- [Column](https://github.com/saltyaom/niku/blob/main/docs/column.md)
+- [Column](https://github.com/saltyaom/niku/blob/main/doc/column.md)
   - Niku extension for `Row`
-- [Row](https://github.com/saltyaom/niku/blob/main/docs/row.md)
+- [Row](https://github.com/saltyaom/niku/blob/main/doc/row.md)
   - Niku extension for `Column`
-- [NikuTextField](https://github.com/saltyaom/niku/blob/main/docs/textfield.md)
+- [NikuTextField](https://github.com/saltyaom/niku/blob/main/doc/textfield.md)
   - Niku extension for `TextFormField`
-- [NikuFlatButton](https://github.com/saltyaom/niku/blob/main/docs/flatButton.md)
+- [NikuFlatButton](https://github.com/saltyaom/niku/blob/main/doc/flatButton.md)
   - Niku extension for `FlatButton`
-- [NikuRaisedButton](https://github.com/saltyaom/niku/blob/main/docs/raisedButton.md)
+- [NikuRaisedButton](https://github.com/saltyaom/niku/blob/main/doc/raisedButton.md)
   - Niku extension for `RaisedButton`
-- [NikuOtlineButton](https://github.com/saltyaom/niku/blob/main/docs/outlineButton.md)
+- [NikuOtlineButton](https://github.com/saltyaom/niku/blob/main/doc/outlineButton.md)
   - Niku extension for `OutlineButton`
