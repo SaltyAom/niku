@@ -1,0 +1,19 @@
+name: niku
+description: Property builder for styling Widget
+version: 0.1.0
+author: SaltyAom
+homepage: https://github.com/saltyAom/niku
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
