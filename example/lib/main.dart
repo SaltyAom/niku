@@ -26,8 +26,6 @@ class HomePage extends StatelessWidget {
                       .color(Colors.blue)
                       .build())
                   .onPressed(() {})
-                  .px(40)
-                  .py(20)
                   .splash(Colors.blueAccent.withOpacity(.125))
                   .highlight(Colors.blueAccent.withOpacity(.125))
                   .rounded(8)

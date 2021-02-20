@@ -75,10 +75,10 @@ class NikuRaisedButton {
   VoidCallback _onPressed;
   VoidCallback _onLongPressed;
 
-  double _pt;
-  double _pb;
-  double _pl;
-  double _pr;
+  double _pt = 0;
+  double _pb = 0;
+  double _pl = 0;
+  double _pr = 0;
   double _mt = 0;
   double _mb = 0;
   double _ml = 0;

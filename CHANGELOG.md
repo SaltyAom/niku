@@ -1,8 +1,12 @@
-## [0.1.1] - 2021/2/21.
+## [0.1.2] - 2021/2/21
+Bug fixes:
+- Fix require padding for `NikuFlatButton`, `NikuOutlineButton` and `NikuRaisedButton`
+
+## [0.1.1] - 2021/2/21
 Bug fixes:
 - `README.md` image not showing banner.
 
-## [0.1.0] - 2021/2/21.
+## [0.1.0] - 2021/2/21
 Initialize project
 
 Add support for 

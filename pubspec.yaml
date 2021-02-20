@@ -1,6 +1,6 @@
 name: niku
 description: Property builder for styling Widget
-version: 0.1.1
+version: 0.1.2
 homepage: https://github.com/saltyAom/niku
 
 environment:
