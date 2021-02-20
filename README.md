@@ -2,7 +2,7 @@
 Property builder for styling Widget
 
 <p align="center">
-  <img src="https://github.com/saltyaom/niku/blob/main/doc/images/niku.png" alt="Niku" width="300" />
+  <img src="https://raw.githubusercontent.com/saltyaom/niku/main/doc/images/niku.png" alt="Niku" width="300" />
 </p>
 
 ## Why

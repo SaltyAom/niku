@@ -1,4 +1,8 @@
-## [0.1.0] - TODO: Add release date.
+## [0.1.0] - 2021/2/21.
+Bug fixes:
+- `README.md` image not showing banner.
+
+## [0.1.0] - 2021/2/21.
 Initialize project
 
 Add support for 
