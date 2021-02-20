@@ -2,7 +2,7 @@
 
 Style property builder for building `OutlineButton`
 
-##### [Table of Content](https://github.com/saltyAom/niku/README.md)
+##### [Table of Content](https://github.com/SaltyAom/niku/blob/main/README.md)
 
 ### Example usage:
 ```
@@ -24,7 +24,7 @@ niku: >= 0.1.0
 import 'package:niku/niku.dart';
 
 // Just widget
-import 'package:niku/outlineButton.dart';
+import 'package:niku/widget/outlineButton.dart';
 ```
 
 ### Meta property list:
@@ -78,4 +78,4 @@ import 'package:niku/outlineButton.dart';
   - highlightBorderColor - Set border color when highlighted
   - disabledBorderColor - Set border color when disabled
 
-##### [Table of Content](https://github.com/saltyAom/niku/README.md)
+##### [Table of Content](https://github.com/SaltyAom/niku/blob/main/README.md)

@@ -2,7 +2,7 @@
 
 Style property builder for building `Row`
 
-##### [Table of Content](https://github.com/saltyAom/niku/README.md)
+##### [Table of Content](https://github.com/SaltyAom/niku/blob/main/README.md)
 
 ### Example usage:
 ```
@@ -25,10 +25,10 @@ niku: >= 0.1.0
 import 'package:niku/niku.dart';
 
 // With relatated widget
-import 'package:niku/axis.dart';
+import 'package:niku/widget/axis.dart';
 
 // Just widget
-import 'package:niku/row.dart';
+import 'package:niku/widget/row.dart';
 ```
 
 ### Meta property list:
@@ -68,4 +68,4 @@ import 'package:niku/row.dart';
   - insert - Insert child at index
   - insertAll - Insert all children at index
 
-##### [Table of Content](https://github.com/saltyAom/niku/README.md)
+##### [Table of Content](https://github.com/SaltyAom/niku/blob/main/README.md)

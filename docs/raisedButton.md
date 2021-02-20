@@ -2,7 +2,7 @@
 
 Style property builder for building `RaisedButton`
 
-##### [Table of Content](https://github.com/saltyAom/niku/README.md)
+##### [Table of Content](https://github.com/SaltyAom/niku/blob/main/README.md)
 
 ### Example usage:
 ```
@@ -24,7 +24,7 @@ niku: >= 0.1.0
 import 'package:niku/niku.dart';
 
 // Just widget
-import 'package:niku/raisedButton.dart';
+import 'package:niku/widget/raisedButton.dart';
 ```
 
 ### Meta property list:
@@ -79,4 +79,4 @@ import 'package:niku/raisedButton.dart';
   - highlightElevation - Set elevation when highlight
   - disabledElevation - Set elevatino when disabled
 
-##### [Table of Content](https://github.com/saltyAom/niku/README.md)
+##### [Table of Content](https://github.com/SaltyAom/niku/blob/main/README.md)

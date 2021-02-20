@@ -1,9 +1,9 @@
 library niku;
 
-export './src/axis.dart';
-export './src/base.dart';
-export './src/flatButton.dart';
-export './src/outlineButton.dart';
-export './src/raisedButton.dart';
-export './src/text.dart';
-export './src/textField.dart';
+export './widget/axis.dart';
+export './widget/base.dart';
+export './widget/flatButton.dart';
+export './widget/outlineButton.dart';
+export './widget/raisedButton.dart';
+export './widget/text.dart';
+export './widget/textField.dart';

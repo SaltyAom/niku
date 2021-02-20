@@ -2,7 +2,7 @@
 
 Style property builder for building `FlatButton`
 
-##### [Table of Content](https://github.com/saltyAom/niku/README.md)
+##### [Table of Content](https://github.com/SaltyAom/niku/blob/main/README.md)
 
 ### Example usage:
 ```
@@ -24,7 +24,7 @@ niku: >= 0.1.0
 import 'package:niku/niku.dart';
 
 // Just widget
-import 'package:niku/flatButton.dart';
+import 'package:niku/widget/flatButton.dart';
 ```
 
 ### Meta property list:
@@ -72,4 +72,4 @@ import 'package:niku/flatButton.dart';
 - theme - Apply style to button using existing theme
 - rounded - Apply border radius to button, will override shape
 
-##### [Table of Content](https://github.com/saltyAom/niku/README.md)
+##### [Table of Content](https://github.com/SaltyAom/niku/blob/main/README.md)

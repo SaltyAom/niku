@@ -2,7 +2,7 @@
 
 Style property builder for building `Text`
 
-##### [Table of Content](https://github.com/saltyAom/niku/README.md)
+##### [Table of Content](https://github.com/SaltyAom/niku/blob/main/README.md)
 
 ### Example usage:
 ```
@@ -21,7 +21,7 @@ niku: >= 0.1.0
 import 'package:niku/niku.dart';
 
 // Just widget
-import 'package:niku/text.dart';
+import 'package:niku/widget/text.dart';
 ```
 
 ### Meta property list:
@@ -86,4 +86,4 @@ import 'package:niku/text.dart';
 - textWidthBasis - Defines how to measure the width of the rendered text
 - textHeightBehavior - Defines how the paragraph will apply [TextStyle.height] to the ascent of the first line and descent of the last line
 
-##### [Table of Content](https://github.com/saltyAom/niku/README.md)
+##### [Table of Content](https://github.com/SaltyAom/niku/blob/main/README.md)
