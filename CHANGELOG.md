@@ -1,4 +1,4 @@
-## [0.1.0] - 2021/2/21.
+## [0.1.1] - 2021/2/21.
 Bug fixes:
 - `README.md` image not showing banner.
 
