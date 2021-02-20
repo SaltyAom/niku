@@ -69,8 +69,8 @@ Then you're ready to create your awesome Flutter project with effortless styling
 Currently, Niku is experimental library for styling user interface.
 
 Niku contains available Widget:
-- [Niku](https://github.com/saltyaom/niku/blob/main/docs/niku.md)
-  - Niku extension for `TextFormField`
+- [Niku](https://github.com/saltyaom/niku/blob/main/docs/base.md)
+  - Niku base for styling widget
 - [NikuText](https://github.com/saltyaom/niku/blob/main/docs/text.md)
   - Niku extension for `Text`
 - [Column](https://github.com/saltyaom/niku/blob/main/docs/column.md)
