@@ -62,4 +62,4 @@ class HomePage extends StatelessWidget {
 }
 ```
 
-[Next chapter](https://github.com/saltyaom/niku/blob/main/doc/tutorial/setting-up.md), we will review about 2 type of widget in Niku which will help you have solid understanding of how Niku work
+[Next chapter](https://github.com/saltyaom/niku/blob/main/doc/tutorial/foundation.md), we will review about 2 type of widget in Niku which will help you have solid understanding of how Niku work
