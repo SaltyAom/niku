@@ -83,5 +83,7 @@ Niku contains available Widget:
   - Niku extension for `FlatButton`
 - [NikuRaisedButton](https://github.com/saltyaom/niku/blob/main/doc/raisedButton.md)
   - Niku extension for `RaisedButton`
-- [NikuOtlineButton](https://github.com/saltyaom/niku/blob/main/doc/outlineButton.md)
+- [NikuOutlineButton](https://github.com/saltyaom/niku/blob/main/doc/outlineButton.md)
+  - Niku extension for `OutlineButton`
+- [NikuIconButton](https://github.com/saltyaom/niku/blob/main/doc/iconButton.md)
   - Niku extension for `OutlineButton`
