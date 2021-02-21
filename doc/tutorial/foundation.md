@@ -92,7 +92,7 @@ Niku(Text("Hello World"))
   .build()
 ```
 
-Because on Flutter spec, `InkWell` should have been `Material` as a parent to be able to property usable.
+Because on Flutter spec, `InkWell` should have `Material` as a parent to be able to property usable.
 
 You might doesn't like shorten `m` of `margin`, which is why we also have `margin` property for styling a padding.
 ```dart

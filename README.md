@@ -24,7 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  niku: 0.1.0
+  niku: 0.2.0
 ```
 
 Then you're ready to create your awesome Flutter project with effortless styling!
