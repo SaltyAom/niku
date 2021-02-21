@@ -29,7 +29,19 @@ class HomePage extends StatelessWidget {
                   .splash(Colors.blueAccent.withOpacity(.125))
                   .highlight(Colors.blueAccent.withOpacity(.125))
                   .rounded(8)
+                  .px(40)
+                  .py(20)
                   .my(20)
+                  .build(),
+              NikuIconButton(Icon(Icons.image))
+                  .setColor(
+                      color: Colors.blue,
+                      highlight: Colors.blueAccent.withOpacity(.1),
+                      splash: Colors.blueAccent.withOpacity(.2))
+                  .onPressed(() {})
+                  .tooltip("Image")
+                  .niku()
+                  .my(8)
                   .build(),
               NikuRaisedButton(NikuText("Raised Button").style(baseText))
                   .onPressed(() {})
@@ -55,13 +67,17 @@ class HomePage extends StatelessWidget {
                   .rounded(8)
                   .my(20)
                   .build(),
-              NikuText("Container")
+              NikuText("Material")
                   .fontSize(21)
                   .color(Colors.white)
                   .niku()
                   .px(40)
                   .py(20)
-                  .bg(Colors.blue)
+                  .on(tap: () {
+                    print("Clicked on Material");
+                  })
+                  .inkwell(splash: Colors.white24, highlight: Colors.white24)
+                  .material(color: Colors.blue)
                   .rounded(8)
                   .my(20)
                   .build(),
@@ -74,7 +90,13 @@ class HomePage extends StatelessWidget {
                 .mb(20)
                 .build())
             .append(NikuTextField("Niku Text Field")
+                .allowSelectAll(false)
                 .prefixIcon(Icon(Icons.edit))
+                .suffixIcon(NikuIconButton(Icon(Icons.delete))
+                    .onPressed(() {})
+                    .highlight(Colors.transparent)
+                    .splash(Colors.transparent)
+                    .build())
                 .color(Colors.black87)
                 .border(OutlineInputBorder(borderSide: BorderSide(width: 2)))
                 .focusedBorder(OutlineInputBorder(

@@ -23,6 +23,10 @@ niku: >= 0.1.0
 // All Widget
 import 'package:niku/niku.dart';
 
+// With relatated widget
+// Prerequistited: niku >= 0.1.2
+import 'package:niku/widget/button.dart';
+
 // Just widget
 import 'package:niku/widget/raisedButton.dart';
 ```
@@ -31,8 +35,8 @@ import 'package:niku/widget/raisedButton.dart';
 - niku() - Switch to Niku() property
 - build() - Apply styles and build RaisedButton as Widget
 - base() - Apply styles and build only base of RaisedButton as Widget
-- apply() - Apply existing NikuOutlineButton's property to current style
-- style() - Apply existing NikuOutlineButton's property to current style and build
+- apply() - Apply existing NikuRaisedButton's property to current style
+- style() - Apply existing NikuRaisedButton's property to current style and build
 - styleBase() - Apply existing NikuRaisedButton's property to current style and build only base
 
 ### Style Property list:

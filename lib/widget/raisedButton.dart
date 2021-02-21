@@ -943,7 +943,7 @@ class NikuRaisedButton {
 
   /// Switch to Niku() property
   ///
-  /// After this method is called, NikuOutlineButton property can't be applied anymore
+  /// After this method is called, NikuRaisedButton property can't be applied anymore
   ///
   /// ```
   /// NikuRaisedButton("Button")

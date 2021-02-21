@@ -1,22 +1,19 @@
-## Niku extension for Material Outline Button
+## Niku extension for Material Raised Button
 
-Style property builder for building `OutlineButton`
+Style property builder for building Raised Button
 
 ##### [Table of Content](https://github.com/SaltyAom/niku/blob/main/README.md)
 
 ### Example usage:
 ```
-NikuOutlineButton(Text("Outline Button"))
+NikuIconButton(Icon(Icons.edit))
   .color(Colors.blue)
-  .px(40)
-  .py(20)
-  .rounded(8)
-  .my(8)
+  .p(40)
   .build()
 ```
 
 ### Prerequisite:
-niku: >= 0.1.0
+niku: >= 0.1.2
 
 ### Availability: 
 ```dart
@@ -28,20 +25,18 @@ import 'package:niku/niku.dart';
 import 'package:niku/widget/button.dart';
 
 // Just widget
-import 'package:niku/widget/outlineButton.dart';
+import 'package:niku/widget/raisedButton.dart';
 ```
 
 ### Meta property list:
 - niku() - Switch to Niku() property
-- build() - Apply styles and build OutlineButton as Widget
-- base() - Apply styles and build only base of OutlineButton as Widget
+- build() - Apply styles and build RaisedButton as Widget
 - apply() - Apply existing NikuOutlineButton's property to current style
 - style() - Apply existing NikuOutlineButton's property to current style and build
-- styleBase() - Apply existing NikuOutlineButton's property to current style and build only base
 
 ### Style Property list:
 - onPressed - Callback when button is pressed
-- onLongPressed - Callback when button is long pressed
+- visualDensity - Defines the visual density of user interface components
 - padding, p - Padding of container
   - padding, p - apply padding to all side
   - px - apply padding to x axis
@@ -50,14 +45,18 @@ import 'package:niku/widget/outlineButton.dart';
   - pl - apply padding left side
   - pb - apply padding bottom side
   - pl - apply padding right side
-- margin, m - Padding of container
-  - margin, m - apply margin to all side
-  - mx - apply margin to x axis
-  - my - apply margin y axis
-  - mt - apply margin top side
-  - ml - apply margin left side
-  - mb - apply margin bottom side
-  - ml - apply margin right side
+- alignment, align - Set self alignment
+  - align - Accept [Alignment] to align self
+  - topLeft - Apply widget to top-left
+  - topCenter - Apply widget to top-center
+  - topRight - Apply widget to top-right
+  - centerLeft - Apply widget to center-left
+  - center - Apply widget to center
+  - centerRight - Apply widget to center-right
+  - bottomLeft - Apply widget to bottom-left
+  - bottomCenter - Apply widget to bottom-center
+  - bottomRight - Apply widget to bottom-right
+- splashRadius - The splash radius. If null, default splash radius of [Material.defaultSplashRadius] is used
 - setColor - Apply color to all button property
   - setColor - Apply all color property using named property
   - bg, color - Apply color to button background
@@ -66,20 +65,11 @@ import 'package:niku/widget/outlineButton.dart';
   - focus - Background color of button when focused
   - highlight - Background color of button when highlighted
   - splash - Splash/Ripple color of button
-- textColor - Set text color of button, won't override existing color
-- shape - Apply custom shape to button
-- clip - Apply clip to button
+- mouseCursor - The cursor for a mouse pointer when it enters or is hovering over the button
+- focusNode - An optional focus node to use as the focus node for this widget
 - autofocus - Determine whether button should be auto focus
-- theme - Apply style to button using existing theme
-- rounded - Apply border radius to button, will override shape
-- border, borderSide - Set border of button
-  - border, borderSide - Set border using [BorderSide]
-  - borderWidth - Set border width
-  - borderColor - Set border color
-  - borderStyle - Set border style
- - setBorderColor - Set all border color
-  - color - Set border color
-  - highlightBorderColor - Set border color when highlighted
-  - disabledBorderColor - Set border color when disabled
+- tooltip - Explaination of the button
+- enableFeedback - Whether detected gestures should provide acoustic and/or haptic feedback
+- constraints - Whether detected gestures should provide acoustic and/or haptic feedback
 
 ##### [Table of Content](https://github.com/SaltyAom/niku/blob/main/README.md)

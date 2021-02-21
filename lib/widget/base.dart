@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 /// Niku Widget for styling widget
 ///
@@ -35,7 +36,7 @@ import 'package:flutter/material.dart';
 ///   - mb - Apply margin bottom
 ///   - ml - Apply margin right side
 /// - align - Set self alignment
-///   - align - Accept [Align] to align self
+///   - align - Accept [Alignment] to align self
 ///   - topLeft - Apply widget to top-left
 ///   - topCenter - Apply widget to top-center
 ///   - topRight - Apply widget to top-right
@@ -72,8 +73,60 @@ import 'package:flutter/material.dart';
 /// - heroTag - Apply [Hero] to widget
 /// - ignorePointer - Apply [IgnorePointer] to widget
 /// - absorbPointer - Apply [AbsorbPointer] to widget
-/// - tooltip - Add tooptip to widget
-/// - tarnsform - Add transform to widget
+/// - tooltip - Add tooltip to widget
+/// - transform - Add transform to widget
+/// - material - Add [Material] to widget
+/// - inkwell - Add [InkWell] to widget
+/// - border - Decorate with border using [Border]
+///
+/// Event Listener
+/// - on - Add multiple event listener at once
+///   - tapDown - This is called after a short timeout, even if the winning gesture has not yet been selected. If the tap gesture wins, [onTapUp] will be called, otherwise [onTapCancel] will be called
+///   - tapUp - This triggers immediately before [onTap] in the case of the tap gesture winning. If the tap gesture did not win, [onTapCancel] is called instead
+///   - tap - This triggers when the tap gesture wins. If the tap gesture did not win, [onTapCancel] is called instead
+///   - tapCancel - This is called after [onTapDown], and instead of [onTapUp] and [onTap], if the tap gesture did not win
+///   - secondaryTab - This triggers when the tap gesture wins. If the tap gesture did not win, [onSecondaryTapCancel] is called instead
+///   - secondaryTapDown - This is called after a short timeout, even if the winning gesture has not yet been selected. If the tap gesture wins, [onSecondaryTapUp] will be called, otherwise [onSecondaryTapCancel] will be called
+///   - secondaryTapUp - This triggers in the case of the tap gesture winning. If the tap gesture did not win, [onSecondaryTapCancel] is called instead
+///   - secondaryTapCancel - The pointer that previously triggered [onDoubleTapDown] will not end up causing a double tap
+///   - tertiaryTapDown - Triggered immediately after the down event of the second tap
+///   - tertiaryTapUp - This triggers in the case of the tap gesture winning. If the tap gesture did not win, [onTertiaryTapCancel] is called instead
+///   - tertiaryTapCancel - This is called after [onTertiaryTapDown], and instead of [onTertiaryTapUp], if the tap gesture did not win
+///   - doubleTapDown - Triggered immediately after the down event of the second tap
+///   - doubleTap - The user has tapped the screen with a primary button at the same location twice in quick succession
+///   - doubleTapCancel - The pointer that previously triggered [onDoubleTapDown] will not end up causing a double tap
+///   - longPress - Triggered when a pointer has remained in contact with the screen at the same location for a long period of time
+///   - longPressStart - Triggered when a pointer has remained in contact with the screen at the same location for a long period of time
+///   - longPressMoveUpdate - A pointer has been drag-moved after a long press with a primary button
+///   - longPressUp - A pointer that has triggered a long-press with a primary button has stopped contacting the screen
+///   - longPressEnd - A pointer that has triggered a long-press with a primary button has stopped contacting the screen
+///   - secondaryLongPress - Triggered when a pointer has remained in contact with the screen at the same location for a long period of time
+///   - secondaryLongPressStart - Triggered when a pointer has remained in contact with the screen at the same location for a long period of time
+///   - secondaryLongPressMoveUpdate - A pointer has been drag-moved after a long press with a secondary button
+///   - secondaryLongPressUp - A pointer that has triggered a long-press with a secondary button has stopped contacting the screen
+///   - secondaryLongPressEnd - A pointer that has triggered a long-press with a secondary button has stopped contacting the screen
+///   - verticalDragDown - A pointer has contacted the screen with a primary button and might begin to move vertically
+///   - verticalDragStart - A pointer has contacted the screen with a primary button and has begun to move vertically
+///   - verticalDragUpdate - A pointer that is in contact with the screen with a primary button and moving vertically has moved in the vertical direction
+///   - verticalDragEnd - A pointer that was previously in contact with the screen with a primary button and moving horizontally is no longer in contact with the screen and was moving at a specific velocity when it stopped contacting the screen
+///   - verticalDragCancel - The pointer that previously triggered [onHorizontalDragDown] did not complete
+///   - horizontalDragDown - A pointer has contacted the screen with a primary button and might begin to move horizontally
+///   - horizontalDragStart - A pointer has contacted the screen with a primary button and has begun to move horizontally
+///   - horizontalDragUpdate - A pointer that is in contact with the screen with a primary button and moving horizontally has moved in the horizontal direction
+///   - horizontalDragEnd - A pointer that is in contact with the screen with a primary button and moving horizontally has moved in the horizontal direction
+///   - horizontalDragCancel - The pointer that previously triggered [onHorizontalDragDown] did not complete
+///   - forcePressStart - The pointer is in contact with the screen and has pressed with sufficient force to initiate a force press. The amount of force is at least [ForcePressGestureRecognizer.startPressure]
+///   - forcePressPeak - The pointer is in contact with the screen and has pressed with the maximum force. The amount of force is at least [ForcePressGestureRecognizer.peakPressure]
+///   - forcePressUpdate - A pointer is in contact with the screen, has previously passed the [ForcePressGestureRecognizer.startPressure] and is either moving on the plane of the screen, pressing the screen with varying forces or both simultaneously
+///   - forcePressEnd - The pointer is no longer in contact with the screen
+///   - panDown - A pointer has contacted the screen with a primary button and might begin to move
+///   - panStart - A pointer has contacted the screen with a primary button and has begun to move
+///   - panUpdate - A pointer that is in contact with the screen with a primary button and moving has moved again
+///   - panEnd - A pointer that was previously in contact with the screen with a primary button and moving is no longer in contact with the screen and was moving at a specific velocity when it stopped contacting the screen
+///   - panCancel - The pointer that previously triggered [onPanDown] did not complete
+///   - scaleStart - The pointers in contact with the screen have established a focal point and initial scale of 1.0
+///   - scaleUpdate - The pointers in contact with the screen have indicated a new focal point and/or scale
+///   - scaleEnd - The pointers are no longer in contact with the screen
 class Niku {
   Widget _widget;
 
@@ -831,4 +884,220 @@ extension BaseProperty on Niku {
   /// ```
   Niku transform(Matrix4 transform) =>
       Niku(Transform(transform: transform, child: this._widget));
+
+  /// Event Listener
+  ///
+  /// Equivalent to
+  /// ```
+  /// GestureDetector(
+  ///   input
+  /// )
+  /// ```
+  ///
+  /// - on - Add multiple event listener at once
+  ///   - tapDown - This is called after a short timeout, even if the winning gesture has not yet been selected. If the tap gesture wins, [onTapUp] will be called, otherwise [onTapCancel] will be called
+  ///   - tapUp - This triggers immediately before [onTap] in the case of the tap gesture winning. If the tap gesture did not win, [onTapCancel] is called instead
+  ///   - tap - This triggers when the tap gesture wins. If the tap gesture did not win, [onTapCancel] is called instead
+  ///   - tapCancel - This is called after [onTapDown], and instead of [onTapUp] and [onTap], if the tap gesture did not win
+  ///   - secondaryTab - This triggers when the tap gesture wins. If the tap gesture did not win, [onSecondaryTapCancel] is called instead
+  ///   - secondaryTapDown - This is called after a short timeout, even if the winning gesture has not yet been selected. If the tap gesture wins, [onSecondaryTapUp] will be called, otherwise [onSecondaryTapCancel] will be called
+  ///   - secondaryTapUp - This triggers in the case of the tap gesture winning. If the tap gesture did not win, [onSecondaryTapCancel] is called instead
+  ///   - secondaryTapCancel - The pointer that previously triggered [onDoubleTapDown] will not end up causing a double tap
+  ///   - tertiaryTapDown - Triggered immediately after the down event of the second tap
+  ///   - tertiaryTapUp - This triggers in the case of the tap gesture winning. If the tap gesture did not win, [onTertiaryTapCancel] is called instead
+  ///   - tertiaryTapCancel - This is called after [onTertiaryTapDown], and instead of [onTertiaryTapUp], if the tap gesture did not win
+  ///   - doubleTapDown - Triggered immediately after the down event of the second tap
+  ///   - doubleTap - The user has tapped the screen with a primary button at the same location twice in quick succession
+  ///   - doubleTapCancel - The pointer that previously triggered [onDoubleTapDown] will not end up causing a double tap
+  ///   - longPress - Triggered when a pointer has remained in contact with the screen at the same location for a long period of time
+  ///   - longPressStart - Triggered when a pointer has remained in contact with the screen at the same location for a long period of time
+  ///   - longPressMoveUpdate - A pointer has been drag-moved after a long press with a primary button
+  ///   - longPressUp - A pointer that has triggered a long-press with a primary button has stopped contacting the screen
+  ///   - longPressEnd - A pointer that has triggered a long-press with a primary button has stopped contacting the screen
+  ///   - secondaryLongPress - Triggered when a pointer has remained in contact with the screen at the same location for a long period of time
+  ///   - secondaryLongPressStart - Triggered when a pointer has remained in contact with the screen at the same location for a long period of time
+  ///   - secondaryLongPressMoveUpdate - A pointer has been drag-moved after a long press with a secondary button
+  ///   - secondaryLongPressUp - A pointer that has triggered a long-press with a secondary button has stopped contacting the screen
+  ///   - secondaryLongPressEnd - A pointer that has triggered a long-press with a secondary button has stopped contacting the screen
+  ///   - verticalDragDown - A pointer has contacted the screen with a primary button and might begin to move vertically
+  ///   - verticalDragStart - A pointer has contacted the screen with a primary button and has begun to move vertically
+  ///   - verticalDragUpdate - A pointer that is in contact with the screen with a primary button and moving vertically has moved in the vertical direction
+  ///   - verticalDragEnd - A pointer that was previously in contact with the screen with a primary button and moving horizontally is no longer in contact with the screen and was moving at a specific velocity when it stopped contacting the screen
+  ///   - verticalDragCancel - The pointer that previously triggered [onHorizontalDragDown] did not complete
+  ///   - horizontalDragDown - A pointer has contacted the screen with a primary button and might begin to move horizontally
+  ///   - horizontalDragStart - A pointer has contacted the screen with a primary button and has begun to move horizontally
+  ///   - horizontalDragUpdate - A pointer that is in contact with the screen with a primary button and moving horizontally has moved in the horizontal direction
+  ///   - horizontalDragEnd - A pointer that is in contact with the screen with a primary button and moving horizontally has moved in the horizontal direction
+  ///   - horizontalDragCancel - The pointer that previously triggered [onHorizontalDragDown] did not complete
+  ///   - forcePressStart - The pointer is in contact with the screen and has pressed with sufficient force to initiate a force press. The amount of force is at least [ForcePressGestureRecognizer.startPressure]
+  ///   - forcePressPeak - The pointer is in contact with the screen and has pressed with the maximum force. The amount of force is at least [ForcePressGestureRecognizer.peakPressure]
+  ///   - forcePressUpdate - A pointer is in contact with the screen, has previously passed the [ForcePressGestureRecognizer.startPressure] and is either moving on the plane of the screen, pressing the screen with varying forces or both simultaneously
+  ///   - forcePressEnd - The pointer is no longer in contact with the screen
+  ///   - panDown - A pointer has contacted the screen with a primary button and might begin to move
+  ///   - panStart - A pointer has contacted the screen with a primary button and has begun to move
+  ///   - panUpdate - A pointer that is in contact with the screen with a primary button and moving has moved again
+  ///   - panEnd - A pointer that was previously in contact with the screen with a primary button and moving is no longer in contact with the screen and was moving at a specific velocity when it stopped contacting the screen
+  ///   - panCancel - The pointer that previously triggered [onPanDown] did not complete
+  ///   - scaleStart - The pointers in contact with the screen have established a focal point and initial scale of 1.0
+  ///   - scaleUpdate - The pointers in contact with the screen have indicated a new focal point and/or scale
+  ///   - scaleEnd - The pointers are no longer in contact with the screen
+  Niku on(
+          {void Function(TapDownDetails) tapDown,
+          void Function(TapUpDetails) tapUp,
+          VoidCallback tap,
+          VoidCallback tapCancel,
+          VoidCallback secondaryTap,
+          void Function(TapDownDetails) secondaryTapDown,
+          void Function(TapUpDetails) secondaryTapUp,
+          VoidCallback secondaryTapCancel,
+          void Function(TapDownDetails) tertiaryTapDown,
+          void Function(TapUpDetails) tertiaryTapUp,
+          VoidCallback tertiaryTapCancel,
+          void Function(TapDownDetails) doubleTapDown,
+          VoidCallback doubleTap,
+          VoidCallback doubleTapCancel,
+          VoidCallback longPress,
+          void Function(LongPressStartDetails) longPressStart,
+          void Function(LongPressMoveUpdateDetails) longPressMoveUpdate,
+          VoidCallback longPressUp,
+          void Function(LongPressEndDetails) longPressEnd,
+          VoidCallback secondaryLongPress,
+          void Function(LongPressStartDetails) secondaryLongPressStart,
+          void Function(LongPressMoveUpdateDetails)
+              secondaryLongPressMoveUpdate,
+          VoidCallback secondaryLongPressUp,
+          void Function(LongPressEndDetails) secondaryLongPressEnd,
+          void Function(DragDownDetails) verticalDragDown,
+          void Function(DragStartDetails) verticalDragStart,
+          void Function(DragUpdateDetails) verticalDragUpdate,
+          void Function(DragEndDetails) verticalDragEnd,
+          VoidCallback verticalDragCancel,
+          void Function(DragDownDetails) horizontalDragDown,
+          void Function(DragStartDetails) horizontalDragStart,
+          void Function(DragUpdateDetails) horizontalDragUpdate,
+          void Function(DragEndDetails) horizontalDragEnd,
+          VoidCallback horizontalDragCancel,
+          void Function(ForcePressDetails) forcePressStart,
+          void Function(ForcePressDetails) forcePressPeak,
+          void Function(ForcePressDetails) forcePressUpdate,
+          void Function(ForcePressDetails) forcePressEnd,
+          void Function(DragDownDetails) panDown,
+          void Function(DragStartDetails) panStart,
+          void Function(DragUpdateDetails) panUpdate,
+          void Function(DragEndDetails) panEnd,
+          VoidCallback panCancel,
+          void Function(ScaleStartDetails) scaleStart,
+          void Function(ScaleUpdateDetails) scaleUpdate,
+          void Function(ScaleEndDetails) scaleEnd}) =>
+      Niku(GestureDetector(
+        onTapDown: tapDown,
+        onTapUp: tapUp,
+        onTap: tap,
+        onTapCancel: tapCancel,
+        onSecondaryTap: secondaryTap,
+        onSecondaryTapDown: secondaryTapDown,
+        onSecondaryTapUp: secondaryTapUp,
+        onSecondaryTapCancel: secondaryTapCancel,
+        onTertiaryTapDown: tertiaryTapDown,
+        onTertiaryTapUp: tertiaryTapUp,
+        onTertiaryTapCancel: tertiaryTapCancel,
+        onDoubleTapDown: doubleTapDown,
+        onDoubleTap: doubleTap,
+        onDoubleTapCancel: doubleTapCancel,
+        onLongPress: longPress,
+        onLongPressStart: longPressStart,
+        onLongPressMoveUpdate: longPressMoveUpdate,
+        onLongPressUp: longPressUp,
+        onLongPressEnd: longPressEnd,
+        onSecondaryLongPress: secondaryLongPress,
+        onSecondaryLongPressStart: secondaryLongPressStart,
+        onSecondaryLongPressMoveUpdate: secondaryLongPressMoveUpdate,
+        onSecondaryLongPressUp: secondaryLongPressUp,
+        onSecondaryLongPressEnd: secondaryLongPressEnd,
+        onVerticalDragDown: verticalDragDown,
+        onVerticalDragStart: verticalDragStart,
+        onVerticalDragUpdate: verticalDragUpdate,
+        onVerticalDragEnd: verticalDragEnd,
+        onVerticalDragCancel: verticalDragCancel,
+        onHorizontalDragDown: horizontalDragDown,
+        onHorizontalDragStart: horizontalDragStart,
+        onHorizontalDragUpdate: horizontalDragUpdate,
+        onHorizontalDragEnd: horizontalDragEnd,
+        onHorizontalDragCancel: horizontalDragCancel,
+        onForcePressStart: forcePressStart,
+        onForcePressPeak: forcePressPeak,
+        onForcePressUpdate: forcePressUpdate,
+        onForcePressEnd: forcePressEnd,
+        onPanDown: panDown,
+        onPanStart: panStart,
+        onPanUpdate: panUpdate,
+        onPanEnd: panEnd,
+        onPanCancel: panCancel,
+        onScaleStart: scaleStart,
+        onScaleUpdate: scaleUpdate,
+        onScaleEnd: scaleEnd,
+        child: this._widget,
+      ));
+
+  /// Add [Material] to widget
+  ///
+  /// Equivalent to
+  /// ```
+  /// Material(
+  ///   elevation: elevation,
+  ///   color: color,
+  ///   shadowColor: shadowColor
+  /// )
+  /// ```
+  Niku material({double elevation, Color color, Color shadowColor}) =>
+      Niku(Material(
+        child: this._widget,
+        elevation: elevation = 0,
+        color: color,
+        shadowColor: shadowColor,
+      ));
+
+  /// Add [InkWell] to widget
+  ///
+  /// Equivalent to
+  /// ```
+  /// InkWell(
+  ///   hoverColor: hover,
+  ///   focusColor: focus,
+  ///   highlightColor: highlight,
+  ///   splashColor: splash,
+  ///   radius: radius,
+  ///   autofocus: autofocus
+  /// )
+  /// ```
+  Niku inkwell(
+          {Color hover,
+          Color focus,
+          Color highlight,
+          Color splash,
+          double radius,
+          bool autofocus = false}) =>
+      Niku(InkWell(
+          child: this._widget,
+          hoverColor: hover,
+          focusColor: focus,
+          highlightColor: highlight,
+          splashColor: splash,
+          radius: radius,
+          onTap: () {},
+          autofocus: autofocus));
+
+  /// Decorate with border using [Border]
+  ///
+  /// Equivalent to
+  /// ```
+  /// Container(
+  ///   decoration: BoxDecoration(
+  ///     border: input
+  ///   )
+  /// )
+  /// ```
+  Niku border(Border border) => Niku(Container(
+        decoration: BoxDecoration(border: border),
+      ));
 }

@@ -1,3 +1,19 @@
+## [0.2.0] - 2021/2/21
+Feature:
+- Add support for:
+  - [IconButton](https://github.com/saltyaom/niku/blob/main/doc/iconButton.md)
+    - Niku extension for `IconButton`
+- Add new property to `Niku (base)`:
+  - `on` - Event listener
+  - `material` - Add [Material] to Widget
+  - `inkWell` - Add [InkWell] to Widget
+  - `border` - Decorate with border using [Border]
+- Add group for `flatButton`, `raisedButton`, `outlineButton` and `flatButton` as `package:niku/widget/button`
+
+- Bug fixes:
+  - Wrong spelling of documentation in several place
+  - Prevent `toolbarOptions` from crashing if not specified all by adding default value
+
 ## [0.1.2] - 2021/2/21
 Bug fixes:
 - Fix require padding for `NikuFlatButton`, `NikuOutlineButton` and `NikuRaisedButton`

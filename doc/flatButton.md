@@ -23,6 +23,10 @@ niku: >= 0.1.0
 // All Widget
 import 'package:niku/niku.dart';
 
+// With relatated widget
+// Prerequistited: niku >= 0.1.2
+import 'package:niku/widget/button.dart';
+
 // Just widget
 import 'package:niku/widget/flatButton.dart';
 ```
