@@ -86,4 +86,4 @@ Niku contains available Widget:
 - [NikuOutlineButton](https://github.com/saltyaom/niku/blob/main/doc/outlineButton.md)
   - Niku extension for `OutlineButton`
 - [NikuIconButton](https://github.com/saltyaom/niku/blob/main/doc/iconButton.md)
-  - Niku extension for `OutlineButton`
+  - Niku extension for `IconButton`
