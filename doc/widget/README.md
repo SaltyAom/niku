@@ -1,4 +1,4 @@
-##### [Table of Content](https://github.com/saltyaom/niku/blob/main/doc/widget/README.md)
+##### [Table of Content](https://github.com/saltyaom/niku/blob/main/doc/README.md)
 
 ## Available Widget
 Contains usable property and explaination.
@@ -25,4 +25,4 @@ Niku contains available Widget:
 - [NikuIconButton](https://github.com/saltyaom/niku/blob/main/doc/widget/iconButton.md)
     - Niku extension for `IconButton`
 
-##### [Table of Content](https://github.com/saltyaom/niku/blob/main/doc/widget/README.md)
+##### [Table of Content](https://github.com/saltyaom/niku/blob/main/doc/README.md)

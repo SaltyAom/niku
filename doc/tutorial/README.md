@@ -1,4 +1,4 @@
-##### [Table of Content](https://github.com/saltyaom/niku/blob/main/doc/widget/README.md)
+##### [Table of Content](https://github.com/saltyaom/niku/blob/main/doc/README.md)
 
 ## Tutorial
 These tutorial will help you quick start and understand the concept of Niku.
@@ -9,4 +9,4 @@ These tutorial will help you quick start and understand the concept of Niku.
   - [Setting Up](https://github.com/saltyaom/niku/blob/main/doc/tutorial/setting-up.md)
   - [Foundation](https://github.com/saltyaom/niku/blob/main/doc/tutorial/foundation.md)
 
-##### [Table of Content](https://github.com/saltyaom/niku/blob/main/doc/widget/README.md)
+##### [Table of Content](https://github.com/saltyaom/niku/blob/main/doc/README.md)
