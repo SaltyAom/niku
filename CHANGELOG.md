@@ -1,3 +1,7 @@
+## [0.2.1] - 2021/2/21
+Feature:
+- Add property documentation
+
 ## [0.2.0] - 2021/2/21
 Feature:
 - Add support for:

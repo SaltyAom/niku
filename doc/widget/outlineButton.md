@@ -2,7 +2,7 @@
 
 Style property builder for building `OutlineButton`
 
-##### [Table of Content](https://github.com/SaltyAom/niku/blob/main/README.md)
+##### [Table of Content](https://github.com/saltyaom/niku/blob/main/doc/widget/README.md)
 
 ### Example usage:
 ```
@@ -82,4 +82,4 @@ import 'package:niku/widget/outlineButton.dart';
   - highlightBorderColor - Set border color when highlighted
   - disabledBorderColor - Set border color when disabled
 
-##### [Table of Content](https://github.com/SaltyAom/niku/blob/main/README.md)
+##### [Table of Content](https://github.com/saltyaom/niku/blob/main/doc/widget/README.md)

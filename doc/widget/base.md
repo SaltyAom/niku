@@ -2,13 +2,13 @@
 
 Style property builder for building Widget
 
-##### [Table of Content](https://github.com/SaltyAom/niku/blob/main/README.md)
+##### [Table of Content](https://github.com/saltyaom/niku/blob/main/doc/widget/README.md)
 
 ### Example usage:
 ```
 Niku(Container())
   .background(Colors.blue)
-  .padding(21)
+  .p(21)
   .build()
 ```
 
@@ -143,4 +143,4 @@ niku: >= 0.1.2
   - scaleUpdate - The pointers in contact with the screen have indicated a new focal point and/or scale
   - scaleEnd - The pointers are no longer in contact with the screen
 
-##### [Table of Content](https://github.com/SaltyAom/niku/blob/main/README.md)
+##### [Table of Content](https://github.com/saltyaom/niku/blob/main/doc/widget/README.md)

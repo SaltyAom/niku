@@ -2,7 +2,7 @@
 
 Style property builder for building `Column`
 
-##### [Table of Content](https://github.com/SaltyAom/niku/blob/main/README.md)
+##### [Table of Content](https://github.com/saltyaom/niku/blob/main/doc/widget/README.md)
 
 ### Example usage:
 ```
@@ -68,4 +68,4 @@ Children property list:
   - insert - Insert child at index
   - insertAll - Insert all children at index
 
-##### [Table of Content](https://github.com/SaltyAom/niku/blob/main/README.md)
+##### [Table of Content](https://github.com/saltyaom/niku/blob/main/doc/widget/README.md)

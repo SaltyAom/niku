@@ -11,7 +11,7 @@ import 'package:flutter/rendering.dart';
 /// ```
 /// Niku(Container())
 ///   .background(Colors.blue)
-///   .padding(21)
+///   .p(21)
 ///   .build()
 /// ```
 ///
@@ -138,7 +138,7 @@ class Niku {
   /// ```
   /// Niku(Container())
   ///   .background(Colors.blue)
-  ///   .padding(21)
+  ///   .p(21)
   ///   .build()
   /// ```
   ///
@@ -209,7 +209,7 @@ class Niku {
   /// ```
   /// Niku(Container())
   ///   .background(Colors.blue)
-  ///   .padding(21)
+  ///   .p(21)
   ///   .build()
   /// ```
   Widget build() => this._widget;

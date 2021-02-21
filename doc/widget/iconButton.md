@@ -2,7 +2,7 @@
 
 Style property builder for building Raised Button
 
-##### [Table of Content](https://github.com/SaltyAom/niku/blob/main/README.md)
+##### [Table of Content](https://github.com/saltyaom/niku/blob/main/doc/widget/README.md)
 
 ### Example usage:
 ```
@@ -72,4 +72,4 @@ import 'package:niku/widget/raisedButton.dart';
 - enableFeedback - Whether detected gestures should provide acoustic and/or haptic feedback
 - constraints - Whether detected gestures should provide acoustic and/or haptic feedback
 
-##### [Table of Content](https://github.com/SaltyAom/niku/blob/main/README.md)
+##### [Table of Content](https://github.com/saltyaom/niku/blob/main/doc/widget/README.md)

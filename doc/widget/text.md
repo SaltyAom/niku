@@ -2,7 +2,7 @@
 
 Style property builder for building `Text`
 
-##### [Table of Content](https://github.com/SaltyAom/niku/blob/main/README.md)
+##### [Table of Content](https://github.com/saltyaom/niku/blob/main/doc/widget/README.md)
 
 ### Example usage:
 ```
@@ -86,4 +86,4 @@ import 'package:niku/widget/text.dart';
 - textWidthBasis - Defines how to measure the width of the rendered text
 - textHeightBehavior - Defines how the paragraph will apply [TextStyle.height] to the ascent of the first line and descent of the last line
 
-##### [Table of Content](https://github.com/SaltyAom/niku/blob/main/README.md)
+##### [Table of Content](https://github.com/saltyaom/niku/blob/main/doc/widget/README.md)

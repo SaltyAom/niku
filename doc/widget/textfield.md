@@ -2,7 +2,7 @@
 
 Style property builder for building `TextFormField`
 
-##### [Table of Content](https://github.com/SaltyAom/niku/blob/main/README.md)
+##### [Table of Content](https://github.com/saltyaom/niku/blob/main/doc/widget/README.md)
 
 ### Example usage:
 ```
@@ -404,4 +404,4 @@ import 'package:niku/widget/textfield.dart';
   - alphabetic - Using [TextBaseline.alphabetic]
   - ideographic - Using [TextBaseline.ideographic]
 
-##### [Table of Content](https://github.com/SaltyAom/niku/blob/main/README.md)
+##### [Table of Content](https://github.com/saltyaom/niku/blob/main/doc/widget/README.md)

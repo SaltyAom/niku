@@ -12,47 +12,11 @@ Since everything is a widget, a style property like `Padding`, `Align`, `Fractio
 `Niku` allow developer to style property using builder or `SwiftUI modifier like` to compose styling.
 By reducing the nested hell andbracket usage in Flutter which made styling Flutter widget more maintainable.
 
-```dart
-// Traditional Flutter
-Center(
-  child: Tooltip(
-    message: "A Flat Button",
-    child: Padding(
-      padding: EdgeInsets.symmetric(vertical: 20)
-      child: FractionallySizedBox(
-        widthFactor: .7,
-        child: FlatButton(
-          onPressed: () {},
-            color: Colors.blue 
-            child: Text(
-              "Flat Button",
-              style: const TextStyle(
-              fontSize: 21,
-              color: Colors.white
-            )
-          )
-        )
-      )
-    )
-  )
-);
+<p align="center">
+  <img src="https://raw.githubusercontent.com/saltyaom/niku/main/doc/images/korone-drake-format.jpg" alt="Comparison" />
+</p>
 
-// Niku
-NikuFlatButton(
-  NikuText("Flat Button")
-    .fontSize(21)
-    .color(Colors.blue)
-    .build()
-)
-  .py(20)
-  .niku()
-  .fractionWidth(.7)
-  .tooltip("A Flat Button")
-  .center()
-  .build();
-```
-
-## Getting Started
+## Getting Start
 Niku required no dependencies at all.
 Starting by adding `niku` to `pubspec.yaml`:
 ```yaml
@@ -65,25 +29,39 @@ dependencies:
 
 Then you're ready to create your awesome Flutter project with effortless styling!
 
-## Documentation
-Currently, Niku is experimental library for styling user interface.
+See how simple building Text widget is!
+```dart
+import 'package:niku/niku.dart'; // <--- Import Niku library
 
-Niku contains available Widget:
-- [Niku](https://github.com/saltyaom/niku/blob/main/doc/base.md)
-  - Niku base for styling widget
-- [NikuText](https://github.com/saltyaom/niku/blob/main/doc/text.md)
-  - Niku extension for `Text`
-- [Column](https://github.com/saltyaom/niku/blob/main/doc/column.md)
-  - Niku extension for `Row`
-- [Row](https://github.com/saltyaom/niku/blob/main/doc/row.md)
-  - Niku extension for `Column`
-- [NikuTextField](https://github.com/saltyaom/niku/blob/main/doc/textfield.md)
-  - Niku extension for `TextFormField`
-- [NikuFlatButton](https://github.com/saltyaom/niku/blob/main/doc/flatButton.md)
-  - Niku extension for `FlatButton`
-- [NikuRaisedButton](https://github.com/saltyaom/niku/blob/main/doc/raisedButton.md)
-  - Niku extension for `RaisedButton`
-- [NikuOutlineButton](https://github.com/saltyaom/niku/blob/main/doc/outlineButton.md)
-  - Niku extension for `OutlineButton`
-- [NikuIconButton](https://github.com/saltyaom/niku/blob/main/doc/iconButton.md)
-  - Niku extension for `IconButton`
+NikuText("Hello World")
+  .color(Colors.blue) // <-- Apply color
+  .fontSize(21)       // <-- Add font size
+  .build()            // <-- Create widget
+```
+## Documentation
+Niku is style property builder for styling user interface inspired by SwiftUI.
+
+## Table of content
+- [Tutorial](https://github.com/saltyaom/niku/blob/main/doc/tutorial/README.md)
+  - [Getting Started](https://github.com/saltyaom/niku/blob/main/doc/tutorial/getting-started.md)
+  - [Setting Up](https://github.com/saltyaom/niku/blob/main/doc/tutorial/setting-up.md)
+  - [Foundation](https://github.com/saltyaom/niku/blob/main/doc/tutorial/foundation.md)
+- [Available Widget](https://github.com/saltyaom/niku/blob/main/doc/widget/README.md)
+  - [Niku](https://github.com/saltyaom/niku/blob/main/doc/widget/base.md)
+    - Niku base for styling widget
+  - [NikuText](https://github.com/saltyaom/niku/blob/main/doc/widget/text.md)
+    - Niku extension for `Text`
+  - [Column](https://github.com/saltyaom/niku/blob/main/doc/widget/column.md)
+    - Niku extension for `Row`
+  - [Row](https://github.com/saltyaom/niku/blob/main/doc/widget/row.md)
+    - Niku extension for `Column`
+  - [NikuTextField](https://github.com/saltyaom/niku/blob/main/doc/widget/textfield.md)
+    - Niku extension for `TextFormField`
+  - [NikuFlatButton](https://github.com/saltyaom/niku/blob/main/doc/widget/flatButton.md)
+    - Niku extension for `FlatButton`
+  - [NikuRaisedButton](https://github.com/saltyaom/niku/blob/main/doc/widget/raisedButton.md)
+    - Niku extension for `RaisedButton`
+  - [NikuOutlineButton](https://github.com/saltyaom/niku/blob/main/doc/widget/outlineButton.md)
+    - Niku extension for `OutlineButton`
+  - [NikuIconButton](https://github.com/saltyaom/niku/blob/main/doc/widget/iconButton.md)
+    - Niku extension for `IconButton`

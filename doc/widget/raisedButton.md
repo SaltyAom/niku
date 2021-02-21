@@ -1,12 +1,12 @@
-## Niku extension for Material Flat Button
+## Niku extension for Material Raised Button
 
-Style property builder for building `FlatButton`
+Style property builder for building `RaisedButton`
 
-##### [Table of Content](https://github.com/SaltyAom/niku/blob/main/README.md)
+##### [Table of Content](https://github.com/saltyaom/niku/blob/main/doc/widget/README.md)
 
 ### Example usage:
 ```
-NikuFlatButton(Text("Flat Button"))
+NikuRaisedButton(Text("Raised Button"))
   .color(Colors.blue)
   .px(40)
   .py(20)
@@ -28,16 +28,16 @@ import 'package:niku/niku.dart';
 import 'package:niku/widget/button.dart';
 
 // Just widget
-import 'package:niku/widget/flatButton.dart';
+import 'package:niku/widget/raisedButton.dart';
 ```
 
 ### Meta property list:
 - niku() - Switch to Niku() property
-- build() - Apply styles and build FlatButton as Widget
-- base() - Apply styles and build only base of FlatButton as Widget
-- apply() - Apply existing NikuFlatButton's property to current style
-- style() - Apply existing NikuFlatButton's property to current style and build
-- styleBase() - Apply existing NikuFlatButton's property to current style and build only base
+- build() - Apply styles and build RaisedButton as Widget
+- base() - Apply styles and build only base of RaisedButton as Widget
+- apply() - Apply existing NikuRaisedButton's property to current style
+- style() - Apply existing NikuRaisedButton's property to current style and build
+- styleBase() - Apply existing NikuRaisedButton's property to current style and build only base
 
 ### Style Property list:
 - onPressed - Callback when button is pressed
@@ -75,5 +75,12 @@ import 'package:niku/widget/flatButton.dart';
 - autofocus - Determine whether button should be auto focus
 - theme - Apply style to button using existing theme
 - rounded - Apply border radius to button, will override shape
+- elevation - Apply elevation to raised button
+  - setElevation - Set all elevation property
+  - elevation - Apply elevation to raised button
+  - focusElevation - Set elevation when focused
+  - hoverElevation - Set elevation when hovered
+  - highlightElevation - Set elevation when highlight
+  - disabledElevation - Set elevatino when disabled
 
-##### [Table of Content](https://github.com/SaltyAom/niku/blob/main/README.md)
+##### [Table of Content](https://github.com/saltyaom/niku/blob/main/doc/widget/README.md)
