@@ -29,4 +29,4 @@ Niku is style property builder for styling user interface inspired by SwiftUI.
     - Niku extension for `IconButton`
 - [Available Extension](https://github.com/saltyaom/niku/blob/main/doc/extension/README.md)
   - [niku](https://github.com/saltyaom/niku/blob/main/doc/extension/niku.md)
-   - Add `.niku()` extension for widget
+    - Add `.niku()` extension for widget
