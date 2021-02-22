@@ -1,11 +1,29 @@
-## [0.2.1] - 2021/2/21
+## [0.3.0] - 2021/2/22
 Feature:
+- Add support for:
+  - [NikuStack](https://github.com/saltyaom/niku/blob/main/doc/widget/stack.md)
+    - Niku extension for `IconButton`
+- Add more property to Base Widget
+  - Backdrop filter
+  - Positioned
+  - singleChildScrollView / scrollable
+  - flexible / flex
+- Add group import
+- Add extension Widget
+  - Add `.niku()` extension for widget
+
+Documentation:
 - Add property documentation
+- Correcting wrong spelling
+
+- Bug fixes:
+  - Fixes border not rendering children
+  - Mark children constructor in Row as required
 
 ## [0.2.0] - 2021/2/21
 Feature:
 - Add support for:
-  - [NikuIconButton](https://github.com/saltyaom/niku/blob/main/doc/iconButton.md)
+  - [NikuIconButton](https://github.com/saltyaom/niku/blob/main/doc/widget/iconButton.md)
     - Niku extension for `IconButton`
 - Add new property to `Niku (base)`:
   - `on` - Event listener
@@ -13,6 +31,9 @@ Feature:
   - `inkWell` - Add [InkWell] to Widget
   - `border` - Decorate with border using [Border]
 - Add group for `flatButton`, `raisedButton`, `outlineButton` and `flatButton` as `package:niku/widget/button`
+
+Documentation:
+- Restructure documentation
 
 - Bug fixes:
   - Wrong spelling of documentation in several place

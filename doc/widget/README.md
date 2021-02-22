@@ -7,22 +7,26 @@ In fact, there's documentation available for each property and equivalent code i
 
 Niku contains available Widget:
 - [Niku](https://github.com/saltyaom/niku/blob/main/doc/widget/base.md)
-    - Niku base for styling widget
-- [NikuText](https://github.com/saltyaom/niku/blob/main/doc/widget/text.md)
-    - Niku extension for `Text`
+- Niku base for styling widget
+- [Text](https://github.com/saltyaom/niku/blob/main/doc/widget/text.md)
+- Niku extension for `Text`
 - [Column](https://github.com/saltyaom/niku/blob/main/doc/widget/column.md)
-    - Niku extension for `Row`
+- Niku extension for `Row`
 - [Row](https://github.com/saltyaom/niku/blob/main/doc/widget/row.md)
-    - Niku extension for `Column`
-- [NikuTextField](https://github.com/saltyaom/niku/blob/main/doc/widget/textfield.md)
-    - Niku extension for `TextFormField`
-- [NikuFlatButton](https://github.com/saltyaom/niku/blob/main/doc/widget/flatButton.md)
-    - Niku extension for `FlatButton`
-- [NikuRaisedButton](https://github.com/saltyaom/niku/blob/main/doc/widget/raisedButton.md)
-    - Niku extension for `RaisedButton`
-- [NikuOutlineButton](https://github.com/saltyaom/niku/blob/main/doc/widget/outlineButton.md)
-    - Niku extension for `OutlineButton`
-- [NikuIconButton](https://github.com/saltyaom/niku/blob/main/doc/widget/iconButton.md)
-    - Niku extension for `IconButton`
+- Niku extension for `Column`
+- [Stack](https://github.com/saltyaom/niku/blob/main/doc/widget/stack.md)
+- Niku extension for `Stack`  
+- [TextField](https://github.com/saltyaom/niku/blob/main/doc/widget/textfield.md)
+- Niku extension for `TextFormField`
+- [FlatButton](https://github.com/saltyaom/niku/blob/main/doc/widget/flatButton.md)
+- Niku extension for `FlatButton`
+- [RaisedButton](https://github.com/saltyaom/niku/blob/main/doc/widget/raisedButton.md)
+- Niku extension for `RaisedButton`
+- [OutlineButton](https://github.com/saltyaom/niku/blob/main/doc/widget/outlineButton.md)
+- Niku extension for `OutlineButton`
+- [IconButton](https://github.com/saltyaom/niku/blob/main/doc/widget/iconButton.md)
+- Niku extension for `IconButton`
+
+#### Also See [Available Extension](https://github.com/saltyaom/niku/blob/main/doc/extension/README.md)
 
 ##### [Table of Content](https://github.com/saltyaom/niku/blob/main/doc/README.md)

@@ -118,7 +118,7 @@ class NikuRow {
   ///   - prependChildren - Prepend all of children
   ///   - insert - Insert child at index
   ///   - insertAll - Insert all children at index
-  NikuRow([List<Widget> children = const []]) {
+  NikuRow(List<Widget> children) {
     this._children = children;
   }
 

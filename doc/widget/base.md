@@ -91,6 +91,13 @@ niku: >= 0.1.2
 - inkwell - Add [InkWell] to widget
 - border - Decorate with border using [Border]
 
+### Prerequisite:
+niku: >= 0.3.0
+- backdropFilter - Apply [BackdropFilter] to Widget
+- positioned - Apply [Positioned] to widget
+- scrollable, singleChildScrollView - Add [singleChildScrollView] to widget
+- flex, flexible - Apply [Flexible] to Widget
+
 ### Event Listener
 ##### Prerequisite:
 niku: >= 0.1.2

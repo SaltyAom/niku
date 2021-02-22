@@ -49,19 +49,25 @@ Niku is style property builder for styling user interface inspired by SwiftUI.
 - [Available Widget](https://github.com/saltyaom/niku/blob/main/doc/widget/README.md)
   - [Niku](https://github.com/saltyaom/niku/blob/main/doc/widget/base.md)
     - Niku base for styling widget
-  - [NikuText](https://github.com/saltyaom/niku/blob/main/doc/widget/text.md)
+  - [Text](https://github.com/saltyaom/niku/blob/main/doc/widget/text.md)
     - Niku extension for `Text`
   - [Column](https://github.com/saltyaom/niku/blob/main/doc/widget/column.md)
     - Niku extension for `Row`
   - [Row](https://github.com/saltyaom/niku/blob/main/doc/widget/row.md)
     - Niku extension for `Column`
-  - [NikuTextField](https://github.com/saltyaom/niku/blob/main/doc/widget/textfield.md)
+  - [Stack](https://github.com/saltyaom/niku/blob/main/doc/widget/stack.md)
+    - Niku extension for `Stack`  
+  - [TextField](https://github.com/saltyaom/niku/blob/main/doc/widget/textfield.md)
     - Niku extension for `TextFormField`
-  - [NikuFlatButton](https://github.com/saltyaom/niku/blob/main/doc/widget/flatButton.md)
+  - [FlatButton](https://github.com/saltyaom/niku/blob/main/doc/widget/flatButton.md)
     - Niku extension for `FlatButton`
-  - [NikuRaisedButton](https://github.com/saltyaom/niku/blob/main/doc/widget/raisedButton.md)
+  - [RaisedButton](https://github.com/saltyaom/niku/blob/main/doc/widget/raisedButton.md)
     - Niku extension for `RaisedButton`
-  - [NikuOutlineButton](https://github.com/saltyaom/niku/blob/main/doc/widget/outlineButton.md)
+  - [OutlineButton](https://github.com/saltyaom/niku/blob/main/doc/widget/outlineButton.md)
     - Niku extension for `OutlineButton`
-  - [NikuIconButton](https://github.com/saltyaom/niku/blob/main/doc/widget/iconButton.md)
+  - [IconButton](https://github.com/saltyaom/niku/blob/main/doc/widget/iconButton.md)
     - Niku extension for `IconButton`
+
+- [Available Extension](https://github.com/saltyaom/niku/blob/main/doc/extension/README.md)
+  - [niku](https://github.com/saltyaom/niku/blob/main/doc/extension/niku.md)
+   - Add `.niku()` extension for widget

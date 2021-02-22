@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -78,6 +79,10 @@ import 'package:flutter/rendering.dart';
 /// - material - Add [Material] to widget
 /// - inkwell - Add [InkWell] to widget
 /// - border - Decorate with border using [Border]
+/// - backdropFilter - Apply [BackdropFilter] to Widget
+/// - positioned - Apply [Positioned] to widget
+/// - scrollable, singleChildScrollView - Add [singleChildScrollView] to widget
+/// - flex, flexible - Apply [Flexible] to Widget
 ///
 /// Event Listener
 /// - on - Add multiple event listener at once
@@ -1098,6 +1103,108 @@ extension BaseProperty on Niku {
   /// )
   /// ```
   Niku border(Border border) => Niku(Container(
-        decoration: BoxDecoration(border: border),
+      decoration: BoxDecoration(border: border), child: this._widget));
+
+  /// Add backdrop filter to widget
+  ///
+  /// Equivalent to
+  /// ```
+  /// BackdropFilter(
+  ///   filter: input
+  /// )
+  /// ```
+  Niku backdropFilter(ImageFilter filter) =>
+      Niku(BackdropFilter(filter: filter, child: this._widget));
+
+  /// Add Positioned to widget
+  ///
+  /// Equivalent to
+  /// ```
+  /// Positioned(
+  ///   top: top,
+  ///   left: left,
+  ///   bottom: bottom,
+  ///   right: right
+  /// )
+  /// ```
+  Niku positioned({double top, double left, double bottom, double right}) =>
+      Niku(Positioned(
+          top: top,
+          left: left,
+          bottom: bottom,
+          right: right,
+          child: this._widget));
+
+  /// Add singleChildScrolLView to widget
+  ///
+  /// Equivalent to
+  /// ```
+  /// singleChildScrollView(
+  /// )
+  /// ```
+  Niku singleChildScrollView(
+          {ScrollController controller,
+          Axis scrollDirection = Axis.vertical,
+          bool primary,
+          bool reverse,
+          ScrollPhysics scrollPhysics,
+          DragStartBehavior dragStartBehavior,
+          String restorationId}) =>
+      Niku(SingleChildScrollView(
+        child: this._widget,
+        controller: controller,
+        scrollDirection: scrollDirection,
+        primary: primary,
+        reverse: reverse,
+        physics: scrollPhysics,
+        dragStartBehavior: dragStartBehavior,
+        restorationId: restorationId,
       ));
+
+  /// Add singleChildScrolLView to widget
+  ///
+  /// Equivalent to
+  /// ```
+  /// singleChildScrollView(
+  /// )
+  /// ```
+  Niku scrollable(
+          {ScrollController controller,
+          Axis scrollDirection = Axis.vertical,
+          bool primary,
+          bool reverse,
+          ScrollPhysics scrollPhysics,
+          DragStartBehavior dragStartBehavior,
+          String restorationId}) =>
+      Niku(SingleChildScrollView(
+        child: this._widget,
+        controller: controller,
+        scrollDirection: scrollDirection,
+        primary: primary,
+        reverse: reverse,
+        physics: scrollPhysics,
+        dragStartBehavior: dragStartBehavior,
+        restorationId: restorationId,
+      ));
+
+  /// Apply Flexible to widget
+  ///
+  /// Equivalent to
+  /// ```
+  /// Flexible(
+  ///   flex: input
+  /// )
+  /// ```
+  Niku flexible([int flex = 1]) =>
+      Niku(Flexible(child: this._widget, flex: flex));
+
+  /// Apply Flexible to widget
+  ///
+  /// Equivalent to
+  /// ```
+  /// Flexible(
+  ///   flex: input
+  /// )
+  /// ```
+  Niku flex([int flex = 1]) => Niku(Flexible(child: this._widget, flex: flex));
 }

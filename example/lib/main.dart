@@ -81,6 +81,10 @@ class HomePage extends StatelessWidget {
                   .rounded(8)
                   .my(20)
                   .build(),
+              NikuStack([
+                Text("Normal Text"),
+                Text("Text with Niku Property").niku().mt(40).build()
+              ]).topCenter().niku().maxHeight(100).build()
             ])
             .prepend(NikuText("Niku")
                 .fontSize(21)

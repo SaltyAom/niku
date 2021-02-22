@@ -3,7 +3,7 @@
 ## Setting up
 As Niku doesn't depends on any dependencies, using native dart code, there's nothing preventing you from using `Niku`.
 
-### Prerequisted:
+### Prerequisites:
 - Flutter >= 1.17
 
 ## Starting up
