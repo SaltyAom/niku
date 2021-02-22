@@ -9,4 +9,4 @@ Extension all Niku to add more property to `Widget`.
   - [niku](https://github.com/saltyaom/niku/blob/main/doc/extension/niku.md)
     - Add `.niku()` extension for widget
 
-#### Also See [Available Widget](https://github.com/saltyaom/niku/blob/main/doc/extension/README.md)
+#### Also See [Available Widget](https://github.com/saltyaom/niku/blob/main/doc/widget/README.md)
