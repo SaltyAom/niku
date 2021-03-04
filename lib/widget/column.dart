@@ -62,9 +62,9 @@ class NikuColumn {
   MainAxisAlignment _mainAxisAlignment = MainAxisAlignment.start;
   MainAxisSize _mainAxisSize = MainAxisSize.max;
   CrossAxisAlignment _crossAxisAlignment = CrossAxisAlignment.center;
-  TextDirection _textDirection;
+  TextDirection? _textDirection;
   VerticalDirection _verticalDirection = VerticalDirection.down;
-  TextBaseline _textBaseline;
+  TextBaseline? _textBaseline;
 
   /// Niku extension for Column
   ///
@@ -721,7 +721,7 @@ class NikuColumn {
   ///   .append(Text("2"))
   ///   .build()
   /// ```
-  Column build({Key key}) => Column(
+  Column build({Key? key}) => Column(
         key: key,
         children: this._children,
         mainAxisAlignment: this._mainAxisAlignment,

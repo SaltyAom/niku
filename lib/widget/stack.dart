@@ -44,17 +44,13 @@ import './base.dart';
 ///   - expand - Using [StackFit.expand]
 ///   - passthrogh - Using [StackFit.passthrough]
 ///   - loose - Using [StackFit.loose]
-/// - overflow - Adjust overflow using [Overflow]
-///   - overflowClip - Adjust overflow using [Overflow.clip]
-///   - overflowVisible - Adjust overflow using [Overflow.visible]
 /// - clip, clipBehavior - Add clip behavior of widget
 class NikuStack {
   List<Widget> _children;
 
   AlignmentDirectional _alignment = AlignmentDirectional.topStart;
-  TextDirection _textDirection;
+  TextDirection? _textDirection;
   StackFit _fit = StackFit.loose;
-  Overflow _overflow = Overflow.clip;
   Clip _clipBehavior = Clip.hardEdge;
 
   /// Niku extension for Stack
@@ -97,13 +93,8 @@ class NikuStack {
   ///   - expand - Using [StackFit.expand]
   ///   - passthrogh - Using [StackFit.passthrough]
   ///   - loose - Using [StackFit.loose]
-  /// - overflow - Adjust overflow using [Overflow]
-  ///   - overflowClip - Adjust overflow using [Overflow.clip]
-  ///   - overflowVisible - Adjust overflow using [Overflow.visible]
   /// - clip, clipBehavior - Add clip behavior of widget
-  NikuStack(List<Widget> children) {
-    this._children = children;
-  }
+  NikuStack(this._children);
 
   /// Apply alignment to stack
   ///
@@ -371,52 +362,6 @@ class NikuStack {
     return this;
   }
 
-  /// Adjust overflow using [Overflow]
-  ///
-  /// Equivalent to:
-  /// ```
-  /// Stack(
-  ///   overflow: inpur
-  /// )
-  /// ```
-  NikuStack overflow(Overflow overflow) {
-    this._overflow = overflow;
-
-    return this;
-  }
-
-  /// Adjust overflow using [Overflow]
-  ///
-  /// Using [Overflow.clip]
-  ///
-  /// Equivalent to:
-  /// ```
-  /// Stack(
-  ///   overflow: Overflow.clip
-  /// )
-  /// ```
-  NikuStack overflowClip() {
-    this._overflow = Overflow.clip;
-
-    return this;
-  }
-
-  /// Adjust overflow using [Overflow]
-  ///
-  /// Using [Overflow.visible]
-  ///
-  /// Equivalent to:
-  /// ```
-  /// Stack(
-  ///   overflow: Overflow.visible
-  /// )
-  /// ```
-  NikuStack overflowVisible() {
-    this._overflow = Overflow.visible;
-
-    return this;
-  }
-
   /// Add clip behavior of widget
   ///
   /// Using [Overflow.clip]
@@ -633,13 +578,12 @@ class NikuStack {
   ///   .append(Text("2"))
   ///   .build()
   /// ```
-  Stack build({Key key}) => Stack(
+  Stack build({Key? key}) => Stack(
         key: key,
         children: this._children,
         alignment: this._alignment,
         textDirection: this._textDirection,
         fit: this._fit,
-        overflow: this._overflow,
         clipBehavior: this._clipBehavior,
       );
 

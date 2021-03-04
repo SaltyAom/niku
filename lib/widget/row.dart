@@ -57,14 +57,14 @@ import './base.dart';
 ///   - insert - Insert child at index
 ///   - insertAll - Insert all children at index
 class NikuRow {
-  List<Widget> _children;
+  List<Widget> _children = [];
 
-  MainAxisAlignment _mainAxisAlignment;
-  MainAxisSize _mainAxisSize;
-  CrossAxisAlignment _crossAxisAlignment;
-  TextDirection _textDirection;
-  VerticalDirection _verticalDirection;
-  TextBaseline _textBaseline;
+  MainAxisAlignment _mainAxisAlignment = MainAxisAlignment.start;
+  MainAxisSize _mainAxisSize = MainAxisSize.max;
+  CrossAxisAlignment _crossAxisAlignment = CrossAxisAlignment.baseline;
+  TextDirection? _textDirection;
+  VerticalDirection _verticalDirection = VerticalDirection.up;
+  TextBaseline? _textBaseline;
 
   /// Niku extension for Row
   ///
@@ -721,7 +721,7 @@ class NikuRow {
   ///   .append(Text("2"))
   ///   .build()
   /// ```
-  Row build({Key key}) => Row(
+  Row build({Key? key}) => Row(
         key: key,
         children: this._children,
         mainAxisAlignment: this._mainAxisAlignment,

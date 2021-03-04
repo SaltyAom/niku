@@ -55,9 +55,6 @@ import 'package:niku/widget/row.dart';
   - expand - Using [StackFit.expand]
   - passthrogh - Using [StackFit.passthrough]
   - loose - Using [StackFit.loose]
-- overflow - Adjust overflow using [Overflow]
-  - overflowClip - Adjust overflow using [Overflow.clip]
-  - overflowVisible - Adjust overflow using [Overflow.visible]
 - clip, clipBehavior - Add clip behavior of widget
 
 ##### [Table of Content](https://github.com/saltyaom/niku/blob/main/doc/widget/README.md)

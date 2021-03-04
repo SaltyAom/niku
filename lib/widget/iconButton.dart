@@ -61,10 +61,10 @@ import './base.dart';
 class NikuIconButton {
   Widget _icon;
 
-  VoidCallback _onPressed;
+  VoidCallback? _onPressed;
 
   double _iconSize = 24;
-  VisualDensity _visualDensity;
+  VisualDensity? _visualDensity;
 
   double _pt = 0;
   double _pl = 0;
@@ -72,19 +72,19 @@ class NikuIconButton {
   double _pr = 0;
 
   Alignment _alignment = Alignment.center;
-  double _splashRadius;
-  Color _color;
-  Color _focusColor;
-  Color _hoverColor;
-  Color _highlightColor;
-  Color _splashColor;
-  Color _disabledColor;
+  double? _splashRadius;
+  Color? _color;
+  Color? _focusColor;
+  Color? _hoverColor;
+  Color? _highlightColor;
+  Color? _splashColor;
+  Color? _disabledColor;
   MouseCursor _mouseCursor = SystemMouseCursors.click;
-  FocusNode _focusNode;
+  FocusNode? _focusNode;
   bool _autofocus = false;
-  String _tooltip;
+  String? _tooltip;
   bool _enableFeedback = true;
-  BoxConstraints _constraints;
+  BoxConstraints? _constraints;
 
   NikuIconButton(this._icon);
 
@@ -244,7 +244,7 @@ class NikuIconButton {
   ///   alignment: input
   /// )
   /// ```
-  NikuIconButton alignment(AlignmentGeometry align) {
+  NikuIconButton alignment(Alignment align) {
     this._alignment = align;
 
     return this;
@@ -258,7 +258,7 @@ class NikuIconButton {
   ///   alignment: input
   /// )
   /// ```
-  NikuIconButton align(AlignmentGeometry align) {
+  NikuIconButton align(Alignment align) {
     this._alignment = align;
 
     return this;
@@ -503,12 +503,12 @@ class NikuIconButton {
   /// )
   /// ```
   NikuIconButton setColor(
-      {Color color,
-      Color disabled,
-      Color focus,
-      Color hover,
-      Color highlight,
-      Color splash}) {
+      {Color? color,
+      Color? disabled,
+      Color? focus,
+      Color? hover,
+      Color? highlight,
+      Color? splash}) {
     this._color = color;
     this._disabledColor = disabled;
     this._focusColor = focus;
@@ -681,7 +681,7 @@ class NikuIconButton {
   ///   )
   /// }
   /// ```
-  IconButton build({Key key}) => IconButton(
+  IconButton build({Key? key}) => IconButton(
         icon: this._icon,
         onPressed: this._onPressed,
         iconSize: this._iconSize,
@@ -720,28 +720,28 @@ class NikuIconButton {
   Niku niku() => Niku(this.build());
 
   NikuIconButton set({
-    Widget icon,
+    required Widget icon,
     double iconSize = 24,
-    VisualDensity visualDensity,
+    VisualDensity? visualDensity,
     double pt = 0,
     double pl = 0,
     double pb = 0,
     double pr = 0,
     Alignment alignment = Alignment.center,
-    double splashRadius,
-    Color color,
-    Color focusColor,
-    Color hoverColor,
-    Color highlightColor,
-    Color splashColor,
-    Color disabledColor,
-    VoidCallback onPressed,
+    double? splashRadius,
+    Color? color,
+    Color? focusColor,
+    Color? hoverColor,
+    Color? highlightColor,
+    Color? splashColor,
+    Color? disabledColor,
+    VoidCallback? onPressed,
     MouseCursor mouseCursor = SystemMouseCursors.click,
-    FocusNode focusNode,
+    FocusNode? focusNode,
     bool autofocus = false,
-    String tooltip,
+    String? tooltip,
     bool enableFeedback = true,
-    BoxConstraints constraints,
+    BoxConstraints? constraints,
   }) {
     this._icon = icon;
     this._iconSize = iconSize;

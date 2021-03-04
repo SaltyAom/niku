@@ -65,8 +65,8 @@ import './base.dart';
 /// - rounded - Apply border radius to button, will override shape
 class NikuFlatButton {
   Widget child;
-  VoidCallback _onPressed;
-  VoidCallback _onLongPressed;
+  VoidCallback? _onPressed;
+  VoidCallback? _onLongPressed;
 
   double _pt = 0;
   double _pb = 0;
@@ -76,20 +76,20 @@ class NikuFlatButton {
   double _mb = 0;
   double _ml = 0;
   double _mr = 0;
-  Color _color;
-  Color _disabledColor;
-  Color _focusColor;
-  Color _hoverColor;
-  Color _highlightColor;
-  Color _splashColor;
-  Color _textColor;
-  Brightness _colorBrightness;
-  ShapeBorder _shape;
-  Clip _clipBehavior = Clip.none;
-  double _minWidth;
-  double _height;
+  Color? _color;
+  Color? _disabledColor;
+  Color? _focusColor;
+  Color? _hoverColor;
+  Color? _highlightColor;
+  Color? _splashColor;
+  Color? _textColor;
+  Brightness? _colorBrightness;
+  ShapeBorder? _shape;
+  Clip _clipBehavior = Clip.antiAlias;
+  double? _minWidth;
+  double? _height;
   bool _autofocus = false;
-  ButtonTextTheme _buttonTextTheme;
+  ButtonTextTheme? _buttonTextTheme;
 
   /// Niku extension for Material Flat Button
   ///
@@ -150,9 +150,7 @@ class NikuFlatButton {
   /// - autofocus - Determine whether button should be auto focus
   /// - theme - Apply style to button using existing theme
   /// - rounded - Apply border radius to button, will override shape
-  NikuFlatButton(Widget child) {
-    this.child = child;
-  }
+  NikuFlatButton(this.child);
 
   /// Callback when button is pressed
   ///
@@ -548,12 +546,12 @@ class NikuFlatButton {
   /// )
   /// ```
   NikuFlatButton setColor(
-      {Color color,
-      Color disabled,
-      Color focus,
-      Color hover,
-      Color highlight,
-      Color splash}) {
+      {Color? color,
+      Color? disabled,
+      Color? focus,
+      Color? hover,
+      Color? highlight,
+      Color? splash}) {
     this._color = color;
     this._disabledColor = disabled;
     this._focusColor = focus;
@@ -800,7 +798,7 @@ class NikuFlatButton {
   ///   )
   /// }
   /// ```
-  Widget build({Key key}) => Container(
+  Widget build({Key? key}) => Container(
       key: key,
       margin: EdgeInsets.only(
           top: this._mt, left: this._ml, bottom: this._mb, right: this._mr),
@@ -828,7 +826,8 @@ class NikuFlatButton {
   ///   )
   /// }
   /// ```
-  Widget base({Key key}) => FlatButton(
+  // ignore: deprecated_member_use
+  Widget base({Key? key}) => FlatButton(
       child: this.child,
       key: key,
       onPressed: this._onPressed,
@@ -866,30 +865,30 @@ class NikuFlatButton {
   Niku niku() => Niku(this.build());
 
   NikuFlatButton set(
-      {VoidCallback onPressed,
-      VoidCallback onLongPressed,
-      double pt,
-      double pb,
-      double pl,
-      double pr,
+      {VoidCallback? onPressed,
+      VoidCallback? onLongPressed,
+      double pt = 0,
+      double pb = 0,
+      double pl = 0,
+      double pr = 0,
       double mt = 0,
       double mb = 0,
       double ml = 0,
       double mr = 0,
-      Color color,
-      Color disabledColor,
-      Color focusColor,
-      Color hoverColor,
-      Color highlightColor,
-      Color splashColor,
-      Color textColor,
-      Brightness colorBrightness,
-      ShapeBorder shape,
-      Clip clipBehavior = Clip.none,
-      double height,
+      Color? color,
+      Color? disabledColor,
+      Color? focusColor,
+      Color? hoverColor,
+      Color? highlightColor,
+      Color? splashColor,
+      Color? textColor,
+      Brightness? colorBrightness,
+      ShapeBorder? shape,
+      Clip clipBehavior = Clip.antiAlias,
+      double? height,
       bool autofocus = false,
-      double minWidth,
-      ButtonTextTheme buttonTextTheme}) {
+      double? minWidth,
+      ButtonTextTheme? buttonTextTheme}) {
     this._onPressed = onPressed;
     this._onLongPressed = onLongPressed;
     this._pt = pt;

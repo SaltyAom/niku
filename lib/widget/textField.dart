@@ -399,248 +399,248 @@ import './base.dart';
 ///   - ideographic - Using [TextBaseline.ideographic]
 class NikuTextField {
   // Text Form Field
-  TextEditingController _controller;
-  String _initialValue;
-  FocusNode _focusNode;
-  TextInputType _keyboardType;
+  TextEditingController? _controller;
+  String _initialValue = '';
+  FocusNode? _focusNode;
+  TextInputType? _keyboardType;
   TextCapitalization _textCapitalization = TextCapitalization.none;
-  TextInputAction _textInputAction;
-  TextDirection _textDirection;
+  TextInputAction? _textInputAction;
+  TextDirection? _textDirection;
   TextAlign _textAlign = TextAlign.start;
-  TextAlignVertical _textAlignVertical;
+  TextAlignVertical? _textAlignVertical;
   bool _autofocus = false;
   bool _readOnly = false;
-  ToolbarOptions _toolbarOptions =
+  ToolbarOptions? _toolbarOptions =
       ToolbarOptions(copy: true, cut: true, paste: true, selectAll: true);
-  bool _showCursor;
+  bool? _showCursor;
   String _obscuringCharacter = '•';
   bool _obscureText = false;
   bool _autocorrect = true;
-  SmartDashesType _smartDashesType;
-  SmartQuotesType _smartQuotesType;
+  SmartDashesType? _smartDashesType;
+  SmartQuotesType? _smartQuotesType;
   bool _enableSuggestions = true;
   bool _maxLengthEnforced = true;
   int _maxLines = 1;
-  int _minLines;
+  int? _minLines;
   bool _expands = false;
-  int _maxLength;
-  ValueChanged<String> _onChanged;
-  GestureTapCallback _onTap;
-  VoidCallback _onEditingComplete;
-  ValueChanged<String> _onFieldSubmitted;
-  FormFieldSetter<String> _onSaved;
-  FormFieldValidator<String> _validator;
-  List<TextInputFormatter> _inputFormatters;
-  bool _enabled;
+  int? _maxLength;
+  ValueChanged<String>? _onChanged;
+  GestureTapCallback? _onTap;
+  VoidCallback? _onEditingComplete;
+  ValueChanged<String>? _onFieldSubmitted;
+  FormFieldSetter<String>? _onSaved;
+  FormFieldValidator<String>? _validator;
+  List<TextInputFormatter>? _inputFormatters;
+  bool? _enabled;
   double _cursorWidth = 2.0;
-  double _cursorHeight;
-  Radius _cursorRadius;
-  Color _cursorColor;
-  Brightness _keyboardAppearance;
+  double? _cursorHeight;
+  Radius? _cursorRadius;
+  Color? _cursorColor;
+  Brightness? _keyboardAppearance;
   EdgeInsets _scrollPadding = const EdgeInsets.all(20.0);
   bool _enableInteractiveSelection = true;
-  InputCounterWidgetBuilder _buildCounter;
-  ScrollPhysics _scrollPhysics;
-  Iterable<String> _autofillHints;
-  AutovalidateMode _autovalidateMode;
+  InputCounterWidgetBuilder? _buildCounter;
+  ScrollPhysics? _scrollPhysics;
+  Iterable<String>? _autofillHints;
+  AutovalidateMode? _autovalidateMode;
 
   // Input Decoration
-  Widget _input_icon;
-  String _input_labelText;
-  String _input_helperText;
-  int _input_helperMaxLines;
-  String _input_hintText;
-  int _input_hintMaxLines;
-  String _input_errorText;
-  int _input_errorMaxLines;
+  Widget? _input_icon;
+  String? _input_labelText;
+  String? _input_helperText;
+  int? _input_helperMaxLines;
+  String? _input_hintText;
+  int? _input_hintMaxLines;
+  String? _input_errorText;
+  int? _input_errorMaxLines;
   FloatingLabelBehavior _input_floatingLabelBehavior =
       FloatingLabelBehavior.auto;
   bool _input_isCollapsed = false;
-  bool _input_isDense;
-  EdgeInsetsGeometry _input_contentPadding;
-  Widget _input_prefixIcon;
-  BoxConstraints _input_prefixIconConstraints;
-  Widget _input_prefix;
-  String _input_prefixText;
-  Widget _input_suffixIcon;
-  Widget _input_suffix;
-  String _input_suffixText;
-  BoxConstraints _input_suffixIconConstraints;
-  Widget _input_counter;
-  String _input_counterText;
-  bool _input_filled;
-  Color _input_fillColor;
-  Color _input_focusColor;
-  Color _input_hoverColor;
-  InputBorder _input_errorBorder;
-  InputBorder _input_focusedBorder;
-  InputBorder _input_focusedErrorBorder;
-  InputBorder _input_disabledBorder;
-  InputBorder _input_enabledBorder;
-  InputBorder _input_border;
+  bool? _input_isDense;
+  EdgeInsetsGeometry? _input_contentPadding;
+  Widget? _input_prefixIcon;
+  BoxConstraints? _input_prefixIconConstraints;
+  Widget? _input_prefix;
+  String? _input_prefixText;
+  Widget? _input_suffixIcon;
+  Widget? _input_suffix;
+  String? _input_suffixText;
+  BoxConstraints? _input_suffixIconConstraints;
+  Widget? _input_counter;
+  String? _input_counterText;
+  bool? _input_filled;
+  Color? _input_fillColor;
+  Color? _input_focusColor;
+  Color? _input_hoverColor;
+  InputBorder? _input_errorBorder;
+  InputBorder? _input_focusedBorder;
+  InputBorder? _input_focusedErrorBorder;
+  InputBorder? _input_disabledBorder;
+  InputBorder? _input_enabledBorder;
+  InputBorder? _input_border;
   bool _input_decorationEnabled = true;
-  String _input_semanticCounterText;
-  bool _input_alignLabelWithHint;
+  String? _input_semanticCounterText;
+  bool? _input_alignLabelWithHint;
 
   // Base Text Style
-  Color _base_color;
-  Color _base_backgroundColor;
-  double _base_fontSize;
-  FontWeight _base_fontWeight;
-  FontStyle _base_fontStyle;
-  double _base_letterSpacing;
-  double _base_wordSpacing;
-  double _base_height;
-  Paint _base_foreground;
-  Paint _base_background;
-  List<Shadow> _base_shadows;
-  List<FontFeature> _base_fontFeatures;
-  TextDecoration _base_textDecoration;
-  Color _base_textDecorationColor;
-  double _base_textDecorationThickness;
-  String _base_fontFamily;
-  List<String> _base_fontFamilyFallback;
-  TextBaseline _base_textBaseline;
+  Color? _base_color;
+  Color? _base_backgroundColor;
+  double? _base_fontSize;
+  FontWeight? _base_fontWeight;
+  FontStyle? _base_fontStyle;
+  double? _base_letterSpacing;
+  double? _base_wordSpacing;
+  double? _base_height;
+  Paint? _base_foreground;
+  Paint? _base_background;
+  List<Shadow>? _base_shadows;
+  List<FontFeature>? _base_fontFeatures;
+  TextDecoration? _base_textDecoration;
+  Color? _base_textDecorationColor;
+  double? _base_textDecorationThickness;
+  String? _base_fontFamily;
+  List<String>? _base_fontFamilyFallback;
+  TextBaseline? _base_textBaseline;
 
   // Input Label Style
-  Color _label_color;
-  Color _label_backgroundColor;
-  double _label_fontSize;
-  FontWeight _label_fontWeight;
-  FontStyle _label_fontStyle;
-  double _label_letterSpacing;
-  double _label_wordSpacing;
-  double _label_height;
-  Paint _label_foreground;
-  Paint _label_background;
-  List<Shadow> _label_shadows;
-  List<FontFeature> _label_fontFeatures;
-  TextDecoration _label_textDecoration;
-  Color _label_textDecorationColor;
-  double _label_textDecorationThickness;
-  String _label_fontFamily;
-  List<String> _label_fontFamilyFallback;
-  TextBaseline _label_textBaseline;
+  Color? _label_color;
+  Color? _label_backgroundColor;
+  double? _label_fontSize;
+  FontWeight? _label_fontWeight;
+  FontStyle? _label_fontStyle;
+  double? _label_letterSpacing;
+  double? _label_wordSpacing;
+  double? _label_height;
+  Paint? _label_foreground;
+  Paint? _label_background;
+  List<Shadow>? _label_shadows;
+  List<FontFeature>? _label_fontFeatures;
+  TextDecoration? _label_textDecoration;
+  Color? _label_textDecorationColor;
+  double? _label_textDecorationThickness;
+  String? _label_fontFamily;
+  List<String>? _label_fontFamilyFallback;
+  TextBaseline? _label_textBaseline;
 
   // Input Hint Style
-  Color _hint_color;
-  Color _hint_backgroundColor;
-  double _hint_fontSize;
-  FontWeight _hint_fontWeight;
-  FontStyle _hint_fontStyle;
-  double _hint_letterSpacing;
-  double _hint_wordSpacing;
-  double _hint_height;
-  Paint _hint_foreground;
-  Paint _hint_background;
-  List<Shadow> _hint_shadows;
-  List<FontFeature> _hint_fontFeatures;
-  TextDecoration _hint_textDecoration;
-  Color _hint_textDecorationColor;
-  double _hint_textDecorationThickness;
-  String _hint_fontFamily;
-  List<String> _hint_fontFamilyFallback;
-  TextBaseline _hint_textBaseline;
+  Color? _hint_color;
+  Color? _hint_backgroundColor;
+  double? _hint_fontSize;
+  FontWeight? _hint_fontWeight;
+  FontStyle? _hint_fontStyle;
+  double? _hint_letterSpacing;
+  double? _hint_wordSpacing;
+  double? _hint_height;
+  Paint? _hint_foreground;
+  Paint? _hint_background;
+  List<Shadow>? _hint_shadows;
+  List<FontFeature>? _hint_fontFeatures;
+  TextDecoration? _hint_textDecoration;
+  Color? _hint_textDecorationColor;
+  double? _hint_textDecorationThickness;
+  String? _hint_fontFamily;
+  List<String>? _hint_fontFamilyFallback;
+  TextBaseline? _hint_textBaseline;
 
   // Input Helper Style
-  Color _helper_color;
-  Color _helper_backgroundColor;
-  double _helper_fontSize;
-  FontWeight _helper_fontWeight;
-  FontStyle _helper_fontStyle;
-  double _helper_letterSpacing;
-  double _helper_wordSpacing;
-  double _helper_height;
-  Paint _helper_foreground;
-  Paint _helper_background;
-  List<Shadow> _helper_shadows;
-  List<FontFeature> _helper_fontFeatures;
-  TextDecoration _helper_textDecoration;
-  Color _helper_textDecorationColor;
-  double _helper_textDecorationThickness;
-  String _helper_fontFamily;
-  List<String> _helper_fontFamilyFallback;
-  TextBaseline _helper_textBaseline;
+  Color? _helper_color;
+  Color? _helper_backgroundColor;
+  double? _helper_fontSize;
+  FontWeight? _helper_fontWeight;
+  FontStyle? _helper_fontStyle;
+  double? _helper_letterSpacing;
+  double? _helper_wordSpacing;
+  double? _helper_height;
+  Paint? _helper_foreground;
+  Paint? _helper_background;
+  List<Shadow>? _helper_shadows;
+  List<FontFeature>? _helper_fontFeatures;
+  TextDecoration? _helper_textDecoration;
+  Color? _helper_textDecorationColor;
+  double? _helper_textDecorationThickness;
+  String? _helper_fontFamily;
+  List<String>? _helper_fontFamilyFallback;
+  TextBaseline? _helper_textBaseline;
 
   // Input Error Style
-  Color _error_color;
-  Color _error_backgroundColor;
-  double _error_fontSize;
-  FontWeight _error_fontWeight;
-  FontStyle _error_fontStyle;
-  double _error_letterSpacing;
-  double _error_wordSpacing;
-  double _error_height;
-  Paint _error_foreground;
-  Paint _error_background;
-  List<Shadow> _error_shadows;
-  List<FontFeature> _error_fontFeatures;
-  TextDecoration _error_textDecoration;
-  Color _error_textDecorationColor;
-  double _error_textDecorationThickness;
-  String _error_fontFamily;
-  List<String> _error_fontFamilyFallback;
-  TextBaseline _error_textBaseline;
+  Color? _error_color;
+  Color? _error_backgroundColor;
+  double? _error_fontSize;
+  FontWeight? _error_fontWeight;
+  FontStyle? _error_fontStyle;
+  double? _error_letterSpacing;
+  double? _error_wordSpacing;
+  double? _error_height;
+  Paint? _error_foreground;
+  Paint? _error_background;
+  List<Shadow>? _error_shadows;
+  List<FontFeature>? _error_fontFeatures;
+  TextDecoration? _error_textDecoration;
+  Color? _error_textDecorationColor;
+  double? _error_textDecorationThickness;
+  String? _error_fontFamily;
+  List<String>? _error_fontFamilyFallback;
+  TextBaseline? _error_textBaseline;
 
   // Prefix Style
-  Color _prefix_color;
-  Color _prefix_backgroundColor;
-  double _prefix_fontSize;
-  FontWeight _prefix_fontWeight;
-  FontStyle _prefix_fontStyle;
-  double _prefix_letterSpacing;
-  double _prefix_wordSpacing;
-  double _prefix_height;
-  Paint _prefix_foreground;
-  Paint _prefix_background;
-  List<Shadow> _prefix_shadows;
-  List<FontFeature> _prefix_fontFeatures;
-  TextDecoration _prefix_textDecoration;
-  Color _prefix_textDecorationColor;
-  double _prefix_textDecorationThickness;
-  String _prefix_fontFamily;
-  List<String> _prefix_fontFamilyFallback;
-  TextBaseline _prefix_textBaseline;
+  Color? _prefix_color;
+  Color? _prefix_backgroundColor;
+  double? _prefix_fontSize;
+  FontWeight? _prefix_fontWeight;
+  FontStyle? _prefix_fontStyle;
+  double? _prefix_letterSpacing;
+  double? _prefix_wordSpacing;
+  double? _prefix_height;
+  Paint? _prefix_foreground;
+  Paint? _prefix_background;
+  List<Shadow>? _prefix_shadows;
+  List<FontFeature>? _prefix_fontFeatures;
+  TextDecoration? _prefix_textDecoration;
+  Color? _prefix_textDecorationColor;
+  double? _prefix_textDecorationThickness;
+  String? _prefix_fontFamily;
+  List<String>? _prefix_fontFamilyFallback;
+  TextBaseline? _prefix_textBaseline;
 
   // Suffix Style
-  Color _suffix_color;
-  Color _suffix_backgroundColor;
-  double _suffix_fontSize;
-  FontWeight _suffix_fontWeight;
-  FontStyle _suffix_fontStyle;
-  double _suffix_letterSpacing;
-  double _suffix_wordSpacing;
-  double _suffix_height;
-  Paint _suffix_foreground;
-  Paint _suffix_background;
-  List<Shadow> _suffix_shadows;
-  List<FontFeature> _suffix_fontFeatures;
-  TextDecoration _suffix_textDecoration;
-  Color _suffix_textDecorationColor;
-  double _suffix_textDecorationThickness;
-  String _suffix_fontFamily;
-  List<String> _suffix_fontFamilyFallback;
-  TextBaseline _suffix_textBaseline;
+  Color? _suffix_color;
+  Color? _suffix_backgroundColor;
+  double? _suffix_fontSize;
+  FontWeight? _suffix_fontWeight;
+  FontStyle? _suffix_fontStyle;
+  double? _suffix_letterSpacing;
+  double? _suffix_wordSpacing;
+  double? _suffix_height;
+  Paint? _suffix_foreground;
+  Paint? _suffix_background;
+  List<Shadow>? _suffix_shadows;
+  List<FontFeature>? _suffix_fontFeatures;
+  TextDecoration? _suffix_textDecoration;
+  Color? _suffix_textDecorationColor;
+  double? _suffix_textDecorationThickness;
+  String? _suffix_fontFamily;
+  List<String>? _suffix_fontFamilyFallback;
+  TextBaseline? _suffix_textBaseline;
 
   // Counter Style
-  Color _counter_color;
-  Color _counter_backgroundColor;
-  double _counter_fontSize;
-  FontWeight _counter_fontWeight;
-  FontStyle _counter_fontStyle;
-  double _counter_letterSpacing;
-  double _counter_wordSpacing;
-  double _counter_height;
-  Paint _counter_foreground;
-  Paint _counter_background;
-  List<Shadow> _counter_shadows;
-  List<FontFeature> _counter_fontFeatures;
-  TextDecoration _counter_textDecoration;
-  Color _counter_textDecorationColor;
-  double _counter_textDecorationThickness;
-  String _counter_fontFamily;
-  List<String> _counter_fontFamilyFallback;
-  TextBaseline _counter_textBaseline;
+  Color? _counter_color;
+  Color? _counter_backgroundColor;
+  double? _counter_fontSize;
+  FontWeight? _counter_fontWeight;
+  FontStyle? _counter_fontStyle;
+  double? _counter_letterSpacing;
+  double? _counter_wordSpacing;
+  double? _counter_height;
+  Paint? _counter_foreground;
+  Paint? _counter_background;
+  List<Shadow>? _counter_shadows;
+  List<FontFeature>? _counter_fontFeatures;
+  TextDecoration? _counter_textDecoration;
+  Color? _counter_textDecorationColor;
+  double? _counter_textDecorationThickness;
+  String? _counter_fontFamily;
+  List<String>? _counter_fontFamilyFallback;
+  TextBaseline? _counter_textBaseline;
 
   /// Niku extension for [TextFormField]
   ///
@@ -1610,10 +1610,7 @@ class NikuTextField {
       bool paste = true,
       bool selectAll = true}) {
     this._toolbarOptions = ToolbarOptions(
-        copy: copy ?? this._toolbarOptions.copy,
-        cut: cut ?? this._toolbarOptions.cut,
-        paste: paste ?? this._toolbarOptions.paste,
-        selectAll: selectAll ?? this._toolbarOptions.selectAll);
+        copy: copy, cut: cut, paste: paste, selectAll: selectAll);
 
     return this;
   }
@@ -1630,10 +1627,10 @@ class NikuTextField {
   /// ```
   NikuTextField allowCopy([bool value = false]) {
     this._toolbarOptions = ToolbarOptions(
-        copy: value ?? this._toolbarOptions.copy,
-        cut: this._toolbarOptions.cut ?? true,
-        paste: this._toolbarOptions.paste ?? true,
-        selectAll: this._toolbarOptions.selectAll ?? true);
+        copy: value,
+        cut: this._toolbarOptions?.cut ?? true,
+        paste: this._toolbarOptions?.paste ?? true,
+        selectAll: this._toolbarOptions?.selectAll ?? true);
 
     return this;
   }
@@ -1650,10 +1647,10 @@ class NikuTextField {
   /// ```
   NikuTextField allowCut([bool value = false]) {
     this._toolbarOptions = ToolbarOptions(
-        copy: this._toolbarOptions.copy ?? true,
-        cut: value ?? this._toolbarOptions.cut,
-        paste: this._toolbarOptions.paste ?? true,
-        selectAll: this._toolbarOptions.selectAll ?? true);
+        copy: this._toolbarOptions?.copy ?? true,
+        cut: value,
+        paste: this._toolbarOptions?.paste ?? true,
+        selectAll: this._toolbarOptions?.selectAll ?? true);
 
     return this;
   }
@@ -1670,10 +1667,10 @@ class NikuTextField {
   /// ```
   NikuTextField allowPaste([bool value = false]) {
     this._toolbarOptions = ToolbarOptions(
-        copy: this._toolbarOptions.copy ?? true,
-        cut: this._toolbarOptions.cut ?? true,
-        paste: value ?? this._toolbarOptions.paste,
-        selectAll: this._toolbarOptions.selectAll ?? true);
+        copy: this._toolbarOptions?.copy ?? true,
+        cut: this._toolbarOptions?.cut ?? true,
+        paste: value,
+        selectAll: this._toolbarOptions?.selectAll ?? true);
 
     return this;
   }
@@ -1690,10 +1687,10 @@ class NikuTextField {
   /// ```
   NikuTextField allowSelectAll([bool value = false]) {
     this._toolbarOptions = ToolbarOptions(
-        copy: this._toolbarOptions.copy ?? true,
-        cut: this._toolbarOptions.cut ?? true,
-        paste: this._toolbarOptions.paste ?? true,
-        selectAll: value ?? this._toolbarOptions.selectAll);
+        copy: this._toolbarOptions?.copy ?? true,
+        cut: this._toolbarOptions?.cut ?? true,
+        paste: this._toolbarOptions?.paste ?? true,
+        selectAll: value);
 
     return this;
   }
@@ -2027,11 +2024,11 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField on(
-      {ValueChanged<String> changed,
-      GestureTapCallback tap,
-      VoidCallback editingComplete,
-      ValueChanged<String> submitted,
-      FormFieldValidator<String> saved}) {
+      {ValueChanged<String>? changed,
+      GestureTapCallback? tap,
+      VoidCallback? editingComplete,
+      ValueChanged<String>? submitted,
+      FormFieldValidator<String>? saved}) {
     this._onChanged = changed;
     this._onTap = tap;
     this._onEditingComplete = editingComplete;
@@ -2166,8 +2163,8 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField cursor(
-      {double width = 2, double height, Radius radius, Color color}) {
-    this._cursorWidth = width ?? this._cursorWidth;
+      {double width = 2, double? height, Radius? radius, Color? color}) {
+    this._cursorWidth = width;
     this._cursorHeight = height ?? this._cursorHeight;
     this._cursorRadius = radius ?? this._cursorRadius;
     this._cursorColor = color ?? this._cursorColor;
@@ -5873,7 +5870,7 @@ class NikuTextField {
   ///   )
   /// )
   /// ```
-  NikuTextField setFillColor({Color fill, Color hover, Color focus}) {
+  NikuTextField setFillColor({Color? fill, Color? hover, Color? focus}) {
     this._input_filled = true;
     this._input_fillColor = fill;
     this._input_hoverColor = hover;
@@ -5977,11 +5974,11 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField setBorder(
-      {InputBorder border,
-      InputBorder enabled,
-      InputBorder disabled,
-      InputBorder focused,
-      InputBorder error}) {
+      {InputBorder? border,
+      InputBorder? enabled,
+      InputBorder? disabled,
+      InputBorder? focused,
+      InputBorder? error}) {
     this._input_border = border;
     this._input_enabledBorder = border;
     this._input_disabledBorder = border;
@@ -6745,7 +6742,7 @@ class NikuTextField {
   ///   )
   ///   .build()
   /// ```
-  TextFormField build({Key key}) => TextFormField(
+  TextFormField build({Key? key}) => TextFormField(
         key: key,
         controller: this._controller,
         style: TextStyle(
@@ -6963,6 +6960,7 @@ class NikuTextField {
         smartDashesType: this._smartDashesType,
         smartQuotesType: this._smartQuotesType,
         enableSuggestions: this._enableSuggestions,
+        // ignore: deprecated_member_use
         maxLengthEnforced: this._maxLengthEnforced,
         maxLines: this._maxLines,
         minLines: this._minLines,
@@ -7005,229 +7003,229 @@ class NikuTextField {
   Niku niku() => Niku(this.build());
 
   NikuTextField set({
-    TextEditingController controller,
-    String initialValue,
-    FocusNode focusNode,
-    TextInputType keyboardType,
+    TextEditingController? controller,
+    String initialValue = '',
+    FocusNode? focusNode,
+    TextInputType? keyboardType,
     TextCapitalization textCapitalization = TextCapitalization.none,
-    TextInputAction textInputAction,
-    TextDirection textDirection,
+    TextInputAction? textInputAction,
+    TextDirection? textDirection,
     TextAlign textAlign = TextAlign.start,
-    TextAlignVertical textAlignVertical,
+    TextAlignVertical? textAlignVertical,
     bool autofocus = false,
     bool readOnly = false,
-    ToolbarOptions toolbarOptions,
-    bool showCursor,
+    ToolbarOptions? toolbarOptions,
+    bool? showCursor,
     String obscuringCharacter = '•',
     bool obscureText = false,
     bool autocorrect = true,
-    SmartDashesType smartDashesType,
-    SmartQuotesType smartQuotesType,
+    SmartDashesType? smartDashesType,
+    SmartQuotesType? smartQuotesType,
     bool enableSuggestions = true,
     bool maxLengthEnforced = true,
     int maxLines = 1,
-    int minLines,
+    int? minLines,
     bool expands = false,
-    int maxLength,
-    ValueChanged<String> onChanged,
-    GestureTapCallback onTap,
-    VoidCallback onEditingComplete,
-    ValueChanged<String> onFieldSubmitted,
-    FormFieldSetter<String> onSaved,
-    FormFieldValidator<String> validator,
-    List<TextInputFormatter> inputFormatters,
-    bool enabled,
+    int? maxLength,
+    ValueChanged<String>? onChanged,
+    GestureTapCallback? onTap,
+    VoidCallback? onEditingComplete,
+    ValueChanged<String>? onFieldSubmitted,
+    FormFieldSetter<String>? onSaved,
+    FormFieldValidator<String>? validator,
+    List<TextInputFormatter>? inputFormatters,
+    bool? enabled,
     double cursorWidth = 2.0,
-    double cursorHeight,
-    Radius cursorRadius,
-    Color cursorColor,
-    Brightness keyboardAppearance,
+    double? cursorHeight,
+    Radius? cursorRadius,
+    Color? cursorColor,
+    Brightness? keyboardAppearance,
     EdgeInsets scrollPadding = const EdgeInsets.all(20.0),
     bool enableInteractiveSelection = true,
-    InputCounterWidgetBuilder buildCounter,
-    ScrollPhysics scrollPhysics,
-    Iterable<String> autofillHints,
-    AutovalidateMode autovalidateMode,
-    Widget input_icon,
-    String input_labelText,
-    String input_helperText,
-    int input_helperMaxLines,
-    String input_hintText,
-    int input_hintMaxLines,
-    String input_errorText,
-    int input_errorMaxLines,
+    InputCounterWidgetBuilder? buildCounter,
+    ScrollPhysics? scrollPhysics,
+    Iterable<String>? autofillHints,
+    AutovalidateMode? autovalidateMode,
+    Widget? input_icon,
+    String? input_labelText,
+    String? input_helperText,
+    int? input_helperMaxLines,
+    String? input_hintText,
+    int? input_hintMaxLines,
+    String? input_errorText,
+    int? input_errorMaxLines,
     FloatingLabelBehavior input_floatingLabelBehavior =
         FloatingLabelBehavior.auto,
     bool input_isCollapsed = false,
-    bool input_isDense,
-    EdgeInsetsGeometry input_contentPadding,
-    Widget input_prefixIcon,
-    BoxConstraints input_prefixIconConstraints,
-    Widget input_prefix,
-    String input_prefixText,
-    Widget input_suffixIcon,
-    Widget input_suffix,
-    String input_suffixText,
-    BoxConstraints input_suffixIconConstraints,
-    Widget input_counter,
-    String input_counterText,
-    bool input_filled,
-    Color input_fillColor,
-    Color input_focusColor,
-    Color input_hoverColor,
-    InputBorder input_errorBorder,
-    InputBorder input_focusedBorder,
-    InputBorder input_focusedErrorBorder,
-    InputBorder input_disabledBorder,
-    InputBorder input_enabledBorder,
-    InputBorder input_border,
+    bool? input_isDense,
+    EdgeInsetsGeometry? input_contentPadding,
+    Widget? input_prefixIcon,
+    BoxConstraints? input_prefixIconConstraints,
+    Widget? input_prefix,
+    String? input_prefixText,
+    Widget? input_suffixIcon,
+    Widget? input_suffix,
+    String? input_suffixText,
+    BoxConstraints? input_suffixIconConstraints,
+    Widget? input_counter,
+    String? input_counterText,
+    bool? input_filled,
+    Color? input_fillColor,
+    Color? input_focusColor,
+    Color? input_hoverColor,
+    InputBorder? input_errorBorder,
+    InputBorder? input_focusedBorder,
+    InputBorder? input_focusedErrorBorder,
+    InputBorder? input_disabledBorder,
+    InputBorder? input_enabledBorder,
+    InputBorder? input_border,
     bool input_decorationEnabled = true,
-    String input_semanticCounterText,
-    bool input_alignLabelWithHint,
-    Color base_color,
-    Color base_backgroundColor,
-    double base_fontSize,
-    FontWeight base_fontWeight,
-    FontStyle base_fontStyle,
-    double base_letterSpacing,
-    double base_wordSpacing,
-    double base_height,
-    Paint base_foreground,
-    Paint base_background,
-    List<Shadow> base_shadows,
-    List<FontFeature> base_fontFeatures,
-    TextDecoration base_textDecoration,
-    Color base_textDecorationColor,
-    double base_textDecorationThickness,
-    String base_fontFamily,
-    List<String> base_fontFamilyFallback,
-    TextBaseline base_textBaseline,
-    Color label_color,
-    Color label_backgroundColor,
-    double label_fontSize,
-    FontWeight label_fontWeight,
-    FontStyle label_fontStyle,
-    double label_letterSpacing,
-    double label_wordSpacing,
-    double label_height,
-    Paint label_foreground,
-    Paint label_background,
-    List<Shadow> label_shadows,
-    List<FontFeature> label_fontFeatures,
-    TextDecoration label_textDecoration,
-    Color label_textDecorationColor,
-    double label_textDecorationThickness,
-    String label_fontFamily,
-    List<String> label_fontFamilyFallback,
-    TextBaseline label_textBaseline,
-    Color hint_color,
-    Color hint_backgroundColor,
-    double hint_fontSize,
-    FontWeight hint_fontWeight,
-    FontStyle hint_fontStyle,
-    double hint_letterSpacing,
-    double hint_wordSpacing,
-    double hint_height,
-    Paint hint_foreground,
-    Paint hint_background,
-    List<Shadow> hint_shadows,
-    List<FontFeature> hint_fontFeatures,
-    TextDecoration hint_textDecoration,
-    Color hint_textDecorationColor,
-    double hint_textDecorationThickness,
-    String hint_fontFamily,
-    List<String> hint_fontFamilyFallback,
-    TextBaseline hint_textBaseline,
-    Color helper_color,
-    Color helper_backgroundColor,
-    double helper_fontSize,
-    FontWeight helper_fontWeight,
-    FontStyle helper_fontStyle,
-    double helper_letterSpacing,
-    double helper_wordSpacing,
-    double helper_height,
-    Paint helper_foreground,
-    Paint helper_background,
-    List<Shadow> helper_shadows,
-    List<FontFeature> helper_fontFeatures,
-    TextDecoration helper_textDecoration,
-    Color helper_textDecorationColor,
-    double helper_textDecorationThickness,
-    String helper_fontFamily,
-    List<String> helper_fontFamilyFallback,
-    TextBaseline helper_textBaseline,
-    Color error_color,
-    Color error_backgroundColor,
-    double error_fontSize,
-    FontWeight error_fontWeight,
-    FontStyle error_fontStyle,
-    double error_letterSpacing,
-    double error_wordSpacing,
-    double error_height,
-    Paint error_foreground,
-    Paint error_background,
-    List<Shadow> error_shadows,
-    List<FontFeature> error_fontFeatures,
-    TextDecoration error_textDecoration,
-    Color error_textDecorationColor,
-    double error_textDecorationThickness,
-    String error_fontFamily,
-    List<String> error_fontFamilyFallback,
-    TextBaseline error_textBaseline,
-    Color prefix_color,
-    Color prefix_backgroundColor,
-    double prefix_fontSize,
-    FontWeight prefix_fontWeight,
-    FontStyle prefix_fontStyle,
-    double prefix_letterSpacing,
-    double prefix_wordSpacing,
-    double prefix_height,
-    Paint prefix_foreground,
-    Paint prefix_background,
-    List<Shadow> prefix_shadows,
-    List<FontFeature> prefix_fontFeatures,
-    TextDecoration prefix_textDecoration,
-    Color prefix_textDecorationColor,
-    double prefix_textDecorationThickness,
-    String prefix_fontFamily,
-    List<String> prefix_fontFamilyFallback,
-    TextBaseline prefix_textBaseline,
-    Color suffix_color,
-    Color suffix_backgroundColor,
-    double suffix_fontSize,
-    FontWeight suffix_fontWeight,
-    FontStyle suffix_fontStyle,
-    double suffix_letterSpacing,
-    double suffix_wordSpacing,
-    double suffix_height,
-    Paint suffix_foreground,
-    Paint suffix_background,
-    List<Shadow> suffix_shadows,
-    List<FontFeature> suffix_fontFeatures,
-    TextDecoration suffix_textDecoration,
-    Color suffix_textDecorationColor,
-    double suffix_textDecorationThickness,
-    String suffix_fontFamily,
-    List<String> suffix_fontFamilyFallback,
-    TextBaseline suffix_textBaseline,
-    Color counter_color,
-    Color counter_backgroundColor,
-    double counter_fontSize,
-    FontWeight counter_fontWeight,
-    FontStyle counter_fontStyle,
-    double counter_letterSpacing,
-    double counter_wordSpacing,
-    double counter_height,
-    Paint counter_foreground,
-    Paint counter_background,
-    List<Shadow> counter_shadows,
-    List<FontFeature> counter_fontFeatures,
-    TextDecoration counter_textDecoration,
-    Color counter_textDecorationColor,
-    double counter_textDecorationThickness,
-    String counter_fontFamily,
-    List<String> counter_fontFamilyFallback,
-    TextBaseline counter_textBaseline,
+    String? input_semanticCounterText,
+    bool? input_alignLabelWithHint,
+    Color? base_color,
+    Color? base_backgroundColor,
+    double? base_fontSize,
+    FontWeight? base_fontWeight,
+    FontStyle? base_fontStyle,
+    double? base_letterSpacing,
+    double? base_wordSpacing,
+    double? base_height,
+    Paint? base_foreground,
+    Paint? base_background,
+    List<Shadow>? base_shadows,
+    List<FontFeature>? base_fontFeatures,
+    TextDecoration? base_textDecoration,
+    Color? base_textDecorationColor,
+    double? base_textDecorationThickness,
+    String? base_fontFamily,
+    List<String>? base_fontFamilyFallback,
+    TextBaseline? base_textBaseline,
+    Color? label_color,
+    Color? label_backgroundColor,
+    double? label_fontSize,
+    FontWeight? label_fontWeight,
+    FontStyle? label_fontStyle,
+    double? label_letterSpacing,
+    double? label_wordSpacing,
+    double? label_height,
+    Paint? label_foreground,
+    Paint? label_background,
+    List<Shadow>? label_shadows,
+    List<FontFeature>? label_fontFeatures,
+    TextDecoration? label_textDecoration,
+    Color? label_textDecorationColor,
+    double? label_textDecorationThickness,
+    String? label_fontFamily,
+    List<String>? label_fontFamilyFallback,
+    TextBaseline? label_textBaseline,
+    Color? hint_color,
+    Color? hint_backgroundColor,
+    double? hint_fontSize,
+    FontWeight? hint_fontWeight,
+    FontStyle? hint_fontStyle,
+    double? hint_letterSpacing,
+    double? hint_wordSpacing,
+    double? hint_height,
+    Paint? hint_foreground,
+    Paint? hint_background,
+    List<Shadow>? hint_shadows,
+    List<FontFeature>? hint_fontFeatures,
+    TextDecoration? hint_textDecoration,
+    Color? hint_textDecorationColor,
+    double? hint_textDecorationThickness,
+    String? hint_fontFamily,
+    List<String>? hint_fontFamilyFallback,
+    TextBaseline? hint_textBaseline,
+    Color? helper_color,
+    Color? helper_backgroundColor,
+    double? helper_fontSize,
+    FontWeight? helper_fontWeight,
+    FontStyle? helper_fontStyle,
+    double? helper_letterSpacing,
+    double? helper_wordSpacing,
+    double? helper_height,
+    Paint? helper_foreground,
+    Paint? helper_background,
+    List<Shadow>? helper_shadows,
+    List<FontFeature>? helper_fontFeatures,
+    TextDecoration? helper_textDecoration,
+    Color? helper_textDecorationColor,
+    double? helper_textDecorationThickness,
+    String? helper_fontFamily,
+    List<String>? helper_fontFamilyFallback,
+    TextBaseline? helper_textBaseline,
+    Color? error_color,
+    Color? error_backgroundColor,
+    double? error_fontSize,
+    FontWeight? error_fontWeight,
+    FontStyle? error_fontStyle,
+    double? error_letterSpacing,
+    double? error_wordSpacing,
+    double? error_height,
+    Paint? error_foreground,
+    Paint? error_background,
+    List<Shadow>? error_shadows,
+    List<FontFeature>? error_fontFeatures,
+    TextDecoration? error_textDecoration,
+    Color? error_textDecorationColor,
+    double? error_textDecorationThickness,
+    String? error_fontFamily,
+    List<String>? error_fontFamilyFallback,
+    TextBaseline? error_textBaseline,
+    Color? prefix_color,
+    Color? prefix_backgroundColor,
+    double? prefix_fontSize,
+    FontWeight? prefix_fontWeight,
+    FontStyle? prefix_fontStyle,
+    double? prefix_letterSpacing,
+    double? prefix_wordSpacing,
+    double? prefix_height,
+    Paint? prefix_foreground,
+    Paint? prefix_background,
+    List<Shadow>? prefix_shadows,
+    List<FontFeature>? prefix_fontFeatures,
+    TextDecoration? prefix_textDecoration,
+    Color? prefix_textDecorationColor,
+    double? prefix_textDecorationThickness,
+    String? prefix_fontFamily,
+    List<String>? prefix_fontFamilyFallback,
+    TextBaseline? prefix_textBaseline,
+    Color? suffix_color,
+    Color? suffix_backgroundColor,
+    double? suffix_fontSize,
+    FontWeight? suffix_fontWeight,
+    FontStyle? suffix_fontStyle,
+    double? suffix_letterSpacing,
+    double? suffix_wordSpacing,
+    double? suffix_height,
+    Paint? suffix_foreground,
+    Paint? suffix_background,
+    List<Shadow>? suffix_shadows,
+    List<FontFeature>? suffix_fontFeatures,
+    TextDecoration? suffix_textDecoration,
+    Color? suffix_textDecorationColor,
+    double? suffix_textDecorationThickness,
+    String? suffix_fontFamily,
+    List<String>? suffix_fontFamilyFallback,
+    TextBaseline? suffix_textBaseline,
+    Color? counter_color,
+    Color? counter_backgroundColor,
+    double? counter_fontSize,
+    FontWeight? counter_fontWeight,
+    FontStyle? counter_fontStyle,
+    double? counter_letterSpacing,
+    double? counter_wordSpacing,
+    double? counter_height,
+    Paint? counter_foreground,
+    Paint? counter_background,
+    List<Shadow>? counter_shadows,
+    List<FontFeature>? counter_fontFeatures,
+    TextDecoration? counter_textDecoration,
+    Color? counter_textDecorationColor,
+    double? counter_textDecorationThickness,
+    String? counter_fontFamily,
+    List<String>? counter_fontFamilyFallback,
+    TextBaseline? counter_textBaseline,
   }) {
     this._controller = controller;
     this._initialValue = initialValue;
@@ -7237,7 +7235,7 @@ class NikuTextField {
     this._textInputAction = textInputAction;
     this._textDirection = textDirection;
     this._textAlign = textAlign;
-    this._textAlignVertical = textAlignVertical;
+    this._textAlignVertical = textAlignVertical!;
     this._autofocus = autofocus;
     this._readOnly = readOnly;
     this._toolbarOptions = toolbarOptions;

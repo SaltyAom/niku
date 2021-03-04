@@ -80,35 +80,35 @@ import './base.dart';
 class NikuText {
   String _text;
 
-  Color _color;
-  Color _backgroundColor;
-  double _fontSize;
-  FontWeight _fontWeight;
-  FontStyle _fontStyle;
-  double _letterSpacing;
-  double _wordSpacing;
-  TextAlign _textAlign;
-  double _height;
-  Paint _foreground;
-  Paint _background;
-  List<Shadow> _shadows;
-  List<FontFeature> _fontFeatures;
-  TextDecoration _textDecoration;
-  Color _textDecorationColor;
-  double _textDecorationThickness;
-  String _fontFamily;
-  List<String> _fontFamilyFallback;
-  TextBaseline _textBaseline;
+  Color? _color;
+  Color? _backgroundColor;
+  double? _fontSize;
+  FontWeight? _fontWeight;
+  FontStyle? _fontStyle;
+  double? _letterSpacing;
+  double? _wordSpacing;
+  TextAlign? _textAlign;
+  double? _height;
+  Paint? _foreground;
+  Paint? _background;
+  List<Shadow>? _shadows;
+  List<FontFeature>? _fontFeatures;
+  TextDecoration? _textDecoration;
+  Color? _textDecorationColor;
+  double? _textDecorationThickness;
+  String? _fontFamily;
+  List<String>? _fontFamilyFallback;
+  TextBaseline? _textBaseline;
 
-  TextDirection _textDirection;
-  Locale _locale;
-  bool _softWrap;
-  TextOverflow _overflow;
-  double _textScaleFactor;
-  int _maxLines;
-  String _semanticsLabel;
-  TextWidthBasis _textWidthBasis;
-  TextHeightBehavior _textHeightBehavior;
+  TextDirection? _textDirection;
+  Locale? _locale;
+  bool? _softWrap;
+  TextOverflow? _overflow;
+  double? _textScaleFactor;
+  int? _maxLines;
+  String? _semanticsLabel;
+  TextWidthBasis? _textWidthBasis;
+  TextHeightBehavior? _textHeightBehavior;
 
   /// Niku extension for Text
   ///
@@ -190,17 +190,7 @@ class NikuText {
   ///   - pl - apply padding left side
   ///   - pb - apply padding bottom side
   ///   - pl - apply padding right side
-  /// - margin, m - Padding of container
-  ///   - margin, m - apply margin to all side
-  ///   - mx - apply margin to x axis
-  ///   - my - apply margin y axis
-  ///   - mt - apply margin top side
-  ///   - ml - apply margin left side
-  ///   - mb - apply margin bottom side
-  ///   - ml - apply margin right side
-  NikuText(String text) {
-    this._text = text;
-  }
+  NikuText(this._text);
 
   /// Set text content
   ///
@@ -1008,7 +998,7 @@ class NikuText {
   ///   .bold()
   ///   .build() // Collect all style and render
   /// ```
-  Text build({Key key}) => Text(this._text,
+  Text build({Key? key}) => Text(this._text,
       key: key,
       locale: this._locale,
       softWrap: this._softWrap,
@@ -1056,34 +1046,34 @@ class NikuText {
   Niku niku() => Niku(this.build());
 
   NikuText set({
-    Color color,
-    Color backgroundColor,
-    double fontSize,
-    FontWeight fontWeight,
-    FontStyle fontStyle,
-    double letterSpacing,
-    double wordSpacing,
-    TextAlign textAlign,
-    double height,
-    Paint foreground,
-    Paint background,
-    List<Shadow> shadows,
-    List<FontFeature> fontFeatures,
-    TextDecoration textDecoration,
-    Color textDecorationColor,
-    double textDecorationThickness,
-    String fontFamily,
-    List<String> fontFamilyFallback,
-    TextBaseline textBaseline,
-    TextDirection textDirection,
-    Locale locale,
-    bool softWrap,
-    TextOverflow overflow,
-    double textScaleFactor,
-    int maxLines,
-    String semanticsLabel,
-    TextWidthBasis textWidthBasis,
-    TextHeightBehavior textHeightBehavior,
+    Color? color,
+    Color? backgroundColor,
+    double? fontSize,
+    FontWeight? fontWeight,
+    FontStyle? fontStyle,
+    double? letterSpacing,
+    double? wordSpacing,
+    TextAlign? textAlign,
+    double? height,
+    Paint? foreground,
+    Paint? background,
+    List<Shadow>? shadows,
+    List<FontFeature>? fontFeatures,
+    TextDecoration? textDecoration,
+    Color? textDecorationColor,
+    double? textDecorationThickness,
+    String? fontFamily,
+    List<String>? fontFamilyFallback,
+    TextBaseline? textBaseline,
+    TextDirection? textDirection,
+    Locale? locale,
+    bool? softWrap,
+    TextOverflow? overflow,
+    double? textScaleFactor,
+    int? maxLines,
+    String? semanticsLabel,
+    TextWidthBasis? textWidthBasis,
+    TextHeightBehavior? textHeightBehavior,
   }) {
     this._color = color;
     this._backgroundColor = backgroundColor;

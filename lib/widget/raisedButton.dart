@@ -72,8 +72,8 @@ import './base.dart';
 ///   - disabledElevation - Set elevatino when disabled
 class NikuRaisedButton {
   Widget child;
-  VoidCallback _onPressed;
-  VoidCallback _onLongPressed;
+  VoidCallback? _onPressed;
+  VoidCallback? _onLongPressed;
 
   double _pt = 0;
   double _pb = 0;
@@ -83,23 +83,23 @@ class NikuRaisedButton {
   double _mb = 0;
   double _ml = 0;
   double _mr = 0;
-  Color _color;
-  Color _disabledColor;
-  Color _focusColor;
-  Color _hoverColor;
-  Color _highlightColor;
-  Color _splashColor;
-  Color _textColor;
-  Brightness _colorBrightness;
-  double _elevation;
-  double _focusElevation;
-  double _hoverElevation;
-  double _highlightElevation;
-  double _disabledElevation;
-  ShapeBorder _shape;
-  Clip _clipBehavior = Clip.none;
+  Color? _color;
+  Color? _disabledColor;
+  Color? _focusColor;
+  Color? _hoverColor;
+  Color? _highlightColor;
+  Color? _splashColor;
+  Color? _textColor;
+  Brightness? _colorBrightness;
+  double? _elevation;
+  double? _focusElevation;
+  double? _hoverElevation;
+  double? _highlightElevation;
+  double? _disabledElevation;
+  ShapeBorder? _shape;
+  Clip _clipBehavior = Clip.antiAlias;
   bool _autofocus = false;
-  ButtonTextTheme _buttonTextTheme;
+  ButtonTextTheme? _buttonTextTheme;
 
   /// Niku extension for Material Raised Button
   ///
@@ -167,9 +167,7 @@ class NikuRaisedButton {
   ///   - hoverElevation - Set elevation when hovered
   ///   - highlightElevation - Set elevation when highlight
   ///   - disabledElevation - Set elevatino when disabled
-  NikuRaisedButton(Widget child) {
-    this.child = child;
-  }
+  NikuRaisedButton(this.child);
 
   /// Callback when button is pressed
   ///
@@ -565,12 +563,12 @@ class NikuRaisedButton {
   /// )
   /// ```
   NikuRaisedButton setColor(
-      {Color color,
-      Color disabled,
-      Color focus,
-      Color hover,
-      Color highlight,
-      Color splash}) {
+      {Color? color,
+      Color? disabled,
+      Color? focus,
+      Color? hover,
+      Color? highlight,
+      Color? splash}) {
     this._color = color;
     this._disabledColor = disabled;
     this._focusColor = focus;
@@ -751,11 +749,11 @@ class NikuRaisedButton {
   /// );
   /// ```
   NikuRaisedButton setElevation(
-      {double elevation,
-      double disabled,
-      double focus,
-      double hover,
-      double highlight}) {
+      {double? elevation,
+      double? disabled,
+      double? focus,
+      double? hover,
+      double? highlight}) {
     this._elevation = elevation;
     this._disabledElevation = disabled;
     this._focusElevation = focus;
@@ -888,7 +886,8 @@ class NikuRaisedButton {
   ///   )
   /// }
   /// ```
-  RaisedButton base({Key key}) => RaisedButton(
+  // ignore: deprecated_member_use
+  RaisedButton base({Key? key}) => RaisedButton(
       child: this.child,
       key: key,
       onPressed: this._onPressed,
@@ -935,7 +934,7 @@ class NikuRaisedButton {
   ///   )
   /// }
   /// ```
-  Widget build({Key key}) => Container(
+  Widget build({Key? key}) => Container(
       key: key,
       margin: EdgeInsets.only(
           top: this._mt, left: this._ml, bottom: this._mb, right: this._mr),
@@ -958,33 +957,33 @@ class NikuRaisedButton {
   Niku niku() => Niku(this.build());
 
   NikuRaisedButton set(
-      {VoidCallback onPressed,
-      VoidCallback onLongPressed,
-      double pt,
-      double pb,
-      double pl,
-      double pr,
+      {VoidCallback? onPressed,
+      VoidCallback? onLongPressed,
+      double pt = 0,
+      double pb = 0,
+      double pl = 0,
+      double pr = 0,
       double mt = 0,
       double mb = 0,
       double ml = 0,
       double mr = 0,
-      Color color,
-      Color disabledColor,
-      Color focusColor,
-      Color hoverColor,
-      Color highlightColor,
-      Color splashColor,
-      Color textColor,
-      Brightness colorBrightness,
-      double elevation,
-      double focusElevation,
-      double hoverElevation,
-      double highlightElevation,
-      double disabledElevation,
-      ShapeBorder shape,
-      Clip clipBehavior = Clip.none,
+      Color? color,
+      Color? disabledColor,
+      Color? focusColor,
+      Color? hoverColor,
+      Color? highlightColor,
+      Color? splashColor,
+      Color? textColor,
+      Brightness? colorBrightness,
+      double? elevation,
+      double? focusElevation,
+      double? hoverElevation,
+      double? highlightElevation,
+      double? disabledElevation,
+      ShapeBorder? shape,
+      Clip clipBehavior = Clip.antiAlias,
       bool autofocus = false,
-      ButtonTextTheme buttonTextTheme}) {
+      ButtonTextTheme? buttonTextTheme}) {
     this._onPressed = onPressed;
     this._onLongPressed = onLongPressed;
     this._pt = pt;

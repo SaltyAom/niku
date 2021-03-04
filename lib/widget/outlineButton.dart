@@ -71,8 +71,8 @@ import './base.dart';
 ///   - disabledBorderColor - Set border color when disabled
 class NikuOutlineButton {
   Widget child;
-  VoidCallback _onPressed;
-  VoidCallback _onLongPressed;
+  VoidCallback? _onPressed;
+  VoidCallback? _onLongPressed;
 
   double _pt = 0;
   double _pb = 0;
@@ -82,19 +82,19 @@ class NikuOutlineButton {
   double _mb = 0;
   double _ml = 0;
   double _mr = 0;
-  Color _color;
-  Color _focusColor;
-  Color _hoverColor;
-  Color _highlightColor;
-  Color _splashColor;
-  Color _textColor;
-  BorderSide _borderSide;
-  Color _disabledBorderColor;
-  Color _highlightedBorderColor;
-  ShapeBorder _shape;
-  Clip _clipBehavior = Clip.none;
+  Color? _color;
+  Color? _focusColor;
+  Color? _hoverColor;
+  Color? _highlightColor;
+  Color? _splashColor;
+  Color? _textColor;
+  BorderSide? _borderSide;
+  Color? _disabledBorderColor;
+  Color? _highlightedBorderColor;
+  ShapeBorder? _shape;
+  Clip _clipBehavior = Clip.antiAlias;
   bool _autofocus = false;
-  ButtonTextTheme _buttonTextTheme;
+  ButtonTextTheme? _buttonTextTheme;
 
   /// Niku extension for Material Outline Button
   ///
@@ -161,9 +161,7 @@ class NikuOutlineButton {
   ///   - color - Set border color
   ///   - highlightBorderColor - Set border color when highlighted
   ///   - disabledBorderColor - Set border color when disabled
-  NikuOutlineButton(Widget child) {
-    this.child = child;
-  }
+  NikuOutlineButton(this.child);
 
   /// Callback when button is pressed
   ///
@@ -545,7 +543,11 @@ class NikuOutlineButton {
   /// )
   /// ```
   NikuOutlineButton setColor(
-      {Color color, Color focus, Color hover, Color highlight, Color splash}) {
+      {Color? color,
+      Color? focus,
+      Color? hover,
+      Color? highlight,
+      Color? splash}) {
     this._color = color;
     this._focusColor = focus;
     this._hoverColor = hover;
@@ -668,9 +670,9 @@ class NikuOutlineButton {
   /// ```
   NikuOutlineButton borderWidth(double width) {
     this._borderSide = BorderSide(
-        color: this._borderSide.color,
+        color: this._borderSide?.color ?? Colors.black12,
         width: width,
-        style: this._borderSide.style);
+        style: this._borderSide?.style ?? BorderStyle.solid);
 
     return this;
   }
@@ -688,8 +690,8 @@ class NikuOutlineButton {
   NikuOutlineButton borderColor(Color color) {
     this._borderSide = BorderSide(
         color: color,
-        width: this._borderSide.width,
-        style: this._borderSide.style);
+        width: this._borderSide?.width ?? 1,
+        style: this._borderSide?.style ?? BorderStyle.solid);
 
     return this;
   }
@@ -706,8 +708,8 @@ class NikuOutlineButton {
   /// ```
   NikuOutlineButton borderStyle(BorderStyle style) {
     this._borderSide = BorderSide(
-        color: this._borderSide.color,
-        width: this._borderSide.width,
+        color: this._borderSide?.color ?? Colors.black12,
+        width: this._borderSide?.width ?? 1,
         style: style);
 
     return this;
@@ -754,11 +756,11 @@ class NikuOutlineButton {
   /// );
   /// ```
   NikuOutlineButton setBorderColor(
-      {Color color, Color disabeld, Color highlighted}) {
+      {Color? color, Color? disabled, Color? highlighted}) {
     this._borderSide = BorderSide(
-        color: color,
-        width: this._borderSide.width,
-        style: this._borderSide.style);
+        color: color ?? Colors.black12,
+        width: this._borderSide?.width ?? 1,
+        style: this._borderSide?.style ?? BorderStyle.solid);
     this._disabledBorderColor = color;
     this._highlightedBorderColor = color;
 
@@ -1327,7 +1329,7 @@ class NikuOutlineButton {
   ///   )
   /// }
   /// ```
-  Widget build({Key key}) => Container(
+  Widget build({Key? key}) => Container(
       key: key,
       margin: EdgeInsets.only(
           top: this._mt, left: this._ml, bottom: this._mb, right: this._mr),
@@ -1355,7 +1357,8 @@ class NikuOutlineButton {
   ///   )
   /// }
   /// ```
-  Widget base({Key key}) => OutlineButton(
+  // ignore: deprecated_member_use
+  Widget base({Key? key}) => OutlineButton(
       child: this.child,
       key: key,
       onPressed: this._onPressed,
@@ -1392,29 +1395,29 @@ class NikuOutlineButton {
   Niku niku() => Niku(this.build());
 
   NikuOutlineButton set({
-    VoidCallback onPressed,
-    VoidCallback onLongPressed,
-    double pt,
-    double pb,
-    double pl,
-    double pr,
-    double mt,
-    double mb,
-    double ml,
-    double mr,
-    Color color,
-    Color focusColor,
-    Color hoverColor,
-    Color highlightColor,
-    Color splashColor,
-    Color textColor,
-    BorderSide borderSide,
-    Color disabledBorderColor,
-    Color highlightedBorderColor,
-    ShapeBorder shape,
-    Clip clipBehavior,
-    bool autofocus,
-    ButtonTextTheme buttonTextTheme,
+    VoidCallback? onPressed,
+    VoidCallback? onLongPressed,
+    double pt = 0,
+    double pb = 0,
+    double pl = 0,
+    double pr = 0,
+    double mt = 0,
+    double mb = 0,
+    double ml = 0,
+    double mr = 0,
+    Color? color,
+    Color? focusColor,
+    Color? hoverColor,
+    Color? highlightColor,
+    Color? splashColor,
+    Color? textColor,
+    BorderSide? borderSide,
+    Color? disabledBorderColor,
+    Color? highlightedBorderColor,
+    ShapeBorder? shape,
+    Clip clipBehavior = Clip.antiAlias,
+    bool autofocus = false,
+    ButtonTextTheme? buttonTextTheme,
   }) {
     this._onPressed = onPressed;
     this._onLongPressed = onLongPressed;

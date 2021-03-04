@@ -1,3 +1,26 @@
+## [0.4.0] - 2021/3/4
+Feature:
+- Add support for Sound Null Safety of Flutter 2
+
+Refactor:
+- Constructor to use `this` as parameter
+- Remove `overflow` from stack as it's deprecated
+
+Documentation:
+  - Fix Null Coalesce
+  - Fix `borderColor`, `borderStyle` from crashing on outlineButton
+
+
+## [0.3.2] - 2021/2/25
+Documentation:
+  - Fix Null Coalesce
+  - Fix `borderColor`, `borderStyle` from crashing on outlineButton
+
+## [0.3.1] - 2021/2/25
+Documentation:
+  - Fix wrong spelling of `disabled` on outlineButton
+  - Fix `setBorder` of `outlineButton` from crashing
+
 ## [0.3.0] - 2021/2/22
 Feature:
 - Add support for:

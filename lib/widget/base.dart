@@ -133,7 +133,7 @@ import 'package:flutter/rendering.dart';
 ///   - scaleUpdate - The pointers in contact with the screen have indicated a new focal point and/or scale
 ///   - scaleEnd - The pointers are no longer in contact with the screen
 class Niku {
-  Widget _widget;
+  Widget? _widget;
 
   /// Niku Widget for styling widget
   ///
@@ -217,7 +217,7 @@ class Niku {
   ///   .p(21)
   ///   .build()
   /// ```
-  Widget build() => this._widget;
+  Widget build() => this._widget!;
 }
 
 extension BaseProperty on Niku {
@@ -595,7 +595,7 @@ extension BaseProperty on Niku {
   /// ```
   /// Expanded()
   /// ```
-  Niku expanded([int flex = 1]) => Niku(Expanded(child: this._widget));
+  Niku expanded([int flex = 1]) => Niku(Expanded(child: this._widget!));
 
   /// Set both width and height in percent
   ///
@@ -842,7 +842,8 @@ extension BaseProperty on Niku {
   ///   tag: input
   /// )
   /// ```
-  Niku heroTag(String heroTag) => Niku(Hero(tag: heroTag, child: this._widget));
+  Niku heroTag(String heroTag) =>
+      Niku(Hero(tag: heroTag, child: this._widget!));
 
   /// Apply [IgnorePointer] to widget
   ///
@@ -947,53 +948,53 @@ extension BaseProperty on Niku {
   ///   - scaleUpdate - The pointers in contact with the screen have indicated a new focal point and/or scale
   ///   - scaleEnd - The pointers are no longer in contact with the screen
   Niku on(
-          {void Function(TapDownDetails) tapDown,
-          void Function(TapUpDetails) tapUp,
-          VoidCallback tap,
-          VoidCallback tapCancel,
-          VoidCallback secondaryTap,
-          void Function(TapDownDetails) secondaryTapDown,
-          void Function(TapUpDetails) secondaryTapUp,
-          VoidCallback secondaryTapCancel,
-          void Function(TapDownDetails) tertiaryTapDown,
-          void Function(TapUpDetails) tertiaryTapUp,
-          VoidCallback tertiaryTapCancel,
-          void Function(TapDownDetails) doubleTapDown,
-          VoidCallback doubleTap,
-          VoidCallback doubleTapCancel,
-          VoidCallback longPress,
-          void Function(LongPressStartDetails) longPressStart,
-          void Function(LongPressMoveUpdateDetails) longPressMoveUpdate,
-          VoidCallback longPressUp,
-          void Function(LongPressEndDetails) longPressEnd,
-          VoidCallback secondaryLongPress,
-          void Function(LongPressStartDetails) secondaryLongPressStart,
-          void Function(LongPressMoveUpdateDetails)
+          {void Function(TapDownDetails)? tapDown,
+          void Function(TapUpDetails)? tapUp,
+          VoidCallback? tap,
+          VoidCallback? tapCancel,
+          VoidCallback? secondaryTap,
+          void Function(TapDownDetails)? secondaryTapDown,
+          void Function(TapUpDetails)? secondaryTapUp,
+          VoidCallback? secondaryTapCancel,
+          void Function(TapDownDetails)? tertiaryTapDown,
+          void Function(TapUpDetails)? tertiaryTapUp,
+          VoidCallback? tertiaryTapCancel,
+          void Function(TapDownDetails)? doubleTapDown,
+          VoidCallback? doubleTap,
+          VoidCallback? doubleTapCancel,
+          VoidCallback? longPress,
+          void Function(LongPressStartDetails)? longPressStart,
+          void Function(LongPressMoveUpdateDetails)? longPressMoveUpdate,
+          VoidCallback? longPressUp,
+          void Function(LongPressEndDetails)? longPressEnd,
+          VoidCallback? secondaryLongPress,
+          void Function(LongPressStartDetails)? secondaryLongPressStart,
+          void Function(LongPressMoveUpdateDetails)?
               secondaryLongPressMoveUpdate,
-          VoidCallback secondaryLongPressUp,
-          void Function(LongPressEndDetails) secondaryLongPressEnd,
-          void Function(DragDownDetails) verticalDragDown,
-          void Function(DragStartDetails) verticalDragStart,
-          void Function(DragUpdateDetails) verticalDragUpdate,
-          void Function(DragEndDetails) verticalDragEnd,
-          VoidCallback verticalDragCancel,
-          void Function(DragDownDetails) horizontalDragDown,
-          void Function(DragStartDetails) horizontalDragStart,
-          void Function(DragUpdateDetails) horizontalDragUpdate,
-          void Function(DragEndDetails) horizontalDragEnd,
-          VoidCallback horizontalDragCancel,
-          void Function(ForcePressDetails) forcePressStart,
-          void Function(ForcePressDetails) forcePressPeak,
-          void Function(ForcePressDetails) forcePressUpdate,
-          void Function(ForcePressDetails) forcePressEnd,
-          void Function(DragDownDetails) panDown,
-          void Function(DragStartDetails) panStart,
-          void Function(DragUpdateDetails) panUpdate,
-          void Function(DragEndDetails) panEnd,
-          VoidCallback panCancel,
-          void Function(ScaleStartDetails) scaleStart,
-          void Function(ScaleUpdateDetails) scaleUpdate,
-          void Function(ScaleEndDetails) scaleEnd}) =>
+          VoidCallback? secondaryLongPressUp,
+          void Function(LongPressEndDetails)? secondaryLongPressEnd,
+          void Function(DragDownDetails)? verticalDragDown,
+          void Function(DragStartDetails)? verticalDragStart,
+          void Function(DragUpdateDetails)? verticalDragUpdate,
+          void Function(DragEndDetails)? verticalDragEnd,
+          VoidCallback? verticalDragCancel,
+          void Function(DragDownDetails)? horizontalDragDown,
+          void Function(DragStartDetails)? horizontalDragStart,
+          void Function(DragUpdateDetails)? horizontalDragUpdate,
+          void Function(DragEndDetails)? horizontalDragEnd,
+          VoidCallback? horizontalDragCancel,
+          void Function(ForcePressDetails)? forcePressStart,
+          void Function(ForcePressDetails)? forcePressPeak,
+          void Function(ForcePressDetails)? forcePressUpdate,
+          void Function(ForcePressDetails)? forcePressEnd,
+          void Function(DragDownDetails)? panDown,
+          void Function(DragStartDetails)? panStart,
+          void Function(DragUpdateDetails)? panUpdate,
+          void Function(DragEndDetails)? panEnd,
+          VoidCallback? panCancel,
+          void Function(ScaleStartDetails)? scaleStart,
+          void Function(ScaleUpdateDetails)? scaleUpdate,
+          void Function(ScaleEndDetails)? scaleEnd}) =>
       Niku(GestureDetector(
         onTapDown: tapDown,
         onTapUp: tapUp,
@@ -1054,10 +1055,10 @@ extension BaseProperty on Niku {
   ///   shadowColor: shadowColor
   /// )
   /// ```
-  Niku material({double elevation, Color color, Color shadowColor}) =>
+  Niku material({double elevation = 0, Color? color, Color? shadowColor}) =>
       Niku(Material(
         child: this._widget,
-        elevation: elevation = 0,
+        elevation: elevation,
         color: color,
         shadowColor: shadowColor,
       ));
@@ -1076,11 +1077,11 @@ extension BaseProperty on Niku {
   /// )
   /// ```
   Niku inkwell(
-          {Color hover,
-          Color focus,
-          Color highlight,
-          Color splash,
-          double radius,
+          {Color? hover,
+          Color? focus,
+          Color? highlight,
+          Color? splash,
+          double? radius,
           bool autofocus = false}) =>
       Niku(InkWell(
           child: this._widget,
@@ -1127,13 +1128,13 @@ extension BaseProperty on Niku {
   ///   right: right
   /// )
   /// ```
-  Niku positioned({double top, double left, double bottom, double right}) =>
+  Niku positioned({double? top, double? left, double? bottom, double? right}) =>
       Niku(Positioned(
           top: top,
           left: left,
           bottom: bottom,
           right: right,
-          child: this._widget));
+          child: this._widget!));
 
   /// Add singleChildScrolLView to widget
   ///
@@ -1143,13 +1144,13 @@ extension BaseProperty on Niku {
   /// )
   /// ```
   Niku singleChildScrollView(
-          {ScrollController controller,
+          {ScrollController? controller,
           Axis scrollDirection = Axis.vertical,
-          bool primary,
-          bool reverse,
-          ScrollPhysics scrollPhysics,
-          DragStartBehavior dragStartBehavior,
-          String restorationId}) =>
+          bool? primary,
+          bool reverse = false,
+          ScrollPhysics? scrollPhysics,
+          DragStartBehavior dragStartBehavior = DragStartBehavior.start,
+          String? restorationId}) =>
       Niku(SingleChildScrollView(
         child: this._widget,
         controller: controller,
@@ -1169,13 +1170,13 @@ extension BaseProperty on Niku {
   /// )
   /// ```
   Niku scrollable(
-          {ScrollController controller,
+          {ScrollController? controller,
           Axis scrollDirection = Axis.vertical,
-          bool primary,
-          bool reverse,
-          ScrollPhysics scrollPhysics,
-          DragStartBehavior dragStartBehavior,
-          String restorationId}) =>
+          bool? primary,
+          bool reverse = false,
+          ScrollPhysics? scrollPhysics,
+          DragStartBehavior dragStartBehavior = DragStartBehavior.start,
+          String? restorationId}) =>
       Niku(SingleChildScrollView(
         child: this._widget,
         controller: controller,
@@ -1196,7 +1197,7 @@ extension BaseProperty on Niku {
   /// )
   /// ```
   Niku flexible([int flex = 1]) =>
-      Niku(Flexible(child: this._widget, flex: flex));
+      Niku(Flexible(child: this._widget!, flex: flex));
 
   /// Apply Flexible to widget
   ///
@@ -1206,5 +1207,5 @@ extension BaseProperty on Niku {
   ///   flex: input
   /// )
   /// ```
-  Niku flex([int flex = 1]) => Niku(Flexible(child: this._widget, flex: flex));
+  Niku flex([int flex = 1]) => Niku(Flexible(child: this._widget!, flex: flex));
 }
