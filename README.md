@@ -10,7 +10,7 @@ Styling widget in Flutter is hard to maintain.
 Since everything is a widget, a style property like `Padding`, `Align`, `FractionallySizedBox`, `Tooltip` is nested to compose a simple widget.
 
 `Niku` allow developer to style property using builder or `SwiftUI modifier like` to compose styling.
-By reducing the nested hell andbracket usage in Flutter which made styling Flutter widget more maintainable.
+By reducing the nested hell andbracket usage in Flutter, made styling Flutter widget more maintainable.
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/saltyaom/niku/main/doc/images/korone-drake-format.jpg" alt="Comparison" />
@@ -24,7 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  niku: 0.2.0
+  niku: # Using latest version
 ```
 
 Then you're ready to create your awesome Flutter project with effortless styling!
