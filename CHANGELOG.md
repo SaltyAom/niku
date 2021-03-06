@@ -1,6 +1,27 @@
+## [0.5.0]
+Breaking Change
+- Deprecated:
+  - FlatButton
+  - RaisedButton
+  - ElevatedButton
+- Move `button.dart` to `oldButton.dart`
+- Move `NikuButton` to `button.dart`
+- Importing `package:niku/niku.dart` won't import `oldButton.dart`
+- Only support Flutter 2.0.0 or newer
+
+Feature:
+- Add `NikuButton` for new building new universal Button including
+  - TextButton
+  - TextButton.icon
+  - ElevatedButton
+  - ElevatedButton.icon
+  - OutlinedButton
+  - OutlinedButton.icon
+
 ## [0.4.0] - 2021/3/4
 Feature:
 - Add support for Sound Null Safety of Flutter 2
+- Only support Flutter 2.0.0 or newer
 
 Refactor:
 - Constructor to use `this` as parameter

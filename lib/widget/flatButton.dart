@@ -46,6 +46,17 @@ import './base.dart';
 ///   - ml - apply margin left side
 ///   - mb - apply margin bottom side
 ///   - ml - apply margin right side
+/// - alignment, align - Set text alignment
+///   - align - Accept [Alignment] to align self
+///   - topLeft - Apply widget to top-left
+///   - topCenter - Apply widget to top-center
+///   - topRight - Apply widget to top-right
+///   - centerLeft - Apply widget to center-left
+///   - center - Apply widget to center
+///   - centerRight - Apply widget to center-right
+///   - bottomLeft - Apply widget to bottom-left
+///   - bottomCenter - Apply widget to bottom-center
+///   - bottomRight - Apply widget to bottom-right
 /// - setColor - Apply color to all button property
 ///   - setColor - Apply all color property using named property
 ///   - bg, color - Apply color to button background
@@ -786,7 +797,6 @@ class NikuFlatButton {
   ///
   /// Example usage:
   /// ```
-  ///
   /// build(context) {
   ///   return (
   ///     NikuFlatButton(Text("Applied Style"))
@@ -815,7 +825,6 @@ class NikuFlatButton {
   ///
   /// Example usage:
   /// ```
-  ///
   /// build(context) {
   ///   return (
   ///     NikuFlatButton(Text("Applied Style"))

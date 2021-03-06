@@ -5,15 +5,12 @@ Style property builder for building Widget
 ##### [Table of Content](https://github.com/saltyaom/niku/blob/main/doc/widget/README.md)
 
 ### Example usage:
-```
+```dart
 Niku(Container())
   .background(Colors.blue)
   .p(21)
   .build()
 ```
-
-### Prerequisite:
-niku: >= 0.1.0
 
 ### Availability: 
 ```dart
@@ -84,24 +81,15 @@ padding, p - Padding of container
 - absorbPointer - Apply [AbsorbPointer] to widget
 - tooltip - Add tooltip to widget
 - transform - Add transform to widget
-
-##### Prerequisite:
-niku: >= 0.1.2
 - material - Add [Material] to widget
 - inkwell - Add [InkWell] to widget
 - border - Decorate with border using [Border]
-
-### Prerequisite:
-niku: >= 0.3.0
 - backdropFilter - Apply [BackdropFilter] to Widget
 - positioned - Apply [Positioned] to widget
 - scrollable, singleChildScrollView - Add [singleChildScrollView] to widget
 - flex, flexible - Apply [Flexible] to Widget
 
 ### Event Listener
-##### Prerequisite:
-niku: >= 0.1.2
-
 - on - Add multiple event listener at once
   - tapDown - This is called after a short timeout, even if the winning gesture has not yet been selected. If the tap gesture wins, [onTapUp] will be called, otherwise [onTapCancel] will be called
   - tapUp - This triggers immediately before [onTap] in the case of the tap gesture winning. If the tap gesture did not win, [onTapCancel] is called instead

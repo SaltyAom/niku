@@ -5,15 +5,12 @@ Style property builder for building `Text`
 ##### [Table of Content](https://github.com/saltyaom/niku/blob/main/doc/widget/README.md)
 
 ### Example usage:
-```
+```dart
 NikuText("Text")
   .color(Colors.blue)
   .fontSize(21)
   .build()
 ```
-
-### Prerequisite:
-niku: >= 0.1.0
 
 ### Availability: 
 ```dart

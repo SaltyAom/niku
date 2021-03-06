@@ -1083,7 +1083,8 @@ extension BaseProperty on Niku {
           Color? splash,
           double? radius,
           bool autofocus = false}) =>
-      Niku(InkWell(
+      Niku(
+        InkWell(
           child: this._widget,
           hoverColor: hover,
           focusColor: focus,
@@ -1091,7 +1092,9 @@ extension BaseProperty on Niku {
           splashColor: splash,
           radius: radius,
           onTap: () {},
-          autofocus: autofocus));
+          autofocus: autofocus,
+        ),
+      );
 
   /// Decorate with border using [Border]
   ///
@@ -1169,24 +1172,27 @@ extension BaseProperty on Niku {
   /// singleChildScrollView(
   /// )
   /// ```
-  Niku scrollable(
-          {ScrollController? controller,
-          Axis scrollDirection = Axis.vertical,
-          bool? primary,
-          bool reverse = false,
-          ScrollPhysics? scrollPhysics,
-          DragStartBehavior dragStartBehavior = DragStartBehavior.start,
-          String? restorationId}) =>
-      Niku(SingleChildScrollView(
-        child: this._widget,
-        controller: controller,
-        scrollDirection: scrollDirection,
-        primary: primary,
-        reverse: reverse,
-        physics: scrollPhysics,
-        dragStartBehavior: dragStartBehavior,
-        restorationId: restorationId,
-      ));
+  Niku scrollable({
+    ScrollController? controller,
+    Axis scrollDirection = Axis.vertical,
+    bool? primary,
+    bool reverse = false,
+    ScrollPhysics? scrollPhysics,
+    DragStartBehavior dragStartBehavior = DragStartBehavior.start,
+    String? restorationId,
+  }) =>
+      Niku(
+        SingleChildScrollView(
+          child: this._widget,
+          controller: controller,
+          scrollDirection: scrollDirection,
+          primary: primary,
+          reverse: reverse,
+          physics: scrollPhysics,
+          dragStartBehavior: dragStartBehavior,
+          restorationId: restorationId,
+        ),
+      );
 
   /// Apply Flexible to widget
   ///
@@ -1196,8 +1202,12 @@ extension BaseProperty on Niku {
   ///   flex: input
   /// )
   /// ```
-  Niku flexible([int flex = 1]) =>
-      Niku(Flexible(child: this._widget!, flex: flex));
+  Niku flexible([int flex = 1]) => Niku(
+        Flexible(
+          child: this._widget!,
+          flex: flex,
+        ),
+      );
 
   /// Apply Flexible to widget
   ///

@@ -5,7 +5,7 @@ Style property builder for building `TextFormField`
 ##### [Table of Content](https://github.com/saltyaom/niku/blob/main/doc/widget/README.md)
 
 ### Example usage:
-```
+```dart
 NikuTextField("Hello")
   .border(
     OutlineInputBorder(
@@ -22,10 +22,6 @@ NikuTextField("Hello")
   )
   .build()
 ```
-
-### Prerequisite:
-niku: >= 0.1.0
-
 ### Availability: 
 ```dart
 // All Widget

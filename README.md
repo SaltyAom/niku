@@ -57,18 +57,18 @@ Niku is style property builder for styling user interface inspired by SwiftUI.
     - Niku extension for `Column`
   - [Stack](https://github.com/saltyaom/niku/blob/main/doc/widget/stack.md)
     - Niku extension for `Stack`  
-  - [TextField](https://github.com/saltyaom/niku/blob/main/doc/widget/textfield.md)
-    - Niku extension for `TextFormField`
+  - [Button](https://github.com/saltyaom/niku/blob/main/doc/widget/button.md)
+    - Niku extension for `TextButton`, `ElevatedButton` and `OutlinedButton`
+  - [IconButton](https://github.com/saltyaom/niku/blob/main/doc/widget/iconButton.md)
+    - Niku extension for `IconButton`
+- [Available Extension](https://github.com/saltyaom/niku/blob/main/doc/extension/README.md)
+  - [niku](https://github.com/saltyaom/niku/blob/main/doc/extension/niku.md)
+    - Add `.niku()` extension for widget
+   
+- Deprecated
   - [FlatButton](https://github.com/saltyaom/niku/blob/main/doc/widget/flatButton.md)
     - Niku extension for `FlatButton`
   - [RaisedButton](https://github.com/saltyaom/niku/blob/main/doc/widget/raisedButton.md)
     - Niku extension for `RaisedButton`
   - [OutlineButton](https://github.com/saltyaom/niku/blob/main/doc/widget/outlineButton.md)
     - Niku extension for `OutlineButton`
-  - [IconButton](https://github.com/saltyaom/niku/blob/main/doc/widget/iconButton.md)
-    - Niku extension for `IconButton`
-
-- [Available Extension](https://github.com/saltyaom/niku/blob/main/doc/extension/README.md)
-  - [niku](https://github.com/saltyaom/niku/blob/main/doc/extension/niku.md)
-    - Add `.niku()` extension for widget
-   

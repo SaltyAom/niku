@@ -2,10 +2,12 @@
 
 Style property builder for building `OutlineButton`
 
+### Deprecated API, use [NikuButton](https://github.com/saltyaom/niku/blob/main/doc/widget/button.md) instead
+
 ##### [Table of Content](https://github.com/saltyaom/niku/blob/main/doc/widget/README.md)
 
 ### Example usage:
-```
+```dart
 NikuOutlineButton(Text("Outline Button"))
   .color(Colors.blue)
   .px(40)
@@ -15,17 +17,13 @@ NikuOutlineButton(Text("Outline Button"))
   .build()
 ```
 
-### Prerequisite:
-niku: >= 0.1.0
-
 ### Availability: 
 ```dart
 // All Widget
 import 'package:niku/niku.dart';
 
 // With relatated widget
-// Prerequistited: niku >= 0.1.2
-import 'package:niku/widget/button.dart';
+import 'package:niku/widget/oldButton.dart';
 
 // Just widget
 import 'package:niku/widget/outlineButton.dart';

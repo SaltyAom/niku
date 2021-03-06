@@ -5,7 +5,7 @@ Style property builder for building `Column`
 ##### [Table of Content](https://github.com/saltyaom/niku/blob/main/doc/widget/README.md)
 
 ### Example usage:
-```
+```dart
 NikuColumn([
   Text("0"),
   Text("1")
@@ -15,9 +15,6 @@ NikuColumn([
   .append(Text("2"))
   .build()
 ```
-
-### Prerequisite:
-niku: >= 0.1.0
 
 ### Availability: 
 ```dart

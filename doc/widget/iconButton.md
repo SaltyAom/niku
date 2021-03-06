@@ -5,15 +5,12 @@ Style property builder for building Raised Button
 ##### [Table of Content](https://github.com/saltyaom/niku/blob/main/doc/widget/README.md)
 
 ### Example usage:
-```
+```dart
 NikuIconButton(Icon(Icons.edit))
   .color(Colors.blue)
   .p(40)
   .build()
 ```
-
-### Prerequisite:
-niku: >= 0.1.2
 
 ### Availability: 
 ```dart

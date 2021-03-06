@@ -5,7 +5,7 @@ Style property builder for building stack
 ##### [Table of Content](https://github.com/saltyaom/niku/blob/main/doc/widget/README.md)
 
 ### Example usage:
-```
+```dart
 NikuStack([
   Text("0"),
   Text("1")
@@ -14,9 +14,6 @@ NikuStack([
   .append(Text("2"))
   .build()
 ```
-
-### Prerequisite:
-niku: >= 0.1.0
 
 ### Availability: 
 ```dart
