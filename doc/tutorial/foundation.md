@@ -141,7 +141,7 @@ NikuText("Hello World")
 
 The pattern is as same as base widget, but it only accept its own property.
 
-The extended widget not only consisted of Text, but there's more like `NikuFlatButton`, `NikuTextField`, `NikuColumn` and more at [Available Widget page](doc/widget/README.md).
+The extended widget not only consisted of Text, but there's more like `NikuButton`, `NikuTextField`, `NikuColumn` and more at [Available Widget page](doc/widget/README.md).
 
 ### Reusability
 Now what make extended widget is really useful is not only its self-explained code itself, but it's reusability property like `apply`.
