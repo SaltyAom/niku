@@ -1,5 +1,5 @@
 ## [0.5.0]
-Breaking Change
+Breaking Change:
 - Deprecated:
   - FlatButton
   - RaisedButton
@@ -17,6 +17,9 @@ Feature:
   - ElevatedButton.icon
   - OutlinedButton
   - OutlinedButton.icon
+
+Documentation
+- Add code highlight to widget example usage
 
 ## [0.4.0] - 2021/3/4
 Feature:
