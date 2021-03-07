@@ -1,4 +1,8 @@
-## [0.5.0]
+## [0.5.1] - 2021/3/7
+Bug fixes:
+  - Fix apply overriding written value
+
+## [0.5.0] - 2021/3/6
 Breaking Change:
 - Deprecated:
   - FlatButton

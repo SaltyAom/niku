@@ -625,28 +625,37 @@ class NikuIconButton {
   /// }
   /// ```
   NikuIconButton apply(NikuIconButton instance) => this.set(
-      icon: instance._icon,
-      iconSize: instance._iconSize,
-      visualDensity: instance._visualDensity,
-      pt: instance._pt,
-      pl: instance._pl,
-      pb: instance._pb,
-      pr: instance._pr,
-      alignment: instance._alignment,
-      splashRadius: instance._splashRadius,
-      color: instance._color,
-      focusColor: instance._focusColor,
-      hoverColor: instance._hoverColor,
-      highlightColor: instance._highlightColor,
-      splashColor: instance._splashColor,
-      disabledColor: instance._disabledColor,
-      onPressed: instance._onPressed,
-      mouseCursor: instance._mouseCursor,
-      focusNode: instance._focusNode,
-      autofocus: instance._autofocus,
-      tooltip: instance._tooltip,
-      enableFeedback: instance._enableFeedback,
-      constraints: instance._constraints);
+        iconSize:
+            instance._iconSize != 24 ? this._iconSize : instance._iconSize,
+        visualDensity: instance._visualDensity ?? this._visualDensity,
+        pt: instance._pt != 0 ? instance._pt : this._pt,
+        pl: instance._pl != 0 ? instance._pl : this._pl,
+        pb: instance._pb != 0 ? instance._pb : this._pb,
+        pr: instance._pr != 0 ? instance._pr : this._pr,
+        alignment: instance._alignment != Alignment.center
+            ? instance._alignment
+            : this._alignment,
+        splashRadius: instance._splashRadius ?? this._splashRadius,
+        color: instance._color ?? this._color,
+        focusColor: instance._focusColor ?? this._focusColor,
+        hoverColor: instance._hoverColor ?? this._hoverColor,
+        highlightColor: instance._highlightColor ?? this._highlightColor,
+        splashColor: instance._splashColor ?? this._splashColor,
+        disabledColor: instance._disabledColor ?? this._disabledColor,
+        onPressed: instance._onPressed ?? this._onPressed,
+        mouseCursor: instance._mouseCursor != SystemMouseCursors.click
+            ? instance._mouseCursor
+            : this._mouseCursor,
+        focusNode: instance._focusNode ?? this._focusNode,
+        autofocus: instance._autofocus != false
+            ? instance._autofocus
+            : this._autofocus,
+        tooltip: instance._tooltip ?? this._tooltip,
+        enableFeedback: instance._enableFeedback != false
+            ? instance._enableFeedback
+            : this._enableFeedback,
+        constraints: instance._constraints ?? this._constraints,
+      );
 
   /// Apply existing NikuIconButton's property to current style and build
   ///
@@ -720,7 +729,6 @@ class NikuIconButton {
   Niku niku() => Niku(this.build());
 
   NikuIconButton set({
-    required Widget icon,
     double iconSize = 24,
     VisualDensity? visualDensity,
     double pt = 0,
@@ -743,7 +751,6 @@ class NikuIconButton {
     bool enableFeedback = true,
     BoxConstraints? constraints,
   }) {
-    this._icon = icon;
     this._iconSize = iconSize;
     this._visualDensity = visualDensity;
     this._pt = pt;

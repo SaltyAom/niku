@@ -1911,34 +1911,48 @@ class NikuButton {
   /// }
   /// ```
   NikuButton apply(NikuButton instance) => this.set(
-        onPressed: instance._onPressed,
-        onLongPressed: instance._onLongPressed,
-        focusNode: instance._focusNode,
+        onPressed: instance._onPressed ?? this._onPressed,
+        onLongPressed: instance._onLongPressed ?? this._onLongPressed,
+        focusNode: instance._focusNode ?? this._focusNode,
         autofocus: instance._autofocus,
         clipBehavior: instance._clipBehavior,
-        backgroundColor: instance._backgroundColor,
-        foregroundColor: instance._foregroundColor,
-        overlayColor: instance._overlayColor,
-        shadowColor: instance._shadowColor,
-        elevation: instance._elevation,
-        pt: instance._pt,
-        pb: instance._pb,
-        pl: instance._pl,
-        pr: instance._pr,
-        mt: instance._mt,
-        mb: instance._mb,
-        ml: instance._ml,
-        mr: instance._mr,
-        minimumSize: instance._minimumSize,
-        side: instance._side,
-        shape: instance._shape,
-        mouseCursor: instance._mouseCursor,
-        visualDensity: instance._visualDensity,
-        tapTargetSize: instance._tapTargetSize,
-        animationDuration: instance._animationDuration,
+        backgroundColor: instance._backgroundColor.init
+            ? this._backgroundColor
+            : instance._backgroundColor,
+        foregroundColor: instance._foregroundColor.init
+            ? this._foregroundColor
+            : instance._foregroundColor,
+        overlayColor: instance._overlayColor.init
+            ? this._overlayColor
+            : instance._overlayColor,
+        shadowColor: instance._shadowColor.init
+            ? this._shadowColor
+            : instance._shadowColor,
+        elevation:
+            instance._elevation.init ? this._elevation : instance._elevation,
+        pt: instance._pt == 0 ? this._pt : instance._pt,
+        pb: instance._pb == 0 ? this._pb : instance._pb,
+        pl: instance._pl == 0 ? this._pl : instance._pl,
+        pr: instance._pr == 0 ? this._pr : instance._pr,
+        mt: instance._mt == 0 ? this._mt : instance._mt,
+        mb: instance._mb == 0 ? this._mb : instance._mb,
+        ml: instance._ml == 0 ? this._ml : instance._ml,
+        mr: instance._mr == 0 ? this._mr : instance._mr,
+        minimumSize: instance._minimumSize.init
+            ? this._minimumSize
+            : instance._minimumSize,
+        side: instance._side.init ? this._side : instance._side,
+        shape: instance._shape.init ? this._shape : instance._shape,
+        mouseCursor: instance._mouseCursor.init
+            ? this._mouseCursor
+            : instance._mouseCursor,
+        visualDensity: instance._visualDensity ?? this._visualDensity,
+        tapTargetSize: instance._tapTargetSize ?? this._tapTargetSize,
+        animationDuration:
+            instance._animationDuration ?? this._animationDuration,
         enableFeedback: instance._enableFeedback,
-        alignment: instance._alignment,
-        label: instance._label,
+        alignment: instance._alignment ?? this._alignment,
+        label: instance._label ?? this._label,
       );
 
   /// Apply styles and build as [TextButton]
@@ -2529,6 +2543,8 @@ class NikuMaterialPropertyContainer<T> {
   T? pressed;
   T? selected;
 
+  bool init = true;
+
   void update({
     T? base,
     T? disabled,
@@ -2547,6 +2563,8 @@ class NikuMaterialPropertyContainer<T> {
     this.hovered = hovered ?? this.hovered;
     this.pressed = selected ?? this.pressed;
     this.selected = selected ?? this.selected;
+
+    this.init = false;
   }
 
   void updateAll(T input) {
@@ -2558,5 +2576,7 @@ class NikuMaterialPropertyContainer<T> {
     this.hovered = input;
     this.pressed = input;
     this.selected = input;
+
+    this.init = false;
   }
 }
