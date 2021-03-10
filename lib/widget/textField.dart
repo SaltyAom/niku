@@ -6467,233 +6467,393 @@ class NikuTextField {
   /// );
   /// ```
   NikuTextField apply(NikuTextField instance) => this.set(
-        controller: instance._controller,
-        initialValue: instance._initialValue,
-        focusNode: instance._focusNode,
-        keyboardType: instance._keyboardType,
-        textCapitalization: instance._textCapitalization,
-        textInputAction: instance._textInputAction,
-        textDirection: instance._textDirection,
-        textAlign: instance._textAlign,
-        textAlignVertical: instance._textAlignVertical,
-        autofocus: instance._autofocus,
-        readOnly: instance._readOnly,
-        toolbarOptions: instance._toolbarOptions,
-        showCursor: instance._showCursor,
-        obscuringCharacter: instance._obscuringCharacter,
-        obscureText: instance._obscureText,
-        autocorrect: instance._autocorrect,
-        smartDashesType: instance._smartDashesType,
-        smartQuotesType: instance._smartQuotesType,
-        enableSuggestions: instance._enableSuggestions,
-        maxLengthEnforced: instance._maxLengthEnforced,
-        maxLines: instance._maxLines,
-        minLines: instance._minLines,
-        expands: instance._expands,
-        maxLength: instance._maxLength,
-        onChanged: instance._onChanged,
-        onTap: instance._onTap,
-        onEditingComplete: instance._onEditingComplete,
-        onFieldSubmitted: instance._onFieldSubmitted,
-        onSaved: instance._onSaved,
-        validator: instance._validator,
-        inputFormatters: instance._inputFormatters,
-        enabled: instance._enabled,
-        cursorWidth: instance._cursorWidth,
-        cursorHeight: instance._cursorHeight,
-        cursorRadius: instance._cursorRadius,
-        cursorColor: instance._cursorColor,
-        keyboardAppearance: instance._keyboardAppearance,
-        scrollPadding: instance._scrollPadding,
-        enableInteractiveSelection: instance._enableInteractiveSelection,
-        buildCounter: instance._buildCounter,
-        scrollPhysics: instance._scrollPhysics,
-        autofillHints: instance._autofillHints,
-        autovalidateMode: instance._autovalidateMode,
-        input_icon: instance._input_icon,
-        // ! MIGHT OVERRIDE INITIAL CONSTRUCTOR
-        // input_labelText: instance._input_labelText,
-        input_helperText: instance._input_helperText,
-        input_helperMaxLines: instance._input_helperMaxLines,
-        input_hintText: instance._input_hintText,
-        input_hintMaxLines: instance._input_hintMaxLines,
-        input_errorText: instance._input_errorText,
-        input_errorMaxLines: instance._input_errorMaxLines,
-        input_floatingLabelBehavior: instance._input_floatingLabelBehavior,
-        input_isCollapsed: instance._input_isCollapsed,
-        input_isDense: instance._input_isDense,
-        input_contentPadding: instance._input_contentPadding,
-        input_prefixIcon: instance._input_prefixIcon,
-        input_prefixIconConstraints: instance._input_prefixIconConstraints,
-        input_prefix: instance._input_prefix,
-        input_prefixText: instance._input_prefixText,
-        input_suffixIcon: instance._input_suffixIcon,
-        input_suffix: instance._input_suffix,
-        input_suffixText: instance._input_suffixText,
-        input_suffixIconConstraints: instance._input_suffixIconConstraints,
-        input_counter: instance._input_counter,
-        input_counterText: instance._input_counterText,
-        input_filled: instance._input_filled,
-        input_fillColor: instance._input_fillColor,
-        input_focusColor: instance._input_focusColor,
-        input_hoverColor: instance._input_hoverColor,
-        input_errorBorder: instance._input_errorBorder,
-        input_focusedBorder: instance._input_focusedBorder,
-        input_focusedErrorBorder: instance._input_focusedErrorBorder,
-        input_disabledBorder: instance._input_disabledBorder,
-        input_enabledBorder: instance._input_enabledBorder,
-        input_border: instance._input_border,
-        input_decorationEnabled: instance._input_decorationEnabled,
-        input_semanticCounterText: instance._input_semanticCounterText,
-        input_alignLabelWithHint: instance._input_alignLabelWithHint,
-        base_color: instance._base_color,
-        base_backgroundColor: instance._base_backgroundColor,
-        base_fontSize: instance._base_fontSize,
-        base_fontWeight: instance._base_fontWeight,
-        base_fontStyle: instance._base_fontStyle,
-        base_letterSpacing: instance._base_letterSpacing,
-        base_wordSpacing: instance._base_wordSpacing,
-        base_height: instance._base_height,
-        base_foreground: instance._base_foreground,
-        base_background: instance._base_background,
-        base_shadows: instance._base_shadows,
-        base_fontFeatures: instance._base_fontFeatures,
-        base_textDecoration: instance._base_textDecoration,
-        base_textDecorationColor: instance._base_textDecorationColor,
-        base_textDecorationThickness: instance._base_textDecorationThickness,
-        base_fontFamily: instance._base_fontFamily,
-        base_fontFamilyFallback: instance._base_fontFamilyFallback,
-        base_textBaseline: instance._base_textBaseline,
-        label_color: instance._label_color,
-        label_backgroundColor: instance._label_backgroundColor,
-        label_fontSize: instance._label_fontSize,
-        label_fontWeight: instance._label_fontWeight,
-        label_fontStyle: instance._label_fontStyle,
-        label_letterSpacing: instance._label_letterSpacing,
-        label_wordSpacing: instance._label_wordSpacing,
-        label_height: instance._label_height,
-        label_foreground: instance._label_foreground,
-        label_background: instance._label_background,
-        label_shadows: instance._label_shadows,
-        label_fontFeatures: instance._label_fontFeatures,
-        label_textDecoration: instance._label_textDecoration,
-        label_textDecorationColor: instance._label_textDecorationColor,
-        label_textDecorationThickness: instance._label_textDecorationThickness,
-        label_fontFamily: instance._label_fontFamily,
-        label_fontFamilyFallback: instance._label_fontFamilyFallback,
-        label_textBaseline: instance._label_textBaseline,
-        hint_color: instance._hint_color,
-        hint_backgroundColor: instance._hint_backgroundColor,
-        hint_fontSize: instance._hint_fontSize,
-        hint_fontWeight: instance._hint_fontWeight,
-        hint_fontStyle: instance._hint_fontStyle,
-        hint_letterSpacing: instance._hint_letterSpacing,
-        hint_wordSpacing: instance._hint_wordSpacing,
-        hint_height: instance._hint_height,
-        hint_foreground: instance._hint_foreground,
-        hint_background: instance._hint_background,
-        hint_shadows: instance._hint_shadows,
-        hint_fontFeatures: instance._hint_fontFeatures,
-        hint_textDecoration: instance._hint_textDecoration,
-        hint_textDecorationColor: instance._hint_textDecorationColor,
-        hint_textDecorationThickness: instance._hint_textDecorationThickness,
-        hint_fontFamily: instance._hint_fontFamily,
-        hint_fontFamilyFallback: instance._hint_fontFamilyFallback,
-        hint_textBaseline: instance._hint_textBaseline,
-        helper_color: instance._helper_color,
-        helper_backgroundColor: instance._helper_backgroundColor,
-        helper_fontSize: instance._helper_fontSize,
-        helper_fontWeight: instance._helper_fontWeight,
-        helper_fontStyle: instance._helper_fontStyle,
-        helper_letterSpacing: instance._helper_letterSpacing,
-        helper_wordSpacing: instance._helper_wordSpacing,
-        helper_height: instance._helper_height,
-        helper_foreground: instance._helper_foreground,
-        helper_background: instance._helper_background,
-        helper_shadows: instance._helper_shadows,
-        helper_fontFeatures: instance._helper_fontFeatures,
-        helper_textDecoration: instance._helper_textDecoration,
-        helper_textDecorationColor: instance._helper_textDecorationColor,
+        controller: instance._controller ?? instance._controller,
+        initialValue: instance._initialValue != ""
+            ? instance._initialValue
+            : this._initialValue,
+        focusNode: instance._focusNode ?? instance._focusNode,
+        keyboardType: instance._keyboardType ?? instance._keyboardType,
+        textCapitalization:
+            instance._textCapitalization != TextCapitalization.none
+                ? instance._textCapitalization
+                : this._textCapitalization,
+        textInputAction: instance._textInputAction ?? instance._textInputAction,
+        textDirection: instance._textDirection ?? instance._textDirection,
+        textAlign: instance._textAlign != TextAlign.start
+            ? instance._textAlign
+            : this._textAlign,
+        textAlignVertical:
+            instance._textAlignVertical ?? instance._textAlignVertical,
+        autofocus: instance._autofocus != false
+            ? instance._autofocus
+            : this._autofocus,
+        readOnly:
+            instance._readOnly != false ? instance._readOnly : this._readOnly,
+        toolbarOptions: instance._toolbarOptions ?? instance._toolbarOptions,
+        showCursor: instance._showCursor ?? instance._showCursor,
+        obscuringCharacter: instance._obscuringCharacter != '•'
+            ? instance._obscuringCharacter
+            : this._obscuringCharacter,
+        obscureText: instance._obscureText != false
+            ? instance._obscureText
+            : this._obscureText,
+        autocorrect: instance._autocorrect != true
+            ? instance._autocorrect
+            : this._autocorrect,
+        smartDashesType: instance._smartDashesType ?? instance._smartDashesType,
+        smartQuotesType: instance._smartQuotesType ?? instance._smartQuotesType,
+        enableSuggestions: instance._enableSuggestions != true
+            ? instance._enableSuggestions
+            : this._enableSuggestions,
+        maxLengthEnforced: instance._maxLengthEnforced != true
+            ? instance._maxLengthEnforced
+            : this._maxLengthEnforced,
+        maxLines: instance._maxLines != 1 ? instance._maxLines : this._maxLines,
+        minLines: instance._minLines ?? instance._minLines,
+        expands: instance._expands != false ? instance._expands : this._expands,
+        maxLength: instance._maxLength ?? instance._maxLength,
+        onChanged: instance._onChanged ?? instance._onChanged,
+        onTap: instance._onTap ?? instance._onTap,
+        onEditingComplete:
+            instance._onEditingComplete ?? instance._onEditingComplete,
+        onFieldSubmitted:
+            instance._onFieldSubmitted ?? instance._onFieldSubmitted,
+        onSaved: instance._onSaved ?? instance._onSaved,
+        validator: instance._validator ?? instance._validator,
+        inputFormatters: instance._inputFormatters ?? instance._inputFormatters,
+        enabled: instance._enabled ?? instance._enabled,
+        cursorWidth: instance._cursorWidth != 2.0
+            ? instance._cursorWidth
+            : this._cursorWidth,
+        cursorHeight: instance._cursorHeight ?? instance._cursorHeight,
+        cursorRadius: instance._cursorRadius ?? instance._cursorRadius,
+        cursorColor: instance._cursorColor ?? instance._cursorColor,
+        keyboardAppearance:
+            instance._keyboardAppearance ?? instance._keyboardAppearance,
+        scrollPadding: instance._scrollPadding != EdgeInsets.all(20)
+            ? instance._scrollPadding
+            : this._scrollPadding,
+        enableInteractiveSelection: instance._enableInteractiveSelection != true
+            ? instance._enableInteractiveSelection
+            : this._enableInteractiveSelection,
+        buildCounter: instance._buildCounter ?? instance._buildCounter,
+        scrollPhysics: instance._scrollPhysics ?? instance._scrollPhysics,
+        autofillHints: instance._autofillHints ?? instance._autofillHints,
+        autovalidateMode:
+            instance._autovalidateMode ?? instance._autovalidateMode,
+        input_icon: instance._input_icon ?? instance._input_icon,
+        input_helperText:
+            instance._input_helperText ?? instance._input_helperText,
+        input_helperMaxLines:
+            instance._input_helperMaxLines ?? instance._input_helperMaxLines,
+        input_hintText: instance._input_hintText ?? instance._input_hintText,
+        input_hintMaxLines:
+            instance._input_hintMaxLines ?? instance._input_hintMaxLines,
+        input_errorText: instance._input_errorText ?? instance._input_errorText,
+        input_errorMaxLines:
+            instance._input_errorMaxLines ?? instance._input_errorMaxLines,
+        input_floatingLabelBehavior:
+            instance._input_floatingLabelBehavior != FloatingLabelBehavior.auto
+                ? instance._input_floatingLabelBehavior
+                : this._input_floatingLabelBehavior,
+        input_isCollapsed: instance._input_isCollapsed != false
+            ? instance._input_isCollapsed
+            : this._input_isCollapsed,
+        input_isDense: instance._input_isDense ?? instance._input_isDense,
+        input_contentPadding:
+            instance._input_contentPadding ?? instance._input_contentPadding,
+        input_prefixIcon:
+            instance._input_prefixIcon ?? instance._input_prefixIcon,
+        input_prefixIconConstraints: instance._input_prefixIconConstraints ??
+            instance._input_prefixIconConstraints,
+        input_prefix: instance._input_prefix ?? instance._input_prefix,
+        input_prefixText:
+            instance._input_prefixText ?? instance._input_prefixText,
+        input_suffixIcon:
+            instance._input_suffixIcon ?? instance._input_suffixIcon,
+        input_suffix: instance._input_suffix ?? instance._input_suffix,
+        input_suffixText:
+            instance._input_suffixText ?? instance._input_suffixText,
+        input_suffixIconConstraints: instance._input_suffixIconConstraints ??
+            instance._input_suffixIconConstraints,
+        input_counter: instance._input_counter ?? instance._input_counter,
+        input_counterText:
+            instance._input_counterText ?? instance._input_counterText,
+        input_filled: instance._input_filled ?? instance._input_filled,
+        input_fillColor: instance._input_fillColor ?? instance._input_fillColor,
+        input_focusColor:
+            instance._input_focusColor ?? instance._input_focusColor,
+        input_hoverColor:
+            instance._input_hoverColor ?? instance._input_hoverColor,
+        input_errorBorder:
+            instance._input_errorBorder ?? instance._input_errorBorder,
+        input_focusedBorder:
+            instance._input_focusedBorder ?? instance._input_focusedBorder,
+        input_focusedErrorBorder: instance._input_focusedErrorBorder ??
+            instance._input_focusedErrorBorder,
+        input_disabledBorder:
+            instance._input_disabledBorder ?? instance._input_disabledBorder,
+        input_enabledBorder:
+            instance._input_enabledBorder ?? instance._input_enabledBorder,
+        input_border: instance._input_border ?? instance._input_border,
+        input_decorationEnabled: instance._input_decorationEnabled != true
+            ? instance._input_decorationEnabled
+            : this._input_decorationEnabled,
+        input_semanticCounterText: instance._input_semanticCounterText ??
+            instance._input_semanticCounterText,
+        input_alignLabelWithHint: instance._input_alignLabelWithHint ??
+            instance._input_alignLabelWithHint,
+        base_color: instance._base_color ?? instance._base_color,
+        base_backgroundColor:
+            instance._base_backgroundColor ?? instance._base_backgroundColor,
+        base_fontSize: instance._base_fontSize ?? instance._base_fontSize,
+        base_fontWeight: instance._base_fontWeight ?? instance._base_fontWeight,
+        base_fontStyle: instance._base_fontStyle ?? instance._base_fontStyle,
+        base_letterSpacing:
+            instance._base_letterSpacing ?? instance._base_letterSpacing,
+        base_wordSpacing:
+            instance._base_wordSpacing ?? instance._base_wordSpacing,
+        base_height: instance._base_height ?? instance._base_height,
+        base_foreground: instance._base_foreground ?? instance._base_foreground,
+        base_background: instance._base_background ?? instance._base_background,
+        base_shadows: instance._base_shadows ?? instance._base_shadows,
+        base_fontFeatures:
+            instance._base_fontFeatures ?? instance._base_fontFeatures,
+        base_textDecoration:
+            instance._base_textDecoration ?? instance._base_textDecoration,
+        base_textDecorationColor: instance._base_textDecorationColor ??
+            instance._base_textDecorationColor,
+        base_textDecorationThickness: instance._base_textDecorationThickness ??
+            instance._base_textDecorationThickness,
+        base_fontFamily: instance._base_fontFamily ?? instance._base_fontFamily,
+        base_fontFamilyFallback: instance._base_fontFamilyFallback ??
+            instance._base_fontFamilyFallback,
+        base_textBaseline:
+            instance._base_textBaseline ?? instance._base_textBaseline,
+        label_color: instance._label_color ?? instance._label_color,
+        label_backgroundColor:
+            instance._label_backgroundColor ?? instance._label_backgroundColor,
+        label_fontSize: instance._label_fontSize ?? instance._label_fontSize,
+        label_fontWeight:
+            instance._label_fontWeight ?? instance._label_fontWeight,
+        label_fontStyle: instance._label_fontStyle ?? instance._label_fontStyle,
+        label_letterSpacing:
+            instance._label_letterSpacing ?? instance._label_letterSpacing,
+        label_wordSpacing:
+            instance._label_wordSpacing ?? instance._label_wordSpacing,
+        label_height: instance._label_height ?? instance._label_height,
+        label_foreground:
+            instance._label_foreground ?? instance._label_foreground,
+        label_background:
+            instance._label_background ?? instance._label_background,
+        label_shadows: instance._label_shadows ?? instance._label_shadows,
+        label_fontFeatures:
+            instance._label_fontFeatures ?? instance._label_fontFeatures,
+        label_textDecoration:
+            instance._label_textDecoration ?? instance._label_textDecoration,
+        label_textDecorationColor: instance._label_textDecorationColor ??
+            instance._label_textDecorationColor,
+        label_textDecorationThickness:
+            instance._label_textDecorationThickness ??
+                instance._label_textDecorationThickness,
+        label_fontFamily:
+            instance._label_fontFamily ?? instance._label_fontFamily,
+        label_fontFamilyFallback: instance._label_fontFamilyFallback ??
+            instance._label_fontFamilyFallback,
+        label_textBaseline:
+            instance._label_textBaseline ?? instance._label_textBaseline,
+        hint_color: instance._hint_color ?? instance._hint_color,
+        hint_backgroundColor:
+            instance._hint_backgroundColor ?? instance._hint_backgroundColor,
+        hint_fontSize: instance._hint_fontSize ?? instance._hint_fontSize,
+        hint_fontWeight: instance._hint_fontWeight ?? instance._hint_fontWeight,
+        hint_fontStyle: instance._hint_fontStyle ?? instance._hint_fontStyle,
+        hint_letterSpacing:
+            instance._hint_letterSpacing ?? instance._hint_letterSpacing,
+        hint_wordSpacing:
+            instance._hint_wordSpacing ?? instance._hint_wordSpacing,
+        hint_height: instance._hint_height ?? instance._hint_height,
+        hint_foreground: instance._hint_foreground ?? instance._hint_foreground,
+        hint_background: instance._hint_background ?? instance._hint_background,
+        hint_shadows: instance._hint_shadows ?? instance._hint_shadows,
+        hint_fontFeatures:
+            instance._hint_fontFeatures ?? instance._hint_fontFeatures,
+        hint_textDecoration:
+            instance._hint_textDecoration ?? instance._hint_textDecoration,
+        hint_textDecorationColor: instance._hint_textDecorationColor ??
+            instance._hint_textDecorationColor,
+        hint_textDecorationThickness: instance._hint_textDecorationThickness ??
+            instance._hint_textDecorationThickness,
+        hint_fontFamily: instance._hint_fontFamily ?? instance._hint_fontFamily,
+        hint_fontFamilyFallback: instance._hint_fontFamilyFallback ??
+            instance._hint_fontFamilyFallback,
+        hint_textBaseline:
+            instance._hint_textBaseline ?? instance._hint_textBaseline,
+        helper_color: instance._helper_color ?? instance._helper_color,
+        helper_backgroundColor: instance._helper_backgroundColor ??
+            instance._helper_backgroundColor,
+        helper_fontSize: instance._helper_fontSize ?? instance._helper_fontSize,
+        helper_fontWeight:
+            instance._helper_fontWeight ?? instance._helper_fontWeight,
+        helper_fontStyle:
+            instance._helper_fontStyle ?? instance._helper_fontStyle,
+        helper_letterSpacing:
+            instance._helper_letterSpacing ?? instance._helper_letterSpacing,
+        helper_wordSpacing:
+            instance._helper_wordSpacing ?? instance._helper_wordSpacing,
+        helper_height: instance._helper_height ?? instance._helper_height,
+        helper_foreground:
+            instance._helper_foreground ?? instance._helper_foreground,
+        helper_background:
+            instance._helper_background ?? instance._helper_background,
+        helper_shadows: instance._helper_shadows ?? instance._helper_shadows,
+        helper_fontFeatures:
+            instance._helper_fontFeatures ?? instance._helper_fontFeatures,
+        helper_textDecoration:
+            instance._helper_textDecoration ?? instance._helper_textDecoration,
+        helper_textDecorationColor: instance._helper_textDecorationColor ??
+            instance._helper_textDecorationColor,
         helper_textDecorationThickness:
-            instance._helper_textDecorationThickness,
-        helper_fontFamily: instance._helper_fontFamily,
-        helper_fontFamilyFallback: instance._helper_fontFamilyFallback,
-        helper_textBaseline: instance._helper_textBaseline,
-        error_color: instance._error_color,
-        error_backgroundColor: instance._error_backgroundColor,
-        error_fontSize: instance._error_fontSize,
-        error_fontWeight: instance._error_fontWeight,
-        error_fontStyle: instance._error_fontStyle,
-        error_letterSpacing: instance._error_letterSpacing,
-        error_wordSpacing: instance._error_wordSpacing,
-        error_height: instance._error_height,
-        error_foreground: instance._error_foreground,
-        error_background: instance._error_background,
-        error_shadows: instance._error_shadows,
-        error_fontFeatures: instance._error_fontFeatures,
-        error_textDecoration: instance._error_textDecoration,
-        error_textDecorationColor: instance._error_textDecorationColor,
-        error_textDecorationThickness: instance._error_textDecorationThickness,
-        error_fontFamily: instance._error_fontFamily,
-        error_fontFamilyFallback: instance._error_fontFamilyFallback,
-        error_textBaseline: instance._error_textBaseline,
-        prefix_color: instance._prefix_color,
-        prefix_backgroundColor: instance._prefix_backgroundColor,
-        prefix_fontSize: instance._prefix_fontSize,
-        prefix_fontWeight: instance._prefix_fontWeight,
-        prefix_fontStyle: instance._prefix_fontStyle,
-        prefix_letterSpacing: instance._prefix_letterSpacing,
-        prefix_wordSpacing: instance._prefix_wordSpacing,
-        prefix_height: instance._prefix_height,
-        prefix_foreground: instance._prefix_foreground,
-        prefix_background: instance._prefix_background,
-        prefix_shadows: instance._prefix_shadows,
-        prefix_fontFeatures: instance._prefix_fontFeatures,
-        prefix_textDecoration: instance._prefix_textDecoration,
-        prefix_textDecorationColor: instance._prefix_textDecorationColor,
+            instance._helper_textDecorationThickness ??
+                instance._helper_textDecorationThickness,
+        helper_fontFamily:
+            instance._helper_fontFamily ?? instance._helper_fontFamily,
+        helper_fontFamilyFallback: instance._helper_fontFamilyFallback ??
+            instance._helper_fontFamilyFallback,
+        helper_textBaseline:
+            instance._helper_textBaseline ?? instance._helper_textBaseline,
+        error_color: instance._error_color ?? instance._error_color,
+        error_backgroundColor:
+            instance._error_backgroundColor ?? instance._error_backgroundColor,
+        error_fontSize: instance._error_fontSize ?? instance._error_fontSize,
+        error_fontWeight:
+            instance._error_fontWeight ?? instance._error_fontWeight,
+        error_fontStyle: instance._error_fontStyle ?? instance._error_fontStyle,
+        error_letterSpacing:
+            instance._error_letterSpacing ?? instance._error_letterSpacing,
+        error_wordSpacing:
+            instance._error_wordSpacing ?? instance._error_wordSpacing,
+        error_height: instance._error_height ?? instance._error_height,
+        error_foreground:
+            instance._error_foreground ?? instance._error_foreground,
+        error_background:
+            instance._error_background ?? instance._error_background,
+        error_shadows: instance._error_shadows ?? instance._error_shadows,
+        error_fontFeatures:
+            instance._error_fontFeatures ?? instance._error_fontFeatures,
+        error_textDecoration:
+            instance._error_textDecoration ?? instance._error_textDecoration,
+        error_textDecorationColor: instance._error_textDecorationColor ??
+            instance._error_textDecorationColor,
+        error_textDecorationThickness:
+            instance._error_textDecorationThickness ??
+                instance._error_textDecorationThickness,
+        error_fontFamily:
+            instance._error_fontFamily ?? instance._error_fontFamily,
+        error_fontFamilyFallback: instance._error_fontFamilyFallback ??
+            instance._error_fontFamilyFallback,
+        error_textBaseline:
+            instance._error_textBaseline ?? instance._error_textBaseline,
+        prefix_color: instance._prefix_color ?? instance._prefix_color,
+        prefix_backgroundColor: instance._prefix_backgroundColor ??
+            instance._prefix_backgroundColor,
+        prefix_fontSize: instance._prefix_fontSize ?? instance._prefix_fontSize,
+        prefix_fontWeight:
+            instance._prefix_fontWeight ?? instance._prefix_fontWeight,
+        prefix_fontStyle:
+            instance._prefix_fontStyle ?? instance._prefix_fontStyle,
+        prefix_letterSpacing:
+            instance._prefix_letterSpacing ?? instance._prefix_letterSpacing,
+        prefix_wordSpacing:
+            instance._prefix_wordSpacing ?? instance._prefix_wordSpacing,
+        prefix_height: instance._prefix_height ?? instance._prefix_height,
+        prefix_foreground:
+            instance._prefix_foreground ?? instance._prefix_foreground,
+        prefix_background:
+            instance._prefix_background ?? instance._prefix_background,
+        prefix_shadows: instance._prefix_shadows ?? instance._prefix_shadows,
+        prefix_fontFeatures:
+            instance._prefix_fontFeatures ?? instance._prefix_fontFeatures,
+        prefix_textDecoration:
+            instance._prefix_textDecoration ?? instance._prefix_textDecoration,
+        prefix_textDecorationColor: instance._prefix_textDecorationColor ??
+            instance._prefix_textDecorationColor,
         prefix_textDecorationThickness:
-            instance._prefix_textDecorationThickness,
-        prefix_fontFamily: instance._prefix_fontFamily,
-        prefix_fontFamilyFallback: instance._prefix_fontFamilyFallback,
-        prefix_textBaseline: instance._prefix_textBaseline,
-        suffix_color: instance._suffix_color,
-        suffix_backgroundColor: instance._suffix_backgroundColor,
-        suffix_fontSize: instance._suffix_fontSize,
-        suffix_fontWeight: instance._suffix_fontWeight,
-        suffix_fontStyle: instance._suffix_fontStyle,
-        suffix_letterSpacing: instance._suffix_letterSpacing,
-        suffix_wordSpacing: instance._suffix_wordSpacing,
-        suffix_height: instance._suffix_height,
-        suffix_foreground: instance._suffix_foreground,
-        suffix_background: instance._suffix_background,
-        suffix_shadows: instance._suffix_shadows,
-        suffix_fontFeatures: instance._suffix_fontFeatures,
-        suffix_textDecoration: instance._suffix_textDecoration,
-        suffix_textDecorationColor: instance._suffix_textDecorationColor,
+            instance._prefix_textDecorationThickness ??
+                instance._prefix_textDecorationThickness,
+        prefix_fontFamily:
+            instance._prefix_fontFamily ?? instance._prefix_fontFamily,
+        prefix_fontFamilyFallback: instance._prefix_fontFamilyFallback ??
+            instance._prefix_fontFamilyFallback,
+        prefix_textBaseline:
+            instance._prefix_textBaseline ?? instance._prefix_textBaseline,
+        suffix_color: instance._suffix_color ?? instance._suffix_color,
+        suffix_backgroundColor: instance._suffix_backgroundColor ??
+            instance._suffix_backgroundColor,
+        suffix_fontSize: instance._suffix_fontSize ?? instance._suffix_fontSize,
+        suffix_fontWeight:
+            instance._suffix_fontWeight ?? instance._suffix_fontWeight,
+        suffix_fontStyle:
+            instance._suffix_fontStyle ?? instance._suffix_fontStyle,
+        suffix_letterSpacing:
+            instance._suffix_letterSpacing ?? instance._suffix_letterSpacing,
+        suffix_wordSpacing:
+            instance._suffix_wordSpacing ?? instance._suffix_wordSpacing,
+        suffix_height: instance._suffix_height ?? instance._suffix_height,
+        suffix_foreground:
+            instance._suffix_foreground ?? instance._suffix_foreground,
+        suffix_background:
+            instance._suffix_background ?? instance._suffix_background,
+        suffix_shadows: instance._suffix_shadows ?? instance._suffix_shadows,
+        suffix_fontFeatures:
+            instance._suffix_fontFeatures ?? instance._suffix_fontFeatures,
+        suffix_textDecoration:
+            instance._suffix_textDecoration ?? instance._suffix_textDecoration,
+        suffix_textDecorationColor: instance._suffix_textDecorationColor ??
+            instance._suffix_textDecorationColor,
         suffix_textDecorationThickness:
-            instance._suffix_textDecorationThickness,
-        suffix_fontFamily: instance._suffix_fontFamily,
-        suffix_fontFamilyFallback: instance._suffix_fontFamilyFallback,
-        suffix_textBaseline: instance._suffix_textBaseline,
-        counter_color: instance._counter_color,
-        counter_backgroundColor: instance._counter_backgroundColor,
-        counter_fontSize: instance._counter_fontSize,
-        counter_fontWeight: instance._counter_fontWeight,
-        counter_fontStyle: instance._counter_fontStyle,
-        counter_letterSpacing: instance._counter_letterSpacing,
-        counter_wordSpacing: instance._counter_wordSpacing,
-        counter_height: instance._counter_height,
-        counter_foreground: instance._counter_foreground,
-        counter_background: instance._counter_background,
-        counter_shadows: instance._counter_shadows,
-        counter_fontFeatures: instance._counter_fontFeatures,
-        counter_textDecoration: instance._counter_textDecoration,
-        counter_textDecorationColor: instance._counter_textDecorationColor,
+            instance._suffix_textDecorationThickness ??
+                instance._suffix_textDecorationThickness,
+        suffix_fontFamily:
+            instance._suffix_fontFamily ?? instance._suffix_fontFamily,
+        suffix_fontFamilyFallback: instance._suffix_fontFamilyFallback ??
+            instance._suffix_fontFamilyFallback,
+        suffix_textBaseline:
+            instance._suffix_textBaseline ?? instance._suffix_textBaseline,
+        counter_color: instance._counter_color ?? instance._counter_color,
+        counter_backgroundColor: instance._counter_backgroundColor ??
+            instance._counter_backgroundColor,
+        counter_fontSize:
+            instance._counter_fontSize ?? instance._counter_fontSize,
+        counter_fontWeight:
+            instance._counter_fontWeight ?? instance._counter_fontWeight,
+        counter_fontStyle:
+            instance._counter_fontStyle ?? instance._counter_fontStyle,
+        counter_letterSpacing:
+            instance._counter_letterSpacing ?? instance._counter_letterSpacing,
+        counter_wordSpacing:
+            instance._counter_wordSpacing ?? instance._counter_wordSpacing,
+        counter_height: instance._counter_height ?? instance._counter_height,
+        counter_foreground:
+            instance._counter_foreground ?? instance._counter_foreground,
+        counter_background:
+            instance._counter_background ?? instance._counter_background,
+        counter_shadows: instance._counter_shadows ?? instance._counter_shadows,
+        counter_fontFeatures:
+            instance._counter_fontFeatures ?? instance._counter_fontFeatures,
+        counter_textDecoration: instance._counter_textDecoration ??
+            instance._counter_textDecoration,
+        counter_textDecorationColor: instance._counter_textDecorationColor ??
+            instance._counter_textDecorationColor,
         counter_textDecorationThickness:
-            instance._counter_textDecorationThickness,
-        counter_fontFamily: instance._counter_fontFamily,
-        counter_fontFamilyFallback: instance._counter_fontFamilyFallback,
-        counter_textBaseline: instance._counter_textBaseline,
+            instance._counter_textDecorationThickness ??
+                instance._counter_textDecorationThickness,
+        counter_fontFamily:
+            instance._counter_fontFamily ?? instance._counter_fontFamily,
+        counter_fontFamilyFallback: instance._counter_fontFamilyFallback ??
+            instance._counter_fontFamilyFallback,
+        counter_textBaseline:
+            instance._counter_textBaseline ?? instance._counter_textBaseline,
       );
 
   /// Apply existing NikuTextField's property to current style and build
