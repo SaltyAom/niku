@@ -1,6 +1,6 @@
-## Niku extension for Material Raised Button
+## Niku extension for Material Icon Button
 
-Style property builder for building Raised Button
+Style property builder for building icon Button
 
 ##### [Table of Content](https://github.com/saltyaom/niku/blob/main/doc/widget/README.md)
 
@@ -18,18 +18,17 @@ NikuIconButton(Icon(Icons.edit))
 import 'package:niku/niku.dart';
 
 // With relatated widget
-// Prerequistited: niku >= 0.1.2
 import 'package:niku/widget/button.dart';
 
 // Just widget
-import 'package:niku/widget/raisedButton.dart';
+import 'package:niku/widget/iconButton.dart';
 ```
 
 ### Meta property list:
 - niku() - Switch to Niku() property
-- build() - Apply styles and build RaisedButton as Widget
-- apply() - Apply existing NikuOutlineButton's property to current style
-- style() - Apply existing NikuOutlineButton's property to current style and build
+- build() - Apply styles and build IconButton as Widget
+- apply() - Apply existing NikuIconButton's property to current style
+- style() - Apply existing NikuIconButton's property to current style and build
 
 ### Style Property list:
 - onPressed - Callback when button is pressed
