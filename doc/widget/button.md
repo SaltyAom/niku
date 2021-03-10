@@ -9,8 +9,6 @@ Including:
 - OutlinedButton
 - OutlinedButton.icon
 
-### Deprecated API, use [NikuButton](https://github.com/saltyaom/niku/blob/main/doc/widget/button.md) instead
-
 ##### [Table of Content](https://github.com/saltyaom/niku/blob/main/doc/widget/README.md)
 
 

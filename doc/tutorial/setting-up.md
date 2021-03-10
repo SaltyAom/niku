@@ -4,7 +4,7 @@
 As Niku doesn't depends on any dependencies, using native dart code, there's nothing preventing you from using `Niku`.
 
 ### Prerequisites:
-- Flutter >= 1.17
+- Flutter >= 2.0.0
 
 ## Starting up
 Now let's create quick project styling with Niku.
@@ -23,7 +23,7 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.0
-  niku: 0.2.0
+  niku: # Use latest version
 ...
 ```
 
