@@ -61,7 +61,7 @@ class NikuRow {
 
   MainAxisAlignment _mainAxisAlignment = MainAxisAlignment.start;
   MainAxisSize _mainAxisSize = MainAxisSize.max;
-  CrossAxisAlignment _crossAxisAlignment = CrossAxisAlignment.baseline;
+  CrossAxisAlignment _crossAxisAlignment = CrossAxisAlignment.start;
   TextDirection? _textDirection;
   VerticalDirection _verticalDirection = VerticalDirection.up;
   TextBaseline? _textBaseline;

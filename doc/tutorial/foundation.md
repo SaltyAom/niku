@@ -282,8 +282,6 @@ NikuText("1")
   .build()
 ```
 
-Congratulations! You've now understand all the concept and how to adopt the Niku library in your project!
-
 You can explore more at [Available Widget page](doc/widget/README.md) which would help you find what you're looking for.
 
 Beside that, Niku library is created to helped developer to easier maintain and write friendly Flutter code!
@@ -294,6 +292,6 @@ But feels free to explore and experiment Niku as much as you like!
 
 If you like the project, simply share this library with your friends and college or help us improve the library by creating a discussion and creating a Pull Request to improve the documentation or the code!
 
-We thanks you for your attention!
+[Next chapter](https://github.com/saltyaom/niku/blob/main/doc/tutorial/builder.md), we will add custom builder on Niku property
 
 ##### [Table of Content](https://github.com/saltyaom/niku/blob/main/doc/widget/README.md)

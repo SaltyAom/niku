@@ -1,3 +1,40 @@
+## [0.5.5] - 2021/3/15
+Feature:
+  - Add `animatedBuilder`, `animated` for `AnimationBuilder`
+  - Add `animatedContainer` for `AnimatedContainer`
+  - Add `semantics` for `Semantics`
+
+Changed:
+  - Move use of `Container` to `DecoratedBox`
+    - The property which affected this changed including:
+      - boxDecoration
+      - border
+      - shadows
+  - Move use of `Container` to `SizedBox`
+    - The property which affected this changed including:
+      - fullSize
+      - fullWidth
+      - fullHeight
+
+## [0.5.4] - 2021/3/11
+Bug fixes:
+  - Wrong size on `widthPercent`, `heightPercent` and `sizePercent`
+  - Unable to use `NikuRow` without specifying `crossAxisAlignment`
+  - Add optional `onTap` to `.inkwell`
+
+## [0.5.3] - 2021/3/11
+Bug fixes:
+  - Wrong size on `widthPercent`, `heightPercent` and `sizePercent`
+
+## [0.5.2] - 2021/3/11
+Feature:
+  - Add `builder` on Niku for composing custom widget.
+  - Add `widthPercent`, `heightPercent` and `sizePercent`
+
+Changed:
+  - `bg` and `backgroundColor` of `Niku` are now using `ColoredBox` instead of `Container`
+  - `Niku` now don't required any constructor Widget
+
 ## [0.5.1] - 2021/3/7
 Bug fixes:
   - Fix apply overriding written value

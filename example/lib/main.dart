@@ -102,12 +102,25 @@ class HomePage extends StatelessWidget {
               .inkwell(splash: Colors.white24, highlight: Colors.white24)
               .material(color: Theme.of(context).primaryColor)
               .rounded(8)
-              .my(20)
+              .builder((child) {
+                return Container(
+                  margin: EdgeInsets.symmetric(
+                    vertical: 20,
+                  ),
+                  child: child,
+                );
+              })
               .build(),
           NikuStack([
             Text("Text in Niku Stack"),
             Text("Text with Niku Property").niku().mt(40).build(),
           ]).topCenter().niku().maxHeight(100).build(),
+          Niku()
+              .size(40, 40)
+              .bg(Theme.of(context).primaryColor)
+              .rounded()
+              .my(20)
+              .build()
         ],
       )
           .justifyCenter()
@@ -148,7 +161,7 @@ class HomePage extends StatelessWidget {
           )
           .niku()
           .my(40)
-          .singleChildScrollView()
+          .scrollable()
           .fullWidth()
           .center()
           .build(),

@@ -6,8 +6,8 @@ Style property builder for building Widget
 
 ### Example usage:
 ```dart
-Niku(Container())
-  .background(Colors.blue)
+Niku()
+  .bg(Colors.blue)
   .p(21)
   .build()
 ```
@@ -23,6 +23,7 @@ import 'package:niku/widget/base.dart';
 
 ### Meta property list:
 - build() - Apply styles and build Widget
+- builder() - Add custom widget
 
 ### Style property list:
 padding, p - Padding of container
@@ -88,6 +89,12 @@ padding, p - Padding of container
 - positioned - Apply [Positioned] to widget
 - scrollable, singleChildScrollView - Add [singleChildScrollView] to widget
 - flex, flexible - Apply [Flexible] to Widget
+- shadows - Add shadows to widget
+- semantics - Add semantic to widget
+
+### Animation & Motion
+- animated, animatedBuilder - Wrap widget in animated builder
+- animatedContainer - Wrap widget in AnimatedContainer
 
 ### Event Listener
 - on - Add multiple event listener at once
