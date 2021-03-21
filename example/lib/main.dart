@@ -15,9 +15,22 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.blue,
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(),
+      home: NTHomePage(),
     );
   }
+}
+
+class NTHomePage extends StatelessWidget {
+  build(context) => Scaffold(
+        appBar: AppBar(
+          title: Text("Hello World"),
+        ),
+        body: Text("Hello World").ntNiku()
+          ..p(20)
+          ..bg(Colors.blue)
+          ..rounded()
+          ..center(),
+      );
 }
 
 class HomePage extends StatelessWidget {

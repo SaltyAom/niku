@@ -57,7 +57,7 @@ import './base.dart';
 ///   - insert - Insert child at index
 ///   - insertAll - Insert all children at index
 class NikuColumn {
-  List<Widget> _children = [];
+  List<Widget> _children;
 
   MainAxisAlignment _mainAxisAlignment = MainAxisAlignment.start;
   MainAxisSize _mainAxisSize = MainAxisSize.max;
@@ -118,9 +118,7 @@ class NikuColumn {
   ///   - prependChildren - Prepend all of children
   ///   - insert - Insert child at index
   ///   - insertAll - Insert all children at index
-  NikuColumn(List<Widget> children) {
-    this._children = children;
-  }
+  NikuColumn(this._children);
 
   /// Set main axis alignment
   ///
