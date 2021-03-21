@@ -143,6 +143,11 @@ import 'package:flutter/rendering.dart';
 class NTNiku extends StatelessWidget {
   Widget _widget;
 
+  bool _niku = true;
+
+  // For logging
+  Widget? _base;
+
   /// Niku Widget for styling widget
   ///
   /// Style property builder for building Widget
@@ -278,12 +283,33 @@ class NTNiku extends StatelessWidget {
   ///   - scaleStart - The pointers in contact with the screen have established a focal point and initial scale of 1.0
   ///   - scaleUpdate - The pointers in contact with the screen have indicated a new focal point and/or scale
   ///   - scaleEnd - The pointers are no longer in contact with the screen
-  NTNiku([this._widget = const SizedBox.shrink()]);
+  NTNiku([this._widget = const SizedBox.shrink()]) {
+    this._base = this._widget;
+  }
+
+  @protected
+  Widget get widget => _widget;
+
+  @protected
+  void setWidget(Widget child) {
+    _widget = child;
+  }
+
+  @protected
+  bool get useNiku => _niku;
+
+  @protected
+  void setNiku(bool value) {
+    _niku = value;
+  }
+
+  @protected
+  void setBase(Widget widget) {
+    _base = widget;
+  }
 
   @override
-  build(context) {
-    return this._widget;
-  }
+  build(context) => _widget;
 
   /// Add custom widget
   ///
@@ -299,12 +325,12 @@ class NTNiku extends StatelessWidget {
   ///  })
   ///  .build()
   /// ```
-  builder(Widget Function(Widget child) builder) {
-    this._widget = builder(this._widget);
-  }
-}
+  void builder(Widget Function(Widget child) builder) {
+    assert(useNiku, "Can't use '.builder()' because Niku has not been called");
 
-extension NTBaseProperty on NTNiku {
+    _widget = builder(_widget);
+  }
+
   /// Apply margin using [EdgeInsets]
   ///
   /// Equivalent to:
@@ -313,10 +339,12 @@ extension NTBaseProperty on NTNiku {
   ///   margin: input
   /// )
   /// ```
-  margin(EdgeInsets margin) {
+  void margin(EdgeInsets margin) {
+    assert(useNiku, "Can't use '.margin()' because Niku has not been called");
+
     _widget = Container(
       margin: margin,
-      child: this._widget,
+      child: _widget,
     );
   }
 
@@ -328,8 +356,13 @@ extension NTBaseProperty on NTNiku {
   ///   margin: EdgeInsets.all(input)
   /// )
   /// ```
-  m(double margin) {
-    this._widget = Container(margin: EdgeInsets.all(margin), child: _widget);
+  void m(double margin) {
+    assert(useNiku, "Can't use '.m()' because Niku has not been called");
+
+    _widget = Container(
+      margin: EdgeInsets.all(margin),
+      child: _widget,
+    );
   }
 
   /// Apply margin to x axis
@@ -340,9 +373,13 @@ extension NTBaseProperty on NTNiku {
   ///   margin: EdgeInsets.symmetric(horizontal: input)
   /// )
   /// ```
-  mx(double margin) {
+  void mx(double margin) {
+    assert(useNiku, "Can't use '.mx()' because Niku has not been called");
+
     _widget = Container(
-        margin: EdgeInsets.symmetric(horizontal: margin), child: _widget);
+      margin: EdgeInsets.symmetric(horizontal: margin),
+      child: _widget,
+    );
   }
 
   /// Apply margin to y axis
@@ -353,9 +390,13 @@ extension NTBaseProperty on NTNiku {
   ///   margin: EdgeInsets.symmetric(vertical: input)
   /// )
   /// ```
-  my(double margin) {
+  void my(double margin) {
+    assert(useNiku, "Can't use '.my()' because Niku has not been called");
+
     _widget = Container(
-        margin: EdgeInsets.symmetric(vertical: margin), child: _widget);
+      margin: EdgeInsets.symmetric(vertical: margin),
+      child: _widget,
+    );
   }
 
   /// Apply margin to top
@@ -366,8 +407,13 @@ extension NTBaseProperty on NTNiku {
   ///   margin: EdgeInsets.only(top: input)
   /// )
   /// ```
-  mt(double margin) {
-    _widget = Container(margin: EdgeInsets.only(top: margin), child: _widget);
+  void mt(double margin) {
+    assert(useNiku, "Can't use '.mt()' because Niku has not been called");
+
+    _widget = Container(
+      margin: EdgeInsets.only(top: margin),
+      child: _widget,
+    );
   }
 
   /// Apply margin to bottom
@@ -378,9 +424,13 @@ extension NTBaseProperty on NTNiku {
   ///   margin: EdgeInsets.only(bototm: input)
   /// )
   /// ```
-  mb(double margin) {
-    _widget =
-        Container(margin: EdgeInsets.only(bottom: margin), child: _widget);
+  void mb(double margin) {
+    assert(useNiku, "Can't use '.mb()' because Niku has not been called");
+
+    _widget = Container(
+      margin: EdgeInsets.only(bottom: margin),
+      child: _widget,
+    );
   }
 
   /// Apply margin to left side
@@ -391,8 +441,13 @@ extension NTBaseProperty on NTNiku {
   ///   margin: EdgeInsets.only(left: input)
   /// )
   /// ```
-  ml(double margin) {
-    _widget = Container(margin: EdgeInsets.only(left: margin), child: _widget);
+  void ml(double margin) {
+    assert(useNiku, "Can't use '.ml()' because Niku has not been called");
+
+    _widget = Container(
+      margin: EdgeInsets.only(left: margin),
+      child: _widget,
+    );
   }
 
   /// Apply margin to right side
@@ -403,8 +458,13 @@ extension NTBaseProperty on NTNiku {
   ///   margin: EdgeInsets.only(right: input)
   /// )
   /// ```
-  mr(double margin) {
-    _widget = Container(margin: EdgeInsets.only(right: margin), child: _widget);
+  void mr(double margin) {
+    assert(useNiku, "Can't use '.mr()' because Niku has not been called");
+
+    _widget = Container(
+      margin: EdgeInsets.only(right: margin),
+      child: _widget,
+    );
   }
 
   /// Apply padding using [EdgeInsets]
@@ -415,10 +475,12 @@ extension NTBaseProperty on NTNiku {
   ///   padding: input
   /// )
   /// ```
-  padding(EdgeInsets padding) {
+  void padding(EdgeInsets padding) {
+    assert(useNiku, "Can't use '.padding()' because Niku has not been called");
+
     _widget = Padding(
       padding: padding,
-      child: this._widget,
+      child: _widget,
     );
   }
 
@@ -430,10 +492,13 @@ extension NTBaseProperty on NTNiku {
   ///   padding: EdgeInsets.all(input)
   /// )
   /// ```
-  p(double padding) {
+  void p(double padding) {
+    assert(
+        useNiku, "Can't use '.p()' because Niku has not been called on $_base");
+
     _widget = Padding(
       padding: EdgeInsets.all(padding),
-      child: this._widget,
+      child: _widget,
     );
   }
 
@@ -445,10 +510,12 @@ extension NTBaseProperty on NTNiku {
   ///   padding: EdgeInsets.symmetric(horizontal: input)
   /// )
   /// ```
-  px(double padding) {
+  void px(double padding) {
+    assert(useNiku, "Can't use '.px()' because Niku has not been called");
+
     _widget = Padding(
       padding: EdgeInsets.symmetric(horizontal: padding),
-      child: this._widget,
+      child: _widget,
     );
   }
 
@@ -460,10 +527,12 @@ extension NTBaseProperty on NTNiku {
   ///   padding: EdgeInsets.symmetric(vertical: input)
   /// )
   /// ```
-  py(double padding) {
+  void py(double padding) {
+    assert(useNiku, "Can't use '.py()' because Niku has not been called");
+
     _widget = Padding(
       padding: EdgeInsets.symmetric(vertical: padding),
-      child: this._widget,
+      child: _widget,
     );
   }
 
@@ -475,10 +544,12 @@ extension NTBaseProperty on NTNiku {
   ///   padding: EdgeInsets.symmetric(top: input)
   /// )
   /// ```
-  pt(double padding) {
+  void pt(double padding) {
+    assert(useNiku, "Can't use '.pt()' because Niku has not been called");
+
     _widget = Padding(
       padding: EdgeInsets.only(top: padding),
-      child: this._widget,
+      child: _widget,
     );
   }
 
@@ -490,10 +561,12 @@ extension NTBaseProperty on NTNiku {
   ///   padding: EdgeInsets.symmetric(bottom: input)
   /// )
   /// ```
-  pb(double padding) {
+  void pb(double padding) {
+    assert(useNiku, "Can't use '.pb()' because Niku has not been called");
+
     _widget = Padding(
       padding: EdgeInsets.only(bottom: padding),
-      child: this._widget,
+      child: _widget,
     );
   }
 
@@ -505,10 +578,12 @@ extension NTBaseProperty on NTNiku {
   ///   padding: EdgeInsets.symmetric(left: input)
   /// )
   /// ```
-  pl(double padding) {
+  void pl(double padding) {
+    assert(useNiku, "Can't use '.pl()' because Niku has not been called");
+
     _widget = Padding(
       padding: EdgeInsets.only(left: padding),
-      child: this._widget,
+      child: _widget,
     );
   }
 
@@ -520,10 +595,12 @@ extension NTBaseProperty on NTNiku {
   ///   padding: EdgeInsets.symmetric(right: input)
   /// )
   /// ```
-  pr(double padding) {
+  void pr(double padding) {
+    assert(useNiku, "Can't use '.pr()' because Niku has not been called");
+
     _widget = Padding(
       padding: EdgeInsets.only(right: padding),
-      child: this._widget,
+      child: _widget,
     );
   }
 
@@ -535,10 +612,12 @@ extension NTBaseProperty on NTNiku {
   ///   alignment: input
   /// )
   /// ```
-  align(AlignmentGeometry align) {
+  void align(AlignmentGeometry align) {
+    assert(useNiku, "Can't use '.align()' because Niku has not been called");
+
     _widget = Align(
       alignment: align,
-      child: this._widget,
+      child: _widget,
     );
   }
 
@@ -550,10 +629,12 @@ extension NTBaseProperty on NTNiku {
   ///   alignment: Alignment.topLeft
   /// )
   /// ```
-  topLeft() {
+  void topLeft() {
+    assert(useNiku, "Can't use '.topLeft()' because Niku has not been called");
+
     _widget = Align(
       alignment: Alignment.topLeft,
-      child: this._widget,
+      child: _widget,
     );
   }
 
@@ -565,10 +646,13 @@ extension NTBaseProperty on NTNiku {
   ///   alignment: Alignment.topCenter
   /// )
   /// ```
-  topCenter() {
+  void topCenter() {
+    assert(
+        !useNiku, "Can't use '.topCenter()' because Niku has not been called");
+
     _widget = Align(
       alignment: Alignment.topCenter,
-      child: this._widget,
+      child: _widget,
     );
   }
 
@@ -580,10 +664,13 @@ extension NTBaseProperty on NTNiku {
   ///   alignment: Alignment.topRight
   /// )
   /// ```
-  topRight() {
+  void topRight() {
+    assert(
+        !useNiku, "Can't use '.topRight()' because Niku has not been called");
+
     _widget = Align(
       alignment: Alignment.topRight,
-      child: this._widget,
+      child: _widget,
     );
   }
 
@@ -595,10 +682,13 @@ extension NTBaseProperty on NTNiku {
   ///   alignment: Alignment.centerLeft
   /// )
   /// ```
-  centerLeft() {
+  void centerLeft() {
+    assert(
+        !useNiku, "Can't use '.centerLeft()' because Niku has not been called");
+
     _widget = Align(
       alignment: Alignment.centerLeft,
-      child: this._widget,
+      child: _widget,
     );
   }
 
@@ -610,9 +700,11 @@ extension NTBaseProperty on NTNiku {
   ///   alignment: Alignment.center
   /// )
   /// ```
-  center() {
+  void center() {
+    assert(useNiku, "Can't use '.center()' because Niku has not been called");
+
     _widget = Center(
-      child: this._widget,
+      child: _widget,
     );
   }
 
@@ -624,10 +716,13 @@ extension NTBaseProperty on NTNiku {
   ///   alignment: Alignment.centerRight
   /// )
   /// ```
-  centerRight() {
+  void centerRight() {
+    assert(
+        useNiku, "Can't use '.centerRight()' because Niku has not been called");
+
     _widget = Align(
       alignment: Alignment.centerRight,
-      child: this._widget,
+      child: _widget,
     );
   }
 
@@ -639,10 +734,13 @@ extension NTBaseProperty on NTNiku {
   ///   alignment: Alignment.bottomLeft
   /// )
   /// ```
-  bottomLeft() {
+  void bottomLeft() {
+    assert(
+        !useNiku, "Can't use '.bottomLeft()' because Niku has not been called");
+
     _widget = Align(
       alignment: Alignment.bottomLeft,
-      child: this._widget,
+      child: _widget,
     );
   }
 
@@ -654,10 +752,13 @@ extension NTBaseProperty on NTNiku {
   ///   alignment: Alignment.bottomCenter
   /// )
   /// ```
-  bottomCenter() {
+  void bottomCenter() {
+    assert(useNiku,
+        "Can't use '.bottomCenter()' because Niku has not been called");
+
     _widget = Align(
       alignment: Alignment.bottomCenter,
-      child: this._widget,
+      child: _widget,
     );
   }
 
@@ -669,10 +770,13 @@ extension NTBaseProperty on NTNiku {
   ///   alignment: Alignment.bottomRight
   /// )
   /// ```
-  bottomRight() {
+  void bottomRight() {
+    assert(
+        useNiku, "Can't use '.bottomRight()' because Niku has not been called");
+
     _widget = Align(
       alignment: Alignment.bottomRight,
-      child: this._widget,
+      child: _widget,
     );
   }
 
@@ -684,11 +788,14 @@ extension NTBaseProperty on NTNiku {
   ///   width: double.infinity
   /// )
   /// ```
-  fullSize() {
+  void fullSize() {
+    assert(
+        !useNiku, "Can't use '.fullSize()' because Niku has not been called");
+
     _widget = SizedBox(
       width: double.infinity,
       height: double.infinity,
-      child: this._widget,
+      child: _widget,
     );
   }
 
@@ -701,9 +808,15 @@ extension NTBaseProperty on NTNiku {
   ///   height: double.infinity
   /// )
   /// ```
-  fullWidth() {
+  void fullWidth() {
+    assert(
+        !useNiku, "Can't use '.fullWidth()' because Niku has not been called");
+
     _widget = SizedBox(
-        width: double.infinity, height: double.infinity, child: this._widget);
+      width: double.infinity,
+      height: double.infinity,
+      child: _widget,
+    );
   }
 
   /// Apply full width to self
@@ -714,8 +827,14 @@ extension NTBaseProperty on NTNiku {
   ///   height: double.infinity
   /// )
   /// ```
-  fullHeight() {
-    _widget = SizedBox(height: double.infinity, child: this._widget);
+  void fullHeight() {
+    assert(
+        !useNiku, "Can't use '.fullHeight()' because Niku has not been called");
+
+    _widget = SizedBox(
+      height: double.infinity,
+      child: _widget,
+    );
   }
 
   /// Apply aspect ratio to self
@@ -726,8 +845,14 @@ extension NTBaseProperty on NTNiku {
   ///   aspecrRatio: input
   /// )
   /// ```
-  aspectRatio(double aspectRatio) {
-    _widget = AspectRatio(aspectRatio: aspectRatio, child: _widget);
+  void aspectRatio(double aspectRatio) {
+    assert(
+        useNiku, "Can't use '.aspectRatio()' because Niku has not been called");
+
+    _widget = AspectRatio(
+      aspectRatio: aspectRatio,
+      child: _widget,
+    );
   }
 
   /// Apply expanded to self
@@ -736,7 +861,10 @@ extension NTBaseProperty on NTNiku {
   /// ```
   /// Expanded()
   /// ```
-  expanded([int flex = 1]) {
+  void expanded([int flex = 1]) {
+    assert(
+        !useNiku, "Can't use '.expanded()' because Niku has not been called");
+
     _widget = Expanded(child: _widget);
   }
 
@@ -749,9 +877,15 @@ extension NTBaseProperty on NTNiku {
   ///   heightFactor: height
   /// )
   /// ```
-  fractionSize(double width, double height) {
+  void fractionSize(double width, double height) {
+    assert(useNiku,
+        "Can't use '.fractionSize()' because Niku has not been called");
+
     _widget = FractionallySizedBox(
-        widthFactor: width, heightFactor: height, child: _widget);
+      widthFactor: width,
+      heightFactor: height,
+      child: _widget,
+    );
   }
 
   /// Set width in percent
@@ -762,8 +896,14 @@ extension NTBaseProperty on NTNiku {
   ///   widthFactor: input
   /// )
   /// ```
-  fractionWidth(double fraction) {
-    _widget = FractionallySizedBox(widthFactor: fraction, child: _widget);
+  void fractionWidth(double fraction) {
+    assert(useNiku,
+        "Can't use '.fractionWidth()' because Niku has not been called");
+
+    _widget = FractionallySizedBox(
+      widthFactor: fraction,
+      child: _widget,
+    );
   }
 
   /// Set height in percent
@@ -774,8 +914,14 @@ extension NTBaseProperty on NTNiku {
   ///   heightFactor: input
   /// )
   /// ```
-  fractionHeight(double fraction) {
-    _widget = FractionallySizedBox(widthFactor: fraction, child: _widget);
+  void fractionHeight(double fraction) {
+    assert(useNiku,
+        "Can't use '.fractionHeight()' because Niku has not been called");
+
+    _widget = FractionallySizedBox(
+      widthFactor: fraction,
+      child: _widget,
+    );
   }
 
   /// Set width in percent
@@ -788,10 +934,13 @@ extension NTBaseProperty on NTNiku {
   ///   )
   /// )
   /// ```
-  widthPercent(double percent) {
+  void widthPercent(double percent) {
+    assert(useNiku,
+        "Can't use '.widthPercent()' because Niku has not been called");
+
     _widget = FractionallySizedBox(
       widthFactor: percent / 100,
-      child: this._widget,
+      child: _widget,
     );
   }
 
@@ -805,10 +954,13 @@ extension NTBaseProperty on NTNiku {
   ///   )
   /// )
   /// ```
-  heightPercent(double percent) {
+  void heightPercent(double percent) {
+    assert(useNiku,
+        "Can't use '.heightPercent()' because Niku has not been called");
+
     _widget = FractionallySizedBox(
       widthFactor: percent / 100,
-      child: this._widget,
+      child: _widget,
     );
   }
 
@@ -823,11 +975,14 @@ extension NTBaseProperty on NTNiku {
   ///   )
   /// )
   /// ```
-  sizePercent(double width, double height) {
+  void sizePercent(double width, double height) {
+    assert(
+        useNiku, "Can't use '.sizePercent()' because Niku has not been called");
+
     _widget = FractionallySizedBox(
       widthFactor: width / 100,
       heightFactor: height / 100,
-      child: this._widget,
+      child: _widget,
     );
   }
 
@@ -837,9 +992,12 @@ extension NTBaseProperty on NTNiku {
   /// ```
   /// Container()
   /// ```
-  container() {
+  void container() {
+    assert(
+        !useNiku, "Can't use '.container()' because Niku has not been called");
+
     _widget = Container(
-      child: this._widget,
+      child: _widget,
     );
   }
 
@@ -851,8 +1009,14 @@ extension NTBaseProperty on NTNiku {
   ///   constraints: input
   /// )
   /// ```
-  constraints(BoxConstraints constraints) {
-    _widget = ConstrainedBox(constraints: constraints, child: _widget);
+  void constraints(BoxConstraints constraints) {
+    assert(
+        useNiku, "Can't use '.constraints()' because Niku has not been called");
+
+    _widget = ConstrainedBox(
+      constraints: constraints,
+      child: _widget,
+    );
   }
 
   /// Set maximum size for widget
@@ -866,10 +1030,16 @@ extension NTBaseProperty on NTNiku {
   ///   )
   /// )
   /// ```
-  maxSize(double maxWidth, double maxHeight) {
+  void maxSize(double maxWidth, double maxHeight) {
+    assert(useNiku, "Can't use '.maxSize()' because Niku has not been called");
+
     _widget = ConstrainedBox(
-        constraints: BoxConstraints(maxWidth: maxWidth, maxHeight: maxHeight),
-        child: _widget);
+      constraints: BoxConstraints(
+        maxWidth: maxWidth,
+        maxHeight: maxHeight,
+      ),
+      child: _widget,
+    );
   }
 
   /// Set maximum width for widget
@@ -882,9 +1052,16 @@ extension NTBaseProperty on NTNiku {
   ///   )
   /// )
   /// ```
-  maxWidth(double maxWidth) {
+  void maxWidth(double maxWidth) {
+    assert(
+        !useNiku, "Can't use '.maxWidth()' because Niku has not been called");
+
     _widget = ConstrainedBox(
-        constraints: BoxConstraints(maxWidth: maxWidth), child: _widget);
+      constraints: BoxConstraints(
+        maxWidth: maxWidth,
+      ),
+      child: _widget,
+    );
   }
 
   /// Set maximum height for widget
@@ -897,9 +1074,16 @@ extension NTBaseProperty on NTNiku {
   ///   )
   /// )
   /// ```
-  maxHeight(double maxHeight) {
+  void maxHeight(double maxHeight) {
+    assert(
+        !useNiku, "Can't use '.maxHeight()' because Niku has not been called");
+
     _widget = ConstrainedBox(
-        constraints: BoxConstraints(maxHeight: maxHeight), child: _widget);
+      constraints: BoxConstraints(
+        maxHeight: maxHeight,
+      ),
+      child: _widget,
+    );
   }
 
   /// Set minimum size for widget
@@ -913,10 +1097,16 @@ extension NTBaseProperty on NTNiku {
   ///   )
   /// )
   /// ```
-  minSize(double minWidth, double minHeight) {
+  void minSize(double minWidth, double minHeight) {
+    assert(useNiku, "Can't use '.minSize()' because Niku has not been called");
+
     _widget = ConstrainedBox(
-        constraints: BoxConstraints(minWidth: minWidth, minHeight: minHeight),
-        child: _widget);
+      constraints: BoxConstraints(
+        minWidth: minWidth,
+        minHeight: minHeight,
+      ),
+      child: _widget,
+    );
   }
 
   /// Set minimum width for widget
@@ -929,9 +1119,16 @@ extension NTBaseProperty on NTNiku {
   ///   )
   /// )
   /// ```
-  minWidth(double minWidth) {
+  void minWidth(double minWidth) {
+    assert(
+        !useNiku, "Can't use '.minWidth()' because Niku has not been called");
+
     _widget = ConstrainedBox(
-        constraints: BoxConstraints(minWidth: minWidth), child: _widget);
+      constraints: BoxConstraints(
+        minWidth: minWidth,
+      ),
+      child: _widget,
+    );
   }
 
   /// Set minimum height for widget
@@ -944,9 +1141,16 @@ extension NTBaseProperty on NTNiku {
   ///   )
   /// )
   /// ```
-  minHeight(double minHeight) {
+  void minHeight(double minHeight) {
+    assert(
+        !useNiku, "Can't use '.minHeight()' because Niku has not been called");
+
     _widget = ConstrainedBox(
-        constraints: BoxConstraints(minHeight: minHeight), child: _widget);
+      constraints: BoxConstraints(
+        minHeight: minHeight,
+      ),
+      child: _widget,
+    );
   }
 
   /// Set height of Widget
@@ -957,8 +1161,14 @@ extension NTBaseProperty on NTNiku {
   ///   height: input
   /// )
   /// ```
-  size(double width, double height) {
-    _widget = SizedBox(width: width, height: height, child: _widget);
+  void size(double width, double height) {
+    assert(useNiku, "Can't use '.size()' because Niku has not been called");
+
+    _widget = SizedBox(
+      width: width,
+      height: height,
+      child: _widget,
+    );
   }
 
   /// Set width of widget
@@ -969,8 +1179,13 @@ extension NTBaseProperty on NTNiku {
   ///   width: input
   /// )
   /// ```
-  width(double width) {
-    _widget = SizedBox(width: width, child: _widget);
+  void width(double width) {
+    assert(useNiku, "Can't use '.width()' because Niku has not been called");
+
+    _widget = SizedBox(
+      width: width,
+      child: _widget,
+    );
   }
 
   /// Set height of Widget
@@ -981,8 +1196,13 @@ extension NTBaseProperty on NTNiku {
   ///   height: input
   /// )
   /// ```
-  height(double height) {
-    _widget = SizedBox(height: height, child: _widget);
+  void height(double height) {
+    assert(useNiku, "Can't use '.height()' because Niku has not been called");
+
+    _widget = SizedBox(
+      height: height,
+      child: _widget,
+    );
   }
 
   /// Apply [FittedBox] for widget
@@ -991,8 +1211,12 @@ extension NTBaseProperty on NTNiku {
   /// ```
   /// FittedBox()
   /// ```
-  fitted() {
-    _widget = FittedBox(child: _widget);
+  void fitted() {
+    assert(useNiku, "Can't use '.fitted()' because Niku has not been called");
+
+    _widget = FittedBox(
+      child: _widget,
+    );
   }
 
   /// Apply background to widget
@@ -1003,8 +1227,13 @@ extension NTBaseProperty on NTNiku {
   ///   color: input
   /// )
   /// ```
-  bg(Color color) {
-    _widget = ColoredBox(color: color, child: _widget);
+  void bg(Color color) {
+    assert(useNiku, "Can't use '.bg()' because Niku has not been called");
+
+    _widget = ColoredBox(
+      color: color,
+      child: _widget,
+    );
   }
 
   /// Apply background to widget
@@ -1015,8 +1244,14 @@ extension NTBaseProperty on NTNiku {
   ///   color: input
   /// )
   /// ```
-  backgroundColor(Color color) {
-    _widget = ColoredBox(color: color, child: _widget);
+  void backgroundColor(Color color) {
+    assert(useNiku,
+        "Can't use '.backgroundColor()' because Niku has not been called");
+
+    _widget = ColoredBox(
+      color: color,
+      child: _widget,
+    );
   }
 
   /// Apply opacity to widget
@@ -1027,8 +1262,13 @@ extension NTBaseProperty on NTNiku {
   ///   opacity: input
   /// )
   /// ```
-  opacity(double opacity) {
-    _widget = Opacity(opacity: opacity, child: _widget);
+  void opacity(double opacity) {
+    assert(useNiku, "Can't use '.opacity()' because Niku has not been called");
+
+    _widget = Opacity(
+      opacity: opacity,
+      child: _widget,
+    );
   }
 
   /// Apply border radius to widget
@@ -1041,10 +1281,14 @@ extension NTBaseProperty on NTNiku {
   ///   )
   /// )
   /// ```
-  rounded([double borderRadius = 999999]) {
+  void rounded([double borderRadius = 999999]) {
+    assert(useNiku, "Can't use '.rounded()' because Niku has not been called");
+
     _widget = ClipRRect(
-      borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
-      child: this._widget,
+      borderRadius: BorderRadius.all(
+        Radius.circular(borderRadius),
+      ),
+      child: _widget,
     );
   }
 
@@ -1056,9 +1300,12 @@ extension NTBaseProperty on NTNiku {
   ///   boxDecoration: input
   /// )
   /// ```
-  boxDecoration(BoxDecoration boxDecoration) {
+  void boxDecoration(BoxDecoration boxDecoration) {
+    assert(useNiku,
+        "Can't use '.boxDecoration()' because Niku has not been called");
+
     _widget = DecoratedBox(
-      child: this._widget,
+      child: _widget,
       decoration: boxDecoration,
     );
   }
@@ -1071,8 +1318,13 @@ extension NTBaseProperty on NTNiku {
   ///   tag: input
   /// )
   /// ```
-  heroTag(String heroTag) {
-    _widget = Hero(tag: heroTag, child: _widget);
+  void heroTag(String heroTag) {
+    assert(useNiku, "Can't use '.heroTag()' because Niku has not been called");
+
+    _widget = Hero(
+      tag: heroTag,
+      child: _widget,
+    );
   }
 
   /// Apply [IgnorePointer] to widget
@@ -1083,8 +1335,14 @@ extension NTBaseProperty on NTNiku {
   ///   ignoring: input
   /// )
   /// ```
-  ignorePointer(bool ignoring) {
-    _widget = IgnorePointer(ignoring: ignoring, child: _widget);
+  void ignorePointer(bool ignoring) {
+    assert(useNiku,
+        "Can't use '.ignorePointer()' because Niku has not been called");
+
+    _widget = IgnorePointer(
+      ignoring: ignoring,
+      child: _widget,
+    );
   }
 
   /// Apply [AbsorbPointer] to widget
@@ -1095,8 +1353,14 @@ extension NTBaseProperty on NTNiku {
   ///   absorbing: input
   /// )
   /// ```
-  absorbPointer(bool absorbing) {
-    _widget = AbsorbPointer(absorbing: absorbing, child: _widget);
+  void absorbPointer(bool absorbing) {
+    assert(useNiku,
+        "Can't use '.absorbPointer()' because Niku has not been called");
+
+    _widget = AbsorbPointer(
+      absorbing: absorbing,
+      child: _widget,
+    );
   }
 
   /// Apply tooltip to widget
@@ -1107,10 +1371,12 @@ extension NTBaseProperty on NTNiku {
   ///   message: input
   /// )
   /// ```
-  tooltip(String tip) {
+  void tooltip(String tip) {
+    assert(useNiku, "Can't use '.tooltip()' because Niku has not been called");
+
     _widget = Tooltip(
       message: tip,
-      child: this._widget,
+      child: _widget,
     );
   }
 
@@ -1122,8 +1388,14 @@ extension NTBaseProperty on NTNiku {
   ///   transform: input
   /// )
   /// ```
-  transform(Matrix4 transform) {
-    _widget = Transform(transform: transform, child: _widget);
+  void transform(Matrix4 transform) {
+    assert(
+        !useNiku, "Can't use '.transform()' because Niku has not been called");
+
+    _widget = Transform(
+      transform: transform,
+      child: _widget,
+    );
   }
 
   /// Event Listener
@@ -1182,53 +1454,56 @@ extension NTBaseProperty on NTNiku {
   ///   - scaleStart - The pointers in contact with the screen have established a focal point and initial scale of 1.0
   ///   - scaleUpdate - The pointers in contact with the screen have indicated a new focal point and/or scale
   ///   - scaleEnd - The pointers are no longer in contact with the screen
-  on(
-      {void Function(TapDownDetails)? tapDown,
-      void Function(TapUpDetails)? tapUp,
-      VoidCallback? tap,
-      VoidCallback? tapCancel,
-      VoidCallback? secondaryTap,
-      void Function(TapDownDetails)? secondaryTapDown,
-      void Function(TapUpDetails)? secondaryTapUp,
-      VoidCallback? secondaryTapCancel,
-      void Function(TapDownDetails)? tertiaryTapDown,
-      void Function(TapUpDetails)? tertiaryTapUp,
-      VoidCallback? tertiaryTapCancel,
-      void Function(TapDownDetails)? doubleTapDown,
-      VoidCallback? doubleTap,
-      VoidCallback? doubleTapCancel,
-      VoidCallback? longPress,
-      void Function(LongPressStartDetails)? longPressStart,
-      void Function(LongPressMoveUpdateDetails)? longPressMoveUpdate,
-      VoidCallback? longPressUp,
-      void Function(LongPressEndDetails)? longPressEnd,
-      VoidCallback? secondaryLongPress,
-      void Function(LongPressStartDetails)? secondaryLongPressStart,
-      void Function(LongPressMoveUpdateDetails)? secondaryLongPressMoveUpdate,
-      VoidCallback? secondaryLongPressUp,
-      void Function(LongPressEndDetails)? secondaryLongPressEnd,
-      void Function(DragDownDetails)? verticalDragDown,
-      void Function(DragStartDetails)? verticalDragStart,
-      void Function(DragUpdateDetails)? verticalDragUpdate,
-      void Function(DragEndDetails)? verticalDragEnd,
-      VoidCallback? verticalDragCancel,
-      void Function(DragDownDetails)? horizontalDragDown,
-      void Function(DragStartDetails)? horizontalDragStart,
-      void Function(DragUpdateDetails)? horizontalDragUpdate,
-      void Function(DragEndDetails)? horizontalDragEnd,
-      VoidCallback? horizontalDragCancel,
-      void Function(ForcePressDetails)? forcePressStart,
-      void Function(ForcePressDetails)? forcePressPeak,
-      void Function(ForcePressDetails)? forcePressUpdate,
-      void Function(ForcePressDetails)? forcePressEnd,
-      void Function(DragDownDetails)? panDown,
-      void Function(DragStartDetails)? panStart,
-      void Function(DragUpdateDetails)? panUpdate,
-      void Function(DragEndDetails)? panEnd,
-      VoidCallback? panCancel,
-      void Function(ScaleStartDetails)? scaleStart,
-      void Function(ScaleUpdateDetails)? scaleUpdate,
-      void Function(ScaleEndDetails)? scaleEnd}) {
+  void on({
+    void Function(TapDownDetails)? tapDown,
+    void Function(TapUpDetails)? tapUp,
+    VoidCallback? tap,
+    VoidCallback? tapCancel,
+    VoidCallback? secondaryTap,
+    void Function(TapDownDetails)? secondaryTapDown,
+    void Function(TapUpDetails)? secondaryTapUp,
+    VoidCallback? secondaryTapCancel,
+    void Function(TapDownDetails)? tertiaryTapDown,
+    void Function(TapUpDetails)? tertiaryTapUp,
+    VoidCallback? tertiaryTapCancel,
+    void Function(TapDownDetails)? doubleTapDown,
+    VoidCallback? doubleTap,
+    VoidCallback? doubleTapCancel,
+    VoidCallback? longPress,
+    void Function(LongPressStartDetails)? longPressStart,
+    void Function(LongPressMoveUpdateDetails)? longPressMoveUpdate,
+    VoidCallback? longPressUp,
+    void Function(LongPressEndDetails)? longPressEnd,
+    VoidCallback? secondaryLongPress,
+    void Function(LongPressStartDetails)? secondaryLongPressStart,
+    void Function(LongPressMoveUpdateDetails)? secondaryLongPressMoveUpdate,
+    VoidCallback? secondaryLongPressUp,
+    void Function(LongPressEndDetails)? secondaryLongPressEnd,
+    void Function(DragDownDetails)? verticalDragDown,
+    void Function(DragStartDetails)? verticalDragStart,
+    void Function(DragUpdateDetails)? verticalDragUpdate,
+    void Function(DragEndDetails)? verticalDragEnd,
+    VoidCallback? verticalDragCancel,
+    void Function(DragDownDetails)? horizontalDragDown,
+    void Function(DragStartDetails)? horizontalDragStart,
+    void Function(DragUpdateDetails)? horizontalDragUpdate,
+    void Function(DragEndDetails)? horizontalDragEnd,
+    VoidCallback? horizontalDragCancel,
+    void Function(ForcePressDetails)? forcePressStart,
+    void Function(ForcePressDetails)? forcePressPeak,
+    void Function(ForcePressDetails)? forcePressUpdate,
+    void Function(ForcePressDetails)? forcePressEnd,
+    void Function(DragDownDetails)? panDown,
+    void Function(DragStartDetails)? panStart,
+    void Function(DragUpdateDetails)? panUpdate,
+    void Function(DragEndDetails)? panEnd,
+    VoidCallback? panCancel,
+    void Function(ScaleStartDetails)? scaleStart,
+    void Function(ScaleUpdateDetails)? scaleUpdate,
+    void Function(ScaleEndDetails)? scaleEnd,
+  }) {
+    assert(useNiku, "Can't use '.on()' because Niku has not been called");
+
     _widget = GestureDetector(
       onTapDown: tapDown,
       onTapUp: tapUp,
@@ -1276,7 +1551,7 @@ extension NTBaseProperty on NTNiku {
       onScaleStart: scaleStart,
       onScaleUpdate: scaleUpdate,
       onScaleEnd: scaleEnd,
-      child: this._widget,
+      child: _widget,
     );
   }
 
@@ -1290,9 +1565,12 @@ extension NTBaseProperty on NTNiku {
   ///   shadowColor: shadowColor
   /// )
   /// ```
-  material({double elevation = 0, Color? color, Color? shadowColor}) {
+  void material({double elevation = 0, Color? color, Color? shadowColor}) {
+    assert(
+        !useNiku, "Can't use '.material()' because Niku has not been called");
+
     _widget = Material(
-      child: this._widget,
+      child: _widget,
       elevation: elevation,
       color: color,
       shadowColor: shadowColor,
@@ -1312,7 +1590,7 @@ extension NTBaseProperty on NTNiku {
   ///   autofocus: autofocus
   /// )
   /// ```
-  inkwell({
+  void inkwell({
     Color? hover,
     Color? focus,
     Color? highlight,
@@ -1321,8 +1599,10 @@ extension NTBaseProperty on NTNiku {
     bool autofocus = false,
     VoidCallback? onTap,
   }) {
+    assert(useNiku, "Can't use '.inkwell()' because Niku has not been called");
+
     _widget = InkWell(
-      child: this._widget,
+      child: _widget,
       hoverColor: hover,
       focusColor: focus,
       highlightColor: highlight,
@@ -1343,10 +1623,14 @@ extension NTBaseProperty on NTNiku {
   ///   )
   /// )
   /// ```
-  border(Border border) {
+  void border(Border border) {
+    assert(useNiku, "Can't use '.border()' because Niku has not been called");
+
     _widget = DecoratedBox(
-      decoration: BoxDecoration(border: border),
-      child: this._widget,
+      decoration: BoxDecoration(
+        border: border,
+      ),
+      child: _widget,
     );
   }
 
@@ -1358,8 +1642,14 @@ extension NTBaseProperty on NTNiku {
   ///   filter: input
   /// )
   /// ```
-  backdropFilter(ImageFilter filter) {
-    _widget = BackdropFilter(filter: filter, child: _widget);
+  void backdropFilter(ImageFilter filter) {
+    assert(useNiku,
+        "Can't use '.backdropFilter()' because Niku has not been called");
+
+    _widget = BackdropFilter(
+      filter: filter,
+      child: _widget,
+    );
   }
 
   /// Add Positioned to widget
@@ -1373,9 +1663,22 @@ extension NTBaseProperty on NTNiku {
   ///   right: right
   /// )
   /// ```
-  positioned({double? top, double? left, double? bottom, double? right}) {
+  void positioned({
+    double? top,
+    double? left,
+    double? bottom,
+    double? right,
+  }) {
+    assert(
+        !useNiku, "Can't use '.positioned()' because Niku has not been called");
+
     _widget = Positioned(
-        top: top, left: left, bottom: bottom, right: right, child: _widget);
+      top: top,
+      left: left,
+      bottom: bottom,
+      right: right,
+      child: _widget,
+    );
   }
 
   /// Add singleChildScrolLView to widget
@@ -1385,7 +1688,7 @@ extension NTBaseProperty on NTNiku {
   /// singleChildScrollView(
   /// )
   /// ```
-  singleChildScrollView({
+  void singleChildScrollView({
     ScrollController? controller,
     Axis scrollDirection = Axis.vertical,
     bool? primary,
@@ -1394,8 +1697,11 @@ extension NTBaseProperty on NTNiku {
     DragStartBehavior dragStartBehavior = DragStartBehavior.start,
     String? restorationId,
   }) {
+    assert(useNiku,
+        "Can't use '.singleChildScrollView()' because Niku has not been called");
+
     _widget = SingleChildScrollView(
-      child: this._widget,
+      child: _widget,
       controller: controller,
       scrollDirection: scrollDirection,
       primary: primary,
@@ -1413,7 +1719,7 @@ extension NTBaseProperty on NTNiku {
   /// singleChildScrollView(
   /// )
   /// ```
-  scrollable({
+  void scrollable({
     ScrollController? controller,
     Axis scrollDirection = Axis.vertical,
     bool? primary,
@@ -1422,8 +1728,11 @@ extension NTBaseProperty on NTNiku {
     DragStartBehavior dragStartBehavior = DragStartBehavior.start,
     String? restorationId,
   }) {
+    assert(
+        !useNiku, "Can't use '.scrollable()' because Niku has not been called");
+
     _widget = SingleChildScrollView(
-      child: this._widget,
+      child: _widget,
       controller: controller,
       scrollDirection: scrollDirection,
       primary: primary,
@@ -1442,9 +1751,12 @@ extension NTBaseProperty on NTNiku {
   ///   flex: input
   /// )
   /// ```
-  flexible([int flex = 1]) {
+  void flexible([int flex = 1]) {
+    assert(
+        !useNiku, "Can't use '.flexible()' because Niku has not been called");
+
     _widget = Flexible(
-      child: this._widget,
+      child: _widget,
       flex: flex,
     );
   }
@@ -1457,8 +1769,13 @@ extension NTBaseProperty on NTNiku {
   ///   flex: input
   /// )
   /// ```
-  flex([int flex = 1]) {
-    _widget = Flexible(child: this._widget, flex: flex);
+  void flex([int flex = 1]) {
+    assert(useNiku, "Can't use '.flex()' because Niku has not been called");
+
+    _widget = Flexible(
+      child: _widget,
+      flex: flex,
+    );
   }
 
   /// Add shadows to widget
@@ -1471,10 +1788,14 @@ extension NTBaseProperty on NTNiku {
   ///   )
   /// )
   /// ```
-  shadows(List<BoxShadow> shadows) {
+  void shadows(List<BoxShadow> shadows) {
+    assert(useNiku, "Can't use '.shadows()' because Niku has not been called");
+
     _widget = DecoratedBox(
-      child: this._widget,
-      decoration: BoxDecoration(boxShadow: shadows),
+      child: _widget,
+      decoration: BoxDecoration(
+        boxShadow: shadows,
+      ),
     );
   }
 
@@ -1492,16 +1813,17 @@ extension NTBaseProperty on NTNiku {
   ///   })
   ///   .build()
   /// ```
-  animatedBuilder({
+  void animatedBuilder({
     required Function(BuildContext context, Widget child) builder,
     required AnimationController animation,
   }) {
+    assert(useNiku,
+        "Can't use '.animatedContainer()' because Niku has not been called");
+
     _widget = AnimatedBuilder(
       animation: animation,
-      builder: (context, child) {
-        return builder(context, this._widget);
-      },
-      child: this._widget,
+      builder: (context, child) => builder(context, _widget),
+      child: _widget,
     );
   }
 
@@ -1519,16 +1841,17 @@ extension NTBaseProperty on NTNiku {
   ///   })
   ///   .build()
   /// ```
-  animated(
+  void animated(
     Function(BuildContext context, Widget child) builder,
     AnimationController animation,
   ) {
+    assert(
+        !useNiku, "Can't use '.animated()' because Niku has not been called");
+
     _widget = AnimatedBuilder(
       animation: animation,
-      builder: (context, child) {
-        return builder(context, this._widget);
-      },
-      child: this._widget,
+      builder: (context, child) => builder(context, _widget),
+      child: _widget,
     );
   }
 
@@ -1540,7 +1863,7 @@ extension NTBaseProperty on NTNiku {
   ///   ...params
   /// )
   /// ```
-  semantics({
+  void semantics({
     bool container = false,
     bool explicitChildNodes = false,
     bool excludeSemantics = false,
@@ -1595,8 +1918,11 @@ extension NTBaseProperty on NTNiku {
     VoidCallback? onDidLoseAccessibilityFocus,
     Map<CustomSemanticsAction, VoidCallback>? customSemanticsActions,
   }) {
+    assert(
+        !useNiku, "Can't use '.semantics()' because Niku has not been called");
+
     _widget = Semantics(
-      child: this._widget,
+      child: _widget,
       container: container,
       explicitChildNodes: explicitChildNodes,
       excludeSemantics: excludeSemantics,
@@ -1667,7 +1993,7 @@ extension NTBaseProperty on NTNiku {
   ///   })
   ///   .build()
   /// ```
-  animatedContainer({
+  void animatedContainer({
     Alignment? alignment,
     EdgeInsets? padding,
     Color? color,
@@ -1684,8 +2010,11 @@ extension NTBaseProperty on NTNiku {
     required Duration duration,
     VoidCallback? onEnd,
   }) {
+    assert(useNiku,
+        "Can't use '.animatedContainer()' because Niku has not been called");
+
     _widget = AnimatedContainer(
-      child: this._widget,
+      child: _widget,
       alignment: alignment,
       padding: padding,
       color: color,

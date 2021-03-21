@@ -25,10 +25,34 @@ class NTHomePage extends StatelessWidget {
         appBar: AppBar(
           title: Text("Hello World"),
         ),
-        body: Text("Hello World").ntNiku()
-          ..p(20)
-          ..bg(Colors.blue)
-          ..rounded()
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 8),
+              child: Text(
+                "Text",
+                style: TextStyle(
+                  fontSize: 28,
+                  color: Colors.red,
+                ),
+              ),
+            ),
+            NikuText("Niku Text")
+                .fontSize(28)
+                .color(Colors.black)
+                .niku()
+                .my(8)
+                .build(),
+            NTNikuText("Niku Text NT")
+              ..fontSize(28)
+              ..color(Colors.blue)
+              ..niku()
+              ..my(8),
+          ],
+        ).ntNiku()
+          ..width(300)
           ..center(),
       );
 }
