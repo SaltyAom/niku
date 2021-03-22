@@ -1,8 +1,9 @@
+// ignore_for_file: must_be_immutable
 import 'package:flutter/material.dart';
 
 import 'dart:ui';
 
-import './base.dart';
+import 'base.dart';
 
 /// Niku extension for Stack
 ///
@@ -45,7 +46,7 @@ import './base.dart';
 ///   - passthrogh - Using [StackFit.passthrough]
 ///   - loose - Using [StackFit.loose]
 /// - clip, clipBehavior - Add clip behavior of widget
-class NikuStack {
+class NikuStack extends StatelessWidget {
   List<Widget> _children;
 
   AlignmentDirectional _alignment = AlignmentDirectional.topStart;
@@ -364,8 +365,6 @@ class NikuStack {
 
   /// Add clip behavior of widget
   ///
-  /// Using [Overflow.clip]
-  ///
   /// Equivalent to:
   /// ```
   /// Stack(
@@ -379,8 +378,6 @@ class NikuStack {
   }
 
   /// Add clip behavior of widget
-  ///
-  /// Using [Overflow.clip]
   ///
   /// Equivalent to:
   /// ```
@@ -578,7 +575,7 @@ class NikuStack {
   ///   .append(Text("2"))
   ///   .build()
   /// ```
-  Stack build({Key? key}) => Stack(
+  build(context) => Stack(
         key: key,
         children: this._children,
         alignment: this._alignment,
@@ -601,5 +598,9 @@ class NikuStack {
   ///   .bg(Colors.blue)
   ///   .build()
   /// ```
-  Niku niku() => Niku(this.build());
+  Niku niku() => Niku(
+        Builder(
+          builder: (context) => build(context),
+        ),
+      );
 }

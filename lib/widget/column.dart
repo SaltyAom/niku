@@ -1,8 +1,9 @@
+// ignore_for_file: must_be_immutable
 import 'package:flutter/material.dart';
 
 import 'dart:ui';
 
-import './base.dart';
+import 'base.dart';
 
 /// Niku extension for Column
 ///
@@ -56,7 +57,7 @@ import './base.dart';
 ///   - prependChildren - Prepend all of children
 ///   - insert - Insert child at index
 ///   - insertAll - Insert all children at index
-class NikuColumn {
+class NikuColumn extends StatelessWidget {
   List<Widget> _children;
 
   MainAxisAlignment _mainAxisAlignment = MainAxisAlignment.start;
@@ -719,7 +720,7 @@ class NikuColumn {
   ///   .append(Text("2"))
   ///   .build()
   /// ```
-  Column build({Key? key}) => Column(
+  build(context) => Column(
         key: key,
         children: this._children,
         mainAxisAlignment: this._mainAxisAlignment,
@@ -745,5 +746,9 @@ class NikuColumn {
   ///   .bg(Colors.blue)
   ///   .build()
   /// ```
-  Niku niku() => Niku(this.build());
+  Niku niku() => Niku(
+        Builder(
+          builder: (context) => build(context),
+        ),
+      );
 }

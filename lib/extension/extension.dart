@@ -1,1 +1,1 @@
-export './niku.dart';
+export 'niku.dart';

@@ -1,10 +1,11 @@
 // ignore_for_file: non_constant_identifier_names
+// ignore_for_file: must_be_immutable
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'dart:ui';
 
-import './base.dart';
+import 'base.dart';
 
 /// Niku extension for [TextFormField]
 ///
@@ -397,7 +398,7 @@ import './base.dart';
 /// - textBaseline - A horizontal line used for aligning text
 ///   - alphabetic - Using [TextBaseline.alphabetic]
 ///   - ideographic - Using [TextBaseline.ideographic]
-class NikuTextField {
+class NikuTextField extends StatelessWidget {
   // Text Form Field
   TextEditingController? _controller;
   String _initialValue = '';
@@ -446,7 +447,7 @@ class NikuTextField {
 
   // Input Decoration
   Widget? _input_icon;
-  String? _input_labelText;
+  String _input_labelText = "";
   String? _input_helperText;
   int? _input_helperMaxLines;
   String? _input_hintText;
@@ -1033,9 +1034,7 @@ class NikuTextField {
   /// - textBaseline - A horizontal line used for aligning text
   ///   - alphabetic - Using [TextBaseline.alphabetic]
   ///   - ideographic - Using [TextBaseline.ideographic]
-  NikuTextField([String label = ""]) {
-    this._input_labelText = label;
-  }
+  NikuTextField(this._input_labelText);
 
   // * Text Form Field
 
@@ -1048,7 +1047,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField controller(TextEditingController controller) {
-    this._controller = controller;
+    _controller = controller;
 
     return this;
   }
@@ -1062,7 +1061,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField textEditingController(TextEditingController controller) {
-    this._controller = controller;
+    _controller = controller;
 
     return this;
   }
@@ -1076,7 +1075,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField initialValue(String value) {
-    this._initialValue = value;
+    _initialValue = value;
 
     return this;
   }
@@ -1090,7 +1089,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField initial(String value) {
-    this._initialValue = value;
+    _initialValue = value;
 
     return this;
   }
@@ -1104,7 +1103,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField focusNode(FocusNode focusNode) {
-    this._focusNode = focusNode;
+    _focusNode = focusNode;
 
     return this;
   }
@@ -1118,7 +1117,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField keyboardType(TextInputType keyboardType) {
-    this._keyboardType = keyboardType;
+    _keyboardType = keyboardType;
 
     return this;
   }
@@ -1134,7 +1133,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField dateTimeKeyboard() {
-    this._keyboardType = TextInputType.datetime;
+    _keyboardType = TextInputType.datetime;
 
     return this;
   }
@@ -1150,7 +1149,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField emailKeyboard() {
-    this._keyboardType = TextInputType.emailAddress;
+    _keyboardType = TextInputType.emailAddress;
 
     return this;
   }
@@ -1166,7 +1165,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField multilineKeyboard() {
-    this._keyboardType = TextInputType.multiline;
+    _keyboardType = TextInputType.multiline;
 
     return this;
   }
@@ -1182,7 +1181,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField nameKeyboard() {
-    this._keyboardType = TextInputType.name;
+    _keyboardType = TextInputType.name;
 
     return this;
   }
@@ -1198,7 +1197,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField phoneKeyboard() {
-    this._keyboardType = TextInputType.phone;
+    _keyboardType = TextInputType.phone;
 
     return this;
   }
@@ -1214,7 +1213,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField addressKeyboard() {
-    this._keyboardType = TextInputType.streetAddress;
+    _keyboardType = TextInputType.streetAddress;
 
     return this;
   }
@@ -1230,7 +1229,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField textKeyboard() {
-    this._keyboardType = TextInputType.text;
+    _keyboardType = TextInputType.text;
 
     return this;
   }
@@ -1246,7 +1245,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField urlKeyboard() {
-    this._keyboardType = TextInputType.url;
+    _keyboardType = TextInputType.url;
 
     return this;
   }
@@ -1262,7 +1261,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField visiblePasswordKeyboard() {
-    this._keyboardType = TextInputType.visiblePassword;
+    _keyboardType = TextInputType.visiblePassword;
 
     return this;
   }
@@ -1276,7 +1275,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField textCapitalization(TextCapitalization textCapitalization) {
-    this._textCapitalization = textCapitalization;
+    _textCapitalization = textCapitalization;
 
     return this;
   }
@@ -1292,7 +1291,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField capitalizeCharacters() {
-    this._textCapitalization = TextCapitalization.characters;
+    _textCapitalization = TextCapitalization.characters;
 
     return this;
   }
@@ -1308,7 +1307,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField capitalizeNone() {
-    this._textCapitalization = TextCapitalization.none;
+    _textCapitalization = TextCapitalization.none;
 
     return this;
   }
@@ -1324,7 +1323,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField capitalizeSentences() {
-    this._textCapitalization = TextCapitalization.sentences;
+    _textCapitalization = TextCapitalization.sentences;
 
     return this;
   }
@@ -1340,7 +1339,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField capitalizeWords() {
-    this._textCapitalization = TextCapitalization.words;
+    _textCapitalization = TextCapitalization.words;
 
     return this;
   }
@@ -1352,7 +1351,7 @@ class NikuTextField {
   /// Text(textDirection: input)
   /// ```
   NikuTextField textDirection(TextDirection textDirection) {
-    this._textDirection = textDirection;
+    _textDirection = textDirection;
 
     return this;
   }
@@ -1364,7 +1363,7 @@ class NikuTextField {
   /// Text(textDirection: TextDirection.ltr)
   /// ```
   NikuTextField ltr() {
-    this._textDirection = TextDirection.ltr;
+    _textDirection = TextDirection.ltr;
 
     return this;
   }
@@ -1376,7 +1375,7 @@ class NikuTextField {
   /// Text(textDirection: TextDirection.rtl)
   /// ```
   NikuTextField rtl() {
-    this._textDirection = TextDirection.rtl;
+    _textDirection = TextDirection.rtl;
 
     return this;
   }
@@ -1388,7 +1387,7 @@ class NikuTextField {
   /// Text(textAlign: input)
   /// ```
   NikuTextField textAlign(TextAlign textAlign) {
-    this._textAlign = textAlign;
+    _textAlign = textAlign;
 
     return this;
   }
@@ -1400,7 +1399,7 @@ class NikuTextField {
   /// Text(textAlign: input)
   /// ```
   NikuTextField align(TextAlign textAlign) {
-    this._textAlign = textAlign;
+    _textAlign = textAlign;
 
     return this;
   }
@@ -1412,7 +1411,7 @@ class NikuTextField {
   /// Text(textAlign: TextAlign.left)
   /// ```
   NikuTextField alignLeft() {
-    this._textAlign = TextAlign.left;
+    _textAlign = TextAlign.left;
 
     return this;
   }
@@ -1424,7 +1423,7 @@ class NikuTextField {
   /// Text(textAlign: TextAlign.left)
   /// ```
   NikuTextField left() {
-    this._textAlign = TextAlign.left;
+    _textAlign = TextAlign.left;
 
     return this;
   }
@@ -1436,7 +1435,7 @@ class NikuTextField {
   /// Text(textAlign: TextAlign.center)
   /// ```
   NikuTextField alignCenter() {
-    this._textAlign = TextAlign.center;
+    _textAlign = TextAlign.center;
 
     return this;
   }
@@ -1448,7 +1447,7 @@ class NikuTextField {
   /// Text(textAlign: TextAlign.center)
   /// ```
   NikuTextField center() {
-    this._textAlign = TextAlign.center;
+    _textAlign = TextAlign.center;
 
     return this;
   }
@@ -1460,7 +1459,7 @@ class NikuTextField {
   /// Text(textAlign: TextAlign.right)
   /// ```
   NikuTextField alignRight() {
-    this._textAlign = TextAlign.right;
+    _textAlign = TextAlign.right;
 
     return this;
   }
@@ -1472,7 +1471,7 @@ class NikuTextField {
   /// Text(textAlign: TextAlign.right)
   /// ```
   NikuTextField right() {
-    this._textAlign = TextAlign.right;
+    _textAlign = TextAlign.right;
 
     return this;
   }
@@ -1484,7 +1483,7 @@ class NikuTextField {
   /// Text(textAlign: TextAlign.start)
   /// ```
   NikuTextField alignStart() {
-    this._textAlign = TextAlign.start;
+    _textAlign = TextAlign.start;
 
     return this;
   }
@@ -1496,7 +1495,7 @@ class NikuTextField {
   /// Text(textAlign: TextAlign.start)
   /// ```
   NikuTextField start() {
-    this._textAlign = TextAlign.start;
+    _textAlign = TextAlign.start;
 
     return this;
   }
@@ -1508,7 +1507,7 @@ class NikuTextField {
   /// Text(textAlign: TextAlign.end)
   /// ```
   NikuTextField alignEnd() {
-    this._textAlign = TextAlign.end;
+    _textAlign = TextAlign.end;
 
     return this;
   }
@@ -1520,7 +1519,7 @@ class NikuTextField {
   /// Text(textAlign: TextAlign.end)
   /// ```
   NikuTextField end() {
-    this._textAlign = TextAlign.end;
+    _textAlign = TextAlign.end;
 
     return this;
   }
@@ -1532,7 +1531,7 @@ class NikuTextField {
   /// Text(textAlign: TextAlign.justify)
   /// ```
   NikuTextField alignJustify() {
-    this._textAlign = TextAlign.justify;
+    _textAlign = TextAlign.justify;
 
     return this;
   }
@@ -1544,7 +1543,7 @@ class NikuTextField {
   /// Text(textAlign: TextAlign.justify)
   /// ```
   NikuTextField justify() {
-    this._textAlign = TextAlign.justify;
+    _textAlign = TextAlign.justify;
 
     return this;
   }
@@ -1558,7 +1557,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField autofocus(bool autofocus) {
-    this._autofocus = autofocus;
+    _autofocus = autofocus;
 
     return this;
   }
@@ -1572,7 +1571,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField readOnly(bool readOnly) {
-    this._readOnly = readOnly;
+    _readOnly = readOnly;
 
     return this;
   }
@@ -1586,7 +1585,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField toolbarOptions(ToolbarOptions toolbarOptions) {
-    this._toolbarOptions = toolbarOptions;
+    _toolbarOptions = toolbarOptions;
 
     return this;
   }
@@ -1609,7 +1608,7 @@ class NikuTextField {
       bool cut = true,
       bool paste = true,
       bool selectAll = true}) {
-    this._toolbarOptions = ToolbarOptions(
+    _toolbarOptions = ToolbarOptions(
         copy: copy, cut: cut, paste: paste, selectAll: selectAll);
 
     return this;
@@ -1626,11 +1625,11 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField allowCopy([bool value = false]) {
-    this._toolbarOptions = ToolbarOptions(
+    _toolbarOptions = ToolbarOptions(
         copy: value,
-        cut: this._toolbarOptions?.cut ?? true,
-        paste: this._toolbarOptions?.paste ?? true,
-        selectAll: this._toolbarOptions?.selectAll ?? true);
+        cut: _toolbarOptions?.cut ?? true,
+        paste: _toolbarOptions?.paste ?? true,
+        selectAll: _toolbarOptions?.selectAll ?? true);
 
     return this;
   }
@@ -1646,11 +1645,11 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField allowCut([bool value = false]) {
-    this._toolbarOptions = ToolbarOptions(
-        copy: this._toolbarOptions?.copy ?? true,
+    _toolbarOptions = ToolbarOptions(
+        copy: _toolbarOptions?.copy ?? true,
         cut: value,
-        paste: this._toolbarOptions?.paste ?? true,
-        selectAll: this._toolbarOptions?.selectAll ?? true);
+        paste: _toolbarOptions?.paste ?? true,
+        selectAll: _toolbarOptions?.selectAll ?? true);
 
     return this;
   }
@@ -1666,11 +1665,11 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField allowPaste([bool value = false]) {
-    this._toolbarOptions = ToolbarOptions(
-        copy: this._toolbarOptions?.copy ?? true,
-        cut: this._toolbarOptions?.cut ?? true,
+    _toolbarOptions = ToolbarOptions(
+        copy: _toolbarOptions?.copy ?? true,
+        cut: _toolbarOptions?.cut ?? true,
         paste: value,
-        selectAll: this._toolbarOptions?.selectAll ?? true);
+        selectAll: _toolbarOptions?.selectAll ?? true);
 
     return this;
   }
@@ -1686,10 +1685,10 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField allowSelectAll([bool value = false]) {
-    this._toolbarOptions = ToolbarOptions(
-        copy: this._toolbarOptions?.copy ?? true,
-        cut: this._toolbarOptions?.cut ?? true,
-        paste: this._toolbarOptions?.paste ?? true,
+    _toolbarOptions = ToolbarOptions(
+        copy: _toolbarOptions?.copy ?? true,
+        cut: _toolbarOptions?.cut ?? true,
+        paste: _toolbarOptions?.paste ?? true,
         selectAll: value);
 
     return this;
@@ -1704,7 +1703,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField showCursor(bool showCursor) {
-    this._showCursor = showCursor;
+    _showCursor = showCursor;
 
     return this;
   }
@@ -1718,7 +1717,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField obscuringCharacter(String char) {
-    this._obscuringCharacter = char;
+    _obscuringCharacter = char;
 
     return this;
   }
@@ -1732,7 +1731,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField obscureText(bool obscureText) {
-    this._obscureText = obscureText;
+    _obscureText = obscureText;
 
     return this;
   }
@@ -1746,7 +1745,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField autoCorrect(bool autoCorrect) {
-    this._autocorrect = autoCorrect;
+    _autocorrect = autoCorrect;
 
     return this;
   }
@@ -1760,7 +1759,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField smartDashesType(SmartDashesType type) {
-    this._smartDashesType = type;
+    _smartDashesType = type;
 
     return this;
   }
@@ -1776,7 +1775,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField enableSmartDashes() {
-    this._smartDashesType = SmartDashesType.enabled;
+    _smartDashesType = SmartDashesType.enabled;
 
     return this;
   }
@@ -1792,7 +1791,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField disableSmartDashes() {
-    this._smartDashesType = SmartDashesType.disabled;
+    _smartDashesType = SmartDashesType.disabled;
 
     return this;
   }
@@ -1806,7 +1805,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField smartQuotesType(SmartQuotesType type) {
-    this._smartQuotesType = type;
+    _smartQuotesType = type;
 
     return this;
   }
@@ -1822,7 +1821,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField enableSmartQuotes() {
-    this._smartQuotesType = SmartQuotesType.enabled;
+    _smartQuotesType = SmartQuotesType.enabled;
 
     return this;
   }
@@ -1838,7 +1837,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField disableSmartQuotes() {
-    this._smartQuotesType = SmartQuotesType.disabled;
+    _smartQuotesType = SmartQuotesType.disabled;
 
     return this;
   }
@@ -1852,7 +1851,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField enableSuggestions(bool suggestion) {
-    this._enableSuggestions = suggestion;
+    _enableSuggestions = suggestion;
 
     return this;
   }
@@ -1866,7 +1865,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField maxLengthEnforced(bool enforced) {
-    this._maxLengthEnforced = enforced;
+    _maxLengthEnforced = enforced;
 
     return this;
   }
@@ -1880,7 +1879,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField maxLines(int maxLines) {
-    this._maxLines = maxLines;
+    _maxLines = maxLines;
 
     return this;
   }
@@ -1894,7 +1893,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField minLines(int minLines) {
-    this._minLines = minLines;
+    _minLines = minLines;
 
     return this;
   }
@@ -1908,7 +1907,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField expands(bool expands) {
-    this._expands = expands;
+    _expands = expands;
 
     return this;
   }
@@ -1922,7 +1921,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField maxLength(int maxLength) {
-    this._maxLength = maxLength;
+    _maxLength = maxLength;
 
     return this;
   }
@@ -1936,7 +1935,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField onChanged(ValueChanged<String> onChanged) {
-    this._onChanged = onChanged;
+    _onChanged = onChanged;
 
     return this;
   }
@@ -1950,7 +1949,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField onTap(GestureTapCallback onTap) {
-    this._onTap = onTap;
+    _onTap = onTap;
 
     return this;
   }
@@ -1964,7 +1963,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField onEditingComplete(VoidCallback onEditingComplete) {
-    this._onEditingComplete = onEditingComplete;
+    _onEditingComplete = onEditingComplete;
 
     return this;
   }
@@ -1978,7 +1977,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField onSubmitted(ValueChanged<String> onFieldSubmitted) {
-    this._onFieldSubmitted = onFieldSubmitted;
+    _onFieldSubmitted = onFieldSubmitted;
 
     return this;
   }
@@ -1992,7 +1991,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField onFieldSubmitted(ValueChanged<String> onFieldSubmitted) {
-    this._onFieldSubmitted = onFieldSubmitted;
+    _onFieldSubmitted = onFieldSubmitted;
 
     return this;
   }
@@ -2006,7 +2005,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField onSaved(FormFieldSetter<String> onSaved) {
-    this._onSaved = onSaved;
+    _onSaved = onSaved;
 
     return this;
   }
@@ -2029,11 +2028,11 @@ class NikuTextField {
       VoidCallback? editingComplete,
       ValueChanged<String>? submitted,
       FormFieldValidator<String>? saved}) {
-    this._onChanged = changed;
-    this._onTap = tap;
-    this._onEditingComplete = editingComplete;
-    this._onFieldSubmitted = submitted;
-    this._onSaved = saved;
+    _onChanged = changed;
+    _onTap = tap;
+    _onEditingComplete = editingComplete;
+    _onFieldSubmitted = submitted;
+    _onSaved = saved;
 
     return this;
   }
@@ -2047,7 +2046,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField validator(FormFieldValidator<String> validator) {
-    this._validator = validator;
+    _validator = validator;
 
     return this;
   }
@@ -2061,7 +2060,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField inputFormatters(List<TextInputFormatter> inputFormatters) {
-    this._inputFormatters = inputFormatters;
+    _inputFormatters = inputFormatters;
 
     return this;
   }
@@ -2075,7 +2074,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField enabled(bool enabled) {
-    this._enabled = enabled;
+    _enabled = enabled;
 
     return this;
   }
@@ -2089,7 +2088,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField cursorWidth(double cursorWidth) {
-    this._cursorWidth = cursorWidth;
+    _cursorWidth = cursorWidth;
 
     return this;
   }
@@ -2103,7 +2102,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField cursorHeight(double cursorHeight) {
-    this._cursorHeight = cursorHeight;
+    _cursorHeight = cursorHeight;
 
     return this;
   }
@@ -2117,7 +2116,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField cursorRadius(Radius cursorRadius) {
-    this._cursorRadius = cursorRadius;
+    _cursorRadius = cursorRadius;
 
     return this;
   }
@@ -2132,7 +2131,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField cursorRounded(double radius) {
-    this._cursorRadius = Radius.circular(radius);
+    _cursorRadius = Radius.circular(radius);
 
     return this;
   }
@@ -2146,7 +2145,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField cursorColor(Color color) {
-    this._cursorColor = color;
+    _cursorColor = color;
 
     return this;
   }
@@ -2164,10 +2163,10 @@ class NikuTextField {
   /// ```
   NikuTextField cursor(
       {double width = 2, double? height, Radius? radius, Color? color}) {
-    this._cursorWidth = width;
-    this._cursorHeight = height ?? this._cursorHeight;
-    this._cursorRadius = radius ?? this._cursorRadius;
-    this._cursorColor = color ?? this._cursorColor;
+    _cursorWidth = width;
+    _cursorHeight = height ?? _cursorHeight;
+    _cursorRadius = radius ?? _cursorRadius;
+    _cursorColor = color ?? _cursorColor;
 
     return this;
   }
@@ -2181,7 +2180,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField keyboardAppearance(Brightness brightness) {
-    this._keyboardAppearance = brightness;
+    _keyboardAppearance = brightness;
 
     return this;
   }
@@ -2197,7 +2196,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField lightKeyboard() {
-    this._keyboardAppearance = Brightness.light;
+    _keyboardAppearance = Brightness.light;
 
     return this;
   }
@@ -2213,7 +2212,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField darkKeyboard() {
-    this._keyboardAppearance = Brightness.dark;
+    _keyboardAppearance = Brightness.dark;
 
     return this;
   }
@@ -2227,7 +2226,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField scrollPadding(EdgeInsets padding) {
-    this._scrollPadding = padding;
+    _scrollPadding = padding;
 
     return this;
   }
@@ -2242,7 +2241,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField scrollP(double padding) {
-    this._scrollPadding = EdgeInsets.all(padding);
+    _scrollPadding = EdgeInsets.all(padding);
 
     return this;
   }
@@ -2256,7 +2255,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField enableInteractiveSelection(bool enabled) {
-    this._enableInteractiveSelection = enabled;
+    _enableInteractiveSelection = enabled;
 
     return this;
   }
@@ -2270,7 +2269,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField buildCounter(InputCounterWidgetBuilder builder) {
-    this._buildCounter = builder;
+    _buildCounter = builder;
 
     return this;
   }
@@ -2284,7 +2283,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField scrollPhysics(ScrollPhysics physics) {
-    this._scrollPhysics = physics;
+    _scrollPhysics = physics;
 
     return this;
   }
@@ -2298,7 +2297,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField autoFillHints(Iterable<String> autofillHints) {
-    this._autofillHints = autofillHints;
+    _autofillHints = autofillHints;
 
     return this;
   }
@@ -2312,7 +2311,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField autoValidateMode(AutovalidateMode autovalidateMode) {
-    this._autovalidateMode = autovalidateMode;
+    _autovalidateMode = autovalidateMode;
 
     return this;
   }
@@ -2328,7 +2327,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField alwaysValidate() {
-    this._autovalidateMode = AutovalidateMode.always;
+    _autovalidateMode = AutovalidateMode.always;
 
     return this;
   }
@@ -2344,7 +2343,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField disabledValidate() {
-    this._autovalidateMode = AutovalidateMode.disabled;
+    _autovalidateMode = AutovalidateMode.disabled;
 
     return this;
   }
@@ -2360,7 +2359,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField validateOnUserInteraction() {
-    this._autovalidateMode = AutovalidateMode.onUserInteraction;
+    _autovalidateMode = AutovalidateMode.onUserInteraction;
 
     return this;
   }
@@ -2378,7 +2377,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField icon(Widget icon) {
-    this._input_icon = icon;
+    _input_icon = icon;
 
     return this;
   }
@@ -2394,7 +2393,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField labelText(String labelText) {
-    this._input_labelText = labelText;
+    _input_labelText = labelText;
 
     return this;
   }
@@ -2413,24 +2412,24 @@ class NikuTextField {
   /// ```
   NikuTextField labelStyle(TextStyle textStyle) {
     // Input Label Style
-    this._label_color = textStyle.color;
-    this._label_backgroundColor = textStyle.backgroundColor;
-    this._label_fontSize = textStyle.fontSize;
-    this._label_fontWeight = textStyle.fontWeight;
-    this._label_fontStyle = textStyle.fontStyle;
-    this._label_letterSpacing = textStyle.letterSpacing;
-    this._label_wordSpacing = textStyle.wordSpacing;
-    this._label_height = textStyle.height;
-    this._label_foreground = textStyle.foreground;
-    this._label_background = textStyle.background;
-    this._label_shadows = textStyle.shadows;
-    this._label_fontFeatures = textStyle.fontFeatures;
-    this._label_textDecoration = textStyle.decoration;
-    this._label_textDecorationColor = textStyle.decorationColor;
-    this._label_textDecorationThickness = textStyle.decorationThickness;
-    this._label_fontFamily = textStyle.fontFamily;
-    this._label_fontFamilyFallback = textStyle.fontFamilyFallback;
-    this._label_textBaseline = textStyle.textBaseline;
+    _label_color = textStyle.color;
+    _label_backgroundColor = textStyle.backgroundColor;
+    _label_fontSize = textStyle.fontSize;
+    _label_fontWeight = textStyle.fontWeight;
+    _label_fontStyle = textStyle.fontStyle;
+    _label_letterSpacing = textStyle.letterSpacing;
+    _label_wordSpacing = textStyle.wordSpacing;
+    _label_height = textStyle.height;
+    _label_foreground = textStyle.foreground;
+    _label_background = textStyle.background;
+    _label_shadows = textStyle.shadows;
+    _label_fontFeatures = textStyle.fontFeatures;
+    _label_textDecoration = textStyle.decoration;
+    _label_textDecorationColor = textStyle.decorationColor;
+    _label_textDecorationThickness = textStyle.decorationThickness;
+    _label_fontFamily = textStyle.fontFamily;
+    _label_fontFamilyFallback = textStyle.fontFamilyFallback;
+    _label_textBaseline = textStyle.textBaseline;
 
     return this;
   }
@@ -2442,7 +2441,7 @@ class NikuTextField {
   /// TextStyle(color: input)
   /// ```
   NikuTextField labelColor(Color color) {
-    this._label_color = color;
+    _label_color = color;
 
     return this;
   }
@@ -2454,7 +2453,7 @@ class NikuTextField {
   /// TextStyle(backgroundColor: input)
   /// ```
   NikuTextField labelBackgroundColor(Color backgroundColor) {
-    this._label_backgroundColor = backgroundColor;
+    _label_backgroundColor = backgroundColor;
 
     return this;
   }
@@ -2466,7 +2465,7 @@ class NikuTextField {
   /// TextStyle(backgroundColor: input)
   /// ```
   NikuTextField labelBg(Color backgroundColor) {
-    this._label_backgroundColor = backgroundColor;
+    _label_backgroundColor = backgroundColor;
 
     return this;
   }
@@ -2478,7 +2477,7 @@ class NikuTextField {
   /// TextStyle(fontSize: input)
   /// ```
   NikuTextField labelFontSize(double fontSize) {
-    this._label_fontSize = fontSize;
+    _label_fontSize = fontSize;
 
     return this;
   }
@@ -2490,7 +2489,7 @@ class NikuTextField {
   /// TextStyle(fontSize: input)
   /// ```
   NikuTextField labelFontWeight(FontWeight fontWeight) {
-    this._label_fontWeight = fontWeight;
+    _label_fontWeight = fontWeight;
 
     return this;
   }
@@ -2504,7 +2503,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.bold)
   /// ```
   NikuTextField labelBold() {
-    this._label_fontWeight = FontWeight.bold;
+    _label_fontWeight = FontWeight.bold;
 
     return this;
   }
@@ -2518,7 +2517,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.100)
   /// ```
   NikuTextField labelW100() {
-    this._label_fontWeight = FontWeight.w100;
+    _label_fontWeight = FontWeight.w100;
 
     return this;
   }
@@ -2532,7 +2531,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.200)
   /// ```
   NikuTextField labelW200() {
-    this._label_fontWeight = FontWeight.w200;
+    _label_fontWeight = FontWeight.w200;
 
     return this;
   }
@@ -2546,7 +2545,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.300)
   /// ```
   NikuTextField labelW300() {
-    this._label_fontWeight = FontWeight.w300;
+    _label_fontWeight = FontWeight.w300;
 
     return this;
   }
@@ -2560,7 +2559,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.400)
   /// ```
   NikuTextField labelW400() {
-    this._label_fontWeight = FontWeight.w400;
+    _label_fontWeight = FontWeight.w400;
 
     return this;
   }
@@ -2574,7 +2573,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.500)
   /// ```
   NikuTextField labelW500() {
-    this._label_fontWeight = FontWeight.w500;
+    _label_fontWeight = FontWeight.w500;
 
     return this;
   }
@@ -2588,7 +2587,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.600)
   /// ```
   NikuTextField labelW600() {
-    this._label_fontWeight = FontWeight.w600;
+    _label_fontWeight = FontWeight.w600;
 
     return this;
   }
@@ -2602,7 +2601,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.700)
   /// ```
   NikuTextField labelW700() {
-    this._label_fontWeight = FontWeight.w700;
+    _label_fontWeight = FontWeight.w700;
 
     return this;
   }
@@ -2616,7 +2615,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.800)
   /// ```
   NikuTextField labelW800() {
-    this._label_fontWeight = FontWeight.w800;
+    _label_fontWeight = FontWeight.w800;
 
     return this;
   }
@@ -2630,7 +2629,7 @@ class NikuTextField {
   /// TextStyle(fontWeight: FontWeight.900)
   /// ```
   NikuTextField labelW900() {
-    this._label_fontWeight = FontWeight.w900;
+    _label_fontWeight = FontWeight.w900;
 
     return this;
   }
@@ -2642,7 +2641,7 @@ class NikuTextField {
   /// TextStyle(fontStyle: input)
   /// ```
   NikuTextField labelFontStyle(FontStyle fontStyle) {
-    this._label_fontStyle = fontStyle;
+    _label_fontStyle = fontStyle;
 
     return this;
   }
@@ -2654,7 +2653,7 @@ class NikuTextField {
   /// TextStyle(fontStyle: FontStyle.italic)
   /// ```
   NikuTextField labelItalic() {
-    this._label_fontStyle = FontStyle.italic;
+    _label_fontStyle = FontStyle.italic;
 
     return this;
   }
@@ -2666,7 +2665,7 @@ class NikuTextField {
   /// TextStyle(letterSpacing: input)
   /// ```
   NikuTextField labelLetterSpacing(double letterSpacing) {
-    this._label_letterSpacing = letterSpacing;
+    _label_letterSpacing = letterSpacing;
 
     return this;
   }
@@ -2678,7 +2677,7 @@ class NikuTextField {
   /// Text(wordSpacing: input)
   /// ```
   NikuTextField labelWordSpacing(double wordSpacing) {
-    this._label_wordSpacing = wordSpacing;
+    _label_wordSpacing = wordSpacing;
 
     return this;
   }
@@ -2690,7 +2689,7 @@ class NikuTextField {
   /// TextStyle(height: input)
   /// ```
   NikuTextField labelHeight(double height) {
-    this._label_height = height;
+    _label_height = height;
 
     return this;
   }
@@ -2702,7 +2701,7 @@ class NikuTextField {
   /// TextStyle(foreground: input)
   /// ```
   NikuTextField labelForeground(Paint foreground) {
-    this._label_foreground = foreground;
+    _label_foreground = foreground;
 
     return this;
   }
@@ -2714,7 +2713,7 @@ class NikuTextField {
   /// TextStyle(background: input)
   /// ```
   NikuTextField labelBackground(Paint foreground) {
-    this._label_foreground = foreground;
+    _label_foreground = foreground;
 
     return this;
   }
@@ -2726,7 +2725,7 @@ class NikuTextField {
   /// TextStyle(shadows: input)
   /// ```
   NikuTextField labelShadows(List<Shadow> shadows) {
-    this._label_shadows = shadows;
+    _label_shadows = shadows;
 
     return this;
   }
@@ -2738,7 +2737,7 @@ class NikuTextField {
   /// TextStyle(fontFeatures: input)
   /// ```
   NikuTextField labelFontFeatures(List<FontFeature> fontFeatures) {
-    this._label_fontFeatures = fontFeatures;
+    _label_fontFeatures = fontFeatures;
 
     return this;
   }
@@ -2750,7 +2749,7 @@ class NikuTextField {
   /// TextStyle(decoration: input)
   /// ```
   NikuTextField labelTextDecoration(TextDecoration textDecoration) {
-    this._label_textDecoration = textDecoration;
+    _label_textDecoration = textDecoration;
 
     return this;
   }
@@ -2762,7 +2761,7 @@ class NikuTextField {
   /// TextStyle(decorationColor: input)
   /// ```
   NikuTextField labelTextDecorationColor(Color textDecorationColor) {
-    this._label_textDecorationColor = textDecorationColor;
+    _label_textDecorationColor = textDecorationColor;
 
     return this;
   }
@@ -2774,7 +2773,7 @@ class NikuTextField {
   /// TextStyle(decorationThickness: input)
   /// ```
   NikuTextField labelTextDecorationThickness(double textDecorationThickness) {
-    this._label_textDecorationThickness = textDecorationThickness;
+    _label_textDecorationThickness = textDecorationThickness;
 
     return this;
   }
@@ -2786,7 +2785,7 @@ class NikuTextField {
   /// TextStyle(fontFamily: input)
   /// ```
   NikuTextField labelFontFamily(String fontFamily) {
-    this._label_fontFamily = fontFamily;
+    _label_fontFamily = fontFamily;
 
     return this;
   }
@@ -2798,7 +2797,7 @@ class NikuTextField {
   /// TextStyle(fontFamilyFallback: input)
   /// ```
   NikuTextField labelFontFamilyFallback(List<String> fontFamily) {
-    this._label_fontFamilyFallback = fontFamily;
+    _label_fontFamilyFallback = fontFamily;
 
     return this;
   }
@@ -2810,7 +2809,7 @@ class NikuTextField {
   /// TextStyle(textBaseline: input)
   /// ```
   NikuTextField labelTextBaseline(TextBaseline textBaseline) {
-    this._label_textBaseline = textBaseline;
+    _label_textBaseline = textBaseline;
 
     return this;
   }
@@ -2822,7 +2821,7 @@ class NikuTextField {
   /// TextStyle(textBaseline: Textbaseline.alphabetic)
   /// ```
   NikuTextField labelAlphabetic() {
-    this._label_textBaseline = TextBaseline.alphabetic;
+    _label_textBaseline = TextBaseline.alphabetic;
 
     return this;
   }
@@ -2834,7 +2833,7 @@ class NikuTextField {
   /// TextStyle(textBaseline: Textbaseline.ideographic)
   /// ```
   NikuTextField labelIdeographic() {
-    this._label_textBaseline = TextBaseline.ideographic;
+    _label_textBaseline = TextBaseline.ideographic;
 
     return this;
   }
@@ -2850,7 +2849,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField hintText(String helperText) {
-    this._input_hintText = helperText;
+    _input_hintText = helperText;
 
     return this;
   }
@@ -2866,7 +2865,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField hintMaxLines(int maxLines) {
-    this._input_hintMaxLines = maxLines;
+    _input_hintMaxLines = maxLines;
 
     return this;
   }
@@ -2885,24 +2884,24 @@ class NikuTextField {
   /// ```
   NikuTextField hintStyle(TextStyle textStyle) {
     // Input hint Style
-    this._hint_color = textStyle.color;
-    this._hint_backgroundColor = textStyle.backgroundColor;
-    this._hint_fontSize = textStyle.fontSize;
-    this._hint_fontWeight = textStyle.fontWeight;
-    this._hint_fontStyle = textStyle.fontStyle;
-    this._hint_letterSpacing = textStyle.letterSpacing;
-    this._hint_wordSpacing = textStyle.wordSpacing;
-    this._hint_height = textStyle.height;
-    this._hint_foreground = textStyle.foreground;
-    this._hint_background = textStyle.background;
-    this._hint_shadows = textStyle.shadows;
-    this._hint_fontFeatures = textStyle.fontFeatures;
-    this._hint_textDecoration = textStyle.decoration;
-    this._hint_textDecorationColor = textStyle.decorationColor;
-    this._hint_textDecorationThickness = textStyle.decorationThickness;
-    this._hint_fontFamily = textStyle.fontFamily;
-    this._hint_fontFamilyFallback = textStyle.fontFamilyFallback;
-    this._hint_textBaseline = textStyle.textBaseline;
+    _hint_color = textStyle.color;
+    _hint_backgroundColor = textStyle.backgroundColor;
+    _hint_fontSize = textStyle.fontSize;
+    _hint_fontWeight = textStyle.fontWeight;
+    _hint_fontStyle = textStyle.fontStyle;
+    _hint_letterSpacing = textStyle.letterSpacing;
+    _hint_wordSpacing = textStyle.wordSpacing;
+    _hint_height = textStyle.height;
+    _hint_foreground = textStyle.foreground;
+    _hint_background = textStyle.background;
+    _hint_shadows = textStyle.shadows;
+    _hint_fontFeatures = textStyle.fontFeatures;
+    _hint_textDecoration = textStyle.decoration;
+    _hint_textDecorationColor = textStyle.decorationColor;
+    _hint_textDecorationThickness = textStyle.decorationThickness;
+    _hint_fontFamily = textStyle.fontFamily;
+    _hint_fontFamilyFallback = textStyle.fontFamilyFallback;
+    _hint_textBaseline = textStyle.textBaseline;
 
     return this;
   }
@@ -2914,7 +2913,7 @@ class NikuTextField {
   /// TextStyle(color: input)
   /// ```
   NikuTextField hintColor(Color color) {
-    this._hint_color = color;
+    _hint_color = color;
 
     return this;
   }
@@ -2926,7 +2925,7 @@ class NikuTextField {
   /// TextStyle(backgroundColor: input)
   /// ```
   NikuTextField hintBackgroundColor(Color backgroundColor) {
-    this._hint_backgroundColor = backgroundColor;
+    _hint_backgroundColor = backgroundColor;
 
     return this;
   }
@@ -2938,7 +2937,7 @@ class NikuTextField {
   /// TextStyle(backgroundColor: input)
   /// ```
   NikuTextField hintBg(Color backgroundColor) {
-    this._hint_backgroundColor = backgroundColor;
+    _hint_backgroundColor = backgroundColor;
 
     return this;
   }
@@ -2950,7 +2949,7 @@ class NikuTextField {
   /// TextStyle(fontSize: input)
   /// ```
   NikuTextField hintFontSize(double fontSize) {
-    this._hint_fontSize = fontSize;
+    _hint_fontSize = fontSize;
 
     return this;
   }
@@ -2962,7 +2961,7 @@ class NikuTextField {
   /// TextStyle(fontSize: input)
   /// ```
   NikuTextField hintFontWeight(FontWeight fontWeight) {
-    this._hint_fontWeight = fontWeight;
+    _hint_fontWeight = fontWeight;
 
     return this;
   }
@@ -2976,7 +2975,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.bold)
   /// ```
   NikuTextField hintBold() {
-    this._hint_fontWeight = FontWeight.bold;
+    _hint_fontWeight = FontWeight.bold;
 
     return this;
   }
@@ -2990,7 +2989,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.100)
   /// ```
   NikuTextField hintW100() {
-    this._hint_fontWeight = FontWeight.w100;
+    _hint_fontWeight = FontWeight.w100;
 
     return this;
   }
@@ -3004,7 +3003,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.200)
   /// ```
   NikuTextField hintW200() {
-    this._hint_fontWeight = FontWeight.w200;
+    _hint_fontWeight = FontWeight.w200;
 
     return this;
   }
@@ -3018,7 +3017,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.300)
   /// ```
   NikuTextField hintW300() {
-    this._hint_fontWeight = FontWeight.w300;
+    _hint_fontWeight = FontWeight.w300;
 
     return this;
   }
@@ -3032,7 +3031,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.400)
   /// ```
   NikuTextField hintW400() {
-    this._hint_fontWeight = FontWeight.w400;
+    _hint_fontWeight = FontWeight.w400;
 
     return this;
   }
@@ -3046,7 +3045,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.500)
   /// ```
   NikuTextField hintW500() {
-    this._hint_fontWeight = FontWeight.w500;
+    _hint_fontWeight = FontWeight.w500;
 
     return this;
   }
@@ -3060,7 +3059,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.600)
   /// ```
   NikuTextField hintW600() {
-    this._hint_fontWeight = FontWeight.w600;
+    _hint_fontWeight = FontWeight.w600;
 
     return this;
   }
@@ -3074,7 +3073,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.700)
   /// ```
   NikuTextField hintW700() {
-    this._hint_fontWeight = FontWeight.w700;
+    _hint_fontWeight = FontWeight.w700;
 
     return this;
   }
@@ -3088,7 +3087,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.800)
   /// ```
   NikuTextField hintW800() {
-    this._hint_fontWeight = FontWeight.w800;
+    _hint_fontWeight = FontWeight.w800;
 
     return this;
   }
@@ -3102,7 +3101,7 @@ class NikuTextField {
   /// TextStyle(fontWeight: FontWeight.900)
   /// ```
   NikuTextField hintW900() {
-    this._hint_fontWeight = FontWeight.w900;
+    _hint_fontWeight = FontWeight.w900;
 
     return this;
   }
@@ -3114,7 +3113,7 @@ class NikuTextField {
   /// TextStyle(fontStyle: input)
   /// ```
   NikuTextField hintFontStyle(FontStyle fontStyle) {
-    this._hint_fontStyle = fontStyle;
+    _hint_fontStyle = fontStyle;
 
     return this;
   }
@@ -3126,7 +3125,7 @@ class NikuTextField {
   /// TextStyle(fontStyle: FontStyle.italic)
   /// ```
   NikuTextField hintItalic() {
-    this._hint_fontStyle = FontStyle.italic;
+    _hint_fontStyle = FontStyle.italic;
 
     return this;
   }
@@ -3138,7 +3137,7 @@ class NikuTextField {
   /// TextStyle(letterSpacing: input)
   /// ```
   NikuTextField hintLetterSpacing(double letterSpacing) {
-    this._hint_letterSpacing = letterSpacing;
+    _hint_letterSpacing = letterSpacing;
 
     return this;
   }
@@ -3150,7 +3149,7 @@ class NikuTextField {
   /// Text(wordSpacing: input)
   /// ```
   NikuTextField hintWordSpacing(double wordSpacing) {
-    this._hint_wordSpacing = wordSpacing;
+    _hint_wordSpacing = wordSpacing;
 
     return this;
   }
@@ -3162,7 +3161,7 @@ class NikuTextField {
   /// TextStyle(height: input)
   /// ```
   NikuTextField hintHeight(double height) {
-    this._hint_height = height;
+    _hint_height = height;
 
     return this;
   }
@@ -3174,7 +3173,7 @@ class NikuTextField {
   /// TextStyle(foreground: input)
   /// ```
   NikuTextField hintForeground(Paint foreground) {
-    this._hint_foreground = foreground;
+    _hint_foreground = foreground;
 
     return this;
   }
@@ -3186,7 +3185,7 @@ class NikuTextField {
   /// TextStyle(background: input)
   /// ```
   NikuTextField hintBackground(Paint foreground) {
-    this._hint_foreground = foreground;
+    _hint_foreground = foreground;
 
     return this;
   }
@@ -3198,7 +3197,7 @@ class NikuTextField {
   /// TextStyle(shadows: input)
   /// ```
   NikuTextField hintShadows(List<Shadow> shadows) {
-    this._hint_shadows = shadows;
+    _hint_shadows = shadows;
 
     return this;
   }
@@ -3210,7 +3209,7 @@ class NikuTextField {
   /// TextStyle(fontFeatures: input)
   /// ```
   NikuTextField hintFontFeatures(List<FontFeature> fontFeatures) {
-    this._hint_fontFeatures = fontFeatures;
+    _hint_fontFeatures = fontFeatures;
 
     return this;
   }
@@ -3222,7 +3221,7 @@ class NikuTextField {
   /// TextStyle(decoration: input)
   /// ```
   NikuTextField hintTextDecoration(TextDecoration textDecoration) {
-    this._hint_textDecoration = textDecoration;
+    _hint_textDecoration = textDecoration;
 
     return this;
   }
@@ -3234,7 +3233,7 @@ class NikuTextField {
   /// TextStyle(decorationColor: input)
   /// ```
   NikuTextField hintTextDecorationColor(Color textDecorationColor) {
-    this._hint_textDecorationColor = textDecorationColor;
+    _hint_textDecorationColor = textDecorationColor;
 
     return this;
   }
@@ -3246,7 +3245,7 @@ class NikuTextField {
   /// TextStyle(decorationThickness: input)
   /// ```
   NikuTextField hintTextDecorationThickness(double textDecorationThickness) {
-    this._hint_textDecorationThickness = textDecorationThickness;
+    _hint_textDecorationThickness = textDecorationThickness;
 
     return this;
   }
@@ -3258,7 +3257,7 @@ class NikuTextField {
   /// TextStyle(fontFamily: input)
   /// ```
   NikuTextField hintFontFamily(String fontFamily) {
-    this._hint_fontFamily = fontFamily;
+    _hint_fontFamily = fontFamily;
 
     return this;
   }
@@ -3270,7 +3269,7 @@ class NikuTextField {
   /// TextStyle(fontFamilyFallback: input)
   /// ```
   NikuTextField hintFontFamilyFallback(List<String> fontFamily) {
-    this._hint_fontFamilyFallback = fontFamily;
+    _hint_fontFamilyFallback = fontFamily;
 
     return this;
   }
@@ -3282,7 +3281,7 @@ class NikuTextField {
   /// TextStyle(textBaseline: input)
   /// ```
   NikuTextField hintTextBaseline(TextBaseline textBaseline) {
-    this._hint_textBaseline = textBaseline;
+    _hint_textBaseline = textBaseline;
 
     return this;
   }
@@ -3294,7 +3293,7 @@ class NikuTextField {
   /// TextStyle(textBaseline: Textbaseline.alphabetic)
   /// ```
   NikuTextField hintAlphabetic() {
-    this._hint_textBaseline = TextBaseline.alphabetic;
+    _hint_textBaseline = TextBaseline.alphabetic;
 
     return this;
   }
@@ -3306,7 +3305,7 @@ class NikuTextField {
   /// TextStyle(textBaseline: Textbaseline.ideographic)
   /// ```
   NikuTextField hintIdeographic() {
-    this._hint_textBaseline = TextBaseline.ideographic;
+    _hint_textBaseline = TextBaseline.ideographic;
 
     return this;
   }
@@ -3322,7 +3321,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField helperText(String helperText) {
-    this._input_helperText = helperText;
+    _input_helperText = helperText;
 
     return this;
   }
@@ -3338,7 +3337,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField helperMaxLines(int maxLines) {
-    this._input_helperMaxLines = maxLines;
+    _input_helperMaxLines = maxLines;
 
     return this;
   }
@@ -3357,24 +3356,24 @@ class NikuTextField {
   /// ```
   NikuTextField helperStyle(TextStyle textStyle) {
     // Input Label Style
-    this._helper_color = textStyle.color;
-    this._helper_backgroundColor = textStyle.backgroundColor;
-    this._helper_fontSize = textStyle.fontSize;
-    this._helper_fontWeight = textStyle.fontWeight;
-    this._helper_fontStyle = textStyle.fontStyle;
-    this._helper_letterSpacing = textStyle.letterSpacing;
-    this._helper_wordSpacing = textStyle.wordSpacing;
-    this._helper_height = textStyle.height;
-    this._helper_foreground = textStyle.foreground;
-    this._helper_background = textStyle.background;
-    this._helper_shadows = textStyle.shadows;
-    this._helper_fontFeatures = textStyle.fontFeatures;
-    this._helper_textDecoration = textStyle.decoration;
-    this._helper_textDecorationColor = textStyle.decorationColor;
-    this._helper_textDecorationThickness = textStyle.decorationThickness;
-    this._helper_fontFamily = textStyle.fontFamily;
-    this._helper_fontFamilyFallback = textStyle.fontFamilyFallback;
-    this._helper_textBaseline = textStyle.textBaseline;
+    _helper_color = textStyle.color;
+    _helper_backgroundColor = textStyle.backgroundColor;
+    _helper_fontSize = textStyle.fontSize;
+    _helper_fontWeight = textStyle.fontWeight;
+    _helper_fontStyle = textStyle.fontStyle;
+    _helper_letterSpacing = textStyle.letterSpacing;
+    _helper_wordSpacing = textStyle.wordSpacing;
+    _helper_height = textStyle.height;
+    _helper_foreground = textStyle.foreground;
+    _helper_background = textStyle.background;
+    _helper_shadows = textStyle.shadows;
+    _helper_fontFeatures = textStyle.fontFeatures;
+    _helper_textDecoration = textStyle.decoration;
+    _helper_textDecorationColor = textStyle.decorationColor;
+    _helper_textDecorationThickness = textStyle.decorationThickness;
+    _helper_fontFamily = textStyle.fontFamily;
+    _helper_fontFamilyFallback = textStyle.fontFamilyFallback;
+    _helper_textBaseline = textStyle.textBaseline;
 
     return this;
   }
@@ -3386,7 +3385,7 @@ class NikuTextField {
   /// TextStyle(color: input)
   /// ```
   NikuTextField helperColor(Color color) {
-    this._helper_color = color;
+    _helper_color = color;
 
     return this;
   }
@@ -3398,7 +3397,7 @@ class NikuTextField {
   /// TextStyle(backgroundColor: input)
   /// ```
   NikuTextField helperBackgroundColor(Color backgroundColor) {
-    this._helper_backgroundColor = backgroundColor;
+    _helper_backgroundColor = backgroundColor;
 
     return this;
   }
@@ -3410,7 +3409,7 @@ class NikuTextField {
   /// TextStyle(backgroundColor: input)
   /// ```
   NikuTextField helperBg(Color backgroundColor) {
-    this._helper_backgroundColor = backgroundColor;
+    _helper_backgroundColor = backgroundColor;
 
     return this;
   }
@@ -3422,7 +3421,7 @@ class NikuTextField {
   /// TextStyle(fontSize: input)
   /// ```
   NikuTextField helperFontSize(double fontSize) {
-    this._helper_fontSize = fontSize;
+    _helper_fontSize = fontSize;
 
     return this;
   }
@@ -3434,7 +3433,7 @@ class NikuTextField {
   /// TextStyle(fontSize: input)
   /// ```
   NikuTextField helperFontWeight(FontWeight fontWeight) {
-    this._helper_fontWeight = fontWeight;
+    _helper_fontWeight = fontWeight;
 
     return this;
   }
@@ -3448,7 +3447,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.bold)
   /// ```
   NikuTextField helperBold() {
-    this._helper_fontWeight = FontWeight.bold;
+    _helper_fontWeight = FontWeight.bold;
 
     return this;
   }
@@ -3462,7 +3461,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.100)
   /// ```
   NikuTextField helperW100() {
-    this._helper_fontWeight = FontWeight.w100;
+    _helper_fontWeight = FontWeight.w100;
 
     return this;
   }
@@ -3476,7 +3475,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.200)
   /// ```
   NikuTextField helperW200() {
-    this._helper_fontWeight = FontWeight.w200;
+    _helper_fontWeight = FontWeight.w200;
 
     return this;
   }
@@ -3490,7 +3489,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.300)
   /// ```
   NikuTextField helperW300() {
-    this._helper_fontWeight = FontWeight.w300;
+    _helper_fontWeight = FontWeight.w300;
 
     return this;
   }
@@ -3504,7 +3503,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.400)
   /// ```
   NikuTextField helperW400() {
-    this._helper_fontWeight = FontWeight.w400;
+    _helper_fontWeight = FontWeight.w400;
 
     return this;
   }
@@ -3518,7 +3517,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.500)
   /// ```
   NikuTextField helperW500() {
-    this._helper_fontWeight = FontWeight.w500;
+    _helper_fontWeight = FontWeight.w500;
 
     return this;
   }
@@ -3532,7 +3531,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.600)
   /// ```
   NikuTextField helperW600() {
-    this._helper_fontWeight = FontWeight.w600;
+    _helper_fontWeight = FontWeight.w600;
 
     return this;
   }
@@ -3546,7 +3545,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.700)
   /// ```
   NikuTextField helperW700() {
-    this._helper_fontWeight = FontWeight.w700;
+    _helper_fontWeight = FontWeight.w700;
 
     return this;
   }
@@ -3560,7 +3559,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.800)
   /// ```
   NikuTextField helperW800() {
-    this._helper_fontWeight = FontWeight.w800;
+    _helper_fontWeight = FontWeight.w800;
 
     return this;
   }
@@ -3574,7 +3573,7 @@ class NikuTextField {
   /// TextStyle(fontWeight: FontWeight.900)
   /// ```
   NikuTextField helperW900() {
-    this._helper_fontWeight = FontWeight.w900;
+    _helper_fontWeight = FontWeight.w900;
 
     return this;
   }
@@ -3586,7 +3585,7 @@ class NikuTextField {
   /// TextStyle(fontStyle: input)
   /// ```
   NikuTextField helperFontStyle(FontStyle fontStyle) {
-    this._helper_fontStyle = fontStyle;
+    _helper_fontStyle = fontStyle;
 
     return this;
   }
@@ -3598,7 +3597,7 @@ class NikuTextField {
   /// TextStyle(fontStyle: FontStyle.italic)
   /// ```
   NikuTextField helperItalic() {
-    this._helper_fontStyle = FontStyle.italic;
+    _helper_fontStyle = FontStyle.italic;
 
     return this;
   }
@@ -3610,7 +3609,7 @@ class NikuTextField {
   /// TextStyle(letterSpacing: input)
   /// ```
   NikuTextField helperLetterSpacing(double letterSpacing) {
-    this._helper_letterSpacing = letterSpacing;
+    _helper_letterSpacing = letterSpacing;
 
     return this;
   }
@@ -3622,7 +3621,7 @@ class NikuTextField {
   /// Text(wordSpacing: input)
   /// ```
   NikuTextField helperWordSpacing(double wordSpacing) {
-    this._helper_wordSpacing = wordSpacing;
+    _helper_wordSpacing = wordSpacing;
 
     return this;
   }
@@ -3634,7 +3633,7 @@ class NikuTextField {
   /// TextStyle(height: input)
   /// ```
   NikuTextField helperHeight(double height) {
-    this._helper_height = height;
+    _helper_height = height;
 
     return this;
   }
@@ -3646,7 +3645,7 @@ class NikuTextField {
   /// TextStyle(foreground: input)
   /// ```
   NikuTextField helperForeground(Paint foreground) {
-    this._helper_foreground = foreground;
+    _helper_foreground = foreground;
 
     return this;
   }
@@ -3658,7 +3657,7 @@ class NikuTextField {
   /// TextStyle(background: input)
   /// ```
   NikuTextField helperBackground(Paint foreground) {
-    this._helper_foreground = foreground;
+    _helper_foreground = foreground;
 
     return this;
   }
@@ -3670,7 +3669,7 @@ class NikuTextField {
   /// TextStyle(shadows: input)
   /// ```
   NikuTextField helperShadows(List<Shadow> shadows) {
-    this._helper_shadows = shadows;
+    _helper_shadows = shadows;
 
     return this;
   }
@@ -3682,7 +3681,7 @@ class NikuTextField {
   /// TextStyle(fontFeatures: input)
   /// ```
   NikuTextField helperFontFeatures(List<FontFeature> fontFeatures) {
-    this._helper_fontFeatures = fontFeatures;
+    _helper_fontFeatures = fontFeatures;
 
     return this;
   }
@@ -3694,7 +3693,7 @@ class NikuTextField {
   /// TextStyle(decoration: input)
   /// ```
   NikuTextField helperTextDecoration(TextDecoration textDecoration) {
-    this._helper_textDecoration = textDecoration;
+    _helper_textDecoration = textDecoration;
 
     return this;
   }
@@ -3706,7 +3705,7 @@ class NikuTextField {
   /// TextStyle(decorationColor: input)
   /// ```
   NikuTextField helperTextDecorationColor(Color textDecorationColor) {
-    this._helper_textDecorationColor = textDecorationColor;
+    _helper_textDecorationColor = textDecorationColor;
 
     return this;
   }
@@ -3718,7 +3717,7 @@ class NikuTextField {
   /// TextStyle(decorationThickness: input)
   /// ```
   NikuTextField helperTextDecorationThickness(double textDecorationThickness) {
-    this._helper_textDecorationThickness = textDecorationThickness;
+    _helper_textDecorationThickness = textDecorationThickness;
 
     return this;
   }
@@ -3730,7 +3729,7 @@ class NikuTextField {
   /// TextStyle(fontFamily: input)
   /// ```
   NikuTextField helperFontFamily(String fontFamily) {
-    this._helper_fontFamily = fontFamily;
+    _helper_fontFamily = fontFamily;
 
     return this;
   }
@@ -3742,7 +3741,7 @@ class NikuTextField {
   /// TextStyle(fontFamilyFallback: input)
   /// ```
   NikuTextField helperFontFamilyFallback(List<String> fontFamily) {
-    this._helper_fontFamilyFallback = fontFamily;
+    _helper_fontFamilyFallback = fontFamily;
 
     return this;
   }
@@ -3754,7 +3753,7 @@ class NikuTextField {
   /// TextStyle(textBaseline: input)
   /// ```
   NikuTextField helperTextBaseline(TextBaseline textBaseline) {
-    this._helper_textBaseline = textBaseline;
+    _helper_textBaseline = textBaseline;
 
     return this;
   }
@@ -3766,7 +3765,7 @@ class NikuTextField {
   /// TextStyle(textBaseline: Textbaseline.alphabetic)
   /// ```
   NikuTextField helperAlphabetic() {
-    this._helper_textBaseline = TextBaseline.alphabetic;
+    _helper_textBaseline = TextBaseline.alphabetic;
 
     return this;
   }
@@ -3778,7 +3777,7 @@ class NikuTextField {
   /// TextStyle(textBaseline: Textbaseline.ideographic)
   /// ```
   NikuTextField helperIdeographic() {
-    this._helper_textBaseline = TextBaseline.ideographic;
+    _helper_textBaseline = TextBaseline.ideographic;
 
     return this;
   }
@@ -3794,7 +3793,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField errorText(String errorText) {
-    this._input_errorText = errorText;
+    _input_errorText = errorText;
 
     return this;
   }
@@ -3810,7 +3809,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField errorMaxLines(int maxLines) {
-    this._input_errorMaxLines = maxLines;
+    _input_errorMaxLines = maxLines;
 
     return this;
   }
@@ -3829,24 +3828,24 @@ class NikuTextField {
   /// ```
   NikuTextField errorStyle(TextStyle textStyle) {
     // Input Label Style
-    this._error_color = textStyle.color;
-    this._error_backgroundColor = textStyle.backgroundColor;
-    this._error_fontSize = textStyle.fontSize;
-    this._error_fontWeight = textStyle.fontWeight;
-    this._error_fontStyle = textStyle.fontStyle;
-    this._error_letterSpacing = textStyle.letterSpacing;
-    this._error_wordSpacing = textStyle.wordSpacing;
-    this._error_height = textStyle.height;
-    this._error_foreground = textStyle.foreground;
-    this._error_background = textStyle.background;
-    this._error_shadows = textStyle.shadows;
-    this._error_fontFeatures = textStyle.fontFeatures;
-    this._error_textDecoration = textStyle.decoration;
-    this._error_textDecorationColor = textStyle.decorationColor;
-    this._error_textDecorationThickness = textStyle.decorationThickness;
-    this._error_fontFamily = textStyle.fontFamily;
-    this._error_fontFamilyFallback = textStyle.fontFamilyFallback;
-    this._error_textBaseline = textStyle.textBaseline;
+    _error_color = textStyle.color;
+    _error_backgroundColor = textStyle.backgroundColor;
+    _error_fontSize = textStyle.fontSize;
+    _error_fontWeight = textStyle.fontWeight;
+    _error_fontStyle = textStyle.fontStyle;
+    _error_letterSpacing = textStyle.letterSpacing;
+    _error_wordSpacing = textStyle.wordSpacing;
+    _error_height = textStyle.height;
+    _error_foreground = textStyle.foreground;
+    _error_background = textStyle.background;
+    _error_shadows = textStyle.shadows;
+    _error_fontFeatures = textStyle.fontFeatures;
+    _error_textDecoration = textStyle.decoration;
+    _error_textDecorationColor = textStyle.decorationColor;
+    _error_textDecorationThickness = textStyle.decorationThickness;
+    _error_fontFamily = textStyle.fontFamily;
+    _error_fontFamilyFallback = textStyle.fontFamilyFallback;
+    _error_textBaseline = textStyle.textBaseline;
 
     return this;
   }
@@ -3858,7 +3857,7 @@ class NikuTextField {
   /// TextStyle(color: input)
   /// ```
   NikuTextField errorColor(Color color) {
-    this._error_color = color;
+    _error_color = color;
 
     return this;
   }
@@ -3870,7 +3869,7 @@ class NikuTextField {
   /// TextStyle(backgroundColor: input)
   /// ```
   NikuTextField errorBackgroundColor(Color backgroundColor) {
-    this._error_backgroundColor = backgroundColor;
+    _error_backgroundColor = backgroundColor;
 
     return this;
   }
@@ -3882,7 +3881,7 @@ class NikuTextField {
   /// TextStyle(backgroundColor: input)
   /// ```
   NikuTextField errorBg(Color backgroundColor) {
-    this._error_backgroundColor = backgroundColor;
+    _error_backgroundColor = backgroundColor;
 
     return this;
   }
@@ -3894,7 +3893,7 @@ class NikuTextField {
   /// TextStyle(fontSize: input)
   /// ```
   NikuTextField errorFontSize(double fontSize) {
-    this._error_fontSize = fontSize;
+    _error_fontSize = fontSize;
 
     return this;
   }
@@ -3906,7 +3905,7 @@ class NikuTextField {
   /// TextStyle(fontSize: input)
   /// ```
   NikuTextField errorFontWeight(FontWeight fontWeight) {
-    this._error_fontWeight = fontWeight;
+    _error_fontWeight = fontWeight;
 
     return this;
   }
@@ -3920,7 +3919,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.bold)
   /// ```
   NikuTextField errorBold() {
-    this._error_fontWeight = FontWeight.bold;
+    _error_fontWeight = FontWeight.bold;
 
     return this;
   }
@@ -3934,7 +3933,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.100)
   /// ```
   NikuTextField errorW100() {
-    this._error_fontWeight = FontWeight.w100;
+    _error_fontWeight = FontWeight.w100;
 
     return this;
   }
@@ -3948,7 +3947,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.200)
   /// ```
   NikuTextField errorW200() {
-    this._error_fontWeight = FontWeight.w200;
+    _error_fontWeight = FontWeight.w200;
 
     return this;
   }
@@ -3962,7 +3961,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.300)
   /// ```
   NikuTextField errorW300() {
-    this._error_fontWeight = FontWeight.w300;
+    _error_fontWeight = FontWeight.w300;
 
     return this;
   }
@@ -3976,7 +3975,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.400)
   /// ```
   NikuTextField errorW400() {
-    this._error_fontWeight = FontWeight.w400;
+    _error_fontWeight = FontWeight.w400;
 
     return this;
   }
@@ -3990,7 +3989,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.500)
   /// ```
   NikuTextField errorW500() {
-    this._error_fontWeight = FontWeight.w500;
+    _error_fontWeight = FontWeight.w500;
 
     return this;
   }
@@ -4004,7 +4003,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.600)
   /// ```
   NikuTextField errorW600() {
-    this._error_fontWeight = FontWeight.w600;
+    _error_fontWeight = FontWeight.w600;
 
     return this;
   }
@@ -4018,7 +4017,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.700)
   /// ```
   NikuTextField errorW700() {
-    this._error_fontWeight = FontWeight.w700;
+    _error_fontWeight = FontWeight.w700;
 
     return this;
   }
@@ -4032,7 +4031,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.800)
   /// ```
   NikuTextField errorW800() {
-    this._error_fontWeight = FontWeight.w800;
+    _error_fontWeight = FontWeight.w800;
 
     return this;
   }
@@ -4046,7 +4045,7 @@ class NikuTextField {
   /// TextStyle(fontWeight: FontWeight.900)
   /// ```
   NikuTextField errorW900() {
-    this._error_fontWeight = FontWeight.w900;
+    _error_fontWeight = FontWeight.w900;
 
     return this;
   }
@@ -4058,7 +4057,7 @@ class NikuTextField {
   /// TextStyle(fontStyle: input)
   /// ```
   NikuTextField errorFontStyle(FontStyle fontStyle) {
-    this._error_fontStyle = fontStyle;
+    _error_fontStyle = fontStyle;
 
     return this;
   }
@@ -4070,7 +4069,7 @@ class NikuTextField {
   /// TextStyle(fontStyle: FontStyle.italic)
   /// ```
   NikuTextField errorItalic() {
-    this._error_fontStyle = FontStyle.italic;
+    _error_fontStyle = FontStyle.italic;
 
     return this;
   }
@@ -4082,7 +4081,7 @@ class NikuTextField {
   /// TextStyle(letterSpacing: input)
   /// ```
   NikuTextField errorLetterSpacing(double letterSpacing) {
-    this._error_letterSpacing = letterSpacing;
+    _error_letterSpacing = letterSpacing;
 
     return this;
   }
@@ -4094,7 +4093,7 @@ class NikuTextField {
   /// Text(wordSpacing: input)
   /// ```
   NikuTextField errorWordSpacing(double wordSpacing) {
-    this._error_wordSpacing = wordSpacing;
+    _error_wordSpacing = wordSpacing;
 
     return this;
   }
@@ -4106,7 +4105,7 @@ class NikuTextField {
   /// TextStyle(height: input)
   /// ```
   NikuTextField errorHeight(double height) {
-    this._error_height = height;
+    _error_height = height;
 
     return this;
   }
@@ -4118,7 +4117,7 @@ class NikuTextField {
   /// TextStyle(foreground: input)
   /// ```
   NikuTextField errorForeground(Paint foreground) {
-    this._error_foreground = foreground;
+    _error_foreground = foreground;
 
     return this;
   }
@@ -4130,7 +4129,7 @@ class NikuTextField {
   /// TextStyle(background: input)
   /// ```
   NikuTextField errorBackground(Paint foreground) {
-    this._error_foreground = foreground;
+    _error_foreground = foreground;
 
     return this;
   }
@@ -4142,7 +4141,7 @@ class NikuTextField {
   /// TextStyle(shadows: input)
   /// ```
   NikuTextField errorShadows(List<Shadow> shadows) {
-    this._error_shadows = shadows;
+    _error_shadows = shadows;
 
     return this;
   }
@@ -4154,7 +4153,7 @@ class NikuTextField {
   /// TextStyle(fontFeatures: input)
   /// ```
   NikuTextField errorFontFeatures(List<FontFeature> fontFeatures) {
-    this._error_fontFeatures = fontFeatures;
+    _error_fontFeatures = fontFeatures;
 
     return this;
   }
@@ -4166,7 +4165,7 @@ class NikuTextField {
   /// TextStyle(decoration: input)
   /// ```
   NikuTextField errorTextDecoration(TextDecoration textDecoration) {
-    this._error_textDecoration = textDecoration;
+    _error_textDecoration = textDecoration;
 
     return this;
   }
@@ -4178,7 +4177,7 @@ class NikuTextField {
   /// TextStyle(decorationColor: input)
   /// ```
   NikuTextField errorTextDecorationColor(Color textDecorationColor) {
-    this._error_textDecorationColor = textDecorationColor;
+    _error_textDecorationColor = textDecorationColor;
 
     return this;
   }
@@ -4190,7 +4189,7 @@ class NikuTextField {
   /// TextStyle(decorationThickness: input)
   /// ```
   NikuTextField errorTextDecorationThickness(double textDecorationThickness) {
-    this._error_textDecorationThickness = textDecorationThickness;
+    _error_textDecorationThickness = textDecorationThickness;
 
     return this;
   }
@@ -4202,7 +4201,7 @@ class NikuTextField {
   /// TextStyle(fontFamily: input)
   /// ```
   NikuTextField errorFontFamily(String fontFamily) {
-    this._error_fontFamily = fontFamily;
+    _error_fontFamily = fontFamily;
 
     return this;
   }
@@ -4214,7 +4213,7 @@ class NikuTextField {
   /// TextStyle(fontFamilyFallback: input)
   /// ```
   NikuTextField errorFontFamilyFallback(List<String> fontFamily) {
-    this._error_fontFamilyFallback = fontFamily;
+    _error_fontFamilyFallback = fontFamily;
 
     return this;
   }
@@ -4226,7 +4225,7 @@ class NikuTextField {
   /// TextStyle(textBaseline: input)
   /// ```
   NikuTextField errorTextBaseline(TextBaseline textBaseline) {
-    this._error_textBaseline = textBaseline;
+    _error_textBaseline = textBaseline;
 
     return this;
   }
@@ -4238,7 +4237,7 @@ class NikuTextField {
   /// TextStyle(textBaseline: Textbaseline.alphabetic)
   /// ```
   NikuTextField errorAlphabetic() {
-    this._error_textBaseline = TextBaseline.alphabetic;
+    _error_textBaseline = TextBaseline.alphabetic;
 
     return this;
   }
@@ -4250,7 +4249,7 @@ class NikuTextField {
   /// TextStyle(textBaseline: Textbaseline.ideographic)
   /// ```
   NikuTextField errorIdeographic() {
-    this._error_textBaseline = TextBaseline.ideographic;
+    _error_textBaseline = TextBaseline.ideographic;
 
     return this;
   }
@@ -4266,7 +4265,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField floatingLabelBehavior(FloatingLabelBehavior behavior) {
-    this._input_floatingLabelBehavior = behavior;
+    _input_floatingLabelBehavior = behavior;
 
     return this;
   }
@@ -4282,7 +4281,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField isCollapsed(bool isCollapsed) {
-    this._input_isCollapsed = isCollapsed;
+    _input_isCollapsed = isCollapsed;
 
     return this;
   }
@@ -4298,7 +4297,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField isDense(bool isDense) {
-    this._input_isDense = isDense;
+    _input_isDense = isDense;
 
     return this;
   }
@@ -4314,7 +4313,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField contentPadding(EdgeInsetsGeometry padding) {
-    this._input_contentPadding = padding;
+    _input_contentPadding = padding;
 
     return this;
   }
@@ -4330,7 +4329,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField prefixIcon(Widget icon) {
-    this._input_prefixIcon = icon;
+    _input_prefixIcon = icon;
 
     return this;
   }
@@ -4346,7 +4345,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField prefixIconConstraints(BoxConstraints constraints) {
-    this._input_prefixIconConstraints = constraints;
+    _input_prefixIconConstraints = constraints;
 
     return this;
   }
@@ -4362,7 +4361,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField prefix(Widget widget) {
-    this._input_prefix = widget;
+    _input_prefix = widget;
 
     return this;
   }
@@ -4378,7 +4377,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField prefixText(String prefixText) {
-    this._input_prefixText = prefixText;
+    _input_prefixText = prefixText;
 
     return this;
   }
@@ -4395,24 +4394,24 @@ class NikuTextField {
   /// ```
   NikuTextField prefixStyle(TextStyle textStyle) {
     // Input Label Style
-    this._prefix_color = textStyle.color;
-    this._prefix_backgroundColor = textStyle.backgroundColor;
-    this._prefix_fontSize = textStyle.fontSize;
-    this._prefix_fontWeight = textStyle.fontWeight;
-    this._prefix_fontStyle = textStyle.fontStyle;
-    this._prefix_letterSpacing = textStyle.letterSpacing;
-    this._prefix_wordSpacing = textStyle.wordSpacing;
-    this._prefix_height = textStyle.height;
-    this._prefix_foreground = textStyle.foreground;
-    this._prefix_background = textStyle.background;
-    this._prefix_shadows = textStyle.shadows;
-    this._prefix_fontFeatures = textStyle.fontFeatures;
-    this._prefix_textDecoration = textStyle.decoration;
-    this._prefix_textDecorationColor = textStyle.decorationColor;
-    this._prefix_textDecorationThickness = textStyle.decorationThickness;
-    this._prefix_fontFamily = textStyle.fontFamily;
-    this._prefix_fontFamilyFallback = textStyle.fontFamilyFallback;
-    this._prefix_textBaseline = textStyle.textBaseline;
+    _prefix_color = textStyle.color;
+    _prefix_backgroundColor = textStyle.backgroundColor;
+    _prefix_fontSize = textStyle.fontSize;
+    _prefix_fontWeight = textStyle.fontWeight;
+    _prefix_fontStyle = textStyle.fontStyle;
+    _prefix_letterSpacing = textStyle.letterSpacing;
+    _prefix_wordSpacing = textStyle.wordSpacing;
+    _prefix_height = textStyle.height;
+    _prefix_foreground = textStyle.foreground;
+    _prefix_background = textStyle.background;
+    _prefix_shadows = textStyle.shadows;
+    _prefix_fontFeatures = textStyle.fontFeatures;
+    _prefix_textDecoration = textStyle.decoration;
+    _prefix_textDecorationColor = textStyle.decorationColor;
+    _prefix_textDecorationThickness = textStyle.decorationThickness;
+    _prefix_fontFamily = textStyle.fontFamily;
+    _prefix_fontFamilyFallback = textStyle.fontFamilyFallback;
+    _prefix_textBaseline = textStyle.textBaseline;
 
     return this;
   }
@@ -4424,7 +4423,7 @@ class NikuTextField {
   /// TextStyle(color: input)
   /// ```
   NikuTextField prefixColor(Color color) {
-    this._prefix_color = color;
+    _prefix_color = color;
 
     return this;
   }
@@ -4436,7 +4435,7 @@ class NikuTextField {
   /// TextStyle(backgroundColor: input)
   /// ```
   NikuTextField prefixBackgroundColor(Color backgroundColor) {
-    this._prefix_backgroundColor = backgroundColor;
+    _prefix_backgroundColor = backgroundColor;
 
     return this;
   }
@@ -4448,7 +4447,7 @@ class NikuTextField {
   /// TextStyle(backgroundColor: input)
   /// ```
   NikuTextField prefixBg(Color backgroundColor) {
-    this._prefix_backgroundColor = backgroundColor;
+    _prefix_backgroundColor = backgroundColor;
 
     return this;
   }
@@ -4460,7 +4459,7 @@ class NikuTextField {
   /// TextStyle(fontSize: input)
   /// ```
   NikuTextField prefixFontSize(double fontSize) {
-    this._prefix_fontSize = fontSize;
+    _prefix_fontSize = fontSize;
 
     return this;
   }
@@ -4472,7 +4471,7 @@ class NikuTextField {
   /// TextStyle(fontSize: input)
   /// ```
   NikuTextField prefixFontWeight(FontWeight fontWeight) {
-    this._prefix_fontWeight = fontWeight;
+    _prefix_fontWeight = fontWeight;
 
     return this;
   }
@@ -4486,7 +4485,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.bold)
   /// ```
   NikuTextField prefixBold() {
-    this._prefix_fontWeight = FontWeight.bold;
+    _prefix_fontWeight = FontWeight.bold;
 
     return this;
   }
@@ -4500,7 +4499,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.100)
   /// ```
   NikuTextField prefixW100() {
-    this._prefix_fontWeight = FontWeight.w100;
+    _prefix_fontWeight = FontWeight.w100;
 
     return this;
   }
@@ -4514,7 +4513,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.200)
   /// ```
   NikuTextField prefixW200() {
-    this._prefix_fontWeight = FontWeight.w200;
+    _prefix_fontWeight = FontWeight.w200;
 
     return this;
   }
@@ -4528,7 +4527,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.300)
   /// ```
   NikuTextField prefixW300() {
-    this._prefix_fontWeight = FontWeight.w300;
+    _prefix_fontWeight = FontWeight.w300;
 
     return this;
   }
@@ -4542,7 +4541,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.400)
   /// ```
   NikuTextField prefixW400() {
-    this._prefix_fontWeight = FontWeight.w400;
+    _prefix_fontWeight = FontWeight.w400;
 
     return this;
   }
@@ -4556,7 +4555,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.500)
   /// ```
   NikuTextField prefixW500() {
-    this._prefix_fontWeight = FontWeight.w500;
+    _prefix_fontWeight = FontWeight.w500;
 
     return this;
   }
@@ -4570,7 +4569,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.600)
   /// ```
   NikuTextField prefixW600() {
-    this._prefix_fontWeight = FontWeight.w600;
+    _prefix_fontWeight = FontWeight.w600;
 
     return this;
   }
@@ -4584,7 +4583,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.700)
   /// ```
   NikuTextField prefixW700() {
-    this._prefix_fontWeight = FontWeight.w700;
+    _prefix_fontWeight = FontWeight.w700;
 
     return this;
   }
@@ -4598,7 +4597,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.800)
   /// ```
   NikuTextField prefixW800() {
-    this._prefix_fontWeight = FontWeight.w800;
+    _prefix_fontWeight = FontWeight.w800;
 
     return this;
   }
@@ -4612,7 +4611,7 @@ class NikuTextField {
   /// TextStyle(fontWeight: FontWeight.900)
   /// ```
   NikuTextField prefixW900() {
-    this._prefix_fontWeight = FontWeight.w900;
+    _prefix_fontWeight = FontWeight.w900;
 
     return this;
   }
@@ -4624,7 +4623,7 @@ class NikuTextField {
   /// TextStyle(fontStyle: input)
   /// ```
   NikuTextField prefixFontStyle(FontStyle fontStyle) {
-    this._prefix_fontStyle = fontStyle;
+    _prefix_fontStyle = fontStyle;
 
     return this;
   }
@@ -4636,7 +4635,7 @@ class NikuTextField {
   /// TextStyle(fontStyle: FontStyle.italic)
   /// ```
   NikuTextField prefixItalic() {
-    this._prefix_fontStyle = FontStyle.italic;
+    _prefix_fontStyle = FontStyle.italic;
 
     return this;
   }
@@ -4648,7 +4647,7 @@ class NikuTextField {
   /// TextStyle(letterSpacing: input)
   /// ```
   NikuTextField prefixLetterSpacing(double letterSpacing) {
-    this._prefix_letterSpacing = letterSpacing;
+    _prefix_letterSpacing = letterSpacing;
 
     return this;
   }
@@ -4660,7 +4659,7 @@ class NikuTextField {
   /// Text(wordSpacing: input)
   /// ```
   NikuTextField prefixWordSpacing(double wordSpacing) {
-    this._prefix_wordSpacing = wordSpacing;
+    _prefix_wordSpacing = wordSpacing;
 
     return this;
   }
@@ -4672,7 +4671,7 @@ class NikuTextField {
   /// TextStyle(height: input)
   /// ```
   NikuTextField prefixHeight(double height) {
-    this._prefix_height = height;
+    _prefix_height = height;
 
     return this;
   }
@@ -4684,7 +4683,7 @@ class NikuTextField {
   /// TextStyle(foreground: input)
   /// ```
   NikuTextField prefixForeground(Paint foreground) {
-    this._prefix_foreground = foreground;
+    _prefix_foreground = foreground;
 
     return this;
   }
@@ -4696,7 +4695,7 @@ class NikuTextField {
   /// TextStyle(background: input)
   /// ```
   NikuTextField prefixBackground(Paint foreground) {
-    this._prefix_foreground = foreground;
+    _prefix_foreground = foreground;
 
     return this;
   }
@@ -4708,7 +4707,7 @@ class NikuTextField {
   /// TextStyle(shadows: input)
   /// ```
   NikuTextField prefixShadows(List<Shadow> shadows) {
-    this._prefix_shadows = shadows;
+    _prefix_shadows = shadows;
 
     return this;
   }
@@ -4720,7 +4719,7 @@ class NikuTextField {
   /// TextStyle(fontFeatures: input)
   /// ```
   NikuTextField prefixFontFeatures(List<FontFeature> fontFeatures) {
-    this._prefix_fontFeatures = fontFeatures;
+    _prefix_fontFeatures = fontFeatures;
 
     return this;
   }
@@ -4732,7 +4731,7 @@ class NikuTextField {
   /// TextStyle(decoration: input)
   /// ```
   NikuTextField prefixTextDecoration(TextDecoration textDecoration) {
-    this._prefix_textDecoration = textDecoration;
+    _prefix_textDecoration = textDecoration;
 
     return this;
   }
@@ -4744,7 +4743,7 @@ class NikuTextField {
   /// TextStyle(decorationColor: input)
   /// ```
   NikuTextField prefixTextDecorationColor(Color textDecorationColor) {
-    this._prefix_textDecorationColor = textDecorationColor;
+    _prefix_textDecorationColor = textDecorationColor;
 
     return this;
   }
@@ -4756,7 +4755,7 @@ class NikuTextField {
   /// TextStyle(decorationThickness: input)
   /// ```
   NikuTextField prefixTextDecorationThickness(double textDecorationThickness) {
-    this._prefix_textDecorationThickness = textDecorationThickness;
+    _prefix_textDecorationThickness = textDecorationThickness;
 
     return this;
   }
@@ -4768,7 +4767,7 @@ class NikuTextField {
   /// TextStyle(fontFamily: input)
   /// ```
   NikuTextField prefixFontFamily(String fontFamily) {
-    this._prefix_fontFamily = fontFamily;
+    _prefix_fontFamily = fontFamily;
 
     return this;
   }
@@ -4780,7 +4779,7 @@ class NikuTextField {
   /// TextStyle(fontFamilyFallback: input)
   /// ```
   NikuTextField prefixFontFamilyFallback(List<String> fontFamily) {
-    this._prefix_fontFamilyFallback = fontFamily;
+    _prefix_fontFamilyFallback = fontFamily;
 
     return this;
   }
@@ -4792,7 +4791,7 @@ class NikuTextField {
   /// TextStyle(textBaseline: input)
   /// ```
   NikuTextField prefixTextBaseline(TextBaseline textBaseline) {
-    this._prefix_textBaseline = textBaseline;
+    _prefix_textBaseline = textBaseline;
 
     return this;
   }
@@ -4804,7 +4803,7 @@ class NikuTextField {
   /// TextStyle(textBaseline: Textbaseline.alphabetic)
   /// ```
   NikuTextField prefixAlphabetic() {
-    this._prefix_textBaseline = TextBaseline.alphabetic;
+    _prefix_textBaseline = TextBaseline.alphabetic;
 
     return this;
   }
@@ -4816,7 +4815,7 @@ class NikuTextField {
   /// TextStyle(textBaseline: Textbaseline.ideographic)
   /// ```
   NikuTextField prefixIdeographic() {
-    this._prefix_textBaseline = TextBaseline.ideographic;
+    _prefix_textBaseline = TextBaseline.ideographic;
 
     return this;
   }
@@ -4832,7 +4831,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField suffixIcon(Widget widget) {
-    this._input_suffixIcon = widget;
+    _input_suffixIcon = widget;
 
     return this;
   }
@@ -4848,7 +4847,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField suffixIconConstraints(BoxConstraints constraints) {
-    this._input_suffixIconConstraints = constraints;
+    _input_suffixIconConstraints = constraints;
 
     return this;
   }
@@ -4864,7 +4863,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField suffix(Widget widget) {
-    this._input_suffix = widget;
+    _input_suffix = widget;
 
     return this;
   }
@@ -4880,7 +4879,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField suffixText(String prefixText) {
-    this._input_suffixText = prefixText;
+    _input_suffixText = prefixText;
 
     return this;
   }
@@ -4897,24 +4896,24 @@ class NikuTextField {
   /// ```
   NikuTextField suffixStyle(TextStyle textStyle) {
     // Input Label Style
-    this._suffix_color = textStyle.color;
-    this._suffix_backgroundColor = textStyle.backgroundColor;
-    this._suffix_fontSize = textStyle.fontSize;
-    this._suffix_fontWeight = textStyle.fontWeight;
-    this._suffix_fontStyle = textStyle.fontStyle;
-    this._suffix_letterSpacing = textStyle.letterSpacing;
-    this._suffix_wordSpacing = textStyle.wordSpacing;
-    this._suffix_height = textStyle.height;
-    this._suffix_foreground = textStyle.foreground;
-    this._suffix_background = textStyle.background;
-    this._suffix_shadows = textStyle.shadows;
-    this._suffix_fontFeatures = textStyle.fontFeatures;
-    this._suffix_textDecoration = textStyle.decoration;
-    this._suffix_textDecorationColor = textStyle.decorationColor;
-    this._suffix_textDecorationThickness = textStyle.decorationThickness;
-    this._suffix_fontFamily = textStyle.fontFamily;
-    this._suffix_fontFamilyFallback = textStyle.fontFamilyFallback;
-    this._suffix_textBaseline = textStyle.textBaseline;
+    _suffix_color = textStyle.color;
+    _suffix_backgroundColor = textStyle.backgroundColor;
+    _suffix_fontSize = textStyle.fontSize;
+    _suffix_fontWeight = textStyle.fontWeight;
+    _suffix_fontStyle = textStyle.fontStyle;
+    _suffix_letterSpacing = textStyle.letterSpacing;
+    _suffix_wordSpacing = textStyle.wordSpacing;
+    _suffix_height = textStyle.height;
+    _suffix_foreground = textStyle.foreground;
+    _suffix_background = textStyle.background;
+    _suffix_shadows = textStyle.shadows;
+    _suffix_fontFeatures = textStyle.fontFeatures;
+    _suffix_textDecoration = textStyle.decoration;
+    _suffix_textDecorationColor = textStyle.decorationColor;
+    _suffix_textDecorationThickness = textStyle.decorationThickness;
+    _suffix_fontFamily = textStyle.fontFamily;
+    _suffix_fontFamilyFallback = textStyle.fontFamilyFallback;
+    _suffix_textBaseline = textStyle.textBaseline;
 
     return this;
   }
@@ -4926,7 +4925,7 @@ class NikuTextField {
   /// TextStyle(color: input)
   /// ```
   NikuTextField suffixColor(Color color) {
-    this._suffix_color = color;
+    _suffix_color = color;
 
     return this;
   }
@@ -4938,7 +4937,7 @@ class NikuTextField {
   /// TextStyle(backgroundColor: input)
   /// ```
   NikuTextField suffixBackgroundColor(Color backgroundColor) {
-    this._suffix_backgroundColor = backgroundColor;
+    _suffix_backgroundColor = backgroundColor;
 
     return this;
   }
@@ -4950,7 +4949,7 @@ class NikuTextField {
   /// TextStyle(backgroundColor: input)
   /// ```
   NikuTextField suffixBg(Color backgroundColor) {
-    this._suffix_backgroundColor = backgroundColor;
+    _suffix_backgroundColor = backgroundColor;
 
     return this;
   }
@@ -4962,7 +4961,7 @@ class NikuTextField {
   /// TextStyle(fontSize: input)
   /// ```
   NikuTextField suffixFontSize(double fontSize) {
-    this._suffix_fontSize = fontSize;
+    _suffix_fontSize = fontSize;
 
     return this;
   }
@@ -4974,7 +4973,7 @@ class NikuTextField {
   /// TextStyle(fontSize: input)
   /// ```
   NikuTextField suffixFontWeight(FontWeight fontWeight) {
-    this._suffix_fontWeight = fontWeight;
+    _suffix_fontWeight = fontWeight;
 
     return this;
   }
@@ -4988,7 +4987,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.bold)
   /// ```
   NikuTextField suffixBold() {
-    this._suffix_fontWeight = FontWeight.bold;
+    _suffix_fontWeight = FontWeight.bold;
 
     return this;
   }
@@ -5002,7 +5001,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.100)
   /// ```
   NikuTextField suffixW100() {
-    this._suffix_fontWeight = FontWeight.w100;
+    _suffix_fontWeight = FontWeight.w100;
 
     return this;
   }
@@ -5016,7 +5015,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.200)
   /// ```
   NikuTextField suffixW200() {
-    this._suffix_fontWeight = FontWeight.w200;
+    _suffix_fontWeight = FontWeight.w200;
 
     return this;
   }
@@ -5030,7 +5029,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.300)
   /// ```
   NikuTextField suffixW300() {
-    this._suffix_fontWeight = FontWeight.w300;
+    _suffix_fontWeight = FontWeight.w300;
 
     return this;
   }
@@ -5044,7 +5043,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.400)
   /// ```
   NikuTextField suffixW400() {
-    this._suffix_fontWeight = FontWeight.w400;
+    _suffix_fontWeight = FontWeight.w400;
 
     return this;
   }
@@ -5058,7 +5057,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.500)
   /// ```
   NikuTextField suffixW500() {
-    this._suffix_fontWeight = FontWeight.w500;
+    _suffix_fontWeight = FontWeight.w500;
 
     return this;
   }
@@ -5072,7 +5071,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.600)
   /// ```
   NikuTextField suffixW600() {
-    this._suffix_fontWeight = FontWeight.w600;
+    _suffix_fontWeight = FontWeight.w600;
 
     return this;
   }
@@ -5086,7 +5085,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.700)
   /// ```
   NikuTextField suffixW700() {
-    this._suffix_fontWeight = FontWeight.w700;
+    _suffix_fontWeight = FontWeight.w700;
 
     return this;
   }
@@ -5100,7 +5099,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.800)
   /// ```
   NikuTextField suffixW800() {
-    this._suffix_fontWeight = FontWeight.w800;
+    _suffix_fontWeight = FontWeight.w800;
 
     return this;
   }
@@ -5114,7 +5113,7 @@ class NikuTextField {
   /// TextStyle(fontWeight: FontWeight.900)
   /// ```
   NikuTextField suffixW900() {
-    this._suffix_fontWeight = FontWeight.w900;
+    _suffix_fontWeight = FontWeight.w900;
 
     return this;
   }
@@ -5126,7 +5125,7 @@ class NikuTextField {
   /// TextStyle(fontStyle: input)
   /// ```
   NikuTextField suffixFontStyle(FontStyle fontStyle) {
-    this._suffix_fontStyle = fontStyle;
+    _suffix_fontStyle = fontStyle;
 
     return this;
   }
@@ -5138,7 +5137,7 @@ class NikuTextField {
   /// TextStyle(fontStyle: FontStyle.italic)
   /// ```
   NikuTextField suffixItalic() {
-    this._suffix_fontStyle = FontStyle.italic;
+    _suffix_fontStyle = FontStyle.italic;
 
     return this;
   }
@@ -5150,7 +5149,7 @@ class NikuTextField {
   /// TextStyle(letterSpacing: input)
   /// ```
   NikuTextField suffixLetterSpacing(double letterSpacing) {
-    this._suffix_letterSpacing = letterSpacing;
+    _suffix_letterSpacing = letterSpacing;
 
     return this;
   }
@@ -5162,7 +5161,7 @@ class NikuTextField {
   /// Text(wordSpacing: input)
   /// ```
   NikuTextField suffixWordSpacing(double wordSpacing) {
-    this._suffix_wordSpacing = wordSpacing;
+    _suffix_wordSpacing = wordSpacing;
 
     return this;
   }
@@ -5174,7 +5173,7 @@ class NikuTextField {
   /// TextStyle(height: input)
   /// ```
   NikuTextField suffixHeight(double height) {
-    this._suffix_height = height;
+    _suffix_height = height;
 
     return this;
   }
@@ -5186,7 +5185,7 @@ class NikuTextField {
   /// TextStyle(foreground: input)
   /// ```
   NikuTextField suffixForeground(Paint foreground) {
-    this._suffix_foreground = foreground;
+    _suffix_foreground = foreground;
 
     return this;
   }
@@ -5198,7 +5197,7 @@ class NikuTextField {
   /// TextStyle(background: input)
   /// ```
   NikuTextField suffixBackground(Paint foreground) {
-    this._suffix_foreground = foreground;
+    _suffix_foreground = foreground;
 
     return this;
   }
@@ -5210,7 +5209,7 @@ class NikuTextField {
   /// TextStyle(shadows: input)
   /// ```
   NikuTextField suffixShadows(List<Shadow> shadows) {
-    this._suffix_shadows = shadows;
+    _suffix_shadows = shadows;
 
     return this;
   }
@@ -5222,7 +5221,7 @@ class NikuTextField {
   /// TextStyle(fontFeatures: input)
   /// ```
   NikuTextField suffixFontFeatures(List<FontFeature> fontFeatures) {
-    this._suffix_fontFeatures = fontFeatures;
+    _suffix_fontFeatures = fontFeatures;
 
     return this;
   }
@@ -5234,7 +5233,7 @@ class NikuTextField {
   /// TextStyle(decoration: input)
   /// ```
   NikuTextField suffixTextDecoration(TextDecoration textDecoration) {
-    this._suffix_textDecoration = textDecoration;
+    _suffix_textDecoration = textDecoration;
 
     return this;
   }
@@ -5246,7 +5245,7 @@ class NikuTextField {
   /// TextStyle(decorationColor: input)
   /// ```
   NikuTextField suffixTextDecorationColor(Color textDecorationColor) {
-    this._suffix_textDecorationColor = textDecorationColor;
+    _suffix_textDecorationColor = textDecorationColor;
 
     return this;
   }
@@ -5258,7 +5257,7 @@ class NikuTextField {
   /// TextStyle(decorationThickness: input)
   /// ```
   NikuTextField suffixTextDecorationThickness(double textDecorationThickness) {
-    this._suffix_textDecorationThickness = textDecorationThickness;
+    _suffix_textDecorationThickness = textDecorationThickness;
 
     return this;
   }
@@ -5270,7 +5269,7 @@ class NikuTextField {
   /// TextStyle(fontFamily: input)
   /// ```
   NikuTextField suffixFontFamily(String fontFamily) {
-    this._suffix_fontFamily = fontFamily;
+    _suffix_fontFamily = fontFamily;
 
     return this;
   }
@@ -5282,7 +5281,7 @@ class NikuTextField {
   /// TextStyle(fontFamilyFallback: input)
   /// ```
   NikuTextField suffixFontFamilyFallback(List<String> fontFamily) {
-    this._suffix_fontFamilyFallback = fontFamily;
+    _suffix_fontFamilyFallback = fontFamily;
 
     return this;
   }
@@ -5294,7 +5293,7 @@ class NikuTextField {
   /// TextStyle(textBaseline: input)
   /// ```
   NikuTextField suffixTextBaseline(TextBaseline textBaseline) {
-    this._suffix_textBaseline = textBaseline;
+    _suffix_textBaseline = textBaseline;
 
     return this;
   }
@@ -5306,7 +5305,7 @@ class NikuTextField {
   /// TextStyle(textBaseline: Textbaseline.alphabetic)
   /// ```
   NikuTextField suffixAlphabetic() {
-    this._suffix_textBaseline = TextBaseline.alphabetic;
+    _suffix_textBaseline = TextBaseline.alphabetic;
 
     return this;
   }
@@ -5318,7 +5317,7 @@ class NikuTextField {
   /// TextStyle(textBaseline: Textbaseline.ideographic)
   /// ```
   NikuTextField suffixIdeographic() {
-    this._suffix_textBaseline = TextBaseline.ideographic;
+    _suffix_textBaseline = TextBaseline.ideographic;
 
     return this;
   }
@@ -5334,7 +5333,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField counter(Widget counter) {
-    this._input_counter = counter;
+    _input_counter = counter;
 
     return this;
   }
@@ -5350,7 +5349,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField counterText(String counterText) {
-    this._input_counterText = counterText;
+    _input_counterText = counterText;
 
     return this;
   }
@@ -5367,24 +5366,24 @@ class NikuTextField {
   /// ```
   NikuTextField counterStyle(TextStyle textStyle) {
     // Input Label Style
-    this._counter_color = textStyle.color;
-    this._counter_backgroundColor = textStyle.backgroundColor;
-    this._counter_fontSize = textStyle.fontSize;
-    this._counter_fontWeight = textStyle.fontWeight;
-    this._counter_fontStyle = textStyle.fontStyle;
-    this._counter_letterSpacing = textStyle.letterSpacing;
-    this._counter_wordSpacing = textStyle.wordSpacing;
-    this._counter_height = textStyle.height;
-    this._counter_foreground = textStyle.foreground;
-    this._counter_background = textStyle.background;
-    this._counter_shadows = textStyle.shadows;
-    this._counter_fontFeatures = textStyle.fontFeatures;
-    this._counter_textDecoration = textStyle.decoration;
-    this._counter_textDecorationColor = textStyle.decorationColor;
-    this._counter_textDecorationThickness = textStyle.decorationThickness;
-    this._counter_fontFamily = textStyle.fontFamily;
-    this._counter_fontFamilyFallback = textStyle.fontFamilyFallback;
-    this._counter_textBaseline = textStyle.textBaseline;
+    _counter_color = textStyle.color;
+    _counter_backgroundColor = textStyle.backgroundColor;
+    _counter_fontSize = textStyle.fontSize;
+    _counter_fontWeight = textStyle.fontWeight;
+    _counter_fontStyle = textStyle.fontStyle;
+    _counter_letterSpacing = textStyle.letterSpacing;
+    _counter_wordSpacing = textStyle.wordSpacing;
+    _counter_height = textStyle.height;
+    _counter_foreground = textStyle.foreground;
+    _counter_background = textStyle.background;
+    _counter_shadows = textStyle.shadows;
+    _counter_fontFeatures = textStyle.fontFeatures;
+    _counter_textDecoration = textStyle.decoration;
+    _counter_textDecorationColor = textStyle.decorationColor;
+    _counter_textDecorationThickness = textStyle.decorationThickness;
+    _counter_fontFamily = textStyle.fontFamily;
+    _counter_fontFamilyFallback = textStyle.fontFamilyFallback;
+    _counter_textBaseline = textStyle.textBaseline;
 
     return this;
   }
@@ -5396,7 +5395,7 @@ class NikuTextField {
   /// TextStyle(color: input)
   /// ```
   NikuTextField counterColor(Color color) {
-    this._counter_color = color;
+    _counter_color = color;
 
     return this;
   }
@@ -5408,7 +5407,7 @@ class NikuTextField {
   /// TextStyle(backgroundColor: input)
   /// ```
   NikuTextField counterBackgroundColor(Color backgroundColor) {
-    this._counter_backgroundColor = backgroundColor;
+    _counter_backgroundColor = backgroundColor;
 
     return this;
   }
@@ -5420,7 +5419,7 @@ class NikuTextField {
   /// TextStyle(backgroundColor: input)
   /// ```
   NikuTextField counterBg(Color backgroundColor) {
-    this._counter_backgroundColor = backgroundColor;
+    _counter_backgroundColor = backgroundColor;
 
     return this;
   }
@@ -5432,7 +5431,7 @@ class NikuTextField {
   /// TextStyle(fontSize: input)
   /// ```
   NikuTextField counterFontSize(double fontSize) {
-    this._counter_fontSize = fontSize;
+    _counter_fontSize = fontSize;
 
     return this;
   }
@@ -5444,7 +5443,7 @@ class NikuTextField {
   /// TextStyle(fontSize: input)
   /// ```
   NikuTextField counterFontWeight(FontWeight fontWeight) {
-    this._counter_fontWeight = fontWeight;
+    _counter_fontWeight = fontWeight;
 
     return this;
   }
@@ -5458,7 +5457,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.bold)
   /// ```
   NikuTextField counterBold() {
-    this._counter_fontWeight = FontWeight.bold;
+    _counter_fontWeight = FontWeight.bold;
 
     return this;
   }
@@ -5472,7 +5471,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.100)
   /// ```
   NikuTextField counterW100() {
-    this._counter_fontWeight = FontWeight.w100;
+    _counter_fontWeight = FontWeight.w100;
 
     return this;
   }
@@ -5486,7 +5485,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.200)
   /// ```
   NikuTextField counterW200() {
-    this._counter_fontWeight = FontWeight.w200;
+    _counter_fontWeight = FontWeight.w200;
 
     return this;
   }
@@ -5500,7 +5499,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.300)
   /// ```
   NikuTextField counterW300() {
-    this._counter_fontWeight = FontWeight.w300;
+    _counter_fontWeight = FontWeight.w300;
 
     return this;
   }
@@ -5514,7 +5513,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.400)
   /// ```
   NikuTextField counterW400() {
-    this._counter_fontWeight = FontWeight.w400;
+    _counter_fontWeight = FontWeight.w400;
 
     return this;
   }
@@ -5528,7 +5527,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.500)
   /// ```
   NikuTextField counterW500() {
-    this._counter_fontWeight = FontWeight.w500;
+    _counter_fontWeight = FontWeight.w500;
 
     return this;
   }
@@ -5542,7 +5541,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.600)
   /// ```
   NikuTextField counterW600() {
-    this._counter_fontWeight = FontWeight.w600;
+    _counter_fontWeight = FontWeight.w600;
 
     return this;
   }
@@ -5556,7 +5555,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.700)
   /// ```
   NikuTextField counterW700() {
-    this._counter_fontWeight = FontWeight.w700;
+    _counter_fontWeight = FontWeight.w700;
 
     return this;
   }
@@ -5570,7 +5569,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.800)
   /// ```
   NikuTextField counterW800() {
-    this._counter_fontWeight = FontWeight.w800;
+    _counter_fontWeight = FontWeight.w800;
 
     return this;
   }
@@ -5584,7 +5583,7 @@ class NikuTextField {
   /// TextStyle(fontWeight: FontWeight.900)
   /// ```
   NikuTextField counterW900() {
-    this._counter_fontWeight = FontWeight.w900;
+    _counter_fontWeight = FontWeight.w900;
 
     return this;
   }
@@ -5596,7 +5595,7 @@ class NikuTextField {
   /// TextStyle(fontStyle: input)
   /// ```
   NikuTextField counterFontStyle(FontStyle fontStyle) {
-    this._counter_fontStyle = fontStyle;
+    _counter_fontStyle = fontStyle;
 
     return this;
   }
@@ -5608,7 +5607,7 @@ class NikuTextField {
   /// TextStyle(fontStyle: FontStyle.italic)
   /// ```
   NikuTextField counterItalic() {
-    this._counter_fontStyle = FontStyle.italic;
+    _counter_fontStyle = FontStyle.italic;
 
     return this;
   }
@@ -5620,7 +5619,7 @@ class NikuTextField {
   /// TextStyle(letterSpacing: input)
   /// ```
   NikuTextField counterLetterSpacing(double letterSpacing) {
-    this._counter_letterSpacing = letterSpacing;
+    _counter_letterSpacing = letterSpacing;
 
     return this;
   }
@@ -5632,7 +5631,7 @@ class NikuTextField {
   /// Text(wordSpacing: input)
   /// ```
   NikuTextField counterWordSpacing(double wordSpacing) {
-    this._counter_wordSpacing = wordSpacing;
+    _counter_wordSpacing = wordSpacing;
 
     return this;
   }
@@ -5644,7 +5643,7 @@ class NikuTextField {
   /// TextStyle(height: input)
   /// ```
   NikuTextField counterHeight(double height) {
-    this._counter_height = height;
+    _counter_height = height;
 
     return this;
   }
@@ -5656,7 +5655,7 @@ class NikuTextField {
   /// TextStyle(foreground: input)
   /// ```
   NikuTextField counterForeground(Paint foreground) {
-    this._counter_foreground = foreground;
+    _counter_foreground = foreground;
 
     return this;
   }
@@ -5668,7 +5667,7 @@ class NikuTextField {
   /// TextStyle(background: input)
   /// ```
   NikuTextField counterBackground(Paint foreground) {
-    this._counter_foreground = foreground;
+    _counter_foreground = foreground;
 
     return this;
   }
@@ -5680,7 +5679,7 @@ class NikuTextField {
   /// TextStyle(shadows: input)
   /// ```
   NikuTextField counterShadows(List<Shadow> shadows) {
-    this._counter_shadows = shadows;
+    _counter_shadows = shadows;
 
     return this;
   }
@@ -5692,7 +5691,7 @@ class NikuTextField {
   /// TextStyle(fontFeatures: input)
   /// ```
   NikuTextField counterFontFeatures(List<FontFeature> fontFeatures) {
-    this._counter_fontFeatures = fontFeatures;
+    _counter_fontFeatures = fontFeatures;
 
     return this;
   }
@@ -5704,7 +5703,7 @@ class NikuTextField {
   /// TextStyle(decoration: input)
   /// ```
   NikuTextField counterTextDecoration(TextDecoration textDecoration) {
-    this._counter_textDecoration = textDecoration;
+    _counter_textDecoration = textDecoration;
 
     return this;
   }
@@ -5716,7 +5715,7 @@ class NikuTextField {
   /// TextStyle(decorationColor: input)
   /// ```
   NikuTextField counterTextDecorationColor(Color textDecorationColor) {
-    this._counter_textDecorationColor = textDecorationColor;
+    _counter_textDecorationColor = textDecorationColor;
 
     return this;
   }
@@ -5728,7 +5727,7 @@ class NikuTextField {
   /// TextStyle(decorationThickness: input)
   /// ```
   NikuTextField counterTextDecorationThickness(double textDecorationThickness) {
-    this._counter_textDecorationThickness = textDecorationThickness;
+    _counter_textDecorationThickness = textDecorationThickness;
 
     return this;
   }
@@ -5740,7 +5739,7 @@ class NikuTextField {
   /// TextStyle(fontFamily: input)
   /// ```
   NikuTextField counterFontFamily(String fontFamily) {
-    this._counter_fontFamily = fontFamily;
+    _counter_fontFamily = fontFamily;
 
     return this;
   }
@@ -5752,7 +5751,7 @@ class NikuTextField {
   /// TextStyle(fontFamilyFallback: input)
   /// ```
   NikuTextField counterFontFamilyFallback(List<String> fontFamily) {
-    this._counter_fontFamilyFallback = fontFamily;
+    _counter_fontFamilyFallback = fontFamily;
 
     return this;
   }
@@ -5764,7 +5763,7 @@ class NikuTextField {
   /// TextStyle(textBaseline: input)
   /// ```
   NikuTextField counterTextBaseline(TextBaseline textBaseline) {
-    this._counter_textBaseline = textBaseline;
+    _counter_textBaseline = textBaseline;
 
     return this;
   }
@@ -5776,7 +5775,7 @@ class NikuTextField {
   /// TextStyle(textBaseline: Textbaseline.alphabetic)
   /// ```
   NikuTextField counterAlphabetic() {
-    this._counter_textBaseline = TextBaseline.alphabetic;
+    _counter_textBaseline = TextBaseline.alphabetic;
 
     return this;
   }
@@ -5788,7 +5787,7 @@ class NikuTextField {
   /// TextStyle(textBaseline: Textbaseline.ideographic)
   /// ```
   NikuTextField counterIdeographic() {
-    this._counter_textBaseline = TextBaseline.ideographic;
+    _counter_textBaseline = TextBaseline.ideographic;
 
     return this;
   }
@@ -5804,7 +5803,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField filled(bool filled) {
-    this._input_filled = filled;
+    _input_filled = filled;
 
     return this;
   }
@@ -5820,7 +5819,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField fillColor(Color color) {
-    this._input_fillColor = color;
+    _input_fillColor = color;
 
     return this;
   }
@@ -5836,7 +5835,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField hoverColor(Color color) {
-    this._input_hoverColor = color;
+    _input_hoverColor = color;
 
     return this;
   }
@@ -5852,7 +5851,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField focusColor(Color color) {
-    this._input_focusColor = color;
+    _input_focusColor = color;
 
     return this;
   }
@@ -5871,10 +5870,10 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField setFillColor({Color? fill, Color? hover, Color? focus}) {
-    this._input_filled = true;
-    this._input_fillColor = fill;
-    this._input_hoverColor = hover;
-    this._input_focusColor = focus;
+    _input_filled = true;
+    _input_fillColor = fill;
+    _input_hoverColor = hover;
+    _input_focusColor = focus;
 
     return this;
   }
@@ -5890,7 +5889,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField errorBorder(InputBorder border) {
-    this._input_errorBorder = border;
+    _input_errorBorder = border;
 
     return this;
   }
@@ -5906,7 +5905,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField focusedBorder(InputBorder border) {
-    this._input_focusedBorder = border;
+    _input_focusedBorder = border;
 
     return this;
   }
@@ -5922,7 +5921,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField disabledBorder(InputBorder border) {
-    this._input_disabledBorder = border;
+    _input_disabledBorder = border;
 
     return this;
   }
@@ -5938,7 +5937,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField enabledBorder(InputBorder border) {
-    this._input_enabledBorder = border;
+    _input_enabledBorder = border;
 
     return this;
   }
@@ -5954,7 +5953,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField border(InputBorder border) {
-    this._input_border = border;
+    _input_border = border;
 
     return this;
   }
@@ -5979,11 +5978,11 @@ class NikuTextField {
       InputBorder? disabled,
       InputBorder? focused,
       InputBorder? error}) {
-    this._input_border = border;
-    this._input_enabledBorder = border;
-    this._input_disabledBorder = border;
-    this._input_focusedBorder = border;
-    this._input_errorBorder = border;
+    _input_border = border;
+    _input_enabledBorder = border;
+    _input_disabledBorder = border;
+    _input_focusedBorder = border;
+    _input_errorBorder = border;
 
     return this;
   }
@@ -5999,7 +5998,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField inputDecorationEnable(bool enabled) {
-    this._input_decorationEnabled = enabled;
+    _input_decorationEnabled = enabled;
 
     return this;
   }
@@ -6015,7 +6014,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField semanticCounterText(String semantic) {
-    this._input_semanticCounterText = semantic;
+    _input_semanticCounterText = semantic;
 
     return this;
   }
@@ -6031,7 +6030,7 @@ class NikuTextField {
   /// )
   /// ```
   NikuTextField alignLabelWithHint(bool enable) {
-    this._input_alignLabelWithHint = enable;
+    _input_alignLabelWithHint = enable;
 
     return this;
   }
@@ -6043,7 +6042,7 @@ class NikuTextField {
   /// TextStyle(color: input)
   /// ```
   NikuTextField color(Color color) {
-    this._base_color = color;
+    _base_color = color;
 
     return this;
   }
@@ -6055,7 +6054,7 @@ class NikuTextField {
   /// TextStyle(backgroundColor: input)
   /// ```
   NikuTextField backgroundColor(Color backgroundColor) {
-    this._base_backgroundColor = backgroundColor;
+    _base_backgroundColor = backgroundColor;
 
     return this;
   }
@@ -6067,7 +6066,7 @@ class NikuTextField {
   /// TextStyle(backgroundColor: input)
   /// ```
   NikuTextField bg(Color backgroundColor) {
-    this._base_backgroundColor = backgroundColor;
+    _base_backgroundColor = backgroundColor;
 
     return this;
   }
@@ -6079,7 +6078,7 @@ class NikuTextField {
   /// TextStyle(fontSize: input)
   /// ```
   NikuTextField fontSize(double fontSize) {
-    this._base_fontSize = fontSize;
+    _base_fontSize = fontSize;
 
     return this;
   }
@@ -6091,7 +6090,7 @@ class NikuTextField {
   /// TextStyle(fontSize: input)
   /// ```
   NikuTextField fontWeight(FontWeight fontWeight) {
-    this._base_fontWeight = fontWeight;
+    _base_fontWeight = fontWeight;
 
     return this;
   }
@@ -6105,7 +6104,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.bold)
   /// ```
   NikuTextField bold() {
-    this._base_fontWeight = FontWeight.bold;
+    _base_fontWeight = FontWeight.bold;
 
     return this;
   }
@@ -6119,7 +6118,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.100)
   /// ```
   NikuTextField w100() {
-    this._base_fontWeight = FontWeight.w100;
+    _base_fontWeight = FontWeight.w100;
 
     return this;
   }
@@ -6133,7 +6132,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.200)
   /// ```
   NikuTextField w200() {
-    this._base_fontWeight = FontWeight.w200;
+    _base_fontWeight = FontWeight.w200;
 
     return this;
   }
@@ -6147,7 +6146,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.300)
   /// ```
   NikuTextField w300() {
-    this._base_fontWeight = FontWeight.w300;
+    _base_fontWeight = FontWeight.w300;
 
     return this;
   }
@@ -6161,7 +6160,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.400)
   /// ```
   NikuTextField w400() {
-    this._base_fontWeight = FontWeight.w400;
+    _base_fontWeight = FontWeight.w400;
 
     return this;
   }
@@ -6175,7 +6174,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.500)
   /// ```
   NikuTextField w500() {
-    this._base_fontWeight = FontWeight.w500;
+    _base_fontWeight = FontWeight.w500;
 
     return this;
   }
@@ -6189,7 +6188,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.600)
   /// ```
   NikuTextField w600() {
-    this._base_fontWeight = FontWeight.w600;
+    _base_fontWeight = FontWeight.w600;
 
     return this;
   }
@@ -6203,7 +6202,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.700)
   /// ```
   NikuTextField w700() {
-    this._base_fontWeight = FontWeight.w700;
+    _base_fontWeight = FontWeight.w700;
 
     return this;
   }
@@ -6217,7 +6216,7 @@ class NikuTextField {
   /// TextStyle(FontWeight: FontWeight.800)
   /// ```
   NikuTextField w800() {
-    this._base_fontWeight = FontWeight.w800;
+    _base_fontWeight = FontWeight.w800;
 
     return this;
   }
@@ -6231,7 +6230,7 @@ class NikuTextField {
   /// TextStyle(fontWeight: FontWeight.900)
   /// ```
   NikuTextField w900() {
-    this._base_fontWeight = FontWeight.w900;
+    _base_fontWeight = FontWeight.w900;
 
     return this;
   }
@@ -6243,7 +6242,7 @@ class NikuTextField {
   /// TextStyle(fontStyle: input)
   /// ```
   NikuTextField fontStyle(FontStyle fontStyle) {
-    this._base_fontStyle = fontStyle;
+    _base_fontStyle = fontStyle;
 
     return this;
   }
@@ -6255,7 +6254,7 @@ class NikuTextField {
   /// TextStyle(fontStyle: FontStyle.italic)
   /// ```
   NikuTextField italic() {
-    this._base_fontStyle = FontStyle.italic;
+    _base_fontStyle = FontStyle.italic;
 
     return this;
   }
@@ -6267,7 +6266,7 @@ class NikuTextField {
   /// TextStyle(letterSpacing: input)
   /// ```
   NikuTextField letterSpacing(double letterSpacing) {
-    this._base_letterSpacing = letterSpacing;
+    _base_letterSpacing = letterSpacing;
 
     return this;
   }
@@ -6279,7 +6278,7 @@ class NikuTextField {
   /// Text(wordSpacing: input)
   /// ```
   NikuTextField wordSpacing(double wordSpacing) {
-    this._base_wordSpacing = wordSpacing;
+    _base_wordSpacing = wordSpacing;
 
     return this;
   }
@@ -6291,7 +6290,7 @@ class NikuTextField {
   /// TextStyle(height: input)
   /// ```
   NikuTextField height(double height) {
-    this._base_height = height;
+    _base_height = height;
 
     return this;
   }
@@ -6303,7 +6302,7 @@ class NikuTextField {
   /// TextStyle(foreground: input)
   /// ```
   NikuTextField foreground(Paint foreground) {
-    this._base_foreground = foreground;
+    _base_foreground = foreground;
 
     return this;
   }
@@ -6315,7 +6314,7 @@ class NikuTextField {
   /// TextStyle(background: input)
   /// ```
   NikuTextField background(Paint foreground) {
-    this._base_foreground = foreground;
+    _base_foreground = foreground;
 
     return this;
   }
@@ -6327,7 +6326,7 @@ class NikuTextField {
   /// TextStyle(shadows: input)
   /// ```
   NikuTextField shadows(List<Shadow> shadows) {
-    this._base_shadows = shadows;
+    _base_shadows = shadows;
 
     return this;
   }
@@ -6339,7 +6338,7 @@ class NikuTextField {
   /// TextStyle(fontFeatures: input)
   /// ```
   NikuTextField fontFeatures(List<FontFeature> fontFeatures) {
-    this._base_fontFeatures = fontFeatures;
+    _base_fontFeatures = fontFeatures;
 
     return this;
   }
@@ -6351,7 +6350,7 @@ class NikuTextField {
   /// TextStyle(decoration: input)
   /// ```
   NikuTextField textDecoration(TextDecoration textDecoration) {
-    this._base_textDecoration = textDecoration;
+    _base_textDecoration = textDecoration;
 
     return this;
   }
@@ -6363,7 +6362,7 @@ class NikuTextField {
   /// TextStyle(decorationColor: input)
   /// ```
   NikuTextField textDecorationColor(Color textDecorationColor) {
-    this._base_textDecorationColor = textDecorationColor;
+    _base_textDecorationColor = textDecorationColor;
 
     return this;
   }
@@ -6375,7 +6374,7 @@ class NikuTextField {
   /// TextStyle(decorationThickness: input)
   /// ```
   NikuTextField textDecorationThickness(double textDecorationThickness) {
-    this._base_textDecorationThickness = textDecorationThickness;
+    _base_textDecorationThickness = textDecorationThickness;
 
     return this;
   }
@@ -6387,7 +6386,7 @@ class NikuTextField {
   /// TextStyle(fontFamily: input)
   /// ```
   NikuTextField fontFamily(String fontFamily) {
-    this._base_fontFamily = fontFamily;
+    _base_fontFamily = fontFamily;
 
     return this;
   }
@@ -6399,7 +6398,7 @@ class NikuTextField {
   /// TextStyle(fontFamilyFallback: input)
   /// ```
   NikuTextField fontFamilyFallback(List<String> fontFamily) {
-    this._base_fontFamilyFallback = fontFamily;
+    _base_fontFamilyFallback = fontFamily;
 
     return this;
   }
@@ -6411,7 +6410,7 @@ class NikuTextField {
   /// TextStyle(textBaseline: input)
   /// ```
   NikuTextField textBaseline(TextBaseline textBaseline) {
-    this._base_textBaseline = textBaseline;
+    _base_textBaseline = textBaseline;
 
     return this;
   }
@@ -6423,7 +6422,7 @@ class NikuTextField {
   /// TextStyle(textBaseline: Textbaseline.alphabetic)
   /// ```
   NikuTextField alphabetic() {
-    this._base_textBaseline = TextBaseline.alphabetic;
+    _base_textBaseline = TextBaseline.alphabetic;
 
     return this;
   }
@@ -6435,7 +6434,7 @@ class NikuTextField {
   /// TextStyle(textBaseline: Textbaseline.ideographic)
   /// ```
   NikuTextField ideographic() {
-    this._base_textBaseline = TextBaseline.ideographic;
+    _base_textBaseline = TextBaseline.ideographic;
 
     return this;
   }
@@ -6466,51 +6465,49 @@ class NikuTextField {
   ///     .build();
   /// );
   /// ```
-  NikuTextField apply(NikuTextField instance) => this.set(
+  NikuTextField apply(NikuTextField instance) => set(
         controller: instance._controller ?? instance._controller,
         initialValue: instance._initialValue != ""
             ? instance._initialValue
-            : this._initialValue,
+            : _initialValue,
         focusNode: instance._focusNode ?? instance._focusNode,
         keyboardType: instance._keyboardType ?? instance._keyboardType,
         textCapitalization:
             instance._textCapitalization != TextCapitalization.none
                 ? instance._textCapitalization
-                : this._textCapitalization,
+                : _textCapitalization,
         textInputAction: instance._textInputAction ?? instance._textInputAction,
         textDirection: instance._textDirection ?? instance._textDirection,
         textAlign: instance._textAlign != TextAlign.start
             ? instance._textAlign
-            : this._textAlign,
+            : _textAlign,
         textAlignVertical:
             instance._textAlignVertical ?? instance._textAlignVertical,
-        autofocus: instance._autofocus != false
-            ? instance._autofocus
-            : this._autofocus,
-        readOnly:
-            instance._readOnly != false ? instance._readOnly : this._readOnly,
+        autofocus:
+            instance._autofocus != false ? instance._autofocus : _autofocus,
+        readOnly: instance._readOnly != false ? instance._readOnly : _readOnly,
         toolbarOptions: instance._toolbarOptions ?? instance._toolbarOptions,
         showCursor: instance._showCursor ?? instance._showCursor,
         obscuringCharacter: instance._obscuringCharacter != '•'
             ? instance._obscuringCharacter
-            : this._obscuringCharacter,
+            : _obscuringCharacter,
         obscureText: instance._obscureText != false
             ? instance._obscureText
-            : this._obscureText,
+            : _obscureText,
         autocorrect: instance._autocorrect != true
             ? instance._autocorrect
-            : this._autocorrect,
+            : _autocorrect,
         smartDashesType: instance._smartDashesType ?? instance._smartDashesType,
         smartQuotesType: instance._smartQuotesType ?? instance._smartQuotesType,
         enableSuggestions: instance._enableSuggestions != true
             ? instance._enableSuggestions
-            : this._enableSuggestions,
+            : _enableSuggestions,
         maxLengthEnforced: instance._maxLengthEnforced != true
             ? instance._maxLengthEnforced
-            : this._maxLengthEnforced,
-        maxLines: instance._maxLines != 1 ? instance._maxLines : this._maxLines,
+            : _maxLengthEnforced,
+        maxLines: instance._maxLines != 1 ? instance._maxLines : _maxLines,
         minLines: instance._minLines ?? instance._minLines,
-        expands: instance._expands != false ? instance._expands : this._expands,
+        expands: instance._expands != false ? instance._expands : _expands,
         maxLength: instance._maxLength ?? instance._maxLength,
         onChanged: instance._onChanged ?? instance._onChanged,
         onTap: instance._onTap ?? instance._onTap,
@@ -6522,9 +6519,8 @@ class NikuTextField {
         validator: instance._validator ?? instance._validator,
         inputFormatters: instance._inputFormatters ?? instance._inputFormatters,
         enabled: instance._enabled ?? instance._enabled,
-        cursorWidth: instance._cursorWidth != 2.0
-            ? instance._cursorWidth
-            : this._cursorWidth,
+        cursorWidth:
+            instance._cursorWidth != 2.0 ? instance._cursorWidth : _cursorWidth,
         cursorHeight: instance._cursorHeight ?? instance._cursorHeight,
         cursorRadius: instance._cursorRadius ?? instance._cursorRadius,
         cursorColor: instance._cursorColor ?? instance._cursorColor,
@@ -6532,10 +6528,10 @@ class NikuTextField {
             instance._keyboardAppearance ?? instance._keyboardAppearance,
         scrollPadding: instance._scrollPadding != EdgeInsets.all(20)
             ? instance._scrollPadding
-            : this._scrollPadding,
+            : _scrollPadding,
         enableInteractiveSelection: instance._enableInteractiveSelection != true
             ? instance._enableInteractiveSelection
-            : this._enableInteractiveSelection,
+            : _enableInteractiveSelection,
         buildCounter: instance._buildCounter ?? instance._buildCounter,
         scrollPhysics: instance._scrollPhysics ?? instance._scrollPhysics,
         autofillHints: instance._autofillHints ?? instance._autofillHints,
@@ -6555,10 +6551,10 @@ class NikuTextField {
         input_floatingLabelBehavior:
             instance._input_floatingLabelBehavior != FloatingLabelBehavior.auto
                 ? instance._input_floatingLabelBehavior
-                : this._input_floatingLabelBehavior,
+                : _input_floatingLabelBehavior,
         input_isCollapsed: instance._input_isCollapsed != false
             ? instance._input_isCollapsed
-            : this._input_isCollapsed,
+            : _input_isCollapsed,
         input_isDense: instance._input_isDense ?? instance._input_isDense,
         input_contentPadding:
             instance._input_contentPadding ?? instance._input_contentPadding,
@@ -6598,7 +6594,7 @@ class NikuTextField {
         input_border: instance._input_border ?? instance._input_border,
         input_decorationEnabled: instance._input_decorationEnabled != true
             ? instance._input_decorationEnabled
-            : this._input_decorationEnabled,
+            : _input_decorationEnabled,
         input_semanticCounterText: instance._input_semanticCounterText ??
             instance._input_semanticCounterText,
         input_alignLabelWithHint: instance._input_alignLabelWithHint ??
@@ -6856,32 +6852,6 @@ class NikuTextField {
             instance._counter_textBaseline ?? instance._counter_textBaseline,
       );
 
-  /// Apply existing NikuTextField's property to current style and build
-  ///
-  /// Example usage:
-  /// ```
-  /// final border = NikuTextField("")
-  ///   .border(
-  ///     OutlineInputBorder(
-  ///       borderSide: BorderSide(
-  ///         width: 2
-  ///       )
-  ///     )
-  ///   )
-  ///   .focusedBorder(OutlineInputBorder(
-  ///     borderSide: BorderSide(
-  ///       color: Colors.blue,
-  ///       width: 2)
-  ///     )
-  ///   );
-  ///
-  /// return (
-  ///   NikuTextField("Bordered Filled")
-  ///     .style(border)
-  /// );
-  /// ```
-  Widget style(NikuTextField instance) => this.apply(instance).build();
-
   /// Apply styles and build Text as Widget
   ///
   /// Example usage:
@@ -6902,249 +6872,249 @@ class NikuTextField {
   ///   )
   ///   .build()
   /// ```
-  TextFormField build({Key? key}) => TextFormField(
+  build(context) => TextFormField(
         key: key,
-        controller: this._controller,
+        controller: _controller,
         style: TextStyle(
-          color: this._base_color,
-          backgroundColor: this._base_backgroundColor,
-          fontSize: this._base_fontSize,
-          fontWeight: this._base_fontWeight,
-          fontStyle: this._base_fontStyle,
-          letterSpacing: this._base_letterSpacing,
-          wordSpacing: this._base_wordSpacing,
-          height: this._base_height,
-          foreground: this._base_foreground,
-          background: this._base_background,
-          shadows: this._base_shadows,
-          fontFeatures: this._base_fontFeatures,
-          decoration: this._base_textDecoration,
-          decorationColor: this._base_textDecorationColor,
-          decorationThickness: this._base_textDecorationThickness,
-          fontFamily: this._base_fontFamily,
-          fontFamilyFallback: this._base_fontFamilyFallback,
-          textBaseline: this._base_textBaseline,
+          color: _base_color,
+          backgroundColor: _base_backgroundColor,
+          fontSize: _base_fontSize,
+          fontWeight: _base_fontWeight,
+          fontStyle: _base_fontStyle,
+          letterSpacing: _base_letterSpacing,
+          wordSpacing: _base_wordSpacing,
+          height: _base_height,
+          foreground: _base_foreground,
+          background: _base_background,
+          shadows: _base_shadows,
+          fontFeatures: _base_fontFeatures,
+          decoration: _base_textDecoration,
+          decorationColor: _base_textDecorationColor,
+          decorationThickness: _base_textDecorationThickness,
+          fontFamily: _base_fontFamily,
+          fontFamilyFallback: _base_fontFamilyFallback,
+          textBaseline: _base_textBaseline,
         ),
         decoration: InputDecoration(
-          icon: this._input_icon,
-          labelText: this._input_labelText,
-          helperText: this._input_helperText,
-          helperMaxLines: this._input_helperMaxLines,
-          hintText: this._input_hintText,
-          hintMaxLines: this._input_hintMaxLines,
-          errorText: this._input_errorText,
-          errorMaxLines: this._input_errorMaxLines,
-          floatingLabelBehavior: this._input_floatingLabelBehavior,
-          isCollapsed: this._input_isCollapsed,
-          isDense: this._input_isDense,
-          contentPadding: this._input_contentPadding,
-          prefixIcon: this._input_prefixIcon,
-          prefixIconConstraints: this._input_prefixIconConstraints,
-          prefix: this._input_prefix,
-          prefixText: this._input_prefixText,
-          suffixIcon: this._input_suffixIcon,
-          suffix: this._input_suffix,
-          suffixText: this._input_suffixText,
-          suffixIconConstraints: this._input_suffixIconConstraints,
-          counter: this._input_counter,
-          counterText: this._input_counterText,
-          filled: this._input_filled,
-          fillColor: this._input_fillColor,
-          focusColor: this._input_focusColor,
-          hoverColor: this._input_hoverColor,
-          errorBorder: this._input_errorBorder,
-          focusedBorder: this._input_focusedBorder,
-          focusedErrorBorder: this._input_focusedErrorBorder,
-          disabledBorder: this._input_disabledBorder,
-          enabledBorder: this._input_enabledBorder,
-          border: this._input_border,
-          enabled: this._input_decorationEnabled,
-          semanticCounterText: this._input_semanticCounterText,
-          alignLabelWithHint: this._input_alignLabelWithHint,
+          icon: _input_icon,
+          labelText: _input_labelText,
+          helperText: _input_helperText,
+          helperMaxLines: _input_helperMaxLines,
+          hintText: _input_hintText,
+          hintMaxLines: _input_hintMaxLines,
+          errorText: _input_errorText,
+          errorMaxLines: _input_errorMaxLines,
+          floatingLabelBehavior: _input_floatingLabelBehavior,
+          isCollapsed: _input_isCollapsed,
+          isDense: _input_isDense,
+          contentPadding: _input_contentPadding,
+          prefixIcon: _input_prefixIcon,
+          prefixIconConstraints: _input_prefixIconConstraints,
+          prefix: _input_prefix,
+          prefixText: _input_prefixText,
+          suffixIcon: _input_suffixIcon,
+          suffix: _input_suffix,
+          suffixText: _input_suffixText,
+          suffixIconConstraints: _input_suffixIconConstraints,
+          counter: _input_counter,
+          counterText: _input_counterText,
+          filled: _input_filled,
+          fillColor: _input_fillColor,
+          focusColor: _input_focusColor,
+          hoverColor: _input_hoverColor,
+          errorBorder: _input_errorBorder,
+          focusedBorder: _input_focusedBorder,
+          focusedErrorBorder: _input_focusedErrorBorder,
+          disabledBorder: _input_disabledBorder,
+          enabledBorder: _input_enabledBorder,
+          border: _input_border,
+          enabled: _input_decorationEnabled,
+          semanticCounterText: _input_semanticCounterText,
+          alignLabelWithHint: _input_alignLabelWithHint,
           hintStyle: TextStyle(
-            color: this._hint_color,
-            backgroundColor: this._hint_backgroundColor,
-            fontSize: this._hint_fontSize,
-            fontWeight: this._hint_fontWeight,
-            fontStyle: this._hint_fontStyle,
-            letterSpacing: this._hint_letterSpacing,
-            wordSpacing: this._hint_wordSpacing,
-            height: this._hint_height,
-            foreground: this._hint_foreground,
-            background: this._hint_background,
-            shadows: this._hint_shadows,
-            fontFeatures: this._hint_fontFeatures,
-            decoration: this._hint_textDecoration,
-            decorationColor: this._hint_textDecorationColor,
-            decorationThickness: this._hint_textDecorationThickness,
-            fontFamily: this._hint_fontFamily,
-            fontFamilyFallback: this._hint_fontFamilyFallback,
-            textBaseline: this._hint_textBaseline,
+            color: _hint_color,
+            backgroundColor: _hint_backgroundColor,
+            fontSize: _hint_fontSize,
+            fontWeight: _hint_fontWeight,
+            fontStyle: _hint_fontStyle,
+            letterSpacing: _hint_letterSpacing,
+            wordSpacing: _hint_wordSpacing,
+            height: _hint_height,
+            foreground: _hint_foreground,
+            background: _hint_background,
+            shadows: _hint_shadows,
+            fontFeatures: _hint_fontFeatures,
+            decoration: _hint_textDecoration,
+            decorationColor: _hint_textDecorationColor,
+            decorationThickness: _hint_textDecorationThickness,
+            fontFamily: _hint_fontFamily,
+            fontFamilyFallback: _hint_fontFamilyFallback,
+            textBaseline: _hint_textBaseline,
           ),
           errorStyle: TextStyle(
-            color: this._error_color,
-            backgroundColor: this._error_backgroundColor,
-            fontSize: this._error_fontSize,
-            fontWeight: this._error_fontWeight,
-            fontStyle: this._error_fontStyle,
-            letterSpacing: this._error_letterSpacing,
-            wordSpacing: this._error_wordSpacing,
-            height: this._error_height,
-            foreground: this._error_foreground,
-            background: this._error_background,
-            shadows: this._error_shadows,
-            fontFeatures: this._error_fontFeatures,
-            decoration: this._error_textDecoration,
-            decorationColor: this._error_textDecorationColor,
-            decorationThickness: this._error_textDecorationThickness,
-            fontFamily: this._error_fontFamily,
-            fontFamilyFallback: this._error_fontFamilyFallback,
-            textBaseline: this._error_textBaseline,
+            color: _error_color,
+            backgroundColor: _error_backgroundColor,
+            fontSize: _error_fontSize,
+            fontWeight: _error_fontWeight,
+            fontStyle: _error_fontStyle,
+            letterSpacing: _error_letterSpacing,
+            wordSpacing: _error_wordSpacing,
+            height: _error_height,
+            foreground: _error_foreground,
+            background: _error_background,
+            shadows: _error_shadows,
+            fontFeatures: _error_fontFeatures,
+            decoration: _error_textDecoration,
+            decorationColor: _error_textDecorationColor,
+            decorationThickness: _error_textDecorationThickness,
+            fontFamily: _error_fontFamily,
+            fontFamilyFallback: _error_fontFamilyFallback,
+            textBaseline: _error_textBaseline,
           ),
           prefixStyle: TextStyle(
-            color: this._prefix_color,
-            backgroundColor: this._prefix_backgroundColor,
-            fontSize: this._prefix_fontSize,
-            fontWeight: this._prefix_fontWeight,
-            fontStyle: this._prefix_fontStyle,
-            letterSpacing: this._prefix_letterSpacing,
-            wordSpacing: this._prefix_wordSpacing,
-            height: this._prefix_height,
-            foreground: this._prefix_foreground,
-            background: this._prefix_background,
-            shadows: this._prefix_shadows,
-            fontFeatures: this._prefix_fontFeatures,
-            decoration: this._prefix_textDecoration,
-            decorationColor: this._prefix_textDecorationColor,
-            decorationThickness: this._prefix_textDecorationThickness,
-            fontFamily: this._prefix_fontFamily,
-            fontFamilyFallback: this._prefix_fontFamilyFallback,
-            textBaseline: this._prefix_textBaseline,
+            color: _prefix_color,
+            backgroundColor: _prefix_backgroundColor,
+            fontSize: _prefix_fontSize,
+            fontWeight: _prefix_fontWeight,
+            fontStyle: _prefix_fontStyle,
+            letterSpacing: _prefix_letterSpacing,
+            wordSpacing: _prefix_wordSpacing,
+            height: _prefix_height,
+            foreground: _prefix_foreground,
+            background: _prefix_background,
+            shadows: _prefix_shadows,
+            fontFeatures: _prefix_fontFeatures,
+            decoration: _prefix_textDecoration,
+            decorationColor: _prefix_textDecorationColor,
+            decorationThickness: _prefix_textDecorationThickness,
+            fontFamily: _prefix_fontFamily,
+            fontFamilyFallback: _prefix_fontFamilyFallback,
+            textBaseline: _prefix_textBaseline,
           ),
           suffixStyle: TextStyle(
-            color: this._suffix_color,
-            backgroundColor: this._suffix_backgroundColor,
-            fontSize: this._suffix_fontSize,
-            fontWeight: this._suffix_fontWeight,
-            fontStyle: this._suffix_fontStyle,
-            letterSpacing: this._suffix_letterSpacing,
-            wordSpacing: this._suffix_wordSpacing,
-            height: this._suffix_height,
-            foreground: this._suffix_foreground,
-            background: this._suffix_background,
-            shadows: this._suffix_shadows,
-            fontFeatures: this._suffix_fontFeatures,
-            decoration: this._suffix_textDecoration,
-            decorationColor: this._suffix_textDecorationColor,
-            decorationThickness: this._suffix_textDecorationThickness,
-            fontFamily: this._suffix_fontFamily,
-            fontFamilyFallback: this._suffix_fontFamilyFallback,
-            textBaseline: this._suffix_textBaseline,
+            color: _suffix_color,
+            backgroundColor: _suffix_backgroundColor,
+            fontSize: _suffix_fontSize,
+            fontWeight: _suffix_fontWeight,
+            fontStyle: _suffix_fontStyle,
+            letterSpacing: _suffix_letterSpacing,
+            wordSpacing: _suffix_wordSpacing,
+            height: _suffix_height,
+            foreground: _suffix_foreground,
+            background: _suffix_background,
+            shadows: _suffix_shadows,
+            fontFeatures: _suffix_fontFeatures,
+            decoration: _suffix_textDecoration,
+            decorationColor: _suffix_textDecorationColor,
+            decorationThickness: _suffix_textDecorationThickness,
+            fontFamily: _suffix_fontFamily,
+            fontFamilyFallback: _suffix_fontFamilyFallback,
+            textBaseline: _suffix_textBaseline,
           ),
           counterStyle: TextStyle(
-            color: this._counter_color,
-            backgroundColor: this._counter_backgroundColor,
-            fontSize: this._counter_fontSize,
-            fontWeight: this._counter_fontWeight,
-            fontStyle: this._counter_fontStyle,
-            letterSpacing: this._counter_letterSpacing,
-            wordSpacing: this._counter_wordSpacing,
-            height: this._counter_height,
-            foreground: this._counter_foreground,
-            background: this._counter_background,
-            shadows: this._counter_shadows,
-            fontFeatures: this._counter_fontFeatures,
-            decoration: this._counter_textDecoration,
-            decorationColor: this._counter_textDecorationColor,
-            decorationThickness: this._counter_textDecorationThickness,
-            fontFamily: this._counter_fontFamily,
-            fontFamilyFallback: this._counter_fontFamilyFallback,
-            textBaseline: this._counter_textBaseline,
+            color: _counter_color,
+            backgroundColor: _counter_backgroundColor,
+            fontSize: _counter_fontSize,
+            fontWeight: _counter_fontWeight,
+            fontStyle: _counter_fontStyle,
+            letterSpacing: _counter_letterSpacing,
+            wordSpacing: _counter_wordSpacing,
+            height: _counter_height,
+            foreground: _counter_foreground,
+            background: _counter_background,
+            shadows: _counter_shadows,
+            fontFeatures: _counter_fontFeatures,
+            decoration: _counter_textDecoration,
+            decorationColor: _counter_textDecorationColor,
+            decorationThickness: _counter_textDecorationThickness,
+            fontFamily: _counter_fontFamily,
+            fontFamilyFallback: _counter_fontFamilyFallback,
+            textBaseline: _counter_textBaseline,
           ),
           labelStyle: TextStyle(
-            color: this._label_color,
-            backgroundColor: this._label_backgroundColor,
-            fontSize: this._label_fontSize,
-            fontWeight: this._label_fontWeight,
-            fontStyle: this._label_fontStyle,
-            letterSpacing: this._label_letterSpacing,
-            wordSpacing: this._label_wordSpacing,
-            height: this._label_height,
-            foreground: this._label_foreground,
-            background: this._label_background,
-            shadows: this._label_shadows,
-            fontFeatures: this._label_fontFeatures,
-            decoration: this._label_textDecoration,
-            decorationColor: this._label_textDecorationColor,
-            decorationThickness: this._label_textDecorationThickness,
-            fontFamily: this._label_fontFamily,
-            fontFamilyFallback: this._label_fontFamilyFallback,
-            textBaseline: this._label_textBaseline,
+            color: _label_color,
+            backgroundColor: _label_backgroundColor,
+            fontSize: _label_fontSize,
+            fontWeight: _label_fontWeight,
+            fontStyle: _label_fontStyle,
+            letterSpacing: _label_letterSpacing,
+            wordSpacing: _label_wordSpacing,
+            height: _label_height,
+            foreground: _label_foreground,
+            background: _label_background,
+            shadows: _label_shadows,
+            fontFeatures: _label_fontFeatures,
+            decoration: _label_textDecoration,
+            decorationColor: _label_textDecorationColor,
+            decorationThickness: _label_textDecorationThickness,
+            fontFamily: _label_fontFamily,
+            fontFamilyFallback: _label_fontFamilyFallback,
+            textBaseline: _label_textBaseline,
           ),
           helperStyle: TextStyle(
-            color: this._helper_color,
-            backgroundColor: this._helper_backgroundColor,
-            fontSize: this._helper_fontSize,
-            fontWeight: this._helper_fontWeight,
-            fontStyle: this._helper_fontStyle,
-            letterSpacing: this._helper_letterSpacing,
-            wordSpacing: this._helper_wordSpacing,
-            height: this._helper_height,
-            foreground: this._helper_foreground,
-            background: this._helper_background,
-            shadows: this._helper_shadows,
-            fontFeatures: this._helper_fontFeatures,
-            decoration: this._helper_textDecoration,
-            decorationColor: this._helper_textDecorationColor,
-            decorationThickness: this._helper_textDecorationThickness,
-            fontFamily: this._helper_fontFamily,
-            fontFamilyFallback: this._helper_fontFamilyFallback,
-            textBaseline: this._helper_textBaseline,
+            color: _helper_color,
+            backgroundColor: _helper_backgroundColor,
+            fontSize: _helper_fontSize,
+            fontWeight: _helper_fontWeight,
+            fontStyle: _helper_fontStyle,
+            letterSpacing: _helper_letterSpacing,
+            wordSpacing: _helper_wordSpacing,
+            height: _helper_height,
+            foreground: _helper_foreground,
+            background: _helper_background,
+            shadows: _helper_shadows,
+            fontFeatures: _helper_fontFeatures,
+            decoration: _helper_textDecoration,
+            decorationColor: _helper_textDecorationColor,
+            decorationThickness: _helper_textDecorationThickness,
+            fontFamily: _helper_fontFamily,
+            fontFamilyFallback: _helper_fontFamilyFallback,
+            textBaseline: _helper_textBaseline,
           ),
         ),
-        initialValue: this._initialValue,
-        focusNode: this._focusNode,
-        keyboardType: this._keyboardType,
-        textCapitalization: this._textCapitalization,
-        textInputAction: this._textInputAction,
-        textDirection: this._textDirection,
-        textAlign: this._textAlign,
-        textAlignVertical: this._textAlignVertical,
-        autofocus: this._autofocus,
-        readOnly: this._readOnly,
-        toolbarOptions: this._toolbarOptions,
-        showCursor: this._showCursor,
-        obscuringCharacter: this._obscuringCharacter,
-        obscureText: this._obscureText,
-        autocorrect: this._autocorrect,
-        smartDashesType: this._smartDashesType,
-        smartQuotesType: this._smartQuotesType,
-        enableSuggestions: this._enableSuggestions,
+        initialValue: _controller != null ? null : _initialValue,
+        focusNode: _focusNode,
+        keyboardType: _keyboardType,
+        textCapitalization: _textCapitalization,
+        textInputAction: _textInputAction,
+        textDirection: _textDirection,
+        textAlign: _textAlign,
+        textAlignVertical: _textAlignVertical,
+        autofocus: _autofocus,
+        readOnly: _readOnly,
+        toolbarOptions: _toolbarOptions,
+        showCursor: _showCursor,
+        obscuringCharacter: _obscuringCharacter,
+        obscureText: _obscureText,
+        autocorrect: _autocorrect,
+        smartDashesType: _smartDashesType,
+        smartQuotesType: _smartQuotesType,
+        enableSuggestions: _enableSuggestions,
         // ignore: deprecated_member_use
-        maxLengthEnforced: this._maxLengthEnforced,
-        maxLines: this._maxLines,
-        minLines: this._minLines,
-        expands: this._expands,
-        maxLength: this._maxLength,
-        onChanged: this._onChanged,
-        onTap: this._onTap,
-        onEditingComplete: this._onEditingComplete,
-        onFieldSubmitted: this._onFieldSubmitted,
-        onSaved: this._onSaved,
-        validator: this._validator,
-        inputFormatters: this._inputFormatters,
-        enabled: this._enabled,
-        cursorWidth: this._cursorWidth,
-        cursorHeight: this._cursorHeight,
-        cursorRadius: this._cursorRadius,
-        cursorColor: this._cursorColor,
-        keyboardAppearance: this._keyboardAppearance,
-        scrollPadding: this._scrollPadding,
-        enableInteractiveSelection: this._enableInteractiveSelection,
-        buildCounter: this._buildCounter,
-        scrollPhysics: this._scrollPhysics,
-        autofillHints: this._autofillHints,
-        autovalidateMode: this._autovalidateMode,
+        maxLengthEnforced: _maxLengthEnforced,
+        maxLines: _maxLines,
+        minLines: _minLines,
+        expands: _expands,
+        maxLength: _maxLength,
+        onChanged: _onChanged,
+        onTap: _onTap,
+        onEditingComplete: _onEditingComplete,
+        onFieldSubmitted: _onFieldSubmitted,
+        onSaved: _onSaved,
+        validator: _validator,
+        inputFormatters: _inputFormatters,
+        enabled: _enabled,
+        cursorWidth: _cursorWidth,
+        cursorHeight: _cursorHeight,
+        cursorRadius: _cursorRadius,
+        cursorColor: _cursorColor,
+        keyboardAppearance: _keyboardAppearance,
+        scrollPadding: _scrollPadding,
+        enableInteractiveSelection: _enableInteractiveSelection,
+        buildCounter: _buildCounter,
+        scrollPhysics: _scrollPhysics,
+        autofillHints: _autofillHints,
+        autovalidateMode: _autovalidateMode,
       );
 
   /// Switch to Niku() property
@@ -7160,8 +7130,13 @@ class NikuTextField {
   ///   .my(20)
   ///   .build() // Collect all style and render
   /// ```
-  Niku niku() => Niku(this.build());
+  Niku niku() => Niku(
+        Builder(
+          builder: (context) => build(context),
+        ),
+      );
 
+  @protected
   NikuTextField set({
     TextEditingController? controller,
     String initialValue = '',
@@ -7207,7 +7182,7 @@ class NikuTextField {
     Iterable<String>? autofillHints,
     AutovalidateMode? autovalidateMode,
     Widget? input_icon,
-    String? input_labelText,
+    String input_labelText = '',
     String? input_helperText,
     int? input_helperMaxLines,
     String? input_hintText,
@@ -7387,228 +7362,228 @@ class NikuTextField {
     List<String>? counter_fontFamilyFallback,
     TextBaseline? counter_textBaseline,
   }) {
-    this._controller = controller;
-    this._initialValue = initialValue;
-    this._focusNode = focusNode;
-    this._keyboardType = keyboardType;
-    this._textCapitalization = textCapitalization;
-    this._textInputAction = textInputAction;
-    this._textDirection = textDirection;
-    this._textAlign = textAlign;
-    this._textAlignVertical = textAlignVertical!;
-    this._autofocus = autofocus;
-    this._readOnly = readOnly;
-    this._toolbarOptions = toolbarOptions;
-    this._showCursor = showCursor;
-    this._obscuringCharacter = obscuringCharacter;
-    this._obscureText = obscureText;
-    this._autocorrect = autocorrect;
-    this._smartDashesType = smartDashesType;
-    this._smartQuotesType = smartQuotesType;
-    this._enableSuggestions = enableSuggestions;
-    this._maxLengthEnforced = maxLengthEnforced;
-    this._maxLines = maxLines;
-    this._minLines = minLines;
-    this._expands = expands;
-    this._maxLength = maxLength;
-    this._onChanged = onChanged;
-    this._onTap = onTap;
-    this._onEditingComplete = onEditingComplete;
-    this._onFieldSubmitted = onFieldSubmitted;
-    this._onSaved = onSaved;
-    this._validator = validator;
-    this._inputFormatters = inputFormatters;
-    this._enabled = enabled;
-    this._cursorWidth = cursorWidth;
-    this._cursorHeight = cursorHeight;
-    this._cursorRadius = cursorRadius;
-    this._cursorColor = cursorColor;
-    this._keyboardAppearance = keyboardAppearance;
-    this._scrollPadding = scrollPadding;
-    this._enableInteractiveSelection = enableInteractiveSelection;
-    this._buildCounter = buildCounter;
-    this._scrollPhysics = scrollPhysics;
-    this._autofillHints = autofillHints;
-    this._autovalidateMode = autovalidateMode;
-    this._input_icon = input_icon;
-    this._input_labelText = input_labelText;
-    this._input_helperText = input_helperText;
-    this._input_helperMaxLines = input_helperMaxLines;
-    this._input_hintText = input_hintText;
-    this._input_hintMaxLines = input_hintMaxLines;
-    this._input_errorText = input_errorText;
-    this._input_errorMaxLines = input_errorMaxLines;
-    this._input_floatingLabelBehavior = input_floatingLabelBehavior;
-    this._input_isCollapsed = input_isCollapsed;
-    this._input_isDense = input_isDense;
-    this._input_contentPadding = input_contentPadding;
-    this._input_prefixIcon = input_prefixIcon;
-    this._input_prefixIconConstraints = input_prefixIconConstraints;
-    this._input_prefix = input_prefix;
-    this._input_prefixText = input_prefixText;
-    this._input_suffixIcon = input_suffixIcon;
-    this._input_suffix = input_suffix;
-    this._input_suffixText = input_suffixText;
-    this._input_suffixIconConstraints = input_suffixIconConstraints;
-    this._input_counter = input_counter;
-    this._input_counterText = input_counterText;
-    this._input_filled = input_filled;
-    this._input_fillColor = input_fillColor;
-    this._input_focusColor = input_focusColor;
-    this._input_hoverColor = input_hoverColor;
-    this._input_errorBorder = input_errorBorder;
-    this._input_focusedBorder = input_focusedBorder;
-    this._input_focusedErrorBorder = input_focusedErrorBorder;
-    this._input_disabledBorder = input_disabledBorder;
-    this._input_enabledBorder = input_enabledBorder;
-    this._input_border = input_border;
-    this._input_decorationEnabled = input_decorationEnabled;
-    this._input_semanticCounterText = input_semanticCounterText;
-    this._input_alignLabelWithHint = input_alignLabelWithHint;
-    this._base_color = base_color;
-    this._base_backgroundColor = base_backgroundColor;
-    this._base_fontSize = base_fontSize;
-    this._base_fontWeight = base_fontWeight;
-    this._base_fontStyle = base_fontStyle;
-    this._base_letterSpacing = base_letterSpacing;
-    this._base_wordSpacing = base_wordSpacing;
-    this._base_height = base_height;
-    this._base_foreground = base_foreground;
-    this._base_background = base_background;
-    this._base_shadows = base_shadows;
-    this._base_fontFeatures = base_fontFeatures;
-    this._base_textDecoration = base_textDecoration;
-    this._base_textDecorationColor = base_textDecorationColor;
-    this._base_textDecorationThickness = base_textDecorationThickness;
-    this._base_fontFamily = base_fontFamily;
-    this._base_fontFamilyFallback = base_fontFamilyFallback;
-    this._base_textBaseline = base_textBaseline;
-    this._label_color = label_color;
-    this._label_backgroundColor = label_backgroundColor;
-    this._label_fontSize = label_fontSize;
-    this._label_fontWeight = label_fontWeight;
-    this._label_fontStyle = label_fontStyle;
-    this._label_letterSpacing = label_letterSpacing;
-    this._label_wordSpacing = label_wordSpacing;
-    this._label_height = label_height;
-    this._label_foreground = label_foreground;
-    this._label_background = label_background;
-    this._label_shadows = label_shadows;
-    this._label_fontFeatures = label_fontFeatures;
-    this._label_textDecoration = label_textDecoration;
-    this._label_textDecorationColor = label_textDecorationColor;
-    this._label_textDecorationThickness = label_textDecorationThickness;
-    this._label_fontFamily = label_fontFamily;
-    this._label_fontFamilyFallback = label_fontFamilyFallback;
-    this._label_textBaseline = label_textBaseline;
-    this._hint_color = hint_color;
-    this._hint_backgroundColor = hint_backgroundColor;
-    this._hint_fontSize = hint_fontSize;
-    this._hint_fontWeight = hint_fontWeight;
-    this._hint_fontStyle = hint_fontStyle;
-    this._hint_letterSpacing = hint_letterSpacing;
-    this._hint_wordSpacing = hint_wordSpacing;
-    this._hint_height = hint_height;
-    this._hint_foreground = hint_foreground;
-    this._hint_background = hint_background;
-    this._hint_shadows = hint_shadows;
-    this._hint_fontFeatures = hint_fontFeatures;
-    this._hint_textDecoration = hint_textDecoration;
-    this._hint_textDecorationColor = hint_textDecorationColor;
-    this._hint_textDecorationThickness = hint_textDecorationThickness;
-    this._hint_fontFamily = hint_fontFamily;
-    this._hint_fontFamilyFallback = hint_fontFamilyFallback;
-    this._hint_textBaseline = hint_textBaseline;
-    this._helper_color = helper_color;
-    this._helper_backgroundColor = helper_backgroundColor;
-    this._helper_fontSize = helper_fontSize;
-    this._helper_fontWeight = helper_fontWeight;
-    this._helper_fontStyle = helper_fontStyle;
-    this._helper_letterSpacing = helper_letterSpacing;
-    this._helper_wordSpacing = helper_wordSpacing;
-    this._helper_height = helper_height;
-    this._helper_foreground = helper_foreground;
-    this._helper_background = helper_background;
-    this._helper_shadows = helper_shadows;
-    this._helper_fontFeatures = helper_fontFeatures;
-    this._helper_textDecoration = helper_textDecoration;
-    this._helper_textDecorationColor = helper_textDecorationColor;
-    this._helper_textDecorationThickness = helper_textDecorationThickness;
-    this._helper_fontFamily = helper_fontFamily;
-    this._helper_fontFamilyFallback = helper_fontFamilyFallback;
-    this._helper_textBaseline = helper_textBaseline;
-    this._error_color = error_color;
-    this._error_backgroundColor = error_backgroundColor;
-    this._error_fontSize = error_fontSize;
-    this._error_fontWeight = error_fontWeight;
-    this._error_fontStyle = error_fontStyle;
-    this._error_letterSpacing = error_letterSpacing;
-    this._error_wordSpacing = error_wordSpacing;
-    this._error_height = error_height;
-    this._error_foreground = error_foreground;
-    this._error_background = error_background;
-    this._error_shadows = error_shadows;
-    this._error_fontFeatures = error_fontFeatures;
-    this._error_textDecoration = error_textDecoration;
-    this._error_textDecorationColor = error_textDecorationColor;
-    this._error_textDecorationThickness = error_textDecorationThickness;
-    this._error_fontFamily = error_fontFamily;
-    this._error_fontFamilyFallback = error_fontFamilyFallback;
-    this._error_textBaseline = error_textBaseline;
-    this._prefix_color = prefix_color;
-    this._prefix_backgroundColor = prefix_backgroundColor;
-    this._prefix_fontSize = prefix_fontSize;
-    this._prefix_fontWeight = prefix_fontWeight;
-    this._prefix_fontStyle = prefix_fontStyle;
-    this._prefix_letterSpacing = prefix_letterSpacing;
-    this._prefix_wordSpacing = prefix_wordSpacing;
-    this._prefix_height = prefix_height;
-    this._prefix_foreground = prefix_foreground;
-    this._prefix_background = prefix_background;
-    this._prefix_shadows = prefix_shadows;
-    this._prefix_fontFeatures = prefix_fontFeatures;
-    this._prefix_textDecoration = prefix_textDecoration;
-    this._prefix_textDecorationColor = prefix_textDecorationColor;
-    this._prefix_textDecorationThickness = prefix_textDecorationThickness;
-    this._prefix_fontFamily = prefix_fontFamily;
-    this._prefix_fontFamilyFallback = prefix_fontFamilyFallback;
-    this._prefix_textBaseline = prefix_textBaseline;
-    this._suffix_color = suffix_color;
-    this._suffix_backgroundColor = suffix_backgroundColor;
-    this._suffix_fontSize = suffix_fontSize;
-    this._suffix_fontWeight = suffix_fontWeight;
-    this._suffix_fontStyle = suffix_fontStyle;
-    this._suffix_letterSpacing = suffix_letterSpacing;
-    this._suffix_wordSpacing = suffix_wordSpacing;
-    this._suffix_height = suffix_height;
-    this._suffix_foreground = suffix_foreground;
-    this._suffix_background = suffix_background;
-    this._suffix_shadows = suffix_shadows;
-    this._suffix_fontFeatures = suffix_fontFeatures;
-    this._suffix_textDecoration = suffix_textDecoration;
-    this._suffix_textDecorationColor = suffix_textDecorationColor;
-    this._suffix_textDecorationThickness = suffix_textDecorationThickness;
-    this._suffix_fontFamily = suffix_fontFamily;
-    this._suffix_fontFamilyFallback = suffix_fontFamilyFallback;
-    this._suffix_textBaseline = suffix_textBaseline;
-    this._counter_color = counter_color;
-    this._counter_backgroundColor = counter_backgroundColor;
-    this._counter_fontSize = counter_fontSize;
-    this._counter_fontWeight = counter_fontWeight;
-    this._counter_fontStyle = counter_fontStyle;
-    this._counter_letterSpacing = counter_letterSpacing;
-    this._counter_wordSpacing = counter_wordSpacing;
-    this._counter_height = counter_height;
-    this._counter_foreground = counter_foreground;
-    this._counter_background = counter_background;
-    this._counter_shadows = counter_shadows;
-    this._counter_fontFeatures = counter_fontFeatures;
-    this._counter_textDecoration = counter_textDecoration;
-    this._counter_textDecorationColor = counter_textDecorationColor;
-    this._counter_textDecorationThickness = counter_textDecorationThickness;
-    this._counter_fontFamily = counter_fontFamily;
-    this._counter_fontFamilyFallback = counter_fontFamilyFallback;
-    this._counter_textBaseline = counter_textBaseline;
+    _controller = controller;
+    _initialValue = initialValue;
+    _focusNode = focusNode;
+    _keyboardType = keyboardType;
+    _textCapitalization = textCapitalization;
+    _textInputAction = textInputAction;
+    _textDirection = textDirection;
+    _textAlign = textAlign;
+    _textAlignVertical = textAlignVertical!;
+    _autofocus = autofocus;
+    _readOnly = readOnly;
+    _toolbarOptions = toolbarOptions;
+    _showCursor = showCursor;
+    _obscuringCharacter = obscuringCharacter;
+    _obscureText = obscureText;
+    _autocorrect = autocorrect;
+    _smartDashesType = smartDashesType;
+    _smartQuotesType = smartQuotesType;
+    _enableSuggestions = enableSuggestions;
+    _maxLengthEnforced = maxLengthEnforced;
+    _maxLines = maxLines;
+    _minLines = minLines;
+    _expands = expands;
+    _maxLength = maxLength;
+    _onChanged = onChanged;
+    _onTap = onTap;
+    _onEditingComplete = onEditingComplete;
+    _onFieldSubmitted = onFieldSubmitted;
+    _onSaved = onSaved;
+    _validator = validator;
+    _inputFormatters = inputFormatters;
+    _enabled = enabled;
+    _cursorWidth = cursorWidth;
+    _cursorHeight = cursorHeight;
+    _cursorRadius = cursorRadius;
+    _cursorColor = cursorColor;
+    _keyboardAppearance = keyboardAppearance;
+    _scrollPadding = scrollPadding;
+    _enableInteractiveSelection = enableInteractiveSelection;
+    _buildCounter = buildCounter;
+    _scrollPhysics = scrollPhysics;
+    _autofillHints = autofillHints;
+    _autovalidateMode = autovalidateMode;
+    _input_icon = input_icon;
+    _input_labelText = input_labelText;
+    _input_helperText = input_helperText;
+    _input_helperMaxLines = input_helperMaxLines;
+    _input_hintText = input_hintText;
+    _input_hintMaxLines = input_hintMaxLines;
+    _input_errorText = input_errorText;
+    _input_errorMaxLines = input_errorMaxLines;
+    _input_floatingLabelBehavior = input_floatingLabelBehavior;
+    _input_isCollapsed = input_isCollapsed;
+    _input_isDense = input_isDense;
+    _input_contentPadding = input_contentPadding;
+    _input_prefixIcon = input_prefixIcon;
+    _input_prefixIconConstraints = input_prefixIconConstraints;
+    _input_prefix = input_prefix;
+    _input_prefixText = input_prefixText;
+    _input_suffixIcon = input_suffixIcon;
+    _input_suffix = input_suffix;
+    _input_suffixText = input_suffixText;
+    _input_suffixIconConstraints = input_suffixIconConstraints;
+    _input_counter = input_counter;
+    _input_counterText = input_counterText;
+    _input_filled = input_filled;
+    _input_fillColor = input_fillColor;
+    _input_focusColor = input_focusColor;
+    _input_hoverColor = input_hoverColor;
+    _input_errorBorder = input_errorBorder;
+    _input_focusedBorder = input_focusedBorder;
+    _input_focusedErrorBorder = input_focusedErrorBorder;
+    _input_disabledBorder = input_disabledBorder;
+    _input_enabledBorder = input_enabledBorder;
+    _input_border = input_border;
+    _input_decorationEnabled = input_decorationEnabled;
+    _input_semanticCounterText = input_semanticCounterText;
+    _input_alignLabelWithHint = input_alignLabelWithHint;
+    _base_color = base_color;
+    _base_backgroundColor = base_backgroundColor;
+    _base_fontSize = base_fontSize;
+    _base_fontWeight = base_fontWeight;
+    _base_fontStyle = base_fontStyle;
+    _base_letterSpacing = base_letterSpacing;
+    _base_wordSpacing = base_wordSpacing;
+    _base_height = base_height;
+    _base_foreground = base_foreground;
+    _base_background = base_background;
+    _base_shadows = base_shadows;
+    _base_fontFeatures = base_fontFeatures;
+    _base_textDecoration = base_textDecoration;
+    _base_textDecorationColor = base_textDecorationColor;
+    _base_textDecorationThickness = base_textDecorationThickness;
+    _base_fontFamily = base_fontFamily;
+    _base_fontFamilyFallback = base_fontFamilyFallback;
+    _base_textBaseline = base_textBaseline;
+    _label_color = label_color;
+    _label_backgroundColor = label_backgroundColor;
+    _label_fontSize = label_fontSize;
+    _label_fontWeight = label_fontWeight;
+    _label_fontStyle = label_fontStyle;
+    _label_letterSpacing = label_letterSpacing;
+    _label_wordSpacing = label_wordSpacing;
+    _label_height = label_height;
+    _label_foreground = label_foreground;
+    _label_background = label_background;
+    _label_shadows = label_shadows;
+    _label_fontFeatures = label_fontFeatures;
+    _label_textDecoration = label_textDecoration;
+    _label_textDecorationColor = label_textDecorationColor;
+    _label_textDecorationThickness = label_textDecorationThickness;
+    _label_fontFamily = label_fontFamily;
+    _label_fontFamilyFallback = label_fontFamilyFallback;
+    _label_textBaseline = label_textBaseline;
+    _hint_color = hint_color;
+    _hint_backgroundColor = hint_backgroundColor;
+    _hint_fontSize = hint_fontSize;
+    _hint_fontWeight = hint_fontWeight;
+    _hint_fontStyle = hint_fontStyle;
+    _hint_letterSpacing = hint_letterSpacing;
+    _hint_wordSpacing = hint_wordSpacing;
+    _hint_height = hint_height;
+    _hint_foreground = hint_foreground;
+    _hint_background = hint_background;
+    _hint_shadows = hint_shadows;
+    _hint_fontFeatures = hint_fontFeatures;
+    _hint_textDecoration = hint_textDecoration;
+    _hint_textDecorationColor = hint_textDecorationColor;
+    _hint_textDecorationThickness = hint_textDecorationThickness;
+    _hint_fontFamily = hint_fontFamily;
+    _hint_fontFamilyFallback = hint_fontFamilyFallback;
+    _hint_textBaseline = hint_textBaseline;
+    _helper_color = helper_color;
+    _helper_backgroundColor = helper_backgroundColor;
+    _helper_fontSize = helper_fontSize;
+    _helper_fontWeight = helper_fontWeight;
+    _helper_fontStyle = helper_fontStyle;
+    _helper_letterSpacing = helper_letterSpacing;
+    _helper_wordSpacing = helper_wordSpacing;
+    _helper_height = helper_height;
+    _helper_foreground = helper_foreground;
+    _helper_background = helper_background;
+    _helper_shadows = helper_shadows;
+    _helper_fontFeatures = helper_fontFeatures;
+    _helper_textDecoration = helper_textDecoration;
+    _helper_textDecorationColor = helper_textDecorationColor;
+    _helper_textDecorationThickness = helper_textDecorationThickness;
+    _helper_fontFamily = helper_fontFamily;
+    _helper_fontFamilyFallback = helper_fontFamilyFallback;
+    _helper_textBaseline = helper_textBaseline;
+    _error_color = error_color;
+    _error_backgroundColor = error_backgroundColor;
+    _error_fontSize = error_fontSize;
+    _error_fontWeight = error_fontWeight;
+    _error_fontStyle = error_fontStyle;
+    _error_letterSpacing = error_letterSpacing;
+    _error_wordSpacing = error_wordSpacing;
+    _error_height = error_height;
+    _error_foreground = error_foreground;
+    _error_background = error_background;
+    _error_shadows = error_shadows;
+    _error_fontFeatures = error_fontFeatures;
+    _error_textDecoration = error_textDecoration;
+    _error_textDecorationColor = error_textDecorationColor;
+    _error_textDecorationThickness = error_textDecorationThickness;
+    _error_fontFamily = error_fontFamily;
+    _error_fontFamilyFallback = error_fontFamilyFallback;
+    _error_textBaseline = error_textBaseline;
+    _prefix_color = prefix_color;
+    _prefix_backgroundColor = prefix_backgroundColor;
+    _prefix_fontSize = prefix_fontSize;
+    _prefix_fontWeight = prefix_fontWeight;
+    _prefix_fontStyle = prefix_fontStyle;
+    _prefix_letterSpacing = prefix_letterSpacing;
+    _prefix_wordSpacing = prefix_wordSpacing;
+    _prefix_height = prefix_height;
+    _prefix_foreground = prefix_foreground;
+    _prefix_background = prefix_background;
+    _prefix_shadows = prefix_shadows;
+    _prefix_fontFeatures = prefix_fontFeatures;
+    _prefix_textDecoration = prefix_textDecoration;
+    _prefix_textDecorationColor = prefix_textDecorationColor;
+    _prefix_textDecorationThickness = prefix_textDecorationThickness;
+    _prefix_fontFamily = prefix_fontFamily;
+    _prefix_fontFamilyFallback = prefix_fontFamilyFallback;
+    _prefix_textBaseline = prefix_textBaseline;
+    _suffix_color = suffix_color;
+    _suffix_backgroundColor = suffix_backgroundColor;
+    _suffix_fontSize = suffix_fontSize;
+    _suffix_fontWeight = suffix_fontWeight;
+    _suffix_fontStyle = suffix_fontStyle;
+    _suffix_letterSpacing = suffix_letterSpacing;
+    _suffix_wordSpacing = suffix_wordSpacing;
+    _suffix_height = suffix_height;
+    _suffix_foreground = suffix_foreground;
+    _suffix_background = suffix_background;
+    _suffix_shadows = suffix_shadows;
+    _suffix_fontFeatures = suffix_fontFeatures;
+    _suffix_textDecoration = suffix_textDecoration;
+    _suffix_textDecorationColor = suffix_textDecorationColor;
+    _suffix_textDecorationThickness = suffix_textDecorationThickness;
+    _suffix_fontFamily = suffix_fontFamily;
+    _suffix_fontFamilyFallback = suffix_fontFamilyFallback;
+    _suffix_textBaseline = suffix_textBaseline;
+    _counter_color = counter_color;
+    _counter_backgroundColor = counter_backgroundColor;
+    _counter_fontSize = counter_fontSize;
+    _counter_fontWeight = counter_fontWeight;
+    _counter_fontStyle = counter_fontStyle;
+    _counter_letterSpacing = counter_letterSpacing;
+    _counter_wordSpacing = counter_wordSpacing;
+    _counter_height = counter_height;
+    _counter_foreground = counter_foreground;
+    _counter_background = counter_background;
+    _counter_shadows = counter_shadows;
+    _counter_fontFeatures = counter_fontFeatures;
+    _counter_textDecoration = counter_textDecoration;
+    _counter_textDecorationColor = counter_textDecorationColor;
+    _counter_textDecorationThickness = counter_textDecorationThickness;
+    _counter_fontFamily = counter_fontFamily;
+    _counter_fontFamilyFallback = counter_fontFamilyFallback;
+    _counter_textBaseline = counter_textBaseline;
 
     return this;
   }

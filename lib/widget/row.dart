@@ -1,3 +1,4 @@
+// ignore_for_file: must_be_immutable
 import 'package:flutter/material.dart';
 
 import 'dart:ui';
@@ -56,7 +57,7 @@ import './base.dart';
 ///   - prependChildren - Prepend all of children
 ///   - insert - Insert child at index
 ///   - insertAll - Insert all children at index
-class NikuRow {
+class NikuRow extends StatelessWidget {
   List<Widget> _children = [];
 
   MainAxisAlignment _mainAxisAlignment = MainAxisAlignment.start;
@@ -118,9 +119,7 @@ class NikuRow {
   ///   - prependChildren - Prepend all of children
   ///   - insert - Insert child at index
   ///   - insertAll - Insert all children at index
-  NikuRow(List<Widget> children) {
-    this._children = children;
-  }
+  NikuRow(this._children);
 
   /// Set main axis alignment
   ///
@@ -131,7 +130,7 @@ class NikuRow {
   /// )
   /// ```
   NikuRow mainAxisAlignment(MainAxisAlignment mainAxisAlignment) {
-    this._mainAxisAlignment = mainAxisAlignment;
+    _mainAxisAlignment = mainAxisAlignment;
 
     return this;
   }
@@ -145,7 +144,7 @@ class NikuRow {
   /// )
   /// ```
   NikuRow mainAxis(MainAxisAlignment mainAxisAlignment) {
-    this._mainAxisAlignment = mainAxisAlignment;
+    _mainAxisAlignment = mainAxisAlignment;
 
     return this;
   }
@@ -159,7 +158,7 @@ class NikuRow {
   /// )
   /// ```
   NikuRow mainStart() {
-    this._mainAxisAlignment = MainAxisAlignment.start;
+    _mainAxisAlignment = MainAxisAlignment.start;
 
     return this;
   }
@@ -173,7 +172,7 @@ class NikuRow {
   /// )
   /// ```
   NikuRow mainCenter() {
-    this._mainAxisAlignment = MainAxisAlignment.center;
+    _mainAxisAlignment = MainAxisAlignment.center;
 
     return this;
   }
@@ -187,7 +186,7 @@ class NikuRow {
   /// )
   /// ```
   NikuRow mainEnd() {
-    this._mainAxisAlignment = MainAxisAlignment.end;
+    _mainAxisAlignment = MainAxisAlignment.end;
 
     return this;
   }
@@ -201,7 +200,7 @@ class NikuRow {
   /// )
   /// ```
   NikuRow justifyStart() {
-    this._mainAxisAlignment = MainAxisAlignment.start;
+    _mainAxisAlignment = MainAxisAlignment.start;
 
     return this;
   }
@@ -215,7 +214,7 @@ class NikuRow {
   /// )
   /// ```
   NikuRow justifyCenter() {
-    this._mainAxisAlignment = MainAxisAlignment.center;
+    _mainAxisAlignment = MainAxisAlignment.center;
 
     return this;
   }
@@ -229,7 +228,7 @@ class NikuRow {
   /// )
   /// ```
   NikuRow justifyEnd() {
-    this._mainAxisAlignment = MainAxisAlignment.end;
+    _mainAxisAlignment = MainAxisAlignment.end;
 
     return this;
   }
@@ -243,7 +242,7 @@ class NikuRow {
   /// )
   /// ```
   NikuRow spaceAround() {
-    this._mainAxisAlignment = MainAxisAlignment.spaceAround;
+    _mainAxisAlignment = MainAxisAlignment.spaceAround;
 
     return this;
   }
@@ -257,7 +256,7 @@ class NikuRow {
   /// )
   /// ```
   NikuRow spaceBetween() {
-    this._mainAxisAlignment = MainAxisAlignment.spaceBetween;
+    _mainAxisAlignment = MainAxisAlignment.spaceBetween;
 
     return this;
   }
@@ -271,7 +270,7 @@ class NikuRow {
   /// )
   /// ```
   NikuRow spaceEvenly() {
-    this._mainAxisAlignment = MainAxisAlignment.spaceEvenly;
+    _mainAxisAlignment = MainAxisAlignment.spaceEvenly;
 
     return this;
   }
@@ -285,7 +284,7 @@ class NikuRow {
   /// )
   /// ```
   NikuRow crossAxisAlignment(CrossAxisAlignment crossAxisAlignment) {
-    this._crossAxisAlignment = crossAxisAlignment;
+    _crossAxisAlignment = crossAxisAlignment;
 
     return this;
   }
@@ -299,7 +298,7 @@ class NikuRow {
   /// )
   /// ```
   NikuRow crossAxis(CrossAxisAlignment crossAxisAlignment) {
-    this._crossAxisAlignment = crossAxisAlignment;
+    _crossAxisAlignment = crossAxisAlignment;
 
     return this;
   }
@@ -313,7 +312,7 @@ class NikuRow {
   /// )
   /// ```
   NikuRow baseline() {
-    this._crossAxisAlignment = CrossAxisAlignment.baseline;
+    _crossAxisAlignment = CrossAxisAlignment.baseline;
 
     return this;
   }
@@ -327,7 +326,7 @@ class NikuRow {
   /// )
   /// ```
   NikuRow crossStart() {
-    this._crossAxisAlignment = CrossAxisAlignment.start;
+    _crossAxisAlignment = CrossAxisAlignment.start;
 
     return this;
   }
@@ -341,7 +340,7 @@ class NikuRow {
   /// )
   /// ```
   NikuRow crossCenter() {
-    this._crossAxisAlignment = CrossAxisAlignment.center;
+    _crossAxisAlignment = CrossAxisAlignment.center;
 
     return this;
   }
@@ -355,7 +354,7 @@ class NikuRow {
   /// )
   /// ```
   NikuRow crossEnd() {
-    this._crossAxisAlignment = CrossAxisAlignment.end;
+    _crossAxisAlignment = CrossAxisAlignment.end;
 
     return this;
   }
@@ -369,7 +368,7 @@ class NikuRow {
   /// )
   /// ```
   NikuRow itemsStart() {
-    this._crossAxisAlignment = CrossAxisAlignment.start;
+    _crossAxisAlignment = CrossAxisAlignment.start;
 
     return this;
   }
@@ -383,7 +382,7 @@ class NikuRow {
   /// )
   /// ```
   NikuRow itemsCenter() {
-    this._crossAxisAlignment = CrossAxisAlignment.center;
+    _crossAxisAlignment = CrossAxisAlignment.center;
 
     return this;
   }
@@ -397,7 +396,7 @@ class NikuRow {
   /// )
   /// ```
   NikuRow itemsEnd() {
-    this._crossAxisAlignment = CrossAxisAlignment.end;
+    _crossAxisAlignment = CrossAxisAlignment.end;
 
     return this;
   }
@@ -411,7 +410,7 @@ class NikuRow {
   /// )
   /// ```
   NikuRow stretch() {
-    this._crossAxisAlignment = CrossAxisAlignment.stretch;
+    _crossAxisAlignment = CrossAxisAlignment.stretch;
 
     return this;
   }
@@ -423,7 +422,7 @@ class NikuRow {
   /// Row(textDirection: input)
   /// ```
   NikuRow textDirection(TextDirection textDirection) {
-    this._textDirection = textDirection;
+    _textDirection = textDirection;
 
     return this;
   }
@@ -435,7 +434,7 @@ class NikuRow {
   /// Row(textDirection: TextDirection.ltr)
   /// ```
   NikuRow ltr() {
-    this._textDirection = TextDirection.ltr;
+    _textDirection = TextDirection.ltr;
 
     return this;
   }
@@ -447,7 +446,7 @@ class NikuRow {
   /// Row(textDirection: TextDirection.rtl)
   /// ```
   NikuRow rtl() {
-    this._textDirection = TextDirection.rtl;
+    _textDirection = TextDirection.rtl;
 
     return this;
   }
@@ -461,7 +460,7 @@ class NikuRow {
   /// )
   /// ```
   NikuRow verticalDirection(VerticalDirection verticalDirection) {
-    this._verticalDirection = verticalDirection;
+    _verticalDirection = verticalDirection;
 
     return this;
   }
@@ -475,7 +474,7 @@ class NikuRow {
   /// )
   /// ```
   NikuRow up() {
-    this._verticalDirection = VerticalDirection.up;
+    _verticalDirection = VerticalDirection.up;
 
     return this;
   }
@@ -489,7 +488,7 @@ class NikuRow {
   /// )
   /// ```
   NikuRow down() {
-    this._verticalDirection = VerticalDirection.down;
+    _verticalDirection = VerticalDirection.down;
 
     return this;
   }
@@ -503,7 +502,7 @@ class NikuRow {
   /// )
   /// ```
   NikuRow textBaseline(TextBaseline textBaseline) {
-    this._textBaseline = textBaseline;
+    _textBaseline = textBaseline;
 
     return this;
   }
@@ -517,7 +516,7 @@ class NikuRow {
   /// )
   /// ```
   NikuRow alphabetic() {
-    this._textBaseline = TextBaseline.alphabetic;
+    _textBaseline = TextBaseline.alphabetic;
 
     return this;
   }
@@ -531,7 +530,7 @@ class NikuRow {
   /// )
   /// ```
   NikuRow ideographic() {
-    this._textBaseline = TextBaseline.ideographic;
+    _textBaseline = TextBaseline.ideographic;
 
     return this;
   }
@@ -548,7 +547,7 @@ class NikuRow {
   /// )
   /// ```
   NikuRow child(Widget child) {
-    this._children.add(child);
+    _children.add(child);
 
     return this;
   }
@@ -565,7 +564,7 @@ class NikuRow {
   /// )
   /// ```
   NikuRow append(Widget child) {
-    this._children.add(child);
+    _children.add(child);
 
     return this;
   }
@@ -582,7 +581,7 @@ class NikuRow {
   /// )
   /// ```
   NikuRow appendChild(Widget child) {
-    this._children.add(child);
+    _children.add(child);
 
     return this;
   }
@@ -599,7 +598,7 @@ class NikuRow {
   /// )
   /// ```
   NikuRow children(List<Widget> children) {
-    this._children.addAll(children);
+    _children.addAll(children);
 
     return this;
   }
@@ -616,7 +615,7 @@ class NikuRow {
   /// )
   /// ```
   NikuRow appendChildren(List<Widget> children) {
-    this._children.addAll(children);
+    _children.addAll(children);
 
     return this;
   }
@@ -633,7 +632,7 @@ class NikuRow {
   /// )
   /// ```
   NikuRow prepend(Widget child) {
-    this._children.insert(0, child);
+    _children.insert(0, child);
 
     return this;
   }
@@ -650,7 +649,7 @@ class NikuRow {
   /// )
   /// ```
   NikuRow prependChild(Widget child) {
-    this._children.insert(0, child);
+    _children.insert(0, child);
 
     return this;
   }
@@ -667,7 +666,7 @@ class NikuRow {
   /// )
   /// ```
   NikuRow prependChildren(List<Widget> children) {
-    this._children.insertAll(0, children);
+    _children.insertAll(0, children);
 
     return this;
   }
@@ -685,7 +684,7 @@ class NikuRow {
   /// )
   /// ```
   NikuRow insert(int index, Widget child) {
-    this._children.insert(index, child);
+    _children.insert(index, child);
 
     return this;
   }
@@ -703,7 +702,7 @@ class NikuRow {
   /// )
   /// ```
   NikuRow insertAll(int index, List<Widget> children) {
-    this._children.insertAll(index, children);
+    _children.insertAll(index, children);
 
     return this;
   }
@@ -721,15 +720,15 @@ class NikuRow {
   ///   .append(Text("2"))
   ///   .build()
   /// ```
-  Row build({Key? key}) => Row(
+  build(context) => Row(
         key: key,
-        children: this._children,
-        mainAxisAlignment: this._mainAxisAlignment,
-        mainAxisSize: this._mainAxisSize,
-        crossAxisAlignment: this._crossAxisAlignment,
-        textDirection: this._textDirection,
-        verticalDirection: this._verticalDirection,
-        textBaseline: this._textBaseline,
+        children: _children,
+        mainAxisAlignment: _mainAxisAlignment,
+        mainAxisSize: _mainAxisSize,
+        crossAxisAlignment: _crossAxisAlignment,
+        textDirection: _textDirection,
+        verticalDirection: _verticalDirection,
+        textBaseline: _textBaseline,
       );
 
   /// Switch to Niku() property
@@ -747,5 +746,9 @@ class NikuRow {
   ///   .bg(Colors.blue)
   ///   .build()
   /// ```
-  Niku niku() => Niku(this.build());
+  Niku niku() => Niku(
+        Builder(
+          builder: (context) => build(context),
+        ),
+      );
 }

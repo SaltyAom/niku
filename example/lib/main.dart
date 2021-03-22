@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-import 'package:flutter_hooks/flutter_hooks.dart';
-
 import 'package:niku/niku.dart';
 
 void main() {
@@ -17,7 +15,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.blue,
         primarySwatch: Colors.blue,
       ),
-      home: NTHomePage(),
+      home: HomePage(),
     );
   }
 }
@@ -32,17 +30,15 @@ class NTHomePage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          NTNikuText("Hello World")..fontSize(32),
-          NTNikuButton.outlinedIcon(Icon(Icons.home))
+          NikuText("Hello World").fontSize(32),
+          NikuButton.outlinedIcon(Icon(Icons.home))
               .label(Text("Icon"))
               .onPressed(() {})
               .my(8)
               .px(8)
               .bc(Colors.blue)
         ],
-      ).ntNiku()
-        ..width(300)
-        ..center(),
+      ).niku().width(300).center(),
     );
   }
 }
@@ -69,16 +65,14 @@ class HomePage extends StatelessWidget {
           NikuButton(
             NikuText("Text Button")
                 .apply(baseText)
-                .color(Theme.of(context).primaryColor)
-                .build(),
+                .color(Theme.of(context).primaryColor),
           )
               .apply(baseButton)
               .onPressed(() {
                 print("Text Button");
               })
               .overlay(Theme.of(context).primaryColor.withOpacity(.125))
-              .highlight(Theme.of(context).primaryColor.withOpacity(.075))
-              .build(),
+              .highlight(Theme.of(context).primaryColor.withOpacity(.075)),
           NikuIconButton(
             Icon(Icons.image),
           )
@@ -90,64 +84,32 @@ class HomePage extends StatelessWidget {
               .onPressed(() {})
               .tooltip("Image")
               .niku()
-              .my(8)
-              .build(),
-          NikuButton(
-            NikuText("Elevated Button").style(baseText),
+              .my(8),
+          NikuButton.elevated(
+            NikuText("Elevated Button").apply(baseText),
           )
               .apply(baseButton)
               .onPressed(() {
                 print("Elevated Button");
               })
               .overlay(Colors.white12)
-              .elevation(base: 2)
-              .elevated(),
-          NikuButton(
+              .elevation(base: 2),
+          NikuButton.outlined(
             NikuText("Outlined Button")
                 .apply(baseText)
-                .color(Theme.of(context).primaryColor)
-                .build(),
-          )
-              .apply(baseButton)
-              .onPressed(() {
-                print("Outlined Button");
-              })
-              .borderColor(
-                base: Colors.black12,
-                selected: Theme.of(context).primaryColor,
-              )
-              .outlined(),
-          NikuText("Material")
-              .fontSize(21)
-              .color(Colors.white)
-              .niku()
-              .px(40)
-              .py(20)
-              .on(tap: () {
-                print("Material");
-              })
-              .inkwell(splash: Colors.white24, highlight: Colors.white24)
-              .material(color: Theme.of(context).primaryColor)
-              .rounded(8)
-              .builder((child) {
-                return Container(
-                  margin: EdgeInsets.symmetric(
-                    vertical: 20,
-                  ),
-                  child: child,
-                );
-              })
-              .build(),
+                .color(Theme.of(context).primaryColor),
+          ).apply(baseButton).onPressed(() {
+            print("Outlined Button");
+          }).bc(Colors.blue),
           NikuStack([
             Text("Text in Niku Stack"),
-            Text("Text with Niku Property").niku().mt(40).build(),
-          ]).topCenter().niku().maxHeight(100).build(),
+            Text("Text with Niku Property").niku().mt(40),
+          ]).topCenter().niku().maxHeight(100),
           Niku()
               .size(40, 40)
               .bg(Theme.of(context).primaryColor)
               .rounded()
               .my(20)
-              .build()
         ],
       )
           .justifyCenter()
@@ -157,8 +119,7 @@ class HomePage extends StatelessWidget {
                 .w600()
                 .color(Theme.of(context).primaryColor)
                 .niku()
-                .mb(20)
-                .build(),
+                .mb(20),
           )
           .append(
             NikuTextField("Niku Text Field")
@@ -172,8 +133,7 @@ class HomePage extends StatelessWidget {
                   )
                       .onPressed(() {})
                       .highlight(Colors.transparent)
-                      .splash(Colors.transparent)
-                      .build(),
+                      .splash(Colors.transparent),
                 )
                 .color(Colors.black87)
                 .border(
@@ -183,15 +143,13 @@ class HomePage extends StatelessWidget {
                 )
                 .niku()
                 .maxWidth(320)
-                .my(20)
-                .build(),
+                .my(20),
           )
           .niku()
           .my(40)
           .scrollable()
           .fullWidth()
-          .center()
-          .build(),
+          .center(),
     );
   }
 }
