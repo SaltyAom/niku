@@ -12,7 +12,6 @@ export './extension/niku.dart';
 // NT
 export 'ntWidget/base.dart';
 export 'ntWidget/text.dart';
-export 'ntWidget/ntText.dart';
-export 'ntWidget/ntText4.dart';
+export 'ntWidget/button.dart';
 
 export 'ntExtension/niku.dart';

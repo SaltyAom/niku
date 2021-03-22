@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'dart:ui';
 
-import 'package:niku/ntWidget/base.dart';
+import 'base.dart';
 
 /// Niku extension for Text
 ///
@@ -11,7 +11,7 @@ import 'package:niku/ntWidget/base.dart';
 ///
 /// Example usage:
 /// ```
-/// NikuText("Text")
+/// NTNikuText("Text")
 ///   .color(Colors.blue)
 ///   .fontSize(21)
 ///   .build()
@@ -20,7 +20,8 @@ import 'package:niku/ntWidget/base.dart';
 /// Meta property list:
 /// - niku() - Switch to Niku() property
 /// - build() - Apply styles and build Text as Widget
-/// - apply() - Apply existing NikuText's property to current style
+/// - apply() - Apply existing NTNikuText's property to current style
+/// - style() - Apply existing NTNikuText's property to current style and build
 ///
 /// Style Property list:
 /// - text - Set text
@@ -51,7 +52,7 @@ import 'package:niku/ntWidget/base.dart';
 /// - height - Fixed height for text
 /// - forground - The paint drawn as a foreground for the text.
 /// - background - The paint drawn as a background for the text.
-/// - textShadows - Collection of text's shadow
+/// - shadows - Collection of text's shadow
 /// - fontFeatures - A feature tag and value that affect the selection of glyphs in a font
 /// - textDecoration - Text decoration
 /// - textDecorationColor - Text decoration's color
@@ -77,7 +78,7 @@ import 'package:niku/ntWidget/base.dart';
 /// - semanticsLabel, label - Semantics label for text, good for screen reader
 /// - textWidthBasis - Defines how to measure the width of the rendered text
 /// - textHeightBehavior - Defines how the paragraph will apply [TextStyle.height] to the ascent of the first line and descent of the last line
-class NTNikuText extends NTNiku {
+class NTNikuText extends StatelessWidget {
   String _text;
 
   Color? _color;
@@ -116,7 +117,7 @@ class NTNikuText extends NTNiku {
   ///
   /// Example usage:
   /// ```
-  /// NikuText("Text")
+  /// NTNikuText("Text")
   ///   .color(Colors.blue)
   ///   .fontSize(21)
   ///   .build()
@@ -125,8 +126,8 @@ class NTNikuText extends NTNiku {
   /// Meta property list:
   /// - niku() - Switch to Niku() property
   /// - build() - Apply styles and build Text as Widget
-  /// - apply() - Apply existing NikuText's property to current style
-  /// - style() - Apply existing NikuText's property to current style and build
+  /// - apply() - Apply existing NTNikuText's property to current style
+  /// - style() - Apply existing NTNikuText's property to current style and build
   ///
   /// Style Property list:
   /// - color - Color of text
@@ -156,7 +157,7 @@ class NTNikuText extends NTNiku {
   /// - height - Fixed height for text
   /// - forground - The paint drawn as a foreground for the text
   /// - background - The paint drawn as a background for the text
-  /// - textShadows - Collection of text's shadow
+  /// - shadows - Collection of text's shadow
   /// - fontFeatures - A feature tag and value that affect the selection of glyphs in a font
   /// - textDecoration - Text decoration
   /// - textDecorationColor - Text decoration's color
@@ -190,11 +191,7 @@ class NTNikuText extends NTNiku {
   ///   - pl - apply padding left side
   ///   - pb - apply padding bottom side
   ///   - pl - apply padding right side
-  NTNikuText([this._text = ""]) {
-    super.setBase(Text(_text));
-
-    super.setNiku(false);
-  }
+  NTNikuText(this._text);
 
   /// Set text content
   ///
@@ -202,11 +199,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// Text(input)
   /// ```
-  void text(String text) {
-    assert(!super.useNiku,
-        "Can't use '.text()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText text(String text) {
     _text = text;
+
+    return this;
   }
 
   /// Set color of text
@@ -215,11 +211,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// TextStyle(color: input)
   /// ```
-  void color(Color color) {
-    assert(!super.useNiku,
-        "Can't use '.color()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText color(Color color) {
     _color = color;
+
+    return this;
   }
 
   /// Set background color of text
@@ -228,11 +223,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// TextStyle(backgroundColor: input)
   /// ```
-  void backgroundColor(Color backgroundColor) {
-    if (super.useNiku)
-      super.bg(backgroundColor);
-    else
-      _backgroundColor = backgroundColor;
+  NTNikuText backgroundColor(Color backgroundColor) {
+    _backgroundColor = backgroundColor;
+
+    return this;
   }
 
   /// Set background color of text
@@ -241,11 +235,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// TextStyle(backgroundColor: input)
   /// ```
-  void bg(Color backgroundColor) {
-    if (super.useNiku)
-      super.bg(backgroundColor);
-    else
-      _backgroundColor = backgroundColor;
+  NTNikuText bg(Color backgroundColor) {
+    _backgroundColor = backgroundColor;
+
+    return this;
   }
 
   /// Set size of text
@@ -254,11 +247,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// TextStyle(fontSize: input)
   /// ```
-  void fontSize(double fontSize) {
-    assert(!super.useNiku,
-        "Can't use '.fontSize()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText fontSize(double fontSize) {
     _fontSize = fontSize;
+
+    return this;
   }
 
   /// The thickness of the glyphs used to draw the text
@@ -267,11 +259,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// TextStyle(fontSize: input)
   /// ```
-  void fontWeight(FontWeight fontWeight) {
-    assert(!super.useNiku,
-        "Can't use '.fontWeight()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText fontWeight(FontWeight fontWeight) {
     _fontWeight = fontWeight;
+
+    return this;
   }
 
   /// Set font to bold, using [FontWeight.bold]
@@ -282,11 +273,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// TextStyle(FontWeight: FontWeight.bold)
   /// ```
-  void bold() {
-    assert(!super.useNiku,
-        "Can't use '.bold()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText bold() {
     _fontWeight = FontWeight.bold;
+
+    return this;
   }
 
   /// Use font weight of 100
@@ -297,11 +287,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// TextStyle(FontWeight: FontWeight.100)
   /// ```
-  void w100() {
-    assert(!super.useNiku,
-        "Can't use '.w100()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText w100() {
     _fontWeight = FontWeight.w100;
+
+    return this;
   }
 
   /// Use font weight of 200
@@ -312,11 +301,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// TextStyle(FontWeight: FontWeight.200)
   /// ```
-  void w200() {
-    assert(!super.useNiku,
-        "Can't use '.w200()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText w200() {
     _fontWeight = FontWeight.w200;
+
+    return this;
   }
 
   /// Use font weight of 300
@@ -327,11 +315,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// TextStyle(FontWeight: FontWeight.300)
   /// ```
-  void w300() {
-    assert(!super.useNiku,
-        "Can't use '.w300()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText w300() {
     _fontWeight = FontWeight.w300;
+
+    return this;
   }
 
   /// Use font weight of 400
@@ -342,11 +329,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// TextStyle(FontWeight: FontWeight.400)
   /// ```
-  void w400() {
-    assert(!super.useNiku,
-        "Can't use '.w400()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText w400() {
     _fontWeight = FontWeight.w400;
+
+    return this;
   }
 
   /// Use font weight of 500
@@ -357,11 +343,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// TextStyle(FontWeight: FontWeight.500)
   /// ```
-  void w500() {
-    assert(!super.useNiku,
-        "Can't use '.w500()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText w500() {
     _fontWeight = FontWeight.w500;
+
+    return this;
   }
 
   /// Use font weight of 600
@@ -372,11 +357,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// TextStyle(FontWeight: FontWeight.600)
   /// ```
-  void w600() {
-    assert(!super.useNiku,
-        "Can't use '.w600()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText w600() {
     _fontWeight = FontWeight.w600;
+
+    return this;
   }
 
   /// Use font weight of 700
@@ -387,11 +371,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// TextStyle(FontWeight: FontWeight.700)
   /// ```
-  void w700() {
-    assert(!super.useNiku,
-        "Can't use '.w700()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText w700() {
     _fontWeight = FontWeight.w700;
+
+    return this;
   }
 
   /// Use font weight of 800
@@ -402,11 +385,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// TextStyle(FontWeight: FontWeight.800)
   /// ```
-  void w800() {
-    assert(!super.useNiku,
-        "Can't use '.w800()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText w800() {
     _fontWeight = FontWeight.w800;
+
+    return this;
   }
 
   /// Use font weight of 900
@@ -417,11 +399,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// TextStyle(fontWeight: FontWeight.900)
   /// ```
-  void w900() {
-    assert(!super.useNiku,
-        "Can't use '.w900()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText w900() {
     _fontWeight = FontWeight.w900;
+
+    return this;
   }
 
   /// Whether to slant the glyphs in the font
@@ -430,11 +411,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// TextStyle(fontStyle: input)
   /// ```
-  void fontStyle(FontStyle fontStyle) {
-    assert(!super.useNiku,
-        "Can't use '.fontStyle()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText fontStyle(FontStyle fontStyle) {
     _fontStyle = fontStyle;
+
+    return this;
   }
 
   /// Whether to slant the glyphs in the font
@@ -443,11 +423,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// TextStyle(fontStyle: FontStyle.italic)
   /// ```
-  void italic() {
-    assert(!super.useNiku,
-        "Can't use '.italic()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText italic() {
     _fontStyle = FontStyle.italic;
+
+    return this;
   }
 
   /// Spacing for each letter
@@ -456,11 +435,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// TextStyle(letterSpacing: input)
   /// ```
-  void letterSpacing(double letterSpacing) {
-    assert(!super.useNiku,
-        "Can't use '.letterSpacing()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText letterSpacing(double letterSpacing) {
     _letterSpacing = letterSpacing;
+
+    return this;
   }
 
   /// Spacing for each word
@@ -469,11 +447,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// Text(wordSpacing: input)
   /// ```
-  void wordSpacing(double wordSpacing) {
-    assert(!super.useNiku,
-        "Can't use '.wordSpacing()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText wordSpacing(double wordSpacing) {
     _wordSpacing = wordSpacing;
+
+    return this;
   }
 
   /// Fixed height for text
@@ -482,11 +459,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// TextStyle(height: input)
   /// ```
-  void height(double height) {
-    assert(!super.useNiku,
-        "Can't use '.height()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText height(double height) {
     _height = height;
+
+    return this;
   }
 
   /// - forground - The paint drawn as a foreground for the text.
@@ -495,11 +471,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// TextStyle(foreground: input)
   /// ```
-  void foreground(Paint foreground) {
-    assert(!super.useNiku,
-        "Can't use '.foreground()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText foreground(Paint foreground) {
     _foreground = foreground;
+
+    return this;
   }
 
   /// - forground - The paint drawn as a foreground for the text.
@@ -508,11 +483,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// TextStyle(background: input)
   /// ```
-  void background(Paint background) {
-    assert(!super.useNiku,
-        "Can't use '.background()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText background(Paint background) {
     _background = background;
+
+    return this;
   }
 
   /// Collection of text's shadow
@@ -521,11 +495,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// TextStyle(shadows: input)
   /// ```
-  void textShadows(List<Shadow> shadows) {
-    assert(!super.useNiku,
-        "Can't use '.textShadows()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText shadows(List<Shadow> shadows) {
     _shadows = shadows;
+
+    return this;
   }
 
   /// A feature tag and value that affect the selection of glyphs in a font
@@ -534,11 +507,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// TextStyle(fontFeatures: input)
   /// ```
-  void fontFeatures(List<FontFeature> fontFeatures) {
-    assert(!super.useNiku,
-        "Can't use '.fontFeature()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText fontFeatures(List<FontFeature> fontFeatures) {
     _fontFeatures = fontFeatures;
+
+    return this;
   }
 
   /// Text decoration
@@ -547,11 +519,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// TextStyle(decoration: input)
   /// ```
-  void decoration(TextDecoration textDecoration) {
-    assert(!super.useNiku,
-        "Can't use '.textDecoration()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText textDecoration(TextDecoration textDecoration) {
     _textDecoration = textDecoration;
+
+    return this;
   }
 
   /// Color of text decoration
@@ -560,11 +531,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// TextStyle(decorationColor: input)
   /// ```
-  void decorationColor(Color textDecorationColor) {
-    assert(!super.useNiku,
-        "Can't use '.textDecorationColor()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText textDecorationColor(Color textDecorationColor) {
     _textDecorationColor = textDecorationColor;
+
+    return this;
   }
 
   /// Thickness of text decoration
@@ -573,11 +543,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// TextStyle(decorationThickness: input)
   /// ```
-  void decorationThickness(double textDecorationThickness) {
-    assert(!super.useNiku,
-        "Can't use '.decorationThickness()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText textDecorationThickness(double textDecorationThickness) {
     _textDecorationThickness = textDecorationThickness;
+
+    return this;
   }
 
   /// Apply font to text
@@ -586,11 +555,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// TextStyle(fontFamily: input)
   /// ```
-  void fontFamily(String fontFamily) {
-    assert(!super.useNiku,
-        "Can't use '.fontFamily()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText fontFamily(String fontFamily) {
     _fontFamily = fontFamily;
+
+    return this;
   }
 
   /// Apply font to text
@@ -599,11 +567,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// TextStyle(fontFamilyFallback: input)
   /// ```
-  void fontFamilyFallback(List<String> fontFamily) {
-    assert(!super.useNiku,
-        "Can't use '.fontFamilyFallback()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText fontFamilyFallback(List<String> fontFamily) {
     _fontFamilyFallback = fontFamily;
+
+    return this;
   }
 
   /// The common baseline that should be aligned between this text span and its parent text span, or, for the root text spans, with the line box.
@@ -612,11 +579,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// TextStyle(textBaseline: input)
   /// ```
-  void textBaseline(TextBaseline textBaseline) {
-    assert(!super.useNiku,
-        "Can't use '.textBaseline()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText textBaseline(TextBaseline textBaseline) {
     _textBaseline = textBaseline;
+
+    return this;
   }
 
   /// Using [TextBaseline.alphabetic]
@@ -625,11 +591,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// TextStyle(textBaseline: Textbaseline.alphabetic)
   /// ```
-  void alphabetic() {
-    assert(!super.useNiku,
-        "Can't use '.alphabetic()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText alphabetic() {
     _textBaseline = TextBaseline.alphabetic;
+
+    return this;
   }
 
   /// Using [TextBaseline.ideographic]
@@ -638,11 +603,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// TextStyle(textBaseline: Textbaseline.ideographic)
   /// ```
-  void ideographic() {
-    assert(!super.useNiku,
-        "Can't use '.ideographic()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText ideographic() {
     _textBaseline = TextBaseline.ideographic;
+
+    return this;
   }
 
   /// The common baseline that should be aligned between this text span and its parent text span, or, for the root text spans, with the line box.
@@ -651,11 +615,22 @@ class NTNikuText extends NTNiku {
   /// ```
   /// Text(textAlign: input)
   /// ```
-  void textAlign(TextAlign textAlign) {
-    assert(!super.useNiku,
-        "Can't use '.textAlign()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText textAlign(TextAlign textAlign) {
     _textAlign = textAlign;
+
+    return this;
+  }
+
+  /// The common baseline that should be aligned between this text span and its parent text span, or, for the root text spans, with the line box.
+  ///
+  /// Equivalent to
+  /// ```
+  /// Text(textAlign: input)
+  /// ```
+  NTNikuText align(TextAlign textAlign) {
+    _textAlign = textAlign;
+
+    return this;
   }
 
   /// Set alignment to left
@@ -664,11 +639,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// Text(textAlign: TextAlign.left)
   /// ```
-  void alignLeft() {
-    assert(!super.useNiku,
-        "Can't use '.alignLeft()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText alignLeft() {
     _textAlign = TextAlign.left;
+
+    return this;
   }
 
   /// Set alignment to left
@@ -677,11 +651,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// Text(textAlign: TextAlign.left)
   /// ```
-  void left() {
-    assert(!super.useNiku,
-        "Can't use '.left()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText left() {
     _textAlign = TextAlign.left;
+
+    return this;
   }
 
   /// Set alignment to center
@@ -690,11 +663,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// Text(textAlign: TextAlign.center)
   /// ```
-  void alignCenter() {
-    assert(!super.useNiku,
-        "Can't use '.center()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText alignCenter() {
     _textAlign = TextAlign.center;
+
+    return this;
   }
 
   /// Set alignment to center
@@ -703,11 +675,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// Text(textAlign: TextAlign.center)
   /// ```
-  void center() {
-    if (super.useNiku)
-      super.center();
-    else
-      _textAlign = TextAlign.center;
+  NTNikuText center() {
+    _textAlign = TextAlign.center;
+
+    return this;
   }
 
   /// Set alignment to right
@@ -716,11 +687,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// Text(textAlign: TextAlign.right)
   /// ```
-  void alignRight() {
-    assert(!super.useNiku,
-        "Can't use '.alignRight()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText alignRight() {
     _textAlign = TextAlign.right;
+
+    return this;
   }
 
   /// Set alignment to right
@@ -729,11 +699,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// Text(textAlign: TextAlign.right)
   /// ```
-  void right() {
-    assert(!super.useNiku,
-        "Can't use '.right()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText right() {
     _textAlign = TextAlign.right;
+
+    return this;
   }
 
   /// Set alignment to start, suitable for dynamic [TextDirection]
@@ -742,11 +711,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// Text(textAlign: TextAlign.start)
   /// ```
-  void alignStart() {
-    assert(!super.useNiku,
-        "Can't use '.start()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText alignStart() {
     _textAlign = TextAlign.start;
+
+    return this;
   }
 
   /// Set alignment to start, suitable for dynamic [TextDirection]
@@ -755,11 +723,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// Text(textAlign: TextAlign.start)
   /// ```
-  void start() {
-    assert(!super.useNiku,
-        "Can't use '.start()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText start() {
     _textAlign = TextAlign.start;
+
+    return this;
   }
 
   /// Set alignment to end, suitable for dynamic [TextDirection]
@@ -768,11 +735,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// Text(textAlign: TextAlign.end)
   /// ```
-  void alignEnd() {
-    assert(!super.useNiku,
-        "Can't use '.aligEnd()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText alignEnd() {
     _textAlign = TextAlign.end;
+
+    return this;
   }
 
   /// Set alignment to end, suitable for dynamic [TextDirection]
@@ -781,11 +747,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// Text(textAlign: TextAlign.end)
   /// ```
-  void end() {
-    assert(!super.useNiku,
-        "Can't use '.end()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText end() {
     _textAlign = TextAlign.end;
+
+    return this;
   }
 
   /// Set alignment to justify
@@ -794,11 +759,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// Text(textAlign: TextAlign.justify)
   /// ```
-  void alignJustify() {
-    assert(!super.useNiku,
-        "Can't use '.alignJustify()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText alignJustify() {
     _textAlign = TextAlign.justify;
+
+    return this;
   }
 
   /// Set alignment to justify
@@ -807,11 +771,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// Text(textAlign: TextAlign.justify)
   /// ```
-  void justify() {
-    assert(!super.useNiku,
-        "Can't use '.justify()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText justify() {
     _textAlign = TextAlign.justify;
+
+    return this;
   }
 
   /// Set whether text is left-to-right or right-to-left direction.
@@ -820,11 +783,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// Text(textDirection: input)
   /// ```
-  void textDirection(TextDirection textDirection) {
-    assert(!super.useNiku,
-        "Can't use '.textDirection()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText textDirection(TextDirection textDirection) {
     _textDirection = textDirection;
+
+    return this;
   }
 
   /// Use left-to-right direction
@@ -833,11 +795,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// Text(textDirection: TextDirection.ltr)
   /// ```
-  void ltr() {
-    assert(!super.useNiku,
-        "Can't use '.ltr()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText ltr() {
     _textDirection = TextDirection.ltr;
+
+    return this;
   }
 
   /// Use right-to-left direction
@@ -846,11 +807,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// Text(textDirection: TextDirection.rtl)
   /// ```
-  void rtl() {
-    assert(!super.useNiku,
-        "Can't use '.rtl()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText rtl() {
     _textDirection = TextDirection.rtl;
+
+    return this;
   }
 
   /// Set locale languages of text
@@ -859,11 +819,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// Text(locale: input)
   /// ```
-  void locale(Locale locale) {
-    assert(!super.useNiku,
-        "Can't use '.locale()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText locale(Locale locale) {
     _locale = locale;
+
+    return this;
   }
 
   /// Whether the text should break at soft line breaks.
@@ -872,11 +831,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// Text(softWrap: input)
   /// ```
-  void softWrap(bool softWrap) {
-    assert(!super.useNiku,
-        "Can't use '.softWrap()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText softWrap(bool softWrap) {
     _softWrap = softWrap;
+
+    return this;
   }
 
   /// How visual overflow should be handled
@@ -885,11 +843,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// Text(overflow: input)
   /// ```
-  void overflow(TextOverflow overflow) {
-    assert(!super.useNiku,
-        "Can't use '.overflow()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText overflow(TextOverflow overflow) {
     _overflow = overflow;
+
+    return this;
   }
 
   /// The number of font pixels for each logical pixel
@@ -898,11 +855,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// Text(textScaleFactor: input)
   /// ```
-  void textScaleFactor(double textScaleFactor) {
-    assert(!super.useNiku,
-        "Can't use '.textScaleFactor()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText textScaleFactor(double textScaleFactor) {
     _textScaleFactor = textScaleFactor;
+
+    return this;
   }
 
   /// Max line for text
@@ -911,11 +867,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// Text(maxLines: input)
   /// ```
-  void maxLines(int maxLines) {
-    assert(!super.useNiku,
-        "Can't use '.maxLines()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText maxLines(int maxLines) {
     _maxLines = maxLines;
+
+    return this;
   }
 
   /// Semantics label for text, good for screen reader
@@ -924,11 +879,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// Text(semanticsLabel: input)
   /// ```
-  void label(String semanticsLabel) {
-    assert(!super.useNiku,
-        "Can't use '.label()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText label(String semanticsLabel) {
     _semanticsLabel = semanticsLabel;
+
+    return this;
   }
 
   /// Semantics label for text, good for screen reader
@@ -937,11 +891,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// Text(semanticsLabel: input)
   /// ```
-  void semanticsLabel(String semanticsLabel) {
-    assert(!super.useNiku,
-        "Can't use '.semanticLabel()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText semanticsLabel(String semanticsLabel) {
     _semanticsLabel = semanticsLabel;
+
+    return this;
   }
 
   /// Defines how to measure the width of the rendered text
@@ -950,11 +903,10 @@ class NTNikuText extends NTNiku {
   /// ```
   /// Text(textWidthBasis: input)
   /// ```
-  void textWidthBasis(TextWidthBasis textWidthBasis) {
-    assert(!super.useNiku,
-        "Can't use '.textWidthBasis()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText textWidthBasis(TextWidthBasis textWidthBasis) {
     _textWidthBasis = textWidthBasis;
+
+    return this;
   }
 
   /// Defines how the paragraph will apply [TextStyle.height] to the ascent of the first line and descent of the last line
@@ -963,76 +915,115 @@ class NTNikuText extends NTNiku {
   /// ```
   /// Text(textHeightBehavior: input)
   /// ```
-  void textHeightBehavior(TextHeightBehavior textHeightBehavior) {
-    assert(!super.useNiku,
-        "Can't use '.textHeightBehavior()' because Niku has been called on NikuText('$_text')");
-
+  NTNikuText textHeightBehavior(TextHeightBehavior textHeightBehavior) {
     _textHeightBehavior = textHeightBehavior;
+
+    return this;
   }
 
-  /// Apply existing NikuText's property to current style
+  /// Apply existing NTNikuText's property to current style
   ///
   /// Example usage:
   /// ```
-  /// final style = NikuText(null)
+  /// final style = NTNikuText(null)
   ///   .color(Colors.blue)
   ///   .fontSize(21)
   ///
-  /// final bold = NikuText(null)
+  /// final bold = NTNikuText(null)
   ///   .bold()
   ///
   /// build(context) {
   ///   return (
-  ///     NikuText("Applied Style")
+  ///     NTNikuText("Applied Style")
   ///       .apply(style) // Will have blue color and font size of 21
   ///       .apply(bold) // Will have bold style
   ///       .build() // Will combine all style
   ///   )
   /// }
   /// ```
-  void apply(NTNikuText instance) {
-    assert(!super.useNiku,
-        "Can't use '.apply()' because Niku has been called on NikuText('$_text')");
+  NTNikuText apply(NTNikuText instance) => set(
+        color: instance._color ?? _color,
+        backgroundColor: instance._backgroundColor ?? _backgroundColor,
+        fontSize: instance._fontSize ?? _fontSize,
+        fontWeight: instance._fontWeight ?? _fontWeight,
+        letterSpacing: instance._letterSpacing ?? _letterSpacing,
+        wordSpacing: instance._wordSpacing ?? _wordSpacing,
+        height: instance._height ?? _height,
+        foreground: instance._foreground ?? _foreground,
+        background: instance._background ?? _background,
+        shadows: instance._shadows ?? _shadows,
+        fontFeatures: instance._fontFeatures ?? _fontFeatures,
+        textDecoration: instance._textDecoration ?? _textDecoration,
+        textDecorationColor:
+            instance._textDecorationColor ?? _textDecorationColor,
+        textDecorationThickness:
+            instance._textDecorationThickness ?? _textDecorationThickness,
+        fontFamily: instance._fontFamily ?? _fontFamily,
+        fontFamilyFallback: instance._fontFamilyFallback ?? _fontFamilyFallback,
+        textBaseline: instance._textBaseline ?? _textBaseline,
+        textDirection: instance._textDirection ?? _textDirection,
+        textAlign: instance._textAlign ?? _textAlign,
+        locale: instance._locale ?? _locale,
+        softWrap: instance._softWrap ?? _softWrap,
+        overflow: instance._overflow ?? _overflow,
+        textScaleFactor: instance._textScaleFactor ?? _textScaleFactor,
+        maxLines: instance._maxLines ?? _maxLines,
+        semanticsLabel: instance._semanticsLabel ?? _semanticsLabel,
+        textWidthBasis: instance._textWidthBasis ?? _textWidthBasis,
+        textHeightBehavior: instance._textHeightBehavior ?? _textHeightBehavior,
+      );
 
-    set(
-      color: instance._color ?? _color,
-      backgroundColor: instance._backgroundColor ?? _backgroundColor,
-      fontSize: instance._fontSize ?? _fontSize,
-      fontWeight: instance._fontWeight ?? _fontWeight,
-      letterSpacing: instance._letterSpacing ?? _letterSpacing,
-      wordSpacing: instance._wordSpacing ?? _wordSpacing,
-      height: instance._height ?? _height,
-      foreground: instance._foreground ?? _foreground,
-      background: instance._background ?? _background,
-      shadows: instance._shadows ?? _shadows,
-      fontFeatures: instance._fontFeatures ?? _fontFeatures,
-      textDecoration: instance._textDecoration ?? _textDecoration,
-      textDecorationColor:
-          instance._textDecorationColor ?? _textDecorationColor,
-      textDecorationThickness:
-          instance._textDecorationThickness ?? _textDecorationThickness,
-      fontFamily: instance._fontFamily ?? _fontFamily,
-      fontFamilyFallback: instance._fontFamilyFallback ?? _fontFamilyFallback,
-      textBaseline: instance._textBaseline ?? _textBaseline,
-      textDirection: instance._textDirection ?? _textDirection,
-      textAlign: instance._textAlign ?? _textAlign,
-      locale: instance._locale ?? _locale,
-      softWrap: instance._softWrap ?? _softWrap,
-      overflow: instance._overflow ?? _overflow,
-      textScaleFactor: instance._textScaleFactor ?? _textScaleFactor,
-      maxLines: instance._maxLines ?? _maxLines,
-      semanticsLabel: instance._semanticsLabel ?? _semanticsLabel,
-      textWidthBasis: instance._textWidthBasis ?? _textWidthBasis,
-      textHeightBehavior: instance._textHeightBehavior ?? _textHeightBehavior,
-    );
-  }
+  /// Apply styles and build Text as Widget
+  ///
+  /// Example usage:
+  /// ```
+  /// NTNikuText("Applied Style")
+  ///   .color(Colors.blue)
+  ///   .fontSize(21)
+  ///   .bold()
+  ///   .build() // Collect all style and render
+  /// ```
+  Text build(context) => Text(
+        _text,
+        key: key,
+        locale: _locale,
+        softWrap: _softWrap,
+        overflow: _overflow,
+        textScaleFactor: _textScaleFactor,
+        maxLines: _maxLines,
+        semanticsLabel: _semanticsLabel,
+        textWidthBasis: _textWidthBasis,
+        textHeightBehavior: _textHeightBehavior,
+        textDirection: _textDirection,
+        textAlign: _textAlign,
+        style: TextStyle(
+          color: _color,
+          backgroundColor: _backgroundColor,
+          fontSize: _fontSize,
+          fontWeight: _fontWeight,
+          fontStyle: _fontStyle,
+          letterSpacing: _letterSpacing,
+          wordSpacing: _wordSpacing,
+          textBaseline: _textBaseline,
+          height: _height,
+          fontFeatures: _fontFeatures,
+          foreground: _foreground,
+          background: _background,
+          decoration: _textDecoration,
+          decorationColor: _textDecorationColor,
+          decorationThickness: _textDecorationThickness,
+          shadows: _shadows,
+          fontFamily: _fontFamily,
+          fontFamilyFallback: _fontFamilyFallback,
+        ),
+      );
 
   /// Switch to Niku() property
   ///
-  /// After this method is called, property can't be applied anymore
+  /// After this method is called, NTNikuText property can't be applied anymore
   ///
   /// ```
-  /// NikuText("Applied Style")
+  /// NTNikuText("Applied Style")
   ///   .color(Colors.blue)
   ///   .fontSize(21)
   ///   .bold()
@@ -1040,16 +1031,13 @@ class NTNikuText extends NTNiku {
   ///   .my(20)
   ///   .build() // Collect all style and render
   /// ```
-  void niku() {
-    assert(!super.useNiku,
-        "Can't use '.niku()' because Niku has been called on NikuText('$_text')");
+  NTNiku niku() => NTNiku(
+        Builder(
+          builder: (context) => build(context),
+        ),
+      );
 
-    super.setWidget(createWidget());
-
-    super.setNiku(true);
-  }
-
-  void set({
+  NTNikuText set({
     Color? color,
     Color? backgroundColor,
     double? fontSize,
@@ -1079,9 +1067,6 @@ class NTNikuText extends NTNiku {
     TextWidthBasis? textWidthBasis,
     TextHeightBehavior? textHeightBehavior,
   }) {
-    assert(!super.useNiku,
-        "Can't use '.set()' because Niku has been called on NikuText('$_text')");
-
     _color = color;
     _backgroundColor = backgroundColor;
     _fontSize = fontSize;
@@ -1110,52 +1095,7 @@ class NTNikuText extends NTNiku {
     _semanticsLabel = semanticsLabel;
     _textWidthBasis = textWidthBasis;
     _textHeightBehavior = textHeightBehavior;
-  }
 
-  Widget createWidget() {
-    assert(!super.useNiku,
-        "Can't use '.createWidget()' because Niku has been called on NikuText('$_text')");
-
-    return Text(
-      _text,
-      key: key,
-      locale: _locale,
-      softWrap: _softWrap,
-      overflow: _overflow,
-      textScaleFactor: _textScaleFactor,
-      maxLines: _maxLines,
-      semanticsLabel: _semanticsLabel,
-      textWidthBasis: _textWidthBasis,
-      textHeightBehavior: _textHeightBehavior,
-      textDirection: _textDirection,
-      textAlign: _textAlign,
-      style: TextStyle(
-        color: _color,
-        backgroundColor: _backgroundColor,
-        fontSize: _fontSize,
-        fontWeight: _fontWeight,
-        fontStyle: _fontStyle,
-        letterSpacing: _letterSpacing,
-        wordSpacing: _wordSpacing,
-        textBaseline: _textBaseline,
-        height: _height,
-        fontFeatures: _fontFeatures,
-        foreground: _foreground,
-        background: _background,
-        decoration: _textDecoration,
-        decorationColor: _textDecorationColor,
-        decorationThickness: _textDecorationThickness,
-        shadows: _shadows,
-        fontFamily: _fontFamily,
-        fontFamilyFallback: _fontFamilyFallback,
-      ),
-    );
-  }
-
-  @override
-  build(context) {
-    if (super.useNiku) return this.widget;
-
-    return this.createWidget();
+    return this;
   }
 }

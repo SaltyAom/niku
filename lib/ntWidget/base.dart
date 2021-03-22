@@ -143,11 +143,6 @@ import 'package:flutter/rendering.dart';
 class NTNiku extends StatelessWidget {
   Widget _widget;
 
-  bool _niku = true;
-
-  // For logging
-  Widget? _base;
-
   /// Niku Widget for styling widget
   ///
   /// Style property builder for building Widget
@@ -283,28 +278,7 @@ class NTNiku extends StatelessWidget {
   ///   - scaleStart - The pointers in contact with the screen have established a focal point and initial scale of 1.0
   ///   - scaleUpdate - The pointers in contact with the screen have indicated a new focal point and/or scale
   ///   - scaleEnd - The pointers are no longer in contact with the screen
-  NTNiku([this._widget = const SizedBox.shrink()]) : _base = _widget;
-
-  @protected
-  Widget get widget => _widget;
-
-  @protected
-  void setWidget(Widget child) {
-    _widget = child;
-  }
-
-  @protected
-  bool get useNiku => _niku;
-
-  @protected
-  void setNiku(bool value) {
-    _niku = value;
-  }
-
-  @protected
-  void setBase(Widget widget) {
-    _base = widget;
-  }
+  NTNiku([this._widget = const SizedBox.shrink()]);
 
   @override
   build(context) => _widget;
@@ -324,8 +298,6 @@ class NTNiku extends StatelessWidget {
   ///  .build()
   /// ```
   void builder(Widget Function(Widget child) builder) {
-    assert(useNiku, "Can't use '.builder()' because Niku has not been called");
-
     _widget = builder(_widget);
   }
 
@@ -338,8 +310,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void margin(EdgeInsets margin) {
-    assert(useNiku, "Can't use '.margin()' because Niku has not been called");
-
     _widget = Container(
       margin: margin,
       child: _widget,
@@ -355,8 +325,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void m(double margin) {
-    assert(useNiku, "Can't use '.m()' because Niku has not been called");
-
     _widget = Container(
       margin: EdgeInsets.all(margin),
       child: _widget,
@@ -372,8 +340,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void mx(double margin) {
-    assert(useNiku, "Can't use '.mx()' because Niku has not been called");
-
     _widget = Container(
       margin: EdgeInsets.symmetric(horizontal: margin),
       child: _widget,
@@ -389,8 +355,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void my(double margin) {
-    assert(useNiku, "Can't use '.my()' because Niku has not been called");
-
     _widget = Container(
       margin: EdgeInsets.symmetric(vertical: margin),
       child: _widget,
@@ -406,8 +370,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void mt(double margin) {
-    assert(useNiku, "Can't use '.mt()' because Niku has not been called");
-
     _widget = Container(
       margin: EdgeInsets.only(top: margin),
       child: _widget,
@@ -423,8 +385,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void mb(double margin) {
-    assert(useNiku, "Can't use '.mb()' because Niku has not been called");
-
     _widget = Container(
       margin: EdgeInsets.only(bottom: margin),
       child: _widget,
@@ -440,8 +400,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void ml(double margin) {
-    assert(useNiku, "Can't use '.ml()' because Niku has not been called");
-
     _widget = Container(
       margin: EdgeInsets.only(left: margin),
       child: _widget,
@@ -457,8 +415,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void mr(double margin) {
-    assert(useNiku, "Can't use '.mr()' because Niku has not been called");
-
     _widget = Container(
       margin: EdgeInsets.only(right: margin),
       child: _widget,
@@ -474,8 +430,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void padding(EdgeInsets padding) {
-    assert(useNiku, "Can't use '.padding()' because Niku has not been called");
-
     _widget = Padding(
       padding: padding,
       child: _widget,
@@ -491,9 +445,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void p(double padding) {
-    assert(
-        useNiku, "Can't use '.p()' because Niku has not been called on $_base");
-
     _widget = Padding(
       padding: EdgeInsets.all(padding),
       child: _widget,
@@ -509,8 +460,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void px(double padding) {
-    assert(useNiku, "Can't use '.px()' because Niku has not been called");
-
     _widget = Padding(
       padding: EdgeInsets.symmetric(horizontal: padding),
       child: _widget,
@@ -526,8 +475,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void py(double padding) {
-    assert(useNiku, "Can't use '.py()' because Niku has not been called");
-
     _widget = Padding(
       padding: EdgeInsets.symmetric(vertical: padding),
       child: _widget,
@@ -543,8 +490,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void pt(double padding) {
-    assert(useNiku, "Can't use '.pt()' because Niku has not been called");
-
     _widget = Padding(
       padding: EdgeInsets.only(top: padding),
       child: _widget,
@@ -560,8 +505,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void pb(double padding) {
-    assert(useNiku, "Can't use '.pb()' because Niku has not been called");
-
     _widget = Padding(
       padding: EdgeInsets.only(bottom: padding),
       child: _widget,
@@ -577,8 +520,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void pl(double padding) {
-    assert(useNiku, "Can't use '.pl()' because Niku has not been called");
-
     _widget = Padding(
       padding: EdgeInsets.only(left: padding),
       child: _widget,
@@ -594,8 +535,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void pr(double padding) {
-    assert(useNiku, "Can't use '.pr()' because Niku has not been called");
-
     _widget = Padding(
       padding: EdgeInsets.only(right: padding),
       child: _widget,
@@ -611,8 +550,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void align(AlignmentGeometry align) {
-    assert(useNiku, "Can't use '.align()' because Niku has not been called");
-
     _widget = Align(
       alignment: align,
       child: _widget,
@@ -628,8 +565,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void topLeft() {
-    assert(useNiku, "Can't use '.topLeft()' because Niku has not been called");
-
     _widget = Align(
       alignment: Alignment.topLeft,
       child: _widget,
@@ -645,9 +580,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void topCenter() {
-    assert(
-        !useNiku, "Can't use '.topCenter()' because Niku has not been called");
-
     _widget = Align(
       alignment: Alignment.topCenter,
       child: _widget,
@@ -663,9 +595,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void topRight() {
-    assert(
-        !useNiku, "Can't use '.topRight()' because Niku has not been called");
-
     _widget = Align(
       alignment: Alignment.topRight,
       child: _widget,
@@ -681,9 +610,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void centerLeft() {
-    assert(
-        !useNiku, "Can't use '.centerLeft()' because Niku has not been called");
-
     _widget = Align(
       alignment: Alignment.centerLeft,
       child: _widget,
@@ -699,8 +625,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void center() {
-    assert(useNiku, "Can't use '.center()' because Niku has not been called");
-
     _widget = Center(
       child: _widget,
     );
@@ -715,9 +639,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void centerRight() {
-    assert(
-        useNiku, "Can't use '.centerRight()' because Niku has not been called");
-
     _widget = Align(
       alignment: Alignment.centerRight,
       child: _widget,
@@ -733,9 +654,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void bottomLeft() {
-    assert(
-        !useNiku, "Can't use '.bottomLeft()' because Niku has not been called");
-
     _widget = Align(
       alignment: Alignment.bottomLeft,
       child: _widget,
@@ -751,9 +669,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void bottomCenter() {
-    assert(useNiku,
-        "Can't use '.bottomCenter()' because Niku has not been called");
-
     _widget = Align(
       alignment: Alignment.bottomCenter,
       child: _widget,
@@ -769,9 +684,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void bottomRight() {
-    assert(
-        useNiku, "Can't use '.bottomRight()' because Niku has not been called");
-
     _widget = Align(
       alignment: Alignment.bottomRight,
       child: _widget,
@@ -787,9 +699,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void fullSize() {
-    assert(
-        !useNiku, "Can't use '.fullSize()' because Niku has not been called");
-
     _widget = SizedBox(
       width: double.infinity,
       height: double.infinity,
@@ -807,9 +716,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void fullWidth() {
-    assert(
-        !useNiku, "Can't use '.fullWidth()' because Niku has not been called");
-
     _widget = SizedBox(
       width: double.infinity,
       height: double.infinity,
@@ -826,9 +732,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void fullHeight() {
-    assert(
-        !useNiku, "Can't use '.fullHeight()' because Niku has not been called");
-
     _widget = SizedBox(
       height: double.infinity,
       child: _widget,
@@ -844,9 +747,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void aspectRatio(double aspectRatio) {
-    assert(
-        useNiku, "Can't use '.aspectRatio()' because Niku has not been called");
-
     _widget = AspectRatio(
       aspectRatio: aspectRatio,
       child: _widget,
@@ -860,9 +760,6 @@ class NTNiku extends StatelessWidget {
   /// Expanded()
   /// ```
   void expanded([int flex = 1]) {
-    assert(
-        !useNiku, "Can't use '.expanded()' because Niku has not been called");
-
     _widget = Expanded(child: _widget);
   }
 
@@ -876,9 +773,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void fractionSize(double width, double height) {
-    assert(useNiku,
-        "Can't use '.fractionSize()' because Niku has not been called");
-
     _widget = FractionallySizedBox(
       widthFactor: width,
       heightFactor: height,
@@ -895,9 +789,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void fractionWidth(double fraction) {
-    assert(useNiku,
-        "Can't use '.fractionWidth()' because Niku has not been called");
-
     _widget = FractionallySizedBox(
       widthFactor: fraction,
       child: _widget,
@@ -913,9 +804,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void fractionHeight(double fraction) {
-    assert(useNiku,
-        "Can't use '.fractionHeight()' because Niku has not been called");
-
     _widget = FractionallySizedBox(
       widthFactor: fraction,
       child: _widget,
@@ -933,9 +821,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void widthPercent(double percent) {
-    assert(useNiku,
-        "Can't use '.widthPercent()' because Niku has not been called");
-
     _widget = FractionallySizedBox(
       widthFactor: percent / 100,
       child: _widget,
@@ -953,9 +838,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void heightPercent(double percent) {
-    assert(useNiku,
-        "Can't use '.heightPercent()' because Niku has not been called");
-
     _widget = FractionallySizedBox(
       widthFactor: percent / 100,
       child: _widget,
@@ -974,9 +856,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void sizePercent(double width, double height) {
-    assert(
-        useNiku, "Can't use '.sizePercent()' because Niku has not been called");
-
     _widget = FractionallySizedBox(
       widthFactor: width / 100,
       heightFactor: height / 100,
@@ -991,9 +870,6 @@ class NTNiku extends StatelessWidget {
   /// Container()
   /// ```
   void container() {
-    assert(
-        !useNiku, "Can't use '.container()' because Niku has not been called");
-
     _widget = Container(
       child: _widget,
     );
@@ -1008,9 +884,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void constraints(BoxConstraints constraints) {
-    assert(
-        useNiku, "Can't use '.constraints()' because Niku has not been called");
-
     _widget = ConstrainedBox(
       constraints: constraints,
       child: _widget,
@@ -1029,8 +902,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void maxSize(double maxWidth, double maxHeight) {
-    assert(useNiku, "Can't use '.maxSize()' because Niku has not been called");
-
     _widget = ConstrainedBox(
       constraints: BoxConstraints(
         maxWidth: maxWidth,
@@ -1051,9 +922,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void maxWidth(double maxWidth) {
-    assert(
-        !useNiku, "Can't use '.maxWidth()' because Niku has not been called");
-
     _widget = ConstrainedBox(
       constraints: BoxConstraints(
         maxWidth: maxWidth,
@@ -1073,9 +941,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void maxHeight(double maxHeight) {
-    assert(
-        !useNiku, "Can't use '.maxHeight()' because Niku has not been called");
-
     _widget = ConstrainedBox(
       constraints: BoxConstraints(
         maxHeight: maxHeight,
@@ -1096,8 +961,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void minSize(double minWidth, double minHeight) {
-    assert(useNiku, "Can't use '.minSize()' because Niku has not been called");
-
     _widget = ConstrainedBox(
       constraints: BoxConstraints(
         minWidth: minWidth,
@@ -1118,9 +981,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void minWidth(double minWidth) {
-    assert(
-        !useNiku, "Can't use '.minWidth()' because Niku has not been called");
-
     _widget = ConstrainedBox(
       constraints: BoxConstraints(
         minWidth: minWidth,
@@ -1140,9 +1000,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void minHeight(double minHeight) {
-    assert(
-        !useNiku, "Can't use '.minHeight()' because Niku has not been called");
-
     _widget = ConstrainedBox(
       constraints: BoxConstraints(
         minHeight: minHeight,
@@ -1160,8 +1017,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void size(double width, double height) {
-    assert(useNiku, "Can't use '.size()' because Niku has not been called");
-
     _widget = SizedBox(
       width: width,
       height: height,
@@ -1178,8 +1033,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void width(double width) {
-    assert(useNiku, "Can't use '.width()' because Niku has not been called");
-
     _widget = SizedBox(
       width: width,
       child: _widget,
@@ -1195,8 +1048,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void height(double height) {
-    assert(useNiku, "Can't use '.height()' because Niku has not been called");
-
     _widget = SizedBox(
       height: height,
       child: _widget,
@@ -1210,8 +1061,6 @@ class NTNiku extends StatelessWidget {
   /// FittedBox()
   /// ```
   void fitted() {
-    assert(useNiku, "Can't use '.fitted()' because Niku has not been called");
-
     _widget = FittedBox(
       child: _widget,
     );
@@ -1226,8 +1075,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void bg(Color color) {
-    assert(useNiku, "Can't use '.bg()' because Niku has not been called");
-
     _widget = ColoredBox(
       color: color,
       child: _widget,
@@ -1243,9 +1090,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void backgroundColor(Color color) {
-    assert(useNiku,
-        "Can't use '.backgroundColor()' because Niku has not been called");
-
     _widget = ColoredBox(
       color: color,
       child: _widget,
@@ -1261,8 +1105,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void opacity(double opacity) {
-    assert(useNiku, "Can't use '.opacity()' because Niku has not been called");
-
     _widget = Opacity(
       opacity: opacity,
       child: _widget,
@@ -1280,8 +1122,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void rounded([double borderRadius = 999999]) {
-    assert(useNiku, "Can't use '.rounded()' because Niku has not been called");
-
     _widget = ClipRRect(
       borderRadius: BorderRadius.all(
         Radius.circular(borderRadius),
@@ -1299,9 +1139,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void boxDecoration(BoxDecoration boxDecoration) {
-    assert(useNiku,
-        "Can't use '.boxDecoration()' because Niku has not been called");
-
     _widget = DecoratedBox(
       child: _widget,
       decoration: boxDecoration,
@@ -1317,8 +1154,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void heroTag(String heroTag) {
-    assert(useNiku, "Can't use '.heroTag()' because Niku has not been called");
-
     _widget = Hero(
       tag: heroTag,
       child: _widget,
@@ -1334,9 +1169,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void ignorePointer(bool ignoring) {
-    assert(useNiku,
-        "Can't use '.ignorePointer()' because Niku has not been called");
-
     _widget = IgnorePointer(
       ignoring: ignoring,
       child: _widget,
@@ -1352,9 +1184,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void absorbPointer(bool absorbing) {
-    assert(useNiku,
-        "Can't use '.absorbPointer()' because Niku has not been called");
-
     _widget = AbsorbPointer(
       absorbing: absorbing,
       child: _widget,
@@ -1370,8 +1199,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void tooltip(String tip) {
-    assert(useNiku, "Can't use '.tooltip()' because Niku has not been called");
-
     _widget = Tooltip(
       message: tip,
       child: _widget,
@@ -1387,9 +1214,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void transform(Matrix4 transform) {
-    assert(
-        !useNiku, "Can't use '.transform()' because Niku has not been called");
-
     _widget = Transform(
       transform: transform,
       child: _widget,
@@ -1500,8 +1324,6 @@ class NTNiku extends StatelessWidget {
     void Function(ScaleUpdateDetails)? scaleUpdate,
     void Function(ScaleEndDetails)? scaleEnd,
   }) {
-    assert(useNiku, "Can't use '.on()' because Niku has not been called");
-
     _widget = GestureDetector(
       onTapDown: tapDown,
       onTapUp: tapUp,
@@ -1564,9 +1386,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void material({double elevation = 0, Color? color, Color? shadowColor}) {
-    assert(
-        !useNiku, "Can't use '.material()' because Niku has not been called");
-
     _widget = Material(
       child: _widget,
       elevation: elevation,
@@ -1597,8 +1416,6 @@ class NTNiku extends StatelessWidget {
     bool autofocus = false,
     VoidCallback? onTap,
   }) {
-    assert(useNiku, "Can't use '.inkwell()' because Niku has not been called");
-
     _widget = InkWell(
       child: _widget,
       hoverColor: hover,
@@ -1622,8 +1439,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void border(Border border) {
-    assert(useNiku, "Can't use '.border()' because Niku has not been called");
-
     _widget = DecoratedBox(
       decoration: BoxDecoration(
         border: border,
@@ -1641,9 +1456,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void backdropFilter(ImageFilter filter) {
-    assert(useNiku,
-        "Can't use '.backdropFilter()' because Niku has not been called");
-
     _widget = BackdropFilter(
       filter: filter,
       child: _widget,
@@ -1667,9 +1479,6 @@ class NTNiku extends StatelessWidget {
     double? bottom,
     double? right,
   }) {
-    assert(
-        !useNiku, "Can't use '.positioned()' because Niku has not been called");
-
     _widget = Positioned(
       top: top,
       left: left,
@@ -1695,9 +1504,6 @@ class NTNiku extends StatelessWidget {
     DragStartBehavior dragStartBehavior = DragStartBehavior.start,
     String? restorationId,
   }) {
-    assert(useNiku,
-        "Can't use '.singleChildScrollView()' because Niku has not been called");
-
     _widget = SingleChildScrollView(
       child: _widget,
       controller: controller,
@@ -1726,9 +1532,6 @@ class NTNiku extends StatelessWidget {
     DragStartBehavior dragStartBehavior = DragStartBehavior.start,
     String? restorationId,
   }) {
-    assert(
-        !useNiku, "Can't use '.scrollable()' because Niku has not been called");
-
     _widget = SingleChildScrollView(
       child: _widget,
       controller: controller,
@@ -1750,9 +1553,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void flexible([int flex = 1]) {
-    assert(
-        !useNiku, "Can't use '.flexible()' because Niku has not been called");
-
     _widget = Flexible(
       child: _widget,
       flex: flex,
@@ -1768,8 +1568,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void flex([int flex = 1]) {
-    assert(useNiku, "Can't use '.flex()' because Niku has not been called");
-
     _widget = Flexible(
       child: _widget,
       flex: flex,
@@ -1787,8 +1585,6 @@ class NTNiku extends StatelessWidget {
   /// )
   /// ```
   void shadows(List<BoxShadow> shadows) {
-    assert(useNiku, "Can't use '.shadows()' because Niku has not been called");
-
     _widget = DecoratedBox(
       child: _widget,
       decoration: BoxDecoration(
@@ -1815,9 +1611,6 @@ class NTNiku extends StatelessWidget {
     required Function(BuildContext context, Widget child) builder,
     required AnimationController animation,
   }) {
-    assert(useNiku,
-        "Can't use '.animatedContainer()' because Niku has not been called");
-
     _widget = AnimatedBuilder(
       animation: animation,
       builder: (context, child) => builder(context, _widget),
@@ -1843,9 +1636,6 @@ class NTNiku extends StatelessWidget {
     Function(BuildContext context, Widget child) builder,
     AnimationController animation,
   ) {
-    assert(
-        !useNiku, "Can't use '.animated()' because Niku has not been called");
-
     _widget = AnimatedBuilder(
       animation: animation,
       builder: (context, child) => builder(context, _widget),
@@ -1916,9 +1706,6 @@ class NTNiku extends StatelessWidget {
     VoidCallback? onDidLoseAccessibilityFocus,
     Map<CustomSemanticsAction, VoidCallback>? customSemanticsActions,
   }) {
-    assert(
-        !useNiku, "Can't use '.semantics()' because Niku has not been called");
-
     _widget = Semantics(
       child: _widget,
       container: container,
@@ -2008,9 +1795,6 @@ class NTNiku extends StatelessWidget {
     required Duration duration,
     VoidCallback? onEnd,
   }) {
-    assert(useNiku,
-        "Can't use '.animatedContainer()' because Niku has not been called");
-
     _widget = AnimatedContainer(
       child: _widget,
       alignment: alignment,

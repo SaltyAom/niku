@@ -5,11 +5,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 import 'package:niku/niku.dart';
 
-import 'dart:async';
-import 'dart:math';
-
-import 'package:english_words/english_words.dart';
-
 void main() {
   runApp(MyApp());
 }
@@ -37,88 +32,18 @@ class NTHomePage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Type2(),
+          NTNikuText("Hello World")..fontSize(32),
+          NTNikuButton.outlinedIcon(Icon(Icons.home))
+              .label(Text("Icon"))
+              .onPressed(() {})
+              .my(8)
+              .px(8)
+              .bc(Colors.blue)
         ],
       ).ntNiku()
         ..width(300)
         ..center(),
     );
-  }
-}
-
-class Type0 extends HookWidget {
-  build(context) {
-    final state = useState(0);
-    final word = useState("");
-
-    useEffect(() {
-      Timer.periodic(Duration(milliseconds: 1), (timer) {
-        state.value++;
-
-        word.value = generateWordPairs().take(16).join(" ");
-
-        if (state.value >= 5000) timer.cancel();
-      });
-
-      return;
-    }, []);
-
-    return NikuText(word.value)
-        .fontSize(Random().nextInt(16) + 16)
-        .color(Colors.black)
-        .niku()
-        .my(8)
-        .build();
-  }
-}
-
-class Type1 extends HookWidget {
-  build(context) {
-    final state = useState(0);
-    final word = useState("");
-
-    useEffect(() {
-      Timer.periodic(Duration(milliseconds: 1), (timer) {
-        state.value++;
-
-        word.value = generateWordPairs().take(16).join(" ");
-
-        if (state.value >= 5000) timer.cancel();
-      });
-
-      return;
-    }, []);
-
-    return NTNikuText(word.value)
-      ..fontSize(Random().nextInt(16) + 16)
-      ..color(Colors.black)
-      ..niku()
-      ..my(8);
-  }
-}
-
-class Type2 extends HookWidget {
-  build(context) {
-    final state = useState(0);
-    final word = useState("");
-
-    useEffect(() {
-      Timer.periodic(Duration(milliseconds: 1), (timer) {
-        state.value++;
-
-        word.value = generateWordPairs().take(16).join(" ");
-
-        if (state.value >= 5000) timer.cancel();
-      });
-
-      return;
-    }, []);
-
-    return NTText4(word.value)
-        .fontSize(Random().nextInt(16) + 16)
-        .color(Colors.black)
-        .niku()
-          ..my(8);
   }
 }
 
