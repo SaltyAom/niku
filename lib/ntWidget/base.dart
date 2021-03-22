@@ -283,9 +283,7 @@ class NTNiku extends StatelessWidget {
   ///   - scaleStart - The pointers in contact with the screen have established a focal point and initial scale of 1.0
   ///   - scaleUpdate - The pointers in contact with the screen have indicated a new focal point and/or scale
   ///   - scaleEnd - The pointers are no longer in contact with the screen
-  NTNiku([this._widget = const SizedBox.shrink()]) {
-    this._base = this._widget;
-  }
+  NTNiku([this._widget = const SizedBox.shrink()]) : _base = _widget;
 
   @protected
   Widget get widget => _widget;

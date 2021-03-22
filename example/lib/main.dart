@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
+import 'package:flutter_hooks/flutter_hooks.dart';
+
 import 'package:niku/niku.dart';
+
+import 'dart:async';
+import 'dart:math';
+
+import 'package:english_words/english_words.dart';
 
 void main() {
   runApp(MyApp());
@@ -21,40 +28,98 @@ class MyApp extends StatelessWidget {
 }
 
 class NTHomePage extends StatelessWidget {
-  build(context) => Scaffold(
-        appBar: AppBar(
-          title: Text("Hello World"),
-        ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              margin: const EdgeInsets.symmetric(vertical: 8),
-              child: Text(
-                "Text",
-                style: TextStyle(
-                  fontSize: 28,
-                  color: Colors.red,
-                ),
-              ),
-            ),
-            NikuText("Niku Text")
-                .fontSize(28)
-                .color(Colors.black)
-                .niku()
-                .my(8)
-                .build(),
-            NTNikuText("Niku Text NT")
-              ..fontSize(28)
-              ..color(Colors.blue)
-              ..niku()
-              ..my(8),
-          ],
-        ).ntNiku()
-          ..width(300)
-          ..center(),
-      );
+  build(context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Hello World"),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Type2(),
+        ],
+      ).ntNiku()
+        ..width(300)
+        ..center(),
+    );
+  }
+}
+
+class Type0 extends HookWidget {
+  build(context) {
+    final state = useState(0);
+    final word = useState("");
+
+    useEffect(() {
+      Timer.periodic(Duration(milliseconds: 1), (timer) {
+        state.value++;
+
+        word.value = generateWordPairs().take(16).join(" ");
+
+        if (state.value >= 5000) timer.cancel();
+      });
+
+      return;
+    }, []);
+
+    return NikuText(word.value)
+        .fontSize(Random().nextInt(16) + 16)
+        .color(Colors.black)
+        .niku()
+        .my(8)
+        .build();
+  }
+}
+
+class Type1 extends HookWidget {
+  build(context) {
+    final state = useState(0);
+    final word = useState("");
+
+    useEffect(() {
+      Timer.periodic(Duration(milliseconds: 1), (timer) {
+        state.value++;
+
+        word.value = generateWordPairs().take(16).join(" ");
+
+        if (state.value >= 5000) timer.cancel();
+      });
+
+      return;
+    }, []);
+
+    return NTNikuText(word.value)
+      ..fontSize(Random().nextInt(16) + 16)
+      ..color(Colors.black)
+      ..niku()
+      ..my(8);
+  }
+}
+
+class Type2 extends HookWidget {
+  build(context) {
+    final state = useState(0);
+    final word = useState("");
+
+    useEffect(() {
+      Timer.periodic(Duration(milliseconds: 1), (timer) {
+        state.value++;
+
+        word.value = generateWordPairs().take(16).join(" ");
+
+        if (state.value >= 5000) timer.cancel();
+      });
+
+      return;
+    }, []);
+
+    return NTText4(word.value)
+        .fontSize(Random().nextInt(16) + 16)
+        .color(Colors.black)
+        .niku()
+          ..my(8);
+  }
 }
 
 class HomePage extends StatelessWidget {
