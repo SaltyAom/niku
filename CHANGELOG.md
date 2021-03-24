@@ -1,3 +1,32 @@
+## [0.6.0] -
+Feature:
+  - Remove `.build()` and `.style()`
+  - Niku Internal is now mutating property instead of stacking
+  - Add `.asNiku` on component instead of using Niku Component
+  - Match `NikuButton` to idiomatic Dart
+  - Add `TextStyle` to TextButton
+  - Every Niku Component now support margin property
+
+Breaking Change:
+  - Every Niku Component now extend `NikuCore` which extends `StatelessWidget`
+  - Variant method `NikuButton` is removed
+    - `.icon` to `NikuButton.icon`
+    - `.text` to `NikuButton.text`
+    - `.elevated` to `NikuButton.elevated`
+    - `.elevatedIcon` to `NikuButton.elevatedIcon` 
+    - `.outlined` to `NikuButton.outlined`
+    - `.outlinedIcon` to `NikuButton.outlinedIcon`
+
+Change:
+  - Remove usage of `this.` except for constructor
+  - Every margin property is moved to `NikuCore`
+  - Build is now using `internalBuild`
+  - Remove container if margin is not presented
+
+Bug fix:
+  - Foreground on text change background instead
+  - Fix margin not mistakenly setting on padding instead
+
 ## [0.5.5] - 2021/3/15
 Feature:
   - Add `animatedBuilder`, `animated` for `AnimationBuilder`

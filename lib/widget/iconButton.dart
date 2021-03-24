@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:niku/widget/core.dart';
 
 import 'base.dart';
 
@@ -59,7 +60,7 @@ import 'base.dart';
 /// - tooltip - Explaination of the button
 /// - enableFeedback - Whether detected gestures should provide acoustic and/or haptic feedback
 /// - constraints - Whether detected gestures should provide acoustic and/or haptic feedback
-class NikuIconButton extends StatelessWidget {
+class NikuIconButton extends NikuCore {
   Widget _icon;
 
   VoidCallback? _onPressed;
@@ -80,7 +81,7 @@ class NikuIconButton extends StatelessWidget {
   Color? _highlightColor;
   Color? _splashColor;
   Color? _disabledColor;
-  MouseCursor _mouseCursor = SystemMouseCursors.click;
+  MouseCursor getMouseCursor = SystemMouseCursors.click;
   FocusNode? _focusNode;
   bool _autofocus = false;
   String? _tooltip;
@@ -530,7 +531,7 @@ class NikuIconButton extends StatelessWidget {
   /// )
   /// ```
   NikuIconButton mouseCursor(MouseCursor click) {
-    _mouseCursor = click;
+    getMouseCursor = click;
 
     return this;
   }
@@ -633,6 +634,10 @@ class NikuIconButton extends StatelessWidget {
         pl: instance._pl != 0 ? instance._pl : _pl,
         pb: instance._pb != 0 ? instance._pb : _pb,
         pr: instance._pr != 0 ? instance._pr : _pr,
+        mt: instance.getMt != 0 ? instance.getMt : getMt,
+        mb: instance.getMb != 0 ? instance.getMb : getMb,
+        ml: instance.getMl != 0 ? instance.getMl : getMl,
+        mr: instance.getMr != 0 ? instance.getMr : getMr,
         alignment: instance._alignment != Alignment.center
             ? instance._alignment
             : _alignment,
@@ -644,9 +649,9 @@ class NikuIconButton extends StatelessWidget {
         splashColor: instance._splashColor ?? _splashColor,
         disabledColor: instance._disabledColor ?? _disabledColor,
         onPressed: instance._onPressed ?? _onPressed,
-        mouseCursor: instance._mouseCursor != SystemMouseCursors.click
-            ? instance._mouseCursor
-            : _mouseCursor,
+        mouseCursor: instance.getMouseCursor != SystemMouseCursors.click
+            ? instance.getMouseCursor
+            : getMouseCursor,
         focusNode: instance._focusNode ?? _focusNode,
         autofocus:
             instance._autofocus != false ? instance._autofocus : _autofocus,
@@ -672,31 +677,34 @@ class NikuIconButton extends StatelessWidget {
   ///   )
   /// }
   /// ```
-  build(context) => IconButton(
-        icon: _icon,
-        onPressed: _onPressed,
-        iconSize: _iconSize,
-        visualDensity: _visualDensity,
-        padding: EdgeInsets.only(
-          top: _pt,
-          left: _pl,
-          bottom: _pb,
-          right: _pr,
+  @override
+  build(context) => internalBuild(
+        IconButton(
+          icon: _icon,
+          onPressed: _onPressed,
+          iconSize: _iconSize,
+          visualDensity: _visualDensity,
+          padding: EdgeInsets.only(
+            top: _pt,
+            left: _pl,
+            bottom: _pb,
+            right: _pr,
+          ),
+          alignment: _alignment,
+          splashRadius: _splashRadius,
+          color: _color,
+          focusColor: _focusColor,
+          hoverColor: _hoverColor,
+          highlightColor: _highlightColor,
+          splashColor: _splashColor,
+          disabledColor: _disabledColor,
+          mouseCursor: getMouseCursor,
+          focusNode: _focusNode,
+          autofocus: _autofocus,
+          tooltip: _tooltip,
+          enableFeedback: _enableFeedback,
+          constraints: _constraints,
         ),
-        alignment: _alignment,
-        splashRadius: _splashRadius,
-        color: _color,
-        focusColor: _focusColor,
-        hoverColor: _hoverColor,
-        highlightColor: _highlightColor,
-        splashColor: _splashColor,
-        disabledColor: _disabledColor,
-        mouseCursor: _mouseCursor,
-        focusNode: _focusNode,
-        autofocus: _autofocus,
-        tooltip: _tooltip,
-        enableFeedback: _enableFeedback,
-        constraints: _constraints,
       );
 
   /// Switch to Niku() property
@@ -726,6 +734,10 @@ class NikuIconButton extends StatelessWidget {
     double pl = 0,
     double pb = 0,
     double pr = 0,
+    double mt = 0,
+    double ml = 0,
+    double mb = 0,
+    double mr = 0,
     Alignment alignment = Alignment.center,
     double? splashRadius,
     Color? color,
@@ -748,6 +760,10 @@ class NikuIconButton extends StatelessWidget {
     _pl = pl;
     _pb = pb;
     _pr = pr;
+    super.mt(mt);
+    super.ml(ml);
+    super.mb(mb);
+    super.mr(mr);
     _alignment = alignment;
     _splashRadius = splashRadius;
     _color = color;
@@ -757,7 +773,7 @@ class NikuIconButton extends StatelessWidget {
     _splashColor = splashColor;
     _disabledColor = disabledColor;
     _onPressed = onPressed;
-    _mouseCursor = mouseCursor;
+    getMouseCursor = mouseCursor;
     _focusNode = focusNode;
     _autofocus = autofocus;
     _tooltip = tooltip;

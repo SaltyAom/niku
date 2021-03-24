@@ -20,29 +20,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class NTHomePage extends StatelessWidget {
-  build(context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Hello World"),
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          NikuText("Hello World").fontSize(32),
-          NikuButton.outlinedIcon(Icon(Icons.home))
-              .label(Text("Icon"))
-              .onPressed(() {})
-              .my(8)
-              .px(8)
-              .bc(Colors.blue)
-        ],
-      ).niku().width(300).center(),
-    );
-  }
-}
-
 class HomePage extends StatelessWidget {
   final baseText = NikuText("")
     ..color(Colors.white)
@@ -60,78 +37,86 @@ class HomePage extends StatelessWidget {
         title: Text("Niku"),
         brightness: Brightness.dark,
       ),
-      body: NikuColumn(
-        [
-          NikuButton(
-            NikuText("Text Button")
+      body: Column(
+        children: [
+          TextButton(
+            child: Text("Text Button").asNiku()
+              ..apply(baseText)
+              ..color(Theme.of(context).primaryColor),
+            onPressed: () {
+              print("Text Button");
+            },
+          ).asNiku()
+            ..apply(baseButton)
+            ..overlay(Theme.of(context).primaryColor.withOpacity(.125))
+            ..highlight(Theme.of(context).primaryColor.withOpacity(.075)),
+          IconButton(
+              icon: Icon(Icons.image),
+              onPressed: () {
+                print("Icon Button");
+              }).asNiku()
+            ..setColor(
+              color: Theme.of(context).primaryColor,
+              highlight: Theme.of(context).primaryColor.withOpacity(.1),
+              splash: Theme.of(context).primaryColor.withOpacity(.2),
+            )
+            ..onPressed(() {})
+            ..tooltip("Image")
+            ..my(8),
+          ElevatedButton(
+            child: Text("Elevated Button").asNiku()..apply(baseText),
+            onPressed: () {
+              print("Elevated Button");
+            },
+          ).asNiku()
+            ..apply(baseButton)
+            ..overlay(Colors.white12)
+            ..elevation(base: 2),
+          OutlinedButton(
+            child: Text("Outlined Button")
+                .asNiku()
                 .apply(baseText)
                 .color(Theme.of(context).primaryColor),
-          )
-              .apply(baseButton)
-              .onPressed(() {
-                print("Text Button");
-              })
-              .overlay(Theme.of(context).primaryColor.withOpacity(.125))
-              .highlight(Theme.of(context).primaryColor.withOpacity(.075)),
-          NikuIconButton(
-            Icon(Icons.image),
-          )
-              .setColor(
-                color: Theme.of(context).primaryColor,
-                highlight: Theme.of(context).primaryColor.withOpacity(.1),
-                splash: Theme.of(context).primaryColor.withOpacity(.2),
-              )
-              .onPressed(() {})
-              .tooltip("Image")
-              .niku()
-              .my(8),
-          NikuButton.elevated(
-            NikuText("Elevated Button").apply(baseText),
-          )
-              .apply(baseButton)
-              .onPressed(() {
-                print("Elevated Button");
-              })
-              .overlay(Colors.white12)
-              .elevation(base: 2),
-          NikuButton.outlined(
-            NikuText("Outlined Button")
-                .apply(baseText)
-                .color(Theme.of(context).primaryColor),
-          ).apply(baseButton).onPressed(() {
-            print("Outlined Button");
-          }).bc(Colors.blue),
-          NikuStack([
+            onPressed: () {
+              print("Outlined Button");
+            },
+          ).asNiku()
+            ..apply(baseButton)
+            ..bc(Colors.blue),
+          Stack(children: [
             Text("Text in Niku Stack"),
-            Text("Text with Niku Property").niku().mt(40),
-          ]).topCenter().niku().maxHeight(100),
+            Text("Text with Niku Property").niku()..mt(40),
+          ]).asNiku().topCenter().niku().maxHeight(100),
           Niku()
-              .size(40, 40)
-              .bg(Theme.of(context).primaryColor)
-              .rounded()
-              .my(20)
+            ..size(40, 40)
+            ..bg(Theme.of(context).primaryColor)
+            ..rounded()
+            ..my(20)
         ],
       )
+          .asNiku()
           .justifyCenter()
           .prepend(
-            NikuText("Niku")
-                .fontSize(21)
-                .w600()
-                .color(Theme.of(context).primaryColor)
-                .niku()
-                .mb(20),
+            Text("Niku").asNiku()
+              ..fontSize(21)
+              ..w600()
+              ..color(Theme.of(context).primaryColor)
+              ..mb(20),
           )
           .append(
-            NikuTextField("Niku Text Field")
+            TextField()
+                .asNiku()
+                .label("Niku Text Field")
                 .allowSelectAll(false)
                 .prefixIcon(
                   Icon(Icons.edit),
                 )
                 .suffixIcon(
-                  NikuIconButton(
-                    Icon(Icons.delete),
+                  IconButton(
+                    icon: Icon(Icons.delete),
+                    onPressed: () {},
                   )
-                      .onPressed(() {})
+                      .asNiku()
                       .highlight(Colors.transparent)
                       .splash(Colors.transparent),
                 )
@@ -142,14 +127,14 @@ class HomePage extends StatelessWidget {
                   ),
                 )
                 .niku()
-                .maxWidth(320)
-                .my(20),
+                  ..maxWidth(320)
+                  ..my(20),
           )
           .niku()
-          .my(40)
-          .scrollable()
-          .fullWidth()
-          .center(),
+            ..my(40)
+            ..scrollable()
+            ..fullWidth()
+            ..center(),
     );
   }
 }

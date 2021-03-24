@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'dart:ui';
 
 import 'base.dart';
+import 'core.dart';
 
 /// Niku extension for Stack
 ///
@@ -46,7 +47,7 @@ import 'base.dart';
 ///   - passthrogh - Using [StackFit.passthrough]
 ///   - loose - Using [StackFit.loose]
 /// - clip, clipBehavior - Add clip behavior of widget
-class NikuStack extends StatelessWidget {
+class NikuStack extends NikuCore {
   List<Widget> _children;
 
   AlignmentDirectional _alignment = AlignmentDirectional.topStart;
@@ -575,13 +576,16 @@ class NikuStack extends StatelessWidget {
   ///   .append(Text("2"))
   ///   .build()
   /// ```
-  build(context) => Stack(
-        key: key,
-        children: this._children,
-        alignment: this._alignment,
-        textDirection: this._textDirection,
-        fit: this._fit,
-        clipBehavior: this._clipBehavior,
+  @override
+  build(context) => internalBuild(
+        Stack(
+          key: key,
+          children: this._children,
+          alignment: this._alignment,
+          textDirection: this._textDirection,
+          fit: this._fit,
+          clipBehavior: this._clipBehavior,
+        ),
       );
 
   /// Switch to Niku() property

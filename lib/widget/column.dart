@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'dart:ui';
 
 import 'base.dart';
+import 'core.dart';
 
 /// Niku extension for Column
 ///
@@ -57,7 +58,7 @@ import 'base.dart';
 ///   - prependChildren - Prepend all of children
 ///   - insert - Insert child at index
 ///   - insertAll - Insert all children at index
-class NikuColumn extends StatelessWidget {
+class NikuColumn extends NikuCore {
   List<Widget> _children;
 
   MainAxisAlignment _mainAxisAlignment = MainAxisAlignment.start;
@@ -720,15 +721,18 @@ class NikuColumn extends StatelessWidget {
   ///   .append(Text("2"))
   ///   .build()
   /// ```
-  build(context) => Column(
-        key: key,
-        children: this._children,
-        mainAxisAlignment: this._mainAxisAlignment,
-        mainAxisSize: this._mainAxisSize,
-        crossAxisAlignment: this._crossAxisAlignment,
-        textDirection: this._textDirection,
-        verticalDirection: this._verticalDirection,
-        textBaseline: this._textBaseline,
+  @override
+  build(context) => internalBuild(
+        Column(
+          key: key,
+          children: this._children,
+          mainAxisAlignment: this._mainAxisAlignment,
+          mainAxisSize: this._mainAxisSize,
+          crossAxisAlignment: this._crossAxisAlignment,
+          textDirection: this._textDirection,
+          verticalDirection: this._verticalDirection,
+          textBaseline: this._textBaseline,
+        ),
       );
 
   /// Switch to Niku() property

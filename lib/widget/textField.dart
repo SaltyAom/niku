@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'dart:ui';
 
 import 'base.dart';
+import 'core.dart';
 
 /// Niku extension for [TextFormField]
 ///
@@ -88,7 +89,6 @@ import 'base.dart';
 ///   - enableSmartQuotes - Using [SmartDashesType.enabled]
 ///   - disableSmartQuotes - Using [SmartDashesType.disabled]
 /// - enableSuggestion - Should suggestion be used
-/// - maxLengthEnforced - If true, prevents the field from allowing more than [maxLength] characters
 /// - maxLines - The maximum number of lines for the text to span, wrapping if necessary
 /// - minLines - The minimum number of lines to occupy when the content spans fewer lines
 /// - expands - Whether this widget's height will be sized to fill its parent
@@ -398,7 +398,7 @@ import 'base.dart';
 /// - textBaseline - A horizontal line used for aligning text
 ///   - alphabetic - Using [TextBaseline.alphabetic]
 ///   - ideographic - Using [TextBaseline.ideographic]
-class NikuTextField extends StatelessWidget {
+class NikuTextField extends NikuCore {
   // Text Form Field
   TextEditingController? _controller;
   String _initialValue = '';
@@ -420,7 +420,6 @@ class NikuTextField extends StatelessWidget {
   SmartDashesType? _smartDashesType;
   SmartQuotesType? _smartQuotesType;
   bool _enableSuggestions = true;
-  bool _maxLengthEnforced = true;
   int _maxLines = 1;
   int? _minLines;
   bool _expands = false;
@@ -724,7 +723,6 @@ class NikuTextField extends StatelessWidget {
   ///   - enableSmartQuotes - Using [SmartDashesType.enabled]
   ///   - disableSmartQuotes - Using [SmartDashesType.disabled]
   /// - enableSuggestion - Should suggestion be used
-  /// - maxLengthEnforced - If true, prevents the field from allowing more than [maxLength] characters
   /// - maxLines - The maximum number of lines for the text to span, wrapping if necessary
   /// - minLines - The minimum number of lines to occupy when the content spans fewer lines
   /// - expands - Whether this widget's height will be sized to fill its parent
@@ -1856,20 +1854,6 @@ class NikuTextField extends StatelessWidget {
     return this;
   }
 
-  /// If true, prevents the field from allowing more than [maxLength] characters
-  ///
-  /// Equivalent to
-  /// ```
-  /// TextFormField(
-  ///   maxLengthEnforced: input
-  /// )
-  /// ```
-  NikuTextField maxLengthEnforced(bool enforced) {
-    _maxLengthEnforced = enforced;
-
-    return this;
-  }
-
   /// The maximum number of lines for the text to span, wrapping if necessary
   ///
   /// Equivalent to
@@ -2393,6 +2377,22 @@ class NikuTextField extends StatelessWidget {
   /// )
   /// ```
   NikuTextField labelText(String labelText) {
+    _input_labelText = labelText;
+
+    return this;
+  }
+
+  /// Label text
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextFieldForm(
+  ///   decoration: InputDecoration(
+  ///     labelText: input
+  ///   )
+  /// )
+  /// ```
+  NikuTextField label(String labelText) {
     _input_labelText = labelText;
 
     return this;
@@ -6502,9 +6502,6 @@ class NikuTextField extends StatelessWidget {
         enableSuggestions: instance._enableSuggestions != true
             ? instance._enableSuggestions
             : _enableSuggestions,
-        maxLengthEnforced: instance._maxLengthEnforced != true
-            ? instance._maxLengthEnforced
-            : _maxLengthEnforced,
         maxLines: instance._maxLines != 1 ? instance._maxLines : _maxLines,
         minLines: instance._minLines ?? instance._minLines,
         expands: instance._expands != false ? instance._expands : _expands,
@@ -6850,6 +6847,10 @@ class NikuTextField extends StatelessWidget {
             instance._counter_fontFamilyFallback,
         counter_textBaseline:
             instance._counter_textBaseline ?? instance._counter_textBaseline,
+        mt: instance.getMt != 0 ? instance.getMt : getMt,
+        mb: instance.getMb != 0 ? instance.getMb : getMb,
+        ml: instance.getMl != 0 ? instance.getMl : getMl,
+        mr: instance.getMr != 0 ? instance.getMr : getMr,
       );
 
   /// Apply styles and build Text as Widget
@@ -6872,249 +6873,250 @@ class NikuTextField extends StatelessWidget {
   ///   )
   ///   .build()
   /// ```
-  build(context) => TextFormField(
-        key: key,
-        controller: _controller,
-        style: TextStyle(
-          color: _base_color,
-          backgroundColor: _base_backgroundColor,
-          fontSize: _base_fontSize,
-          fontWeight: _base_fontWeight,
-          fontStyle: _base_fontStyle,
-          letterSpacing: _base_letterSpacing,
-          wordSpacing: _base_wordSpacing,
-          height: _base_height,
-          foreground: _base_foreground,
-          background: _base_background,
-          shadows: _base_shadows,
-          fontFeatures: _base_fontFeatures,
-          decoration: _base_textDecoration,
-          decorationColor: _base_textDecorationColor,
-          decorationThickness: _base_textDecorationThickness,
-          fontFamily: _base_fontFamily,
-          fontFamilyFallback: _base_fontFamilyFallback,
-          textBaseline: _base_textBaseline,
+  @override
+  build(context) => internalBuild(
+        TextFormField(
+          key: key,
+          controller: _controller,
+          style: TextStyle(
+            color: _base_color,
+            backgroundColor: _base_backgroundColor,
+            fontSize: _base_fontSize,
+            fontWeight: _base_fontWeight,
+            fontStyle: _base_fontStyle,
+            letterSpacing: _base_letterSpacing,
+            wordSpacing: _base_wordSpacing,
+            height: _base_height,
+            foreground: _base_foreground,
+            background: _base_background,
+            shadows: _base_shadows,
+            fontFeatures: _base_fontFeatures,
+            decoration: _base_textDecoration,
+            decorationColor: _base_textDecorationColor,
+            decorationThickness: _base_textDecorationThickness,
+            fontFamily: _base_fontFamily,
+            fontFamilyFallback: _base_fontFamilyFallback,
+            textBaseline: _base_textBaseline,
+          ),
+          decoration: InputDecoration(
+            icon: _input_icon,
+            labelText: _input_labelText,
+            helperText: _input_helperText,
+            helperMaxLines: _input_helperMaxLines,
+            hintText: _input_hintText,
+            hintMaxLines: _input_hintMaxLines,
+            errorText: _input_errorText,
+            errorMaxLines: _input_errorMaxLines,
+            floatingLabelBehavior: _input_floatingLabelBehavior,
+            isCollapsed: _input_isCollapsed,
+            isDense: _input_isDense,
+            contentPadding: _input_contentPadding,
+            prefixIcon: _input_prefixIcon,
+            prefixIconConstraints: _input_prefixIconConstraints,
+            prefix: _input_prefix,
+            prefixText: _input_prefixText,
+            suffixIcon: _input_suffixIcon,
+            suffix: _input_suffix,
+            suffixText: _input_suffixText,
+            suffixIconConstraints: _input_suffixIconConstraints,
+            counter: _input_counter,
+            counterText: _input_counterText,
+            filled: _input_filled,
+            fillColor: _input_fillColor,
+            focusColor: _input_focusColor,
+            hoverColor: _input_hoverColor,
+            errorBorder: _input_errorBorder,
+            focusedBorder: _input_focusedBorder,
+            focusedErrorBorder: _input_focusedErrorBorder,
+            disabledBorder: _input_disabledBorder,
+            enabledBorder: _input_enabledBorder,
+            border: _input_border,
+            enabled: _input_decorationEnabled,
+            semanticCounterText: _input_semanticCounterText,
+            alignLabelWithHint: _input_alignLabelWithHint,
+            hintStyle: TextStyle(
+              color: _hint_color,
+              backgroundColor: _hint_backgroundColor,
+              fontSize: _hint_fontSize,
+              fontWeight: _hint_fontWeight,
+              fontStyle: _hint_fontStyle,
+              letterSpacing: _hint_letterSpacing,
+              wordSpacing: _hint_wordSpacing,
+              height: _hint_height,
+              foreground: _hint_foreground,
+              background: _hint_background,
+              shadows: _hint_shadows,
+              fontFeatures: _hint_fontFeatures,
+              decoration: _hint_textDecoration,
+              decorationColor: _hint_textDecorationColor,
+              decorationThickness: _hint_textDecorationThickness,
+              fontFamily: _hint_fontFamily,
+              fontFamilyFallback: _hint_fontFamilyFallback,
+              textBaseline: _hint_textBaseline,
+            ),
+            errorStyle: TextStyle(
+              color: _error_color,
+              backgroundColor: _error_backgroundColor,
+              fontSize: _error_fontSize,
+              fontWeight: _error_fontWeight,
+              fontStyle: _error_fontStyle,
+              letterSpacing: _error_letterSpacing,
+              wordSpacing: _error_wordSpacing,
+              height: _error_height,
+              foreground: _error_foreground,
+              background: _error_background,
+              shadows: _error_shadows,
+              fontFeatures: _error_fontFeatures,
+              decoration: _error_textDecoration,
+              decorationColor: _error_textDecorationColor,
+              decorationThickness: _error_textDecorationThickness,
+              fontFamily: _error_fontFamily,
+              fontFamilyFallback: _error_fontFamilyFallback,
+              textBaseline: _error_textBaseline,
+            ),
+            prefixStyle: TextStyle(
+              color: _prefix_color,
+              backgroundColor: _prefix_backgroundColor,
+              fontSize: _prefix_fontSize,
+              fontWeight: _prefix_fontWeight,
+              fontStyle: _prefix_fontStyle,
+              letterSpacing: _prefix_letterSpacing,
+              wordSpacing: _prefix_wordSpacing,
+              height: _prefix_height,
+              foreground: _prefix_foreground,
+              background: _prefix_background,
+              shadows: _prefix_shadows,
+              fontFeatures: _prefix_fontFeatures,
+              decoration: _prefix_textDecoration,
+              decorationColor: _prefix_textDecorationColor,
+              decorationThickness: _prefix_textDecorationThickness,
+              fontFamily: _prefix_fontFamily,
+              fontFamilyFallback: _prefix_fontFamilyFallback,
+              textBaseline: _prefix_textBaseline,
+            ),
+            suffixStyle: TextStyle(
+              color: _suffix_color,
+              backgroundColor: _suffix_backgroundColor,
+              fontSize: _suffix_fontSize,
+              fontWeight: _suffix_fontWeight,
+              fontStyle: _suffix_fontStyle,
+              letterSpacing: _suffix_letterSpacing,
+              wordSpacing: _suffix_wordSpacing,
+              height: _suffix_height,
+              foreground: _suffix_foreground,
+              background: _suffix_background,
+              shadows: _suffix_shadows,
+              fontFeatures: _suffix_fontFeatures,
+              decoration: _suffix_textDecoration,
+              decorationColor: _suffix_textDecorationColor,
+              decorationThickness: _suffix_textDecorationThickness,
+              fontFamily: _suffix_fontFamily,
+              fontFamilyFallback: _suffix_fontFamilyFallback,
+              textBaseline: _suffix_textBaseline,
+            ),
+            counterStyle: TextStyle(
+              color: _counter_color,
+              backgroundColor: _counter_backgroundColor,
+              fontSize: _counter_fontSize,
+              fontWeight: _counter_fontWeight,
+              fontStyle: _counter_fontStyle,
+              letterSpacing: _counter_letterSpacing,
+              wordSpacing: _counter_wordSpacing,
+              height: _counter_height,
+              foreground: _counter_foreground,
+              background: _counter_background,
+              shadows: _counter_shadows,
+              fontFeatures: _counter_fontFeatures,
+              decoration: _counter_textDecoration,
+              decorationColor: _counter_textDecorationColor,
+              decorationThickness: _counter_textDecorationThickness,
+              fontFamily: _counter_fontFamily,
+              fontFamilyFallback: _counter_fontFamilyFallback,
+              textBaseline: _counter_textBaseline,
+            ),
+            labelStyle: TextStyle(
+              color: _label_color,
+              backgroundColor: _label_backgroundColor,
+              fontSize: _label_fontSize,
+              fontWeight: _label_fontWeight,
+              fontStyle: _label_fontStyle,
+              letterSpacing: _label_letterSpacing,
+              wordSpacing: _label_wordSpacing,
+              height: _label_height,
+              foreground: _label_foreground,
+              background: _label_background,
+              shadows: _label_shadows,
+              fontFeatures: _label_fontFeatures,
+              decoration: _label_textDecoration,
+              decorationColor: _label_textDecorationColor,
+              decorationThickness: _label_textDecorationThickness,
+              fontFamily: _label_fontFamily,
+              fontFamilyFallback: _label_fontFamilyFallback,
+              textBaseline: _label_textBaseline,
+            ),
+            helperStyle: TextStyle(
+              color: _helper_color,
+              backgroundColor: _helper_backgroundColor,
+              fontSize: _helper_fontSize,
+              fontWeight: _helper_fontWeight,
+              fontStyle: _helper_fontStyle,
+              letterSpacing: _helper_letterSpacing,
+              wordSpacing: _helper_wordSpacing,
+              height: _helper_height,
+              foreground: _helper_foreground,
+              background: _helper_background,
+              shadows: _helper_shadows,
+              fontFeatures: _helper_fontFeatures,
+              decoration: _helper_textDecoration,
+              decorationColor: _helper_textDecorationColor,
+              decorationThickness: _helper_textDecorationThickness,
+              fontFamily: _helper_fontFamily,
+              fontFamilyFallback: _helper_fontFamilyFallback,
+              textBaseline: _helper_textBaseline,
+            ),
+          ),
+          initialValue: _controller != null ? null : _initialValue,
+          focusNode: _focusNode,
+          keyboardType: _keyboardType,
+          textCapitalization: _textCapitalization,
+          textInputAction: _textInputAction,
+          textDirection: _textDirection,
+          textAlign: _textAlign,
+          textAlignVertical: _textAlignVertical,
+          autofocus: _autofocus,
+          readOnly: _readOnly,
+          toolbarOptions: _toolbarOptions,
+          showCursor: _showCursor,
+          obscuringCharacter: _obscuringCharacter,
+          obscureText: _obscureText,
+          autocorrect: _autocorrect,
+          smartDashesType: _smartDashesType,
+          smartQuotesType: _smartQuotesType,
+          enableSuggestions: _enableSuggestions,
+          maxLines: _maxLines,
+          minLines: _minLines,
+          expands: _expands,
+          maxLength: _maxLength,
+          onChanged: _onChanged,
+          onTap: _onTap,
+          onEditingComplete: _onEditingComplete,
+          onFieldSubmitted: _onFieldSubmitted,
+          onSaved: _onSaved,
+          validator: _validator,
+          inputFormatters: _inputFormatters,
+          enabled: _enabled,
+          cursorWidth: _cursorWidth,
+          cursorHeight: _cursorHeight,
+          cursorRadius: _cursorRadius,
+          cursorColor: _cursorColor,
+          keyboardAppearance: _keyboardAppearance,
+          scrollPadding: _scrollPadding,
+          enableInteractiveSelection: _enableInteractiveSelection,
+          buildCounter: _buildCounter,
+          scrollPhysics: _scrollPhysics,
+          autofillHints: _autofillHints,
+          autovalidateMode: _autovalidateMode,
         ),
-        decoration: InputDecoration(
-          icon: _input_icon,
-          labelText: _input_labelText,
-          helperText: _input_helperText,
-          helperMaxLines: _input_helperMaxLines,
-          hintText: _input_hintText,
-          hintMaxLines: _input_hintMaxLines,
-          errorText: _input_errorText,
-          errorMaxLines: _input_errorMaxLines,
-          floatingLabelBehavior: _input_floatingLabelBehavior,
-          isCollapsed: _input_isCollapsed,
-          isDense: _input_isDense,
-          contentPadding: _input_contentPadding,
-          prefixIcon: _input_prefixIcon,
-          prefixIconConstraints: _input_prefixIconConstraints,
-          prefix: _input_prefix,
-          prefixText: _input_prefixText,
-          suffixIcon: _input_suffixIcon,
-          suffix: _input_suffix,
-          suffixText: _input_suffixText,
-          suffixIconConstraints: _input_suffixIconConstraints,
-          counter: _input_counter,
-          counterText: _input_counterText,
-          filled: _input_filled,
-          fillColor: _input_fillColor,
-          focusColor: _input_focusColor,
-          hoverColor: _input_hoverColor,
-          errorBorder: _input_errorBorder,
-          focusedBorder: _input_focusedBorder,
-          focusedErrorBorder: _input_focusedErrorBorder,
-          disabledBorder: _input_disabledBorder,
-          enabledBorder: _input_enabledBorder,
-          border: _input_border,
-          enabled: _input_decorationEnabled,
-          semanticCounterText: _input_semanticCounterText,
-          alignLabelWithHint: _input_alignLabelWithHint,
-          hintStyle: TextStyle(
-            color: _hint_color,
-            backgroundColor: _hint_backgroundColor,
-            fontSize: _hint_fontSize,
-            fontWeight: _hint_fontWeight,
-            fontStyle: _hint_fontStyle,
-            letterSpacing: _hint_letterSpacing,
-            wordSpacing: _hint_wordSpacing,
-            height: _hint_height,
-            foreground: _hint_foreground,
-            background: _hint_background,
-            shadows: _hint_shadows,
-            fontFeatures: _hint_fontFeatures,
-            decoration: _hint_textDecoration,
-            decorationColor: _hint_textDecorationColor,
-            decorationThickness: _hint_textDecorationThickness,
-            fontFamily: _hint_fontFamily,
-            fontFamilyFallback: _hint_fontFamilyFallback,
-            textBaseline: _hint_textBaseline,
-          ),
-          errorStyle: TextStyle(
-            color: _error_color,
-            backgroundColor: _error_backgroundColor,
-            fontSize: _error_fontSize,
-            fontWeight: _error_fontWeight,
-            fontStyle: _error_fontStyle,
-            letterSpacing: _error_letterSpacing,
-            wordSpacing: _error_wordSpacing,
-            height: _error_height,
-            foreground: _error_foreground,
-            background: _error_background,
-            shadows: _error_shadows,
-            fontFeatures: _error_fontFeatures,
-            decoration: _error_textDecoration,
-            decorationColor: _error_textDecorationColor,
-            decorationThickness: _error_textDecorationThickness,
-            fontFamily: _error_fontFamily,
-            fontFamilyFallback: _error_fontFamilyFallback,
-            textBaseline: _error_textBaseline,
-          ),
-          prefixStyle: TextStyle(
-            color: _prefix_color,
-            backgroundColor: _prefix_backgroundColor,
-            fontSize: _prefix_fontSize,
-            fontWeight: _prefix_fontWeight,
-            fontStyle: _prefix_fontStyle,
-            letterSpacing: _prefix_letterSpacing,
-            wordSpacing: _prefix_wordSpacing,
-            height: _prefix_height,
-            foreground: _prefix_foreground,
-            background: _prefix_background,
-            shadows: _prefix_shadows,
-            fontFeatures: _prefix_fontFeatures,
-            decoration: _prefix_textDecoration,
-            decorationColor: _prefix_textDecorationColor,
-            decorationThickness: _prefix_textDecorationThickness,
-            fontFamily: _prefix_fontFamily,
-            fontFamilyFallback: _prefix_fontFamilyFallback,
-            textBaseline: _prefix_textBaseline,
-          ),
-          suffixStyle: TextStyle(
-            color: _suffix_color,
-            backgroundColor: _suffix_backgroundColor,
-            fontSize: _suffix_fontSize,
-            fontWeight: _suffix_fontWeight,
-            fontStyle: _suffix_fontStyle,
-            letterSpacing: _suffix_letterSpacing,
-            wordSpacing: _suffix_wordSpacing,
-            height: _suffix_height,
-            foreground: _suffix_foreground,
-            background: _suffix_background,
-            shadows: _suffix_shadows,
-            fontFeatures: _suffix_fontFeatures,
-            decoration: _suffix_textDecoration,
-            decorationColor: _suffix_textDecorationColor,
-            decorationThickness: _suffix_textDecorationThickness,
-            fontFamily: _suffix_fontFamily,
-            fontFamilyFallback: _suffix_fontFamilyFallback,
-            textBaseline: _suffix_textBaseline,
-          ),
-          counterStyle: TextStyle(
-            color: _counter_color,
-            backgroundColor: _counter_backgroundColor,
-            fontSize: _counter_fontSize,
-            fontWeight: _counter_fontWeight,
-            fontStyle: _counter_fontStyle,
-            letterSpacing: _counter_letterSpacing,
-            wordSpacing: _counter_wordSpacing,
-            height: _counter_height,
-            foreground: _counter_foreground,
-            background: _counter_background,
-            shadows: _counter_shadows,
-            fontFeatures: _counter_fontFeatures,
-            decoration: _counter_textDecoration,
-            decorationColor: _counter_textDecorationColor,
-            decorationThickness: _counter_textDecorationThickness,
-            fontFamily: _counter_fontFamily,
-            fontFamilyFallback: _counter_fontFamilyFallback,
-            textBaseline: _counter_textBaseline,
-          ),
-          labelStyle: TextStyle(
-            color: _label_color,
-            backgroundColor: _label_backgroundColor,
-            fontSize: _label_fontSize,
-            fontWeight: _label_fontWeight,
-            fontStyle: _label_fontStyle,
-            letterSpacing: _label_letterSpacing,
-            wordSpacing: _label_wordSpacing,
-            height: _label_height,
-            foreground: _label_foreground,
-            background: _label_background,
-            shadows: _label_shadows,
-            fontFeatures: _label_fontFeatures,
-            decoration: _label_textDecoration,
-            decorationColor: _label_textDecorationColor,
-            decorationThickness: _label_textDecorationThickness,
-            fontFamily: _label_fontFamily,
-            fontFamilyFallback: _label_fontFamilyFallback,
-            textBaseline: _label_textBaseline,
-          ),
-          helperStyle: TextStyle(
-            color: _helper_color,
-            backgroundColor: _helper_backgroundColor,
-            fontSize: _helper_fontSize,
-            fontWeight: _helper_fontWeight,
-            fontStyle: _helper_fontStyle,
-            letterSpacing: _helper_letterSpacing,
-            wordSpacing: _helper_wordSpacing,
-            height: _helper_height,
-            foreground: _helper_foreground,
-            background: _helper_background,
-            shadows: _helper_shadows,
-            fontFeatures: _helper_fontFeatures,
-            decoration: _helper_textDecoration,
-            decorationColor: _helper_textDecorationColor,
-            decorationThickness: _helper_textDecorationThickness,
-            fontFamily: _helper_fontFamily,
-            fontFamilyFallback: _helper_fontFamilyFallback,
-            textBaseline: _helper_textBaseline,
-          ),
-        ),
-        initialValue: _controller != null ? null : _initialValue,
-        focusNode: _focusNode,
-        keyboardType: _keyboardType,
-        textCapitalization: _textCapitalization,
-        textInputAction: _textInputAction,
-        textDirection: _textDirection,
-        textAlign: _textAlign,
-        textAlignVertical: _textAlignVertical,
-        autofocus: _autofocus,
-        readOnly: _readOnly,
-        toolbarOptions: _toolbarOptions,
-        showCursor: _showCursor,
-        obscuringCharacter: _obscuringCharacter,
-        obscureText: _obscureText,
-        autocorrect: _autocorrect,
-        smartDashesType: _smartDashesType,
-        smartQuotesType: _smartQuotesType,
-        enableSuggestions: _enableSuggestions,
-        // ignore: deprecated_member_use
-        maxLengthEnforced: _maxLengthEnforced,
-        maxLines: _maxLines,
-        minLines: _minLines,
-        expands: _expands,
-        maxLength: _maxLength,
-        onChanged: _onChanged,
-        onTap: _onTap,
-        onEditingComplete: _onEditingComplete,
-        onFieldSubmitted: _onFieldSubmitted,
-        onSaved: _onSaved,
-        validator: _validator,
-        inputFormatters: _inputFormatters,
-        enabled: _enabled,
-        cursorWidth: _cursorWidth,
-        cursorHeight: _cursorHeight,
-        cursorRadius: _cursorRadius,
-        cursorColor: _cursorColor,
-        keyboardAppearance: _keyboardAppearance,
-        scrollPadding: _scrollPadding,
-        enableInteractiveSelection: _enableInteractiveSelection,
-        buildCounter: _buildCounter,
-        scrollPhysics: _scrollPhysics,
-        autofillHints: _autofillHints,
-        autovalidateMode: _autovalidateMode,
       );
 
   /// Switch to Niku() property
@@ -7157,7 +7159,6 @@ class NikuTextField extends StatelessWidget {
     SmartDashesType? smartDashesType,
     SmartQuotesType? smartQuotesType,
     bool enableSuggestions = true,
-    bool maxLengthEnforced = true,
     int maxLines = 1,
     int? minLines,
     bool expands = false,
@@ -7361,6 +7362,10 @@ class NikuTextField extends StatelessWidget {
     String? counter_fontFamily,
     List<String>? counter_fontFamilyFallback,
     TextBaseline? counter_textBaseline,
+    double mt = 0,
+    double ml = 0,
+    double mb = 0,
+    double mr = 0,
   }) {
     _controller = controller;
     _initialValue = initialValue;
@@ -7381,7 +7386,6 @@ class NikuTextField extends StatelessWidget {
     _smartDashesType = smartDashesType;
     _smartQuotesType = smartQuotesType;
     _enableSuggestions = enableSuggestions;
-    _maxLengthEnforced = maxLengthEnforced;
     _maxLines = maxLines;
     _minLines = minLines;
     _expands = expands;
@@ -7584,6 +7588,11 @@ class NikuTextField extends StatelessWidget {
     _counter_fontFamily = counter_fontFamily;
     _counter_fontFamilyFallback = counter_fontFamilyFallback;
     _counter_textBaseline = counter_textBaseline;
+
+    super.mt(mt);
+    super.ml(ml);
+    super.mb(mb);
+    super.mr(mr);
 
     return this;
   }

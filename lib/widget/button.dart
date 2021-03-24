@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'dart:ui';
 
 import 'package:flutter/rendering.dart';
+import 'package:niku/widget/core.dart';
 
 import 'base.dart';
 
@@ -21,7 +22,7 @@ import 'base.dart';
 ///
 /// Example usage:
 /// ```
-/// NikuButton(Text("Flat Button"))
+/// NikuButton(Text("Text Button"))
 ///   .bg(Colors.blue)
 ///   .px(40)
 ///   .py(20)
@@ -29,23 +30,24 @@ import 'base.dart';
 ///   .my(8)
 ///   .build()
 ///
-/// NikuButton(Text("Flat Button"))
+/// NikuButton.elevated(Text("Elevated Button"))
 ///   .bg(Colors.blue)
 ///   .px(40)
 ///   .py(20)
 ///   .rounded(8)
 ///   .my(8)
-///   .elevated()
+///
+/// NikuButton.outlinedIcon(Text("Elevated Button"))
+///   .bg(Colors.blue)
+///   .px(40)
+///   .py(20)
+///   .rounded(8)
+///   .my(8)
 /// ```
 ///
 /// Meta property list:
 /// - niku() - Switch to Niku() property
 /// - build(), textButton() - Build as [TextButton]
-/// - elevated() - Build as [ElevatedButton]
-/// - outlined() - Build as [OutlinedButton]
-/// - textButtonIcon() - Build as [TextButton.icon]
-/// - elevatedIcon() - Build as [ElevatedButton.icon]
-/// - outlinedIcon() - Build as [OutlinedButton.icon]
 /// - apply() - Apply existing NikuFlatButton's property to current style
 ///
 /// Style Property list:
@@ -194,7 +196,7 @@ import 'base.dart';
 /// - tapTargetSize - Configures the tap target and layout size of certain Material widgets
 /// - rounded - Apply border radius to button, will override shape
 /// - label - Add label to [IconButton]
-class NikuButton extends StatelessWidget {
+class NikuButton extends NikuCore {
   Widget child;
   NikuButtonType _type;
 
@@ -219,18 +221,14 @@ class NikuButton extends StatelessWidget {
   double _pb = 0;
   double _pl = 0;
   double _pr = 0;
-  double _mt = 0;
-  double _mb = 0;
-  double _ml = 0;
-  double _mr = 0;
 
-  NikuMaterialPropertyContainer<Size> _minimumSize =
+  NikuMaterialPropertyContainer<Size> getMinimumSize =
       NikuMaterialPropertyContainer();
   NikuMaterialPropertyContainer<BorderSide> _side =
       NikuMaterialPropertyContainer();
   NikuMaterialPropertyContainer<RoundedRectangleBorder> _shape =
       NikuMaterialPropertyContainer();
-  NikuMaterialPropertyContainer<MouseCursor> _mouseCursor =
+  NikuMaterialPropertyContainer<MouseCursor> getMouseCursor =
       NikuMaterialPropertyContainer();
 
   VisualDensity? _visualDensity;
@@ -240,6 +238,27 @@ class NikuButton extends StatelessWidget {
   AlignmentGeometry? _alignment;
 
   Widget? _label;
+
+  // Input Label Style
+  NikuMaterialPropertyContainer<Color> _text_color =
+      NikuMaterialPropertyContainer();
+  Color? _text_backgroundColor;
+  double? _text_fontSize;
+  FontWeight? _text_fontWeight;
+  FontStyle? _text_fontStyle;
+  double? _text_letterSpacing;
+  double? _text_wordSpacing;
+  double? _text_height;
+  Paint? _text_foreground;
+  Paint? _text_background;
+  List<Shadow>? _text_shadows;
+  List<FontFeature>? _text_fontFeatures;
+  TextDecoration? _text_textDecoration;
+  Color? _text_textDecorationColor;
+  double? _text_textDecorationThickness;
+  String? _text_fontFamily;
+  List<String>? _text_fontFamilyFallback;
+  TextBaseline? _text_textBaseline;
 
   /// Niku extension for Material various Button
   /// Including:
@@ -592,126 +611,6 @@ class NikuButton extends StatelessWidget {
   /// ```
   NikuButton pr(double padding) {
     _pr = padding;
-
-    return this;
-  }
-
-  /// Apply margin using [EdgeInset]
-  ///
-  /// Equivalent to
-  /// ```
-  /// Container(
-  ///   margin: input
-  /// )
-  /// ```
-  NikuButton margin(EdgeInsets padding) {
-    _pt = padding.top;
-    _pl = padding.left;
-    _pb = padding.bottom;
-    _pr = padding.right;
-
-    return this;
-  }
-
-  /// Apply margin to top
-  ///
-  /// Equivalent to
-  /// ```
-  /// Container(
-  ///   margin: EdgeInsets.all(input)
-  /// )
-  /// ```
-  NikuButton m(double margin) {
-    _mt = margin;
-    _ml = margin;
-    _mb = margin;
-    _mr = margin;
-
-    return this;
-  }
-
-  /// Apply margin to x axis
-  ///
-  /// Equivalent to
-  /// ```
-  /// Container(
-  ///   margin: EdgeInsets.symmetric(horizontal: input)
-  /// )
-  /// ```
-  NikuButton mx(double margin) {
-    _ml = margin;
-    _mr = margin;
-
-    return this;
-  }
-
-  /// Apply margin to y axis
-  ///
-  /// Equivalent to
-  /// ```
-  /// Container(
-  ///   margin: EdgeInsets.symmetric(vertical: input)
-  /// )
-  /// ```
-  NikuButton my(double margin) {
-    _mt = margin;
-    _mb = margin;
-
-    return this;
-  }
-
-  /// Apply margin to top
-  ///
-  /// Equivalent to
-  /// ```
-  /// Container(
-  ///   margin: EdgeInsets.only(top: input)
-  /// )
-  /// ```
-  NikuButton mt(double margin) {
-    _mt = margin;
-
-    return this;
-  }
-
-  /// Apply margin to left side
-  ///
-  /// Equivalent to
-  /// ```
-  /// Container(
-  ///   margin: EdgeInsets.only(left: input)
-  /// )
-  /// ```
-  NikuButton ml(double margin) {
-    _ml = margin;
-
-    return this;
-  }
-
-  /// Apply margin to bottom
-  ///
-  /// Equivalent to
-  /// ```
-  /// Container(
-  ///   margin: EdgeInsets.only(bottom: input)
-  /// )
-  /// ```
-  NikuButton mb(double margin) {
-    _mb = margin;
-
-    return this;
-  }
-
-  /// Apply margin to right side
-  ///
-  /// Equivalent to
-  /// ```
-  /// Container(
-  ///   margin: EdgeInsets.only(right: input)
-  /// )
-  /// ```
-  NikuButton mr(double margin) {
-    _mr = margin;
 
     return this;
   }
@@ -1652,7 +1551,7 @@ class NikuButton extends StatelessWidget {
     MouseCursor? pressed,
     MouseCursor? selected,
   }) {
-    _mouseCursor.update(
+    getMouseCursor.update(
       base: base,
       disabled: disabled,
       dragged: dragged,
@@ -1694,7 +1593,7 @@ class NikuButton extends StatelessWidget {
     MouseCursor? pressed,
     MouseCursor? selected,
   }) {
-    _mouseCursor.update(
+    getMouseCursor.update(
       base: base,
       disabled: disabled,
       dragged: dragged,
@@ -1747,7 +1646,7 @@ class NikuButton extends StatelessWidget {
   /// )
   /// ```
   NikuButton minSize(Size input) {
-    _minimumSize.updateAll(input);
+    getMinimumSize.updateAll(input);
 
     return this;
   }
@@ -1780,7 +1679,7 @@ class NikuButton extends StatelessWidget {
     Size? pressed,
     Size? selected,
   ) {
-    _minimumSize.update(
+    getMinimumSize.update(
       base: base,
       disabled: disabled,
       dragged: dragged,
@@ -1911,6 +1810,449 @@ class NikuButton extends StatelessWidget {
     return this;
   }
 
+  /// Set color of text
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(color: input)
+  /// ```
+  NikuButton textColor({
+    Color? base,
+    Color? disabled,
+    Color? dragged,
+    Color? error,
+    Color? focused,
+    Color? hovered,
+    Color? pressed,
+    Color? selected,
+  }) {
+    _text_color.update(
+      base: base,
+      disabled: disabled,
+      dragged: dragged,
+      error: error,
+      focused: focused,
+      hovered: hovered,
+      pressed: pressed,
+      selected: selected,
+    );
+
+    return this;
+  }
+
+  /// Set color of text
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(color: input)
+  /// ```
+  NikuButton textColors(Color color) {
+    _text_color.update(
+      base: color,
+      disabled: color,
+      dragged: color,
+      error: color,
+      focused: color,
+      hovered: color,
+      pressed: color,
+      selected: color,
+    );
+
+    return this;
+  }
+
+  /// Set background color of text
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(backgroundColor: input)
+  /// ```
+  NikuButton textBackgroundColor(Color backgroundColor) {
+    _text_backgroundColor = backgroundColor;
+
+    return this;
+  }
+
+  /// Set background color of text
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(backgroundColor: input)
+  /// ```
+  NikuButton textBg(Color backgroundColor) {
+    _text_backgroundColor = backgroundColor;
+
+    return this;
+  }
+
+  /// Set size of text
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(fontSize: input)
+  /// ```
+  NikuButton fontSize(double fontSize) {
+    _text_fontSize = fontSize;
+
+    return this;
+  }
+
+  /// The thickness of the glyphs used to draw the text
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(fontSize: input)
+  /// ```
+  NikuButton fontWeight(FontWeight fontWeight) {
+    _text_fontWeight = fontWeight;
+
+    return this;
+  }
+
+  /// Set font to bold, using [FontWeight.bold]
+  ///
+  /// The thickness of the glyphs used to draw the text
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(FontWeight: FontWeight.bold)
+  /// ```
+  NikuButton bold() {
+    _text_fontWeight = FontWeight.bold;
+
+    return this;
+  }
+
+  /// Use font weight of 100
+  ///
+  /// The thickness of the glyphs used to draw the text
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(FontWeight: FontWeight.100)
+  /// ```
+  NikuButton w100() {
+    _text_fontWeight = FontWeight.w100;
+
+    return this;
+  }
+
+  /// Use font weight of 200
+  ///
+  /// The thickness of the glyphs used to draw the text
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(FontWeight: FontWeight.200)
+  /// ```
+  NikuButton w200() {
+    _text_fontWeight = FontWeight.w200;
+
+    return this;
+  }
+
+  /// Use font weight of 300
+  ///
+  /// The thickness of the glyphs used to draw the text
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(FontWeight: FontWeight.300)
+  /// ```
+  NikuButton w300() {
+    _text_fontWeight = FontWeight.w300;
+
+    return this;
+  }
+
+  /// Use font weight of 400
+  ///
+  /// The thickness of the glyphs used to draw the text
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(FontWeight: FontWeight.400)
+  /// ```
+  NikuButton w400() {
+    _text_fontWeight = FontWeight.w400;
+
+    return this;
+  }
+
+  /// Use font weight of 500
+  ///
+  /// The thickness of the glyphs used to draw the text
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(FontWeight: FontWeight.500)
+  /// ```
+  NikuButton w500() {
+    _text_fontWeight = FontWeight.w500;
+
+    return this;
+  }
+
+  /// Use font weight of 600
+  ///
+  /// The thickness of the glyphs used to draw the text
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(FontWeight: FontWeight.600)
+  /// ```
+  NikuButton w600() {
+    _text_fontWeight = FontWeight.w600;
+
+    return this;
+  }
+
+  /// Use font weight of 700
+  ///
+  /// The thickness of the glyphs used to draw the text
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(FontWeight: FontWeight.700)
+  /// ```
+  NikuButton w700() {
+    _text_fontWeight = FontWeight.w700;
+
+    return this;
+  }
+
+  /// Use font weight of 800
+  ///
+  /// The thickness of the glyphs used to draw the text
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(FontWeight: FontWeight.800)
+  /// ```
+  NikuButton w800() {
+    _text_fontWeight = FontWeight.w800;
+
+    return this;
+  }
+
+  /// Use font weight of 900
+  ///
+  /// The thickness of the glyphs used to draw the text
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(fontWeight: FontWeight.900)
+  /// ```
+  NikuButton w900() {
+    _text_fontWeight = FontWeight.w900;
+
+    return this;
+  }
+
+  /// Whether to slant the glyphs in the font
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(fontStyle: input)
+  /// ```
+  NikuButton fontStyle(FontStyle fontStyle) {
+    _text_fontStyle = fontStyle;
+
+    return this;
+  }
+
+  /// Whether to slant the glyphs in the font
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(fontStyle: FontStyle.italic)
+  /// ```
+  NikuButton italic() {
+    _text_fontStyle = FontStyle.italic;
+
+    return this;
+  }
+
+  /// Spacing for each letter
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(letterSpacing: input)
+  /// ```
+  NikuButton letterSpacing(double letterSpacing) {
+    _text_letterSpacing = letterSpacing;
+
+    return this;
+  }
+
+  /// Spacing for each word
+  ///
+  /// Equivalent to
+  /// ```
+  /// Text(wordSpacing: input)
+  /// ```
+  NikuButton wordSpacing(double wordSpacing) {
+    _text_wordSpacing = wordSpacing;
+
+    return this;
+  }
+
+  /// Fixed height for text
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(height: input)
+  /// ```
+  NikuButton textHeight(double height) {
+    _text_height = height;
+
+    return this;
+  }
+
+  /// - forground - The paint drawn as a foreground for the text.
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(foreground: input)
+  /// ```
+  NikuButton textForeground(Paint foreground) {
+    _text_foreground = foreground;
+
+    return this;
+  }
+
+  /// - background - The paint drawn as a background for the text.
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(background: input)
+  /// ```
+  NikuButton textBackground(Paint foreground) {
+    _text_foreground = foreground;
+
+    return this;
+  }
+
+  /// Collection of text's shadow
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(shadows: input)
+  /// ```
+  NikuButton textShadows(List<Shadow> shadows) {
+    _text_shadows = shadows;
+
+    return this;
+  }
+
+  /// A feature tag and value that affect the selection of glyphs in a font
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(fontFeatures: input)
+  /// ```
+  NikuButton fontFeatures(List<FontFeature> fontFeatures) {
+    _text_fontFeatures = fontFeatures;
+
+    return this;
+  }
+
+  /// Text decoration
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(decoration: input)
+  /// ```
+  NikuButton textDecoration(TextDecoration textDecoration) {
+    _text_textDecoration = textDecoration;
+
+    return this;
+  }
+
+  /// Color of text decoration
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(decorationColor: input)
+  /// ```
+  NikuButton textDecorationColor(Color textDecorationColor) {
+    _text_textDecorationColor = textDecorationColor;
+
+    return this;
+  }
+
+  /// Thickness of text decoration
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(decorationThickness: input)
+  /// ```
+  NikuButton textDecorationThickness(double textDecorationThickness) {
+    _text_textDecorationThickness = textDecorationThickness;
+
+    return this;
+  }
+
+  /// Apply font to text
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(fontFamily: input)
+  /// ```
+  NikuButton fontFamily(String fontFamily) {
+    _text_fontFamily = fontFamily;
+
+    return this;
+  }
+
+  /// Apply font to text
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(fontFamilyFallback: input)
+  /// ```
+  NikuButton fontFamilyFallback(List<String> fontFamily) {
+    _text_fontFamilyFallback = fontFamily;
+
+    return this;
+  }
+
+  /// The common baseline that should be aligned between this text span and its parent text span, or, for the root text spans, with the line box.
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(textBaseline: input)
+  /// ```
+  NikuButton textBaseline(TextBaseline textBaseline) {
+    _text_textBaseline = textBaseline;
+
+    return this;
+  }
+
+  /// Using [TextBaseline.alphabetic]
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(textBaseline: Textbaseline.alphabetic)
+  /// ```
+  NikuButton alphabetic() {
+    _text_textBaseline = TextBaseline.alphabetic;
+
+    return this;
+  }
+
+  /// Using [TextBaseline.ideographic]
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(textBaseline: Textbaseline.ideographic)
+  /// ```
+  NikuButton ideographic() {
+    _text_textBaseline = TextBaseline.ideographic;
+
+    return this;
+  }
+
   /// Apply existing NikuButton's property to current style
   ///
   /// Example usage:
@@ -1954,22 +2296,52 @@ class NikuButton extends StatelessWidget {
         pb: instance._pb == 0 ? _pb : instance._pb,
         pl: instance._pl == 0 ? _pl : instance._pl,
         pr: instance._pr == 0 ? _pr : instance._pr,
-        mt: instance._mt == 0 ? _mt : instance._mt,
-        mb: instance._mb == 0 ? _mb : instance._mb,
-        ml: instance._ml == 0 ? _ml : instance._ml,
-        mr: instance._mr == 0 ? _mr : instance._mr,
-        minimumSize:
-            instance._minimumSize.init ? _minimumSize : instance._minimumSize,
+        mt: instance.getMt == 0 ? getMt : instance.getMt,
+        mb: instance.getMb == 0 ? getMb : instance.getMb,
+        ml: instance.getMl == 0 ? getMl : instance.getMl,
+        mr: instance.getMr == 0 ? getMr : instance.getMr,
+        minimumSize: instance.getMinimumSize.init
+            ? getMinimumSize
+            : instance.getMinimumSize,
         side: instance._side.init ? _side : instance._side,
         shape: instance._shape.init ? _shape : instance._shape,
-        mouseCursor:
-            instance._mouseCursor.init ? _mouseCursor : instance._mouseCursor,
+        mouseCursor: instance.getMouseCursor.init
+            ? getMouseCursor
+            : instance.getMouseCursor,
         visualDensity: instance._visualDensity ?? _visualDensity,
         tapTargetSize: instance._tapTargetSize ?? _tapTargetSize,
         animationDuration: instance._animationDuration ?? _animationDuration,
         enableFeedback: instance._enableFeedback,
         alignment: instance._alignment ?? _alignment,
         label: instance._label ?? _label,
+        text_color:
+            instance._text_color.init ? _text_color : instance._text_color,
+        text_backgroundColor:
+            instance._text_backgroundColor ?? instance._text_backgroundColor,
+        text_fontSize: instance._text_fontSize ?? instance._text_fontSize,
+        text_fontWeight: instance._text_fontWeight ?? instance._text_fontWeight,
+        text_fontStyle: instance._text_fontStyle ?? instance._text_fontStyle,
+        text_letterSpacing:
+            instance._text_letterSpacing ?? instance._text_letterSpacing,
+        text_wordSpacing:
+            instance._text_wordSpacing ?? instance._text_wordSpacing,
+        text_height: instance._text_height ?? instance._text_height,
+        text_foreground: instance._text_foreground ?? instance._text_foreground,
+        text_background: instance._text_background ?? instance._text_background,
+        text_shadows: instance._text_shadows ?? instance._text_shadows,
+        text_fontFeatures:
+            instance._text_fontFeatures ?? instance._text_fontFeatures,
+        text_textDecoration:
+            instance._text_textDecoration ?? instance._text_textDecoration,
+        text_textDecorationColor: instance._text_textDecorationColor ??
+            instance._text_textDecorationColor,
+        text_textDecorationThickness: instance._text_textDecorationThickness ??
+            instance._text_textDecorationThickness,
+        text_fontFamily: instance._text_fontFamily ?? instance._text_fontFamily,
+        text_fontFamilyFallback: instance._text_fontFamilyFallback ??
+            instance._text_fontFamilyFallback,
+        text_textBaseline:
+            instance._text_textBaseline ?? instance._text_textBaseline,
       );
 
   /// Apply styles and build as [TextButton]
@@ -1991,100 +2363,104 @@ class NikuButton extends StatelessWidget {
   ///   )
   /// }
   /// ```
+  @override
   Widget build(BuildContext context) {
-    if (_type == NikuButtonType.Elevated)
-      return Container(
-        margin: EdgeInsets.only(
-          top: _mt,
-          left: _ml,
-          bottom: _mb,
-          right: _mr,
+    final composeTextStyle = ({
+      Color? color,
+    }) =>
+        TextStyle(
+          color: color,
+          backgroundColor: _text_backgroundColor,
+          fontSize: _text_fontSize,
+          fontWeight: _text_fontWeight,
+          fontStyle: _text_fontStyle,
+          letterSpacing: _text_letterSpacing,
+          wordSpacing: _text_wordSpacing,
+          height: _text_height,
+          foreground: _text_foreground,
+          background: _text_background,
+          shadows: _text_shadows,
+          fontFeatures: _text_fontFeatures,
+          decoration: _text_textDecoration,
+          decorationColor: _text_textDecorationColor,
+          decorationThickness: _text_textDecorationThickness,
+          fontFamily: _text_fontFamily,
+          fontFamilyFallback: _text_fontFamilyFallback,
+          textBaseline: _text_textBaseline,
+        );
+
+    final buttonStyle = ButtonStyle(
+      textStyle: MaterialStateProperty.resolveWith<TextStyle>((states) {
+        if (states.contains(MaterialState.disabled))
+          return composeTextStyle(color: _text_color._disabled);
+        if (states.contains(MaterialState.dragged))
+          return composeTextStyle(color: _text_color._dragged);
+        if (states.contains(MaterialState.error))
+          return composeTextStyle(color: _text_color._error);
+        if (states.contains(MaterialState.focused))
+          return composeTextStyle(color: _text_color._focused);
+        if (states.contains(MaterialState.hovered))
+          return composeTextStyle(color: _text_color._hovered);
+        if (states.contains(MaterialState.pressed))
+          return composeTextStyle(color: _text_color._pressed);
+        if (states.contains(MaterialState.selected))
+          return composeTextStyle(color: _text_color._selected);
+
+        return composeTextStyle(color: _text_color._base);
+      }),
+      padding: MaterialStateProperty.resolveWith<EdgeInsetsGeometry>(
+        (_) => EdgeInsets.only(
+          top: _pt,
+          left: _pl,
+          bottom: _pb,
+          right: _pr,
         ),
-        child: ElevatedButton(
+      ),
+      backgroundColor: _composeMaterialState<Color>(_backgroundColor),
+      foregroundColor: _composeMaterialState<Color>(_foregroundColor),
+      overlayColor: _composeMaterialState<Color>(_overlayColor),
+      shadowColor: _composeMaterialState<Color>(_shadowColor),
+      elevation: _composeMaterialState<double>(_elevation),
+      minimumSize: _composeMaterialState<Size>(getMinimumSize),
+      side: _composeMaterialState<BorderSide>(_side),
+      shape: _composeMaterialState<OutlinedBorder>(_shape),
+      mouseCursor: _composeMaterialState<MouseCursor>(getMouseCursor),
+      visualDensity: _visualDensity,
+      tapTargetSize: _tapTargetSize,
+      animationDuration: _animationDuration,
+      enableFeedback: _enableFeedback,
+      alignment: _alignment,
+    );
+
+    if (_type == NikuButtonType.Elevated)
+      return internalBuild(
+        ElevatedButton(
           child: child,
           onPressed: _onPressed,
           onLongPress: _onLongPressed,
           focusNode: _focusNode,
           autofocus: _autofocus,
           clipBehavior: _clipBehavior,
-          style: ButtonStyle(
-            padding: MaterialStateProperty.resolveWith<EdgeInsetsGeometry>(
-              (_) => EdgeInsets.only(
-                top: _pt,
-                left: _pl,
-                bottom: _pb,
-                right: _pr,
-              ),
-            ),
-            backgroundColor: _composeMaterialState<Color>(_backgroundColor),
-            foregroundColor: _composeMaterialState<Color>(_foregroundColor),
-            overlayColor: _composeMaterialState<Color>(_overlayColor),
-            shadowColor: _composeMaterialState<Color>(_shadowColor),
-            elevation: _composeMaterialState<double>(_elevation),
-            minimumSize: _composeMaterialState<Size>(_minimumSize),
-            side: _composeMaterialState<BorderSide>(_side),
-            shape: _composeMaterialState<OutlinedBorder>(_shape),
-            mouseCursor: _composeMaterialState<MouseCursor>(_mouseCursor),
-            visualDensity: _visualDensity,
-            tapTargetSize: _tapTargetSize,
-            animationDuration: _animationDuration,
-            enableFeedback: _enableFeedback,
-            alignment: _alignment,
-          ),
+          style: buttonStyle,
         ),
       );
 
     if (_type == NikuButtonType.Outlined)
-      return Container(
-        margin: EdgeInsets.only(
-          top: _mt,
-          left: _ml,
-          bottom: _mb,
-          right: _mr,
-        ),
-        child: OutlinedButton(
+      return internalBuild(
+        OutlinedButton(
           child: child,
           onPressed: _onPressed,
           onLongPress: _onLongPressed,
           focusNode: _focusNode,
           autofocus: _autofocus,
           clipBehavior: _clipBehavior,
-          style: ButtonStyle(
-            padding: MaterialStateProperty.resolveWith<EdgeInsetsGeometry>(
-              (_) => EdgeInsets.only(
-                top: _pt,
-                left: _pl,
-                bottom: _pb,
-                right: _pr,
-              ),
-            ),
-            backgroundColor: _composeMaterialState<Color>(_backgroundColor),
-            foregroundColor: _composeMaterialState<Color>(_foregroundColor),
-            overlayColor: _composeMaterialState<Color>(_overlayColor),
-            shadowColor: _composeMaterialState<Color>(_shadowColor),
-            elevation: _composeMaterialState<double>(_elevation),
-            minimumSize: _composeMaterialState<Size>(_minimumSize),
-            side: _composeMaterialState<BorderSide>(_side),
-            shape: _composeMaterialState<RoundedRectangleBorder>(_shape),
-            mouseCursor: _composeMaterialState<MouseCursor>(_mouseCursor),
-            visualDensity: _visualDensity,
-            tapTargetSize: _tapTargetSize,
-            animationDuration: _animationDuration,
-            enableFeedback: _enableFeedback,
-            alignment: _alignment,
-          ),
+          style: buttonStyle,
         ),
       );
 
     if (_type == NikuButtonType.TextIcon)
-      return Container(
-        margin: EdgeInsets.only(
-          top: _mt,
-          left: _ml,
-          bottom: _mb,
-          right: _mr,
-        ),
-        child: TextButton.icon(
+      return internalBuild(
+        TextButton.icon(
           icon: child,
           label: _label ?? Text("Icon Button"),
           onPressed: _onPressed,
@@ -2092,42 +2468,13 @@ class NikuButton extends StatelessWidget {
           focusNode: _focusNode,
           autofocus: _autofocus,
           clipBehavior: _clipBehavior,
-          style: ButtonStyle(
-            padding: MaterialStateProperty.resolveWith<EdgeInsetsGeometry>(
-              (_) => EdgeInsets.only(
-                top: _pt,
-                left: _pl,
-                bottom: _pb,
-                right: _pr,
-              ),
-            ),
-            backgroundColor: _composeMaterialState<Color>(_backgroundColor),
-            foregroundColor: _composeMaterialState<Color>(_foregroundColor),
-            overlayColor: _composeMaterialState<Color>(_overlayColor),
-            shadowColor: _composeMaterialState<Color>(_shadowColor),
-            elevation: _composeMaterialState<double>(_elevation),
-            minimumSize: _composeMaterialState<Size>(_minimumSize),
-            side: _composeMaterialState<BorderSide>(_side),
-            shape: _composeMaterialState<OutlinedBorder>(_shape),
-            mouseCursor: _composeMaterialState<MouseCursor>(_mouseCursor),
-            visualDensity: _visualDensity,
-            tapTargetSize: _tapTargetSize,
-            animationDuration: _animationDuration,
-            enableFeedback: _enableFeedback,
-            alignment: _alignment,
-          ),
+          style: buttonStyle,
         ),
       );
 
     if (_type == NikuButtonType.ElevatedIcon)
-      return Container(
-        margin: EdgeInsets.only(
-          top: _mt,
-          left: _ml,
-          bottom: _mb,
-          right: _mr,
-        ),
-        child: ElevatedButton.icon(
+      return internalBuild(
+        ElevatedButton.icon(
           icon: child,
           label: _label ?? Text("Icon Button"),
           onPressed: _onPressed,
@@ -2135,42 +2482,13 @@ class NikuButton extends StatelessWidget {
           focusNode: _focusNode,
           autofocus: _autofocus,
           clipBehavior: _clipBehavior,
-          style: ButtonStyle(
-            padding: MaterialStateProperty.resolveWith<EdgeInsetsGeometry>(
-              (_) => EdgeInsets.only(
-                top: _pt,
-                left: _pl,
-                bottom: _pb,
-                right: _pr,
-              ),
-            ),
-            backgroundColor: _composeMaterialState<Color>(_backgroundColor),
-            foregroundColor: _composeMaterialState<Color>(_foregroundColor),
-            overlayColor: _composeMaterialState<Color>(_overlayColor),
-            shadowColor: _composeMaterialState<Color>(_shadowColor),
-            elevation: _composeMaterialState<double>(_elevation),
-            minimumSize: _composeMaterialState<Size>(_minimumSize),
-            side: _composeMaterialState<BorderSide>(_side),
-            shape: _composeMaterialState<OutlinedBorder>(_shape),
-            mouseCursor: _composeMaterialState<MouseCursor>(_mouseCursor),
-            visualDensity: _visualDensity,
-            tapTargetSize: _tapTargetSize,
-            animationDuration: _animationDuration,
-            enableFeedback: _enableFeedback,
-            alignment: _alignment,
-          ),
+          style: buttonStyle,
         ),
       );
 
     if (_type == NikuButtonType.OutlinedIcon)
-      return Container(
-        margin: EdgeInsets.only(
-          top: _mt,
-          left: _ml,
-          bottom: _mb,
-          right: _mr,
-        ),
-        child: OutlinedButton.icon(
+      return internalBuild(
+        OutlinedButton.icon(
           icon: child,
           label: _label ?? Text("Icon Button"),
           onPressed: _onPressed,
@@ -2178,71 +2496,19 @@ class NikuButton extends StatelessWidget {
           focusNode: _focusNode,
           autofocus: _autofocus,
           clipBehavior: _clipBehavior,
-          style: ButtonStyle(
-            padding: MaterialStateProperty.resolveWith<EdgeInsetsGeometry>(
-              (_) => EdgeInsets.only(
-                top: _pt,
-                left: _pl,
-                bottom: _pb,
-                right: _pr,
-              ),
-            ),
-            backgroundColor: _composeMaterialState<Color>(_backgroundColor),
-            foregroundColor: _composeMaterialState<Color>(_foregroundColor),
-            overlayColor: _composeMaterialState<Color>(_overlayColor),
-            shadowColor: _composeMaterialState<Color>(_shadowColor),
-            elevation: _composeMaterialState<double>(_elevation),
-            minimumSize: _composeMaterialState<Size>(_minimumSize),
-            side: _composeMaterialState<BorderSide>(_side),
-            shape: _composeMaterialState<OutlinedBorder>(_shape),
-            mouseCursor: _composeMaterialState<MouseCursor>(_mouseCursor),
-            visualDensity: _visualDensity,
-            tapTargetSize: _tapTargetSize,
-            animationDuration: _animationDuration,
-            enableFeedback: _enableFeedback,
-            alignment: _alignment,
-          ),
+          style: buttonStyle,
         ),
       );
 
-    return Container(
-      margin: EdgeInsets.only(
-        top: _mt,
-        left: _ml,
-        bottom: _mb,
-        right: _mr,
-      ),
-      child: TextButton(
+    return internalBuild(
+      TextButton(
         child: child,
         onPressed: _onPressed,
         onLongPress: _onLongPressed,
         focusNode: _focusNode,
         autofocus: _autofocus,
         clipBehavior: _clipBehavior,
-        style: ButtonStyle(
-          padding: MaterialStateProperty.resolveWith<EdgeInsetsGeometry>(
-            (_) => EdgeInsets.only(
-              top: _pt,
-              left: _pl,
-              bottom: _pb,
-              right: _pr,
-            ),
-          ),
-          backgroundColor: _composeMaterialState<Color>(_backgroundColor),
-          foregroundColor: _composeMaterialState<Color>(_foregroundColor),
-          overlayColor: _composeMaterialState<Color>(_overlayColor),
-          shadowColor: _composeMaterialState<Color>(_shadowColor),
-          elevation: _composeMaterialState<double>(_elevation),
-          minimumSize: _composeMaterialState<Size>(_minimumSize),
-          side: _composeMaterialState<BorderSide>(_side),
-          shape: _composeMaterialState<OutlinedBorder>(_shape),
-          mouseCursor: _composeMaterialState<MouseCursor>(_mouseCursor),
-          visualDensity: _visualDensity,
-          tapTargetSize: _tapTargetSize,
-          animationDuration: _animationDuration,
-          enableFeedback: _enableFeedback,
-          alignment: _alignment,
-        ),
+        style: buttonStyle,
       ),
     );
   }
@@ -2295,6 +2561,24 @@ class NikuButton extends StatelessWidget {
     bool enableFeedback = false,
     AlignmentGeometry? alignment,
     Widget? label,
+    NikuMaterialPropertyContainer<Color>? text_color,
+    Color? text_backgroundColor,
+    double? text_fontSize,
+    FontWeight? text_fontWeight,
+    FontStyle? text_fontStyle,
+    double? text_letterSpacing,
+    double? text_wordSpacing,
+    double? text_height,
+    Paint? text_foreground,
+    Paint? text_background,
+    List<Shadow>? text_shadows,
+    List<FontFeature>? text_fontFeatures,
+    TextDecoration? text_textDecoration,
+    Color? text_textDecorationColor,
+    double? text_textDecorationThickness,
+    String? text_fontFamily,
+    List<String>? text_fontFamilyFallback,
+    TextBaseline? text_textBaseline,
   }) {
     _onPressed = onPressed;
     _onLongPressed = onLongPressed;
@@ -2310,20 +2594,39 @@ class NikuButton extends StatelessWidget {
     _pb = pb;
     _pl = pl;
     _pr = pr;
-    _mt = mt;
-    _mb = mb;
-    _ml = ml;
-    _mr = mr;
-    _minimumSize = minimumSize ?? NikuMaterialPropertyContainer();
+    super.mt(mt);
+    super.mb(mb);
+    super.ml(ml);
+    super.mr(mr);
+    getMinimumSize = minimumSize ?? NikuMaterialPropertyContainer();
     _side = side ?? NikuMaterialPropertyContainer();
     _shape = shape ?? NikuMaterialPropertyContainer();
-    _mouseCursor = mouseCursor ?? NikuMaterialPropertyContainer();
+    getMouseCursor = mouseCursor ?? NikuMaterialPropertyContainer();
     _visualDensity = visualDensity;
     _tapTargetSize = tapTargetSize;
     _animationDuration = animationDuration;
     _enableFeedback = enableFeedback;
     _alignment = alignment;
     _label = label;
+
+    _text_color = text_color ?? NikuMaterialPropertyContainer();
+    _text_backgroundColor = text_backgroundColor;
+    _text_fontSize = text_fontSize;
+    _text_fontWeight = text_fontWeight;
+    _text_fontStyle = text_fontStyle;
+    _text_letterSpacing = text_letterSpacing;
+    _text_wordSpacing = text_wordSpacing;
+    _text_height = text_height;
+    _text_foreground = text_foreground;
+    _text_background = text_background;
+    _text_shadows = text_shadows;
+    _text_fontFeatures = text_fontFeatures;
+    _text_textDecoration = text_textDecoration;
+    _text_textDecorationColor = text_textDecorationColor;
+    _text_textDecorationThickness = text_textDecorationThickness;
+    _text_fontFamily = text_fontFamily;
+    _text_fontFamilyFallback = text_fontFamilyFallback;
+    _text_textBaseline = text_textBaseline;
 
     return this;
   }

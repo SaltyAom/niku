@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable
 import 'package:flutter/material.dart';
+import 'package:niku/widget/core.dart';
 
 import 'dart:ui';
 
@@ -78,7 +79,7 @@ import 'base.dart';
 /// - semanticsLabel, label - Semantics label for text, good for screen reader
 /// - textWidthBasis - Defines how to measure the width of the rendered text
 /// - textHeightBehavior - Defines how the paragraph will apply [TextStyle.height] to the ascent of the first line and descent of the last line
-class NikuText extends StatelessWidget {
+class NikuText extends NikuCore {
   String _text;
 
   Color? _color;
@@ -971,6 +972,10 @@ class NikuText extends StatelessWidget {
         semanticsLabel: instance._semanticsLabel ?? _semanticsLabel,
         textWidthBasis: instance._textWidthBasis ?? _textWidthBasis,
         textHeightBehavior: instance._textHeightBehavior ?? _textHeightBehavior,
+        mt: instance.getMt != 0 ? instance.getMt : getMt,
+        mb: instance.getMb != 0 ? instance.getMb : getMb,
+        ml: instance.getMl != 0 ? instance.getMl : getMl,
+        mr: instance.getMr != 0 ? instance.getMr : getMr,
       );
 
   /// Apply styles and build Text as Widget
@@ -983,38 +988,41 @@ class NikuText extends StatelessWidget {
   ///   .bold()
   ///   .build() // Collect all style and render
   /// ```
-  Text build(context) => Text(
-        _text,
-        key: key,
-        locale: _locale,
-        softWrap: _softWrap,
-        overflow: _overflow,
-        textScaleFactor: _textScaleFactor,
-        maxLines: _maxLines,
-        semanticsLabel: _semanticsLabel,
-        textWidthBasis: _textWidthBasis,
-        textHeightBehavior: _textHeightBehavior,
-        textDirection: _textDirection,
-        textAlign: _textAlign,
-        style: TextStyle(
-          color: _color,
-          backgroundColor: _backgroundColor,
-          fontSize: _fontSize,
-          fontWeight: _fontWeight,
-          fontStyle: _fontStyle,
-          letterSpacing: _letterSpacing,
-          wordSpacing: _wordSpacing,
-          textBaseline: _textBaseline,
-          height: _height,
-          fontFeatures: _fontFeatures,
-          foreground: _foreground,
-          background: _background,
-          decoration: _textDecoration,
-          decorationColor: _textDecorationColor,
-          decorationThickness: _textDecorationThickness,
-          shadows: _shadows,
-          fontFamily: _fontFamily,
-          fontFamilyFallback: _fontFamilyFallback,
+  @override
+  build(context) => internalBuild(
+        Text(
+          _text,
+          key: key,
+          locale: _locale,
+          softWrap: _softWrap,
+          overflow: _overflow,
+          textScaleFactor: _textScaleFactor,
+          maxLines: _maxLines,
+          semanticsLabel: _semanticsLabel,
+          textWidthBasis: _textWidthBasis,
+          textHeightBehavior: _textHeightBehavior,
+          textDirection: _textDirection,
+          textAlign: _textAlign,
+          style: TextStyle(
+            color: _color,
+            backgroundColor: _backgroundColor,
+            fontSize: _fontSize,
+            fontWeight: _fontWeight,
+            fontStyle: _fontStyle,
+            letterSpacing: _letterSpacing,
+            wordSpacing: _wordSpacing,
+            textBaseline: _textBaseline,
+            height: _height,
+            fontFeatures: _fontFeatures,
+            foreground: _foreground,
+            background: _background,
+            decoration: _textDecoration,
+            decorationColor: _textDecorationColor,
+            decorationThickness: _textDecorationThickness,
+            shadows: _shadows,
+            fontFamily: _fontFamily,
+            fontFamilyFallback: _fontFamilyFallback,
+          ),
         ),
       );
 
@@ -1066,6 +1074,10 @@ class NikuText extends StatelessWidget {
     String? semanticsLabel,
     TextWidthBasis? textWidthBasis,
     TextHeightBehavior? textHeightBehavior,
+    double mt = 0,
+    double ml = 0,
+    double mb = 0,
+    double mr = 0,
   }) {
     _color = color;
     _backgroundColor = backgroundColor;
@@ -1095,6 +1107,10 @@ class NikuText extends StatelessWidget {
     _semanticsLabel = semanticsLabel;
     _textWidthBasis = textWidthBasis;
     _textHeightBehavior = textHeightBehavior;
+    super.mt(mt);
+    super.ml(ml);
+    super.mb(mb);
+    super.mr(mr);
 
     return this;
   }

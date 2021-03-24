@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 
 import 'dart:ui';
 
-import './base.dart';
+import 'base.dart';
+import 'core.dart';
 
 /// Niku extension for Row
 ///
@@ -57,7 +58,7 @@ import './base.dart';
 ///   - prependChildren - Prepend all of children
 ///   - insert - Insert child at index
 ///   - insertAll - Insert all children at index
-class NikuRow extends StatelessWidget {
+class NikuRow extends NikuCore {
   List<Widget> _children = [];
 
   MainAxisAlignment _mainAxisAlignment = MainAxisAlignment.start;
@@ -720,15 +721,17 @@ class NikuRow extends StatelessWidget {
   ///   .append(Text("2"))
   ///   .build()
   /// ```
-  build(context) => Row(
-        key: key,
-        children: _children,
-        mainAxisAlignment: _mainAxisAlignment,
-        mainAxisSize: _mainAxisSize,
-        crossAxisAlignment: _crossAxisAlignment,
-        textDirection: _textDirection,
-        verticalDirection: _verticalDirection,
-        textBaseline: _textBaseline,
+  build(context) => internalBuild(
+        Row(
+          key: key,
+          children: _children,
+          mainAxisAlignment: _mainAxisAlignment,
+          mainAxisSize: _mainAxisSize,
+          crossAxisAlignment: _crossAxisAlignment,
+          textDirection: _textDirection,
+          verticalDirection: _verticalDirection,
+          textBaseline: _textBaseline,
+        ),
       );
 
   /// Switch to Niku() property
