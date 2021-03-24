@@ -1,4 +1,4 @@
-## [0.6.0] -
+## [1.0.0-alpha.0] - 2021/3/24
 Feature:
   - Remove `.build()` and `.style()`
   - Niku Internal is now mutating property instead of stacking

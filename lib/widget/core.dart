@@ -1,8 +1,6 @@
 // ignore_for_file: must_be_immutable
 import 'package:flutter/material.dart';
 
-import 'package:meta/meta.dart';
-
 class NikuCore extends StatelessWidget {
   double _mt = 0;
   double _mb = 0;
@@ -22,7 +20,7 @@ class NikuCore extends StatelessWidget {
   ///   margin: input
   /// )
   /// ```
-  Widget margin(EdgeInsets padding) {
+  NikuCore margin(EdgeInsets padding) {
     _mt = padding.top;
     _ml = padding.left;
     _mb = padding.bottom;
@@ -39,7 +37,7 @@ class NikuCore extends StatelessWidget {
   ///   margin: EdgeInsets.all(input)
   /// )
   /// ```
-  Widget m(double margin) {
+  NikuCore m(double margin) {
     _mt = margin;
     _ml = margin;
     _mb = margin;
@@ -56,7 +54,7 @@ class NikuCore extends StatelessWidget {
   ///   margin: EdgeInsets.symmetric(horizontal: input)
   /// )
   /// ```
-  Widget mx(double margin) {
+  NikuCore mx(double margin) {
     _ml = margin;
     _mr = margin;
 
@@ -71,7 +69,7 @@ class NikuCore extends StatelessWidget {
   ///   margin: EdgeInsets.symmetric(vertical: input)
   /// )
   /// ```
-  Widget my(double margin) {
+  NikuCore my(double margin) {
     _mt = margin;
     _mb = margin;
 
@@ -86,7 +84,7 @@ class NikuCore extends StatelessWidget {
   ///   margin: EdgeInsets.only(top: input)
   /// )
   /// ```
-  Widget mt(double margin) {
+  NikuCore mt(double margin) {
     _mt = margin;
 
     return this;
@@ -100,7 +98,7 @@ class NikuCore extends StatelessWidget {
   ///   margin: EdgeInsets.only(left: input)
   /// )
   /// ```
-  Widget ml(double margin) {
+  NikuCore ml(double margin) {
     _ml = margin;
 
     return this;
@@ -114,7 +112,7 @@ class NikuCore extends StatelessWidget {
   ///   margin: EdgeInsets.only(bottom: input)
   /// )
   /// ```
-  Widget mb(double margin) {
+  NikuCore mb(double margin) {
     _mb = margin;
 
     return this;
@@ -128,13 +126,13 @@ class NikuCore extends StatelessWidget {
   ///   margin: EdgeInsets.only(right: input)
   /// )
   /// ```
-  Widget mr(double margin) {
+  NikuCore mr(double margin) {
     _mr = margin;
 
     return this;
   }
 
-  @visibleForOverriding
+  @override
   build(context) => SizedBox.shrink();
 
   Widget internalBuild(Widget widget) {
