@@ -19,7 +19,6 @@ import 'core.dart';
 ///   .mainAxis(MainAxisAlignment.center)
 ///   .crossCenter()
 ///   .append(Text("2"))
-///   .build()
 /// ```
 ///
 /// Meta property list:
@@ -51,6 +50,15 @@ import 'core.dart';
 ///   - alphabetic - Using [TextBaseline.alphabetic]
 ///   - ideographic - Using [TextBaseline.ideographic]
 ///
+/// - margin, m - Padding of container
+///   - margin, m - apply margin to all side
+///   - mx - apply margin to x axis
+///   - my - apply margin y axis
+///   - mt - apply margin top side
+///   - ml - apply margin left side
+///   - mb - apply margin bottom side
+///   - ml - apply margin right side
+///
 /// Children property list:
 ///   - child, append, appendChild - Append child
 ///   - children, appendChildren - Append all of children
@@ -60,6 +68,7 @@ import 'core.dart';
 ///   - insertAll - Insert all children at index
 class NikuRow extends NikuCore {
   List<Widget> _children = [];
+  Key? key;
 
   MainAxisAlignment _mainAxisAlignment = MainAxisAlignment.start;
   MainAxisSize _mainAxisSize = MainAxisSize.max;
@@ -81,7 +90,6 @@ class NikuRow extends NikuCore {
   ///   .mainAxis(MainAxisAlignment.center)
   ///   .crossCenter()
   ///   .append(Text("2"))
-  ///   .build()
   /// ```
   ///
   /// Meta property list:
@@ -120,7 +128,7 @@ class NikuRow extends NikuCore {
   ///   - prependChildren - Prepend all of children
   ///   - insert - Insert child at index
   ///   - insertAll - Insert all children at index
-  NikuRow(this._children);
+  NikuRow(this._children, {this.key});
 
   /// Set main axis alignment
   ///
@@ -719,7 +727,6 @@ class NikuRow extends NikuCore {
   ///   .mainAxis(MainAxisAlignment.center)
   ///   .crossCenter()
   ///   .append(Text("2"))
-  ///   .build()
   /// ```
   build(context) => internalBuild(
         Row(
@@ -747,11 +754,11 @@ class NikuRow extends NikuCore {
   ///   .crossCenter()
   ///   .niku()
   ///   .bg(Colors.blue)
-  ///   .build()
   /// ```
   Niku niku() => Niku(
         Builder(
           builder: (context) => build(context),
         ),
+        key,
       );
 }

@@ -10,17 +10,18 @@ NikuTextField("Hello")
   .border(
     OutlineInputBorder(
       borderSide: BorderSide(
-        width: 2
-      )
-    )
+        width: 2,
+      ),
+    ),
   )
-  .focusedBorder(OutlineInputBorder(
-    borderSide: BorderSide(
-      color: Colors.blue,
-      width: 2)
-    )
+  .focusedBorder(
+    OutlineInputBorder(
+      borderSide: BorderSide(
+        color: Colors.blue,
+        width: 2,
+      ),
+    ),
   )
-  .build()
 ```
 ### Availability: 
 ```dart

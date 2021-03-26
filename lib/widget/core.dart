@@ -140,6 +140,7 @@ class NikuCore extends StatelessWidget {
       return widget;
 
     return Container(
+      key: widget.key,
       margin: EdgeInsets.only(
         top: getMt,
         left: getMl,

@@ -9,7 +9,6 @@ Style property builder for building icon Button
 NikuIconButton(Icon(Icons.edit))
   .color(Colors.blue)
   .p(40)
-  .build()
 ```
 
 ### Availability: 

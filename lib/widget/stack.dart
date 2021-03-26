@@ -18,7 +18,6 @@ import 'core.dart';
 /// ])
 ///   .center()
 ///   .append(Text("2"))
-///   .build()
 /// ```
 ///
 /// Meta property list:
@@ -47,8 +46,18 @@ import 'core.dart';
 ///   - passthrogh - Using [StackFit.passthrough]
 ///   - loose - Using [StackFit.loose]
 /// - clip, clipBehavior - Add clip behavior of widget
+///
+/// /// - margin, m - Padding of container
+///   - margin, m - apply margin to all side
+///   - mx - apply margin to x axis
+///   - my - apply margin y axis
+///   - mt - apply margin top side
+///   - ml - apply margin left side
+///   - mb - apply margin bottom side
+///   - ml - apply margin right side
 class NikuStack extends NikuCore {
   List<Widget> _children;
+  Key? key;
 
   AlignmentDirectional _alignment = AlignmentDirectional.topStart;
   TextDirection? _textDirection;
@@ -67,7 +76,6 @@ class NikuStack extends NikuCore {
   /// ])
   ///   .center()
   ///   .append(Text("2"))
-  ///   .build()
   /// ```
   ///
   /// Meta property list:
@@ -96,7 +104,7 @@ class NikuStack extends NikuCore {
   ///   - passthrogh - Using [StackFit.passthrough]
   ///   - loose - Using [StackFit.loose]
   /// - clip, clipBehavior - Add clip behavior of widget
-  NikuStack(this._children);
+  NikuStack(this._children, {this.key});
 
   /// Apply alignment to stack
   ///
@@ -574,7 +582,6 @@ class NikuStack extends NikuCore {
   /// ])
   ///   .center()
   ///   .append(Text("2"))
-  ///   .build()
   /// ```
   @override
   build(context) => internalBuild(
@@ -600,11 +607,11 @@ class NikuStack extends NikuCore {
   ///   .center()
   ///   .niku()
   ///   .bg(Colors.blue)
-  ///   .build()
   /// ```
   Niku niku() => Niku(
         Builder(
           builder: (context) => build(context),
         ),
+        key,
       );
 }

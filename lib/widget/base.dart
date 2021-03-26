@@ -11,10 +11,9 @@ import 'package:flutter/rendering.dart';
 ///
 /// Example usage:
 /// ```
-/// Niku(Container())
+/// Niku()
 ///   .background(Colors.blue)
 ///   .p(21)
-///   .build()
 /// ```
 ///
 /// Meta property list:
@@ -142,6 +141,7 @@ import 'package:flutter/rendering.dart';
 ///   - scaleEnd - The pointers are no longer in contact with the screen
 class Niku extends StatelessWidget {
   Widget _widget;
+  Key? key;
 
   /// Niku Widget for styling widget
   ///
@@ -152,7 +152,6 @@ class Niku extends StatelessWidget {
   /// Niku(Container())
   ///   .background(Colors.blue)
   ///   .p(21)
-  ///   .build()
   /// ```
   ///
   /// Meta property list:
@@ -278,10 +277,12 @@ class Niku extends StatelessWidget {
   ///   - scaleStart - The pointers in contact with the screen have established a focal point and initial scale of 1.0
   ///   - scaleUpdate - The pointers in contact with the screen have indicated a new focal point and/or scale
   ///   - scaleEnd - The pointers are no longer in contact with the screen
-  Niku([this._widget = const SizedBox.shrink()]);
+  Niku([this._widget = const SizedBox.shrink(), this.key]);
 
   @override
   build(context) {
+    if (key != null) return SizedBox(key: key, child: _widget);
+
     return _widget;
   }
 
@@ -297,7 +298,6 @@ class Niku extends StatelessWidget {
   ///          child: child
   ///      );
   ///  })
-  ///  .build()
   /// ```
   void builder(Widget Function(Widget child) builder) {
     _widget = builder(_widget);
@@ -1843,7 +1843,6 @@ extension BaseProperty on Niku {
   ///       margin: EdgeInsets.all(animation.value)
   ///     )
   ///   })
-  ///   .build()
   /// ```
   Niku animatedBuilder({
     required Widget Function(BuildContext context, Widget child) builder,
@@ -1874,7 +1873,6 @@ extension BaseProperty on Niku {
   ///       margin: EdgeInsets.all(animation.value)
   ///     )
   ///   })
-  ///   .build()
   /// ```
   Niku animated({
     required Widget Function(BuildContext context, Widget child) builder,
@@ -2030,7 +2028,6 @@ extension BaseProperty on Niku {
   ///       margin: EdgeInsets.all(animation.value)
   ///     )
   ///   })
-  ///   .build()
   /// ```
   Niku animatedContainer({
     Alignment? alignment,

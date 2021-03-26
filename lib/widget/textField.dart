@@ -28,7 +28,6 @@ import 'core.dart';
 ///       width: 2)
 ///     )
 ///   )
-///   .build()
 /// ```
 ///
 /// Meta property list:
@@ -399,6 +398,8 @@ import 'core.dart';
 ///   - alphabetic - Using [TextBaseline.alphabetic]
 ///   - ideographic - Using [TextBaseline.ideographic]
 class NikuTextField extends NikuCore {
+  Key? key;
+
   // Text Form Field
   TextEditingController? _controller;
   String _initialValue = '';
@@ -662,7 +663,6 @@ class NikuTextField extends NikuCore {
   ///       width: 2)
   ///     )
   ///   )
-  ///   .build()
   /// ```
   ///
   /// Meta property list:
@@ -1032,7 +1032,7 @@ class NikuTextField extends NikuCore {
   /// - textBaseline - A horizontal line used for aligning text
   ///   - alphabetic - Using [TextBaseline.alphabetic]
   ///   - ideographic - Using [TextBaseline.ideographic]
-  NikuTextField(this._input_labelText);
+  NikuTextField(this._input_labelText, {this.key});
 
   // * Text Form Field
 
@@ -6462,7 +6462,6 @@ class NikuTextField extends NikuCore {
   ///   NikuTextField("Bordered Filled")
   ///     .apply(border)
   ///     .color(Colors.blue)
-  ///     .build();
   /// );
   /// ```
   NikuTextField apply(NikuTextField instance) => set(
@@ -6871,7 +6870,6 @@ class NikuTextField extends NikuCore {
   ///       width: 2)
   ///     )
   ///   )
-  ///   .build()
   /// ```
   @override
   build(context) => internalBuild(
@@ -7130,12 +7128,12 @@ class NikuTextField extends NikuCore {
   ///   .bold()
   ///   .niku()
   ///   .my(20)
-  ///   .build() // Collect all style and render
   /// ```
   Niku niku() => Niku(
         Builder(
           builder: (context) => build(context),
         ),
+        key,
       );
 
   @protected

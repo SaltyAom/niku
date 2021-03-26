@@ -1,3 +1,7 @@
+## [1.0.0-alpha.1] - 2021/3/25
+Bug Fix:
+  - add Key
+
 ## [1.0.0-alpha.0] - 2021/3/24
 Feature:
   - Remove `.build()` and `.style()`

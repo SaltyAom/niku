@@ -18,7 +18,6 @@ Niku()
             child: child
         );
     })
-    .build()
 ```
 
 That's it! Now when you run out of widget or want some custom logic, you can use builder to create your own!

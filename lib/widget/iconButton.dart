@@ -14,7 +14,6 @@ import 'base.dart';
 /// NikuIconButton(Icon(Icons.edit))
 ///   .color(Colors.blue)
 ///   .p(40)
-///   .build()
 /// ```
 ///
 /// Meta property list:
@@ -62,6 +61,7 @@ import 'base.dart';
 /// - constraints - Whether detected gestures should provide acoustic and/or haptic feedback
 class NikuIconButton extends NikuCore {
   Widget _icon;
+  Key? key;
 
   VoidCallback? _onPressed;
 
@@ -88,7 +88,7 @@ class NikuIconButton extends NikuCore {
   bool _enableFeedback = true;
   BoxConstraints? _constraints;
 
-  NikuIconButton(this._icon);
+  NikuIconButton(this._icon, {this.key});
 
   /// Callback when button is pressed
   ///
@@ -623,7 +623,6 @@ class NikuIconButton extends NikuCore {
   ///       .apply(iconSize) // Will have iconSize apply
   ///       .apply(decoration) // Will have decoration apply
   ///       .tooltip("Edit")
-  ///       .build()
   ///   )
   /// }
   /// ```
@@ -673,13 +672,13 @@ class NikuIconButton extends NikuCore {
   ///       .iconSize(24)
   ///       .p(20)
   ///       .highlightColor(Colors.blue.withOpacity(.125))
-  ///       .build()
   ///   )
   /// }
   /// ```
   @override
   build(context) => internalBuild(
         IconButton(
+          key: key,
           icon: _icon,
           onPressed: _onPressed,
           iconSize: _iconSize,
@@ -718,12 +717,12 @@ class NikuIconButton extends NikuCore {
   ///   .highlightColor(Colors.blue.withOpacity(.125))
   ///   .niku()
   ///   .my(8)
-  ///   .build() // Collect all style and render
   /// ```
   Niku niku() => Niku(
         Builder(
           builder: (context) => build(context),
         ),
+        key,
       );
 
   @protected

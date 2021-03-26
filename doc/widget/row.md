@@ -13,7 +13,6 @@ NikuRow([
   .mainAxis(MainAxisAlignment.center)
   .crossCenter()
   .append(Text("2"))
-  .build()
 ```
 
 ### Availability: 

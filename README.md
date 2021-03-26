@@ -36,7 +36,6 @@ import 'package:niku/niku.dart'; // <--- Import Niku library
 NikuText("Hello World")
   .color(Colors.blue) // <-- Apply color
   .fontSize(21)       // <-- Add font size
-  .build()            // <-- Create widget
 ```
 ## Documentation
 Niku is style property builder for styling user interface inspired by SwiftUI.

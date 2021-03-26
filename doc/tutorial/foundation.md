@@ -60,7 +60,6 @@ Niku(
   .material(color: Colors.white) // 4
   .mx(40)  // 5.1
   .my(20)  // 5.2
-  .build() // 6
 ```
 
 Using Niku, the structure itself is self-explainary. But let's recap for better understading.
@@ -71,7 +70,6 @@ Using Niku, the structure itself is self-explainary. But let's recap for better 
 5. We add padding here
   5.1 `mx` is shorten for "Margin x-axis", which inspired by `TailwindCSS` to shorten the property.
   5.2 `my` as same as `mx`, it's shorten for "Margin y-axis".
-6. Now after we add all desired property, we build it as Widget.
 
 The order of property builder is every important.
 Because when we call the property of base Widget, it create a new Widget to wrap itself.
@@ -81,7 +79,6 @@ Which mean this would work:
 Niku(Text("Hello World"))
   .inkwell(splashColor: Colors.blue.withOpacity(.1))
   .material(color: Colors.white)
-  .build()
 ```
 
 But this wouldn't:
@@ -89,7 +86,6 @@ But this wouldn't:
 Niku(Text("Hello World"))
   .material(color: Colors.white)
   .inkwell(splashColor: Colors.blue.withOpacity(.1))
-  .build()
 ```
 
 Because on Flutter spec, `InkWell` should have `Material` as a parent to be able to property usable.
@@ -110,7 +106,6 @@ Niku(
       horizontal: 40
     )
   )
-  .build() // 6
 ```
 
 Every shorten property like `m` for `margin` or `p` for `padding` will accept reduced form of the property itself.
@@ -136,7 +131,6 @@ Previously, we haven't style the Text's yet, we could style it with extended `Ni
 ```dart
 NikuText("Hello World")
   .color(Colors.blue)
-  .build()
 ```
 
 The pattern is as same as base widget, but it only accept its own property.
@@ -154,7 +148,6 @@ NikuText("1")
   .fontSize(36)
   .fontFamily("Product Sans")
   .textAlign("Center")
-  .build()
 
 // 2
 NikuText("2")
@@ -163,7 +156,6 @@ NikuText("2")
   .fontSize(36)
   .fontFamily("Product Sans")
   .textAlign("Center")
-  .build()
 
 // 3
 NikuText("3")
@@ -172,7 +164,6 @@ NikuText("3")
   .fontSize(28)
   .fontFamily("Product Sans")
   .textAlign("Center")
-  .build()
 ```
 
 Written redundant style in app is quite confusing and annoying. You see that `1` and `2` is identical and `3` only changed is `fontSize`.
@@ -194,16 +185,13 @@ final title = NikuText(null)
 
 NikuText("1")
   .apply(title)
-  .build()
 
 NikuText("2")
   .apply(title)
-  .build()
 
 NikuText("3")
   .apply(title)
   .fontSize(28)
-  .build()
 ```
 
 Now all the Text has the same style applied as the base style! And you could override it to fit your need!
@@ -253,7 +241,6 @@ NikuText("1")
   .fontSize(24)
   .niku()  // <-- Extended widget is now base widget (Niku)
   .p(20)
-  .build()
 ```
 
 Which could also written as:
@@ -262,10 +249,8 @@ Niku(
   NikuText("1")
     .color(Colors.blue)
     .fontSize(24)
-    .build()
 )
   .p(20)
-  .build()
 ```
 
 When `niku` is called, the extended widget is now wrapped with Niku property which allows the extended widget to use all the base widget property for styling to fit your need.
@@ -279,7 +264,6 @@ NikuText("1")
   .niku()
   .fontSize(24)  // <-- Not existed in base widget
   .p(20)
-  .build()
 ```
 
 You can explore more at [Available Widget page](doc/widget/README.md) which would help you find what you're looking for.

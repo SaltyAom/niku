@@ -10,7 +10,7 @@ Padding(
   child: Container(
     child: Text(
       "Hello World",
-      style: const TextStyle(
+      style: TextStyle(
         color: Colors.blue
       )
     )
@@ -30,7 +30,6 @@ NikuText("Hello World")
   .color(Colors.blue)
   .niku()
   .p(20)
-  .build()
 ```
 
 See? Niku help eliminate nested hell by encapsulate styling as expose it as property.

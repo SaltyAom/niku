@@ -13,5 +13,5 @@ extension NikuWidget on Widget {
   ///   ..niku()
   ///   ..bg(Colors.blue)
   /// ```
-  Niku niku() => Niku(this);
+  Niku niku() => Niku(this, key);
 }

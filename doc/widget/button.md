@@ -20,15 +20,13 @@ NikuButton(Text("Flat Button"))
   .py(20)
   .rounded(8)
   .my(8)
-  .build()
 
-NikuButton(Text("Flat Button"))
+NikuButton.elevated(Text("Flat Button"))
   .bg(Colors.blue)
   .px(40)
   .py(20)
   .rounded(8)
   .my(8)
-  .elevated()
 ```
 
 ### Availability: 
@@ -42,13 +40,15 @@ import 'package:niku/widget/oldButton.dart';
 
 ### Meta property list:
 - niku() - Switch to Niku() property
-- build(), textButton() - Build as [TextButton]
+- build() - Build as [TextButton]
+- apply() - Apply existing NikuFlatButton's property to current style
+
+## Factory Method
 - elevated() - Build as [ElevatedButton]
 - outlined() - Build as [OutlinedButton]
-- textButtonIcon() - Build as [TextButton.icon]
+- icon() - Build as [TextButton.icon]
 - elevatedIcon() - Build as [ElevatedButton.icon]
 - outlinedIcon() - Build as [OutlinedButton.icon]
-- apply() - Apply existing NikuFlatButton's property to current style
 
 ### Style Property list:
 - onPressed - Callback when button is pressed

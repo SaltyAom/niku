@@ -9,7 +9,6 @@ Style property builder for building `Text`
 NikuText("Text")
   .color(Colors.blue)
   .fontSize(21)
-  .build()
 ```
 
 ### Availability: 

@@ -28,7 +28,6 @@ import 'base.dart';
 ///   .py(20)
 ///   .rounded(8)
 ///   .my(8)
-///   .build()
 ///
 /// NikuButton.elevated(Text("Elevated Button"))
 ///   .bg(Colors.blue)
@@ -47,8 +46,15 @@ import 'base.dart';
 ///
 /// Meta property list:
 /// - niku() - Switch to Niku() property
-/// - build(), textButton() - Build as [TextButton]
+/// - build() - Build as [TextButton]
 /// - apply() - Apply existing NikuFlatButton's property to current style
+///
+/// Factory Method
+/// - elevated() - Build as [ElevatedButton]
+/// - outlined() - Build as [OutlinedButton]
+/// - icon() - Build as [TextButton.icon]
+/// - elevatedIcon() - Build as [ElevatedButton.icon]
+/// - outlinedIcon() - Build as [OutlinedButton.icon]
 ///
 /// Style Property list:
 /// - onPressed - Callback when button is pressed
@@ -198,7 +204,8 @@ import 'base.dart';
 /// - label - Add label to [IconButton]
 class NikuButton extends NikuCore {
   Widget child;
-  NikuButtonType _type;
+  NikuButtonType type;
+  Key? key;
 
   VoidCallback? _onPressed;
   VoidCallback? _onLongPressed;
@@ -279,26 +286,26 @@ class NikuButton extends NikuCore {
   ///   .py(20)
   ///   .rounded(8)
   ///   .my(8)
-  ///   .build()
   ///
-  /// NikuButton(Text("Flat Button"))
+  /// NikuButton.elevated(Text("Flat Button"))
   ///   .bg(Colors.blue)
   ///   .px(40)
   ///   .py(20)
   ///   .rounded(8)
   ///   .my(8)
-  ///   .elevated()
   /// ```
   ///
   /// Meta property list:
   /// - niku() - Switch to Niku() property
-  /// - build(), textButton() - Build as [TextButton]
+  /// - build() - Build as [TextButton]
+  /// - apply() - Apply existing NikuFlatButton's property to current style
+  ///
+  /// Factory Method
   /// - elevated() - Build as [ElevatedButton]
   /// - outlined() - Build as [OutlinedButton]
-  /// - textButtonIcon() - Build as [TextButton.icon]
+  /// - icon() - Build as [TextButton.icon]
   /// - elevatedIcon() - Build as [ElevatedButton.icon]
   /// - outlinedIcon() - Build as [OutlinedButton.icon]
-  /// - apply() - Apply existing NikuFlatButton's property to current style
   ///
   /// Style Property list:
   /// - onPressed - Callback when button is pressed
@@ -445,26 +452,50 @@ class NikuButton extends NikuCore {
   /// - tapTargetSize - Configures the tap target and layout size of certain Material widgets
   /// - rounded - Apply border radius to button, will override shape
   /// - label - Add label to [IconButton]
-  NikuButton(this.child, [this._type = NikuButtonType.Text]);
+  NikuButton(
+    this.child, {
+    this.type = NikuButtonType.Text,
+    this.key,
+  });
 
-  factory NikuButton.icon(Widget child) {
-    return NikuButton(child, NikuButtonType.TextIcon);
+  factory NikuButton.icon(Widget child, {Key? key}) {
+    return NikuButton(
+      child,
+      type: NikuButtonType.TextIcon,
+      key: key,
+    );
   }
 
-  factory NikuButton.elevated(Widget child) {
-    return NikuButton(child, NikuButtonType.Elevated);
+  factory NikuButton.elevated(Widget child, {Key? key}) {
+    return NikuButton(
+      child,
+      type: NikuButtonType.Elevated,
+      key: key,
+    );
   }
 
-  factory NikuButton.elevatedIcon(Widget child) {
-    return NikuButton(child, NikuButtonType.ElevatedIcon);
+  factory NikuButton.elevatedIcon(Widget child, {Key? key}) {
+    return NikuButton(
+      child,
+      type: NikuButtonType.ElevatedIcon,
+      key: key,
+    );
   }
 
-  factory NikuButton.outlined(Widget child) {
-    return NikuButton(child, NikuButtonType.Outlined);
+  factory NikuButton.outlined(Widget child, {Key? key}) {
+    return NikuButton(
+      child,
+      type: NikuButtonType.Outlined,
+      key: key,
+    );
   }
 
-  factory NikuButton.outlinedIcon(Widget child) {
-    return NikuButton(child, NikuButtonType.OutlinedIcon);
+  factory NikuButton.outlinedIcon(Widget child, {Key? key}) {
+    return NikuButton(
+      child,
+      type: NikuButtonType.OutlinedIcon,
+      key: key,
+    );
   }
 
   /// Callback when button is pressed
@@ -2269,8 +2300,7 @@ class NikuButton extends NikuCore {
   ///     NikuButton(Text("Applied Style"))
   ///       .apply(padding) // Will have padding
   ///       .apply(blueBackground) // Will have blue background
-  ///       .rounded(8)
-  ///       .build() // Will combine all style
+  ///       .rounded(8) // Will have border radius of 8px
   ///   )
   /// }
   /// ```
@@ -2359,7 +2389,6 @@ class NikuButton extends NikuCore {
   ///       .px(40)
   ///       .py(20)
   ///       .bg(Colors.blue)
-  ///       .build() // Colelct all style and build
   ///   )
   /// }
   /// ```
@@ -2432,10 +2461,11 @@ class NikuButton extends NikuCore {
       alignment: _alignment,
     );
 
-    if (_type == NikuButtonType.Elevated)
+    if (type == NikuButtonType.Elevated)
       return internalBuild(
         ElevatedButton(
           child: child,
+          key: key,
           onPressed: _onPressed,
           onLongPress: _onLongPressed,
           focusNode: _focusNode,
@@ -2445,10 +2475,11 @@ class NikuButton extends NikuCore {
         ),
       );
 
-    if (_type == NikuButtonType.Outlined)
+    if (type == NikuButtonType.Outlined)
       return internalBuild(
         OutlinedButton(
           child: child,
+          key: key,
           onPressed: _onPressed,
           onLongPress: _onLongPressed,
           focusNode: _focusNode,
@@ -2458,10 +2489,11 @@ class NikuButton extends NikuCore {
         ),
       );
 
-    if (_type == NikuButtonType.TextIcon)
+    if (type == NikuButtonType.TextIcon)
       return internalBuild(
         TextButton.icon(
           icon: child,
+          key: key,
           label: _label ?? Text("Icon Button"),
           onPressed: _onPressed,
           onLongPress: _onLongPressed,
@@ -2472,10 +2504,11 @@ class NikuButton extends NikuCore {
         ),
       );
 
-    if (_type == NikuButtonType.ElevatedIcon)
+    if (type == NikuButtonType.ElevatedIcon)
       return internalBuild(
         ElevatedButton.icon(
           icon: child,
+          key: key,
           label: _label ?? Text("Icon Button"),
           onPressed: _onPressed,
           onLongPress: _onLongPressed,
@@ -2486,10 +2519,11 @@ class NikuButton extends NikuCore {
         ),
       );
 
-    if (_type == NikuButtonType.OutlinedIcon)
+    if (type == NikuButtonType.OutlinedIcon)
       return internalBuild(
         OutlinedButton.icon(
           icon: child,
+          key: key,
           label: _label ?? Text("Icon Button"),
           onPressed: _onPressed,
           onLongPress: _onLongPressed,
@@ -2503,6 +2537,7 @@ class NikuButton extends NikuCore {
     return internalBuild(
       TextButton(
         child: child,
+        key: key,
         onPressed: _onPressed,
         onLongPress: _onLongPressed,
         focusNode: _focusNode,
@@ -2523,13 +2558,12 @@ class NikuButton extends NikuCore {
   ///   .px(18)
   ///   .py(16)
   ///   .rounded(8)
-  ///   .niku()
-  ///   .build() // Collect all style and render
   /// ```
   Niku niku() => Niku(
         Builder(
           builder: (context) => build(context),
         ),
+        key,
       );
 
   NikuButton set({

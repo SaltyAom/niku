@@ -15,7 +15,6 @@ import 'base.dart';
 /// NikuText("Text")
 ///   .color(Colors.blue)
 ///   .fontSize(21)
-///   .build()
 /// ```
 ///
 /// Meta property list:
@@ -81,6 +80,7 @@ import 'base.dart';
 /// - textHeightBehavior - Defines how the paragraph will apply [TextStyle.height] to the ascent of the first line and descent of the last line
 class NikuText extends NikuCore {
   String _text;
+  Key? key;
 
   Color? _color;
   Color? _backgroundColor;
@@ -121,7 +121,6 @@ class NikuText extends NikuCore {
   /// NikuText("Text")
   ///   .color(Colors.blue)
   ///   .fontSize(21)
-  ///   .build()
   /// ```
   ///
   /// Meta property list:
@@ -192,7 +191,7 @@ class NikuText extends NikuCore {
   ///   - pl - apply padding left side
   ///   - pb - apply padding bottom side
   ///   - pl - apply padding right side
-  NikuText(this._text);
+  NikuText(this._text, {this.key});
 
   /// Set text content
   ///
@@ -938,7 +937,6 @@ class NikuText extends NikuCore {
   ///     NikuText("Applied Style")
   ///       .apply(style) // Will have blue color and font size of 21
   ///       .apply(bold) // Will have bold style
-  ///       .build() // Will combine all style
   ///   )
   /// }
   /// ```
@@ -986,7 +984,6 @@ class NikuText extends NikuCore {
   ///   .color(Colors.blue)
   ///   .fontSize(21)
   ///   .bold()
-  ///   .build() // Collect all style and render
   /// ```
   @override
   build(context) => internalBuild(
@@ -1037,12 +1034,12 @@ class NikuText extends NikuCore {
   ///   .bold()
   ///   .niku()
   ///   .my(20)
-  ///   .build() // Collect all style and render
   /// ```
   Niku niku() => Niku(
         Builder(
           builder: (context) => build(context),
         ),
+        key,
       );
 
   NikuText set({

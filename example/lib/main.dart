@@ -37,7 +37,7 @@ class HomePage extends StatelessWidget {
         title: Text("Niku"),
         brightness: Brightness.dark,
       ),
-      body: Column(
+      body: Niku(Column(
         children: [
           TextButton(
             child: Text("Text Button").asNiku()
@@ -83,58 +83,56 @@ class HomePage extends StatelessWidget {
           ).asNiku()
             ..apply(baseButton)
             ..bc(Colors.blue),
-          Stack(children: [
+          Niku(Stack(children: [
             Text("Text in Niku Stack"),
-            Text("Text with Niku Property").niku()..mt(40),
-          ]).asNiku().topCenter().niku().maxHeight(100),
+            NikuText("Text with Niku Property")..mt(40),
+          ]).asNiku()
+            ..topCenter())
+            ..maxHeight(100),
           Niku()
             ..size(40, 40)
             ..bg(Theme.of(context).primaryColor)
             ..rounded()
             ..my(20)
         ],
-      )
-          .asNiku()
-          .justifyCenter()
-          .prepend(
-            Text("Niku").asNiku()
-              ..fontSize(21)
-              ..w600()
-              ..color(Theme.of(context).primaryColor)
-              ..mb(20),
-          )
-          .append(
-            TextField()
-                .asNiku()
-                .label("Niku Text Field")
-                .allowSelectAll(false)
-                .prefixIcon(
-                  Icon(Icons.edit),
-                )
-                .suffixIcon(
-                  IconButton(
-                    icon: Icon(Icons.delete),
-                    onPressed: () {},
-                  )
-                      .asNiku()
-                      .highlight(Colors.transparent)
-                      .splash(Colors.transparent),
-                )
-                .color(Colors.black87)
-                .border(
-                  OutlineInputBorder(
-                    borderSide: BorderSide(width: 2),
-                  ),
-                )
-                .niku()
-                  ..maxWidth(320)
-                  ..my(20),
-          )
-          .niku()
-            ..my(40)
-            ..scrollable()
-            ..fullWidth()
-            ..center(),
+      ).asNiku()
+        ..justifyCenter()
+        ..prepend(
+          Text("Niku").asNiku()
+            ..fontSize(21)
+            ..w600()
+            ..color(Theme.of(context).primaryColor)
+            ..mb(20),
+        )
+        ..append(
+          Niku(TextField().asNiku()
+            ..label("Niku Text Field")
+            ..allowSelectAll(false)
+            ..prefixIcon(
+              Icon(Icons.edit),
+            )
+            ..suffixIcon(
+              IconButton(
+                icon: Icon(Icons.delete),
+                onPressed: () {},
+              )
+                  .asNiku()
+                  .highlight(Colors.transparent)
+                  .splash(Colors.transparent),
+            )
+            ..color(Colors.black87)
+            ..border(
+              OutlineInputBorder(
+                borderSide: BorderSide(width: 2),
+              ),
+            ))
+            ..maxWidth(320)
+            ..my(20),
+        ))
+        ..my(40)
+        ..scrollable()
+        ..fullWidth()
+        ..center(),
     );
   }
 }

@@ -14,7 +14,6 @@ NikuOutlineButton(Text("Outline Button"))
   .py(20)
   .rounded(8)
   .my(8)
-  .build()
 ```
 
 ### Availability: 

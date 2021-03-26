@@ -9,7 +9,6 @@ Style property builder for building Widget
 Niku()
   .bg(Colors.blue)
   .p(21)
-  .build()
 ```
 
 ### Availability: 

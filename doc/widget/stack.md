@@ -12,7 +12,6 @@ NikuStack([
 ])
   .center()
   .append(Text("2"))
-  .build()
 ```
 
 ### Availability: 
