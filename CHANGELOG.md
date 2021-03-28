@@ -1,3 +1,11 @@
+## [1.0.0-alpha.2] - 2021/3/28
+Breaking Change:
+  - Swap arguments of animated
+
+Change:
+  - Remove Nested instance from base property
+  - Add default value of `true` to `absortPointer` and `ignorePointer`
+
 ## [1.0.0-alpha.1] - 2021/3/25
 Bug Fix:
   - add Key
