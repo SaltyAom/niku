@@ -1,4 +1,4 @@
-## [1.0.0-alpha.3] - 
+## [1.0.0-alpha.3] - 2021/3/31
 Feature:
   - Add `cursor` to IconButton.
   - Add the following property to `IconButton`:
