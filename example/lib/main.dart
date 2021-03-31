@@ -121,7 +121,7 @@ class HomePage extends StatelessWidget {
                   .splash(Colors.transparent),
             )
             ..color(Colors.black87)
-            ..border(
+            ..b(
               OutlineInputBorder(
                 borderSide: BorderSide(width: 2),
               ),

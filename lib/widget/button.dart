@@ -202,6 +202,31 @@ import 'base.dart';
 /// - tapTargetSize - Configures the tap target and layout size of certain Material widgets
 /// - rounded - Apply border radius to button, will override shape
 /// - label - Add label to [IconButton]
+///
+///
+/// - textColor - Color of text
+/// - fontSize - Set text size
+/// - fontWeight - Font weight
+///   - fontWeight - Set font weight of text
+///   - bold - Set font to bold, equivalent to w700()
+///   - w100 - Use font weight of 100
+///   - w200 - Use font weight of 200
+///   - w300 - Use font weight of 300
+///   - w400 - Use font weight of 400
+///   - w500 - Use font weight of 500
+///   - w600 - Use font weight of 600
+///   - w700 - Use font weight of 700
+///   - w800 - Use font weight of 800
+///   - w900 - Use font weight of 900
+/// - fontWeight - The thickness of the glyphs used to draw the text
+/// - fontStyle - Whether to slant the glyphs in the font
+///   - fontStyle - Use [FontStyle] to apply
+///   - italic - Use italic style
+/// - letterSpacing - Spacing for each letter
+/// - wordSpacing - Spacing for each word
+/// - textBaseline - A horizontal line used for aligning text
+///   - alphabetic - Using [TextBaseline.alphabetic]
+///   - ideographic - Using [TextBaseline.ideographic]
 class NikuButton extends NikuCore {
   Widget child;
   NikuButtonType type;
@@ -451,7 +476,30 @@ class NikuButton extends NikuCore {
   /// - visualDensity - Defines the visual density of user interface components
   /// - tapTargetSize - Configures the tap target and layout size of certain Material widgets
   /// - rounded - Apply border radius to button, will override shape
-  /// - label - Add label to [IconButton]
+  ///
+  /// - textColor - Color of text
+  /// - fontSize - Set text size
+  /// - fontWeight - Font weight
+  ///   - fontWeight - Set font weight of text
+  ///   - bold - Set font to bold, equivalent to w700()
+  ///   - w100 - Use font weight of 100
+  ///   - w200 - Use font weight of 200
+  ///   - w300 - Use font weight of 300
+  ///   - w400 - Use font weight of 400
+  ///   - w500 - Use font weight of 500
+  ///   - w600 - Use font weight of 600
+  ///   - w700 - Use font weight of 700
+  ///   - w800 - Use font weight of 800
+  ///   - w900 - Use font weight of 900
+  /// - fontWeight - The thickness of the glyphs used to draw the text
+  /// - fontStyle - Whether to slant the glyphs in the font
+  ///   - fontStyle - Use [FontStyle] to apply
+  ///   - italic - Use italic style
+  /// - letterSpacing - Spacing for each letter
+  /// - wordSpacing - Spacing for each word
+  /// - textBaseline - A horizontal line used for aligning text
+  ///   - alphabetic - Using [TextBaseline.alphabetic]
+  ///   - ideographic - Using [TextBaseline.ideographic]
   NikuButton(
     this.child, {
     this.type = NikuButtonType.Text,
@@ -653,7 +701,7 @@ class NikuButton extends NikuCore {
   /// TextButton(
   ///   alignment: input
   /// )
-  /// ```
+  /// ```top
   NikuButton alignment(Alignment align) {
     _alignment = align;
 
@@ -864,10 +912,10 @@ class NikuButton extends NikuCore {
   /// ```
   /// TextButton(
   ///   color: MaterialStateProperty.resolveWith<T>((states) {
-  ///     if (states.contains(MaterialState.focused)) return focused;
-  ///     if (states.contains(MaterialState.hovered)) return hovered;
-  ///     if (states.contains(MaterialState.pressed)) return pressed;
-  ///     if (states.contains(MaterialState.selected)) return selected;
+  ///     if (states.contains(MaterialState.focused)) return input;
+  ///     if (states.contains(MaterialState.hovered)) return input;
+  ///     if (states.contains(MaterialState.pressed)) return input;
+  ///     if (states.contains(MaterialState.selected)) return input;
   ///
   ///     return null
   ///   })
@@ -875,10 +923,11 @@ class NikuButton extends NikuCore {
   /// ```
   NikuButton highlight(Color highlight) {
     _backgroundColor.update(
-        hovered: highlight,
-        focused: highlight,
-        pressed: highlight,
-        selected: highlight);
+      hovered: highlight,
+      focused: highlight,
+      pressed: highlight,
+      selected: highlight,
+    );
 
     return this;
   }
@@ -1671,7 +1720,7 @@ class NikuButton extends NikuCore {
   /// Equivalent to
   /// ```
   /// TextButton(
-  ///   minimumSize: MaterialStateProperty.resolveWith<OutlinedBorder>((states) {  ///
+  ///   minimumSize: MaterialStateProperty.resolveWith<T>((states) {
   ///     return base;
   ///   });
   /// )
@@ -1781,14 +1830,15 @@ class NikuButton extends NikuCore {
   }
 
   /// Defines the visual density of user interface components.
+  /// 
   /// Equivalent to
   /// ```
   /// TextButton(
   ///   visualDensity: input
   /// )
   /// ```
-  NikuButton visualDensity(FocusNode focusNode) {
-    _focusNode = focusNode;
+  NikuButton visualDensity(VisualDensity visualDensity) {
+    _visualDensity = visualDensity;
 
     return this;
   }

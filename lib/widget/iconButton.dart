@@ -536,6 +536,20 @@ class NikuIconButton extends NikuCore {
     return this;
   }
 
+  /// The cursor for a mouse pointer when it enters or is hovering over the button
+  ///
+  /// Equivalent to
+  /// ```
+  /// IconButton(
+  ///   mouseCursor: input
+  /// )
+  /// ```
+  NikuIconButton cursor(MouseCursor click) {
+    getMouseCursor = click;
+
+    return this;
+  }
+
   /// An optional focus node to use as the focus node for this widget
   ///
   /// Equivalent to
@@ -564,7 +578,7 @@ class NikuIconButton extends NikuCore {
     return this;
   }
 
-  /// Determine whether button should be auto focus
+  /// Explaination of the button
   ///
   /// Equivalent to
   /// ```
@@ -586,13 +600,13 @@ class NikuIconButton extends NikuCore {
   ///   enableFeedback: input
   /// )
   /// ```
-  NikuIconButton enableFeedback(bool enableFeedback) {
+  NikuIconButton enableFeedback([bool enableFeedback = true]) {
     _enableFeedback = enableFeedback;
 
     return this;
   }
 
-  /// Whether detected gestures should provide acoustic and/or haptic feedback
+  /// Set constraints layout of button
   ///
   /// Equivalent to
   /// ```
@@ -602,6 +616,286 @@ class NikuIconButton extends NikuCore {
   /// ```
   NikuIconButton constraints(BoxConstraints boxConstraints) {
     _constraints = boxConstraints;
+
+    return this;
+  }
+
+  /// Set size of button
+  ///
+  /// Equivalent to
+  /// ```
+  /// IconButton(
+  ///   constraints: BoxConstraints(
+  ///     minWidth: input1,
+  ///     minHeight: input2,
+  ///     maxWidth: input1,
+  ///     maxHeight: input2,
+  ///   ),
+  /// );
+  /// ```
+  NikuIconButton size(double x, double y) {
+    _constraints = BoxConstraints(
+      minWidth: x,
+      minHeight: y,
+      maxWidth: x,
+      maxHeight: y,
+    );
+
+    return this;
+  }
+
+  /// Set maximum button size of both width and height
+  ///
+  /// Equivalent to
+  /// ```
+  /// IconButton(
+  ///   constraints: BoxConstraints(
+  ///     maxWidth: input1,
+  ///     maxHeight: input2,
+  ///   ),
+  /// );
+  /// ```
+  NikuIconButton maximumSize(double x, double y) {
+    _constraints = BoxConstraints(
+      minWidth: _constraints?.minWidth ?? 0,
+      minHeight: _constraints?.minHeight ?? 0,
+      maxWidth: x,
+      maxHeight: y,
+    );
+
+    return this;
+  }
+
+  /// Set maximum button size of both width and height
+  ///
+  /// Equivalent to
+  /// ```
+  /// IconButton(
+  ///   constraints: BoxConstraints(
+  ///     maxWidth: input1,
+  ///     maxHeight: input2,
+  ///   ),
+  /// );
+  /// ```
+  NikuIconButton maxSize(double x, double y) {
+    _constraints = BoxConstraints(
+      minWidth: _constraints?.minWidth ?? 0,
+      minHeight: _constraints?.minHeight ?? 0,
+      maxWidth: x,
+      maxHeight: y,
+    );
+
+    return this;
+  }
+
+  /// Set minmum button size of both width and height
+  ///
+  /// Equivalent to
+  /// ```
+  /// IconButton(
+  ///   constraints: BoxConstraints(
+  ///     minWidth: input1,
+  ///     minHeight: input2,
+  ///   ),
+  /// );
+  /// ```
+  NikuIconButton minimumSize(double x, double y) {
+    _constraints = BoxConstraints(
+      minWidth: x,
+      minHeight: y,
+      maxWidth: _constraints?.maxWidth ?? double.infinity,
+      maxHeight: _constraints?.maxHeight ?? double.infinity,
+    );
+
+    return this;
+  }
+
+  /// Set minmum button size of both width and height
+  ///
+  /// Equivalent to
+  /// ```
+  /// IconButton(
+  ///   constraints: BoxConstraints(
+  ///     minWidth: input1,
+  ///     minHeight: input2,
+  ///   ),
+  /// );
+  /// ```
+  NikuIconButton minSize(double x, double y) {
+    _constraints = BoxConstraints(
+      minWidth: x,
+      minHeight: y,
+      maxWidth: _constraints?.maxWidth ?? double.infinity,
+      maxHeight: _constraints?.maxHeight ?? double.infinity,
+    );
+
+    return this;
+  }
+
+  /// Set minimum width of button
+  ///
+  /// Equivalent to
+  /// ```
+  /// IconButton(
+  ///   constraints: BoxConstraints(
+  ///     minWidth: input,
+  ///   ),
+  /// );
+  /// ```
+  NikuIconButton minimumWidth(double input) {
+    _constraints = BoxConstraints(
+      minWidth: input,
+      minHeight: _constraints?.minHeight ?? 0,
+      maxWidth: _constraints?.maxWidth ?? double.infinity,
+      maxHeight: _constraints?.maxHeight ?? double.infinity,
+    );
+
+    return this;
+  }
+
+  /// Set minimum width of button
+  ///
+  /// Equivalent to
+  /// ```
+  /// IconButton(
+  ///   constraints: BoxConstraints(
+  ///     minWidth: input,
+  ///   ),
+  /// );
+  /// ```
+  NikuIconButton minWidth(double input) {
+    _constraints = BoxConstraints(
+      minWidth: input,
+      minHeight: _constraints?.minHeight ?? 0,
+      maxWidth: _constraints?.maxWidth ?? double.infinity,
+      maxHeight: _constraints?.maxHeight ?? double.infinity,
+    );
+
+    return this;
+  }
+
+  /// Set minimum height of button
+  ///
+  /// Equivalent to
+  /// ```
+  /// IconButton(
+  ///   constraints: BoxConstraints(
+  ///     minHeight: input,
+  ///   ),
+  /// );
+  /// ```
+  NikuIconButton minimumHeight(double input) {
+    _constraints = BoxConstraints(
+      minWidth: _constraints?.minWidth ?? 0,
+      minHeight: input,
+      maxWidth: _constraints?.maxWidth ?? double.infinity,
+      maxHeight: _constraints?.maxHeight ?? double.infinity,
+    );
+
+    return this;
+  }
+
+  /// Set minimum height of button
+  ///
+  /// Equivalent to
+  /// ```
+  /// IconButton(
+  ///   constraints: BoxConstraints(
+  ///     minHeight: input,
+  ///   ),
+  /// );
+  /// ```
+  NikuIconButton minHeight(double input) {
+    _constraints = BoxConstraints(
+      minWidth: _constraints?.minWidth ?? 0,
+      minHeight: input,
+      maxWidth: _constraints?.maxWidth ?? double.infinity,
+      maxHeight: _constraints?.maxHeight ?? double.infinity,
+    );
+
+    return this;
+  }
+
+  /// Set maximum width of button
+  ///
+  /// Equivalent to
+  /// ```
+  /// IconButton(
+  ///   constraints: BoxConstraints(
+  ///     maxWidth: input,
+  ///   ),
+  /// );
+  /// ```
+  NikuIconButton maximumWidth(double input) {
+    _constraints = BoxConstraints(
+      minWidth: _constraints?.minWidth ?? 0,
+      minHeight: _constraints?.minHeight ?? 0,
+      maxWidth: input,
+      maxHeight: _constraints?.maxHeight ?? double.infinity,
+    );
+
+    return this;
+  }
+
+  /// Set maximum width of button
+  ///
+  /// Equivalent to
+  /// ```
+  /// IconButton(
+  ///   constraints: BoxConstraints(
+  ///     maxWidth: input,
+  ///   ),
+  /// );
+  /// ```
+  NikuIconButton maxWidth(double input) {
+    _constraints = BoxConstraints(
+      minWidth: _constraints?.minWidth ?? 0,
+      minHeight: _constraints?.minHeight ?? 0,
+      maxWidth: input,
+      maxHeight: _constraints?.maxHeight ?? double.infinity,
+    );
+
+    return this;
+  }
+
+  /// Set maximum height of button
+  ///
+  /// Equivalent to
+  /// ```
+  /// IconButton(
+  ///   constraints: BoxConstraints(
+  ///     maxHeight: input,
+  ///   ),
+  /// );
+  /// ```
+  NikuIconButton maximumHeight(double input) {
+    _constraints = BoxConstraints(
+      minWidth: _constraints?.minWidth ?? 0,
+      minHeight: _constraints?.minHeight ?? 0,
+      maxWidth: _constraints?.maxWidth ?? double.infinity,
+      maxHeight: input,
+    );
+
+    return this;
+  }
+
+  /// Set maximum height of button
+  ///
+  /// Equivalent to
+  /// ```
+  /// IconButton(
+  ///   constraints: BoxConstraints(
+  ///     minHeight: input,
+  ///   ),
+  /// );
+  /// ```
+  NikuIconButton maxHeight(double input) {
+    _constraints = BoxConstraints(
+      minWidth: _constraints?.minWidth ?? 0,
+      minHeight: _constraints?.minHeight ?? 0,
+      maxWidth: _constraints?.maxWidth ?? double.infinity,
+      maxHeight: input,
+    );
 
     return this;
   }

@@ -1,3 +1,29 @@
+## [1.0.0-alpha.3] - 
+Feature:
+  - Add `cursor` to IconButton.
+  - Add the following property to `IconButton`:
+    - `size`, 
+    - `minSize`, `minimumSize`
+    - `maxSize`, `maximumSize`
+    - `minWidth`, `minimumWidth`
+    - `minHeight`, `minimumHeight`
+    - `maxWidth`, `maximumWidth`
+    - `maxHeight`, `maximumHeight`
+  - Boolean method on `NikuTextField` now has default value of `true`.
+
+Breaking Change:
+  - Rename `border` to `b` and `setBorder` to `border`.
+  - Change `obscureTextFormField` to `obscureText` on NikuTextField.
+  - Add `asPassword` on NikuTextField.
+  - Remove `disabledSmartDashes` and `disabledSmartQuotes`.
+  - `enableSmartQuotes` and `enableSmartDashes` now accept option boolean default as true.
+  - Change from `inputDecorationEnable` to `enableInputDecoration`.
+  - Change from `...textFormField` to `...text` in NikuTextField.
+
+Bug fix:
+  - Fix Visual Density in NikuButton.
+  - Setting multiple border variant not working
+
 ## [1.0.0-alpha.2] - 2021/3/28
 Breaking Change:
   - Swap arguments of animated

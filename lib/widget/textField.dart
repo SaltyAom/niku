@@ -120,7 +120,7 @@ import 'core.dart';
 /// - autoFillHints - A list of strings that helps the autofill service identify the type of this text input
 /// - autoValidateMode - Validation of value of field
 ///   - alwaysValidate - Using [AutovalidateMode.always]
-///   - disabledValidate - Using [AutovalidateMode.disabled]
+///   - disableValidate - Using [AutovalidateMode.disabled]
 ///   - validateOnUserInteraction - Using [AutovalidateMode.onUserInteraction]
 ///
 /// [InputDecoration] property builder
@@ -359,12 +359,15 @@ import 'core.dart';
 ///   - focusColor - The base fill color of the decoration's container color when focused
 ///
 /// - border - The shape of the border to draw around the decoration's container
-///   - setBorder - Set multiple [InputDecoration] at once
+///   - b - Set multiple [InputDecoration] at once
 ///   - border - The shape of the border to draw around the decoration's container
 ///   - enabledBorder - The border to display when the [InputDecorator] is enabled and is not showing an error
 ///   - disabledBorder - The border to display when the [InputDecorator] is disabled and is not showing an error
 ///   - focusedBorder - The border to display when the [InputDecorator] has the focus and is not showing an error
 ///   - errorBorder - The border to display when the [InputDecorator] does not have the focus and is showing an error
+///   - outlined - Using [OutlineInputBorder]
+///   - underlined - Using [UnderlineInputBorder]
+///   - borderColor - Set each border color.
 ///
 /// - inputDecorationEnable - If false [helperText], [errorText], and [counterText] are not displayed, and the opacity of the remaining visual elements is reduced
 /// - semanticCounterText - A semantic label for the [counterText]
@@ -391,7 +394,7 @@ import 'core.dart';
 ///   - italic - Use italic style
 /// - letterSpacing - Spacing for each letter
 /// - wordSpacing - Spacing for each word
-/// - height - Fixed height for text
+/// - textHeight - Fixed height for text
 /// - foreground - The paint drawn as a foreground for the text
 /// - background - The paint drawn as a background for the text
 /// - textBaseline - A horizontal line used for aligning text
@@ -755,7 +758,7 @@ class NikuTextField extends NikuCore {
   /// - autoFillHints - A list of strings that helps the autofill service identify the type of this text input
   /// - autoValidateMode - Validation of value of field
   ///   - alwaysValidate - Using [AutovalidateMode.always]
-  ///   - disabledValidate - Using [AutovalidateMode.disabled]
+  ///   - disableValidate - Using [AutovalidateMode.disabled]
   ///   - validateOnUserInteraction - Using [AutovalidateMode.onUserInteraction]
   ///
   /// [InputDecoration] property builder
@@ -994,12 +997,15 @@ class NikuTextField extends NikuCore {
   ///   - focusColor - The base fill color of the decoration's container color when focused
   ///
   /// - border - The shape of the border to draw around the decoration's container
-  ///   - setBorder - Set multiple [InputDecoration] at once
+  ///   - b - Set multiple [InputDecoration] at once
   ///   - border - The shape of the border to draw around the decoration's container
   ///   - enabledBorder - The border to display when the [InputDecorator] is enabled and is not showing an error
   ///   - disabledBorder - The border to display when the [InputDecorator] is disabled and is not showing an error
   ///   - focusedBorder - The border to display when the [InputDecorator] has the focus and is not showing an error
   ///   - errorBorder - The border to display when the [InputDecorator] does not have the focus and is showing an error
+  ///   - outlined - Using [OutlineInputBorder]
+  ///   - underlined - Using [UnderlineInputBorder]
+  ///   - borderColor - Set each border color.
   ///
   /// - inputDecorationEnable - If false [helperText], [errorText], and [counterText] are not displayed, and the opacity of the remaining visual elements is reduced
   /// - semanticCounterText - A semantic label for the [counterText]
@@ -1036,7 +1042,7 @@ class NikuTextField extends NikuCore {
 
   // * Text Form Field
 
-  /// Controller for ediable text field
+  /// Controller for editable text field
   ///
   /// Equivalent to
   /// ```
@@ -1050,7 +1056,7 @@ class NikuTextField extends NikuCore {
     return this;
   }
 
-  /// Controller for ediable text field
+  /// Controller for editable text field
   ///
   /// Equivalent to
   /// ```
@@ -1346,7 +1352,7 @@ class NikuTextField extends NikuCore {
   ///
   /// Equivalent to
   /// ```
-  /// Text(textDirection: input)
+  /// TextFormField(textDirection: input)
   /// ```
   NikuTextField textDirection(TextDirection textDirection) {
     _textDirection = textDirection;
@@ -1358,7 +1364,7 @@ class NikuTextField extends NikuCore {
   ///
   /// Equivalent to
   /// ```
-  /// Text(textDirection: TextDirection.ltr)
+  /// TextFormField(textDirection: TextDirection.ltr)
   /// ```
   NikuTextField ltr() {
     _textDirection = TextDirection.ltr;
@@ -1370,7 +1376,7 @@ class NikuTextField extends NikuCore {
   ///
   /// Equivalent to
   /// ```
-  /// Text(textDirection: TextDirection.rtl)
+  /// TextFormField(textDirection: TextDirection.rtl)
   /// ```
   NikuTextField rtl() {
     _textDirection = TextDirection.rtl;
@@ -1382,7 +1388,7 @@ class NikuTextField extends NikuCore {
   ///
   /// Equivalent to
   /// ```
-  /// Text(textAlign: input)
+  /// TextFormField(textAlign: input)
   /// ```
   NikuTextField textAlign(TextAlign textAlign) {
     _textAlign = textAlign;
@@ -1394,7 +1400,7 @@ class NikuTextField extends NikuCore {
   ///
   /// Equivalent to
   /// ```
-  /// Text(textAlign: input)
+  /// TextFormField(textAlign: input)
   /// ```
   NikuTextField align(TextAlign textAlign) {
     _textAlign = textAlign;
@@ -1406,7 +1412,7 @@ class NikuTextField extends NikuCore {
   ///
   /// Equivalent to
   /// ```
-  /// Text(textAlign: TextAlign.left)
+  /// TextFormField(textAlign: TextAlign.left)
   /// ```
   NikuTextField alignLeft() {
     _textAlign = TextAlign.left;
@@ -1418,7 +1424,7 @@ class NikuTextField extends NikuCore {
   ///
   /// Equivalent to
   /// ```
-  /// Text(textAlign: TextAlign.left)
+  /// TextFormField(textAlign: TextAlign.left)
   /// ```
   NikuTextField left() {
     _textAlign = TextAlign.left;
@@ -1430,7 +1436,7 @@ class NikuTextField extends NikuCore {
   ///
   /// Equivalent to
   /// ```
-  /// Text(textAlign: TextAlign.center)
+  /// TextFormField(textAlign: TextAlign.center)
   /// ```
   NikuTextField alignCenter() {
     _textAlign = TextAlign.center;
@@ -1442,7 +1448,7 @@ class NikuTextField extends NikuCore {
   ///
   /// Equivalent to
   /// ```
-  /// Text(textAlign: TextAlign.center)
+  /// TextFormField(textAlign: TextAlign.center)
   /// ```
   NikuTextField center() {
     _textAlign = TextAlign.center;
@@ -1454,7 +1460,7 @@ class NikuTextField extends NikuCore {
   ///
   /// Equivalent to
   /// ```
-  /// Text(textAlign: TextAlign.right)
+  /// TextFormField(textAlign: TextAlign.right)
   /// ```
   NikuTextField alignRight() {
     _textAlign = TextAlign.right;
@@ -1466,7 +1472,7 @@ class NikuTextField extends NikuCore {
   ///
   /// Equivalent to
   /// ```
-  /// Text(textAlign: TextAlign.right)
+  /// TextFormField(textAlign: TextAlign.right)
   /// ```
   NikuTextField right() {
     _textAlign = TextAlign.right;
@@ -1478,7 +1484,7 @@ class NikuTextField extends NikuCore {
   ///
   /// Equivalent to
   /// ```
-  /// Text(textAlign: TextAlign.start)
+  /// TextFormField(textAlign: TextAlign.start)
   /// ```
   NikuTextField alignStart() {
     _textAlign = TextAlign.start;
@@ -1490,7 +1496,7 @@ class NikuTextField extends NikuCore {
   ///
   /// Equivalent to
   /// ```
-  /// Text(textAlign: TextAlign.start)
+  /// TextFormField(textAlign: TextAlign.start)
   /// ```
   NikuTextField start() {
     _textAlign = TextAlign.start;
@@ -1502,7 +1508,7 @@ class NikuTextField extends NikuCore {
   ///
   /// Equivalent to
   /// ```
-  /// Text(textAlign: TextAlign.end)
+  /// TextFormField(textAlign: TextAlign.end)
   /// ```
   NikuTextField alignEnd() {
     _textAlign = TextAlign.end;
@@ -1514,7 +1520,7 @@ class NikuTextField extends NikuCore {
   ///
   /// Equivalent to
   /// ```
-  /// Text(textAlign: TextAlign.end)
+  /// TextFormField(textAlign: TextAlign.end)
   /// ```
   NikuTextField end() {
     _textAlign = TextAlign.end;
@@ -1526,7 +1532,7 @@ class NikuTextField extends NikuCore {
   ///
   /// Equivalent to
   /// ```
-  /// Text(textAlign: TextAlign.justify)
+  /// TextFormField(textAlign: TextAlign.justify)
   /// ```
   NikuTextField alignJustify() {
     _textAlign = TextAlign.justify;
@@ -1538,7 +1544,7 @@ class NikuTextField extends NikuCore {
   ///
   /// Equivalent to
   /// ```
-  /// Text(textAlign: TextAlign.justify)
+  /// TextFormField(textAlign: TextAlign.justify)
   /// ```
   NikuTextField justify() {
     _textAlign = TextAlign.justify;
@@ -1601,13 +1607,18 @@ class NikuTextField extends NikuCore {
   ///   )
   /// )
   /// ```
-  NikuTextField toolbar(
-      {bool copy = true,
-      bool cut = true,
-      bool paste = true,
-      bool selectAll = true}) {
+  NikuTextField toolbar({
+    bool copy = true,
+    bool cut = true,
+    bool paste = true,
+    bool selectAll = true,
+  }) {
     _toolbarOptions = ToolbarOptions(
-        copy: copy, cut: cut, paste: paste, selectAll: selectAll);
+      copy: copy,
+      cut: cut,
+      paste: paste,
+      selectAll: selectAll,
+    );
 
     return this;
   }
@@ -1622,12 +1633,13 @@ class NikuTextField extends NikuCore {
   ///   )
   /// )
   /// ```
-  NikuTextField allowCopy([bool value = false]) {
+  NikuTextField allowCopy([bool value = true]) {
     _toolbarOptions = ToolbarOptions(
-        copy: value,
-        cut: _toolbarOptions?.cut ?? true,
-        paste: _toolbarOptions?.paste ?? true,
-        selectAll: _toolbarOptions?.selectAll ?? true);
+      copy: value,
+      cut: _toolbarOptions?.cut ?? true,
+      paste: _toolbarOptions?.paste ?? true,
+      selectAll: _toolbarOptions?.selectAll ?? true,
+    );
 
     return this;
   }
@@ -1642,12 +1654,13 @@ class NikuTextField extends NikuCore {
   ///   )
   /// )
   /// ```
-  NikuTextField allowCut([bool value = false]) {
+  NikuTextField allowCut([bool value = true]) {
     _toolbarOptions = ToolbarOptions(
-        copy: _toolbarOptions?.copy ?? true,
-        cut: value,
-        paste: _toolbarOptions?.paste ?? true,
-        selectAll: _toolbarOptions?.selectAll ?? true);
+      copy: _toolbarOptions?.copy ?? true,
+      cut: value,
+      paste: _toolbarOptions?.paste ?? true,
+      selectAll: _toolbarOptions?.selectAll ?? true,
+    );
 
     return this;
   }
@@ -1662,12 +1675,13 @@ class NikuTextField extends NikuCore {
   ///   )
   /// )
   /// ```
-  NikuTextField allowPaste([bool value = false]) {
+  NikuTextField allowPaste([bool value = true]) {
     _toolbarOptions = ToolbarOptions(
-        copy: _toolbarOptions?.copy ?? true,
-        cut: _toolbarOptions?.cut ?? true,
-        paste: value,
-        selectAll: _toolbarOptions?.selectAll ?? true);
+      copy: _toolbarOptions?.copy ?? true,
+      cut: _toolbarOptions?.cut ?? true,
+      paste: value,
+      selectAll: _toolbarOptions?.selectAll ?? true,
+    );
 
     return this;
   }
@@ -1682,12 +1696,13 @@ class NikuTextField extends NikuCore {
   ///   )
   /// )
   /// ```
-  NikuTextField allowSelectAll([bool value = false]) {
+  NikuTextField allowSelectAll([bool value = true]) {
     _toolbarOptions = ToolbarOptions(
-        copy: _toolbarOptions?.copy ?? true,
-        cut: _toolbarOptions?.cut ?? true,
-        paste: _toolbarOptions?.paste ?? true,
-        selectAll: value);
+      copy: _toolbarOptions?.copy ?? true,
+      cut: _toolbarOptions?.cut ?? true,
+      paste: _toolbarOptions?.paste ?? true,
+      selectAll: value,
+    );
 
     return this;
   }
@@ -1700,7 +1715,7 @@ class NikuTextField extends NikuCore {
   ///   showCursor: input
   /// )
   /// ```
-  NikuTextField showCursor(bool showCursor) {
+  NikuTextField showCursor([bool showCursor = true]) {
     _showCursor = showCursor;
 
     return this;
@@ -1728,8 +1743,24 @@ class NikuTextField extends NikuCore {
   ///   obscuringCharacter: input
   /// )
   /// ```
-  NikuTextField obscureText(bool obscureText) {
+  NikuTextField obscureText([bool obscureText = true]) {
     _obscureText = obscureText;
+
+    return this;
+  }
+
+  /// Should text be obscure eg. password field
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextFormField(
+  ///   obscureTextFormField: true,
+  /// )
+  /// ```
+  NikuTextField asPassword() {
+    _obscureText = true;
+
+    allowCopy(false);
 
     return this;
   }
@@ -1742,7 +1773,7 @@ class NikuTextField extends NikuCore {
   ///   autoCorrect: input
   /// )
   /// ```
-  NikuTextField autoCorrect(bool autoCorrect) {
+  NikuTextField autoCorrect([bool autoCorrect = true]) {
     _autocorrect = autoCorrect;
 
     return this;
@@ -1764,32 +1795,17 @@ class NikuTextField extends NikuCore {
 
   /// Indicates how to handle the intelligent replacement of dashes in text input
   ///
-  /// Using [SmartDashesType.enabled]
+  /// Using [boolean]
   ///
   /// Equivalent to
   /// ```
   /// TextFormField(
-  ///   smartDashesType: SmartDashesType.enabled
+  ///   smartDashesType: input ? SmartDashesType.enabled : SmartDashesType.disabled
   /// )
   /// ```
-  NikuTextField enableSmartDashes() {
-    _smartDashesType = SmartDashesType.enabled;
-
-    return this;
-  }
-
-  /// Indicates how to handle the intelligent replacement of dashes in text input
-  ///
-  /// Using [SmartDashesType.disabled]
-  ///
-  /// Equivalent to
-  /// ```
-  /// TextFormField(
-  ///   smartDashesType: SmartDashesType.disabled
-  /// )
-  /// ```
-  NikuTextField disableSmartDashes() {
-    _smartDashesType = SmartDashesType.disabled;
+  NikuTextField enableSmartDashes([bool value = true]) {
+    _smartDashesType =
+        value ? SmartDashesType.enabled : SmartDashesType.disabled;
 
     return this;
   }
@@ -1810,32 +1826,17 @@ class NikuTextField extends NikuCore {
 
   /// Indicates how to handle the intelligent replacement of quotes in text input
   ///
-  /// Using [SmartQuotesType.enabled]
+  /// Using [boolean]
   ///
   /// Equivalent to
   /// ```
   /// TextFormField(
-  ///   smartQuotesType: SmartQuotesType.enabled
+  ///   smartQuotesType: input ? SmartQuotesType.enabled : SmartQuotesType.disabled
   /// )
   /// ```
-  NikuTextField enableSmartQuotes() {
-    _smartQuotesType = SmartQuotesType.enabled;
-
-    return this;
-  }
-
-  /// Indicates how to handle the intelligent replacement of quotes in text input
-  ///
-  /// Using [SmartQuotesType.disabled]
-  ///
-  /// Equivalent to
-  /// ```
-  /// TextFormField(
-  ///   smartQuotesType: SmartQuotesType.disabled
-  /// )
-  /// ```
-  NikuTextField disableSmartQuotes() {
-    _smartQuotesType = SmartQuotesType.disabled;
+  NikuTextField enableSmartQuotes([bool value = true]) {
+    _smartQuotesType =
+        value ? SmartQuotesType.enabled : SmartQuotesType.disabled;
 
     return this;
   }
@@ -1848,7 +1849,7 @@ class NikuTextField extends NikuCore {
   ///   enableSuggestions: input
   /// )
   /// ```
-  NikuTextField enableSuggestions(bool suggestion) {
+  NikuTextField enableSuggestions([bool suggestion = true]) {
     _enableSuggestions = suggestion;
 
     return this;
@@ -1890,7 +1891,7 @@ class NikuTextField extends NikuCore {
   ///   expands: input
   /// )
   /// ```
-  NikuTextField expands(bool expands) {
+  NikuTextField expands([bool expands = true]) {
     _expands = expands;
 
     return this;
@@ -1938,12 +1939,12 @@ class NikuTextField extends NikuCore {
     return this;
   }
 
-  /// Called for each distinct tap except for every second tap of a double tap
+  /// Called for when editing text is complete and "leave" from textfield.
   ///
   /// Equivalent to
   /// ```
   /// TextFormField(
-  ///   onTap: input
+  ///   onEditing: input
   /// )
   /// ```
   NikuTextField onEditingComplete(VoidCallback onEditingComplete) {
@@ -1980,7 +1981,7 @@ class NikuTextField extends NikuCore {
     return this;
   }
 
-  /// call with the final value when the form is saved via [FormState.save]
+  /// Call with the final value when the form is saved via [FormState.save]
   ///
   /// Equivalent to
   /// ```
@@ -1994,7 +1995,7 @@ class NikuTextField extends NikuCore {
     return this;
   }
 
-  /// call with the final value when the form is saved via [FormState.save]
+  /// Set multiple event listener at once
   ///
   /// Equivalent to
   /// ```
@@ -2006,12 +2007,13 @@ class NikuTextField extends NikuCore {
   ///   onSaved: saved
   /// )
   /// ```
-  NikuTextField on(
-      {ValueChanged<String>? changed,
-      GestureTapCallback? tap,
-      VoidCallback? editingComplete,
-      ValueChanged<String>? submitted,
-      FormFieldValidator<String>? saved}) {
+  NikuTextField on({
+    ValueChanged<String>? changed,
+    GestureTapCallback? tap,
+    VoidCallback? editingComplete,
+    ValueChanged<String>? submitted,
+    FormFieldValidator<String>? saved,
+  }) {
     _onChanged = changed;
     _onTap = tap;
     _onEditingComplete = editingComplete;
@@ -2057,7 +2059,7 @@ class NikuTextField extends NikuCore {
   ///   enabled: input
   /// )
   /// ```
-  NikuTextField enabled(bool enabled) {
+  NikuTextField enabled([bool enabled = true]) {
     _enabled = enabled;
 
     return this;
@@ -2145,8 +2147,12 @@ class NikuTextField extends NikuCore {
   ///   cursorColor: color
   /// )
   /// ```
-  NikuTextField cursor(
-      {double width = 2, double? height, Radius? radius, Color? color}) {
+  NikuTextField cursor({
+    double width = 2,
+    double? height,
+    Radius? radius,
+    Color? color,
+  }) {
     _cursorWidth = width;
     _cursorHeight = height ?? _cursorHeight;
     _cursorRadius = radius ?? _cursorRadius;
@@ -2238,7 +2244,7 @@ class NikuTextField extends NikuCore {
   ///   enableInteractiveSelection: input
   /// )
   /// ```
-  NikuTextField enableInteractiveSelection(bool enabled) {
+  NikuTextField enableInteractiveSelection([bool enabled = true]) {
     _enableInteractiveSelection = enabled;
 
     return this;
@@ -2326,7 +2332,7 @@ class NikuTextField extends NikuCore {
   ///   autovalidateMode: AutovalidateMode.disabled
   /// )
   /// ```
-  NikuTextField disabledValidate() {
+  NikuTextField disableValidate() {
     _autovalidateMode = AutovalidateMode.disabled;
 
     return this;
@@ -2347,8 +2353,6 @@ class NikuTextField extends NikuCore {
 
     return this;
   }
-
-  // * Input Decoration
 
   /// An icon to show before the input field and outside of the decoration's container
   ///
@@ -2674,7 +2678,7 @@ class NikuTextField extends NikuCore {
   ///
   /// Equivalent to
   /// ```
-  /// Text(wordSpacing: input)
+  /// TextFormField(wordSpacing: input)
   /// ```
   NikuTextField labelWordSpacing(double wordSpacing) {
     _label_wordSpacing = wordSpacing;
@@ -3146,7 +3150,7 @@ class NikuTextField extends NikuCore {
   ///
   /// Equivalent to
   /// ```
-  /// Text(wordSpacing: input)
+  /// TextFormField(wordSpacing: input)
   /// ```
   NikuTextField hintWordSpacing(double wordSpacing) {
     _hint_wordSpacing = wordSpacing;
@@ -3618,7 +3622,7 @@ class NikuTextField extends NikuCore {
   ///
   /// Equivalent to
   /// ```
-  /// Text(wordSpacing: input)
+  /// TextFormField(wordSpacing: input)
   /// ```
   NikuTextField helperWordSpacing(double wordSpacing) {
     _helper_wordSpacing = wordSpacing;
@@ -4090,7 +4094,7 @@ class NikuTextField extends NikuCore {
   ///
   /// Equivalent to
   /// ```
-  /// Text(wordSpacing: input)
+  /// TextFormField(wordSpacing: input)
   /// ```
   NikuTextField errorWordSpacing(double wordSpacing) {
     _error_wordSpacing = wordSpacing;
@@ -4276,11 +4280,11 @@ class NikuTextField extends NikuCore {
   /// ```
   /// TextFormField(
   ///   decoration: InputDecoration(
-  ///     isCollapsed: bool
+  ///     isCollapsed: input
   ///   )
   /// )
   /// ```
-  NikuTextField isCollapsed(bool isCollapsed) {
+  NikuTextField isCollapsed([bool isCollapsed = true]) {
     _input_isCollapsed = isCollapsed;
 
     return this;
@@ -4296,7 +4300,7 @@ class NikuTextField extends NikuCore {
   ///   )
   /// )
   /// ```
-  NikuTextField isDense(bool isDense) {
+  NikuTextField isDense([bool isDense = true]) {
     _input_isDense = isDense;
 
     return this;
@@ -4656,7 +4660,7 @@ class NikuTextField extends NikuCore {
   ///
   /// Equivalent to
   /// ```
-  /// Text(wordSpacing: input)
+  /// TextFormField(wordSpacing: input)
   /// ```
   NikuTextField prefixWordSpacing(double wordSpacing) {
     _prefix_wordSpacing = wordSpacing;
@@ -5158,7 +5162,7 @@ class NikuTextField extends NikuCore {
   ///
   /// Equivalent to
   /// ```
-  /// Text(wordSpacing: input)
+  /// TextFormField(wordSpacing: input)
   /// ```
   NikuTextField suffixWordSpacing(double wordSpacing) {
     _suffix_wordSpacing = wordSpacing;
@@ -5628,7 +5632,7 @@ class NikuTextField extends NikuCore {
   ///
   /// Equivalent to
   /// ```
-  /// Text(wordSpacing: input)
+  /// TextFormField(wordSpacing: input)
   /// ```
   NikuTextField counterWordSpacing(double wordSpacing) {
     _counter_wordSpacing = wordSpacing;
@@ -5802,7 +5806,7 @@ class NikuTextField extends NikuCore {
   ///   )
   /// )
   /// ```
-  NikuTextField filled(bool filled) {
+  NikuTextField filled([bool filled = true]) {
     _input_filled = filled;
 
     return this;
@@ -5869,16 +5873,32 @@ class NikuTextField extends NikuCore {
   ///   )
   /// )
   /// ```
-  NikuTextField setFillColor({Color? fill, Color? hover, Color? focus}) {
+  NikuTextField setFillColor({Color? base, Color? hover, Color? focus}) {
     _input_filled = true;
-    _input_fillColor = fill;
+    _input_fillColor = base;
     _input_hoverColor = hover;
     _input_focusColor = focus;
 
     return this;
   }
 
-  /// The shape of the border to draw aroudn the decorations' container
+  /// The shape of the border to draw around the decorations' container
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextFormField(
+  ///   decoration: InputDecoration(
+  ///     border: input
+  ///   )
+  /// )
+  /// ```
+  NikuTextField border(InputBorder border) {
+    _input_border = border;
+
+    return this;
+  }
+
+  /// The shape of the border to draw around the decorations' container
   ///
   /// Equivalent to
   /// ```
@@ -5952,8 +5972,12 @@ class NikuTextField extends NikuCore {
   ///   )
   /// )
   /// ```
-  NikuTextField border(InputBorder border) {
+  NikuTextField b(InputBorder border) {
     _input_border = border;
+    _input_enabledBorder = border;
+    _input_disabledBorder = border;
+    _input_focusedBorder = border;
+    _input_errorBorder = border;
 
     return this;
   }
@@ -5968,21 +5992,197 @@ class NikuTextField extends NikuCore {
   ///     enabled: enabled,
   ///     disabled: disabled,
   ///     focused: focused,
-  ///     error: error
-  ///   )
-  /// )
+  ///     error: error,
+  ///   ),
+  /// );
   /// ```
-  NikuTextField setBorder(
-      {InputBorder? border,
-      InputBorder? enabled,
-      InputBorder? disabled,
-      InputBorder? focused,
-      InputBorder? error}) {
+  NikuTextField setBorder({
+    InputBorder? base,
+    InputBorder? enabled,
+    InputBorder? disabled,
+    InputBorder? focused,
+    InputBorder? error,
+  }) {
+    _input_border = base;
+    _input_enabledBorder = enabled;
+    _input_disabledBorder = disabled;
+    _input_focusedBorder = focused;
+    _input_errorBorder = error;
+
+    return this;
+  }
+
+  /// The shape of the border to draw around the decoration's container
+  ///
+  /// Using [OutlineInputBorder].
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextFormField(
+  ///   decoration: InputDecoration(
+  ///     border: OutlineInputBorder(
+  ///       borderSide: BorderSide(
+  ///         color: color,
+  ///         width: width,
+  ///         style: style
+  ///       ),
+  ///       borderRadius: borderRadius,
+  ///       gapPadding: gap,
+  ///     ),
+  ///   ),
+  /// );
+  /// ```
+  NikuTextField outlined({
+    double width = 1,
+    Color color = Colors.grey,
+    BorderStyle style = BorderStyle.solid,
+    BorderRadius borderRadius = const BorderRadius.all(Radius.circular(8)),
+    double gap = 4,
+  }) {
+    final border = OutlineInputBorder(
+      borderSide: BorderSide(
+        color: color,
+        width: width,
+        style: style,
+      ),
+      borderRadius: borderRadius,
+      gapPadding: gap,
+    );
+
     _input_border = border;
     _input_enabledBorder = border;
     _input_disabledBorder = border;
     _input_focusedBorder = border;
     _input_errorBorder = border;
+
+    return this;
+  }
+
+  /// The shape of the border to draw around the decoration's container
+  ///
+  /// Using [UnderlineInputBorder].
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextFormField(
+  ///   decoration: InputDecoration(
+  ///     border: UnderlineInputBorder(
+  ///       borderSide: BorderSide(
+  ///         color: color,
+  ///         width: width,
+  ///         style: style
+  ///       ),
+  ///       borderRadius: borderRadius,
+  ///     ),
+  ///   ),
+  /// );
+  /// ```
+  NikuTextField underlined({
+    double width = 1,
+    Color color = Colors.grey,
+    BorderStyle style = BorderStyle.solid,
+    BorderRadius borderRadius = const BorderRadius.only(
+      topLeft: Radius.circular(4.0),
+      topRight: Radius.circular(4.0),
+    ),
+  }) {
+    final border = UnderlineInputBorder(
+      borderSide: BorderSide(
+        color: color,
+        width: width,
+        style: style,
+      ),
+      borderRadius: borderRadius,
+    );
+
+    _input_border = border;
+    _input_enabledBorder = border;
+    _input_disabledBorder = border;
+    _input_focusedBorder = border;
+    _input_errorBorder = border;
+
+    return this;
+  }
+
+  /// Setting multiple border color at once.
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextFormField(
+  ///   decoration: InputDecoration(
+  ///     border: OutlineInputBorder(
+  ///       borderSide: BorderSide(
+  ///         color: color,
+  ///         width: width,
+  ///         style: style
+  ///       ),
+  ///       borderRadius: borderRadius,
+  ///       gapPadding: gap,
+  ///     ),
+  ///   ),
+  /// );
+  /// ```
+  NikuTextField borderColor({
+    Color base = Colors.grey,
+    Color enabled = Colors.grey,
+    Color disabled = Colors.grey,
+    Color focused = Colors.grey,
+    Color error = Colors.grey,
+  }) {
+    _input_border = _input_border?.copyWith(
+      borderSide: _input_border?.borderSide.copyWith(
+            color: base,
+          ) ??
+          BorderSide(
+            color: Colors.grey,
+            width: 1,
+            style: BorderStyle.solid,
+          ),
+    );
+
+    _input_enabledBorder = _input_enabledBorder?.copyWith(
+      borderSide: _input_enabledBorder?.borderSide.copyWith(
+            color: base,
+          ) ??
+          BorderSide(
+            color: Colors.grey,
+            width: 1,
+            style: BorderStyle.solid,
+          ),
+    );
+
+    _input_disabledBorder = _input_disabledBorder?.copyWith(
+      borderSide: _input_disabledBorder?.borderSide.copyWith(
+            color: base,
+          ) ??
+          BorderSide(
+            color: Colors.grey,
+            width: 1,
+            style: BorderStyle.solid,
+          ),
+    );
+
+    _input_focusedBorder = _input_focusedBorder?.copyWith(
+      borderSide: _input_focusedBorder?.borderSide.copyWith(
+            color: base,
+          ) ??
+          BorderSide(
+            color: Colors.grey,
+            width: 1,
+            style: BorderStyle.solid,
+          ),
+    );
+
+    _input_errorBorder = _input_errorBorder?.copyWith(
+      borderSide: _input_errorBorder?.borderSide.copyWith(
+            color: base,
+          ) ??
+          BorderSide(
+            color: Colors.grey,
+            width: 1,
+            style: BorderStyle.solid,
+          ),
+    );
 
     return this;
   }
@@ -5997,7 +6197,7 @@ class NikuTextField extends NikuCore {
   ///   )
   /// )
   /// ```
-  NikuTextField inputDecorationEnable(bool enabled) {
+  NikuTextField enableInputDecoration([bool enabled = true]) {
     _input_decorationEnabled = enabled;
 
     return this;
@@ -6029,8 +6229,38 @@ class NikuTextField extends NikuCore {
   ///   )
   /// )
   /// ```
-  NikuTextField alignLabelWithHint(bool enable) {
+  NikuTextField alignLabelWithHint([bool enable = true]) {
     _input_alignLabelWithHint = enable;
+
+    return this;
+  }
+
+  /// Set color of text
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(color: input)
+  /// ```
+  NikuTextField textStyle(TextStyle textStyle) {
+    // Input hint Style
+    _base_color = textStyle.color;
+    _base_backgroundColor = textStyle.backgroundColor;
+    _base_fontSize = textStyle.fontSize;
+    _base_fontWeight = textStyle.fontWeight;
+    _base_fontStyle = textStyle.fontStyle;
+    _base_letterSpacing = textStyle.letterSpacing;
+    _base_wordSpacing = textStyle.wordSpacing;
+    _base_height = textStyle.height;
+    _base_foreground = textStyle.foreground;
+    _base_background = textStyle.background;
+    _base_shadows = textStyle.shadows;
+    _base_fontFeatures = textStyle.fontFeatures;
+    _base_textDecoration = textStyle.decoration;
+    _base_textDecorationColor = textStyle.decorationColor;
+    _base_textDecorationThickness = textStyle.decorationThickness;
+    _base_fontFamily = textStyle.fontFamily;
+    _base_fontFamilyFallback = textStyle.fontFamilyFallback;
+    _base_textBaseline = textStyle.textBaseline;
 
     return this;
   }
@@ -6275,7 +6505,7 @@ class NikuTextField extends NikuCore {
   ///
   /// Equivalent to
   /// ```
-  /// Text(wordSpacing: input)
+  /// TextFormField(wordSpacing: input)
   /// ```
   NikuTextField wordSpacing(double wordSpacing) {
     _base_wordSpacing = wordSpacing;
@@ -6289,7 +6519,7 @@ class NikuTextField extends NikuCore {
   /// ```
   /// TextStyle(height: input)
   /// ```
-  NikuTextField height(double height) {
+  NikuTextField textHeight(double height) {
     _base_height = height;
 
     return this;
@@ -7122,7 +7352,7 @@ class NikuTextField extends NikuCore {
   /// After this method is called, NikuText property can't be applied anymore
   ///
   /// ```
-  /// NikuText("Applied Style")
+  /// NikuTextFormField("Applied Style")
   ///   .color(Colors.blue)
   ///   .fontSize(21)
   ///   .bold()

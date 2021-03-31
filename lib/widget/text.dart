@@ -26,7 +26,7 @@ import 'base.dart';
 /// Style Property list:
 /// - text - Set text
 /// - color - Color of text
-/// - bg, background - Background color of text
+/// - bg, backgroundColor - Background color of text
 /// - fontSize - Set text size
 /// - fontWeight - Font weight
 ///   - fontWeight - Set font weight of text
@@ -131,7 +131,7 @@ class NikuText extends NikuCore {
   ///
   /// Style Property list:
   /// - color - Color of text
-  /// - bg, background - Background color of text
+  /// - bg, backgroundColor - Background color of text
   /// - fontSize - Set text size
   /// - fontWeight - Font weight
   ///   - fontWeight - Set font weight of text
