@@ -1941,4 +1941,32 @@ extension BaseProperty on Niku {
 
     return this;
   }
+
+  /// Wrap widget in Form
+  ///
+  /// Example usage
+  /// ```
+  /// final formKey = GlobalKey<FormState>();
+  ///
+  /// Niku()
+  ///   .form(
+  ///     key: formKey,
+  ///   );
+  /// ```
+  Niku form({
+    required Key key,
+    AutovalidateMode? autovalidateMode,
+    Future<bool> Function()? onWillPop,
+    void Function()? onChanged,
+  }) {
+    _widget = Form(
+      key: key,
+      child: _widget,
+      autovalidateMode: autovalidateMode,
+      onWillPop: onWillPop,
+      onChanged: onChanged,
+    );
+
+    return this;
+  }
 }

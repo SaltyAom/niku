@@ -57,3 +57,7 @@ extension NikuColumnBuilder on Column {
 extension NikuStackBuilder on Stack {
   NikuStack asNiku() => NikuStack(children);
 }
+
+extension NikuWrapBuilder on Wrap {
+  NikuWrap asNiku() => NikuWrap(children);
+}

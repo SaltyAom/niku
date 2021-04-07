@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
+
+import 'package:flutter_hooks/flutter_hooks.dart';
 
 import 'package:niku/niku.dart';
 
@@ -14,18 +15,82 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.blue,
         primarySwatch: Colors.blue,
+        appBarTheme: AppBarTheme(
+          brightness: Brightness.dark,
+        ),
       ),
       home: HomePage(),
     );
   }
 }
 
-class HomePage extends StatelessWidget {
-  final baseText = NikuText("")
-    ..color(Colors.white)
-    ..fontSize(21);
+class NikuTextFieldPage extends HookWidget {
+  final style = NikuTextField("Hello")
+    ..outlined()
+    ..borderColor(
+      focused: Colors.blue,
+    )
+    ..labelW600()
+    ..mb(20);
 
+  final String? Function(String?) Function(String) validator = (label) =>
+      (value) {
+        if (value == null) return "Something went wrong";
+
+        if (value.isEmpty) return "$label can't be empty";
+        if (value.length <= 5) return "$label must have more than 5 characters";
+      };
+
+  @override
+  build(context) {
+    final username = useTextEditingController();
+    final password = useTextEditingController();
+
+    final form = GlobalKey<FormState>();
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Hello World"),
+      ),
+      body: Form(
+        key: form,
+        child: NikuColumn([
+          NikuTextField("Username")
+            ..apply(style)
+            ..controller(username)
+            ..validator(validator("Username"))
+            ..prefixIcon(Icon(Icons.supervised_user_circle)),
+          NikuTextField("Password")
+            ..apply(style)
+            ..controller(password)
+            ..asPassword()
+            ..validator(validator("Password"))
+            ..prefixIcon(Icon(Icons.lock)),
+          NikuButton.elevated(Text("Login"))
+            ..onPressed(() {})
+            ..bg(Colors.blue)
+            ..fg(Colors.white)
+            ..fontSize(18)
+            ..bold()
+            ..rounded(8)
+            ..py(16)
+            ..onPressed(() {
+              if (!form.currentState!.validate()) return;
+
+              print("Username: ${username.value.text}");
+              print("Password: ${password.value.text}");
+            }),
+        ]).mainCenter().stretch().niku()
+          ..px(20),
+      ),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
   final baseButton = NikuButton(Placeholder())
+    ..fontSize(21)
+    ..fg(Colors.blue)
     ..rounded(8)
     ..px(40)
     ..py(20)
@@ -40,9 +105,7 @@ class HomePage extends StatelessWidget {
       body: Niku(Column(
         children: [
           TextButton(
-            child: Text("Text Button").asNiku()
-              ..apply(baseText)
-              ..color(Theme.of(context).primaryColor),
+            child: Text("Text Button"),
             onPressed: () {
               print("Text Button");
             },
@@ -64,24 +127,24 @@ class HomePage extends StatelessWidget {
             ..tooltip("Image")
             ..my(8),
           ElevatedButton(
-            child: Text("Elevated Button").asNiku()..apply(baseText),
+            child: Text("Elevated Button"),
             onPressed: () {
               print("Elevated Button");
             },
           ).asNiku()
             ..apply(baseButton)
+            ..fg(Colors.white)
             ..overlay(Colors.white12)
             ..elevation(base: 2),
           OutlinedButton(
-            child: Text("Outlined Button")
-                .asNiku()
-                .apply(baseText)
-                .color(Theme.of(context).primaryColor),
+            child: Text("Outlined Button"),
             onPressed: () {
               print("Outlined Button");
             },
           ).asNiku()
             ..apply(baseButton)
+            ..rounded(8)
+            ..fontSize(21)
             ..bc(Colors.blue),
           Niku(Stack(children: [
             Text("Text in Niku Stack"),
@@ -121,11 +184,8 @@ class HomePage extends StatelessWidget {
                   .splash(Colors.transparent),
             )
             ..color(Colors.black87)
-            ..b(
-              OutlineInputBorder(
-                borderSide: BorderSide(width: 2),
-              ),
-            ))
+            ..outlined(width: 1)
+            ..borderColor(enabled: Colors.blue))
             ..maxWidth(320)
             ..my(20),
         ))

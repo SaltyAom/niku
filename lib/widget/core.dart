@@ -1,6 +1,8 @@
 // ignore_for_file: must_be_immutable
 import 'package:flutter/material.dart';
 
+import 'dart:convert';
+
 class NikuCore extends StatelessWidget {
   double _mt = 0;
   double _mb = 0;
@@ -11,6 +13,14 @@ class NikuCore extends StatelessWidget {
   double get getMb => _mb;
   double get getMl => _ml;
   double get getMr => _mr;
+
+  @protected
+  Map<String, dynamic> clone(item) {
+    final String jsonString = json.encode(item);
+    final jsonResponse = json.decode(jsonString);
+
+    return jsonResponse;
+  }
 
   /// Apply margin using [EdgeInset]
   ///

@@ -1830,7 +1830,7 @@ class NikuButton extends NikuCore {
   }
 
   /// Defines the visual density of user interface components.
-  /// 
+  ///
   /// Equivalent to
   /// ```
   /// TextButton(
@@ -2669,11 +2669,51 @@ class NikuButton extends NikuCore {
     _focusNode = focusNode;
     _autofocus = autofocus;
     _clipBehavior = clipBehavior;
-    _backgroundColor = backgroundColor ?? NikuMaterialPropertyContainer();
-    _foregroundColor = foregroundColor ?? NikuMaterialPropertyContainer();
-    _overlayColor = overlayColor ?? NikuMaterialPropertyContainer();
-    _shadowColor = shadowColor ?? NikuMaterialPropertyContainer();
-    _elevation = elevation ?? NikuMaterialPropertyContainer();
+    _backgroundColor.update(
+      base: backgroundColor?._base,
+      disabled: backgroundColor?._disabled,
+      dragged: backgroundColor?._dragged,
+      error: backgroundColor?._error,
+      focused: backgroundColor?._focused,
+      hovered: backgroundColor?._hovered,
+      pressed: backgroundColor?._pressed,
+    );
+    _foregroundColor.update(
+      base: foregroundColor?._base,
+      disabled: foregroundColor?._disabled,
+      dragged: foregroundColor?._dragged,
+      error: foregroundColor?._error,
+      focused: foregroundColor?._focused,
+      hovered: foregroundColor?._hovered,
+      pressed: foregroundColor?._pressed,
+    );
+    _overlayColor.update(
+      base: overlayColor?._base,
+      disabled: overlayColor?._disabled,
+      dragged: overlayColor?._dragged,
+      error: overlayColor?._error,
+      focused: overlayColor?._focused,
+      hovered: overlayColor?._hovered,
+      pressed: overlayColor?._pressed,
+    );
+    _shadowColor.update(
+      base: shadowColor?._base,
+      disabled: shadowColor?._disabled,
+      dragged: shadowColor?._dragged,
+      error: shadowColor?._error,
+      focused: shadowColor?._focused,
+      hovered: shadowColor?._hovered,
+      pressed: shadowColor?._pressed,
+    );
+    _elevation.update(
+      base: elevation?._base,
+      disabled: elevation?._disabled,
+      dragged: elevation?._dragged,
+      error: elevation?._error,
+      focused: elevation?._focused,
+      hovered: elevation?._hovered,
+      pressed: elevation?._pressed,
+    );
     _pt = pt;
     _pb = pb;
     _pl = pl;
@@ -2682,10 +2722,42 @@ class NikuButton extends NikuCore {
     super.mb(mb);
     super.ml(ml);
     super.mr(mr);
-    getMinimumSize = minimumSize ?? NikuMaterialPropertyContainer();
-    _side = side ?? NikuMaterialPropertyContainer();
-    _shape = shape ?? NikuMaterialPropertyContainer();
-    getMouseCursor = mouseCursor ?? NikuMaterialPropertyContainer();
+    getMinimumSize.update(
+      base: minimumSize?._base,
+      disabled: minimumSize?._disabled,
+      dragged: minimumSize?._dragged,
+      error: minimumSize?._error,
+      focused: minimumSize?._focused,
+      hovered: minimumSize?._hovered,
+      pressed: minimumSize?._pressed,
+    );
+    _side.update(
+      base: side?._base,
+      disabled: side?._disabled,
+      dragged: side?._dragged,
+      error: side?._error,
+      focused: side?._focused,
+      hovered: side?._hovered,
+      pressed: side?._pressed,
+    );
+    _shape.update(
+      base: shape?._base,
+      disabled: shape?._disabled,
+      dragged: shape?._dragged,
+      error: shape?._error,
+      focused: shape?._focused,
+      hovered: shape?._hovered,
+      pressed: shape?._pressed,
+    );
+    getMouseCursor.update(
+      base: mouseCursor?._base,
+      disabled: mouseCursor?._disabled,
+      dragged: mouseCursor?._dragged,
+      error: mouseCursor?._error,
+      focused: mouseCursor?._focused,
+      hovered: mouseCursor?._hovered,
+      pressed: mouseCursor?._pressed,
+    );
     _visualDensity = visualDensity;
     _tapTargetSize = tapTargetSize;
     _animationDuration = animationDuration;
@@ -2693,7 +2765,15 @@ class NikuButton extends NikuCore {
     _alignment = alignment;
     _label = label;
 
-    _text_color = text_color ?? NikuMaterialPropertyContainer();
+    _text_color.update(
+      base: text_color?._base,
+      disabled: text_color?._disabled,
+      dragged: text_color?._dragged,
+      error: text_color?._error,
+      focused: text_color?._focused,
+      hovered: text_color?._hovered,
+      pressed: text_color?._pressed,
+    );
     _text_backgroundColor = text_backgroundColor;
     _text_fontSize = text_fontSize;
     _text_fontWeight = text_fontWeight;

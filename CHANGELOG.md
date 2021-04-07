@@ -1,3 +1,17 @@
+## [1.0.0] - 2021/4/7
+Bug fix:
+  - `this.` access property.
+
+## [1.0.0-alpha.4] - 2021/4/1
+Feature:
+  - Add `NikuWrap`
+  - Add `form` to `NikuBase`.
+  - Add `focusedError` to `TextField` border input.
+
+Bug fix:
+  - `apply` using unexpected share property.
+  - `apply` on `NikuTextField` without `AlignVertical` cause build to failed.
+
 ## [1.0.0-alpha.3] - 2021/3/31
 Feature:
   - Add `cursor` to IconButton.
