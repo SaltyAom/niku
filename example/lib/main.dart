@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
+
+import 'package:flutter_hooks/flutter_hooks.dart';
 
 import 'package:niku/niku.dart';
 
@@ -14,18 +15,82 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.blue,
         primarySwatch: Colors.blue,
+        appBarTheme: AppBarTheme(
+          brightness: Brightness.dark,
+        ),
       ),
       home: HomePage(),
     );
   }
 }
 
-class HomePage extends StatelessWidget {
-  final baseText = NikuText("")
-    ..color(Colors.white)
-    ..fontSize(21);
+class NikuTextFieldPage extends HookWidget {
+  final style = NikuTextField("Hello")
+    ..outlined()
+    ..borderColor(
+      focused: Colors.blue,
+    )
+    ..labelW600()
+    ..mb(20);
 
+  final String? Function(String?) Function(String) validator = (label) =>
+      (value) {
+        if (value == null) return "Something went wrong";
+
+        if (value.isEmpty) return "$label can't be empty";
+        if (value.length <= 5) return "$label must have more than 5 characters";
+      };
+
+  @override
+  build(context) {
+    final username = useTextEditingController();
+    final password = useTextEditingController();
+
+    final form = GlobalKey<FormState>();
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Hello World"),
+      ),
+      body: Form(
+        key: form,
+        child: NikuColumn([
+          NikuTextField("Username")
+            ..apply(style)
+            ..controller(username)
+            ..validator(validator("Username"))
+            ..prefixIcon(Icon(Icons.supervised_user_circle)),
+          NikuTextField("Password")
+            ..apply(style)
+            ..controller(password)
+            ..asPassword()
+            ..validator(validator("Password"))
+            ..prefixIcon(Icon(Icons.lock)),
+          NikuButton.elevated(Text("Login"))
+            ..onPressed(() {})
+            ..bg(Colors.blue)
+            ..fg(Colors.white)
+            ..fontSize(18)
+            ..bold()
+            ..rounded(8)
+            ..py(16)
+            ..onPressed(() {
+              if (!form.currentState!.validate()) return;
+
+              print("Username: ${username.value.text}");
+              print("Password: ${password.value.text}");
+            }),
+        ]).mainCenter().stretch().niku()
+          ..px(20),
+      ),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
   final baseButton = NikuButton(Placeholder())
+    ..fontSize(21)
+    ..fg(Colors.blue)
     ..rounded(8)
     ..px(40)
     ..py(20)
@@ -37,134 +102,97 @@ class HomePage extends StatelessWidget {
         title: Text("Niku"),
         brightness: Brightness.dark,
       ),
-      body: NikuColumn(
-        [
-          NikuButton(
-            NikuText("Text Button")
-                .apply(baseText)
-                .color(Theme.of(context).primaryColor)
-                .build(),
-          )
-              .apply(baseButton)
-              .onPressed(() {
-                print("Text Button");
-              })
-              .overlay(Theme.of(context).primaryColor.withOpacity(.125))
-              .highlight(Theme.of(context).primaryColor.withOpacity(.075))
-              .build(),
-          NikuIconButton(
-            Icon(Icons.image),
-          )
-              .setColor(
-                color: Theme.of(context).primaryColor,
-                highlight: Theme.of(context).primaryColor.withOpacity(.1),
-                splash: Theme.of(context).primaryColor.withOpacity(.2),
-              )
-              .onPressed(() {})
-              .tooltip("Image")
-              .niku()
-              .my(8)
-              .build(),
-          NikuButton(
-            NikuText("Elevated Button").style(baseText),
-          )
-              .apply(baseButton)
-              .onPressed(() {
-                print("Elevated Button");
-              })
-              .overlay(Colors.white12)
-              .elevation(base: 2)
-              .elevated(),
-          NikuButton(
-            NikuText("Outlined Button")
-                .apply(baseText)
-                .color(Theme.of(context).primaryColor)
-                .build(),
-          )
-              .apply(baseButton)
-              .onPressed(() {
-                print("Outlined Button");
-              })
-              .borderColor(
-                base: Colors.black12,
-                selected: Theme.of(context).primaryColor,
-              )
-              .outlined(),
-          NikuText("Material")
-              .fontSize(21)
-              .color(Colors.white)
-              .niku()
-              .px(40)
-              .py(20)
-              .on(tap: () {
-                print("Material");
-              })
-              .inkwell(splash: Colors.white24, highlight: Colors.white24)
-              .material(color: Theme.of(context).primaryColor)
-              .rounded(8)
-              .builder((child) {
-                return Container(
-                  margin: EdgeInsets.symmetric(
-                    vertical: 20,
-                  ),
-                  child: child,
-                );
-              })
-              .build(),
-          NikuStack([
+      body: Niku(Column(
+        children: [
+          TextButton(
+            child: Text("Text Button"),
+            onPressed: () {
+              print("Text Button");
+            },
+          ).asNiku()
+            ..apply(baseButton)
+            ..overlay(Theme.of(context).primaryColor.withOpacity(.125))
+            ..highlight(Theme.of(context).primaryColor.withOpacity(.075)),
+          IconButton(
+              icon: Icon(Icons.image),
+              onPressed: () {
+                print("Icon Button");
+              }).asNiku()
+            ..setColor(
+              color: Theme.of(context).primaryColor,
+              highlight: Theme.of(context).primaryColor.withOpacity(.1),
+              splash: Theme.of(context).primaryColor.withOpacity(.2),
+            )
+            ..onPressed(() {})
+            ..tooltip("Image")
+            ..my(8),
+          ElevatedButton(
+            child: Text("Elevated Button"),
+            onPressed: () {
+              print("Elevated Button");
+            },
+          ).asNiku()
+            ..apply(baseButton)
+            ..fg(Colors.white)
+            ..overlay(Colors.white12)
+            ..elevation(base: 2),
+          OutlinedButton(
+            child: Text("Outlined Button"),
+            onPressed: () {
+              print("Outlined Button");
+            },
+          ).asNiku()
+            ..apply(baseButton)
+            ..rounded(8)
+            ..fontSize(21)
+            ..bc(Colors.blue),
+          Niku(Stack(children: [
             Text("Text in Niku Stack"),
-            Text("Text with Niku Property").niku().mt(40).build(),
-          ]).topCenter().niku().maxHeight(100).build(),
+            NikuText("Text with Niku Property")..mt(40),
+          ]).asNiku()
+            ..topCenter())
+            ..maxHeight(100),
           Niku()
-              .size(40, 40)
-              .bg(Theme.of(context).primaryColor)
-              .rounded()
-              .my(20)
-              .build()
+            ..size(40, 40)
+            ..bg(Theme.of(context).primaryColor)
+            ..rounded()
+            ..my(20)
         ],
-      )
-          .justifyCenter()
-          .prepend(
-            NikuText("Niku")
-                .fontSize(21)
-                .w600()
-                .color(Theme.of(context).primaryColor)
-                .niku()
-                .mb(20)
-                .build(),
-          )
-          .append(
-            NikuTextField("Niku Text Field")
-                .allowSelectAll(false)
-                .prefixIcon(
-                  Icon(Icons.edit),
-                )
-                .suffixIcon(
-                  NikuIconButton(
-                    Icon(Icons.delete),
-                  )
-                      .onPressed(() {})
-                      .highlight(Colors.transparent)
-                      .splash(Colors.transparent)
-                      .build(),
-                )
-                .color(Colors.black87)
-                .border(
-                  OutlineInputBorder(
-                    borderSide: BorderSide(width: 2),
-                  ),
-                )
-                .niku()
-                .maxWidth(320)
-                .my(20)
-                .build(),
-          )
-          .niku()
-          .my(40)
-          .scrollable()
-          .fullWidth()
-          .center()
-          .build(),
+      ).asNiku()
+        ..justifyCenter()
+        ..prepend(
+          Text("Niku").asNiku()
+            ..fontSize(21)
+            ..w600()
+            ..color(Theme.of(context).primaryColor)
+            ..mb(20),
+        )
+        ..append(
+          Niku(TextField().asNiku()
+            ..label("Niku Text Field")
+            ..allowSelectAll(false)
+            ..prefixIcon(
+              Icon(Icons.edit),
+            )
+            ..suffixIcon(
+              IconButton(
+                icon: Icon(Icons.delete),
+                onPressed: () {},
+              )
+                  .asNiku()
+                  .highlight(Colors.transparent)
+                  .splash(Colors.transparent),
+            )
+            ..color(Colors.black87)
+            ..outlined(width: 1)
+            ..borderColor(enabled: Colors.blue))
+            ..maxWidth(320)
+            ..my(20),
+        ))
+        ..my(40)
+        ..scrollable()
+        ..fullWidth()
+        ..center(),
     );
   }
 }

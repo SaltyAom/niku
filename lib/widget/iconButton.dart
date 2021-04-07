@@ -1,7 +1,9 @@
+// ignore_for_file: must_be_immutable
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:niku/widget/core.dart';
 
-import './base.dart';
+import 'base.dart';
 
 /// Niku extension for Material Raised Button
 ///
@@ -12,7 +14,6 @@ import './base.dart';
 /// NikuIconButton(Icon(Icons.edit))
 ///   .color(Colors.blue)
 ///   .p(40)
-///   .build()
 /// ```
 ///
 /// Meta property list:
@@ -58,8 +59,9 @@ import './base.dart';
 /// - tooltip - Explaination of the button
 /// - enableFeedback - Whether detected gestures should provide acoustic and/or haptic feedback
 /// - constraints - Whether detected gestures should provide acoustic and/or haptic feedback
-class NikuIconButton {
+class NikuIconButton extends NikuCore {
   Widget _icon;
+  Key? key;
 
   VoidCallback? _onPressed;
 
@@ -79,14 +81,14 @@ class NikuIconButton {
   Color? _highlightColor;
   Color? _splashColor;
   Color? _disabledColor;
-  MouseCursor _mouseCursor = SystemMouseCursors.click;
+  MouseCursor getMouseCursor = SystemMouseCursors.click;
   FocusNode? _focusNode;
   bool _autofocus = false;
   String? _tooltip;
   bool _enableFeedback = true;
   BoxConstraints? _constraints;
 
-  NikuIconButton(this._icon);
+  NikuIconButton(this._icon, {this.key});
 
   /// Callback when button is pressed
   ///
@@ -97,7 +99,7 @@ class NikuIconButton {
   /// )
   /// ```
   NikuIconButton onPressed(VoidCallback callback) {
-    this._onPressed = callback;
+    _onPressed = callback;
 
     return this;
   }
@@ -111,7 +113,7 @@ class NikuIconButton {
   /// )
   /// ```
   NikuIconButton visualDensity(VisualDensity visualDensity) {
-    this._visualDensity = visualDensity;
+    _visualDensity = visualDensity;
 
     return this;
   }
@@ -125,10 +127,10 @@ class NikuIconButton {
   /// )
   /// ```
   NikuIconButton padding(EdgeInsets padding) {
-    this._pt = padding.top;
-    this._pl = padding.left;
-    this._pb = padding.bottom;
-    this._pr = padding.right;
+    _pt = padding.top;
+    _pl = padding.left;
+    _pb = padding.bottom;
+    _pr = padding.right;
 
     return this;
   }
@@ -142,10 +144,10 @@ class NikuIconButton {
   /// )
   /// ```
   NikuIconButton p(double padding) {
-    this._pt = padding;
-    this._pl = padding;
-    this._pb = padding;
-    this._pr = padding;
+    _pt = padding;
+    _pl = padding;
+    _pb = padding;
+    _pr = padding;
 
     return this;
   }
@@ -159,8 +161,8 @@ class NikuIconButton {
   /// )
   /// ```
   NikuIconButton px(double padding) {
-    this._pl = padding;
-    this._pr = padding;
+    _pl = padding;
+    _pr = padding;
 
     return this;
   }
@@ -174,8 +176,8 @@ class NikuIconButton {
   /// )
   /// ```
   NikuIconButton py(double padding) {
-    this._pt = padding;
-    this._pb = padding;
+    _pt = padding;
+    _pb = padding;
 
     return this;
   }
@@ -189,7 +191,7 @@ class NikuIconButton {
   /// )
   /// ```
   NikuIconButton pt(double padding) {
-    this._pt = padding;
+    _pt = padding;
 
     return this;
   }
@@ -203,7 +205,7 @@ class NikuIconButton {
   /// )
   /// ```
   NikuIconButton pl(double padding) {
-    this._pl = padding;
+    _pl = padding;
 
     return this;
   }
@@ -217,7 +219,7 @@ class NikuIconButton {
   /// )
   /// ```
   NikuIconButton pb(double padding) {
-    this._pb = padding;
+    _pb = padding;
 
     return this;
   }
@@ -231,7 +233,7 @@ class NikuIconButton {
   /// )
   /// ```
   NikuIconButton pr(double padding) {
-    this._pr = padding;
+    _pr = padding;
 
     return this;
   }
@@ -245,7 +247,7 @@ class NikuIconButton {
   /// )
   /// ```
   NikuIconButton alignment(Alignment align) {
-    this._alignment = align;
+    _alignment = align;
 
     return this;
   }
@@ -259,7 +261,7 @@ class NikuIconButton {
   /// )
   /// ```
   NikuIconButton align(Alignment align) {
-    this._alignment = align;
+    _alignment = align;
 
     return this;
   }
@@ -273,7 +275,7 @@ class NikuIconButton {
   /// )
   /// ```
   NikuIconButton topLeft() {
-    this._alignment = Alignment.topLeft;
+    _alignment = Alignment.topLeft;
 
     return this;
   }
@@ -287,7 +289,7 @@ class NikuIconButton {
   /// )
   /// ```
   NikuIconButton topCenter() {
-    this._alignment = Alignment.topCenter;
+    _alignment = Alignment.topCenter;
 
     return this;
   }
@@ -301,7 +303,7 @@ class NikuIconButton {
   /// )
   /// ```
   NikuIconButton topRight() {
-    this._alignment = Alignment.topRight;
+    _alignment = Alignment.topRight;
 
     return this;
   }
@@ -315,7 +317,7 @@ class NikuIconButton {
   /// )
   /// ```
   NikuIconButton centerLeft() {
-    this._alignment = Alignment.centerLeft;
+    _alignment = Alignment.centerLeft;
 
     return this;
   }
@@ -329,7 +331,7 @@ class NikuIconButton {
   /// )
   /// ```
   NikuIconButton center() {
-    this._alignment = Alignment.center;
+    _alignment = Alignment.center;
 
     return this;
   }
@@ -343,7 +345,7 @@ class NikuIconButton {
   /// )
   /// ```
   NikuIconButton centerRight() {
-    this._alignment = Alignment.centerRight;
+    _alignment = Alignment.centerRight;
 
     return this;
   }
@@ -357,7 +359,7 @@ class NikuIconButton {
   /// )
   /// ```
   NikuIconButton bottomLeft() {
-    this._alignment = Alignment.bottomLeft;
+    _alignment = Alignment.bottomLeft;
 
     return this;
   }
@@ -371,7 +373,7 @@ class NikuIconButton {
   /// )
   /// ```
   NikuIconButton bottomCenter() {
-    this._alignment = Alignment.bottomCenter;
+    _alignment = Alignment.bottomCenter;
 
     return this;
   }
@@ -385,7 +387,7 @@ class NikuIconButton {
   /// )
   /// ```
   NikuIconButton bottomRight() {
-    this._alignment = Alignment.bottomRight;
+    _alignment = Alignment.bottomRight;
 
     return this;
   }
@@ -400,7 +402,7 @@ class NikuIconButton {
   /// )
   /// ```
   NikuIconButton splashRadius(double radius) {
-    this._splashRadius = radius;
+    _splashRadius = radius;
 
     return this;
   }
@@ -414,7 +416,7 @@ class NikuIconButton {
   /// )
   /// ```
   NikuIconButton color(Color color) {
-    this._color = color;
+    _color = color;
 
     return this;
   }
@@ -428,7 +430,7 @@ class NikuIconButton {
   /// )
   /// ```
   NikuIconButton disabled(Color color) {
-    this._disabledColor = color;
+    _disabledColor = color;
 
     return this;
   }
@@ -442,7 +444,7 @@ class NikuIconButton {
   /// )
   /// ```
   NikuIconButton focus(Color color) {
-    this._focusColor = color;
+    _focusColor = color;
 
     return this;
   }
@@ -456,7 +458,7 @@ class NikuIconButton {
   /// )
   /// ```
   NikuIconButton hover(Color color) {
-    this._hoverColor = color;
+    _hoverColor = color;
 
     return this;
   }
@@ -470,7 +472,7 @@ class NikuIconButton {
   /// )
   /// ```
   NikuIconButton highlight(Color color) {
-    this._highlightColor = color;
+    _highlightColor = color;
 
     return this;
   }
@@ -484,7 +486,7 @@ class NikuIconButton {
   /// )
   /// ```
   NikuIconButton splash(Color color) {
-    this._splashColor = color;
+    _splashColor = color;
 
     return this;
   }
@@ -502,19 +504,20 @@ class NikuIconButton {
   ///   splash: splash
   /// )
   /// ```
-  NikuIconButton setColor(
-      {Color? color,
-      Color? disabled,
-      Color? focus,
-      Color? hover,
-      Color? highlight,
-      Color? splash}) {
-    this._color = color;
-    this._disabledColor = disabled;
-    this._focusColor = focus;
-    this._hoverColor = hover;
-    this._highlightColor = highlight;
-    this._splashColor = highlight;
+  NikuIconButton setColor({
+    Color? color,
+    Color? disabled,
+    Color? focus,
+    Color? hover,
+    Color? highlight,
+    Color? splash,
+  }) {
+    _color = color;
+    _disabledColor = disabled;
+    _focusColor = focus;
+    _hoverColor = hover;
+    _highlightColor = highlight;
+    _splashColor = highlight;
 
     return this;
   }
@@ -528,7 +531,21 @@ class NikuIconButton {
   /// )
   /// ```
   NikuIconButton mouseCursor(MouseCursor click) {
-    this._mouseCursor = click;
+    getMouseCursor = click;
+
+    return this;
+  }
+
+  /// The cursor for a mouse pointer when it enters or is hovering over the button
+  ///
+  /// Equivalent to
+  /// ```
+  /// IconButton(
+  ///   mouseCursor: input
+  /// )
+  /// ```
+  NikuIconButton cursor(MouseCursor click) {
+    getMouseCursor = click;
 
     return this;
   }
@@ -542,7 +559,7 @@ class NikuIconButton {
   /// )
   /// ```
   NikuIconButton focusNode(FocusNode focusNode) {
-    this._focusNode = focusNode;
+    _focusNode = focusNode;
 
     return this;
   }
@@ -556,12 +573,12 @@ class NikuIconButton {
   /// )
   /// ```
   NikuIconButton autofocus(bool autofocus) {
-    this._autofocus = autofocus;
+    _autofocus = autofocus;
 
     return this;
   }
 
-  /// Determine whether button should be auto focus
+  /// Explaination of the button
   ///
   /// Equivalent to
   /// ```
@@ -570,7 +587,7 @@ class NikuIconButton {
   /// )
   /// ```
   NikuIconButton tooltip(String tooltip) {
-    this._tooltip = tooltip;
+    _tooltip = tooltip;
 
     return this;
   }
@@ -583,13 +600,13 @@ class NikuIconButton {
   ///   enableFeedback: input
   /// )
   /// ```
-  NikuIconButton enableFeedback(bool enableFeedback) {
-    this._enableFeedback = enableFeedback;
+  NikuIconButton enableFeedback([bool enableFeedback = true]) {
+    _enableFeedback = enableFeedback;
 
     return this;
   }
 
-  /// Whether detected gestures should provide acoustic and/or haptic feedback
+  /// Set constraints layout of button
   ///
   /// Equivalent to
   /// ```
@@ -598,7 +615,287 @@ class NikuIconButton {
   /// )
   /// ```
   NikuIconButton constraints(BoxConstraints boxConstraints) {
-    this._constraints = boxConstraints;
+    _constraints = boxConstraints;
+
+    return this;
+  }
+
+  /// Set size of button
+  ///
+  /// Equivalent to
+  /// ```
+  /// IconButton(
+  ///   constraints: BoxConstraints(
+  ///     minWidth: input1,
+  ///     minHeight: input2,
+  ///     maxWidth: input1,
+  ///     maxHeight: input2,
+  ///   ),
+  /// );
+  /// ```
+  NikuIconButton size(double x, double y) {
+    _constraints = BoxConstraints(
+      minWidth: x,
+      minHeight: y,
+      maxWidth: x,
+      maxHeight: y,
+    );
+
+    return this;
+  }
+
+  /// Set maximum button size of both width and height
+  ///
+  /// Equivalent to
+  /// ```
+  /// IconButton(
+  ///   constraints: BoxConstraints(
+  ///     maxWidth: input1,
+  ///     maxHeight: input2,
+  ///   ),
+  /// );
+  /// ```
+  NikuIconButton maximumSize(double x, double y) {
+    _constraints = BoxConstraints(
+      minWidth: _constraints?.minWidth ?? 0,
+      minHeight: _constraints?.minHeight ?? 0,
+      maxWidth: x,
+      maxHeight: y,
+    );
+
+    return this;
+  }
+
+  /// Set maximum button size of both width and height
+  ///
+  /// Equivalent to
+  /// ```
+  /// IconButton(
+  ///   constraints: BoxConstraints(
+  ///     maxWidth: input1,
+  ///     maxHeight: input2,
+  ///   ),
+  /// );
+  /// ```
+  NikuIconButton maxSize(double x, double y) {
+    _constraints = BoxConstraints(
+      minWidth: _constraints?.minWidth ?? 0,
+      minHeight: _constraints?.minHeight ?? 0,
+      maxWidth: x,
+      maxHeight: y,
+    );
+
+    return this;
+  }
+
+  /// Set minmum button size of both width and height
+  ///
+  /// Equivalent to
+  /// ```
+  /// IconButton(
+  ///   constraints: BoxConstraints(
+  ///     minWidth: input1,
+  ///     minHeight: input2,
+  ///   ),
+  /// );
+  /// ```
+  NikuIconButton minimumSize(double x, double y) {
+    _constraints = BoxConstraints(
+      minWidth: x,
+      minHeight: y,
+      maxWidth: _constraints?.maxWidth ?? double.infinity,
+      maxHeight: _constraints?.maxHeight ?? double.infinity,
+    );
+
+    return this;
+  }
+
+  /// Set minmum button size of both width and height
+  ///
+  /// Equivalent to
+  /// ```
+  /// IconButton(
+  ///   constraints: BoxConstraints(
+  ///     minWidth: input1,
+  ///     minHeight: input2,
+  ///   ),
+  /// );
+  /// ```
+  NikuIconButton minSize(double x, double y) {
+    _constraints = BoxConstraints(
+      minWidth: x,
+      minHeight: y,
+      maxWidth: _constraints?.maxWidth ?? double.infinity,
+      maxHeight: _constraints?.maxHeight ?? double.infinity,
+    );
+
+    return this;
+  }
+
+  /// Set minimum width of button
+  ///
+  /// Equivalent to
+  /// ```
+  /// IconButton(
+  ///   constraints: BoxConstraints(
+  ///     minWidth: input,
+  ///   ),
+  /// );
+  /// ```
+  NikuIconButton minimumWidth(double input) {
+    _constraints = BoxConstraints(
+      minWidth: input,
+      minHeight: _constraints?.minHeight ?? 0,
+      maxWidth: _constraints?.maxWidth ?? double.infinity,
+      maxHeight: _constraints?.maxHeight ?? double.infinity,
+    );
+
+    return this;
+  }
+
+  /// Set minimum width of button
+  ///
+  /// Equivalent to
+  /// ```
+  /// IconButton(
+  ///   constraints: BoxConstraints(
+  ///     minWidth: input,
+  ///   ),
+  /// );
+  /// ```
+  NikuIconButton minWidth(double input) {
+    _constraints = BoxConstraints(
+      minWidth: input,
+      minHeight: _constraints?.minHeight ?? 0,
+      maxWidth: _constraints?.maxWidth ?? double.infinity,
+      maxHeight: _constraints?.maxHeight ?? double.infinity,
+    );
+
+    return this;
+  }
+
+  /// Set minimum height of button
+  ///
+  /// Equivalent to
+  /// ```
+  /// IconButton(
+  ///   constraints: BoxConstraints(
+  ///     minHeight: input,
+  ///   ),
+  /// );
+  /// ```
+  NikuIconButton minimumHeight(double input) {
+    _constraints = BoxConstraints(
+      minWidth: _constraints?.minWidth ?? 0,
+      minHeight: input,
+      maxWidth: _constraints?.maxWidth ?? double.infinity,
+      maxHeight: _constraints?.maxHeight ?? double.infinity,
+    );
+
+    return this;
+  }
+
+  /// Set minimum height of button
+  ///
+  /// Equivalent to
+  /// ```
+  /// IconButton(
+  ///   constraints: BoxConstraints(
+  ///     minHeight: input,
+  ///   ),
+  /// );
+  /// ```
+  NikuIconButton minHeight(double input) {
+    _constraints = BoxConstraints(
+      minWidth: _constraints?.minWidth ?? 0,
+      minHeight: input,
+      maxWidth: _constraints?.maxWidth ?? double.infinity,
+      maxHeight: _constraints?.maxHeight ?? double.infinity,
+    );
+
+    return this;
+  }
+
+  /// Set maximum width of button
+  ///
+  /// Equivalent to
+  /// ```
+  /// IconButton(
+  ///   constraints: BoxConstraints(
+  ///     maxWidth: input,
+  ///   ),
+  /// );
+  /// ```
+  NikuIconButton maximumWidth(double input) {
+    _constraints = BoxConstraints(
+      minWidth: _constraints?.minWidth ?? 0,
+      minHeight: _constraints?.minHeight ?? 0,
+      maxWidth: input,
+      maxHeight: _constraints?.maxHeight ?? double.infinity,
+    );
+
+    return this;
+  }
+
+  /// Set maximum width of button
+  ///
+  /// Equivalent to
+  /// ```
+  /// IconButton(
+  ///   constraints: BoxConstraints(
+  ///     maxWidth: input,
+  ///   ),
+  /// );
+  /// ```
+  NikuIconButton maxWidth(double input) {
+    _constraints = BoxConstraints(
+      minWidth: _constraints?.minWidth ?? 0,
+      minHeight: _constraints?.minHeight ?? 0,
+      maxWidth: input,
+      maxHeight: _constraints?.maxHeight ?? double.infinity,
+    );
+
+    return this;
+  }
+
+  /// Set maximum height of button
+  ///
+  /// Equivalent to
+  /// ```
+  /// IconButton(
+  ///   constraints: BoxConstraints(
+  ///     maxHeight: input,
+  ///   ),
+  /// );
+  /// ```
+  NikuIconButton maximumHeight(double input) {
+    _constraints = BoxConstraints(
+      minWidth: _constraints?.minWidth ?? 0,
+      minHeight: _constraints?.minHeight ?? 0,
+      maxWidth: _constraints?.maxWidth ?? double.infinity,
+      maxHeight: input,
+    );
+
+    return this;
+  }
+
+  /// Set maximum height of button
+  ///
+  /// Equivalent to
+  /// ```
+  /// IconButton(
+  ///   constraints: BoxConstraints(
+  ///     minHeight: input,
+  ///   ),
+  /// );
+  /// ```
+  NikuIconButton maxHeight(double input) {
+    _constraints = BoxConstraints(
+      minWidth: _constraints?.minWidth ?? 0,
+      minHeight: _constraints?.minHeight ?? 0,
+      maxWidth: _constraints?.maxWidth ?? double.infinity,
+      maxHeight: input,
+    );
 
     return this;
   }
@@ -620,60 +917,43 @@ class NikuIconButton {
   ///       .apply(iconSize) // Will have iconSize apply
   ///       .apply(decoration) // Will have decoration apply
   ///       .tooltip("Edit")
-  ///       .build()
   ///   )
   /// }
   /// ```
-  NikuIconButton apply(NikuIconButton instance) => this.set(
-        iconSize:
-            instance._iconSize != 24 ? this._iconSize : instance._iconSize,
-        visualDensity: instance._visualDensity ?? this._visualDensity,
-        pt: instance._pt != 0 ? instance._pt : this._pt,
-        pl: instance._pl != 0 ? instance._pl : this._pl,
-        pb: instance._pb != 0 ? instance._pb : this._pb,
-        pr: instance._pr != 0 ? instance._pr : this._pr,
+  NikuIconButton apply(NikuIconButton instance) => set(
+        iconSize: instance._iconSize != 24 ? _iconSize : instance._iconSize,
+        visualDensity: instance._visualDensity ?? _visualDensity,
+        pt: instance._pt != 0 ? instance._pt : _pt,
+        pl: instance._pl != 0 ? instance._pl : _pl,
+        pb: instance._pb != 0 ? instance._pb : _pb,
+        pr: instance._pr != 0 ? instance._pr : _pr,
+        mt: instance.getMt != 0 ? instance.getMt : getMt,
+        mb: instance.getMb != 0 ? instance.getMb : getMb,
+        ml: instance.getMl != 0 ? instance.getMl : getMl,
+        mr: instance.getMr != 0 ? instance.getMr : getMr,
         alignment: instance._alignment != Alignment.center
             ? instance._alignment
-            : this._alignment,
-        splashRadius: instance._splashRadius ?? this._splashRadius,
-        color: instance._color ?? this._color,
-        focusColor: instance._focusColor ?? this._focusColor,
-        hoverColor: instance._hoverColor ?? this._hoverColor,
-        highlightColor: instance._highlightColor ?? this._highlightColor,
-        splashColor: instance._splashColor ?? this._splashColor,
-        disabledColor: instance._disabledColor ?? this._disabledColor,
-        onPressed: instance._onPressed ?? this._onPressed,
-        mouseCursor: instance._mouseCursor != SystemMouseCursors.click
-            ? instance._mouseCursor
-            : this._mouseCursor,
-        focusNode: instance._focusNode ?? this._focusNode,
-        autofocus: instance._autofocus != false
-            ? instance._autofocus
-            : this._autofocus,
-        tooltip: instance._tooltip ?? this._tooltip,
+            : _alignment,
+        splashRadius: instance._splashRadius ?? _splashRadius,
+        color: instance._color ?? _color,
+        focusColor: instance._focusColor ?? _focusColor,
+        hoverColor: instance._hoverColor ?? _hoverColor,
+        highlightColor: instance._highlightColor ?? _highlightColor,
+        splashColor: instance._splashColor ?? _splashColor,
+        disabledColor: instance._disabledColor ?? _disabledColor,
+        onPressed: instance._onPressed ?? _onPressed,
+        mouseCursor: instance.getMouseCursor != SystemMouseCursors.click
+            ? instance.getMouseCursor
+            : getMouseCursor,
+        focusNode: instance._focusNode ?? _focusNode,
+        autofocus:
+            instance._autofocus != false ? instance._autofocus : _autofocus,
+        tooltip: instance._tooltip ?? _tooltip,
         enableFeedback: instance._enableFeedback != false
             ? instance._enableFeedback
-            : this._enableFeedback,
-        constraints: instance._constraints ?? this._constraints,
+            : _enableFeedback,
+        constraints: instance._constraints ?? _constraints,
       );
-
-  /// Apply existing NikuIconButton's property to current style and build
-  ///
-  /// Example usage:
-  /// ```
-  /// final style = NikuIconButton()
-  ///   .iconSize(24)
-  ///   .p(20)
-  ///   .highlightColor(Colors.blue.withOpacity(.125))
-  ///
-  /// build(context) {
-  ///   return (
-  ///     NikuIconButton(Icons(Icon.edit))
-  ///       .style(style) // Will have iconSize apply and build
-  ///   )
-  /// }
-  /// ```
-  IconButton style(NikuIconButton instance) => this.apply(instance).build();
 
   /// Apply existing NikuIconButton's property to current style and build
   ///
@@ -686,31 +966,38 @@ class NikuIconButton {
   ///       .iconSize(24)
   ///       .p(20)
   ///       .highlightColor(Colors.blue.withOpacity(.125))
-  ///       .build()
   ///   )
   /// }
   /// ```
-  IconButton build({Key? key}) => IconButton(
-        icon: this._icon,
-        onPressed: this._onPressed,
-        iconSize: this._iconSize,
-        visualDensity: this._visualDensity,
-        padding: EdgeInsets.only(
-            top: this._pt, left: this._pl, bottom: this._pb, right: this._pr),
-        alignment: this._alignment,
-        splashRadius: this._splashRadius,
-        color: this._color,
-        focusColor: this._focusColor,
-        hoverColor: this._hoverColor,
-        highlightColor: this._highlightColor,
-        splashColor: this._splashColor,
-        disabledColor: this._disabledColor,
-        mouseCursor: this._mouseCursor,
-        focusNode: this._focusNode,
-        autofocus: this._autofocus,
-        tooltip: this._tooltip,
-        enableFeedback: this._enableFeedback,
-        constraints: this._constraints,
+  @override
+  build(context) => internalBuild(
+        IconButton(
+          key: key,
+          icon: _icon,
+          onPressed: _onPressed,
+          iconSize: _iconSize,
+          visualDensity: _visualDensity,
+          padding: EdgeInsets.only(
+            top: _pt,
+            left: _pl,
+            bottom: _pb,
+            right: _pr,
+          ),
+          alignment: _alignment,
+          splashRadius: _splashRadius,
+          color: _color,
+          focusColor: _focusColor,
+          hoverColor: _hoverColor,
+          highlightColor: _highlightColor,
+          splashColor: _splashColor,
+          disabledColor: _disabledColor,
+          mouseCursor: getMouseCursor,
+          focusNode: _focusNode,
+          autofocus: _autofocus,
+          tooltip: _tooltip,
+          enableFeedback: _enableFeedback,
+          constraints: _constraints,
+        ),
       );
 
   /// Switch to Niku() property
@@ -724,10 +1011,15 @@ class NikuIconButton {
   ///   .highlightColor(Colors.blue.withOpacity(.125))
   ///   .niku()
   ///   .my(8)
-  ///   .build() // Collect all style and render
   /// ```
-  Niku niku() => Niku(this.build());
+  Niku niku() => Niku(
+        Builder(
+          builder: (context) => build(context),
+        ),
+        key,
+      );
 
+  @protected
   NikuIconButton set({
     double iconSize = 24,
     VisualDensity? visualDensity,
@@ -735,6 +1027,10 @@ class NikuIconButton {
     double pl = 0,
     double pb = 0,
     double pr = 0,
+    double mt = 0,
+    double ml = 0,
+    double mb = 0,
+    double mr = 0,
     Alignment alignment = Alignment.center,
     double? splashRadius,
     Color? color,
@@ -751,27 +1047,31 @@ class NikuIconButton {
     bool enableFeedback = true,
     BoxConstraints? constraints,
   }) {
-    this._iconSize = iconSize;
-    this._visualDensity = visualDensity;
-    this._pt = pt;
-    this._pl = pl;
-    this._pb = pb;
-    this._pr = pr;
-    this._alignment = alignment;
-    this._splashRadius = splashRadius;
-    this._color = color;
-    this._focusColor = focusColor;
-    this._hoverColor = hoverColor;
-    this._highlightColor = highlightColor;
-    this._splashColor = splashColor;
-    this._disabledColor = disabledColor;
-    this._onPressed = onPressed;
-    this._mouseCursor = mouseCursor;
-    this._focusNode = focusNode;
-    this._autofocus = autofocus;
-    this._tooltip = tooltip;
-    this._enableFeedback = enableFeedback;
-    this._constraints = constraints;
+    _iconSize = iconSize;
+    _visualDensity = visualDensity;
+    _pt = pt;
+    _pl = pl;
+    _pb = pb;
+    _pr = pr;
+    super.mt(mt);
+    super.ml(ml);
+    super.mb(mb);
+    super.mr(mr);
+    _alignment = alignment;
+    _splashRadius = splashRadius;
+    _color = color;
+    _focusColor = focusColor;
+    _hoverColor = hoverColor;
+    _highlightColor = highlightColor;
+    _splashColor = splashColor;
+    _disabledColor = disabledColor;
+    _onPressed = onPressed;
+    getMouseCursor = mouseCursor;
+    _focusNode = focusNode;
+    _autofocus = autofocus;
+    _tooltip = tooltip;
+    _enableFeedback = enableFeedback;
+    _constraints = constraints;
 
     return this;
   }

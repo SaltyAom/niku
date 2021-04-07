@@ -1,11 +1,13 @@
 // ignore_for_file: non_constant_identifier_names
+// ignore_for_file: must_be_immutable
 import 'package:flutter/material.dart';
 
 import 'dart:ui';
 
 import 'package:flutter/rendering.dart';
+import 'package:niku/widget/core.dart';
 
-import './base.dart';
+import 'base.dart';
 
 /// Niku extension for Material various Button
 /// Including:
@@ -20,32 +22,39 @@ import './base.dart';
 ///
 /// Example usage:
 /// ```
-/// NikuButton(Text("Flat Button"))
+/// NikuButton(Text("Text Button"))
 ///   .bg(Colors.blue)
 ///   .px(40)
 ///   .py(20)
 ///   .rounded(8)
 ///   .my(8)
-///   .build()
 ///
-/// NikuButton(Text("Flat Button"))
+/// NikuButton.elevated(Text("Elevated Button"))
 ///   .bg(Colors.blue)
 ///   .px(40)
 ///   .py(20)
 ///   .rounded(8)
 ///   .my(8)
-///   .elevated()
+///
+/// NikuButton.outlinedIcon(Text("Elevated Button"))
+///   .bg(Colors.blue)
+///   .px(40)
+///   .py(20)
+///   .rounded(8)
+///   .my(8)
 /// ```
 ///
 /// Meta property list:
 /// - niku() - Switch to Niku() property
-/// - build(), textButton() - Build as [TextButton]
+/// - build() - Build as [TextButton]
+/// - apply() - Apply existing NikuFlatButton's property to current style
+///
+/// Factory Method
 /// - elevated() - Build as [ElevatedButton]
 /// - outlined() - Build as [OutlinedButton]
-/// - textButtonIcon() - Build as [TextButton.icon]
+/// - icon() - Build as [TextButton.icon]
 /// - elevatedIcon() - Build as [ElevatedButton.icon]
 /// - outlinedIcon() - Build as [OutlinedButton.icon]
-/// - apply() - Apply existing NikuFlatButton's property to current style
 ///
 /// Style Property list:
 /// - onPressed - Callback when button is pressed
@@ -193,8 +202,35 @@ import './base.dart';
 /// - tapTargetSize - Configures the tap target and layout size of certain Material widgets
 /// - rounded - Apply border radius to button, will override shape
 /// - label - Add label to [IconButton]
-class NikuButton {
+///
+///
+/// - textColor - Color of text
+/// - fontSize - Set text size
+/// - fontWeight - Font weight
+///   - fontWeight - Set font weight of text
+///   - bold - Set font to bold, equivalent to w700()
+///   - w100 - Use font weight of 100
+///   - w200 - Use font weight of 200
+///   - w300 - Use font weight of 300
+///   - w400 - Use font weight of 400
+///   - w500 - Use font weight of 500
+///   - w600 - Use font weight of 600
+///   - w700 - Use font weight of 700
+///   - w800 - Use font weight of 800
+///   - w900 - Use font weight of 900
+/// - fontWeight - The thickness of the glyphs used to draw the text
+/// - fontStyle - Whether to slant the glyphs in the font
+///   - fontStyle - Use [FontStyle] to apply
+///   - italic - Use italic style
+/// - letterSpacing - Spacing for each letter
+/// - wordSpacing - Spacing for each word
+/// - textBaseline - A horizontal line used for aligning text
+///   - alphabetic - Using [TextBaseline.alphabetic]
+///   - ideographic - Using [TextBaseline.ideographic]
+class NikuButton extends NikuCore {
   Widget child;
+  NikuButtonType type;
+  Key? key;
 
   VoidCallback? _onPressed;
   VoidCallback? _onLongPressed;
@@ -217,18 +253,14 @@ class NikuButton {
   double _pb = 0;
   double _pl = 0;
   double _pr = 0;
-  double _mt = 0;
-  double _mb = 0;
-  double _ml = 0;
-  double _mr = 0;
 
-  NikuMaterialPropertyContainer<Size> _minimumSize =
+  NikuMaterialPropertyContainer<Size> getMinimumSize =
       NikuMaterialPropertyContainer();
   NikuMaterialPropertyContainer<BorderSide> _side =
       NikuMaterialPropertyContainer();
   NikuMaterialPropertyContainer<RoundedRectangleBorder> _shape =
       NikuMaterialPropertyContainer();
-  NikuMaterialPropertyContainer<MouseCursor> _mouseCursor =
+  NikuMaterialPropertyContainer<MouseCursor> getMouseCursor =
       NikuMaterialPropertyContainer();
 
   VisualDensity? _visualDensity;
@@ -238,6 +270,27 @@ class NikuButton {
   AlignmentGeometry? _alignment;
 
   Widget? _label;
+
+  // Input Label Style
+  NikuMaterialPropertyContainer<Color> _text_color =
+      NikuMaterialPropertyContainer();
+  Color? _text_backgroundColor;
+  double? _text_fontSize;
+  FontWeight? _text_fontWeight;
+  FontStyle? _text_fontStyle;
+  double? _text_letterSpacing;
+  double? _text_wordSpacing;
+  double? _text_height;
+  Paint? _text_foreground;
+  Paint? _text_background;
+  List<Shadow>? _text_shadows;
+  List<FontFeature>? _text_fontFeatures;
+  TextDecoration? _text_textDecoration;
+  Color? _text_textDecorationColor;
+  double? _text_textDecorationThickness;
+  String? _text_fontFamily;
+  List<String>? _text_fontFamilyFallback;
+  TextBaseline? _text_textBaseline;
 
   /// Niku extension for Material various Button
   /// Including:
@@ -258,26 +311,26 @@ class NikuButton {
   ///   .py(20)
   ///   .rounded(8)
   ///   .my(8)
-  ///   .build()
   ///
-  /// NikuButton(Text("Flat Button"))
+  /// NikuButton.elevated(Text("Flat Button"))
   ///   .bg(Colors.blue)
   ///   .px(40)
   ///   .py(20)
   ///   .rounded(8)
   ///   .my(8)
-  ///   .elevated()
   /// ```
   ///
   /// Meta property list:
   /// - niku() - Switch to Niku() property
-  /// - build(), textButton() - Build as [TextButton]
+  /// - build() - Build as [TextButton]
+  /// - apply() - Apply existing NikuFlatButton's property to current style
+  ///
+  /// Factory Method
   /// - elevated() - Build as [ElevatedButton]
   /// - outlined() - Build as [OutlinedButton]
-  /// - textButtonIcon() - Build as [TextButton.icon]
+  /// - icon() - Build as [TextButton.icon]
   /// - elevatedIcon() - Build as [ElevatedButton.icon]
   /// - outlinedIcon() - Build as [OutlinedButton.icon]
-  /// - apply() - Apply existing NikuFlatButton's property to current style
   ///
   /// Style Property list:
   /// - onPressed - Callback when button is pressed
@@ -423,8 +476,75 @@ class NikuButton {
   /// - visualDensity - Defines the visual density of user interface components
   /// - tapTargetSize - Configures the tap target and layout size of certain Material widgets
   /// - rounded - Apply border radius to button, will override shape
-  /// - label - Add label to [IconButton]
-  NikuButton(this.child);
+  ///
+  /// - textColor - Color of text
+  /// - fontSize - Set text size
+  /// - fontWeight - Font weight
+  ///   - fontWeight - Set font weight of text
+  ///   - bold - Set font to bold, equivalent to w700()
+  ///   - w100 - Use font weight of 100
+  ///   - w200 - Use font weight of 200
+  ///   - w300 - Use font weight of 300
+  ///   - w400 - Use font weight of 400
+  ///   - w500 - Use font weight of 500
+  ///   - w600 - Use font weight of 600
+  ///   - w700 - Use font weight of 700
+  ///   - w800 - Use font weight of 800
+  ///   - w900 - Use font weight of 900
+  /// - fontWeight - The thickness of the glyphs used to draw the text
+  /// - fontStyle - Whether to slant the glyphs in the font
+  ///   - fontStyle - Use [FontStyle] to apply
+  ///   - italic - Use italic style
+  /// - letterSpacing - Spacing for each letter
+  /// - wordSpacing - Spacing for each word
+  /// - textBaseline - A horizontal line used for aligning text
+  ///   - alphabetic - Using [TextBaseline.alphabetic]
+  ///   - ideographic - Using [TextBaseline.ideographic]
+  NikuButton(
+    this.child, {
+    this.type = NikuButtonType.Text,
+    this.key,
+  });
+
+  factory NikuButton.icon(Widget child, {Key? key}) {
+    return NikuButton(
+      child,
+      type: NikuButtonType.TextIcon,
+      key: key,
+    );
+  }
+
+  factory NikuButton.elevated(Widget child, {Key? key}) {
+    return NikuButton(
+      child,
+      type: NikuButtonType.Elevated,
+      key: key,
+    );
+  }
+
+  factory NikuButton.elevatedIcon(Widget child, {Key? key}) {
+    return NikuButton(
+      child,
+      type: NikuButtonType.ElevatedIcon,
+      key: key,
+    );
+  }
+
+  factory NikuButton.outlined(Widget child, {Key? key}) {
+    return NikuButton(
+      child,
+      type: NikuButtonType.Outlined,
+      key: key,
+    );
+  }
+
+  factory NikuButton.outlinedIcon(Widget child, {Key? key}) {
+    return NikuButton(
+      child,
+      type: NikuButtonType.OutlinedIcon,
+      key: key,
+    );
+  }
 
   /// Callback when button is pressed
   ///
@@ -435,7 +555,7 @@ class NikuButton {
   /// )
   /// ```
   NikuButton onPressed(VoidCallback callback) {
-    this._onPressed = callback;
+    _onPressed = callback;
 
     return this;
   }
@@ -449,7 +569,7 @@ class NikuButton {
   /// )
   /// ```
   NikuButton onLongPressed(VoidCallback callback) {
-    this._onLongPressed = callback;
+    _onLongPressed = callback;
 
     return this;
   }
@@ -463,10 +583,10 @@ class NikuButton {
   /// )
   /// ```
   NikuButton padding(EdgeInsets padding) {
-    this._pt = padding.top;
-    this._pl = padding.left;
-    this._pb = padding.bottom;
-    this._pr = padding.right;
+    _pt = padding.top;
+    _pl = padding.left;
+    _pb = padding.bottom;
+    _pr = padding.right;
 
     return this;
   }
@@ -480,10 +600,10 @@ class NikuButton {
   /// )
   /// ```
   NikuButton p(double padding) {
-    this._pt = padding;
-    this._pl = padding;
-    this._pb = padding;
-    this._pr = padding;
+    _pt = padding;
+    _pl = padding;
+    _pb = padding;
+    _pr = padding;
 
     return this;
   }
@@ -497,8 +617,8 @@ class NikuButton {
   /// )
   /// ```
   NikuButton px(double padding) {
-    this._pl = padding;
-    this._pr = padding;
+    _pl = padding;
+    _pr = padding;
 
     return this;
   }
@@ -512,8 +632,8 @@ class NikuButton {
   /// )
   /// ```
   NikuButton py(double padding) {
-    this._pt = padding;
-    this._pb = padding;
+    _pt = padding;
+    _pb = padding;
 
     return this;
   }
@@ -527,7 +647,7 @@ class NikuButton {
   /// )
   /// ```
   NikuButton pt(double padding) {
-    this._pt = padding;
+    _pt = padding;
 
     return this;
   }
@@ -541,7 +661,7 @@ class NikuButton {
   /// )
   /// ```
   NikuButton pl(double padding) {
-    this._pl = padding;
+    _pl = padding;
 
     return this;
   }
@@ -555,7 +675,7 @@ class NikuButton {
   /// )
   /// ```
   NikuButton pb(double padding) {
-    this._pb = padding;
+    _pb = padding;
 
     return this;
   }
@@ -569,127 +689,7 @@ class NikuButton {
   /// )
   /// ```
   NikuButton pr(double padding) {
-    this._pr = padding;
-
-    return this;
-  }
-
-  /// Apply margin using [EdgeInset]
-  ///
-  /// Equivalent to
-  /// ```
-  /// Container(
-  ///   margin: input
-  /// )
-  /// ```
-  NikuButton margin(EdgeInsets padding) {
-    this._pt = padding.top;
-    this._pl = padding.left;
-    this._pb = padding.bottom;
-    this._pr = padding.right;
-
-    return this;
-  }
-
-  /// Apply margin to top
-  ///
-  /// Equivalent to
-  /// ```
-  /// Container(
-  ///   margin: EdgeInsets.all(input)
-  /// )
-  /// ```
-  NikuButton m(double margin) {
-    this._mt = margin;
-    this._ml = margin;
-    this._mb = margin;
-    this._mr = margin;
-
-    return this;
-  }
-
-  /// Apply margin to x axis
-  ///
-  /// Equivalent to
-  /// ```
-  /// Container(
-  ///   margin: EdgeInsets.symmetric(horizontal: input)
-  /// )
-  /// ```
-  NikuButton mx(double margin) {
-    this._ml = margin;
-    this._mr = margin;
-
-    return this;
-  }
-
-  /// Apply margin to y axis
-  ///
-  /// Equivalent to
-  /// ```
-  /// Container(
-  ///   margin: EdgeInsets.symmetric(vertical: input)
-  /// )
-  /// ```
-  NikuButton my(double margin) {
-    this._mt = margin;
-    this._mb = margin;
-
-    return this;
-  }
-
-  /// Apply margin to top
-  ///
-  /// Equivalent to
-  /// ```
-  /// Container(
-  ///   margin: EdgeInsets.only(top: input)
-  /// )
-  /// ```
-  NikuButton mt(double margin) {
-    this._mt = margin;
-
-    return this;
-  }
-
-  /// Apply margin to left side
-  ///
-  /// Equivalent to
-  /// ```
-  /// Container(
-  ///   margin: EdgeInsets.only(left: input)
-  /// )
-  /// ```
-  NikuButton ml(double margin) {
-    this._ml = margin;
-
-    return this;
-  }
-
-  /// Apply margin to bottom
-  ///
-  /// Equivalent to
-  /// ```
-  /// Container(
-  ///   margin: EdgeInsets.only(bottom: input)
-  /// )
-  /// ```
-  NikuButton mb(double margin) {
-    this._mb = margin;
-
-    return this;
-  }
-
-  /// Apply margin to right side
-  ///
-  /// Equivalent to
-  /// ```
-  /// Container(
-  ///   margin: EdgeInsets.only(right: input)
-  /// )
-  /// ```
-  NikuButton mr(double margin) {
-    this._mr = margin;
+    _pr = padding;
 
     return this;
   }
@@ -701,9 +701,9 @@ class NikuButton {
   /// TextButton(
   ///   alignment: input
   /// )
-  /// ```
+  /// ```top
   NikuButton alignment(Alignment align) {
-    this._alignment = align;
+    _alignment = align;
 
     return this;
   }
@@ -717,7 +717,7 @@ class NikuButton {
   /// )
   /// ```
   NikuButton align(Alignment align) {
-    this._alignment = align;
+    _alignment = align;
 
     return this;
   }
@@ -731,7 +731,7 @@ class NikuButton {
   /// )
   /// ```
   NikuButton topLeft() {
-    this._alignment = Alignment.topLeft;
+    _alignment = Alignment.topLeft;
 
     return this;
   }
@@ -745,7 +745,7 @@ class NikuButton {
   /// )
   /// ```
   NikuButton topCenter() {
-    this._alignment = Alignment.topCenter;
+    _alignment = Alignment.topCenter;
 
     return this;
   }
@@ -759,7 +759,7 @@ class NikuButton {
   /// )
   /// ```
   NikuButton topRight() {
-    this._alignment = Alignment.topRight;
+    _alignment = Alignment.topRight;
 
     return this;
   }
@@ -773,7 +773,7 @@ class NikuButton {
   /// )
   /// ```
   NikuButton centerLeft() {
-    this._alignment = Alignment.centerLeft;
+    _alignment = Alignment.centerLeft;
 
     return this;
   }
@@ -787,7 +787,7 @@ class NikuButton {
   /// )
   /// ```
   NikuButton center() {
-    this._alignment = Alignment.center;
+    _alignment = Alignment.center;
 
     return this;
   }
@@ -801,7 +801,7 @@ class NikuButton {
   /// )
   /// ```
   NikuButton centerRight() {
-    this._alignment = Alignment.centerRight;
+    _alignment = Alignment.centerRight;
 
     return this;
   }
@@ -815,7 +815,7 @@ class NikuButton {
   /// )
   /// ```
   NikuButton bottomLeft() {
-    this._alignment = Alignment.bottomLeft;
+    _alignment = Alignment.bottomLeft;
 
     return this;
   }
@@ -829,7 +829,7 @@ class NikuButton {
   /// )
   /// ```
   NikuButton bottomCenter() {
-    this._alignment = Alignment.bottomCenter;
+    _alignment = Alignment.bottomCenter;
 
     return this;
   }
@@ -843,7 +843,7 @@ class NikuButton {
   /// )
   /// ```
   NikuButton bottomRight() {
-    this._alignment = Alignment.bottomRight;
+    _alignment = Alignment.bottomRight;
 
     return this;
   }
@@ -859,7 +859,7 @@ class NikuButton {
   /// )
   /// ```
   NikuButton bg(Color color) {
-    this._backgroundColor.updateAll(color);
+    _backgroundColor.updateAll(color);
 
     return this;
   }
@@ -892,16 +892,16 @@ class NikuButton {
     Color? pressed,
     Color? selected,
   }) {
-    this._backgroundColor.update(
-          base: base,
-          disabled: disabled,
-          dragged: dragged,
-          error: error,
-          focused: focused,
-          hovered: hovered,
-          pressed: pressed,
-          selected: selected,
-        );
+    _backgroundColor.update(
+      base: base,
+      disabled: disabled,
+      dragged: dragged,
+      error: error,
+      focused: focused,
+      hovered: hovered,
+      pressed: pressed,
+      selected: selected,
+    );
 
     return this;
   }
@@ -912,21 +912,22 @@ class NikuButton {
   /// ```
   /// TextButton(
   ///   color: MaterialStateProperty.resolveWith<T>((states) {
-  ///     if (states.contains(MaterialState.focused)) return focused;
-  ///     if (states.contains(MaterialState.hovered)) return hovered;
-  ///     if (states.contains(MaterialState.pressed)) return pressed;
-  ///     if (states.contains(MaterialState.selected)) return selected;
+  ///     if (states.contains(MaterialState.focused)) return input;
+  ///     if (states.contains(MaterialState.hovered)) return input;
+  ///     if (states.contains(MaterialState.pressed)) return input;
+  ///     if (states.contains(MaterialState.selected)) return input;
   ///
   ///     return null
   ///   })
   /// )
   /// ```
   NikuButton highlight(Color highlight) {
-    this._backgroundColor.update(
-        hovered: highlight,
-        focused: highlight,
-        pressed: highlight,
-        selected: highlight);
+    _backgroundColor.update(
+      hovered: highlight,
+      focused: highlight,
+      pressed: highlight,
+      selected: highlight,
+    );
 
     return this;
   }
@@ -942,7 +943,7 @@ class NikuButton {
   /// )
   /// ```
   NikuButton fg(Color base) {
-    this._foregroundColor.updateAll(base);
+    _foregroundColor.updateAll(base);
 
     return this;
   }
@@ -975,16 +976,16 @@ class NikuButton {
     Color? pressed,
     Color? selected,
   }) {
-    this._foregroundColor.update(
-          base: base,
-          disabled: disabled,
-          dragged: dragged,
-          error: error,
-          focused: focused,
-          hovered: hovered,
-          pressed: pressed,
-          selected: selected,
-        );
+    _foregroundColor.update(
+      base: base,
+      disabled: disabled,
+      dragged: dragged,
+      error: error,
+      focused: focused,
+      hovered: hovered,
+      pressed: pressed,
+      selected: selected,
+    );
 
     return this;
   }
@@ -1000,7 +1001,7 @@ class NikuButton {
   /// )
   /// ```
   NikuButton overlay(Color base) {
-    this._overlayColor.updateAll(base);
+    _overlayColor.updateAll(base);
 
     return this;
   }
@@ -1024,7 +1025,7 @@ class NikuButton {
   /// )
   /// ```
   NikuButton splash(Color base) {
-    this._overlayColor.updateAll(base);
+    _overlayColor.updateAll(base);
 
     return this;
   }
@@ -1057,16 +1058,16 @@ class NikuButton {
     Color? pressed,
     Color? selected,
   }) {
-    this._overlayColor.update(
-          base: base,
-          disabled: disabled,
-          dragged: dragged,
-          error: error,
-          focused: focused,
-          hovered: hovered,
-          pressed: pressed,
-          selected: selected,
-        );
+    _overlayColor.update(
+      base: base,
+      disabled: disabled,
+      dragged: dragged,
+      error: error,
+      focused: focused,
+      hovered: hovered,
+      pressed: pressed,
+      selected: selected,
+    );
 
     return this;
   }
@@ -1082,7 +1083,7 @@ class NikuButton {
   /// )
   /// ```
   NikuButton shadow(Color base) {
-    this._shadowColor.updateAll(base);
+    _shadowColor.updateAll(base);
 
     return this;
   }
@@ -1115,16 +1116,16 @@ class NikuButton {
     Color? pressed,
     Color? selected,
   }) {
-    this._shadowColor.update(
-          base: base,
-          disabled: disabled,
-          dragged: dragged,
-          error: error,
-          focused: focused,
-          hovered: hovered,
-          pressed: pressed,
-          selected: selected,
-        );
+    _shadowColor.update(
+      base: base,
+      disabled: disabled,
+      dragged: dragged,
+      error: error,
+      focused: focused,
+      hovered: hovered,
+      pressed: pressed,
+      selected: selected,
+    );
 
     return this;
   }
@@ -1157,16 +1158,16 @@ class NikuButton {
     double? pressed,
     double? selected,
   }) {
-    this._elevation.update(
-          base: base,
-          disabled: disabled,
-          dragged: dragged,
-          error: error,
-          focused: focused,
-          hovered: hovered,
-          pressed: pressed,
-          selected: selected,
-        );
+    _elevation.update(
+      base: base,
+      disabled: disabled,
+      dragged: dragged,
+      error: error,
+      focused: focused,
+      hovered: hovered,
+      pressed: pressed,
+      selected: selected,
+    );
 
     return this;
   }
@@ -1182,7 +1183,7 @@ class NikuButton {
   /// )
   /// ```
   NikuButton b(BorderSide input) {
-    this._side.updateAll(input);
+    _side.updateAll(input);
 
     return this;
   }
@@ -1215,64 +1216,64 @@ class NikuButton {
     BorderSide? pressed,
     BorderSide? selected,
   }) {
-    this._side.update(
-          base: base,
-          disabled: disabled,
-          dragged: dragged,
-          error: error,
-          focused: focused,
-          hovered: hovered,
-          pressed: pressed,
-          selected: selected,
-        );
+    _side.update(
+      base: base,
+      disabled: disabled,
+      dragged: dragged,
+      error: error,
+      focused: focused,
+      hovered: hovered,
+      pressed: pressed,
+      selected: selected,
+    );
 
     return this;
   }
 
   /// Apply styling to border width
   NikuButton bw(double width) {
-    this._side.update(
-          base: BorderSide(
-            color: this._side.base?.color ?? Colors.black12,
-            width: width,
-            style: this._side.base?.style ?? BorderStyle.solid,
-          ),
-          disabled: BorderSide(
-            color: this._side.disabled?.color ?? Colors.black12,
-            width: width,
-            style: this._side.disabled?.style ?? BorderStyle.solid,
-          ),
-          dragged: BorderSide(
-            color: this._side.dragged?.color ?? Colors.black12,
-            width: width,
-            style: this._side.dragged?.style ?? BorderStyle.solid,
-          ),
-          error: BorderSide(
-            color: this._side.error?.color ?? Colors.black12,
-            width: width,
-            style: this._side.error?.style ?? BorderStyle.solid,
-          ),
-          focused: BorderSide(
-            color: this._side.focused?.color ?? Colors.black12,
-            width: width,
-            style: this._side.focused?.style ?? BorderStyle.solid,
-          ),
-          hovered: BorderSide(
-            color: this._side.hovered?.color ?? Colors.black12,
-            width: width,
-            style: this._side.hovered?.style ?? BorderStyle.solid,
-          ),
-          pressed: BorderSide(
-            color: this._side.pressed?.color ?? Colors.black12,
-            width: width,
-            style: this._side.pressed?.style ?? BorderStyle.solid,
-          ),
-          selected: BorderSide(
-            color: this._side.selected?.color ?? Colors.black12,
-            width: width,
-            style: this._side.selected?.style ?? BorderStyle.solid,
-          ),
-        );
+    _side.update(
+      base: BorderSide(
+        color: _side._base?.color ?? Colors.black12,
+        width: width,
+        style: _side._base?.style ?? BorderStyle.solid,
+      ),
+      disabled: BorderSide(
+        color: _side._disabled?.color ?? Colors.black12,
+        width: width,
+        style: _side._disabled?.style ?? BorderStyle.solid,
+      ),
+      dragged: BorderSide(
+        color: _side._dragged?.color ?? Colors.black12,
+        width: width,
+        style: _side._dragged?.style ?? BorderStyle.solid,
+      ),
+      error: BorderSide(
+        color: _side._error?.color ?? Colors.black12,
+        width: width,
+        style: _side._error?.style ?? BorderStyle.solid,
+      ),
+      focused: BorderSide(
+        color: _side._focused?.color ?? Colors.black12,
+        width: width,
+        style: _side._focused?.style ?? BorderStyle.solid,
+      ),
+      hovered: BorderSide(
+        color: _side._hovered?.color ?? Colors.black12,
+        width: width,
+        style: _side._hovered?.style ?? BorderStyle.solid,
+      ),
+      pressed: BorderSide(
+        color: _side._pressed?.color ?? Colors.black12,
+        width: width,
+        style: _side._pressed?.style ?? BorderStyle.solid,
+      ),
+      selected: BorderSide(
+        color: _side._selected?.color ?? Colors.black12,
+        width: width,
+        style: _side._selected?.style ?? BorderStyle.solid,
+      ),
+    );
 
     return this;
   }
@@ -1288,96 +1289,96 @@ class NikuButton {
     double pressed = 1,
     double selected = 1,
   }) {
-    this._side.update(
-          base: BorderSide(
-            color: this._side.base?.color ?? Colors.black12,
-            width: base,
-            style: this._side.base?.style ?? BorderStyle.solid,
-          ),
-          disabled: BorderSide(
-            color: this._side.disabled?.color ?? Colors.black12,
-            width: disabled,
-            style: this._side.disabled?.style ?? BorderStyle.solid,
-          ),
-          dragged: BorderSide(
-            color: this._side.dragged?.color ?? Colors.black12,
-            width: dragged,
-            style: this._side.dragged?.style ?? BorderStyle.solid,
-          ),
-          error: BorderSide(
-            color: this._side.error?.color ?? Colors.black12,
-            width: error,
-            style: this._side.error?.style ?? BorderStyle.solid,
-          ),
-          focused: BorderSide(
-            color: this._side.focused?.color ?? Colors.black12,
-            width: focused,
-            style: this._side.focused?.style ?? BorderStyle.solid,
-          ),
-          hovered: BorderSide(
-            color: this._side.hovered?.color ?? Colors.black12,
-            width: hovered,
-            style: this._side.hovered?.style ?? BorderStyle.solid,
-          ),
-          pressed: BorderSide(
-            color: this._side.pressed?.color ?? Colors.black12,
-            width: pressed,
-            style: this._side.pressed?.style ?? BorderStyle.solid,
-          ),
-          selected: BorderSide(
-            color: this._side.selected?.color ?? Colors.black12,
-            width: selected,
-            style: this._side.selected?.style ?? BorderStyle.solid,
-          ),
-        );
+    _side.update(
+      base: BorderSide(
+        color: _side._base?.color ?? Colors.black12,
+        width: base,
+        style: _side._base?.style ?? BorderStyle.solid,
+      ),
+      disabled: BorderSide(
+        color: _side._disabled?.color ?? Colors.black12,
+        width: disabled,
+        style: _side._disabled?.style ?? BorderStyle.solid,
+      ),
+      dragged: BorderSide(
+        color: _side._dragged?.color ?? Colors.black12,
+        width: dragged,
+        style: _side._dragged?.style ?? BorderStyle.solid,
+      ),
+      error: BorderSide(
+        color: _side._error?.color ?? Colors.black12,
+        width: error,
+        style: _side._error?.style ?? BorderStyle.solid,
+      ),
+      focused: BorderSide(
+        color: _side._focused?.color ?? Colors.black12,
+        width: focused,
+        style: _side._focused?.style ?? BorderStyle.solid,
+      ),
+      hovered: BorderSide(
+        color: _side._hovered?.color ?? Colors.black12,
+        width: hovered,
+        style: _side._hovered?.style ?? BorderStyle.solid,
+      ),
+      pressed: BorderSide(
+        color: _side._pressed?.color ?? Colors.black12,
+        width: pressed,
+        style: _side._pressed?.style ?? BorderStyle.solid,
+      ),
+      selected: BorderSide(
+        color: _side._selected?.color ?? Colors.black12,
+        width: selected,
+        style: _side._selected?.style ?? BorderStyle.solid,
+      ),
+    );
 
     return this;
   }
 
   /// Apply styling to border color
   NikuButton bc(Color color) {
-    this._side.update(
-          base: BorderSide(
-            width: this._side.base?.width ?? 1,
-            color: color,
-            style: this._side.base?.style ?? BorderStyle.solid,
-          ),
-          disabled: BorderSide(
-            width: this._side.disabled?.width ?? 1,
-            color: color,
-            style: this._side.disabled?.style ?? BorderStyle.solid,
-          ),
-          dragged: BorderSide(
-            width: this._side.dragged?.width ?? 1,
-            color: color,
-            style: this._side.dragged?.style ?? BorderStyle.solid,
-          ),
-          error: BorderSide(
-            width: this._side.error?.width ?? 1,
-            color: color,
-            style: this._side.error?.style ?? BorderStyle.solid,
-          ),
-          focused: BorderSide(
-            width: this._side.focused?.width ?? 1,
-            color: color,
-            style: this._side.focused?.style ?? BorderStyle.solid,
-          ),
-          hovered: BorderSide(
-            width: this._side.hovered?.width ?? 1,
-            color: color,
-            style: this._side.hovered?.style ?? BorderStyle.solid,
-          ),
-          pressed: BorderSide(
-            width: this._side.pressed?.width ?? 1,
-            color: color,
-            style: this._side.pressed?.style ?? BorderStyle.solid,
-          ),
-          selected: BorderSide(
-            width: this._side.selected?.width ?? 1,
-            color: color,
-            style: this._side.selected?.style ?? BorderStyle.solid,
-          ),
-        );
+    _side.update(
+      base: BorderSide(
+        width: _side._base?.width ?? 1,
+        color: color,
+        style: _side._base?.style ?? BorderStyle.solid,
+      ),
+      disabled: BorderSide(
+        width: _side._disabled?.width ?? 1,
+        color: color,
+        style: _side._disabled?.style ?? BorderStyle.solid,
+      ),
+      dragged: BorderSide(
+        width: _side._dragged?.width ?? 1,
+        color: color,
+        style: _side._dragged?.style ?? BorderStyle.solid,
+      ),
+      error: BorderSide(
+        width: _side._error?.width ?? 1,
+        color: color,
+        style: _side._error?.style ?? BorderStyle.solid,
+      ),
+      focused: BorderSide(
+        width: _side._focused?.width ?? 1,
+        color: color,
+        style: _side._focused?.style ?? BorderStyle.solid,
+      ),
+      hovered: BorderSide(
+        width: _side._hovered?.width ?? 1,
+        color: color,
+        style: _side._hovered?.style ?? BorderStyle.solid,
+      ),
+      pressed: BorderSide(
+        width: _side._pressed?.width ?? 1,
+        color: color,
+        style: _side._pressed?.style ?? BorderStyle.solid,
+      ),
+      selected: BorderSide(
+        width: _side._selected?.width ?? 1,
+        color: color,
+        style: _side._selected?.style ?? BorderStyle.solid,
+      ),
+    );
 
     return this;
   }
@@ -1393,96 +1394,96 @@ class NikuButton {
     Color pressed = Colors.black12,
     Color selected = Colors.black12,
   }) {
-    this._side.update(
-          base: BorderSide(
-            width: this._side.base?.width ?? 1,
-            color: base,
-            style: this._side.base?.style ?? BorderStyle.solid,
-          ),
-          disabled: BorderSide(
-            width: this._side.disabled?.width ?? 1,
-            color: disabled,
-            style: this._side.disabled?.style ?? BorderStyle.solid,
-          ),
-          dragged: BorderSide(
-            width: this._side.dragged?.width ?? 1,
-            color: dragged,
-            style: this._side.dragged?.style ?? BorderStyle.solid,
-          ),
-          error: BorderSide(
-            width: this._side.error?.width ?? 1,
-            color: error,
-            style: this._side.error?.style ?? BorderStyle.solid,
-          ),
-          focused: BorderSide(
-            width: this._side.focused?.width ?? 1,
-            color: focused,
-            style: this._side.focused?.style ?? BorderStyle.solid,
-          ),
-          hovered: BorderSide(
-            width: this._side.hovered?.width ?? 1,
-            color: hovered,
-            style: this._side.hovered?.style ?? BorderStyle.solid,
-          ),
-          pressed: BorderSide(
-            width: this._side.pressed?.width ?? 1,
-            color: pressed,
-            style: this._side.pressed?.style ?? BorderStyle.solid,
-          ),
-          selected: BorderSide(
-            width: this._side.selected?.width ?? 1,
-            color: selected,
-            style: this._side.selected?.style ?? BorderStyle.solid,
-          ),
-        );
+    _side.update(
+      base: BorderSide(
+        width: _side._base?.width ?? 1,
+        color: base,
+        style: _side._base?.style ?? BorderStyle.solid,
+      ),
+      disabled: BorderSide(
+        width: _side._disabled?.width ?? 1,
+        color: disabled,
+        style: _side._disabled?.style ?? BorderStyle.solid,
+      ),
+      dragged: BorderSide(
+        width: _side._dragged?.width ?? 1,
+        color: dragged,
+        style: _side._dragged?.style ?? BorderStyle.solid,
+      ),
+      error: BorderSide(
+        width: _side._error?.width ?? 1,
+        color: error,
+        style: _side._error?.style ?? BorderStyle.solid,
+      ),
+      focused: BorderSide(
+        width: _side._focused?.width ?? 1,
+        color: focused,
+        style: _side._focused?.style ?? BorderStyle.solid,
+      ),
+      hovered: BorderSide(
+        width: _side._hovered?.width ?? 1,
+        color: hovered,
+        style: _side._hovered?.style ?? BorderStyle.solid,
+      ),
+      pressed: BorderSide(
+        width: _side._pressed?.width ?? 1,
+        color: pressed,
+        style: _side._pressed?.style ?? BorderStyle.solid,
+      ),
+      selected: BorderSide(
+        width: _side._selected?.width ?? 1,
+        color: selected,
+        style: _side._selected?.style ?? BorderStyle.solid,
+      ),
+    );
 
     return this;
   }
 
   /// Apply [BorderStyle] to border
   NikuButton bs(BorderStyle style) {
-    this._side.update(
-          base: BorderSide(
-            width: this._side.base?.width ?? 1,
-            style: style,
-            color: this._side.base?.color ?? Colors.black12,
-          ),
-          disabled: BorderSide(
-            width: this._side.disabled?.width ?? 1,
-            style: style,
-            color: this._side.disabled?.color ?? Colors.black12,
-          ),
-          dragged: BorderSide(
-            width: this._side.dragged?.width ?? 1,
-            style: style,
-            color: this._side.dragged?.color ?? Colors.black12,
-          ),
-          error: BorderSide(
-            width: this._side.error?.width ?? 1,
-            style: style,
-            color: this._side.error?.color ?? Colors.black12,
-          ),
-          focused: BorderSide(
-            width: this._side.focused?.width ?? 1,
-            style: style,
-            color: this._side.focused?.color ?? Colors.black12,
-          ),
-          hovered: BorderSide(
-            width: this._side.hovered?.width ?? 1,
-            style: style,
-            color: this._side.hovered?.color ?? Colors.black12,
-          ),
-          pressed: BorderSide(
-            width: this._side.pressed?.width ?? 1,
-            style: style,
-            color: this._side.pressed?.color ?? Colors.black12,
-          ),
-          selected: BorderSide(
-            width: this._side.selected?.width ?? 1,
-            style: style,
-            color: this._side.selected?.color ?? Colors.black12,
-          ),
-        );
+    _side.update(
+      base: BorderSide(
+        width: _side._base?.width ?? 1,
+        style: style,
+        color: _side._base?.color ?? Colors.black12,
+      ),
+      disabled: BorderSide(
+        width: _side._disabled?.width ?? 1,
+        style: style,
+        color: _side._disabled?.color ?? Colors.black12,
+      ),
+      dragged: BorderSide(
+        width: _side._dragged?.width ?? 1,
+        style: style,
+        color: _side._dragged?.color ?? Colors.black12,
+      ),
+      error: BorderSide(
+        width: _side._error?.width ?? 1,
+        style: style,
+        color: _side._error?.color ?? Colors.black12,
+      ),
+      focused: BorderSide(
+        width: _side._focused?.width ?? 1,
+        style: style,
+        color: _side._focused?.color ?? Colors.black12,
+      ),
+      hovered: BorderSide(
+        width: _side._hovered?.width ?? 1,
+        style: style,
+        color: _side._hovered?.color ?? Colors.black12,
+      ),
+      pressed: BorderSide(
+        width: _side._pressed?.width ?? 1,
+        style: style,
+        color: _side._pressed?.color ?? Colors.black12,
+      ),
+      selected: BorderSide(
+        width: _side._selected?.width ?? 1,
+        style: style,
+        color: _side._selected?.color ?? Colors.black12,
+      ),
+    );
 
     return this;
   }
@@ -1498,48 +1499,48 @@ class NikuButton {
     BorderStyle pressed = BorderStyle.solid,
     BorderStyle selected = BorderStyle.solid,
   }) {
-    this._side.update(
-          base: BorderSide(
-            width: this._side.base?.width ?? 1,
-            style: base,
-            color: this._side.base?.color ?? Colors.black12,
-          ),
-          disabled: BorderSide(
-            width: this._side.disabled?.width ?? 1,
-            style: disabled,
-            color: this._side.disabled?.color ?? Colors.black12,
-          ),
-          dragged: BorderSide(
-            width: this._side.dragged?.width ?? 1,
-            style: dragged,
-            color: this._side.dragged?.color ?? Colors.black12,
-          ),
-          error: BorderSide(
-            width: this._side.error?.width ?? 1,
-            style: error,
-            color: this._side.error?.color ?? Colors.black12,
-          ),
-          focused: BorderSide(
-            width: this._side.focused?.width ?? 1,
-            style: focused,
-            color: this._side.focused?.color ?? Colors.black12,
-          ),
-          hovered: BorderSide(
-            width: this._side.hovered?.width ?? 1,
-            style: hovered,
-            color: this._side.hovered?.color ?? Colors.black12,
-          ),
-          pressed: BorderSide(
-            width: this._side.pressed?.width ?? 1,
-            style: pressed,
-            color: this._side.pressed?.color ?? Colors.black12,
-          ),
-          selected: BorderSide(
-            width: this._side.selected?.width ?? 1,
-            style: selected,
-            color: this._side.selected?.color ?? Colors.black12,
-          ),
-        );
+    _side.update(
+      base: BorderSide(
+        width: _side._base?.width ?? 1,
+        style: base,
+        color: _side._base?.color ?? Colors.black12,
+      ),
+      disabled: BorderSide(
+        width: _side._disabled?.width ?? 1,
+        style: disabled,
+        color: _side._disabled?.color ?? Colors.black12,
+      ),
+      dragged: BorderSide(
+        width: _side._dragged?.width ?? 1,
+        style: dragged,
+        color: _side._dragged?.color ?? Colors.black12,
+      ),
+      error: BorderSide(
+        width: _side._error?.width ?? 1,
+        style: error,
+        color: _side._error?.color ?? Colors.black12,
+      ),
+      focused: BorderSide(
+        width: _side._focused?.width ?? 1,
+        style: focused,
+        color: _side._focused?.color ?? Colors.black12,
+      ),
+      hovered: BorderSide(
+        width: _side._hovered?.width ?? 1,
+        style: hovered,
+        color: _side._hovered?.color ?? Colors.black12,
+      ),
+      pressed: BorderSide(
+        width: _side._pressed?.width ?? 1,
+        style: pressed,
+        color: _side._pressed?.color ?? Colors.black12,
+      ),
+      selected: BorderSide(
+        width: _side._selected?.width ?? 1,
+        style: selected,
+        color: _side._selected?.color ?? Colors.black12,
+      ),
+    );
 
     return this;
   }
@@ -1555,7 +1556,7 @@ class NikuButton {
   /// )
   /// ```
   NikuButton s(RoundedRectangleBorder input) {
-    this._shape.updateAll(input);
+    _shape.updateAll(input);
 
     return this;
   }
@@ -1588,16 +1589,16 @@ class NikuButton {
     RoundedRectangleBorder? pressed,
     RoundedRectangleBorder? selected,
   }) {
-    this._shape.update(
-          base: base,
-          disabled: disabled,
-          dragged: dragged,
-          error: error,
-          focused: focused,
-          hovered: hovered,
-          pressed: pressed,
-          selected: selected,
-        );
+    _shape.update(
+      base: base,
+      disabled: disabled,
+      dragged: dragged,
+      error: error,
+      focused: focused,
+      hovered: hovered,
+      pressed: pressed,
+      selected: selected,
+    );
 
     return this;
   }
@@ -1630,16 +1631,16 @@ class NikuButton {
     MouseCursor? pressed,
     MouseCursor? selected,
   }) {
-    this._mouseCursor.update(
-          base: base,
-          disabled: disabled,
-          dragged: dragged,
-          error: error,
-          focused: focused,
-          hovered: hovered,
-          pressed: pressed,
-          selected: selected,
-        );
+    getMouseCursor.update(
+      base: base,
+      disabled: disabled,
+      dragged: dragged,
+      error: error,
+      focused: focused,
+      hovered: hovered,
+      pressed: pressed,
+      selected: selected,
+    );
 
     return this;
   }
@@ -1672,16 +1673,16 @@ class NikuButton {
     MouseCursor? pressed,
     MouseCursor? selected,
   }) {
-    this._mouseCursor.update(
-          base: base,
-          disabled: disabled,
-          dragged: dragged,
-          error: error,
-          focused: focused,
-          hovered: hovered,
-          pressed: pressed,
-          selected: selected,
-        );
+    getMouseCursor.update(
+      base: base,
+      disabled: disabled,
+      dragged: dragged,
+      error: error,
+      focused: focused,
+      hovered: hovered,
+      pressed: pressed,
+      selected: selected,
+    );
 
     return this;
   }
@@ -1695,7 +1696,7 @@ class NikuButton {
   /// )
   /// ```
   NikuButton clip(Clip clip) {
-    this._clipBehavior = clip;
+    _clipBehavior = clip;
 
     return this;
   }
@@ -1709,7 +1710,7 @@ class NikuButton {
   /// )
   /// ```
   NikuButton autofocus(bool autofocus) {
-    this._autofocus = autofocus;
+    _autofocus = autofocus;
 
     return this;
   }
@@ -1719,13 +1720,13 @@ class NikuButton {
   /// Equivalent to
   /// ```
   /// TextButton(
-  ///   minimumSize: MaterialStateProperty.resolveWith<OutlinedBorder>((states) {  ///
+  ///   minimumSize: MaterialStateProperty.resolveWith<T>((states) {
   ///     return base;
   ///   });
   /// )
   /// ```
   NikuButton minSize(Size input) {
-    this._minimumSize.updateAll(input);
+    getMinimumSize.updateAll(input);
 
     return this;
   }
@@ -1758,16 +1759,16 @@ class NikuButton {
     Size? pressed,
     Size? selected,
   ) {
-    this._minimumSize.update(
-          base: base,
-          disabled: disabled,
-          dragged: dragged,
-          error: error,
-          focused: focused,
-          hovered: hovered,
-          pressed: pressed,
-          selected: selected,
-        );
+    getMinimumSize.update(
+      base: base,
+      disabled: disabled,
+      dragged: dragged,
+      error: error,
+      focused: focused,
+      hovered: hovered,
+      pressed: pressed,
+      selected: selected,
+    );
 
     return this;
   }
@@ -1781,7 +1782,7 @@ class NikuButton {
   /// )
   /// ```
   NikuButton animationDuration(Duration duration) {
-    this._animationDuration = duration;
+    _animationDuration = duration;
 
     return this;
   }
@@ -1795,7 +1796,7 @@ class NikuButton {
   /// )
   /// ```
   NikuButton duration(Duration duration) {
-    this._animationDuration = duration;
+    _animationDuration = duration;
 
     return this;
   }
@@ -1809,7 +1810,7 @@ class NikuButton {
   /// )
   /// ```
   NikuButton immediate() {
-    this._animationDuration = Duration.zero;
+    _animationDuration = Duration.zero;
 
     return this;
   }
@@ -1823,20 +1824,21 @@ class NikuButton {
   /// )
   /// ```
   NikuButton focusNode(FocusNode focusNode) {
-    this._focusNode = focusNode;
+    _focusNode = focusNode;
 
     return this;
   }
 
   /// Defines the visual density of user interface components.
+  ///
   /// Equivalent to
   /// ```
   /// TextButton(
   ///   visualDensity: input
   /// )
   /// ```
-  NikuButton visualDensity(FocusNode focusNode) {
-    this._focusNode = focusNode;
+  NikuButton visualDensity(VisualDensity visualDensity) {
+    _visualDensity = visualDensity;
 
     return this;
   }
@@ -1850,7 +1852,7 @@ class NikuButton {
   /// )
   /// ```
   NikuButton tapTargetSize(MaterialTapTargetSize tapTargetSize) {
-    this._tapTargetSize = tapTargetSize;
+    _tapTargetSize = tapTargetSize;
 
     return this;
   }
@@ -1866,11 +1868,11 @@ class NikuButton {
   /// );
   /// ```
   NikuButton rounded([double radius = 999999]) {
-    this._shape.updateAll(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(radius),
-          ),
-        );
+    _shape.updateAll(
+      RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(radius),
+      ),
+    );
 
     return this;
   }
@@ -1884,7 +1886,450 @@ class NikuButton {
   /// );
   /// ```
   NikuButton label(Widget label) {
-    this._label = label;
+    _label = label;
+
+    return this;
+  }
+
+  /// Set color of text
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(color: input)
+  /// ```
+  NikuButton textColor({
+    Color? base,
+    Color? disabled,
+    Color? dragged,
+    Color? error,
+    Color? focused,
+    Color? hovered,
+    Color? pressed,
+    Color? selected,
+  }) {
+    _text_color.update(
+      base: base,
+      disabled: disabled,
+      dragged: dragged,
+      error: error,
+      focused: focused,
+      hovered: hovered,
+      pressed: pressed,
+      selected: selected,
+    );
+
+    return this;
+  }
+
+  /// Set color of text
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(color: input)
+  /// ```
+  NikuButton textColors(Color color) {
+    _text_color.update(
+      base: color,
+      disabled: color,
+      dragged: color,
+      error: color,
+      focused: color,
+      hovered: color,
+      pressed: color,
+      selected: color,
+    );
+
+    return this;
+  }
+
+  /// Set background color of text
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(backgroundColor: input)
+  /// ```
+  NikuButton textBackgroundColor(Color backgroundColor) {
+    _text_backgroundColor = backgroundColor;
+
+    return this;
+  }
+
+  /// Set background color of text
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(backgroundColor: input)
+  /// ```
+  NikuButton textBg(Color backgroundColor) {
+    _text_backgroundColor = backgroundColor;
+
+    return this;
+  }
+
+  /// Set size of text
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(fontSize: input)
+  /// ```
+  NikuButton fontSize(double fontSize) {
+    _text_fontSize = fontSize;
+
+    return this;
+  }
+
+  /// The thickness of the glyphs used to draw the text
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(fontSize: input)
+  /// ```
+  NikuButton fontWeight(FontWeight fontWeight) {
+    _text_fontWeight = fontWeight;
+
+    return this;
+  }
+
+  /// Set font to bold, using [FontWeight.bold]
+  ///
+  /// The thickness of the glyphs used to draw the text
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(FontWeight: FontWeight.bold)
+  /// ```
+  NikuButton bold() {
+    _text_fontWeight = FontWeight.bold;
+
+    return this;
+  }
+
+  /// Use font weight of 100
+  ///
+  /// The thickness of the glyphs used to draw the text
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(FontWeight: FontWeight.100)
+  /// ```
+  NikuButton w100() {
+    _text_fontWeight = FontWeight.w100;
+
+    return this;
+  }
+
+  /// Use font weight of 200
+  ///
+  /// The thickness of the glyphs used to draw the text
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(FontWeight: FontWeight.200)
+  /// ```
+  NikuButton w200() {
+    _text_fontWeight = FontWeight.w200;
+
+    return this;
+  }
+
+  /// Use font weight of 300
+  ///
+  /// The thickness of the glyphs used to draw the text
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(FontWeight: FontWeight.300)
+  /// ```
+  NikuButton w300() {
+    _text_fontWeight = FontWeight.w300;
+
+    return this;
+  }
+
+  /// Use font weight of 400
+  ///
+  /// The thickness of the glyphs used to draw the text
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(FontWeight: FontWeight.400)
+  /// ```
+  NikuButton w400() {
+    _text_fontWeight = FontWeight.w400;
+
+    return this;
+  }
+
+  /// Use font weight of 500
+  ///
+  /// The thickness of the glyphs used to draw the text
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(FontWeight: FontWeight.500)
+  /// ```
+  NikuButton w500() {
+    _text_fontWeight = FontWeight.w500;
+
+    return this;
+  }
+
+  /// Use font weight of 600
+  ///
+  /// The thickness of the glyphs used to draw the text
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(FontWeight: FontWeight.600)
+  /// ```
+  NikuButton w600() {
+    _text_fontWeight = FontWeight.w600;
+
+    return this;
+  }
+
+  /// Use font weight of 700
+  ///
+  /// The thickness of the glyphs used to draw the text
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(FontWeight: FontWeight.700)
+  /// ```
+  NikuButton w700() {
+    _text_fontWeight = FontWeight.w700;
+
+    return this;
+  }
+
+  /// Use font weight of 800
+  ///
+  /// The thickness of the glyphs used to draw the text
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(FontWeight: FontWeight.800)
+  /// ```
+  NikuButton w800() {
+    _text_fontWeight = FontWeight.w800;
+
+    return this;
+  }
+
+  /// Use font weight of 900
+  ///
+  /// The thickness of the glyphs used to draw the text
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(fontWeight: FontWeight.900)
+  /// ```
+  NikuButton w900() {
+    _text_fontWeight = FontWeight.w900;
+
+    return this;
+  }
+
+  /// Whether to slant the glyphs in the font
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(fontStyle: input)
+  /// ```
+  NikuButton fontStyle(FontStyle fontStyle) {
+    _text_fontStyle = fontStyle;
+
+    return this;
+  }
+
+  /// Whether to slant the glyphs in the font
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(fontStyle: FontStyle.italic)
+  /// ```
+  NikuButton italic() {
+    _text_fontStyle = FontStyle.italic;
+
+    return this;
+  }
+
+  /// Spacing for each letter
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(letterSpacing: input)
+  /// ```
+  NikuButton letterSpacing(double letterSpacing) {
+    _text_letterSpacing = letterSpacing;
+
+    return this;
+  }
+
+  /// Spacing for each word
+  ///
+  /// Equivalent to
+  /// ```
+  /// Text(wordSpacing: input)
+  /// ```
+  NikuButton wordSpacing(double wordSpacing) {
+    _text_wordSpacing = wordSpacing;
+
+    return this;
+  }
+
+  /// Fixed height for text
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(height: input)
+  /// ```
+  NikuButton textHeight(double height) {
+    _text_height = height;
+
+    return this;
+  }
+
+  /// - forground - The paint drawn as a foreground for the text.
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(foreground: input)
+  /// ```
+  NikuButton textForeground(Paint foreground) {
+    _text_foreground = foreground;
+
+    return this;
+  }
+
+  /// - background - The paint drawn as a background for the text.
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(background: input)
+  /// ```
+  NikuButton textBackground(Paint foreground) {
+    _text_foreground = foreground;
+
+    return this;
+  }
+
+  /// Collection of text's shadow
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(shadows: input)
+  /// ```
+  NikuButton textShadows(List<Shadow> shadows) {
+    _text_shadows = shadows;
+
+    return this;
+  }
+
+  /// A feature tag and value that affect the selection of glyphs in a font
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(fontFeatures: input)
+  /// ```
+  NikuButton fontFeatures(List<FontFeature> fontFeatures) {
+    _text_fontFeatures = fontFeatures;
+
+    return this;
+  }
+
+  /// Text decoration
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(decoration: input)
+  /// ```
+  NikuButton textDecoration(TextDecoration textDecoration) {
+    _text_textDecoration = textDecoration;
+
+    return this;
+  }
+
+  /// Color of text decoration
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(decorationColor: input)
+  /// ```
+  NikuButton textDecorationColor(Color textDecorationColor) {
+    _text_textDecorationColor = textDecorationColor;
+
+    return this;
+  }
+
+  /// Thickness of text decoration
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(decorationThickness: input)
+  /// ```
+  NikuButton textDecorationThickness(double textDecorationThickness) {
+    _text_textDecorationThickness = textDecorationThickness;
+
+    return this;
+  }
+
+  /// Apply font to text
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(fontFamily: input)
+  /// ```
+  NikuButton fontFamily(String fontFamily) {
+    _text_fontFamily = fontFamily;
+
+    return this;
+  }
+
+  /// Apply font to text
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(fontFamilyFallback: input)
+  /// ```
+  NikuButton fontFamilyFallback(List<String> fontFamily) {
+    _text_fontFamilyFallback = fontFamily;
+
+    return this;
+  }
+
+  /// The common baseline that should be aligned between this text span and its parent text span, or, for the root text spans, with the line box.
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(textBaseline: input)
+  /// ```
+  NikuButton textBaseline(TextBaseline textBaseline) {
+    _text_textBaseline = textBaseline;
+
+    return this;
+  }
+
+  /// Using [TextBaseline.alphabetic]
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(textBaseline: Textbaseline.alphabetic)
+  /// ```
+  NikuButton alphabetic() {
+    _text_textBaseline = TextBaseline.alphabetic;
+
+    return this;
+  }
+
+  /// Using [TextBaseline.ideographic]
+  ///
+  /// Equivalent to
+  /// ```
+  /// TextStyle(textBaseline: Textbaseline.ideographic)
+  /// ```
+  NikuButton ideographic() {
+    _text_textBaseline = TextBaseline.ideographic;
 
     return this;
   }
@@ -1905,54 +2350,78 @@ class NikuButton {
   ///     NikuButton(Text("Applied Style"))
   ///       .apply(padding) // Will have padding
   ///       .apply(blueBackground) // Will have blue background
-  ///       .rounded(8)
-  ///       .build() // Will combine all style
+  ///       .rounded(8) // Will have border radius of 8px
   ///   )
   /// }
   /// ```
-  NikuButton apply(NikuButton instance) => this.set(
-        onPressed: instance._onPressed ?? this._onPressed,
-        onLongPressed: instance._onLongPressed ?? this._onLongPressed,
-        focusNode: instance._focusNode ?? this._focusNode,
+  NikuButton apply(NikuButton instance) => set(
+        onPressed: instance._onPressed ?? _onPressed,
+        onLongPressed: instance._onLongPressed ?? _onLongPressed,
+        focusNode: instance._focusNode ?? _focusNode,
         autofocus: instance._autofocus,
         clipBehavior: instance._clipBehavior,
         backgroundColor: instance._backgroundColor.init
-            ? this._backgroundColor
+            ? _backgroundColor
             : instance._backgroundColor,
         foregroundColor: instance._foregroundColor.init
-            ? this._foregroundColor
+            ? _foregroundColor
             : instance._foregroundColor,
         overlayColor: instance._overlayColor.init
-            ? this._overlayColor
+            ? _overlayColor
             : instance._overlayColor,
-        shadowColor: instance._shadowColor.init
-            ? this._shadowColor
-            : instance._shadowColor,
-        elevation:
-            instance._elevation.init ? this._elevation : instance._elevation,
-        pt: instance._pt == 0 ? this._pt : instance._pt,
-        pb: instance._pb == 0 ? this._pb : instance._pb,
-        pl: instance._pl == 0 ? this._pl : instance._pl,
-        pr: instance._pr == 0 ? this._pr : instance._pr,
-        mt: instance._mt == 0 ? this._mt : instance._mt,
-        mb: instance._mb == 0 ? this._mb : instance._mb,
-        ml: instance._ml == 0 ? this._ml : instance._ml,
-        mr: instance._mr == 0 ? this._mr : instance._mr,
-        minimumSize: instance._minimumSize.init
-            ? this._minimumSize
-            : instance._minimumSize,
-        side: instance._side.init ? this._side : instance._side,
-        shape: instance._shape.init ? this._shape : instance._shape,
-        mouseCursor: instance._mouseCursor.init
-            ? this._mouseCursor
-            : instance._mouseCursor,
-        visualDensity: instance._visualDensity ?? this._visualDensity,
-        tapTargetSize: instance._tapTargetSize ?? this._tapTargetSize,
-        animationDuration:
-            instance._animationDuration ?? this._animationDuration,
+        shadowColor:
+            instance._shadowColor.init ? _shadowColor : instance._shadowColor,
+        elevation: instance._elevation.init ? _elevation : instance._elevation,
+        pt: instance._pt == 0 ? _pt : instance._pt,
+        pb: instance._pb == 0 ? _pb : instance._pb,
+        pl: instance._pl == 0 ? _pl : instance._pl,
+        pr: instance._pr == 0 ? _pr : instance._pr,
+        mt: instance.getMt == 0 ? getMt : instance.getMt,
+        mb: instance.getMb == 0 ? getMb : instance.getMb,
+        ml: instance.getMl == 0 ? getMl : instance.getMl,
+        mr: instance.getMr == 0 ? getMr : instance.getMr,
+        minimumSize: instance.getMinimumSize.init
+            ? getMinimumSize
+            : instance.getMinimumSize,
+        side: instance._side.init ? _side : instance._side,
+        shape: instance._shape.init ? _shape : instance._shape,
+        mouseCursor: instance.getMouseCursor.init
+            ? getMouseCursor
+            : instance.getMouseCursor,
+        visualDensity: instance._visualDensity ?? _visualDensity,
+        tapTargetSize: instance._tapTargetSize ?? _tapTargetSize,
+        animationDuration: instance._animationDuration ?? _animationDuration,
         enableFeedback: instance._enableFeedback,
-        alignment: instance._alignment ?? this._alignment,
-        label: instance._label ?? this._label,
+        alignment: instance._alignment ?? _alignment,
+        label: instance._label ?? _label,
+        text_color:
+            instance._text_color.init ? _text_color : instance._text_color,
+        text_backgroundColor:
+            instance._text_backgroundColor ?? instance._text_backgroundColor,
+        text_fontSize: instance._text_fontSize ?? instance._text_fontSize,
+        text_fontWeight: instance._text_fontWeight ?? instance._text_fontWeight,
+        text_fontStyle: instance._text_fontStyle ?? instance._text_fontStyle,
+        text_letterSpacing:
+            instance._text_letterSpacing ?? instance._text_letterSpacing,
+        text_wordSpacing:
+            instance._text_wordSpacing ?? instance._text_wordSpacing,
+        text_height: instance._text_height ?? instance._text_height,
+        text_foreground: instance._text_foreground ?? instance._text_foreground,
+        text_background: instance._text_background ?? instance._text_background,
+        text_shadows: instance._text_shadows ?? instance._text_shadows,
+        text_fontFeatures:
+            instance._text_fontFeatures ?? instance._text_fontFeatures,
+        text_textDecoration:
+            instance._text_textDecoration ?? instance._text_textDecoration,
+        text_textDecorationColor: instance._text_textDecorationColor ??
+            instance._text_textDecorationColor,
+        text_textDecorationThickness: instance._text_textDecorationThickness ??
+            instance._text_textDecorationThickness,
+        text_fontFamily: instance._text_fontFamily ?? instance._text_fontFamily,
+        text_fontFamilyFallback: instance._text_fontFamilyFallback ??
+            instance._text_fontFamilyFallback,
+        text_textBaseline:
+            instance._text_textBaseline ?? instance._text_textBaseline,
       );
 
   /// Apply styles and build as [TextButton]
@@ -1970,386 +2439,164 @@ class NikuButton {
   ///       .px(40)
   ///       .py(20)
   ///       .bg(Colors.blue)
-  ///       .build() // Colelct all style and build
   ///   )
   /// }
   /// ```
-  Widget build({Key? key}) => this.textButton(key: key);
+  @override
+  Widget build(BuildContext context) {
+    final composeTextStyle = ({
+      Color? color,
+    }) =>
+        TextStyle(
+          color: color,
+          backgroundColor: _text_backgroundColor,
+          fontSize: _text_fontSize,
+          fontWeight: _text_fontWeight,
+          fontStyle: _text_fontStyle,
+          letterSpacing: _text_letterSpacing,
+          wordSpacing: _text_wordSpacing,
+          height: _text_height,
+          foreground: _text_foreground,
+          background: _text_background,
+          shadows: _text_shadows,
+          fontFeatures: _text_fontFeatures,
+          decoration: _text_textDecoration,
+          decorationColor: _text_textDecorationColor,
+          decorationThickness: _text_textDecorationThickness,
+          fontFamily: _text_fontFamily,
+          fontFamilyFallback: _text_fontFamilyFallback,
+          textBaseline: _text_textBaseline,
+        );
 
-  /// Apply styles and build as [TextButton]
-  ///
-  /// Equivalent to
-  /// ```
-  /// TextButton()
-  /// ```
-  ///
-  /// Example usage:
-  /// ```
-  /// build(context) {
-  ///   return (
-  ///     NikuButton(Text("Applied Style"))
-  ///       .px(40)
-  ///       .py(20)
-  ///       .bg(Colors.blue)
-  ///       .textButton() // Colelct all style and build
-  ///   )
-  /// }
-  /// ```
-  Widget textButton({Key? key}) => Container(
-        margin: EdgeInsets.only(
-          top: this._mt,
-          left: this._ml,
-          bottom: this._mb,
-          right: this._mr,
+    final buttonStyle = ButtonStyle(
+      textStyle: MaterialStateProperty.resolveWith<TextStyle>((states) {
+        if (states.contains(MaterialState.disabled))
+          return composeTextStyle(color: _text_color._disabled);
+        if (states.contains(MaterialState.dragged))
+          return composeTextStyle(color: _text_color._dragged);
+        if (states.contains(MaterialState.error))
+          return composeTextStyle(color: _text_color._error);
+        if (states.contains(MaterialState.focused))
+          return composeTextStyle(color: _text_color._focused);
+        if (states.contains(MaterialState.hovered))
+          return composeTextStyle(color: _text_color._hovered);
+        if (states.contains(MaterialState.pressed))
+          return composeTextStyle(color: _text_color._pressed);
+        if (states.contains(MaterialState.selected))
+          return composeTextStyle(color: _text_color._selected);
+
+        return composeTextStyle(color: _text_color._base);
+      }),
+      padding: MaterialStateProperty.resolveWith<EdgeInsetsGeometry>(
+        (_) => EdgeInsets.only(
+          top: _pt,
+          left: _pl,
+          bottom: _pb,
+          right: _pr,
         ),
-        child: TextButton(
-          child: this.child,
-          onPressed: this._onPressed,
-          onLongPress: this._onLongPressed,
-          focusNode: this._focusNode,
-          autofocus: this._autofocus,
-          clipBehavior: this._clipBehavior,
-          style: ButtonStyle(
-            padding: MaterialStateProperty.resolveWith<EdgeInsetsGeometry>(
-              (_) => EdgeInsets.only(
-                top: this._pt,
-                left: this._pl,
-                bottom: this._pb,
-                right: this._pr,
-              ),
-            ),
-            backgroundColor:
-                _composeMaterialState<Color>(this._backgroundColor),
-            foregroundColor:
-                _composeMaterialState<Color>(this._foregroundColor),
-            overlayColor: _composeMaterialState<Color>(this._overlayColor),
-            shadowColor: _composeMaterialState<Color>(this._shadowColor),
-            elevation: _composeMaterialState<double>(this._elevation),
-            minimumSize: _composeMaterialState<Size>(this._minimumSize),
-            side: _composeMaterialState<BorderSide>(this._side),
-            shape: _composeMaterialState<OutlinedBorder>(this._shape),
-            mouseCursor: _composeMaterialState<MouseCursor>(this._mouseCursor),
-            visualDensity: this._visualDensity,
-            tapTargetSize: this._tapTargetSize,
-            animationDuration: this._animationDuration,
-            enableFeedback: this._enableFeedback,
-            alignment: this._alignment,
-          ),
+      ),
+      backgroundColor: _composeMaterialState<Color>(_backgroundColor),
+      foregroundColor: _composeMaterialState<Color>(_foregroundColor),
+      overlayColor: _composeMaterialState<Color>(_overlayColor),
+      shadowColor: _composeMaterialState<Color>(_shadowColor),
+      elevation: _composeMaterialState<double>(_elevation),
+      minimumSize: _composeMaterialState<Size>(getMinimumSize),
+      side: _composeMaterialState<BorderSide>(_side),
+      shape: _composeMaterialState<OutlinedBorder>(_shape),
+      mouseCursor: _composeMaterialState<MouseCursor>(getMouseCursor),
+      visualDensity: _visualDensity,
+      tapTargetSize: _tapTargetSize,
+      animationDuration: _animationDuration,
+      enableFeedback: _enableFeedback,
+      alignment: _alignment,
+    );
+
+    if (type == NikuButtonType.Elevated)
+      return internalBuild(
+        ElevatedButton(
+          child: child,
+          key: key,
+          onPressed: _onPressed,
+          onLongPress: _onLongPressed,
+          focusNode: _focusNode,
+          autofocus: _autofocus,
+          clipBehavior: _clipBehavior,
+          style: buttonStyle,
         ),
       );
 
-  /// Apply styles and build as [ElevatedButton]
-  ///
-  /// Equivalent to
-  /// ```
-  /// ElevatedButton()
-  /// ```
-  ///
-  /// Example usage:
-  /// ```
-  /// build(context) {
-  ///   return (
-  ///     NikuButton(Text("Applied Style"))
-  ///       .px(40)
-  ///       .py(20)
-  ///       .bg(Colors.blue)
-  ///       .elevated() // Colelct all style and build
-  ///   )
-  /// }
-  /// ```
-  Widget elevated({Key? key}) => Container(
-        margin: EdgeInsets.only(
-          top: this._mt,
-          left: this._ml,
-          bottom: this._mb,
-          right: this._mr,
-        ),
-        child: ElevatedButton(
-          child: this.child,
-          onPressed: this._onPressed,
-          onLongPress: this._onLongPressed,
-          focusNode: this._focusNode,
-          autofocus: this._autofocus,
-          clipBehavior: this._clipBehavior,
-          style: ButtonStyle(
-            padding: MaterialStateProperty.resolveWith<EdgeInsetsGeometry>(
-              (_) => EdgeInsets.only(
-                top: this._pt,
-                left: this._pl,
-                bottom: this._pb,
-                right: this._pr,
-              ),
-            ),
-            backgroundColor:
-                _composeMaterialState<Color>(this._backgroundColor),
-            foregroundColor:
-                _composeMaterialState<Color>(this._foregroundColor),
-            overlayColor: _composeMaterialState<Color>(this._overlayColor),
-            shadowColor: _composeMaterialState<Color>(this._shadowColor),
-            elevation: _composeMaterialState<double>(this._elevation),
-            minimumSize: _composeMaterialState<Size>(this._minimumSize),
-            side: _composeMaterialState<BorderSide>(this._side),
-            shape: _composeMaterialState<OutlinedBorder>(this._shape),
-            mouseCursor: _composeMaterialState<MouseCursor>(this._mouseCursor),
-            visualDensity: this._visualDensity,
-            tapTargetSize: this._tapTargetSize,
-            animationDuration: this._animationDuration,
-            enableFeedback: this._enableFeedback,
-            alignment: this._alignment,
-          ),
+    if (type == NikuButtonType.Outlined)
+      return internalBuild(
+        OutlinedButton(
+          child: child,
+          key: key,
+          onPressed: _onPressed,
+          onLongPress: _onLongPressed,
+          focusNode: _focusNode,
+          autofocus: _autofocus,
+          clipBehavior: _clipBehavior,
+          style: buttonStyle,
         ),
       );
 
-  /// Apply styles and build as [OutlinedButton]
-  ///
-  /// Equivalent to
-  /// ```
-  /// OutlinedButton()
-  /// ```
-  ///
-  /// Example usage:
-  /// ```
-  /// build(context) {
-  ///   return (
-  ///     NikuButton(Text("Applied Style"))
-  ///       .px(40)
-  ///       .py(20)
-  ///       .bg(Colors.blue)
-  ///       .outlined() // Colelct all style and build
-  ///   )
-  /// }
-  /// ```
-  Widget outlined({Key? key}) => Container(
-        margin: EdgeInsets.only(
-          top: this._mt,
-          left: this._ml,
-          bottom: this._mb,
-          right: this._mr,
-        ),
-        child: OutlinedButton(
-          child: this.child,
-          onPressed: this._onPressed,
-          onLongPress: this._onLongPressed,
-          focusNode: this._focusNode,
-          autofocus: this._autofocus,
-          clipBehavior: this._clipBehavior,
-          style: ButtonStyle(
-            padding: MaterialStateProperty.resolveWith<EdgeInsetsGeometry>(
-              (_) => EdgeInsets.only(
-                top: this._pt,
-                left: this._pl,
-                bottom: this._pb,
-                right: this._pr,
-              ),
-            ),
-            backgroundColor:
-                _composeMaterialState<Color>(this._backgroundColor),
-            foregroundColor:
-                _composeMaterialState<Color>(this._foregroundColor),
-            overlayColor: _composeMaterialState<Color>(this._overlayColor),
-            shadowColor: _composeMaterialState<Color>(this._shadowColor),
-            elevation: _composeMaterialState<double>(this._elevation),
-            minimumSize: _composeMaterialState<Size>(this._minimumSize),
-            side: _composeMaterialState<BorderSide>(this._side),
-            shape: _composeMaterialState<RoundedRectangleBorder>(this._shape),
-            mouseCursor: _composeMaterialState<MouseCursor>(this._mouseCursor),
-            visualDensity: this._visualDensity,
-            tapTargetSize: this._tapTargetSize,
-            animationDuration: this._animationDuration,
-            enableFeedback: this._enableFeedback,
-            alignment: this._alignment,
-          ),
-        ),
-      );
-
-  /// Apply styles and build as [TextButton]
-  ///
-  /// Equivalent to
-  /// ```
-  /// TextButton.icon()
-  /// ```
-  ///
-  /// Example usage:
-  /// ```
-  /// build(context) {
-  ///   return (
-  ///     NikuButton(Text("Applied Style"))
-  ///       .px(40)
-  ///       .py(20)
-  ///       .bg(Colors.blue)
-  ///       .textButtonIcon() // Colelct all style and build
-  ///   )
-  /// }
-  /// ```
-  Widget textButtonIcon({Key? key}) => Container(
-        margin: EdgeInsets.only(
-          top: this._mt,
-          left: this._ml,
-          bottom: this._mb,
-          right: this._mr,
-        ),
-        child: TextButton.icon(
-          icon: this.child,
+    if (type == NikuButtonType.TextIcon)
+      return internalBuild(
+        TextButton.icon(
+          icon: child,
+          key: key,
           label: _label ?? Text("Icon Button"),
-          onPressed: this._onPressed,
-          onLongPress: this._onLongPressed,
-          focusNode: this._focusNode,
-          autofocus: this._autofocus,
-          clipBehavior: this._clipBehavior,
-          style: ButtonStyle(
-            padding: MaterialStateProperty.resolveWith<EdgeInsetsGeometry>(
-              (_) => EdgeInsets.only(
-                top: this._pt,
-                left: this._pl,
-                bottom: this._pb,
-                right: this._pr,
-              ),
-            ),
-            backgroundColor:
-                _composeMaterialState<Color>(this._backgroundColor),
-            foregroundColor:
-                _composeMaterialState<Color>(this._foregroundColor),
-            overlayColor: _composeMaterialState<Color>(this._overlayColor),
-            shadowColor: _composeMaterialState<Color>(this._shadowColor),
-            elevation: _composeMaterialState<double>(this._elevation),
-            minimumSize: _composeMaterialState<Size>(this._minimumSize),
-            side: _composeMaterialState<BorderSide>(this._side),
-            shape: _composeMaterialState<OutlinedBorder>(this._shape),
-            mouseCursor: _composeMaterialState<MouseCursor>(this._mouseCursor),
-            visualDensity: this._visualDensity,
-            tapTargetSize: this._tapTargetSize,
-            animationDuration: this._animationDuration,
-            enableFeedback: this._enableFeedback,
-            alignment: this._alignment,
-          ),
+          onPressed: _onPressed,
+          onLongPress: _onLongPressed,
+          focusNode: _focusNode,
+          autofocus: _autofocus,
+          clipBehavior: _clipBehavior,
+          style: buttonStyle,
         ),
       );
 
-  /// Apply styles and build as [ElevatedButton]
-  ///
-  /// Equivalent to
-  /// ```
-  /// ElevatedButton.icon()
-  /// ```
-  ///
-  /// Example usage:
-  /// ```
-  /// build(context) {
-  ///   return (
-  ///     NikuButton(Text("Applied Style"))
-  ///       .px(40)
-  ///       .py(20)
-  ///       .bg(Colors.blue)
-  ///       .elevatedIcon() // Colelct all style and build
-  ///   )
-  /// }
-  /// ```
-  Widget elevatedIcon({Key? key}) => Container(
-        margin: EdgeInsets.only(
-          top: this._mt,
-          left: this._ml,
-          bottom: this._mb,
-          right: this._mr,
-        ),
-        child: ElevatedButton.icon(
-          icon: this.child,
+    if (type == NikuButtonType.ElevatedIcon)
+      return internalBuild(
+        ElevatedButton.icon(
+          icon: child,
+          key: key,
           label: _label ?? Text("Icon Button"),
-          onPressed: this._onPressed,
-          onLongPress: this._onLongPressed,
-          focusNode: this._focusNode,
-          autofocus: this._autofocus,
-          clipBehavior: this._clipBehavior,
-          style: ButtonStyle(
-            padding: MaterialStateProperty.resolveWith<EdgeInsetsGeometry>(
-              (_) => EdgeInsets.only(
-                top: this._pt,
-                left: this._pl,
-                bottom: this._pb,
-                right: this._pr,
-              ),
-            ),
-            backgroundColor:
-                _composeMaterialState<Color>(this._backgroundColor),
-            foregroundColor:
-                _composeMaterialState<Color>(this._foregroundColor),
-            overlayColor: _composeMaterialState<Color>(this._overlayColor),
-            shadowColor: _composeMaterialState<Color>(this._shadowColor),
-            elevation: _composeMaterialState<double>(this._elevation),
-            minimumSize: _composeMaterialState<Size>(this._minimumSize),
-            side: _composeMaterialState<BorderSide>(this._side),
-            shape: _composeMaterialState<OutlinedBorder>(this._shape),
-            mouseCursor: _composeMaterialState<MouseCursor>(this._mouseCursor),
-            visualDensity: this._visualDensity,
-            tapTargetSize: this._tapTargetSize,
-            animationDuration: this._animationDuration,
-            enableFeedback: this._enableFeedback,
-            alignment: this._alignment,
-          ),
+          onPressed: _onPressed,
+          onLongPress: _onLongPressed,
+          focusNode: _focusNode,
+          autofocus: _autofocus,
+          clipBehavior: _clipBehavior,
+          style: buttonStyle,
         ),
       );
 
-  /// Apply styles and build as [OutlinedButton]
-  ///
-  /// Equivalent to
-  /// ```
-  /// OutlinedButton.icon()
-  /// ```
-  ///
-  /// Example usage:
-  /// ```
-  /// build(context) {
-  ///   return (
-  ///     NikuButton(Text("Applied Style"))
-  ///       .px(40)
-  ///       .py(20)
-  ///       .bg(Colors.blue)
-  ///       .outlinedIcon() // Colelct all style and build
-  ///   )
-  /// }
-  /// ```
-  Widget outlinedIcon({Key? key}) => Container(
-        margin: EdgeInsets.only(
-          top: this._mt,
-          left: this._ml,
-          bottom: this._mb,
-          right: this._mr,
-        ),
-        child: OutlinedButton.icon(
-          icon: this.child,
+    if (type == NikuButtonType.OutlinedIcon)
+      return internalBuild(
+        OutlinedButton.icon(
+          icon: child,
+          key: key,
           label: _label ?? Text("Icon Button"),
-          onPressed: this._onPressed,
-          onLongPress: this._onLongPressed,
-          focusNode: this._focusNode,
-          autofocus: this._autofocus,
-          clipBehavior: this._clipBehavior,
-          style: ButtonStyle(
-            padding: MaterialStateProperty.resolveWith<EdgeInsetsGeometry>(
-              (_) => EdgeInsets.only(
-                top: this._pt,
-                left: this._pl,
-                bottom: this._pb,
-                right: this._pr,
-              ),
-            ),
-            backgroundColor:
-                _composeMaterialState<Color>(this._backgroundColor),
-            foregroundColor:
-                _composeMaterialState<Color>(this._foregroundColor),
-            overlayColor: _composeMaterialState<Color>(this._overlayColor),
-            shadowColor: _composeMaterialState<Color>(this._shadowColor),
-            elevation: _composeMaterialState<double>(this._elevation),
-            minimumSize: _composeMaterialState<Size>(this._minimumSize),
-            side: _composeMaterialState<BorderSide>(this._side),
-            shape: _composeMaterialState<OutlinedBorder>(this._shape),
-            mouseCursor: _composeMaterialState<MouseCursor>(this._mouseCursor),
-            visualDensity: this._visualDensity,
-            tapTargetSize: this._tapTargetSize,
-            animationDuration: this._animationDuration,
-            enableFeedback: this._enableFeedback,
-            alignment: this._alignment,
-          ),
+          onPressed: _onPressed,
+          onLongPress: _onLongPressed,
+          focusNode: _focusNode,
+          autofocus: _autofocus,
+          clipBehavior: _clipBehavior,
+          style: buttonStyle,
         ),
       );
+
+    return internalBuild(
+      TextButton(
+        child: child,
+        key: key,
+        onPressed: _onPressed,
+        onLongPress: _onLongPressed,
+        focusNode: _focusNode,
+        autofocus: _autofocus,
+        clipBehavior: _clipBehavior,
+        style: buttonStyle,
+      ),
+    );
+  }
 
   /// Switch to Niku() property as [TextButton]
   ///
@@ -2361,100 +2608,13 @@ class NikuButton {
   ///   .px(18)
   ///   .py(16)
   ///   .rounded(8)
-  ///   .niku()
-  ///   .build() // Collect all style and render
   /// ```
-  Niku niku({Key? key}) => Niku(this.build(key: key));
-
-  /// Switch to Niku() property as [TextButton]
-  ///
-  /// After this method is called, NikuFlatButton property can't be applied anymore
-  ///
-  /// ```
-  /// NikuButton("Button")
-  ///   .bg(Colors.blue)
-  ///   .px(18)
-  ///   .py(16)
-  ///   .rounded(8)
-  ///   .nikuTextButton()
-  ///   .build() // Collect all style and render
-  /// ```
-  Niku nikuTextButton({Key? key}) => Niku(this.textButton(key: key));
-
-  /// Switch to Niku() property as [ElevatedButton]
-  ///
-  /// After this method is called, NikuFlatButton property can't be applied anymore
-  ///
-  /// ```
-  /// NikuButton("Button")
-  ///   .bg(Colors.blue)
-  ///   .px(18)
-  ///   .py(16)
-  ///   .rounded(8)
-  ///   .nikuElevated()
-  ///   .build() // Collect all style and render
-  /// ```
-  Niku nikuElevated({Key? key}) => Niku(this.elevated(key: key));
-
-  /// Switch to Niku() property as [OutlinedButton]
-  ///
-  /// After this method is called, NikuFlatButton property can't be applied anymore
-  ///
-  /// ```
-  /// NikuButton("Button")
-  ///   .bg(Colors.blue)
-  ///   .px(18)
-  ///   .py(16)
-  ///   .rounded(8)
-  ///   .nikuOutlined()
-  ///   .build() // Collect all style and render
-  /// ```
-  Niku nikuOutlined({Key? key}) => Niku(this.outlined(key: key));
-
-  /// Switch to Niku() property as [TextButton.icon]
-  ///
-  /// After this method is called, NikuFlatButton property can't be applied anymore
-  ///
-  /// ```
-  /// NikuButton("Button")
-  ///   .bg(Colors.blue)
-  ///   .px(18)
-  ///   .py(16)
-  ///   .rounded(8)
-  ///   .nikuTextButtonIcon()
-  ///   .build() // Collect all style and render
-  /// ```
-  Niku nikuTextButtonIcon({Key? key}) => Niku(this.textButtonIcon(key: key));
-
-  /// Switch to Niku() property as [ElevatedButton.icon]
-  ///
-  /// After this method is called, NikuFlatButton property can't be applied anymore
-  ///
-  /// ```
-  /// NikuButton("Button")
-  ///   .bg(Colors.blue)
-  ///   .px(18)
-  ///   .py(16)
-  ///   .rounded(8)
-  ///   .nikuElevatedIcon()
-  ///   .build() // Collect all style and render
-  /// ```
-  Niku nikuElevatedIcon({Key? key}) => Niku(this.elevatedIcon(key: key));
-
-  /// Switch to Niku() property as [OutlinedButton.icon]
-  ///
-  /// After this method is called, NikuFlatButton property can't be applied anymore
-  ///
-  /// ```
-  /// NikuButton("Button")
-  ///   .bg(Colors.blue)
-  ///   .px(18)
-  ///   .py(16)
-  ///   .rounded(8)
-  ///   .nikuOutlinedIcon()
-  ///   .build() // Collect all style and render
-  /// ```
-  Niku nikuOutlinedIcon({Key? key}) => Niku(this.outlinedIcon(key: key));
+  Niku niku() => Niku(
+        Builder(
+          builder: (context) => build(context),
+        ),
+        key,
+      );
 
   NikuButton set({
     VoidCallback? onPressed,
@@ -2485,63 +2645,185 @@ class NikuButton {
     bool enableFeedback = false,
     AlignmentGeometry? alignment,
     Widget? label,
+    NikuMaterialPropertyContainer<Color>? text_color,
+    Color? text_backgroundColor,
+    double? text_fontSize,
+    FontWeight? text_fontWeight,
+    FontStyle? text_fontStyle,
+    double? text_letterSpacing,
+    double? text_wordSpacing,
+    double? text_height,
+    Paint? text_foreground,
+    Paint? text_background,
+    List<Shadow>? text_shadows,
+    List<FontFeature>? text_fontFeatures,
+    TextDecoration? text_textDecoration,
+    Color? text_textDecorationColor,
+    double? text_textDecorationThickness,
+    String? text_fontFamily,
+    List<String>? text_fontFamilyFallback,
+    TextBaseline? text_textBaseline,
   }) {
-    this._onPressed = onPressed;
-    this._onLongPressed = onLongPressed;
-    this._focusNode = focusNode;
-    this._autofocus = autofocus;
-    this._clipBehavior = clipBehavior;
-    this._backgroundColor = backgroundColor ?? NikuMaterialPropertyContainer();
-    this._foregroundColor = foregroundColor ?? NikuMaterialPropertyContainer();
-    this._overlayColor = overlayColor ?? NikuMaterialPropertyContainer();
-    this._shadowColor = shadowColor ?? NikuMaterialPropertyContainer();
-    this._elevation = elevation ?? NikuMaterialPropertyContainer();
-    this._pt = pt;
-    this._pb = pb;
-    this._pl = pl;
-    this._pr = pr;
-    this._mt = mt;
-    this._mb = mb;
-    this._ml = ml;
-    this._mr = mr;
-    this._minimumSize = minimumSize ?? NikuMaterialPropertyContainer();
-    this._side = side ?? NikuMaterialPropertyContainer();
-    this._shape = shape ?? NikuMaterialPropertyContainer();
-    this._mouseCursor = mouseCursor ?? NikuMaterialPropertyContainer();
-    this._visualDensity = visualDensity;
-    this._tapTargetSize = tapTargetSize;
-    this._animationDuration = animationDuration;
-    this._enableFeedback = enableFeedback;
-    this._alignment = alignment;
-    this._label = label;
+    _onPressed = onPressed;
+    _onLongPressed = onLongPressed;
+    _focusNode = focusNode;
+    _autofocus = autofocus;
+    _clipBehavior = clipBehavior;
+    _backgroundColor.update(
+      base: backgroundColor?._base,
+      disabled: backgroundColor?._disabled,
+      dragged: backgroundColor?._dragged,
+      error: backgroundColor?._error,
+      focused: backgroundColor?._focused,
+      hovered: backgroundColor?._hovered,
+      pressed: backgroundColor?._pressed,
+    );
+    _foregroundColor.update(
+      base: foregroundColor?._base,
+      disabled: foregroundColor?._disabled,
+      dragged: foregroundColor?._dragged,
+      error: foregroundColor?._error,
+      focused: foregroundColor?._focused,
+      hovered: foregroundColor?._hovered,
+      pressed: foregroundColor?._pressed,
+    );
+    _overlayColor.update(
+      base: overlayColor?._base,
+      disabled: overlayColor?._disabled,
+      dragged: overlayColor?._dragged,
+      error: overlayColor?._error,
+      focused: overlayColor?._focused,
+      hovered: overlayColor?._hovered,
+      pressed: overlayColor?._pressed,
+    );
+    _shadowColor.update(
+      base: shadowColor?._base,
+      disabled: shadowColor?._disabled,
+      dragged: shadowColor?._dragged,
+      error: shadowColor?._error,
+      focused: shadowColor?._focused,
+      hovered: shadowColor?._hovered,
+      pressed: shadowColor?._pressed,
+    );
+    _elevation.update(
+      base: elevation?._base,
+      disabled: elevation?._disabled,
+      dragged: elevation?._dragged,
+      error: elevation?._error,
+      focused: elevation?._focused,
+      hovered: elevation?._hovered,
+      pressed: elevation?._pressed,
+    );
+    _pt = pt;
+    _pb = pb;
+    _pl = pl;
+    _pr = pr;
+    super.mt(mt);
+    super.mb(mb);
+    super.ml(ml);
+    super.mr(mr);
+    getMinimumSize.update(
+      base: minimumSize?._base,
+      disabled: minimumSize?._disabled,
+      dragged: minimumSize?._dragged,
+      error: minimumSize?._error,
+      focused: minimumSize?._focused,
+      hovered: minimumSize?._hovered,
+      pressed: minimumSize?._pressed,
+    );
+    _side.update(
+      base: side?._base,
+      disabled: side?._disabled,
+      dragged: side?._dragged,
+      error: side?._error,
+      focused: side?._focused,
+      hovered: side?._hovered,
+      pressed: side?._pressed,
+    );
+    _shape.update(
+      base: shape?._base,
+      disabled: shape?._disabled,
+      dragged: shape?._dragged,
+      error: shape?._error,
+      focused: shape?._focused,
+      hovered: shape?._hovered,
+      pressed: shape?._pressed,
+    );
+    getMouseCursor.update(
+      base: mouseCursor?._base,
+      disabled: mouseCursor?._disabled,
+      dragged: mouseCursor?._dragged,
+      error: mouseCursor?._error,
+      focused: mouseCursor?._focused,
+      hovered: mouseCursor?._hovered,
+      pressed: mouseCursor?._pressed,
+    );
+    _visualDensity = visualDensity;
+    _tapTargetSize = tapTargetSize;
+    _animationDuration = animationDuration;
+    _enableFeedback = enableFeedback;
+    _alignment = alignment;
+    _label = label;
+
+    _text_color.update(
+      base: text_color?._base,
+      disabled: text_color?._disabled,
+      dragged: text_color?._dragged,
+      error: text_color?._error,
+      focused: text_color?._focused,
+      hovered: text_color?._hovered,
+      pressed: text_color?._pressed,
+    );
+    _text_backgroundColor = text_backgroundColor;
+    _text_fontSize = text_fontSize;
+    _text_fontWeight = text_fontWeight;
+    _text_fontStyle = text_fontStyle;
+    _text_letterSpacing = text_letterSpacing;
+    _text_wordSpacing = text_wordSpacing;
+    _text_height = text_height;
+    _text_foreground = text_foreground;
+    _text_background = text_background;
+    _text_shadows = text_shadows;
+    _text_fontFeatures = text_fontFeatures;
+    _text_textDecoration = text_textDecoration;
+    _text_textDecorationColor = text_textDecorationColor;
+    _text_textDecorationThickness = text_textDecorationThickness;
+    _text_fontFamily = text_fontFamily;
+    _text_fontFamilyFallback = text_fontFamilyFallback;
+    _text_textBaseline = text_textBaseline;
 
     return this;
   }
 
   static MaterialStateProperty<T?> _composeMaterialState<T>(
-          NikuMaterialPropertyContainer<T>? property) =>
-      MaterialStateProperty.resolveWith<T?>((states) {
-        if (states.contains(MaterialState.disabled)) return property?.disabled;
-        if (states.contains(MaterialState.dragged)) return property?.dragged;
-        if (states.contains(MaterialState.error)) return property?.error;
-        if (states.contains(MaterialState.focused)) return property?.focused;
-        if (states.contains(MaterialState.hovered)) return property?.hovered;
-        if (states.contains(MaterialState.pressed)) return property?.pressed;
-        if (states.contains(MaterialState.selected)) return property?.selected;
+    NikuMaterialPropertyContainer<T>? property,
+  ) =>
+      MaterialStateProperty.resolveWith<T?>(
+        (states) {
+          if (states.contains(MaterialState.disabled))
+            return property?._disabled;
+          if (states.contains(MaterialState.dragged)) return property?._dragged;
+          if (states.contains(MaterialState.error)) return property?._error;
+          if (states.contains(MaterialState.focused)) return property?._focused;
+          if (states.contains(MaterialState.hovered)) return property?._hovered;
+          if (states.contains(MaterialState.pressed)) return property?._pressed;
+          if (states.contains(MaterialState.selected))
+            return property?._selected;
 
-        return property?.base;
-      });
+          return property?._base;
+        },
+      );
 }
 
 class NikuMaterialPropertyContainer<T> {
-  T? base;
-  T? disabled;
-  T? dragged;
-  T? error;
-  T? focused;
-  T? hovered;
-  T? pressed;
-  T? selected;
+  T? _base;
+  T? _disabled;
+  T? _dragged;
+  T? _error;
+  T? _focused;
+  T? _hovered;
+  T? _pressed;
+  T? _selected;
 
   bool init = true;
 
@@ -2555,28 +2837,37 @@ class NikuMaterialPropertyContainer<T> {
     T? pressed,
     T? selected,
   }) {
-    this.base = base ?? this.base;
-    this.disabled = disabled ?? this.disabled;
-    this.dragged = dragged ?? this.dragged;
-    this.error = error ?? this.error;
-    this.focused = focused ?? this.focused;
-    this.hovered = hovered ?? this.hovered;
-    this.pressed = selected ?? this.pressed;
-    this.selected = selected ?? this.selected;
+    _base = _base ?? base;
+    _disabled = _disabled ?? disabled;
+    _dragged = _dragged ?? dragged;
+    _error = _error ?? error;
+    _focused = _focused ?? focused;
+    _hovered = _hovered ?? hovered;
+    _pressed = _selected ?? pressed;
+    _selected = _selected ?? selected;
 
-    this.init = false;
+    init = false;
   }
 
   void updateAll(T input) {
-    this.base = input;
-    this.disabled = input;
-    this.dragged = input;
-    this.error = input;
-    this.focused = input;
-    this.hovered = input;
-    this.pressed = input;
-    this.selected = input;
+    _base = input;
+    _disabled = input;
+    _dragged = input;
+    _error = input;
+    _focused = input;
+    _hovered = input;
+    _pressed = input;
+    _selected = input;
 
-    this.init = false;
+    init = false;
   }
+}
+
+enum NikuButtonType {
+  Text,
+  TextIcon,
+  Elevated,
+  ElevatedIcon,
+  Outlined,
+  OutlinedIcon
 }

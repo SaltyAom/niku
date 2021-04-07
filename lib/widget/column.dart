@@ -1,8 +1,10 @@
+// ignore_for_file: must_be_immutable
 import 'package:flutter/material.dart';
 
 import 'dart:ui';
 
-import './base.dart';
+import 'base.dart';
+import 'core.dart';
 
 /// Niku extension for Column
 ///
@@ -17,7 +19,6 @@ import './base.dart';
 ///   .mainAxis(MainAxisAlignment.center)
 ///   .crossCenter()
 ///   .append(Text("2"))
-///   .build()
 /// ```
 ///
 /// Meta property list:
@@ -49,6 +50,16 @@ import './base.dart';
 ///   - alphabetic - Using [TextBaseline.alphabetic]
 ///   - ideographic - Using [TextBaseline.ideographic]
 ///
+/// - margin, m - Padding of container
+///   - margin, m - apply margin to all side
+///   - mx - apply margin to x axis
+///   - my - apply margin y axis
+///   - mt - apply margin top side
+///   - ml - apply margin left side
+///   - mb - apply margin bottom side
+///   - ml - apply margin right side
+
+///
 /// Children property list:
 ///   - child, append, appendChild - Append child
 ///   - children, appendChildren - Append all of children
@@ -56,8 +67,9 @@ import './base.dart';
 ///   - prependChildren - Prepend all of children
 ///   - insert - Insert child at index
 ///   - insertAll - Insert all children at index
-class NikuColumn {
-  List<Widget> _children = [];
+class NikuColumn extends NikuCore {
+  List<Widget> _children;
+  Key? key;
 
   MainAxisAlignment _mainAxisAlignment = MainAxisAlignment.start;
   MainAxisSize _mainAxisSize = MainAxisSize.max;
@@ -79,7 +91,6 @@ class NikuColumn {
   ///   .mainAxis(MainAxisAlignment.center)
   ///   .crossCenter()
   ///   .append(Text("2"))
-  ///   .build()
   /// ```
   ///
   /// Meta property list:
@@ -118,9 +129,7 @@ class NikuColumn {
   ///   - prependChildren - Prepend all of children
   ///   - insert - Insert child at index
   ///   - insertAll - Insert all children at index
-  NikuColumn(List<Widget> children) {
-    this._children = children;
-  }
+  NikuColumn(this._children, {key});
 
   /// Set main axis alignment
   ///
@@ -131,7 +140,7 @@ class NikuColumn {
   /// )
   /// ```
   NikuColumn mainAxisAlignment(MainAxisAlignment mainAxisAlignment) {
-    this._mainAxisAlignment = mainAxisAlignment;
+    _mainAxisAlignment = mainAxisAlignment;
 
     return this;
   }
@@ -145,7 +154,7 @@ class NikuColumn {
   /// )
   /// ```
   NikuColumn mainAxis(MainAxisAlignment mainAxisAlignment) {
-    this._mainAxisAlignment = mainAxisAlignment;
+    _mainAxisAlignment = mainAxisAlignment;
 
     return this;
   }
@@ -159,7 +168,7 @@ class NikuColumn {
   /// )
   /// ```
   NikuColumn mainStart() {
-    this._mainAxisAlignment = MainAxisAlignment.start;
+    _mainAxisAlignment = MainAxisAlignment.start;
 
     return this;
   }
@@ -173,7 +182,7 @@ class NikuColumn {
   /// )
   /// ```
   NikuColumn mainCenter() {
-    this._mainAxisAlignment = MainAxisAlignment.center;
+    _mainAxisAlignment = MainAxisAlignment.center;
 
     return this;
   }
@@ -187,7 +196,7 @@ class NikuColumn {
   /// )
   /// ```
   NikuColumn mainEnd() {
-    this._mainAxisAlignment = MainAxisAlignment.end;
+    _mainAxisAlignment = MainAxisAlignment.end;
 
     return this;
   }
@@ -201,7 +210,7 @@ class NikuColumn {
   /// )
   /// ```
   NikuColumn justifyStart() {
-    this._mainAxisAlignment = MainAxisAlignment.start;
+    _mainAxisAlignment = MainAxisAlignment.start;
 
     return this;
   }
@@ -215,7 +224,7 @@ class NikuColumn {
   /// )
   /// ```
   NikuColumn justifyCenter() {
-    this._mainAxisAlignment = MainAxisAlignment.center;
+    _mainAxisAlignment = MainAxisAlignment.center;
 
     return this;
   }
@@ -229,7 +238,7 @@ class NikuColumn {
   /// )
   /// ```
   NikuColumn justifyEnd() {
-    this._mainAxisAlignment = MainAxisAlignment.end;
+    _mainAxisAlignment = MainAxisAlignment.end;
 
     return this;
   }
@@ -243,7 +252,7 @@ class NikuColumn {
   /// )
   /// ```
   NikuColumn spaceAround() {
-    this._mainAxisAlignment = MainAxisAlignment.spaceAround;
+    _mainAxisAlignment = MainAxisAlignment.spaceAround;
 
     return this;
   }
@@ -257,7 +266,7 @@ class NikuColumn {
   /// )
   /// ```
   NikuColumn spaceBetween() {
-    this._mainAxisAlignment = MainAxisAlignment.spaceBetween;
+    _mainAxisAlignment = MainAxisAlignment.spaceBetween;
 
     return this;
   }
@@ -271,7 +280,7 @@ class NikuColumn {
   /// )
   /// ```
   NikuColumn spaceEvenly() {
-    this._mainAxisAlignment = MainAxisAlignment.spaceEvenly;
+    _mainAxisAlignment = MainAxisAlignment.spaceEvenly;
 
     return this;
   }
@@ -285,7 +294,7 @@ class NikuColumn {
   /// )
   /// ```
   NikuColumn crossAxisAlignment(CrossAxisAlignment crossAxisAlignment) {
-    this._crossAxisAlignment = crossAxisAlignment;
+    _crossAxisAlignment = crossAxisAlignment;
 
     return this;
   }
@@ -299,7 +308,7 @@ class NikuColumn {
   /// )
   /// ```
   NikuColumn crossAxis(CrossAxisAlignment crossAxisAlignment) {
-    this._crossAxisAlignment = crossAxisAlignment;
+    _crossAxisAlignment = crossAxisAlignment;
 
     return this;
   }
@@ -313,7 +322,7 @@ class NikuColumn {
   /// )
   /// ```
   NikuColumn baseline() {
-    this._crossAxisAlignment = CrossAxisAlignment.baseline;
+    _crossAxisAlignment = CrossAxisAlignment.baseline;
 
     return this;
   }
@@ -327,7 +336,7 @@ class NikuColumn {
   /// )
   /// ```
   NikuColumn crossStart() {
-    this._crossAxisAlignment = CrossAxisAlignment.start;
+    _crossAxisAlignment = CrossAxisAlignment.start;
 
     return this;
   }
@@ -341,7 +350,7 @@ class NikuColumn {
   /// )
   /// ```
   NikuColumn crossCenter() {
-    this._crossAxisAlignment = CrossAxisAlignment.center;
+    _crossAxisAlignment = CrossAxisAlignment.center;
 
     return this;
   }
@@ -355,7 +364,7 @@ class NikuColumn {
   /// )
   /// ```
   NikuColumn crossEnd() {
-    this._crossAxisAlignment = CrossAxisAlignment.end;
+    _crossAxisAlignment = CrossAxisAlignment.end;
 
     return this;
   }
@@ -369,7 +378,7 @@ class NikuColumn {
   /// )
   /// ```
   NikuColumn itemsStart() {
-    this._crossAxisAlignment = CrossAxisAlignment.start;
+    _crossAxisAlignment = CrossAxisAlignment.start;
 
     return this;
   }
@@ -383,7 +392,7 @@ class NikuColumn {
   /// )
   /// ```
   NikuColumn itemsCenter() {
-    this._crossAxisAlignment = CrossAxisAlignment.center;
+    _crossAxisAlignment = CrossAxisAlignment.center;
 
     return this;
   }
@@ -397,7 +406,7 @@ class NikuColumn {
   /// )
   /// ```
   NikuColumn itemsEnd() {
-    this._crossAxisAlignment = CrossAxisAlignment.end;
+    _crossAxisAlignment = CrossAxisAlignment.end;
 
     return this;
   }
@@ -411,7 +420,7 @@ class NikuColumn {
   /// )
   /// ```
   NikuColumn stretch() {
-    this._crossAxisAlignment = CrossAxisAlignment.stretch;
+    _crossAxisAlignment = CrossAxisAlignment.stretch;
 
     return this;
   }
@@ -423,7 +432,7 @@ class NikuColumn {
   /// Column(textDirection: input)
   /// ```
   NikuColumn textDirection(TextDirection textDirection) {
-    this._textDirection = textDirection;
+    _textDirection = textDirection;
 
     return this;
   }
@@ -435,7 +444,7 @@ class NikuColumn {
   /// Column(textDirection: TextDirection.ltr)
   /// ```
   NikuColumn ltr() {
-    this._textDirection = TextDirection.ltr;
+    _textDirection = TextDirection.ltr;
 
     return this;
   }
@@ -447,7 +456,7 @@ class NikuColumn {
   /// Column(textDirection: TextDirection.rtl)
   /// ```
   NikuColumn rtl() {
-    this._textDirection = TextDirection.rtl;
+    _textDirection = TextDirection.rtl;
 
     return this;
   }
@@ -461,7 +470,7 @@ class NikuColumn {
   /// )
   /// ```
   NikuColumn verticalDirection(VerticalDirection verticalDirection) {
-    this._verticalDirection = verticalDirection;
+    _verticalDirection = verticalDirection;
 
     return this;
   }
@@ -475,7 +484,7 @@ class NikuColumn {
   /// )
   /// ```
   NikuColumn up() {
-    this._verticalDirection = VerticalDirection.up;
+    _verticalDirection = VerticalDirection.up;
 
     return this;
   }
@@ -489,7 +498,7 @@ class NikuColumn {
   /// )
   /// ```
   NikuColumn down() {
-    this._verticalDirection = VerticalDirection.down;
+    _verticalDirection = VerticalDirection.down;
 
     return this;
   }
@@ -503,7 +512,7 @@ class NikuColumn {
   /// )
   /// ```
   NikuColumn textBaseline(TextBaseline textBaseline) {
-    this._textBaseline = textBaseline;
+    _textBaseline = textBaseline;
 
     return this;
   }
@@ -517,7 +526,7 @@ class NikuColumn {
   /// )
   /// ```
   NikuColumn alphabetic() {
-    this._textBaseline = TextBaseline.alphabetic;
+    _textBaseline = TextBaseline.alphabetic;
 
     return this;
   }
@@ -531,7 +540,7 @@ class NikuColumn {
   /// )
   /// ```
   NikuColumn ideographic() {
-    this._textBaseline = TextBaseline.ideographic;
+    _textBaseline = TextBaseline.ideographic;
 
     return this;
   }
@@ -548,7 +557,7 @@ class NikuColumn {
   /// )
   /// ```
   NikuColumn child(Widget child) {
-    this._children.add(child);
+    _children.add(child);
 
     return this;
   }
@@ -565,7 +574,7 @@ class NikuColumn {
   /// )
   /// ```
   NikuColumn append(Widget child) {
-    this._children.add(child);
+    _children.add(child);
 
     return this;
   }
@@ -582,7 +591,7 @@ class NikuColumn {
   /// )
   /// ```
   NikuColumn appendChild(Widget child) {
-    this._children.add(child);
+    _children.add(child);
 
     return this;
   }
@@ -599,7 +608,7 @@ class NikuColumn {
   /// )
   /// ```
   NikuColumn children(List<Widget> children) {
-    this._children.addAll(children);
+    _children.addAll(children);
 
     return this;
   }
@@ -616,7 +625,7 @@ class NikuColumn {
   /// )
   /// ```
   NikuColumn appendChildren(List<Widget> children) {
-    this._children.addAll(children);
+    _children.addAll(children);
 
     return this;
   }
@@ -633,7 +642,7 @@ class NikuColumn {
   /// )
   /// ```
   NikuColumn prepend(Widget child) {
-    this._children.insert(0, child);
+    _children.insert(0, child);
 
     return this;
   }
@@ -650,7 +659,7 @@ class NikuColumn {
   /// )
   /// ```
   NikuColumn prependChild(Widget child) {
-    this._children.insert(0, child);
+    _children.insert(0, child);
 
     return this;
   }
@@ -667,7 +676,7 @@ class NikuColumn {
   /// )
   /// ```
   NikuColumn prependChildren(List<Widget> children) {
-    this._children.insertAll(0, children);
+    _children.insertAll(0, children);
 
     return this;
   }
@@ -685,7 +694,7 @@ class NikuColumn {
   /// )
   /// ```
   NikuColumn insert(int index, Widget child) {
-    this._children.insert(index, child);
+    _children.insert(index, child);
 
     return this;
   }
@@ -703,7 +712,7 @@ class NikuColumn {
   /// )
   /// ```
   NikuColumn insertAll(int index, List<Widget> children) {
-    this._children.insertAll(index, children);
+    _children.insertAll(index, children);
 
     return this;
   }
@@ -719,17 +728,19 @@ class NikuColumn {
   ///   .mainAxis(MainAxisAlignment.center)
   ///   .crossCenter()
   ///   .append(Text("2"))
-  ///   .build()
   /// ```
-  Column build({Key? key}) => Column(
-        key: key,
-        children: this._children,
-        mainAxisAlignment: this._mainAxisAlignment,
-        mainAxisSize: this._mainAxisSize,
-        crossAxisAlignment: this._crossAxisAlignment,
-        textDirection: this._textDirection,
-        verticalDirection: this._verticalDirection,
-        textBaseline: this._textBaseline,
+  @override
+  build(context) => internalBuild(
+        Column(
+          key: key,
+          children: _children,
+          mainAxisAlignment: _mainAxisAlignment,
+          mainAxisSize: _mainAxisSize,
+          crossAxisAlignment: _crossAxisAlignment,
+          textDirection: _textDirection,
+          verticalDirection: _verticalDirection,
+          textBaseline: _textBaseline,
+        ),
       );
 
   /// Switch to Niku() property
@@ -745,7 +756,11 @@ class NikuColumn {
   ///   .crossCenter()
   ///   .niku()
   ///   .bg(Colors.blue)
-  ///   .build()
   /// ```
-  Niku niku() => Niku(this.build());
+  Niku niku() => Niku(
+        Builder(
+          builder: (context) => build(context),
+        ),
+        key,
+      );
 }

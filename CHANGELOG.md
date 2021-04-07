@@ -1,3 +1,84 @@
+## [1.0.0] - 2021/4/7
+Bug fix:
+  - `this.` access property.
+
+## [1.0.0-alpha.4] - 2021/4/1
+Feature:
+  - Add `NikuWrap`
+  - Add `form` to `NikuBase`.
+  - Add `focusedError` to `TextField` border input.
+
+Bug fix:
+  - `apply` using unexpected share property.
+  - `apply` on `NikuTextField` without `AlignVertical` cause build to failed.
+
+## [1.0.0-alpha.3] - 2021/3/31
+Feature:
+  - Add `cursor` to IconButton.
+  - Add the following property to `IconButton`:
+    - `size`, 
+    - `minSize`, `minimumSize`
+    - `maxSize`, `maximumSize`
+    - `minWidth`, `minimumWidth`
+    - `minHeight`, `minimumHeight`
+    - `maxWidth`, `maximumWidth`
+    - `maxHeight`, `maximumHeight`
+  - Boolean method on `NikuTextField` now has default value of `true`.
+
+Breaking Change:
+  - Rename `border` to `b` and `setBorder` to `border`.
+  - Change `obscureTextFormField` to `obscureText` on NikuTextField.
+  - Add `asPassword` on NikuTextField.
+  - Remove `disabledSmartDashes` and `disabledSmartQuotes`.
+  - `enableSmartQuotes` and `enableSmartDashes` now accept option boolean default as true.
+  - Change from `inputDecorationEnable` to `enableInputDecoration`.
+  - Change from `...textFormField` to `...text` in NikuTextField.
+
+Bug fix:
+  - Fix Visual Density in NikuButton.
+  - Setting multiple border variant not working
+
+## [1.0.0-alpha.2] - 2021/3/28
+Breaking Change:
+  - Swap arguments of animated
+
+Change:
+  - Remove Nested instance from base property
+  - Add default value of `true` to `absortPointer` and `ignorePointer`
+
+## [1.0.0-alpha.1] - 2021/3/25
+Bug Fix:
+  - add Key
+
+## [1.0.0-alpha.0] - 2021/3/24
+Feature:
+  - Remove `.build()` and `.style()`
+  - Niku Internal is now mutating property instead of stacking
+  - Add `.asNiku` on component instead of using Niku Component
+  - Match `NikuButton` to idiomatic Dart
+  - Add `TextStyle` to TextButton
+  - Every Niku Component now support margin property
+
+Breaking Change:
+  - Every Niku Component now extend `NikuCore` which extends `StatelessWidget`
+  - Variant method `NikuButton` is removed
+    - `.icon` to `NikuButton.icon`
+    - `.text` to `NikuButton.text`
+    - `.elevated` to `NikuButton.elevated`
+    - `.elevatedIcon` to `NikuButton.elevatedIcon` 
+    - `.outlined` to `NikuButton.outlined`
+    - `.outlinedIcon` to `NikuButton.outlinedIcon`
+
+Change:
+  - Remove usage of `this.` except for constructor
+  - Every margin property is moved to `NikuCore`
+  - Build is now using `internalBuild`
+  - Remove container if margin is not presented
+
+Bug fix:
+  - Foreground on text change background instead
+  - Fix margin not mistakenly setting on padding instead
+
 ## [0.5.5] - 2021/3/15
 Feature:
   - Add `animatedBuilder`, `animated` for `AnimationBuilder`

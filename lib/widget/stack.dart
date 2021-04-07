@@ -1,8 +1,10 @@
+// ignore_for_file: must_be_immutable
 import 'package:flutter/material.dart';
 
 import 'dart:ui';
 
-import './base.dart';
+import 'base.dart';
+import 'core.dart';
 
 /// Niku extension for Stack
 ///
@@ -16,7 +18,6 @@ import './base.dart';
 /// ])
 ///   .center()
 ///   .append(Text("2"))
-///   .build()
 /// ```
 ///
 /// Meta property list:
@@ -45,8 +46,18 @@ import './base.dart';
 ///   - passthrogh - Using [StackFit.passthrough]
 ///   - loose - Using [StackFit.loose]
 /// - clip, clipBehavior - Add clip behavior of widget
-class NikuStack {
+///
+/// - margin, m - Padding of container
+///   - margin, m - apply margin to all side
+///   - mx - apply margin to x axis
+///   - my - apply margin y axis
+///   - mt - apply margin top side
+///   - ml - apply margin left side
+///   - mb - apply margin bottom side
+///   - ml - apply margin right side
+class NikuStack extends NikuCore {
   List<Widget> _children;
+  Key? key;
 
   AlignmentDirectional _alignment = AlignmentDirectional.topStart;
   TextDirection? _textDirection;
@@ -65,7 +76,6 @@ class NikuStack {
   /// ])
   ///   .center()
   ///   .append(Text("2"))
-  ///   .build()
   /// ```
   ///
   /// Meta property list:
@@ -94,7 +104,7 @@ class NikuStack {
   ///   - passthrogh - Using [StackFit.passthrough]
   ///   - loose - Using [StackFit.loose]
   /// - clip, clipBehavior - Add clip behavior of widget
-  NikuStack(this._children);
+  NikuStack(this._children, {key});
 
   /// Apply alignment to stack
   ///
@@ -105,7 +115,7 @@ class NikuStack {
   /// )
   /// ```
   NikuStack alignment(AlignmentDirectional alignment) {
-    this._alignment = alignment;
+    _alignment = alignment;
 
     return this;
   }
@@ -119,7 +129,7 @@ class NikuStack {
   /// )
   /// ```
   NikuStack align(AlignmentDirectional alignment) {
-    this._alignment = alignment;
+    _alignment = alignment;
 
     return this;
   }
@@ -133,7 +143,7 @@ class NikuStack {
   /// )
   /// ```
   NikuStack topStart() {
-    this._alignment = AlignmentDirectional.topStart;
+    _alignment = AlignmentDirectional.topStart;
 
     return this;
   }
@@ -147,7 +157,7 @@ class NikuStack {
   /// )
   /// ```
   NikuStack topCenter() {
-    this._alignment = AlignmentDirectional.topCenter;
+    _alignment = AlignmentDirectional.topCenter;
 
     return this;
   }
@@ -161,7 +171,7 @@ class NikuStack {
   /// )
   /// ```
   NikuStack topEnd() {
-    this._alignment = AlignmentDirectional.topEnd;
+    _alignment = AlignmentDirectional.topEnd;
 
     return this;
   }
@@ -175,7 +185,7 @@ class NikuStack {
   /// )
   /// ```
   NikuStack centerStart() {
-    this._alignment = AlignmentDirectional.centerStart;
+    _alignment = AlignmentDirectional.centerStart;
 
     return this;
   }
@@ -189,7 +199,7 @@ class NikuStack {
   /// )
   /// ```
   NikuStack center() {
-    this._alignment = AlignmentDirectional.center;
+    _alignment = AlignmentDirectional.center;
 
     return this;
   }
@@ -203,7 +213,7 @@ class NikuStack {
   /// )
   /// ```
   NikuStack centerEnd() {
-    this._alignment = AlignmentDirectional.centerEnd;
+    _alignment = AlignmentDirectional.centerEnd;
 
     return this;
   }
@@ -217,7 +227,7 @@ class NikuStack {
   /// )
   /// ```
   NikuStack bottomStart() {
-    this._alignment = AlignmentDirectional.bottomStart;
+    _alignment = AlignmentDirectional.bottomStart;
 
     return this;
   }
@@ -231,7 +241,7 @@ class NikuStack {
   /// )
   /// ```
   NikuStack bottomCenter() {
-    this._alignment = AlignmentDirectional.bottomCenter;
+    _alignment = AlignmentDirectional.bottomCenter;
 
     return this;
   }
@@ -245,7 +255,7 @@ class NikuStack {
   /// )
   /// ```
   NikuStack bottomEnd() {
-    this._alignment = AlignmentDirectional.bottomEnd;
+    _alignment = AlignmentDirectional.bottomEnd;
 
     return this;
   }
@@ -257,7 +267,7 @@ class NikuStack {
   /// Stack(textDirection: input)
   /// ```
   NikuStack textDirection(TextDirection textDirection) {
-    this._textDirection = textDirection;
+    _textDirection = textDirection;
 
     return this;
   }
@@ -269,7 +279,7 @@ class NikuStack {
   /// Stack(textDirection: TextDirection.ltr)
   /// ```
   NikuStack ltr() {
-    this._textDirection = TextDirection.ltr;
+    _textDirection = TextDirection.ltr;
 
     return this;
   }
@@ -281,7 +291,7 @@ class NikuStack {
   /// Stack(textDirection: TextDirection.rtl)
   /// ```
   NikuStack rtl() {
-    this._textDirection = TextDirection.rtl;
+    _textDirection = TextDirection.rtl;
 
     return this;
   }
@@ -295,7 +305,7 @@ class NikuStack {
   /// )
   /// ```
   NikuStack stackFit(StackFit fit) {
-    this._fit = fit;
+    _fit = fit;
 
     return this;
   }
@@ -309,7 +319,7 @@ class NikuStack {
   /// )
   /// ```
   NikuStack fit(StackFit fit) {
-    this._fit = fit;
+    _fit = fit;
 
     return this;
   }
@@ -325,7 +335,7 @@ class NikuStack {
   /// )
   /// ```
   NikuStack expand() {
-    this._fit = StackFit.expand;
+    _fit = StackFit.expand;
 
     return this;
   }
@@ -341,7 +351,7 @@ class NikuStack {
   /// )
   /// ```
   NikuStack passthrough() {
-    this._fit = StackFit.passthrough;
+    _fit = StackFit.passthrough;
 
     return this;
   }
@@ -357,14 +367,12 @@ class NikuStack {
   /// )
   /// ```
   NikuStack loose() {
-    this._fit = StackFit.loose;
+    _fit = StackFit.loose;
 
     return this;
   }
 
   /// Add clip behavior of widget
-  ///
-  /// Using [Overflow.clip]
   ///
   /// Equivalent to:
   /// ```
@@ -373,14 +381,12 @@ class NikuStack {
   /// )
   /// ```
   NikuStack clipBehavior(Clip clip) {
-    this._clipBehavior = clip;
+    _clipBehavior = clip;
 
     return this;
   }
 
   /// Add clip behavior of widget
-  ///
-  /// Using [Overflow.clip]
   ///
   /// Equivalent to:
   /// ```
@@ -389,7 +395,7 @@ class NikuStack {
   /// )
   /// ```
   NikuStack clip(Clip clip) {
-    this._clipBehavior = clip;
+    _clipBehavior = clip;
 
     return this;
   }
@@ -406,7 +412,7 @@ class NikuStack {
   /// )
   /// ```
   NikuStack child(Widget child) {
-    this._children.add(child);
+    _children.add(child);
 
     return this;
   }
@@ -423,7 +429,7 @@ class NikuStack {
   /// )
   /// ```
   NikuStack append(Widget child) {
-    this._children.add(child);
+    _children.add(child);
 
     return this;
   }
@@ -440,7 +446,7 @@ class NikuStack {
   /// )
   /// ```
   NikuStack appendChild(Widget child) {
-    this._children.add(child);
+    _children.add(child);
 
     return this;
   }
@@ -457,7 +463,7 @@ class NikuStack {
   /// )
   /// ```
   NikuStack children(List<Widget> children) {
-    this._children.addAll(children);
+    _children.addAll(children);
 
     return this;
   }
@@ -474,7 +480,7 @@ class NikuStack {
   /// )
   /// ```
   NikuStack appendChildren(List<Widget> children) {
-    this._children.addAll(children);
+    _children.addAll(children);
 
     return this;
   }
@@ -491,7 +497,7 @@ class NikuStack {
   /// )
   /// ```
   NikuStack prepend(Widget child) {
-    this._children.insert(0, child);
+    _children.insert(0, child);
 
     return this;
   }
@@ -508,7 +514,7 @@ class NikuStack {
   /// )
   /// ```
   NikuStack prependChild(Widget child) {
-    this._children.insert(0, child);
+    _children.insert(0, child);
 
     return this;
   }
@@ -525,7 +531,7 @@ class NikuStack {
   /// )
   /// ```
   NikuStack prependChildren(List<Widget> children) {
-    this._children.insertAll(0, children);
+    _children.insertAll(0, children);
 
     return this;
   }
@@ -543,7 +549,7 @@ class NikuStack {
   /// )
   /// ```
   NikuStack insert(int index, Widget child) {
-    this._children.insert(index, child);
+    _children.insert(index, child);
 
     return this;
   }
@@ -561,7 +567,7 @@ class NikuStack {
   /// )
   /// ```
   NikuStack insertAll(int index, List<Widget> children) {
-    this._children.insertAll(index, children);
+    _children.insertAll(index, children);
 
     return this;
   }
@@ -576,15 +582,17 @@ class NikuStack {
   /// ])
   ///   .center()
   ///   .append(Text("2"))
-  ///   .build()
   /// ```
-  Stack build({Key? key}) => Stack(
-        key: key,
-        children: this._children,
-        alignment: this._alignment,
-        textDirection: this._textDirection,
-        fit: this._fit,
-        clipBehavior: this._clipBehavior,
+  @override
+  build(context) => internalBuild(
+        Stack(
+          key: key,
+          children: _children,
+          alignment: _alignment,
+          textDirection: _textDirection,
+          fit: _fit,
+          clipBehavior: _clipBehavior,
+        ),
       );
 
   /// Switch to Niku() property
@@ -599,7 +607,11 @@ class NikuStack {
   ///   .center()
   ///   .niku()
   ///   .bg(Colors.blue)
-  ///   .build()
   /// ```
-  Niku niku() => Niku(this.build());
+  Niku niku() => Niku(
+        Builder(
+          builder: (context) => build(context),
+        ),
+        key,
+      );
 }

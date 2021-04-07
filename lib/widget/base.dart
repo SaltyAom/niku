@@ -1,3 +1,4 @@
+// ignore_for_file: must_be_immutable
 import 'dart:ui';
 
 import 'package:flutter/gestures.dart';
@@ -10,10 +11,9 @@ import 'package:flutter/rendering.dart';
 ///
 /// Example usage:
 /// ```
-/// Niku(Container())
+/// Niku()
 ///   .background(Colors.blue)
 ///   .p(21)
-///   .build()
 /// ```
 ///
 /// Meta property list:
@@ -139,8 +139,9 @@ import 'package:flutter/rendering.dart';
 ///   - scaleStart - The pointers in contact with the screen have established a focal point and initial scale of 1.0
 ///   - scaleUpdate - The pointers in contact with the screen have indicated a new focal point and/or scale
 ///   - scaleEnd - The pointers are no longer in contact with the screen
-class Niku {
-  Widget _widget = SizedBox.shrink();
+class Niku extends StatelessWidget {
+  Widget _widget;
+  Key? key;
 
   /// Niku Widget for styling widget
   ///
@@ -151,7 +152,6 @@ class Niku {
   /// Niku(Container())
   ///   .background(Colors.blue)
   ///   .p(21)
-  ///   .build()
   /// ```
   ///
   /// Meta property list:
@@ -277,38 +277,31 @@ class Niku {
   ///   - scaleStart - The pointers in contact with the screen have established a focal point and initial scale of 1.0
   ///   - scaleUpdate - The pointers in contact with the screen have indicated a new focal point and/or scale
   ///   - scaleEnd - The pointers are no longer in contact with the screen
-  Niku([Widget widget = const SizedBox.shrink()]) {
-    this._widget = widget;
-  }
+  Niku([this._widget = const SizedBox.shrink(), this.key]);
 
-  /// Apply styles and build Widget
-  ///
-  /// Example usage:
-  /// ```
-  /// Niku(Container())
-  ///   .background(Colors.blue)
-  ///   .p(21)
-  ///   .build()
-  /// ```
-  Widget build() => this._widget;
+  @override
+  build(context) {
+    if (key != null) return SizedBox(key: key, child: _widget);
+
+    return _widget;
+  }
 
   /// Add custom widget
   ///
   /// Example usage
-  /// ```
+  /// ```dart
   /// Niku()
-  ///  .builder((child) {
-  ///      return AnimatedContainer(
-  ///          width: 200,
-  ///          height: 200,
-  ///          child: child
-  ///      );
-  ///  })
-  ///  .build()
+  ///   .builder((child) {
+  ///     return AnimatedContainer(
+  ///       width: 200,
+  ///       height: 200,
+  ///       child: child
+  ///     );
+  ///   });
   /// ```
-  Niku builder(Widget Function(Widget child) builder) => Niku(
-        builder(this._widget),
-      );
+  void builder(Widget Function(Widget child) builder) {
+    _widget = builder(_widget);
+  }
 }
 
 extension BaseProperty on Niku {
@@ -320,10 +313,14 @@ extension BaseProperty on Niku {
   ///   margin: input
   /// )
   /// ```
-  Niku margin(EdgeInsets margin) => Niku(Container(
-        margin: margin,
-        child: this._widget,
-      ));
+  Niku margin(EdgeInsets margin) {
+    _widget = Container(
+      margin: margin,
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Apply margin to all side
   ///
@@ -333,8 +330,14 @@ extension BaseProperty on Niku {
   ///   margin: EdgeInsets.all(input)
   /// )
   /// ```
-  Niku m(double margin) =>
-      Niku(Container(margin: EdgeInsets.all(margin), child: this._widget));
+  Niku m(double margin) {
+    _widget = Container(
+      margin: EdgeInsets.all(margin),
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Apply margin to x axis
   ///
@@ -344,8 +347,14 @@ extension BaseProperty on Niku {
   ///   margin: EdgeInsets.symmetric(horizontal: input)
   /// )
   /// ```
-  Niku mx(double margin) => Niku(Container(
-      margin: EdgeInsets.symmetric(horizontal: margin), child: this._widget));
+  Niku mx(double margin) {
+    _widget = Container(
+      margin: EdgeInsets.symmetric(horizontal: margin),
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Apply margin to y axis
   ///
@@ -355,8 +364,14 @@ extension BaseProperty on Niku {
   ///   margin: EdgeInsets.symmetric(vertical: input)
   /// )
   /// ```
-  Niku my(double margin) => Niku(Container(
-      margin: EdgeInsets.symmetric(vertical: margin), child: this._widget));
+  Niku my(double margin) {
+    _widget = Container(
+      margin: EdgeInsets.symmetric(vertical: margin),
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Apply margin to top
   ///
@@ -366,8 +381,14 @@ extension BaseProperty on Niku {
   ///   margin: EdgeInsets.only(top: input)
   /// )
   /// ```
-  Niku mt(double margin) => Niku(
-      Container(margin: EdgeInsets.only(top: margin), child: this._widget));
+  Niku mt(double margin) {
+    _widget = Container(
+      margin: EdgeInsets.only(top: margin),
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Apply margin to bottom
   ///
@@ -377,8 +398,14 @@ extension BaseProperty on Niku {
   ///   margin: EdgeInsets.only(bototm: input)
   /// )
   /// ```
-  Niku mb(double margin) => Niku(
-      Container(margin: EdgeInsets.only(bottom: margin), child: this._widget));
+  Niku mb(double margin) {
+    _widget = Container(
+      margin: EdgeInsets.only(bottom: margin),
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Apply margin to left side
   ///
@@ -388,8 +415,14 @@ extension BaseProperty on Niku {
   ///   margin: EdgeInsets.only(left: input)
   /// )
   /// ```
-  Niku ml(double margin) => Niku(
-      Container(margin: EdgeInsets.only(left: margin), child: this._widget));
+  Niku ml(double margin) {
+    _widget = Container(
+      margin: EdgeInsets.only(left: margin),
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Apply margin to right side
   ///
@@ -399,8 +432,14 @@ extension BaseProperty on Niku {
   ///   margin: EdgeInsets.only(right: input)
   /// )
   /// ```
-  Niku mr(double margin) => Niku(
-      Container(margin: EdgeInsets.only(right: margin), child: this._widget));
+  Niku mr(double margin) {
+    _widget = Container(
+      margin: EdgeInsets.only(right: margin),
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Apply padding using [EdgeInsets]
   ///
@@ -410,10 +449,14 @@ extension BaseProperty on Niku {
   ///   padding: input
   /// )
   /// ```
-  Niku padding(EdgeInsets padding) => Niku(Padding(
-        padding: padding,
-        child: this._widget,
-      ));
+  Niku padding(EdgeInsets padding) {
+    _widget = Padding(
+      padding: padding,
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Apply padding to all side
   ///
@@ -423,10 +466,14 @@ extension BaseProperty on Niku {
   ///   padding: EdgeInsets.all(input)
   /// )
   /// ```
-  Niku p(double padding) => Niku(Padding(
-        padding: EdgeInsets.all(padding),
-        child: this._widget,
-      ));
+  Niku p(double padding) {
+    _widget = Padding(
+      padding: EdgeInsets.all(padding),
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Apply padding to x axis
   ///
@@ -436,10 +483,14 @@ extension BaseProperty on Niku {
   ///   padding: EdgeInsets.symmetric(horizontal: input)
   /// )
   /// ```
-  Niku px(double padding) => Niku(Padding(
-        padding: EdgeInsets.symmetric(horizontal: padding),
-        child: this._widget,
-      ));
+  Niku px(double padding) {
+    _widget = Padding(
+      padding: EdgeInsets.symmetric(horizontal: padding),
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Apply padding to y axis
   ///
@@ -449,10 +500,14 @@ extension BaseProperty on Niku {
   ///   padding: EdgeInsets.symmetric(vertical: input)
   /// )
   /// ```
-  Niku py(double padding) => Niku(Padding(
-        padding: EdgeInsets.symmetric(vertical: padding),
-        child: this._widget,
-      ));
+  Niku py(double padding) {
+    _widget = Padding(
+      padding: EdgeInsets.symmetric(vertical: padding),
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Apply padding to top
   ///
@@ -462,10 +517,14 @@ extension BaseProperty on Niku {
   ///   padding: EdgeInsets.symmetric(top: input)
   /// )
   /// ```
-  Niku pt(double padding) => Niku(Padding(
-        padding: EdgeInsets.only(top: padding),
-        child: this._widget,
-      ));
+  Niku pt(double padding) {
+    _widget = Padding(
+      padding: EdgeInsets.only(top: padding),
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Apply padding to bottom
   ///
@@ -475,10 +534,14 @@ extension BaseProperty on Niku {
   ///   padding: EdgeInsets.symmetric(bottom: input)
   /// )
   /// ```
-  Niku pb(double padding) => Niku(Padding(
-        padding: EdgeInsets.only(bottom: padding),
-        child: this._widget,
-      ));
+  Niku pb(double padding) {
+    _widget = Padding(
+      padding: EdgeInsets.only(bottom: padding),
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Apply padding to left side
   ///
@@ -488,10 +551,14 @@ extension BaseProperty on Niku {
   ///   padding: EdgeInsets.symmetric(left: input)
   /// )
   /// ```
-  Niku pl(double padding) => Niku(Padding(
-        padding: EdgeInsets.only(left: padding),
-        child: this._widget,
-      ));
+  Niku pl(double padding) {
+    _widget = Padding(
+      padding: EdgeInsets.only(left: padding),
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Apply padding to right side
   ///
@@ -501,10 +568,14 @@ extension BaseProperty on Niku {
   ///   padding: EdgeInsets.symmetric(right: input)
   /// )
   /// ```
-  Niku pr(double padding) => Niku(Padding(
-        padding: EdgeInsets.only(right: padding),
-        child: this._widget,
-      ));
+  Niku pr(double padding) {
+    _widget = Padding(
+      padding: EdgeInsets.only(right: padding),
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Apply alignment to widget
   ///
@@ -514,10 +585,14 @@ extension BaseProperty on Niku {
   ///   alignment: input
   /// )
   /// ```
-  Niku align(AlignmentGeometry align) => Niku(Align(
-        alignment: align,
-        child: this._widget,
-      ));
+  Niku align(AlignmentGeometry align) {
+    _widget = Align(
+      alignment: align,
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Apply widget to top left
   ///
@@ -527,10 +602,14 @@ extension BaseProperty on Niku {
   ///   alignment: Alignment.topLeft
   /// )
   /// ```
-  Niku topLeft() => Niku(Align(
-        alignment: Alignment.topLeft,
-        child: this._widget,
-      ));
+  Niku topLeft() {
+    _widget = Align(
+      alignment: Alignment.topLeft,
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Apply widget to top center
   ///
@@ -540,10 +619,14 @@ extension BaseProperty on Niku {
   ///   alignment: Alignment.topCenter
   /// )
   /// ```
-  Niku topCenter() => Niku(Align(
-        alignment: Alignment.topCenter,
-        child: this._widget,
-      ));
+  Niku topCenter() {
+    _widget = Align(
+      alignment: Alignment.topCenter,
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Apply widget to top right
   ///
@@ -553,10 +636,14 @@ extension BaseProperty on Niku {
   ///   alignment: Alignment.topRight
   /// )
   /// ```
-  Niku topRight() => Niku(Align(
-        alignment: Alignment.topRight,
-        child: this._widget,
-      ));
+  Niku topRight() {
+    _widget = Align(
+      alignment: Alignment.topRight,
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Apply widget to center left
   ///
@@ -566,10 +653,14 @@ extension BaseProperty on Niku {
   ///   alignment: Alignment.centerLeft
   /// )
   /// ```
-  Niku centerLeft() => Niku(Align(
-        alignment: Alignment.centerLeft,
-        child: this._widget,
-      ));
+  Niku centerLeft() {
+    _widget = Align(
+      alignment: Alignment.centerLeft,
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Apply widget to center
   ///
@@ -579,9 +670,13 @@ extension BaseProperty on Niku {
   ///   alignment: Alignment.center
   /// )
   /// ```
-  Niku center() => Niku(Center(
-        child: this._widget,
-      ));
+  Niku center() {
+    _widget = Center(
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Apply widget to center right
   ///
@@ -591,10 +686,14 @@ extension BaseProperty on Niku {
   ///   alignment: Alignment.centerRight
   /// )
   /// ```
-  Niku centerRight() => Niku(Align(
-        alignment: Alignment.centerRight,
-        child: this._widget,
-      ));
+  Niku centerRight() {
+    _widget = Align(
+      alignment: Alignment.centerRight,
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Apply widget to bottom left
   ///
@@ -604,10 +703,14 @@ extension BaseProperty on Niku {
   ///   alignment: Alignment.bottomLeft
   /// )
   /// ```
-  Niku bottomLeft() => Niku(Align(
-        alignment: Alignment.bottomLeft,
-        child: this._widget,
-      ));
+  Niku bottomLeft() {
+    _widget = Align(
+      alignment: Alignment.bottomLeft,
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Apply widget to bottom center
   ///
@@ -617,10 +720,14 @@ extension BaseProperty on Niku {
   ///   alignment: Alignment.bottomCenter
   /// )
   /// ```
-  Niku bottomCenter() => Niku(Align(
-        alignment: Alignment.bottomCenter,
-        child: this._widget,
-      ));
+  Niku bottomCenter() {
+    _widget = Align(
+      alignment: Alignment.bottomCenter,
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Apply widget to bottom right
   ///
@@ -630,26 +737,33 @@ extension BaseProperty on Niku {
   ///   alignment: Alignment.bottomRight
   /// )
   /// ```
-  Niku bottomRight() => Niku(Align(
-        alignment: Alignment.bottomRight,
-        child: this._widget,
-      ));
+  Niku bottomRight() {
+    _widget = Align(
+      alignment: Alignment.bottomRight,
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Apply both full width and height to self
   ///
   /// Equivalent to:
   /// ```
   /// SizedBox(
-  ///   width: double.infinity
+  ///   width: double.infinity,
+  ///   height: double.infinity,
   /// )
   /// ```
-  Niku fullSize() => Niku(
-        SizedBox(
-          width: double.infinity,
-          height: double.infinity,
-          child: this._widget,
-        ),
-      );
+  Niku fullSize() {
+    _widget = SizedBox(
+      width: double.infinity,
+      height: double.infinity,
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Apply full width to self
   ///
@@ -660,12 +774,12 @@ extension BaseProperty on Niku {
   ///   height: double.infinity
   /// )
   /// ```
-  Niku fullWidth() => Niku(
-        SizedBox(
-            width: double.infinity,
-            height: double.infinity,
-            child: this._widget),
-      );
+  Niku fullWidth() {
+    _widget = SizedBox(
+        width: double.infinity, height: double.infinity, child: _widget);
+
+    return this;
+  }
 
   /// Apply full width to self
   ///
@@ -675,9 +789,11 @@ extension BaseProperty on Niku {
   ///   height: double.infinity
   /// )
   /// ```
-  Niku fullHeight() => Niku(
-        SizedBox(height: double.infinity, child: this._widget),
-      );
+  Niku fullHeight() {
+    _widget = SizedBox(height: double.infinity, child: _widget);
+
+    return this;
+  }
 
   /// Apply aspect ratio to self
   ///
@@ -687,8 +803,11 @@ extension BaseProperty on Niku {
   ///   aspecrRatio: input
   /// )
   /// ```
-  Niku aspectRatio(double aspectRatio) =>
-      Niku(AspectRatio(aspectRatio: aspectRatio, child: this._widget));
+  Niku aspectRatio(double aspectRatio) {
+    _widget = AspectRatio(aspectRatio: aspectRatio, child: _widget);
+
+    return this;
+  }
 
   /// Apply expanded to self
   ///
@@ -696,7 +815,11 @@ extension BaseProperty on Niku {
   /// ```
   /// Expanded()
   /// ```
-  Niku expanded([int flex = 1]) => Niku(Expanded(child: this._widget));
+  Niku expanded([int flex = 1]) {
+    _widget = Expanded(child: _widget);
+
+    return this;
+  }
 
   /// Set both width and height in percent
   ///
@@ -707,8 +830,12 @@ extension BaseProperty on Niku {
   ///   heightFactor: height
   /// )
   /// ```
-  Niku fractionSize(double width, double height) => Niku(FractionallySizedBox(
-      widthFactor: width, heightFactor: height, child: this._widget));
+  Niku fractionSize(double width, double height) {
+    _widget = FractionallySizedBox(
+        widthFactor: width, heightFactor: height, child: _widget);
+
+    return this;
+  }
 
   /// Set width in percent
   ///
@@ -718,8 +845,11 @@ extension BaseProperty on Niku {
   ///   widthFactor: input
   /// )
   /// ```
-  Niku fractionWidth(double fraction) =>
-      Niku(FractionallySizedBox(widthFactor: fraction, child: this._widget));
+  Niku fractionWidth(double fraction) {
+    _widget = FractionallySizedBox(widthFactor: fraction, child: _widget);
+
+    return this;
+  }
 
   /// Set height in percent
   ///
@@ -729,8 +859,11 @@ extension BaseProperty on Niku {
   ///   heightFactor: input
   /// )
   /// ```
-  Niku fractionHeight(double fraction) =>
-      Niku(FractionallySizedBox(widthFactor: fraction, child: this._widget));
+  Niku fractionHeight(double fraction) {
+    _widget = FractionallySizedBox(widthFactor: fraction, child: _widget);
+
+    return this;
+  }
 
   /// Set width in percent
   ///
@@ -742,12 +875,14 @@ extension BaseProperty on Niku {
   ///   )
   /// )
   /// ```
-  Niku widthPercent(double percent) => Niku(
-        FractionallySizedBox(
-          widthFactor: percent / 100,
-          child: this._widget,
-        ),
-      );
+  Niku widthPercent(double percent) {
+    _widget = FractionallySizedBox(
+      widthFactor: percent / 100,
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Set height in percent
   ///
@@ -759,12 +894,14 @@ extension BaseProperty on Niku {
   ///   )
   /// )
   /// ```
-  Niku heightPercent(double percent) => Niku(
-        FractionallySizedBox(
-          widthFactor: percent / 100,
-          child: this._widget,
-        ),
-      );
+  Niku heightPercent(double percent) {
+    _widget = FractionallySizedBox(
+      widthFactor: percent / 100,
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Set height in percent
   ///
@@ -777,13 +914,15 @@ extension BaseProperty on Niku {
   ///   )
   /// )
   /// ```
-  Niku sizePercent(double width, double height) => Niku(
-        FractionallySizedBox(
-          widthFactor: width / 100,
-          heightFactor: height / 100,
-          child: this._widget,
-        ),
-      );
+  Niku sizePercent(double width, double height) {
+    _widget = FractionallySizedBox(
+      widthFactor: width / 100,
+      heightFactor: height / 100,
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Add new container to widget
   ///
@@ -791,11 +930,13 @@ extension BaseProperty on Niku {
   /// ```
   /// Container()
   /// ```
-  Niku container() => Niku(
-        Container(
-          child: this._widget,
-        ),
-      );
+  Niku container() {
+    _widget = Container(
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Set minimum and maximum size for widget
   ///
@@ -805,8 +946,14 @@ extension BaseProperty on Niku {
   ///   constraints: input
   /// )
   /// ```
-  Niku constraints(BoxConstraints constraints) =>
-      Niku(ConstrainedBox(constraints: constraints, child: this._widget));
+  Niku constraints(BoxConstraints constraints) {
+    _widget = ConstrainedBox(
+      constraints: constraints,
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Set maximum size for widget
   ///
@@ -819,9 +966,17 @@ extension BaseProperty on Niku {
   ///   )
   /// )
   /// ```
-  Niku maxSize(double maxWidth, double maxHeight) => Niku(ConstrainedBox(
-      constraints: BoxConstraints(maxWidth: maxWidth, maxHeight: maxHeight),
-      child: this._widget));
+  Niku maxSize(double maxWidth, double maxHeight) {
+    _widget = ConstrainedBox(
+      constraints: BoxConstraints(
+        maxWidth: maxWidth,
+        maxHeight: maxHeight,
+      ),
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Set maximum width for widget
   ///
@@ -833,8 +988,16 @@ extension BaseProperty on Niku {
   ///   )
   /// )
   /// ```
-  Niku maxWidth(double maxWidth) => Niku(ConstrainedBox(
-      constraints: BoxConstraints(maxWidth: maxWidth), child: this._widget));
+  Niku maxWidth(double maxWidth) {
+    _widget = ConstrainedBox(
+      constraints: BoxConstraints(
+        maxWidth: maxWidth,
+      ),
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Set maximum height for widget
   ///
@@ -846,8 +1009,15 @@ extension BaseProperty on Niku {
   ///   )
   /// )
   /// ```
-  Niku maxHeight(double maxHeight) => Niku(ConstrainedBox(
-      constraints: BoxConstraints(maxHeight: maxHeight), child: this._widget));
+  Niku maxHeight(double maxHeight) {
+    _widget = ConstrainedBox(
+        constraints: BoxConstraints(
+          maxHeight: maxHeight,
+        ),
+        child: _widget);
+
+    return this;
+  }
 
   /// Set minimum size for widget
   ///
@@ -860,9 +1030,17 @@ extension BaseProperty on Niku {
   ///   )
   /// )
   /// ```
-  Niku minSize(double minWidth, double minHeight) => Niku(ConstrainedBox(
-      constraints: BoxConstraints(minWidth: minWidth, minHeight: minHeight),
-      child: this._widget));
+  Niku minSize(double minWidth, double minHeight) {
+    _widget = ConstrainedBox(
+      constraints: BoxConstraints(
+        minWidth: minWidth,
+        minHeight: minHeight,
+      ),
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Set minimum width for widget
   ///
@@ -874,8 +1052,16 @@ extension BaseProperty on Niku {
   ///   )
   /// )
   /// ```
-  Niku minWidth(double minWidth) => Niku(ConstrainedBox(
-      constraints: BoxConstraints(minWidth: minWidth), child: this._widget));
+  Niku minWidth(double minWidth) {
+    _widget = ConstrainedBox(
+      constraints: BoxConstraints(
+        minWidth: minWidth,
+      ),
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Set minimum height for widget
   ///
@@ -887,8 +1073,16 @@ extension BaseProperty on Niku {
   ///   )
   /// )
   /// ```
-  Niku minHeight(double minHeight) => Niku(ConstrainedBox(
-      constraints: BoxConstraints(minHeight: minHeight), child: this._widget));
+  Niku minHeight(double minHeight) {
+    _widget = ConstrainedBox(
+      constraints: BoxConstraints(
+        minHeight: minHeight,
+      ),
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Set height of Widget
   ///
@@ -898,8 +1092,15 @@ extension BaseProperty on Niku {
   ///   height: input
   /// )
   /// ```
-  Niku size(double width, double height) =>
-      Niku(SizedBox(width: width, height: height, child: this._widget));
+  Niku size(double width, double height) {
+    _widget = SizedBox(
+      width: width,
+      height: height,
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Set width of widget
   ///
@@ -909,7 +1110,14 @@ extension BaseProperty on Niku {
   ///   width: input
   /// )
   /// ```
-  Niku width(double width) => Niku(SizedBox(width: width, child: this._widget));
+  Niku width(double width) {
+    _widget = SizedBox(
+      width: width,
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Set height of Widget
   ///
@@ -919,8 +1127,14 @@ extension BaseProperty on Niku {
   ///   height: input
   /// )
   /// ```
-  Niku height(double height) =>
-      Niku(SizedBox(height: height, child: this._widget));
+  Niku height(double height) {
+    _widget = SizedBox(
+      height: height,
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Apply [FittedBox] for widget
   ///
@@ -928,7 +1142,13 @@ extension BaseProperty on Niku {
   /// ```
   /// FittedBox()
   /// ```
-  Niku fitted() => Niku(FittedBox(child: this._widget));
+  Niku fitted() {
+    _widget = FittedBox(
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Apply background to widget
   ///
@@ -938,7 +1158,14 @@ extension BaseProperty on Niku {
   ///   color: input
   /// )
   /// ```
-  Niku bg(Color color) => Niku(ColoredBox(color: color, child: this._widget));
+  Niku bg(Color color) {
+    _widget = ColoredBox(
+      color: color,
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Apply background to widget
   ///
@@ -948,8 +1175,14 @@ extension BaseProperty on Niku {
   ///   color: input
   /// )
   /// ```
-  Niku backgroundColor(Color color) =>
-      Niku(ColoredBox(color: color, child: this._widget));
+  Niku backgroundColor(Color color) {
+    _widget = ColoredBox(
+      color: color,
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Apply opacity to widget
   ///
@@ -959,8 +1192,14 @@ extension BaseProperty on Niku {
   ///   opacity: input
   /// )
   /// ```
-  Niku opacity(double opacity) =>
-      Niku(Opacity(opacity: opacity, child: this._widget));
+  Niku opacity(double opacity) {
+    _widget = Opacity(
+      opacity: opacity,
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Apply border radius to widget
   ///
@@ -972,10 +1211,18 @@ extension BaseProperty on Niku {
   ///   )
   /// )
   /// ```
-  Niku rounded([double borderRadius = 999999]) => Niku(ClipRRect(
-        borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
-        child: this._widget,
-      ));
+  Niku rounded([double borderRadius = 999999]) {
+    _widget = ClipRRect(
+      borderRadius: BorderRadius.all(
+        Radius.circular(
+          borderRadius,
+        ),
+      ),
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Apply [BoxDecoration] to widget
   ///
@@ -985,12 +1232,14 @@ extension BaseProperty on Niku {
   ///   boxDecoration: input
   /// )
   /// ```
-  Niku boxDecoration(BoxDecoration boxDecoration) => Niku(
-        DecoratedBox(
-          child: this._widget,
-          decoration: boxDecoration,
-        ),
-      );
+  Niku boxDecoration(BoxDecoration boxDecoration) {
+    _widget = DecoratedBox(
+      child: _widget,
+      decoration: boxDecoration,
+    );
+
+    return this;
+  }
 
   /// Apply [Hero] to widget
   ///
@@ -1000,7 +1249,14 @@ extension BaseProperty on Niku {
   ///   tag: input
   /// )
   /// ```
-  Niku heroTag(String heroTag) => Niku(Hero(tag: heroTag, child: this._widget));
+  Niku heroTag(String heroTag) {
+    _widget = Hero(
+      tag: heroTag,
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Apply [IgnorePointer] to widget
   ///
@@ -1010,8 +1266,14 @@ extension BaseProperty on Niku {
   ///   ignoring: input
   /// )
   /// ```
-  Niku ignorePointer(bool ignoring) =>
-      Niku(IgnorePointer(ignoring: ignoring, child: this._widget));
+  Niku ignorePointer([bool ignoring = true]) {
+    _widget = IgnorePointer(
+      ignoring: ignoring,
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Apply [AbsorbPointer] to widget
   ///
@@ -1021,8 +1283,14 @@ extension BaseProperty on Niku {
   ///   absorbing: input
   /// )
   /// ```
-  Niku absorbPointer(bool absorbing) =>
-      Niku(AbsorbPointer(absorbing: absorbing, child: this._widget));
+  Niku absorbPointer([bool absorbing = true]) {
+    _widget = AbsorbPointer(
+      absorbing: absorbing,
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Apply tooltip to widget
   ///
@@ -1032,10 +1300,14 @@ extension BaseProperty on Niku {
   ///   message: input
   /// )
   /// ```
-  Niku tooltip(String tip) => Niku(Tooltip(
-        message: tip,
-        child: this._widget,
-      ));
+  Niku tooltip(String tip) {
+    _widget = Tooltip(
+      message: tip,
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Apply transform to widget
   ///
@@ -1045,8 +1317,14 @@ extension BaseProperty on Niku {
   ///   transform: input
   /// )
   /// ```
-  Niku transform(Matrix4 transform) =>
-      Niku(Transform(transform: transform, child: this._widget));
+  Niku transform(Matrix4 transform) {
+    _widget = Transform(
+      transform: transform,
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Event Listener
   ///
@@ -1105,102 +1383,104 @@ extension BaseProperty on Niku {
   ///   - scaleUpdate - The pointers in contact with the screen have indicated a new focal point and/or scale
   ///   - scaleEnd - The pointers are no longer in contact with the screen
   Niku on(
-          {void Function(TapDownDetails)? tapDown,
-          void Function(TapUpDetails)? tapUp,
-          VoidCallback? tap,
-          VoidCallback? tapCancel,
-          VoidCallback? secondaryTap,
-          void Function(TapDownDetails)? secondaryTapDown,
-          void Function(TapUpDetails)? secondaryTapUp,
-          VoidCallback? secondaryTapCancel,
-          void Function(TapDownDetails)? tertiaryTapDown,
-          void Function(TapUpDetails)? tertiaryTapUp,
-          VoidCallback? tertiaryTapCancel,
-          void Function(TapDownDetails)? doubleTapDown,
-          VoidCallback? doubleTap,
-          VoidCallback? doubleTapCancel,
-          VoidCallback? longPress,
-          void Function(LongPressStartDetails)? longPressStart,
-          void Function(LongPressMoveUpdateDetails)? longPressMoveUpdate,
-          VoidCallback? longPressUp,
-          void Function(LongPressEndDetails)? longPressEnd,
-          VoidCallback? secondaryLongPress,
-          void Function(LongPressStartDetails)? secondaryLongPressStart,
-          void Function(LongPressMoveUpdateDetails)?
-              secondaryLongPressMoveUpdate,
-          VoidCallback? secondaryLongPressUp,
-          void Function(LongPressEndDetails)? secondaryLongPressEnd,
-          void Function(DragDownDetails)? verticalDragDown,
-          void Function(DragStartDetails)? verticalDragStart,
-          void Function(DragUpdateDetails)? verticalDragUpdate,
-          void Function(DragEndDetails)? verticalDragEnd,
-          VoidCallback? verticalDragCancel,
-          void Function(DragDownDetails)? horizontalDragDown,
-          void Function(DragStartDetails)? horizontalDragStart,
-          void Function(DragUpdateDetails)? horizontalDragUpdate,
-          void Function(DragEndDetails)? horizontalDragEnd,
-          VoidCallback? horizontalDragCancel,
-          void Function(ForcePressDetails)? forcePressStart,
-          void Function(ForcePressDetails)? forcePressPeak,
-          void Function(ForcePressDetails)? forcePressUpdate,
-          void Function(ForcePressDetails)? forcePressEnd,
-          void Function(DragDownDetails)? panDown,
-          void Function(DragStartDetails)? panStart,
-          void Function(DragUpdateDetails)? panUpdate,
-          void Function(DragEndDetails)? panEnd,
-          VoidCallback? panCancel,
-          void Function(ScaleStartDetails)? scaleStart,
-          void Function(ScaleUpdateDetails)? scaleUpdate,
-          void Function(ScaleEndDetails)? scaleEnd}) =>
-      Niku(GestureDetector(
-        onTapDown: tapDown,
-        onTapUp: tapUp,
-        onTap: tap,
-        onTapCancel: tapCancel,
-        onSecondaryTap: secondaryTap,
-        onSecondaryTapDown: secondaryTapDown,
-        onSecondaryTapUp: secondaryTapUp,
-        onSecondaryTapCancel: secondaryTapCancel,
-        onTertiaryTapDown: tertiaryTapDown,
-        onTertiaryTapUp: tertiaryTapUp,
-        onTertiaryTapCancel: tertiaryTapCancel,
-        onDoubleTapDown: doubleTapDown,
-        onDoubleTap: doubleTap,
-        onDoubleTapCancel: doubleTapCancel,
-        onLongPress: longPress,
-        onLongPressStart: longPressStart,
-        onLongPressMoveUpdate: longPressMoveUpdate,
-        onLongPressUp: longPressUp,
-        onLongPressEnd: longPressEnd,
-        onSecondaryLongPress: secondaryLongPress,
-        onSecondaryLongPressStart: secondaryLongPressStart,
-        onSecondaryLongPressMoveUpdate: secondaryLongPressMoveUpdate,
-        onSecondaryLongPressUp: secondaryLongPressUp,
-        onSecondaryLongPressEnd: secondaryLongPressEnd,
-        onVerticalDragDown: verticalDragDown,
-        onVerticalDragStart: verticalDragStart,
-        onVerticalDragUpdate: verticalDragUpdate,
-        onVerticalDragEnd: verticalDragEnd,
-        onVerticalDragCancel: verticalDragCancel,
-        onHorizontalDragDown: horizontalDragDown,
-        onHorizontalDragStart: horizontalDragStart,
-        onHorizontalDragUpdate: horizontalDragUpdate,
-        onHorizontalDragEnd: horizontalDragEnd,
-        onHorizontalDragCancel: horizontalDragCancel,
-        onForcePressStart: forcePressStart,
-        onForcePressPeak: forcePressPeak,
-        onForcePressUpdate: forcePressUpdate,
-        onForcePressEnd: forcePressEnd,
-        onPanDown: panDown,
-        onPanStart: panStart,
-        onPanUpdate: panUpdate,
-        onPanEnd: panEnd,
-        onPanCancel: panCancel,
-        onScaleStart: scaleStart,
-        onScaleUpdate: scaleUpdate,
-        onScaleEnd: scaleEnd,
-        child: this._widget,
-      ));
+      {void Function(TapDownDetails)? tapDown,
+      void Function(TapUpDetails)? tapUp,
+      VoidCallback? tap,
+      VoidCallback? tapCancel,
+      VoidCallback? secondaryTap,
+      void Function(TapDownDetails)? secondaryTapDown,
+      void Function(TapUpDetails)? secondaryTapUp,
+      VoidCallback? secondaryTapCancel,
+      void Function(TapDownDetails)? tertiaryTapDown,
+      void Function(TapUpDetails)? tertiaryTapUp,
+      VoidCallback? tertiaryTapCancel,
+      void Function(TapDownDetails)? doubleTapDown,
+      VoidCallback? doubleTap,
+      VoidCallback? doubleTapCancel,
+      VoidCallback? longPress,
+      void Function(LongPressStartDetails)? longPressStart,
+      void Function(LongPressMoveUpdateDetails)? longPressMoveUpdate,
+      VoidCallback? longPressUp,
+      void Function(LongPressEndDetails)? longPressEnd,
+      VoidCallback? secondaryLongPress,
+      void Function(LongPressStartDetails)? secondaryLongPressStart,
+      void Function(LongPressMoveUpdateDetails)? secondaryLongPressMoveUpdate,
+      VoidCallback? secondaryLongPressUp,
+      void Function(LongPressEndDetails)? secondaryLongPressEnd,
+      void Function(DragDownDetails)? verticalDragDown,
+      void Function(DragStartDetails)? verticalDragStart,
+      void Function(DragUpdateDetails)? verticalDragUpdate,
+      void Function(DragEndDetails)? verticalDragEnd,
+      VoidCallback? verticalDragCancel,
+      void Function(DragDownDetails)? horizontalDragDown,
+      void Function(DragStartDetails)? horizontalDragStart,
+      void Function(DragUpdateDetails)? horizontalDragUpdate,
+      void Function(DragEndDetails)? horizontalDragEnd,
+      VoidCallback? horizontalDragCancel,
+      void Function(ForcePressDetails)? forcePressStart,
+      void Function(ForcePressDetails)? forcePressPeak,
+      void Function(ForcePressDetails)? forcePressUpdate,
+      void Function(ForcePressDetails)? forcePressEnd,
+      void Function(DragDownDetails)? panDown,
+      void Function(DragStartDetails)? panStart,
+      void Function(DragUpdateDetails)? panUpdate,
+      void Function(DragEndDetails)? panEnd,
+      VoidCallback? panCancel,
+      void Function(ScaleStartDetails)? scaleStart,
+      void Function(ScaleUpdateDetails)? scaleUpdate,
+      void Function(ScaleEndDetails)? scaleEnd}) {
+    _widget = GestureDetector(
+      onTapDown: tapDown,
+      onTapUp: tapUp,
+      onTap: tap,
+      onTapCancel: tapCancel,
+      onSecondaryTap: secondaryTap,
+      onSecondaryTapDown: secondaryTapDown,
+      onSecondaryTapUp: secondaryTapUp,
+      onSecondaryTapCancel: secondaryTapCancel,
+      onTertiaryTapDown: tertiaryTapDown,
+      onTertiaryTapUp: tertiaryTapUp,
+      onTertiaryTapCancel: tertiaryTapCancel,
+      onDoubleTapDown: doubleTapDown,
+      onDoubleTap: doubleTap,
+      onDoubleTapCancel: doubleTapCancel,
+      onLongPress: longPress,
+      onLongPressStart: longPressStart,
+      onLongPressMoveUpdate: longPressMoveUpdate,
+      onLongPressUp: longPressUp,
+      onLongPressEnd: longPressEnd,
+      onSecondaryLongPress: secondaryLongPress,
+      onSecondaryLongPressStart: secondaryLongPressStart,
+      onSecondaryLongPressMoveUpdate: secondaryLongPressMoveUpdate,
+      onSecondaryLongPressUp: secondaryLongPressUp,
+      onSecondaryLongPressEnd: secondaryLongPressEnd,
+      onVerticalDragDown: verticalDragDown,
+      onVerticalDragStart: verticalDragStart,
+      onVerticalDragUpdate: verticalDragUpdate,
+      onVerticalDragEnd: verticalDragEnd,
+      onVerticalDragCancel: verticalDragCancel,
+      onHorizontalDragDown: horizontalDragDown,
+      onHorizontalDragStart: horizontalDragStart,
+      onHorizontalDragUpdate: horizontalDragUpdate,
+      onHorizontalDragEnd: horizontalDragEnd,
+      onHorizontalDragCancel: horizontalDragCancel,
+      onForcePressStart: forcePressStart,
+      onForcePressPeak: forcePressPeak,
+      onForcePressUpdate: forcePressUpdate,
+      onForcePressEnd: forcePressEnd,
+      onPanDown: panDown,
+      onPanStart: panStart,
+      onPanUpdate: panUpdate,
+      onPanEnd: panEnd,
+      onPanCancel: panCancel,
+      onScaleStart: scaleStart,
+      onScaleUpdate: scaleUpdate,
+      onScaleEnd: scaleEnd,
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Add [Material] to widget
   ///
@@ -1212,13 +1492,16 @@ extension BaseProperty on Niku {
   ///   shadowColor: shadowColor
   /// )
   /// ```
-  Niku material({double elevation = 0, Color? color, Color? shadowColor}) =>
-      Niku(Material(
-        child: this._widget,
-        elevation: elevation,
-        color: color,
-        shadowColor: shadowColor,
-      ));
+  Niku material({double elevation = 0, Color? color, Color? shadowColor}) {
+    _widget = Material(
+      child: _widget,
+      elevation: elevation,
+      color: color,
+      shadowColor: shadowColor,
+    );
+
+    return this;
+  }
 
   /// Add [InkWell] to widget
   ///
@@ -1241,19 +1524,20 @@ extension BaseProperty on Niku {
     double? radius,
     bool autofocus = false,
     VoidCallback? onTap,
-  }) =>
-      Niku(
-        InkWell(
-          child: this._widget,
-          hoverColor: hover,
-          focusColor: focus,
-          highlightColor: highlight,
-          splashColor: splash,
-          radius: radius,
-          onTap: onTap,
-          autofocus: autofocus,
-        ),
-      );
+  }) {
+    _widget = InkWell(
+      child: _widget,
+      hoverColor: hover,
+      focusColor: focus,
+      highlightColor: highlight,
+      splashColor: splash,
+      radius: radius,
+      onTap: onTap,
+      autofocus: autofocus,
+    );
+
+    return this;
+  }
 
   /// Decorate with border using [Border]
   ///
@@ -1265,12 +1549,14 @@ extension BaseProperty on Niku {
   ///   )
   /// )
   /// ```
-  Niku border(Border border) => Niku(
-        DecoratedBox(
-          decoration: BoxDecoration(border: border),
-          child: this._widget,
-        ),
-      );
+  Niku border(Border border) {
+    _widget = DecoratedBox(
+      decoration: BoxDecoration(border: border),
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Add backdrop filter to widget
   ///
@@ -1280,8 +1566,14 @@ extension BaseProperty on Niku {
   ///   filter: input
   /// )
   /// ```
-  Niku backdropFilter(ImageFilter filter) =>
-      Niku(BackdropFilter(filter: filter, child: this._widget));
+  Niku backdropFilter(ImageFilter filter) {
+    _widget = BackdropFilter(
+      filter: filter,
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Add Positioned to widget
   ///
@@ -1294,13 +1586,17 @@ extension BaseProperty on Niku {
   ///   right: right
   /// )
   /// ```
-  Niku positioned({double? top, double? left, double? bottom, double? right}) =>
-      Niku(Positioned(
-          top: top,
-          left: left,
-          bottom: bottom,
-          right: right,
-          child: this._widget));
+  Niku positioned({double? top, double? left, double? bottom, double? right}) {
+    _widget = Positioned(
+      top: top,
+      left: left,
+      bottom: bottom,
+      right: right,
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Add singleChildScrolLView to widget
   ///
@@ -1317,17 +1613,20 @@ extension BaseProperty on Niku {
     ScrollPhysics? scrollPhysics,
     DragStartBehavior dragStartBehavior = DragStartBehavior.start,
     String? restorationId,
-  }) =>
-      Niku(SingleChildScrollView(
-        child: this._widget,
-        controller: controller,
-        scrollDirection: scrollDirection,
-        primary: primary,
-        reverse: reverse,
-        physics: scrollPhysics,
-        dragStartBehavior: dragStartBehavior,
-        restorationId: restorationId,
-      ));
+  }) {
+    _widget = SingleChildScrollView(
+      child: _widget,
+      controller: controller,
+      scrollDirection: scrollDirection,
+      primary: primary,
+      reverse: reverse,
+      physics: scrollPhysics,
+      dragStartBehavior: dragStartBehavior,
+      restorationId: restorationId,
+    );
+
+    return this;
+  }
 
   /// Add singleChildScrolLView to widget
   ///
@@ -1344,19 +1643,20 @@ extension BaseProperty on Niku {
     ScrollPhysics? scrollPhysics,
     DragStartBehavior dragStartBehavior = DragStartBehavior.start,
     String? restorationId,
-  }) =>
-      Niku(
-        SingleChildScrollView(
-          child: this._widget,
-          controller: controller,
-          scrollDirection: scrollDirection,
-          primary: primary,
-          reverse: reverse,
-          physics: scrollPhysics,
-          dragStartBehavior: dragStartBehavior,
-          restorationId: restorationId,
-        ),
-      );
+  }) {
+    _widget = SingleChildScrollView(
+      child: _widget,
+      controller: controller,
+      scrollDirection: scrollDirection,
+      primary: primary,
+      reverse: reverse,
+      physics: scrollPhysics,
+      dragStartBehavior: dragStartBehavior,
+      restorationId: restorationId,
+    );
+
+    return this;
+  }
 
   /// Apply Flexible to widget
   ///
@@ -1366,12 +1666,14 @@ extension BaseProperty on Niku {
   ///   flex: input
   /// )
   /// ```
-  Niku flexible([int flex = 1]) => Niku(
-        Flexible(
-          child: this._widget,
-          flex: flex,
-        ),
-      );
+  Niku flexible([int flex = 1]) {
+    _widget = Flexible(
+      child: _widget,
+      flex: flex,
+    );
+
+    return this;
+  }
 
   /// Apply Flexible to widget
   ///
@@ -1381,7 +1683,14 @@ extension BaseProperty on Niku {
   ///   flex: input
   /// )
   /// ```
-  Niku flex([int flex = 1]) => Niku(Flexible(child: this._widget, flex: flex));
+  Niku flex([int flex = 1]) {
+    _widget = Flexible(
+      child: _widget,
+      flex: flex,
+    );
+
+    return this;
+  }
 
   /// Add shadows to widget
   ///
@@ -1393,12 +1702,14 @@ extension BaseProperty on Niku {
   ///   )
   /// )
   /// ```
-  Niku shadows(List<BoxShadow> shadows) => Niku(
-        DecoratedBox(
-          child: this._widget,
-          decoration: BoxDecoration(boxShadow: shadows),
-        ),
-      );
+  Niku shadows(List<BoxShadow> shadows) {
+    _widget = DecoratedBox(
+      child: _widget,
+      decoration: BoxDecoration(boxShadow: shadows),
+    );
+
+    return this;
+  }
 
   /// Wrap widget in animated builder
   ///
@@ -1407,26 +1718,26 @@ extension BaseProperty on Niku {
   /// Niku()
   ///   .animatedBuilder(
   ///     animation: animation,
-  ///     builder: (context, child) => Container(
+  ///     builder: (context, child) { _widget = Container(
   ///       child: child,
   ///       margin: EdgeInsets.all(animation.value)
   ///     )
   ///   })
-  ///   .build()
   /// ```
   Niku animatedBuilder({
     required Widget Function(BuildContext context, Widget child) builder,
     required AnimationController animation,
-  }) =>
-      Niku(
-        AnimatedBuilder(
-          animation: animation,
-          builder: (context, child) {
-            return builder(context, this._widget);
-          },
-          child: this._widget,
-        ),
-      );
+  }) {
+    _widget = AnimatedBuilder(
+      animation: animation,
+      builder: (context, child) {
+        return builder(context, _widget);
+      },
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Wrap widget in animated builder
   ///
@@ -1435,26 +1746,26 @@ extension BaseProperty on Niku {
   /// Niku()
   ///   .animatedBuilder(
   ///     animation: animation,
-  ///     builder: (context, child) => Container(
+  ///     builder: (context, child) { _widget = Container(
   ///       child: child,
   ///       margin: EdgeInsets.all(animation.value)
   ///     )
   ///   })
-  ///   .build()
   /// ```
   Niku animated({
-    required Widget Function(BuildContext context, Widget child) builder,
     required AnimationController animation,
-  }) =>
-      Niku(
-        AnimatedBuilder(
-          animation: animation,
-          builder: (context, child) {
-            return builder(context, this._widget);
-          },
-          child: this._widget,
-        ),
-      );
+    required Widget Function(BuildContext context, Widget child) builder,
+  }) {
+    _widget = AnimatedBuilder(
+      animation: animation,
+      builder: (context, child) {
+        return builder(context, _widget);
+      },
+      child: _widget,
+    );
+
+    return this;
+  }
 
   /// Add semantic to widget
   ///
@@ -1518,65 +1829,66 @@ extension BaseProperty on Niku {
     VoidCallback? onDidGainAccessibilityFocus,
     VoidCallback? onDidLoseAccessibilityFocus,
     Map<CustomSemanticsAction, VoidCallback>? customSemanticsActions,
-  }) =>
-      Niku(
-        Semantics(
-          child: this._widget,
-          container: container,
-          explicitChildNodes: explicitChildNodes,
-          excludeSemantics: excludeSemantics,
-          enabled: enabled,
-          checked: checked,
-          selected: selected,
-          toggled: toggled,
-          button: button,
-          slider: slider,
-          link: link,
-          header: header,
-          textField: textField,
-          readOnly: readOnly,
-          focusable: focusable,
-          focused: focused,
-          inMutuallyExclusiveGroup: inMutuallyExclusiveGroup,
-          obscured: obscured,
-          multiline: multiline,
-          scopesRoute: scopesRoute,
-          namesRoute: namesRoute,
-          hidden: hidden,
-          image: image,
-          liveRegion: liveRegion,
-          maxValueLength: maxValueLength,
-          currentValueLength: currentValueLength,
-          label: label,
-          value: value,
-          increasedValue: increasedValue,
-          decreasedValue: decreasedValue,
-          hint: hint,
-          onTapHint: onTapHint,
-          onLongPressHint: onLongPressHint,
-          textDirection: textDirection,
-          sortKey: sortKey,
-          tagForChildren: tagForChildren,
-          onTap: onTap,
-          onLongPress: onLongPress,
-          onScrollLeft: onScrollLeft,
-          onScrollRight: onScrollRight,
-          onScrollUp: onScrollUp,
-          onScrollDown: onScrollDown,
-          onIncrease: onIncrease,
-          onDecrease: onDecrease,
-          onCopy: onCopy,
-          onCut: onCut,
-          onPaste: onPaste,
-          onDismiss: onDismiss,
-          onMoveCursorForwardByCharacter: onMoveCursorForwardByCharacter,
-          onMoveCursorBackwardByCharacter: onMoveCursorBackwardByCharacter,
-          onSetSelection: onSetSelection,
-          onDidGainAccessibilityFocus: onDidGainAccessibilityFocus,
-          onDidLoseAccessibilityFocus: onDidLoseAccessibilityFocus,
-          customSemanticsActions: customSemanticsActions,
-        ),
-      );
+  }) {
+    _widget = Semantics(
+      child: _widget,
+      container: container,
+      explicitChildNodes: explicitChildNodes,
+      excludeSemantics: excludeSemantics,
+      enabled: enabled,
+      checked: checked,
+      selected: selected,
+      toggled: toggled,
+      button: button,
+      slider: slider,
+      link: link,
+      header: header,
+      textField: textField,
+      readOnly: readOnly,
+      focusable: focusable,
+      focused: focused,
+      inMutuallyExclusiveGroup: inMutuallyExclusiveGroup,
+      obscured: obscured,
+      multiline: multiline,
+      scopesRoute: scopesRoute,
+      namesRoute: namesRoute,
+      hidden: hidden,
+      image: image,
+      liveRegion: liveRegion,
+      maxValueLength: maxValueLength,
+      currentValueLength: currentValueLength,
+      label: label,
+      value: value,
+      increasedValue: increasedValue,
+      decreasedValue: decreasedValue,
+      hint: hint,
+      onTapHint: onTapHint,
+      onLongPressHint: onLongPressHint,
+      textDirection: textDirection,
+      sortKey: sortKey,
+      tagForChildren: tagForChildren,
+      onTap: onTap,
+      onLongPress: onLongPress,
+      onScrollLeft: onScrollLeft,
+      onScrollRight: onScrollRight,
+      onScrollUp: onScrollUp,
+      onScrollDown: onScrollDown,
+      onIncrease: onIncrease,
+      onDecrease: onDecrease,
+      onCopy: onCopy,
+      onCut: onCut,
+      onPaste: onPaste,
+      onDismiss: onDismiss,
+      onMoveCursorForwardByCharacter: onMoveCursorForwardByCharacter,
+      onMoveCursorBackwardByCharacter: onMoveCursorBackwardByCharacter,
+      onSetSelection: onSetSelection,
+      onDidGainAccessibilityFocus: onDidGainAccessibilityFocus,
+      onDidLoseAccessibilityFocus: onDidLoseAccessibilityFocus,
+      customSemanticsActions: customSemanticsActions,
+    );
+
+    return this;
+  }
 
   /// Wrap widget in animated container
   ///
@@ -1585,12 +1897,11 @@ extension BaseProperty on Niku {
   /// Niku()
   ///   .animatedBuilder(
   ///     animation: animation,
-  ///     builder: (context, child) => Container(
+  ///     builder: (context, child) { _widget = Container(
   ///       child: child,
   ///       margin: EdgeInsets.all(animation.value)
   ///     )
   ///   })
-  ///   .build()
   /// ```
   Niku animatedContainer({
     Alignment? alignment,
@@ -1608,25 +1919,54 @@ extension BaseProperty on Niku {
     Curve curve = Curves.linear,
     required Duration duration,
     VoidCallback? onEnd,
-  }) =>
-      Niku(
-        AnimatedContainer(
-          child: this._widget,
-          alignment: alignment,
-          padding: padding,
-          color: color,
-          decoration: decoration,
-          foregroundDecoration: foregroundDecoration,
-          width: width,
-          height: height,
-          constraints: constraints,
-          margin: margin,
-          transform: transform,
-          transformAlignment: transformAlignment,
-          clipBehavior: clipBehavior,
-          curve: curve,
-          duration: duration,
-          onEnd: onEnd,
-        ),
-      );
+  }) {
+    _widget = AnimatedContainer(
+      child: _widget,
+      alignment: alignment,
+      padding: padding,
+      color: color,
+      decoration: decoration,
+      foregroundDecoration: foregroundDecoration,
+      width: width,
+      height: height,
+      constraints: constraints,
+      margin: margin,
+      transform: transform,
+      transformAlignment: transformAlignment,
+      clipBehavior: clipBehavior,
+      curve: curve,
+      duration: duration,
+      onEnd: onEnd,
+    );
+
+    return this;
+  }
+
+  /// Wrap widget in Form
+  ///
+  /// Example usage
+  /// ```
+  /// final formKey = GlobalKey<FormState>();
+  ///
+  /// Niku()
+  ///   .form(
+  ///     key: formKey,
+  ///   );
+  /// ```
+  Niku form({
+    required Key key,
+    AutovalidateMode? autovalidateMode,
+    Future<bool> Function()? onWillPop,
+    void Function()? onChanged,
+  }) {
+    _widget = Form(
+      key: key,
+      child: _widget,
+      autovalidateMode: autovalidateMode,
+      onWillPop: onWillPop,
+      onChanged: onChanged,
+    );
+
+    return this;
+  }
 }

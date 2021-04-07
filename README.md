@@ -1,74 +1,35 @@
 # Niku
-Property builder for styling Widget
+Effortless property builder for composing maintainable Flutter UI
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/saltyaom/niku/main/doc/images/niku.png" alt="Niku" width="300" />
+  <img src="https://raw.githubusercontent.com/saltyaom/niku/main/doc/images/niku.jpg" alt="Niku" />
 </p>
 
 ## Why
-Styling widget in Flutter is hard to maintain. 
-Since everything is a widget, a style property like `Padding`, `Align`, `FractionallySizedBox`, `Tooltip` is nested to compose a simple widget.
+Creating UI in Flutter is easy. Its declarative enables developers to control every detail and outcome of how it should be.
 
-`Niku` allow developer to style property using builder or `SwiftUI modifier like` to compose styling.
-By reducing the nested hell andbracket usage in Flutter, made styling Flutter widget more maintainable.
+To create styling in Flutter, developers have to describe every detail to Widget. It's like low-level programming UI, having to adapt between property is hard when some are more complex than others, for instance, MaterialStateProperty.
+
+When the codebase gets more complex, the syntax of Flutter itself is too verbose, nested than it should be, result being hard to maintain mostly known as "Nested Hell".
+
+Niku helps to solve the problem by providing a toolkit to style widgets with property builders. To provide a smoother, shorter yet, more straightforward and maintainable way to compose styling in Flutter.
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/saltyaom/niku/main/doc/images/korone-drake-format.jpg" alt="Comparison" />
 </p>
 
-## Getting Start
-Niku required no dependencies at all.
-Starting by adding `niku` to `pubspec.yaml`:
-```yaml
-dependencies:
-  flutter:
-    sdk: flutter
-
-  niku: # Using latest version
-```
-
-Then you're ready to create your awesome Flutter project with effortless styling!
-
-See how simple building Text widget is!
-```dart
-import 'package:niku/niku.dart'; // <--- Import Niku library
-
-NikuText("Hello World")
-  .color(Colors.blue) // <-- Apply color
-  .fontSize(21)       // <-- Add font size
-  .build()            // <-- Create widget
-```
 ## Documentation
-Niku is style property builder for styling user interface inspired by SwiftUI.
+Documentation and getting start can be find on [https://niku.saltyaom.com](niku.saltyaom.com)
 
-## Table of content
-- [Tutorial](https://github.com/saltyaom/niku/blob/main/doc/tutorial/README.md)
-  - [Getting Started](https://github.com/saltyaom/niku/blob/main/doc/tutorial/getting-started.md)
-  - [Setting Up](https://github.com/saltyaom/niku/blob/main/doc/tutorial/setting-up.md)
-  - [Foundation](https://github.com/saltyaom/niku/blob/main/doc/tutorial/foundation.md)
-- [Available Widget](https://github.com/saltyaom/niku/blob/main/doc/widget/README.md)
-  - [Niku](https://github.com/saltyaom/niku/blob/main/doc/widget/base.md)
-    - Niku base for styling widget
-  - [Text](https://github.com/saltyaom/niku/blob/main/doc/widget/text.md)
-    - Niku extension for `Text`
-  - [Column](https://github.com/saltyaom/niku/blob/main/doc/widget/column.md)
-    - Niku extension for `Row`
-  - [Row](https://github.com/saltyaom/niku/blob/main/doc/widget/row.md)
-    - Niku extension for `Column`
-  - [Stack](https://github.com/saltyaom/niku/blob/main/doc/widget/stack.md)
-    - Niku extension for `Stack`  
-  - [Button](https://github.com/saltyaom/niku/blob/main/doc/widget/button.md)
-    - Niku extension for `TextButton`, `ElevatedButton` and `OutlinedButton`
-  - [IconButton](https://github.com/saltyaom/niku/blob/main/doc/widget/iconButton.md)
-    - Niku extension for `IconButton`
-- [Available Extension](https://github.com/saltyaom/niku/blob/main/doc/extension/README.md)
-  - [niku](https://github.com/saltyaom/niku/blob/main/doc/extension/niku.md)
-    - Add `.niku()` extension for widget
-   
-- Deprecated
-  - [FlatButton](https://github.com/saltyaom/niku/blob/main/doc/widget/flatButton.md)
-    - Niku extension for `FlatButton`
-  - [RaisedButton](https://github.com/saltyaom/niku/blob/main/doc/widget/raisedButton.md)
-    - Niku extension for `RaisedButton`
-  - [OutlineButton](https://github.com/saltyaom/niku/blob/main/doc/widget/outlineButton.md)
-    - Niku extension for `OutlineButton`
+- [Introduction and why](https://niku.saltyaom.com/docs/introduction)
+- [Overview](https://niku.saltyaom.com/docs/overview)
+- [Property Builder](https://niku.saltyaom.com/docs/property-builder)
+- [Naming Convention](https://niku.saltyaom.com/docs/naming-convention)
+- [Style Property Builder](https://niku.saltyaom.com/docs/style-builder)
+- [Parent Builder](https://niku.saltyaom.com/docs/parent-builder)
+
+### License
+Niku is MIT Licensed.
+
+### Maintainers
+- [SaltyAom](https://github.com/saltyaom)

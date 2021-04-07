@@ -10,9 +10,8 @@ extension NikuWidget on Widget {
   /// Example usage
   /// ```
   /// Container()
-  ///   .niku()
-  ///   .bg(Colors.blue)
-  ///   .build()
+  ///   ..niku()
+  ///   ..bg(Colors.blue)
   /// ```
-  Niku niku() => Niku(this);
+  Niku niku() => Niku(this, key);
 }
