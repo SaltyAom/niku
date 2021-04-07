@@ -15,7 +15,7 @@ When the codebase gets more complex, the syntax of Flutter itself is too verbose
 Niku helps to solve the problem by providing a toolkit to style widgets with property builders. To provide a smoother, shorter yet, more straightforward and maintainable way to compose styling in Flutter.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/saltyaom/niku/main/doc/images/korone-drake-format.jpg" alt="Comparison" />
+  <img src="https://raw.githubusercontent.com/saltyaom/niku/main/doc/images/drake.jpg" alt="Comparison" />
 </p>
 
 ## Documentation
