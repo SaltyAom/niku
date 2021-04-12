@@ -57,8 +57,8 @@ import 'core.dart';
 ///   - rtl - Use right-to-left direction
 /// - clip, clipBehavior - Add clip behavior of widget
 class NikuWrap extends NikuCore {
-  List<Widget> _children;
-  Key? key;
+  final List<Widget> _children;
+  final Key? key;
 
   Axis _direction = Axis.horizontal;
   WrapAlignment _alignment = WrapAlignment.start;
@@ -117,7 +117,10 @@ class NikuWrap extends NikuCore {
   ///   - ltr - Use left-to-right direction
   ///   - rtl - Use right-to-left direction
   /// - clip, clipBehavior - Add clip behavior of widget
-  NikuWrap(this._children, {key});
+  NikuWrap(
+    this._children, {
+    this.key,
+  });
 
   /// Set wrap direction
   ///

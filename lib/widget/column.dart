@@ -68,8 +68,8 @@ import 'core.dart';
 ///   - insert - Insert child at index
 ///   - insertAll - Insert all children at index
 class NikuColumn extends NikuCore {
-  List<Widget> _children;
-  Key? key;
+  final List<Widget> _children;
+  final Key? key;
 
   MainAxisAlignment _mainAxisAlignment = MainAxisAlignment.start;
   MainAxisSize _mainAxisSize = MainAxisSize.max;
@@ -129,7 +129,10 @@ class NikuColumn extends NikuCore {
   ///   - prependChildren - Prepend all of children
   ///   - insert - Insert child at index
   ///   - insertAll - Insert all children at index
-  NikuColumn(this._children, {key});
+  NikuColumn(
+    this._children, {
+    this.key,
+  });
 
   /// Set main axis alignment
   ///

@@ -56,8 +56,8 @@ import 'core.dart';
 ///   - mb - apply margin bottom side
 ///   - ml - apply margin right side
 class NikuStack extends NikuCore {
-  List<Widget> _children;
-  Key? key;
+  final List<Widget> _children;
+  final Key? key;
 
   AlignmentDirectional _alignment = AlignmentDirectional.topStart;
   TextDirection? _textDirection;
@@ -104,7 +104,10 @@ class NikuStack extends NikuCore {
   ///   - passthrogh - Using [StackFit.passthrough]
   ///   - loose - Using [StackFit.loose]
   /// - clip, clipBehavior - Add clip behavior of widget
-  NikuStack(this._children, {key});
+  NikuStack(
+    this._children, {
+    this.key,
+  });
 
   /// Apply alignment to stack
   ///

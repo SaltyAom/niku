@@ -60,8 +60,8 @@ import 'base.dart';
 /// - enableFeedback - Whether detected gestures should provide acoustic and/or haptic feedback
 /// - constraints - Whether detected gestures should provide acoustic and/or haptic feedback
 class NikuIconButton extends NikuCore {
-  Widget _icon;
-  Key? key;
+  final Widget _icon;
+  final Key? key;
 
   VoidCallback? _onPressed;
 

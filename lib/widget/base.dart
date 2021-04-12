@@ -1731,7 +1731,7 @@ extension BaseProperty on Niku {
     _widget = AnimatedBuilder(
       animation: animation,
       builder: (context, child) {
-        return builder(context, _widget);
+        return builder(context, child!);
       },
       child: _widget,
     );
@@ -1752,14 +1752,14 @@ extension BaseProperty on Niku {
   ///     )
   ///   })
   /// ```
-  Niku animated({
-    required AnimationController animation,
-    required Widget Function(BuildContext context, Widget child) builder,
-  }) {
+  Niku animated(
+    AnimationController animation,
+    Widget Function(BuildContext context, Widget child) builder,
+  ) {
     _widget = AnimatedBuilder(
       animation: animation,
       builder: (context, child) {
-        return builder(context, _widget);
+        return builder(context, child!);
       },
       child: _widget,
     );

@@ -228,9 +228,9 @@ import 'base.dart';
 ///   - alphabetic - Using [TextBaseline.alphabetic]
 ///   - ideographic - Using [TextBaseline.ideographic]
 class NikuButton extends NikuCore {
-  Widget child;
-  NikuButtonType type;
-  Key? key;
+  final Widget child;
+  final NikuButtonType type;
+  final Key? key;
 
   VoidCallback? _onPressed;
   VoidCallback? _onLongPressed;

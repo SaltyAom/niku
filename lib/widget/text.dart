@@ -79,8 +79,8 @@ import 'base.dart';
 /// - textWidthBasis - Defines how to measure the width of the rendered text
 /// - textHeightBehavior - Defines how the paragraph will apply [TextStyle.height] to the ascent of the first line and descent of the last line
 class NikuText extends NikuCore {
-  String _text;
-  Key? key;
+  final String _text;
+  final Key? key;
 
   Color? _color;
   Color? _backgroundColor;
@@ -191,19 +191,10 @@ class NikuText extends NikuCore {
   ///   - pl - apply padding left side
   ///   - pb - apply padding bottom side
   ///   - pl - apply padding right side
-  NikuText(this._text, {this.key});
-
-  /// Set text content
-  ///
-  /// Equivalent to
-  /// ```
-  /// Text(input)
-  /// ```
-  NikuText text(String text) {
-    _text = text;
-
-    return this;
-  }
+  NikuText(
+    this._text, {
+    this.key,
+  });
 
   /// Set color of text
   ///

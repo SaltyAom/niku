@@ -4,6 +4,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 import 'package:niku/niku.dart';
 
+import 'dart:math' as Math;
+
 void main() {
   runApp(MyApp());
 }
@@ -83,6 +85,42 @@ class NikuTextFieldPage extends HookWidget {
         ]).mainCenter().stretch().niku()
           ..px(20),
       ),
+    );
+  }
+}
+
+class AnimationPage extends HookWidget {
+  build(context) {
+    final controller = useAnimationController(
+      initialValue: 5,
+      lowerBound: 0,
+      upperBound: 10,
+    );
+
+    return Scaffold(
+      appBar: AppBar(),
+      body: NikuColumn([
+        NikuButton(Text("Random Width"))
+          ..onPressed(() {
+            final value = Math.Random().nextInt(10);
+
+            controller.animateTo(
+              value.toDouble(),
+              duration: const Duration(milliseconds: 200),
+            );
+          }),
+        Niku()
+          ..bg(Colors.blue)
+          ..rounded()
+          ..height(10)
+          ..animated(
+            controller,
+            (context, child) =>
+                Niku(child)..widthPercent(controller.value * 10),
+          )
+      ])
+        ..mainCenter()
+        ..stretch(),
     );
   }
 }

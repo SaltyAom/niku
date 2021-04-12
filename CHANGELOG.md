@@ -1,3 +1,14 @@
+## [1.0.1] - 2021/4/7
+Breaking Change:
+  - Remove `.text` from NikuText.
+
+Change:
+  - Adding final to constructor parameter.
+
+Bug fix:
+  - Fix key not setting for several widget.
+  - Fix `animated` and `animatedBuilder` not working.
+
 ## [1.0.0] - 2021/4/7
 Bug fix:
   - `this.` access property.

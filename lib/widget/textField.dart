@@ -401,7 +401,7 @@ import 'core.dart';
 ///   - alphabetic - Using [TextBaseline.alphabetic]
 ///   - ideographic - Using [TextBaseline.ideographic]
 class NikuTextField extends NikuCore {
-  Key? key;
+  final Key? key;
 
   // Text Form Field
   TextEditingController? _controller;
