@@ -1033,46 +1033,42 @@ class NikuText extends NikuCore {
   ///   .bold()
   /// ```
   @override
-  build(context) {
-    print("Build");
-
-    return internalBuild(
-      Text(
-        _text,
-        key: key,
-        locale: _locale,
-        softWrap: _softWrap,
-        overflow: _overflow,
-        textScaleFactor: _textScaleFactor,
-        maxLines: _maxLines,
-        semanticsLabel: _semanticsLabel,
-        textWidthBasis: _textWidthBasis,
-        textHeightBehavior: _textHeightBehavior,
-        textDirection: _textDirection,
-        textAlign: _textAlign,
-        style: TextStyle(
-          color: _color,
-          backgroundColor: _backgroundColor,
-          fontSize: _fontSize,
-          fontWeight: _fontWeight,
-          fontStyle: _fontStyle,
-          letterSpacing: _letterSpacing,
-          wordSpacing: _wordSpacing,
-          textBaseline: _textBaseline,
-          height: _height,
-          fontFeatures: _fontFeatures,
-          foreground: _foreground,
-          background: _background,
-          decoration: _textDecoration,
-          decorationColor: _textDecorationColor,
-          decorationThickness: _textDecorationThickness,
-          shadows: _shadows,
-          fontFamily: _fontFamily,
-          fontFamilyFallback: _fontFamilyFallback,
+  build(context) => internalBuild(
+        Text(
+          _text,
+          key: key,
+          locale: _locale,
+          softWrap: _softWrap,
+          overflow: _overflow,
+          textScaleFactor: _textScaleFactor,
+          maxLines: _maxLines,
+          semanticsLabel: _semanticsLabel,
+          textWidthBasis: _textWidthBasis,
+          textHeightBehavior: _textHeightBehavior,
+          textDirection: _textDirection,
+          textAlign: _textAlign,
+          style: TextStyle(
+            color: _color,
+            backgroundColor: _backgroundColor,
+            fontSize: _fontSize,
+            fontWeight: _fontWeight,
+            fontStyle: _fontStyle,
+            letterSpacing: _letterSpacing,
+            wordSpacing: _wordSpacing,
+            textBaseline: _textBaseline,
+            height: _height,
+            fontFeatures: _fontFeatures,
+            foreground: _foreground,
+            background: _background,
+            decoration: _textDecoration,
+            decorationColor: _textDecorationColor,
+            decorationThickness: _textDecorationThickness,
+            shadows: _shadows,
+            fontFamily: _fontFamily,
+            fontFamilyFallback: _fontFamilyFallback,
+          ),
         ),
-      ),
-    );
-  }
+      );
 
   /// Switch to Niku() property
   ///

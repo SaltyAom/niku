@@ -1,3 +1,7 @@
+## [1.0.4] - 2021/4/24
+Bug fix:
+  - log
+
 ## [1.0.3] - 2021/4/24
 Bug fix:
   - builder return void.
