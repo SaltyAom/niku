@@ -142,6 +142,11 @@ class HomePage extends StatelessWidget {
       ),
       body: Niku(Column(
         children: [
+          NikuText("Hi")
+            ..theme(
+              context,
+              (theme) => theme.headline1,
+            ),
           TextButton(
             child: Text("Text Button"),
             onPressed: () {
@@ -229,6 +234,7 @@ class HomePage extends StatelessWidget {
         ))
         ..my(40)
         ..scrollable()
+        ..scrollbar()
         ..fullWidth()
         ..center(),
     );

@@ -78,6 +78,8 @@ import 'base.dart';
 /// - semanticsLabel, label - Semantics label for text, good for screen reader
 /// - textWidthBasis - Defines how to measure the width of the rendered text
 /// - textHeightBehavior - Defines how the paragraph will apply [TextStyle.height] to the ascent of the first line and descent of the last line
+/// - style - Apply text style to Text
+/// - theme - Apply text theme to Text
 class NikuText extends NikuCore {
   final String _text;
   final Key? key;
@@ -183,6 +185,8 @@ class NikuText extends NikuCore {
   /// - semanticsLabel, label - Semantics label for text, good for screen reader
   /// - textWidthBasis - Defines how to measure the width of the rendered text
   /// - textHeightBehavior - Defines how the paragraph will apply [TextStyle.height] to the ascent of the first line and descent of the last line
+  /// - style - Apply text style to Text
+  /// - theme - Apply text theme to Text
   /// - padding, p - Padding of container
   ///   - padding, p - apply padding to all side
   ///   - px - apply padding to x axis
@@ -910,6 +914,58 @@ class NikuText extends NikuCore {
     _textHeightBehavior = textHeightBehavior;
 
     return this;
+  }
+
+  /// Apply text theme to Text
+  ///
+  /// Example Usage:
+  /// NikuText("Theme")
+  ///   ..style(Theme.of(context).textTheme.headline1)
+  ///
+  /// Equivalent:
+  /// ```
+  /// Text(style: input)
+  /// ```
+  NikuText style(TextStyle? theme) {
+    if (theme == null) return this;
+
+    return set(
+      color: theme.color ?? _color,
+      backgroundColor: theme.backgroundColor ?? _backgroundColor,
+      fontSize: theme.fontSize ?? _fontSize,
+      fontWeight: theme.fontWeight ?? _fontWeight,
+      letterSpacing: theme.letterSpacing ?? _letterSpacing,
+      wordSpacing: theme.wordSpacing ?? _wordSpacing,
+      height: theme.height ?? _height,
+      foreground: theme.foreground ?? _foreground,
+      background: theme.background ?? _background,
+      shadows: theme.shadows ?? _shadows,
+      fontFeatures: theme.fontFeatures ?? _fontFeatures,
+      fontFamily: theme.fontFamily ?? _fontFamily,
+      fontFamilyFallback: theme.fontFamilyFallback ?? _fontFamilyFallback,
+      textBaseline: theme.textBaseline ?? _textBaseline,
+      locale: theme.locale ?? _locale,
+    );
+  }
+
+  /// Apply text theme to Text
+  ///
+  /// Example Usage:
+  /// NikuText("Theme")
+  ///   ..theme(
+  ///     context,
+  ///     (theme) => theme.headline1,
+  ///   )
+  ///
+  /// Equivalent:
+  /// ```
+  /// Text(style: input)
+  /// ```
+  NikuText theme(
+    BuildContext context,
+    TextStyle? Function(TextTheme theme) callback,
+  ) {
+    return style(callback(Theme.of(context).textTheme));
   }
 
   /// Apply existing NikuText's property to current style

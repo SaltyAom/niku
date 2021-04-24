@@ -83,6 +83,7 @@ import 'package:flutter/rendering.dart';
 /// - backdropFilter - Apply [BackdropFilter] to Widget
 /// - positioned - Apply [Positioned] to widget
 /// - scrollable, singleChildScrollView - Add [singleChildScrollView] to widget
+/// - scrollbar - Add scrollbar to widget scrollable
 /// - flex, flexible - Apply [Flexible] to Widget
 /// - shadows - Add shadows to widget
 /// - semantics - Add semantic to widget
@@ -221,6 +222,7 @@ class Niku extends StatelessWidget {
   /// - backdropFilter - Apply [BackdropFilter] to Widget
   /// - positioned - Apply [Positioned] to widget
   /// - scrollable, singleChildScrollView - Add [singleChildScrollView] to widget
+  /// - scrollbar - Add scrollbar to widget scrollable
   /// - flex, flexible - Apply [Flexible] to Widget
   /// - shadows - Add shadows to widget
   /// - semantics - Add semantic to widget
@@ -1954,7 +1956,7 @@ extension BaseProperty on Niku {
   ///   );
   /// ```
   Niku form({
-    required Key key,
+    Key? key,
     AutovalidateMode? autovalidateMode,
     Future<bool> Function()? onWillPop,
     void Function()? onChanged,
@@ -1965,6 +1967,35 @@ extension BaseProperty on Niku {
       autovalidateMode: autovalidateMode,
       onWillPop: onWillPop,
       onChanged: onChanged,
+    );
+
+    return this;
+  }
+
+  /// Add scrollbar to widget scrollable
+  ///
+  /// Example usage
+  /// ```
+  /// Niku()
+  ///   .scrollbar();
+  /// ```
+  Niku scrollbar({
+    ScrollController? controller,
+    bool? isAlwaysShown,
+    bool? showTrackOnHover,
+    double? hoverThickness,
+    double? thickness,
+    Radius? radius,
+    ScrollNotificationPredicate? notificationPredicate,
+  }) {
+    _widget = Scrollbar(
+      child: _widget,
+      controller: controller,
+      isAlwaysShown: isAlwaysShown,
+      hoverThickness: hoverThickness,
+      thickness: thickness,
+      radius: radius,
+      notificationPredicate: notificationPredicate,
     );
 
     return this;

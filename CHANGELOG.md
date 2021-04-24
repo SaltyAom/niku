@@ -1,3 +1,8 @@
+## [1.0.2] - 2021/4/24
+Feature:
+  - add `.scrollbar` to base.
+  - add `.style`, `.theme` to text.
+
 ## [1.0.1] - 2021/4/7
 Breaking Change:
   - Remove `.text` from NikuText.

@@ -415,8 +415,12 @@ class NikuTextField extends NikuCore {
   TextAlignVertical? _textAlignVertical;
   bool _autofocus = false;
   bool _readOnly = false;
-  ToolbarOptions? _toolbarOptions =
-      ToolbarOptions(copy: true, cut: true, paste: true, selectAll: true);
+  ToolbarOptions? _toolbarOptions = ToolbarOptions(
+    copy: true,
+    cut: true,
+    paste: true,
+    selectAll: true,
+  );
   bool? _showCursor;
   String _obscuringCharacter = '•';
   bool _obscureText = false;
