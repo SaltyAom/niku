@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.dark,
         ),
       ),
-      home: HomePage(),
+      home: Constable(),
     );
   }
 }
@@ -238,5 +238,36 @@ class HomePage extends StatelessWidget {
         ..fullWidth()
         ..center(),
     );
+  }
+}
+
+class Constable extends HookWidget {
+  const Constable();
+
+  build(context) {
+    final counter = useState(0);
+
+    return Scaffold(
+      appBar: AppBar(),
+      body: NikuColumn([
+        NikuText(counter.value.toString()),
+        NikuButton(Text("Update"))
+          ..onPressed(() {
+            counter.value++;
+          })
+      ]),
+    );
+  }
+}
+
+class ConstNikuText extends StatelessWidget {
+  final NikuText text;
+
+  ConstNikuText(this.text);
+
+  build(context) {
+    print("Change");
+
+    return text.build(context);
   }
 }

@@ -301,8 +301,10 @@ class Niku extends StatelessWidget {
   ///     );
   ///   });
   /// ```
-  void builder(Widget Function(Widget child) builder) {
+  Widget builder(Widget Function(Widget child) builder) {
     _widget = builder(_widget);
+
+    return this;
   }
 }
 
