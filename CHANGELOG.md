@@ -1,3 +1,7 @@
+## [1.0.5] - 2021/4/24
+Bug fix:
+  - builder return Widget instead of Niku.
+
 ## [1.0.4] - 2021/4/24
 Bug fix:
   - log
