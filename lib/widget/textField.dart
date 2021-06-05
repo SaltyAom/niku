@@ -3800,7 +3800,7 @@ class NikuTextField extends NikuCore {
   ///   )
   /// )
   /// ```
-  NikuTextField errorText(String errorText) {
+  NikuTextField errorText(String? errorText) {
     _input_errorText = errorText;
 
     return this;
