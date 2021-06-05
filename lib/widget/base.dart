@@ -775,12 +775,10 @@ extension BaseProperty on Niku {
   /// ```
   /// SizedBox(
   ///   width: double.infinity,
-  ///   height: double.infinity
   /// )
   /// ```
   Niku fullWidth() {
-    _widget = SizedBox(
-        width: double.infinity, height: double.infinity, child: _widget);
+    _widget = SizedBox(width: double.infinity, child: _widget);
 
     return this;
   }
