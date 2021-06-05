@@ -33,6 +33,9 @@ import 'core.dart';
 ///   - spaceAround - Using [MainAxisAlignment.spaceAround]
 ///   - spaceBetween - Using [MainAxisAlignment.spaceBetween]
 ///   - spaceEvenly - Using [MainAxisAlignment.spaceEvenly]
+/// - mainAxisSize, mainAxis - Set main axis size
+///   - sizeMax - Using [MainAxisSize.max]
+///   - sizeMin - Using [MainAxisSize.min]
 /// - crossAxisAlignment, crossAxis - Set cross axis alignment
 ///   - baseline - Using [CrossAxisAlignment.baseline]
 ///   - crossStart, itemsStart - Using [CrossAxisAlignment.start]
@@ -104,6 +107,9 @@ class NikuRow extends NikuCore {
   ///   - spaceAround - Using [MainAxisAlignment.spaceAround]
   ///   - spaceBetween - Using [MainAxisAlignment.spaceBetween]
   ///   - spaceEvenly - Using [MainAxisAlignment.spaceEvenly]
+  /// - mainAxisSize, mainAxis - Set main axis size
+  ///   - sizeMax - Using [MainAxisSize.max]
+  ///   - sizeMin - Using [MainAxisSize.min]
   /// - crossAxisAlignment, crossAxis - Set cross axis alignment
   ///   - baseline - Using [CrossAxisAlignment.baseline]
   ///   - crossStart, itemsStart - Using [CrossAxisAlignment.start]
@@ -297,6 +303,48 @@ class NikuRow extends NikuCore {
   /// ```
   NikuRow crossAxisAlignment(CrossAxisAlignment crossAxisAlignment) {
     _crossAxisAlignment = crossAxisAlignment;
+
+    return this;
+  }
+
+  /// Set main axis size
+  ///
+  /// Equivalent to
+  /// ```
+  /// Row(
+  ///   mainAxisSize: input
+  /// )
+  /// ```
+  NikuRow mainSize(MainAxisSize size) {
+    _mainAxisSize = size;
+
+    return this;
+  }
+
+  /// Using [MainAxisSize.max]
+  ///
+  /// Equivalent to
+  /// ```
+  /// Row(
+  ///   mainAxisSize: MainAxisSize.max
+  /// )
+  /// ```
+  NikuRow sizeMax() {
+    _mainAxisSize = MainAxisSize.max;
+
+    return this;
+  }
+
+  /// Using [MainAxisSize.min]
+  ///
+  /// Equivalent to
+  /// ```
+  /// Row(
+  ///   mainAxisSize: MainAxisSize.min
+  /// )
+  /// ```
+  NikuRow sizeMin() {
+    _mainAxisSize = MainAxisSize.min;
 
     return this;
   }

@@ -33,6 +33,9 @@ import 'core.dart';
 ///   - spaceAround - Using [MainAxisAlignment.spaceAround]
 ///   - spaceBetween - Using [MainAxisAlignment.spaceBetween]
 ///   - spaceEvenly - Using [MainAxisAlignment.spaceEvenly]
+/// - mainAxisSize, mainAxis - Set main axis size
+///   - sizeMax - Using [MainAxisSize.max]
+///   - sizeMin - Using [MainAxisSize.min]
 /// - crossAxisAlignment, crossAxis - Set cross axis alignment
 ///   - baseline - Using [CrossAxisAlignment.baseline]
 ///   - crossStart, itemsStart - Using [CrossAxisAlignment.start]
@@ -105,6 +108,9 @@ class NikuColumn extends NikuCore {
   ///   - spaceAround - Using [MainAxisAlignment.spaceAround]
   ///   - spaceBetween - Using [MainAxisAlignment.spaceBetween]
   ///   - spaceEvenly - Using [MainAxisAlignment.spaceEvenly]
+  /// - mainAxisSize, mainAxis - Set main axis size
+  ///   - sizeMax - Using [MainAxisSize.max]
+  ///   - sizeMin - Using [MainAxisSize.min]
   /// - crossAxisAlignment, crossAxis - Set cross axis alignment
   ///   - baseline - Using [CrossAxisAlignment.baseline]
   ///   - crossStart, itemsStart - Using [CrossAxisAlignment.start]
@@ -284,6 +290,48 @@ class NikuColumn extends NikuCore {
   /// ```
   NikuColumn spaceEvenly() {
     _mainAxisAlignment = MainAxisAlignment.spaceEvenly;
+
+    return this;
+  }
+
+  /// Set main axis size
+  ///
+  /// Equivalent to
+  /// ```
+  /// Column(
+  ///   mainAxisSize: input
+  /// )
+  /// ```
+  NikuColumn mainSize(MainAxisSize size) {
+    _mainAxisSize = size;
+
+    return this;
+  }
+
+  /// Using [MainAxisSize.max]
+  ///
+  /// Equivalent to
+  /// ```
+  /// Column(
+  ///   mainAxisSize: MainAxisSize.max
+  /// )
+  /// ```
+  NikuColumn sizeMax() {
+    _mainAxisSize = MainAxisSize.max;
+
+    return this;
+  }
+
+  /// Using [MainAxisSize.min]
+  ///
+  /// Equivalent to
+  /// ```
+  /// Column(
+  ///   mainAxisSize: MainAxisSize.min
+  /// )
+  /// ```
+  NikuColumn sizeMin() {
+    _mainAxisSize = MainAxisSize.min;
 
     return this;
   }
