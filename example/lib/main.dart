@@ -1,10 +1,8 @@
-import 'package:flutter/material.dart';
-
-import 'package:flutter_hooks/flutter_hooks.dart';
-
-import 'package:niku/niku.dart';
-
 import 'dart:math' as Math;
+
+import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:niku/niku.dart';
 
 void main() {
   runApp(MyApp());
@@ -246,14 +244,21 @@ class Constable extends HookWidget {
 
   build(context) {
     final counter = useState(0);
+    final isEnabled = useState(true);
 
     return Scaffold(
       appBar: AppBar(),
       body: NikuColumn([
         NikuText(counter.value.toString()),
         NikuButton(Text("Update"))
+          ..onPressed(isEnabled.value
+              ? () {
+                  counter.value++;
+                }
+              : null),
+        NikuButton(Text("Toggle"))
           ..onPressed(() {
-            counter.value++;
+            isEnabled.value = !isEnabled.value;
           })
       ]),
     );
