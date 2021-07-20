@@ -98,7 +98,7 @@ class NikuIconButton extends NikuCore {
   ///   onPressed: input
   /// )
   /// ```
-  NikuIconButton onPressed(VoidCallback callback) {
+  NikuIconButton onPressed(VoidCallback? callback) {
     _onPressed = callback;
 
     return this;

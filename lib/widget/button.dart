@@ -1,9 +1,8 @@
 // ignore_for_file: non_constant_identifier_names
 // ignore_for_file: must_be_immutable
-import 'package:flutter/material.dart';
-
 import 'dart:ui';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:niku/widget/core.dart';
 
@@ -554,7 +553,7 @@ class NikuButton extends NikuCore {
   ///   onPressed: input
   /// )
   /// ```
-  NikuButton onPressed(VoidCallback callback) {
+  NikuButton onPressed(VoidCallback? callback) {
     _onPressed = callback;
 
     return this;
