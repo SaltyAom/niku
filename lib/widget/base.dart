@@ -818,7 +818,7 @@ extension BaseProperty on Niku {
   /// Expanded()
   /// ```
   Niku expanded([int flex = 1]) {
-    _widget = Expanded(child: _widget);
+    _widget = Expanded(child: _widget, flex: flex);
 
     return this;
   }
