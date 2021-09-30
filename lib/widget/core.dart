@@ -143,7 +143,7 @@ class NikuCore extends StatelessWidget {
   }
 
   @override
-  build(context) => SizedBox.shrink();
+  Widget build(context) => SizedBox.shrink();
 
   Widget internalBuild(Widget widget) {
     if ([getMt, getMl, getMb, getMr].every((element) => element == 0))

@@ -1,3 +1,25 @@
+## [1.1.2] - 2021/7/20
+Thanks to [dmitrijkiltau](https://github.com/dmitrijkiltau) for contribution!
+This release add the nullable `onTap` on `NikuButton`, also adding the example for that.
+
+Bug fixes:
+  - Nullable onTap on `NikuButton`
+
+## [1.1.1] - 2021/7/11
+Big thanks to [y-pakorn](https://github.com/y-pakorn) for this release!
+He contribute to Niku for a several PR now, in fact, this entire release is happend because of his contribution which solved bug caused by my clumsiness, tee hee~
+
+Feature:
+  - Add `mainAxisSize` to `NikuColumn` and `NikuRow`
+
+Bug fixes:
+  - Fixes `.fullWidth()` which cause full height.
+  - Makes error text optional on `NikuTextField`.
+
+## [1.1.0] - 2021/6/2
+Feature:
+  - selectable text
+
 ## [1.0.5] - 2021/4/24
 Bug fix:
   - builder return Widget instead of Niku.

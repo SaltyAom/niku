@@ -781,7 +781,7 @@ class NikuColumn extends NikuCore {
   ///   .append(Text("2"))
   /// ```
   @override
-  build(context) => internalBuild(
+  Widget build(context) => internalBuild(
         Column(
           key: key,
           children: _children,
