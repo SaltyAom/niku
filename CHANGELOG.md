@@ -1,3 +1,11 @@
+## [1.1.3] - 2021/9/30
+Thanks to [y-pakron](https://github.com/y-pakorn) for fixing the bug!
+This release fix the `expanded` method to be flexible on `NikuCore` where I overlook.
+Without this PR, we are going to have time confusion of why flexing doesn't work!
+
+Bug fixes:
+  - Apply `flex` parameter to `expanded` on `NikuCore`
+
 ## [1.1.2] - 2021/7/20
 Thanks to [dmitrijkiltau](https://github.com/dmitrijkiltau) for contribution!
 This release add the nullable `onTap` on `NikuButton`, also adding the example for that.
