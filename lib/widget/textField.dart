@@ -428,7 +428,7 @@ class NikuTextField extends NikuCore {
   SmartDashesType? _smartDashesType;
   SmartQuotesType? _smartQuotesType;
   bool _enableSuggestions = true;
-  int _maxLines = 1;
+  int? _maxLines = 1;
   int? _minLines;
   bool _expands = false;
   int? _maxLength;
@@ -1867,7 +1867,7 @@ class NikuTextField extends NikuCore {
   ///   maxLines: input
   /// )
   /// ```
-  NikuTextField maxLines(int maxLines) {
+  NikuTextField maxLines(int? maxLines) {
     _maxLines = maxLines;
 
     return this;
@@ -1881,7 +1881,7 @@ class NikuTextField extends NikuCore {
   ///   maxLines: input
   /// )
   /// ```
-  NikuTextField minLines(int minLines) {
+  NikuTextField minLines(int? minLines) {
     _minLines = minLines;
 
     return this;
@@ -7445,7 +7445,7 @@ class NikuTextField extends NikuCore {
     SmartDashesType? smartDashesType,
     SmartQuotesType? smartQuotesType,
     bool enableSuggestions = true,
-    int maxLines = 1,
+    int? maxLines = 1,
     int? minLines,
     bool expands = false,
     int? maxLength,
