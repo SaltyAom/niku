@@ -550,7 +550,7 @@ class NikuText extends NikuCore {
   /// ```
   /// TextStyle(fontFamily: input)
   /// ```
-  NikuText fontFamily(String fontFamily) {
+  NikuText fontFamily(String? fontFamily) {
     _fontFamily = fontFamily;
 
     return this;
@@ -562,7 +562,7 @@ class NikuText extends NikuCore {
   /// ```
   /// TextStyle(fontFamilyFallback: input)
   /// ```
-  NikuText fontFamilyFallback(List<String> fontFamily) {
+  NikuText fontFamilyFallback(List<String>? fontFamily) {
     _fontFamilyFallback = fontFamily;
 
     return this;
