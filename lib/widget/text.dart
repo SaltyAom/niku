@@ -23,16 +23,11 @@ class NikuText extends StatelessWidget with TextAlignMacro, TextBaselineMacro {
   set apply(NikuText? text) {
     if (text == null) return;
 
-    if (style != null)
-      style!.apply = text.style;
-    else
-      style = text.style;
+    if (style == null) style = NikuTextStyle();
+    if (strutStyle == null) strutStyle = NikuStrutStyle();
 
-    if (strutStyle != null)
-      strutStyle!.apply = text.strutStyle;
-    else
-      strutStyle = text.strutStyle;
-
+    style = text.style;
+    strutStyle = text.strutStyle;
     textAlign = text.textAlign ?? textAlign;
     textDirection = text.textDirection ?? textDirection;
     locale = text.locale ?? locale;

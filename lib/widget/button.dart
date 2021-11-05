@@ -37,6 +37,7 @@ class NikuButton extends StatelessWidget with ClipMacro {
 
   factory NikuButton.elevated(
     Widget child, {
+    Key? key,
     VoidCallback? onPressed,
     VoidCallback? onLongPress,
     NikuButtonStyle? style,
@@ -44,16 +45,20 @@ class NikuButton extends StatelessWidget with ClipMacro {
     bool? autofocus,
     Clip? clipBehavior,
   }) =>
-      NikuButton(child,
-          type: NikuButtonType.Elevated,
-          onPressed: onPressed,
-          onLongPress: onLongPress,
-          style: style,
-          focusNode: focusNode,
-          clipBehavior: clipBehavior);
+      NikuButton(
+        child,
+        type: NikuButtonType.Elevated,
+        onPressed: onPressed,
+        onLongPress: onLongPress,
+        style: style,
+        focusNode: focusNode,
+        clipBehavior: clipBehavior,
+        key: key,
+      );
 
   factory NikuButton.outlined(
     Widget child, {
+    Key? key,
     VoidCallback? onPressed,
     VoidCallback? onLongPress,
     NikuButtonStyle? style,
@@ -69,6 +74,7 @@ class NikuButton extends StatelessWidget with ClipMacro {
         style: style,
         focusNode: focusNode,
         clipBehavior: clipBehavior,
+        key: key,
       );
 
   factory NikuButton.icon(
@@ -203,4 +209,40 @@ class NikuButton extends StatelessWidget with ClipMacro {
             clipBehavior: clipBehavior ?? Clip.none,
           );
   }
+}
+
+extension TransformNikuTextButton on TextButton {
+  NikuButton get niku => NikuButton(
+        child ?? SizedBox.shrink(),
+        key: key,
+        onPressed: onPressed,
+        onLongPress: onLongPress,
+        style: style?.niku,
+        focusNode: focusNode,
+        clipBehavior: clipBehavior,
+      );
+}
+
+extension TransformNikuElevatedButton on ElevatedButton {
+  NikuButton get niku => NikuButton.elevated(
+        child ?? SizedBox.shrink(),
+        key: key,
+        onPressed: onPressed,
+        onLongPress: onLongPress,
+        style: style?.niku,
+        focusNode: focusNode,
+        clipBehavior: clipBehavior,
+      );
+}
+
+extension TransformNikuOutlinedButton on OutlinedButton {
+  NikuButton get niku => NikuButton.outlined(
+        child ?? SizedBox.shrink(),
+        key: key,
+        onPressed: onPressed,
+        onLongPress: onLongPress,
+        style: style?.niku,
+        focusNode: focusNode,
+        clipBehavior: clipBehavior,
+      );
 }

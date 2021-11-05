@@ -18,8 +18,30 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.blue,
         primarySwatch: Colors.blue,
       ),
-      home: App(),
+      home: Counter(),
     );
+  }
+}
+
+class Counter extends HookWidget {
+  const Counter();
+
+  build(context) {
+    final count = useState(0);
+
+    return Scaffold(
+        body: Center(
+      child: NikuColumn([
+        NikuText("Counter: ${count.value}")
+          ..style = (NikuTextStyle()..h3 = context),
+        NikuButton.elevated(Text("Increment"))
+          ..onPressed = () {
+            count.value++;
+          },
+      ])
+        ..mainCenter
+        ..crossCenter,
+    ));
   }
 }
 
@@ -32,6 +54,13 @@ class App extends StatelessWidget {
       body: Container(
         width: double.infinity,
         child: NikuColumn([
+          NikuTextFormField()
+            ..style = (NikuTextStyle(fontSize: 21))
+            ..decoration = (NikuInputDecoration()
+              ..labelText = "Text"
+              ..outlined
+              ..floatingLabelStyle = (NikuTextStyle(color: Colors.red))
+              ..focusedBorderColor = Colors.red),
           NikuButton.elevated(Text("Hello World"))
             ..onPressed = () {}
             ..style = (NikuButtonStyle()

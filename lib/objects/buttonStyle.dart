@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:niku/macros/macros.dart';
-
+import '../macros/macros.dart';
 import '../objects/objects.dart';
 
 class NikuButtonStyle with AlignmentDirectionalMacro {
@@ -180,6 +179,17 @@ class NikuButtonStyle with AlignmentDirectionalMacro {
         side: sideState?.value,
         shape: shapeState?.value,
         mouseCursor: mouseCursorState?.value,
+        visualDensity: visualDensity,
+        tapTargetSize: tapTargetSize,
+        animationDuration: animationDuration,
+        enableFeedback: enableFeedback,
+        alignment: alignment,
+        splashFactory: splashFactory,
+      );
+}
+
+extension NikuButtonStyleTransform on ButtonStyle {
+  NikuButtonStyle get niku => NikuButtonStyle(
         visualDensity: visualDensity,
         tapTargetSize: tapTargetSize,
         animationDuration: animationDuration,
