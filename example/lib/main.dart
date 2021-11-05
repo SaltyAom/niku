@@ -1,5 +1,3 @@
-import 'dart:math' as Math;
-
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:niku/niku.dart';
@@ -7,8 +5,6 @@ import 'package:niku/niku.dart';
 void main() {
   runApp(MyApp());
 }
-
-typedef A = List<String>;
 
 class MyApp extends StatelessWidget {
   build(context) {
@@ -32,12 +28,24 @@ class Counter extends HookWidget {
     return Scaffold(
         body: Center(
       child: NikuColumn([
-        NikuText("Counter: ${count.value}")
-          ..style = (NikuTextStyle()..h3 = context),
-        NikuButton.elevated(Text("Increment"))
-          ..onPressed = () {
+        NikuText(
+          "Counter: ${count.value}",
+          style: NikuTextStyle()..h3 = context,
+        ),
+        NikuButton.elevated(
+          Text("Increment"),
+          onPressed: () {
             count.value++;
           },
+        )..style = (NikuButtonStyle(
+            textStyleState: NikuState<NikuTextStyle>.all(
+              NikuTextStyle()
+                ..h5 = context
+                ..color = Colors.white,
+            ),
+          )
+            ..px = 24
+            ..py = 12),
       ])
         ..mainCenter
         ..crossCenter,
