@@ -36,32 +36,33 @@ class NikuTextStyle
   TextOverflow? overflow;
   String? package;
 
-  NikuTextStyle(
-      {this.inherit = true,
-      this.color,
-      this.backgroundColor,
-      this.fontFamily,
-      this.fontFamilyFallback,
-      this.fontSize,
-      this.fontWeight,
-      this.fontStyle,
-      this.letterSpacing,
-      this.wordSpacing,
-      this.textBaseline,
-      this.height,
-      this.leadingDistribution,
-      this.locale,
-      this.foreground,
-      this.background,
-      this.decoration,
-      this.decorationColor,
-      this.decorationStyle,
-      this.decorationThickness,
-      this.debugLabel,
-      this.shadows,
-      this.fontFeatures,
-      this.overflow,
-      this.package});
+  NikuTextStyle({
+    this.inherit = true,
+    this.color,
+    this.backgroundColor,
+    this.fontFamily,
+    this.fontFamilyFallback,
+    this.fontSize,
+    this.fontWeight,
+    this.fontStyle,
+    this.letterSpacing,
+    this.wordSpacing,
+    this.textBaseline,
+    this.height,
+    this.leadingDistribution,
+    this.locale,
+    this.foreground,
+    this.background,
+    this.decoration,
+    this.decorationColor,
+    this.decorationStyle,
+    this.decorationThickness,
+    this.debugLabel,
+    this.shadows,
+    this.fontFeatures,
+    this.overflow,
+    this.package,
+  });
 
   set apply(NikuTextStyle? style) {
     if (style == null) return;
@@ -92,7 +93,7 @@ class NikuTextStyle
     overflow = style.overflow ?? overflow;
   }
 
-  get value => TextStyle(
+  TextStyle get value => TextStyle(
         inherit: inherit,
         color: color,
         backgroundColor: backgroundColor,

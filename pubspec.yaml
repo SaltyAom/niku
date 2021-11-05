@@ -4,12 +4,14 @@ version: 2.0.0-experimental.0
 homepage: https://github.com/saltyAom/niku
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=2.14.0 <3.0.0"
   flutter: ">=2.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
+
+  union: ^0.0.4-nullsafety.1
 
 dev_dependencies:
   flutter_test:

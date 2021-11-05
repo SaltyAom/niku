@@ -8,6 +8,8 @@ void main() {
   runApp(MyApp());
 }
 
+typedef A = List<String>;
+
 class MyApp extends StatelessWidget {
   build(context) {
     return MaterialApp(
@@ -27,16 +29,36 @@ class App extends StatelessWidget {
       appBar: AppBar(
         title: Text("Niku"),
       ),
-      body: NikuColumn([
-        NikuText("Hi friends~")
-          ..center
-          ..style = (NikuTextStyle()
-            ..h2 = context
-            ..color = Colors.grey.shade700
-            ..w300)
-      ])
-        ..mainCenter
-        ..stretch,
+      body: Container(
+        width: double.infinity,
+        child: NikuColumn([
+          NikuButton.elevated(Text("Hello World"))
+            ..onPressed = () {}
+            ..style = (NikuButtonStyle()
+              ..bg = Colors.blue
+              ..fg = Colors.white
+              ..px = 24
+              ..py = 12
+              ..elevationState = NikuState(pressed: 16)
+              ..textStyle = (NikuTextStyle()..fontSize = 24)),
+          NikuButton.outlined(Text("Hello World"))
+            ..onPressed = () {}
+            ..style = (NikuButtonStyle()
+              ..fg = Colors.blue
+              ..px = 24
+              ..py = 12
+              ..side = BorderSide(color: Colors.blue, width: 2)
+              ..textStyle = (NikuTextStyle()..fontSize = 24)),
+          NikuText("Hi friends~")
+            ..center
+            ..style = (NikuTextStyle()
+              ..fontSize = 24
+              ..color = Colors.grey.shade700
+              ..w300)
+        ])
+          ..mainCenter
+          ..crossCenter,
+      ),
     );
   }
 }
