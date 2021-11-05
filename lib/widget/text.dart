@@ -4,11 +4,11 @@ import '../objects/objects.dart';
 import '../mixins/mixins.dart';
 
 // ignore: must_be_immutable
-class NikuText extends StatelessWidget with TextAlignMixins {
+class NikuText extends StatelessWidget with TextAlignMixin, TextBaselineMixin {
   String? text;
 
   NikuTextStyle? style;
-  StrutStyle? strutStyle;
+  NikuStrutStyle? strutStyle;
   TextAlign? textAlign;
   TextDirection? textDirection;
   Locale? locale;
@@ -20,8 +20,29 @@ class NikuText extends StatelessWidget with TextAlignMixins {
   TextWidthBasis? textWidthBasis;
   TextHeightBehavior? textHeightBehavior;
 
-  set createStyle(NikuTextStyle Function(NikuTextStyle) callback) {
-    style = callback(NikuTextStyle());
+  set apply(NikuText? text) {
+    if (text == null) return;
+
+    if (style != null)
+      style!.apply = text.style;
+    else
+      style = text.style;
+
+    if (strutStyle != null)
+      strutStyle!.apply = text.strutStyle;
+    else
+      strutStyle = text.strutStyle;
+
+    textAlign = text.textAlign ?? textAlign;
+    textDirection = text.textDirection ?? textDirection;
+    locale = text.locale ?? locale;
+    softWrap = text.softWrap ?? softWrap;
+    overflow = text.overflow ?? overflow;
+    textScaleFactor = text.textScaleFactor ?? textScaleFactor;
+    maxLines = text.maxLines ?? maxLines;
+    semanticsLabel = text.semanticsLabel ?? semanticsLabel;
+    textWidthBasis = text.textWidthBasis ?? textWidthBasis;
+    textHeightBehavior = text.textHeightBehavior ?? textHeightBehavior;
   }
 
   NikuText(
@@ -42,11 +63,11 @@ class NikuText extends StatelessWidget with TextAlignMixins {
   }) : super(key: key);
 
   @override
-  build(context) {
+  Text build(context) {
     return Text(
       this.text ?? "",
       style: this.style?.value,
-      strutStyle: this.strutStyle,
+      strutStyle: this.strutStyle?.value,
       textAlign: this.textAlign,
       textDirection: this.textDirection,
       locale: this.locale,
@@ -65,7 +86,7 @@ extension NikuTextTransform on Text {
   NikuText get niku => NikuText(
         this.data,
         style: this.style?.niku,
-        strutStyle: this.strutStyle,
+        strutStyle: this.strutStyle?.niku,
         textAlign: this.textAlign,
         textDirection: this.textDirection,
         locale: this.locale,

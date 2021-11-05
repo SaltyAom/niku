@@ -1,7 +1,9 @@
+export 'axis.dart';
 export 'backgroundColor.dart';
 export 'fontStyle.dart';
 export 'fontWeight.dart';
 export 'foregroundColor.dart';
 export 'textAlign.dart';
+export 'textBaseline.dart';
 export 'textDirection.dart';
 export 'textStyleTheme.dart';

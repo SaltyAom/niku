@@ -27,18 +27,16 @@ class App extends StatelessWidget {
       appBar: AppBar(
         title: Text("Niku"),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          NikuText("Hi friends~")
-            ..center
-            ..style = (NikuTextStyle()
-              ..h2 = context
-              ..color = Colors.grey.shade700
-              ..w300)
-        ],
-      ),
+      body: NikuColumn([
+        NikuText("Hi friends~")
+          ..center
+          ..style = (NikuTextStyle()
+            ..h2 = context
+            ..color = Colors.grey.shade700
+            ..w300)
+      ])
+        ..mainCenter
+        ..stretch,
     );
   }
 }

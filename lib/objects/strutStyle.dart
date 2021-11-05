@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../mixins/mixins.dart';
 
-class NikuStrutStyle with FontWeightMixin, FontStyleMixin {
+class NikuStrutStyle with FontStyleMixin, FontWeightMixin {
   String? fontFamily;
   List<String>? fontFamilyFallback;
   double? fontSize;

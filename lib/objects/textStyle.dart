@@ -5,10 +5,10 @@ import '../mixins/mixins.dart';
 
 class NikuTextStyle
     with
-        FontWeightMixin,
-        FontStyleMixin,
-        TextDirectionMixin,
         BackgroundColorMixin,
+        FontStyleMixin,
+        FontWeightMixin,
+        TextDirectionMixin,
         TextStyleThemeMixin {
   bool inherit;
   Color? color;
