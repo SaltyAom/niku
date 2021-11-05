@@ -29,7 +29,6 @@ class NikuColumn extends StatelessWidget
   set apply(NikuColumn? column) {
     if (column == null) return;
 
-    children = children;
     mainAxisAlignment = column.mainAxisAlignment ?? mainAxisAlignment;
     mainAxisSize = column.mainAxisSize ?? mainAxisSize;
     crossAxisAlignment = column.crossAxisAlignment ?? crossAxisAlignment;
@@ -41,6 +40,7 @@ class NikuColumn extends StatelessWidget
   Column build(context) {
     return Column(
       children: children,
+      key: key,
       mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.start,
       mainAxisSize: mainAxisSize ?? MainAxisSize.max,
       crossAxisAlignment: crossAxisAlignment ?? CrossAxisAlignment.center,

@@ -26,21 +26,21 @@ class NikuRow extends StatelessWidget
     this.textBaseline,
   }) : super(key: key);
 
-  set apply(NikuRow? column) {
-    if (column == null) return;
+  set apply(NikuRow? row) {
+    if (row == null) return;
 
-    children = children;
-    mainAxisAlignment = column.mainAxisAlignment ?? mainAxisAlignment;
-    mainAxisSize = column.mainAxisSize ?? mainAxisSize;
-    crossAxisAlignment = column.crossAxisAlignment ?? crossAxisAlignment;
-    textDirection = column.textDirection ?? textDirection;
-    textBaseline = column.textBaseline ?? textBaseline;
+    mainAxisAlignment = row.mainAxisAlignment ?? mainAxisAlignment;
+    mainAxisSize = row.mainAxisSize ?? mainAxisSize;
+    crossAxisAlignment = row.crossAxisAlignment ?? crossAxisAlignment;
+    textDirection = row.textDirection ?? textDirection;
+    textBaseline = row.textBaseline ?? textBaseline;
   }
 
   @override
   Column build(context) {
     return Column(
       children: children,
+      key: key,
       mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.start,
       mainAxisSize: mainAxisSize ?? MainAxisSize.max,
       crossAxisAlignment: crossAxisAlignment ?? CrossAxisAlignment.center,

@@ -66,6 +66,7 @@ class NikuText extends StatelessWidget with TextAlignMixin, TextBaselineMixin {
   Text build(context) {
     return Text(
       this.text ?? "",
+      key: key,
       style: this.style?.value,
       strutStyle: this.strutStyle?.value,
       textAlign: this.textAlign,

@@ -1,5 +1,8 @@
+export 'alignmentDirectional.dart';
 export 'axis.dart';
 export 'backgroundColor.dart';
+export 'clip.dart';
+export 'fit.dart';
 export 'fontStyle.dart';
 export 'fontWeight.dart';
 export 'foregroundColor.dart';
