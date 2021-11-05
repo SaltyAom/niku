@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-abstract class FontStyleMixin {
+abstract class FontStyleMacro {
   FontStyle? fontStyle;
 
   void get italic => fontStyle = FontStyle.italic;

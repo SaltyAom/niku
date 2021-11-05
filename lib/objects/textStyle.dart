@@ -1,15 +1,15 @@
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 
-import '../mixins/mixins.dart';
+import '../macros/macros.dart';
 
 class NikuTextStyle
     with
-        BackgroundColorMixin,
-        FontStyleMixin,
-        FontWeightMixin,
-        TextDirectionMixin,
-        TextStyleThemeMixin {
+        BackgroundColorMacro,
+        FontStyleMacro,
+        FontWeightMacro,
+        TextDirectionMacro,
+        TextStyleThemeMacro {
   bool inherit;
   Color? color;
   Color? backgroundColor;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-abstract class FontWeightMixin {
+abstract class FontWeightMacro {
   FontWeight? fontWeight;
 
   void get w100 => fontWeight = FontWeight.w100;

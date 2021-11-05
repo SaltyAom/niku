@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-abstract class ClipMixin {
+abstract class ClipMacro {
   Clip? clip;
 
   void get noClip => clip = Clip.none;

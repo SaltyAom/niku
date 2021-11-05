@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../objects/objects.dart';
-import '../mixins/mixins.dart';
+import '../macros/macros.dart';
 
 // ignore: must_be_immutable
-class NikuText extends StatelessWidget with TextAlignMixin, TextBaselineMixin {
+class NikuText extends StatelessWidget with TextAlignMacro, TextBaselineMacro {
   String? text;
 
   NikuTextStyle? style;

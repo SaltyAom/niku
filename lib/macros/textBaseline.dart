@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-abstract class TextBaselineMixin {
+abstract class TextBaselineMacro {
   TextBaseline? textBaseline;
 
   void get alphabetic => textBaseline = TextBaseline.alphabetic;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-abstract class BackgroundColorMixin {
+abstract class BackgroundColorMacro {
   Color? backgroundColor;
 
   set bg(Color color) => backgroundColor = color;

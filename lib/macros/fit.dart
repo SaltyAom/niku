@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-abstract class FitMixin {
+abstract class FitMacro {
   StackFit? fit;
 
   void get expand => fit = StackFit.expand;

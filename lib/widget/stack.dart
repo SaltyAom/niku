@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../mixins/mixins.dart';
+import '../macros/macros.dart';
 
 // ignore: must_be_immutable
 class NikuStack extends StatelessWidget
-    with AlignmentDirectionalMixin, ClipMixin, FitMixin, TextDirectionMixin {
+    with AlignmentDirectionalMacro, ClipMacro, FitMacro, TextDirectionMacro {
   List<Widget> children;
   AlignmentGeometry? alignment;
   TextDirection? textDirection;

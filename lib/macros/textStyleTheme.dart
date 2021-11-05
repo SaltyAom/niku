@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../objects/textStyle.dart';
 
-abstract class TextStyleThemeMixin {
+abstract class TextStyleThemeMacro {
   set apply(NikuTextStyle? style);
 
   set h1(BuildContext context) =>

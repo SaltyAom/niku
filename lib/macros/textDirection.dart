@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-abstract class TextDirectionMixin {
+abstract class TextDirectionMacro {
   TextDirection? textDirection;
 
   void get ltr => textDirection = TextDirection.ltr;

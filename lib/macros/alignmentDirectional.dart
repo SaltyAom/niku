@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-abstract class AlignmentDirectionalMixin {
+abstract class AlignmentDirectionalMacro {
   AlignmentGeometry? alignment;
 
   void get topStart => alignment = AlignmentDirectional.topStart;

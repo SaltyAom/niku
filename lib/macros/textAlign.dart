@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-abstract class TextAlignMixin {
+abstract class TextAlignMacro {
   TextAlign? textAlign;
 
   void get left => textAlign = TextAlign.left;
