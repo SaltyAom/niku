@@ -37,19 +37,19 @@ class NikuWrap extends StatelessWidget
     this.clipBehavior,
   }) : super(key: key);
 
-  set apply(NikuWrap? wrap) {
-    if (wrap == null) return;
+  set apply(NikuWrap? v) {
+    if (v == null) return;
 
-    this.chidren = wrap.chidren;
-    this.direction = wrap.direction;
-    this.alignment = wrap.alignment;
-    this.spacing = wrap.spacing;
-    this.runAlignment = wrap.runAlignment;
-    this.runSpacing = wrap.runSpacing;
-    this.crossAxisAlignment = wrap.crossAxisAlignment;
-    this.textDirection = wrap.textDirection;
-    this.verticalDirection = wrap.verticalDirection;
-    this.clipBehavior = wrap.clipBehavior;
+    this.chidren = v.chidren;
+    this.direction = v.direction;
+    this.alignment = v.alignment;
+    this.spacing = v.spacing;
+    this.runAlignment = v.runAlignment;
+    this.runSpacing = v.runSpacing;
+    this.crossAxisAlignment = v.crossAxisAlignment;
+    this.textDirection = v.textDirection;
+    this.verticalDirection = v.verticalDirection;
+    this.clipBehavior = v.clipBehavior;
   }
 
   @override
@@ -59,7 +59,7 @@ class NikuWrap extends StatelessWidget
       key: key,
       direction: direction ?? Axis.horizontal,
       alignment: alignment ?? WrapAlignment.start,
-      spacing: spacing = 0,
+      spacing: spacing ?? 0,
       runAlignment: runAlignment ?? WrapAlignment.start,
       runSpacing: runSpacing ?? 0,
       crossAxisAlignment: crossAxisAlignment ?? WrapCrossAlignment.start,

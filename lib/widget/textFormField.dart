@@ -7,6 +7,9 @@ import '../macros/macros.dart';
 // ignore: must_be_immutable
 class NikuTextFormField extends StatelessWidget
     with
+        ApplyTextMacro,
+        ApplyStrutStyleMacro,
+        ApplyInputDecorationMacro,
         TextAlignMacro,
         TextDirectionMacro,
         KeyboardTypeMacro,
@@ -126,66 +129,66 @@ class NikuTextFormField extends StatelessWidget
   void get lightKeyboard => keyboardAppearance == Brightness.light;
   void get darkKeyboard => keyboardAppearance == Brightness.dark;
 
-  set apply(NikuTextFormField? textFormField) {
-    if (textFormField == null) return;
+  set apply(NikuTextFormField? v) {
+    if (v == null) return;
 
-    if (decoration == null) decoration = NikuInputDecoration();
-    if (style == null) style = NikuTextStyle();
-    if (strutStyle == null) strutStyle = NikuStrutStyle();
+    if (decoration == null && v.decoration != null)
+      decoration = NikuInputDecoration();
+    if (style == null && v.style != null) style = NikuTextStyle();
+    if (strutStyle == null && v.strutStyle != null)
+      strutStyle = NikuStrutStyle();
 
-    initialValue = textFormField.initialValue ?? initialValue;
-    focusNode = textFormField.focusNode ?? focusNode;
-    decoration!.apply = textFormField.decoration;
-    keyboardType = textFormField.keyboardType ?? keyboardType;
-    textCapitalization = textFormField.textCapitalization ?? textCapitalization;
-    textInputAction = textFormField.textInputAction ?? textInputAction;
-    style!.apply = textFormField.style;
-    strutStyle!.apply = textFormField.strutStyle;
-    textDirection = textFormField.textDirection ?? textDirection;
-    textAlign = textFormField.textAlign ?? textAlign;
-    textAlignVertical = textFormField.textAlignVertical ?? textAlignVertical;
-    autofocus = textFormField.autofocus ?? autofocus;
-    readOnly = textFormField.readOnly ?? readOnly;
-    toolbarOptions = textFormField.toolbarOptions ?? toolbarOptions;
-    showCursor = textFormField.showCursor ?? showCursor;
-    obscuringCharacter = textFormField.obscuringCharacter ?? obscuringCharacter;
-    obscureText = textFormField.obscureText ?? obscureText;
-    autocorrect = textFormField.autocorrect ?? autocorrect;
-    smartDashesType = textFormField.smartDashesType ?? smartDashesType;
-    smartQuotesType = textFormField.smartQuotesType ?? smartQuotesType;
-    enableSuggestions = textFormField.enableSuggestions ?? enableSuggestions;
-    autovalidate = textFormField.autovalidate ?? autovalidate;
-    maxLengthEnforced = textFormField.maxLengthEnforced ?? maxLengthEnforced;
-    maxLengthEnforcement =
-        textFormField.maxLengthEnforcement ?? maxLengthEnforcement;
-    maxLines = textFormField.maxLines ?? maxLines;
-    minLines = textFormField.minLines ?? minLines;
-    expands = textFormField.expands ?? expands;
-    maxLength = textFormField.maxLength ?? maxLength;
-    onChanged = textFormField.onChanged ?? onChanged;
-    onTap = textFormField.onTap ?? onTap;
-    onEditingComplete = textFormField.onEditingComplete ?? onEditingComplete;
-    onFieldSubmitted = textFormField.onFieldSubmitted ?? onFieldSubmitted;
-    onSaved = textFormField.onSaved ?? onSaved;
-    validator = textFormField.validator ?? validator;
-    inputFormatters = textFormField.inputFormatters ?? inputFormatters;
-    enabled = textFormField.enabled ?? enabled;
-    cursorWidth = textFormField.cursorWidth ?? cursorWidth;
-    cursorHeight = textFormField.cursorHeight ?? cursorHeight;
-    cursorRadius = textFormField.cursorRadius ?? cursorRadius;
-    cursorColor = textFormField.cursorColor ?? cursorColor;
-    keyboardAppearance = textFormField.keyboardAppearance ?? keyboardAppearance;
-    scrollPadding = textFormField.scrollPadding ?? scrollPadding;
+    initialValue = v.initialValue ?? initialValue;
+    focusNode = v.focusNode ?? focusNode;
+    decoration?.apply = v.decoration;
+    keyboardType = v.keyboardType ?? keyboardType;
+    textCapitalization = v.textCapitalization ?? textCapitalization;
+    textInputAction = v.textInputAction ?? textInputAction;
+    style?.apply = v.style;
+    strutStyle?.apply = v.strutStyle;
+    textDirection = v.textDirection ?? textDirection;
+    textAlign = v.textAlign ?? textAlign;
+    textAlignVertical = v.textAlignVertical ?? textAlignVertical;
+    autofocus = v.autofocus ?? autofocus;
+    readOnly = v.readOnly ?? readOnly;
+    toolbarOptions = v.toolbarOptions ?? toolbarOptions;
+    showCursor = v.showCursor ?? showCursor;
+    obscuringCharacter = v.obscuringCharacter ?? obscuringCharacter;
+    obscureText = v.obscureText ?? obscureText;
+    autocorrect = v.autocorrect ?? autocorrect;
+    smartDashesType = v.smartDashesType ?? smartDashesType;
+    smartQuotesType = v.smartQuotesType ?? smartQuotesType;
+    enableSuggestions = v.enableSuggestions ?? enableSuggestions;
+    autovalidate = v.autovalidate ?? autovalidate;
+    maxLengthEnforced = v.maxLengthEnforced ?? maxLengthEnforced;
+    maxLengthEnforcement = v.maxLengthEnforcement ?? maxLengthEnforcement;
+    maxLines = v.maxLines ?? maxLines;
+    minLines = v.minLines ?? minLines;
+    expands = v.expands ?? expands;
+    maxLength = v.maxLength ?? maxLength;
+    onChanged = v.onChanged ?? onChanged;
+    onTap = v.onTap ?? onTap;
+    onEditingComplete = v.onEditingComplete ?? onEditingComplete;
+    onFieldSubmitted = v.onFieldSubmitted ?? onFieldSubmitted;
+    onSaved = v.onSaved ?? onSaved;
+    validator = v.validator ?? validator;
+    inputFormatters = v.inputFormatters ?? inputFormatters;
+    enabled = v.enabled ?? enabled;
+    cursorWidth = v.cursorWidth ?? cursorWidth;
+    cursorHeight = v.cursorHeight ?? cursorHeight;
+    cursorRadius = v.cursorRadius ?? cursorRadius;
+    cursorColor = v.cursorColor ?? cursorColor;
+    keyboardAppearance = v.keyboardAppearance ?? keyboardAppearance;
+    scrollPadding = v.scrollPadding ?? scrollPadding;
     enableInteractiveSelection =
-        textFormField.enableInteractiveSelection ?? enableInteractiveSelection;
-    selectionControls = textFormField.selectionControls ?? selectionControls;
-    buildCounter = textFormField.buildCounter ?? buildCounter;
-    scrollPhysics = textFormField.scrollPhysics ?? scrollPhysics;
-    autofillHints = textFormField.autofillHints ?? autofillHints;
-    restorationId = textFormField.restorationId ?? restorationId;
+        v.enableInteractiveSelection ?? enableInteractiveSelection;
+    selectionControls = v.selectionControls ?? selectionControls;
+    buildCounter = v.buildCounter ?? buildCounter;
+    scrollPhysics = v.scrollPhysics ?? scrollPhysics;
+    autofillHints = v.autofillHints ?? autofillHints;
+    restorationId = v.restorationId ?? restorationId;
     enableIMEPersonalizedLearning =
-        textFormField.enableIMEPersonalizedLearning ??
-            enableIMEPersonalizedLearning;
+        v.enableIMEPersonalizedLearning ?? enableIMEPersonalizedLearning;
   }
 
   build(context) {

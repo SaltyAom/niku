@@ -58,16 +58,16 @@ class NikuInputBorder {
         gapPadding: gapPadding,
       );
 
-  set apply(NikuInputBorder? border) {
-    if (border == null) return;
+  set apply(NikuInputBorder? v) {
+    if (v == null) return;
 
-    width = border.width ?? width;
-    radius = border.radius ?? radius;
-    style = border.style ?? style;
-    color = border.color ?? color;
-    gapPadding = border.gapPadding ?? gapPadding;
-    borderRadius = border.borderRadius ?? borderRadius;
-    type = border.type ?? type;
+    width = v.width ?? width;
+    radius = v.radius ?? radius;
+    style = v.style ?? style;
+    color = v.color ?? color;
+    gapPadding = v.gapPadding ?? gapPadding;
+    borderRadius = v.borderRadius ?? borderRadius;
+    type = v.type ?? type;
   }
 
   UnderlineInputBorder get value => UnderlineInputBorder(

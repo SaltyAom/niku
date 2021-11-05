@@ -6,19 +6,22 @@ import '../macros/macros.dart';
 enum NikuButtonType { Text, Elevated, Outlined }
 
 // ignore: must_be_immutable
-class NikuButton extends StatelessWidget with ClipMacro {
+class NikuButton extends StatelessWidget with ApplyButtonStyleMacro, ClipMacro {
   Widget child;
 
   Widget? icon;
   Widget? label;
 
   NikuButtonType? type = NikuButtonType.Text;
+  NikuButtonStyle? style;
   VoidCallback? onPressed;
   VoidCallback? onLongPress;
-  NikuButtonStyle? style;
   FocusNode? focusNode;
   bool? autofocus;
   Clip? clipBehavior;
+
+  // Custom Properties
+  bool enable = true;
 
   NikuButton(
     this.child, {
@@ -33,6 +36,9 @@ class NikuButton extends StatelessWidget with ClipMacro {
     // For icon factory
     this.icon,
     this.label,
+
+    // Custom
+    this.enable = true,
   }) : super(key: key);
 
   factory NikuButton.elevated(
@@ -44,6 +50,7 @@ class NikuButton extends StatelessWidget with ClipMacro {
     FocusNode? focusNode,
     bool? autofocus,
     Clip? clipBehavior,
+    bool enable = true,
   }) =>
       NikuButton(
         child,
@@ -53,6 +60,7 @@ class NikuButton extends StatelessWidget with ClipMacro {
         style: style,
         focusNode: focusNode,
         clipBehavior: clipBehavior,
+        enable: enable,
         key: key,
       );
 
@@ -65,6 +73,7 @@ class NikuButton extends StatelessWidget with ClipMacro {
     FocusNode? focusNode,
     bool? autofocus,
     Clip? clipBehavior,
+    bool enable = true,
   }) =>
       NikuButton(
         child,
@@ -74,18 +83,21 @@ class NikuButton extends StatelessWidget with ClipMacro {
         style: style,
         focusNode: focusNode,
         clipBehavior: clipBehavior,
+        enable: enable,
         key: key,
       );
 
   factory NikuButton.icon(
     Widget label,
     Widget icon, {
+    Key? key,
     VoidCallback? onPressed,
     VoidCallback? onLongPress,
     NikuButtonStyle? style,
     FocusNode? focusNode,
     bool? autofocus,
     Clip? clipBehavior,
+    bool enable = true,
   }) =>
       NikuButton(
         SizedBox.shrink(),
@@ -96,20 +108,25 @@ class NikuButton extends StatelessWidget with ClipMacro {
         clipBehavior: clipBehavior,
         label: label,
         icon: icon,
+        enable: enable,
+        key: key,
       );
 
   factory NikuButton.elevatedIcon(
     Widget label,
     Widget icon, {
+    Key? key,
     VoidCallback? onPressed,
     VoidCallback? onLongPress,
     NikuButtonStyle? style,
     FocusNode? focusNode,
     bool? autofocus,
     Clip? clipBehavior,
+    bool enable = true,
   }) =>
       NikuButton(
         SizedBox.shrink(),
+        key: key,
         type: NikuButtonType.Elevated,
         onPressed: onPressed,
         onLongPress: onLongPress,
@@ -118,20 +135,24 @@ class NikuButton extends StatelessWidget with ClipMacro {
         clipBehavior: clipBehavior,
         label: label,
         icon: icon,
+        enable: enable,
       );
 
   factory NikuButton.outlinedIcon(
     Widget label,
     Widget icon, {
+    Key? key,
     VoidCallback? onPressed,
     VoidCallback? onLongPress,
     NikuButtonStyle? style,
     FocusNode? focusNode,
     bool? autofocus,
     Clip? clipBehavior,
+    bool enable = true,
   }) =>
       NikuButton(
         SizedBox.shrink(),
+        key: key,
         type: NikuButtonType.Outlined,
         onPressed: onPressed,
         onLongPress: onLongPress,
@@ -140,7 +161,24 @@ class NikuButton extends StatelessWidget with ClipMacro {
         clipBehavior: clipBehavior,
         label: label,
         icon: icon,
+        enable: enable,
       );
+
+  set apply(NikuButton? v) {
+    if (v == null) return;
+
+    if (style == null && v.style != null) style = NikuButtonStyle();
+
+    type = v.type ?? type;
+    onPressed = v.onPressed ?? onPressed;
+    onLongPress = v.onLongPress ?? onLongPress;
+    style?.apply = v.style;
+    focusNode = v.focusNode ?? focusNode;
+    clipBehavior = v.clipBehavior ?? clipBehavior;
+    icon = v.icon ?? icon;
+    label = v.label ?? label;
+    enable = v.enable;
+  }
 
   @override
   build(context) {
@@ -149,8 +187,8 @@ class NikuButton extends StatelessWidget with ClipMacro {
           ? ElevatedButton.icon(
               label: label!,
               icon: icon!,
-              onPressed: onPressed,
-              onLongPress: onLongPress,
+              onPressed: enable ? onPressed : null,
+              onLongPress: enable ? onLongPress : null,
               style: style?.value,
               focusNode: focusNode,
               autofocus: autofocus ?? false,
@@ -158,8 +196,8 @@ class NikuButton extends StatelessWidget with ClipMacro {
             )
           : ElevatedButton(
               child: child,
-              onPressed: onPressed,
-              onLongPress: onLongPress,
+              onPressed: enable ? onPressed : null,
+              onLongPress: enable ? onLongPress : null,
               style: style?.value,
               focusNode: focusNode,
               autofocus: autofocus ?? false,
@@ -171,8 +209,8 @@ class NikuButton extends StatelessWidget with ClipMacro {
           ? OutlinedButton.icon(
               label: label!,
               icon: icon!,
-              onPressed: onPressed,
-              onLongPress: onLongPress,
+              onPressed: enable ? onPressed : null,
+              onLongPress: enable ? onLongPress : null,
               style: style?.value,
               focusNode: focusNode,
               autofocus: autofocus ?? false,
@@ -180,8 +218,8 @@ class NikuButton extends StatelessWidget with ClipMacro {
             )
           : OutlinedButton(
               child: child,
-              onPressed: onPressed,
-              onLongPress: onLongPress,
+              onPressed: enable ? onPressed : null,
+              onLongPress: enable ? onLongPress : null,
               style: style?.value,
               focusNode: focusNode,
               autofocus: autofocus ?? false,
@@ -192,8 +230,8 @@ class NikuButton extends StatelessWidget with ClipMacro {
         ? TextButton.icon(
             label: label!,
             icon: icon!,
-            onPressed: onPressed,
-            onLongPress: onLongPress,
+            onPressed: enable ? onPressed : null,
+            onLongPress: enable ? onLongPress : null,
             style: style?.value,
             focusNode: focusNode,
             autofocus: autofocus ?? false,
@@ -201,8 +239,8 @@ class NikuButton extends StatelessWidget with ClipMacro {
           )
         : TextButton(
             child: child,
-            onPressed: onPressed,
-            onLongPress: onLongPress,
+            onPressed: enable ? onPressed : null,
+            onLongPress: enable ? onLongPress : null,
             style: style?.value,
             focusNode: focusNode,
             autofocus: autofocus ?? false,

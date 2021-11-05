@@ -235,73 +235,141 @@ class NikuInputDecoration with ContentPaddingMacro, FloatingLabelBehaviorMacro {
     errorBorder?.color = color;
   }
 
-  set apply(NikuInputDecoration? inputDecoration) {
-    if (inputDecoration == null) return;
-
+  void useLabelStyle(NikuTextStyle Function(NikuTextStyle) v) {
     if (labelStyle == null) labelStyle = NikuTextStyle();
+
+    labelStyle?.apply = v(labelStyle!);
+  }
+
+  void useFloatingLabelStyle(NikuTextStyle Function(NikuTextStyle) v) {
     if (floatingLabelStyle == null) floatingLabelStyle = NikuTextStyle();
+
+    floatingLabelStyle?.apply = v(floatingLabelStyle!);
+  }
+
+  void useHelperStyle(NikuTextStyle Function(NikuTextStyle) v) {
     if (helperStyle == null) helperStyle = NikuTextStyle();
+
+    helperStyle?.apply = v(helperStyle!);
+  }
+
+  void useHintStyle(NikuTextStyle Function(NikuTextStyle) v) {
     if (hintStyle == null) hintStyle = NikuTextStyle();
+
+    hintStyle?.apply = v(hintStyle!);
+  }
+
+  void useErrorStyle(NikuTextStyle Function(NikuTextStyle) v) {
     if (errorStyle == null) errorStyle = NikuTextStyle();
+
+    errorStyle?.apply = v(errorStyle!);
+  }
+
+  void usePrefixStyle(NikuTextStyle Function(NikuTextStyle) v) {
+    if (prefixStyle == null) prefixStyle = NikuTextStyle();
+
+    prefixStyle?.apply = v(prefixStyle!);
+  }
+
+  void useSuffixStyle(NikuTextStyle Function(NikuTextStyle) v) {
+    if (suffixStyle == null) suffixStyle = NikuTextStyle();
+
+    suffixStyle?.apply = v(suffixStyle!);
+  }
+
+  void usePrefixIconConstraints(
+      NikuBoxConstraints Function(NikuBoxConstraints) v) {
     if (prefixIconConstraints == null)
       prefixIconConstraints = NikuBoxConstraints();
-    if (prefixStyle == null) prefixStyle = NikuTextStyle();
+
+    prefixIconConstraints?.apply = v(prefixIconConstraints!);
+  }
+
+  void useSuffixIconConstraints(
+      NikuBoxConstraints Function(NikuBoxConstraints) v) {
     if (suffixIconConstraints == null)
       suffixIconConstraints = NikuBoxConstraints();
-    if (suffixStyle == null) suffixStyle = NikuTextStyle();
-    if (counterStyle == null) counterStyle = NikuTextStyle();
+
+    suffixIconConstraints?.apply = v(suffixIconConstraints!);
+  }
+
+  void useConstraints(NikuBoxConstraints Function(NikuBoxConstraints) v) {
     if (constraints == null) constraints = NikuBoxConstraints();
 
-    icon = inputDecoration.icon ?? icon;
-    label = inputDecoration.label ?? label;
-    labelText = inputDecoration.labelText ?? labelText;
-    labelStyle!.apply = inputDecoration.labelStyle;
-    floatingLabelStyle!.apply = inputDecoration.floatingLabelStyle;
-    helperText = inputDecoration.helperText ?? helperText;
-    helperStyle!.apply = inputDecoration.helperStyle;
-    helperMaxLines = inputDecoration.helperMaxLines ?? helperMaxLines;
-    hintText = inputDecoration.hintText ?? hintText;
-    hintStyle!.apply = inputDecoration.hintStyle;
-    hintTextDirection = inputDecoration.hintTextDirection ?? hintTextDirection;
-    hintMaxLines = inputDecoration.hintMaxLines ?? hintMaxLines;
-    errorText = inputDecoration.errorText ?? errorText;
-    errorStyle!.apply = inputDecoration.errorStyle;
-    errorMaxLines = inputDecoration.errorMaxLines ?? errorMaxLines;
-    floatingLabelBehavior =
-        inputDecoration.floatingLabelBehavior ?? floatingLabelBehavior;
-    isDense = inputDecoration.isDense ?? isDense;
-    contentPadding = inputDecoration.contentPadding ?? contentPadding;
-    isCollapsed = inputDecoration.isCollapsed ?? isCollapsed;
-    prefixIcon = inputDecoration.prefixIcon ?? prefixIcon;
-    prefixIconConstraints!.apply = inputDecoration.prefixIconConstraints;
-    prefix = inputDecoration.prefix ?? prefix;
-    prefixText = inputDecoration.prefixText ?? prefixText;
-    prefixStyle!.apply = inputDecoration.prefixStyle;
-    suffixIcon = inputDecoration.suffixIcon ?? suffixIcon;
-    suffix = inputDecoration.suffix ?? suffix;
-    suffixText = inputDecoration.suffixText ?? suffixText;
-    suffixStyle!.apply = inputDecoration.suffixStyle;
-    suffixIconConstraints!.apply = inputDecoration.suffixIconConstraints;
-    counterText = inputDecoration.counterText ?? counterText;
-    counter = inputDecoration.counter ?? counter;
-    counterStyle!.apply = inputDecoration.counterStyle;
-    filled = inputDecoration.filled ?? filled;
-    fillColor = inputDecoration.fillColor ?? fillColor;
-    focusColor = inputDecoration.focusColor ?? focusColor;
-    hoverColor = inputDecoration.hoverColor ?? hoverColor;
-    errorBorder = inputDecoration.errorBorder ?? errorBorder;
-    focusedBorder = inputDecoration.focusedBorder ?? focusedBorder;
-    focusedErrorBorder =
-        inputDecoration.focusedErrorBorder ?? focusedErrorBorder;
-    disabledBorder = inputDecoration.disabledBorder ?? disabledBorder;
-    enabledBorder = inputDecoration.enabledBorder ?? enabledBorder;
-    border = inputDecoration.border ?? border;
-    enabled = inputDecoration.enabled ?? enabled;
-    semanticCounterText =
-        inputDecoration.semanticCounterText ?? semanticCounterText;
-    alignLabelWithHint =
-        inputDecoration.alignLabelWithHint ?? alignLabelWithHint;
-    constraints!.apply = inputDecoration.constraints;
+    constraints?.apply = v(constraints!);
+  }
+
+  set apply(NikuInputDecoration? v) {
+    if (v == null) return;
+
+    if (labelStyle == null && v.labelStyle != null)
+      labelStyle = NikuTextStyle();
+    if (floatingLabelStyle == null && v.floatingLabelStyle != null)
+      floatingLabelStyle = NikuTextStyle();
+    if (helperStyle == null && v.helperStyle != null)
+      helperStyle = NikuTextStyle();
+    if (hintStyle == null && v.hintStyle != null) hintStyle = NikuTextStyle();
+    if (errorStyle == null && v.errorStyle != null)
+      errorStyle = NikuTextStyle();
+    if (prefixIconConstraints == null && v.prefixIconConstraints != null)
+      prefixIconConstraints = NikuBoxConstraints();
+    if (prefixStyle == null && v.prefixStyle != null)
+      prefixStyle = NikuTextStyle();
+    if (suffixIconConstraints == null && v.suffixIconConstraints != null)
+      suffixIconConstraints = NikuBoxConstraints();
+    if (suffixStyle == null && v.suffixStyle != null)
+      suffixStyle = NikuTextStyle();
+    if (counterStyle == null && v.counterStyle != null)
+      counterStyle = NikuTextStyle();
+    if (constraints == null && v.constraints != null)
+      constraints = NikuBoxConstraints();
+
+    icon = v.icon ?? icon;
+    label = v.label ?? label;
+    labelText = v.labelText ?? labelText;
+    labelStyle?.apply = v.labelStyle;
+    floatingLabelStyle?.apply = v.floatingLabelStyle;
+    helperText = v.helperText ?? helperText;
+    helperStyle?.apply = v.helperStyle;
+    helperMaxLines = v.helperMaxLines ?? helperMaxLines;
+    hintText = v.hintText ?? hintText;
+    hintStyle?.apply = v.hintStyle;
+    hintTextDirection = v.hintTextDirection ?? hintTextDirection;
+    hintMaxLines = v.hintMaxLines ?? hintMaxLines;
+    errorText = v.errorText ?? errorText;
+    errorStyle?.apply = v.errorStyle;
+    errorMaxLines = v.errorMaxLines ?? errorMaxLines;
+    floatingLabelBehavior = v.floatingLabelBehavior ?? floatingLabelBehavior;
+    isDense = v.isDense ?? isDense;
+    contentPadding = v.contentPadding ?? contentPadding;
+    isCollapsed = v.isCollapsed ?? isCollapsed;
+    prefixIcon = v.prefixIcon ?? prefixIcon;
+    prefixIconConstraints?.apply = v.prefixIconConstraints;
+    prefix = v.prefix ?? prefix;
+    prefixText = v.prefixText ?? prefixText;
+    prefixStyle?.apply = v.prefixStyle;
+    suffixIcon = v.suffixIcon ?? suffixIcon;
+    suffix = v.suffix ?? suffix;
+    suffixText = v.suffixText ?? suffixText;
+    suffixStyle?.apply = v.suffixStyle;
+    suffixIconConstraints?.apply = v.suffixIconConstraints;
+    counterText = v.counterText ?? counterText;
+    counter = v.counter ?? counter;
+    counterStyle?.apply = v.counterStyle;
+    filled = v.filled ?? filled;
+    fillColor = v.fillColor ?? fillColor;
+    focusColor = v.focusColor ?? focusColor;
+    hoverColor = v.hoverColor ?? hoverColor;
+    errorBorder = v.errorBorder ?? errorBorder;
+    focusedBorder = v.focusedBorder ?? focusedBorder;
+    focusedErrorBorder = v.focusedErrorBorder ?? focusedErrorBorder;
+    disabledBorder = v.disabledBorder ?? disabledBorder;
+    enabledBorder = v.enabledBorder ?? enabledBorder;
+    border = v.border ?? border;
+    enabled = v.enabled ?? enabled;
+    semanticCounterText = v.semanticCounterText ?? semanticCounterText;
+    alignLabelWithHint = v.alignLabelWithHint ?? alignLabelWithHint;
+    constraints?.apply = v.constraints;
   }
 
   get value => InputDecoration(

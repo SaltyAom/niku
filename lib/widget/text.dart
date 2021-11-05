@@ -1,10 +1,17 @@
+// ignore_for_file: deprecated_member_use_from_same_package
+
 import 'package:flutter/material.dart';
 
 import '../objects/objects.dart';
 import '../macros/macros.dart';
 
 // ignore: must_be_immutable
-class NikuText extends StatelessWidget with TextAlignMacro, TextBaselineMacro {
+class NikuText extends StatelessWidget
+    with
+        ApplyTextMacro,
+        ApplyStrutStyleMacro,
+        TextAlignMacro,
+        TextBaselineMacro {
   String? text;
 
   NikuTextStyle? style;
@@ -19,26 +26,6 @@ class NikuText extends StatelessWidget with TextAlignMacro, TextBaselineMacro {
   String? semanticsLabel;
   TextWidthBasis? textWidthBasis;
   TextHeightBehavior? textHeightBehavior;
-
-  set apply(NikuText? text) {
-    if (text == null) return;
-
-    if (style == null) style = NikuTextStyle();
-    if (strutStyle == null) strutStyle = NikuStrutStyle();
-
-    style = text.style;
-    strutStyle = text.strutStyle;
-    textAlign = text.textAlign ?? textAlign;
-    textDirection = text.textDirection ?? textDirection;
-    locale = text.locale ?? locale;
-    softWrap = text.softWrap ?? softWrap;
-    overflow = text.overflow ?? overflow;
-    textScaleFactor = text.textScaleFactor ?? textScaleFactor;
-    maxLines = text.maxLines ?? maxLines;
-    semanticsLabel = text.semanticsLabel ?? semanticsLabel;
-    textWidthBasis = text.textWidthBasis ?? textWidthBasis;
-    textHeightBehavior = text.textHeightBehavior ?? textHeightBehavior;
-  }
 
   NikuText(
     this.text, {
@@ -56,6 +43,27 @@ class NikuText extends StatelessWidget with TextAlignMacro, TextBaselineMacro {
     this.textHeightBehavior,
     Key? key,
   }) : super(key: key);
+
+  set apply(NikuText? v) {
+    if (v == null) return;
+
+    if (style == null && v.style != null) style = NikuTextStyle();
+    if (strutStyle == null && v.strutStyle != null)
+      strutStyle = NikuStrutStyle();
+
+    style?.apply = v.style;
+    strutStyle?.apply = v.strutStyle;
+    textAlign = v.textAlign ?? textAlign;
+    textDirection = v.textDirection ?? textDirection;
+    locale = v.locale ?? locale;
+    softWrap = v.softWrap ?? softWrap;
+    overflow = v.overflow ?? overflow;
+    textScaleFactor = v.textScaleFactor ?? textScaleFactor;
+    maxLines = v.maxLines ?? maxLines;
+    semanticsLabel = v.semanticsLabel ?? semanticsLabel;
+    textWidthBasis = v.textWidthBasis ?? textWidthBasis;
+    textHeightBehavior = v.textHeightBehavior ?? textHeightBehavior;
+  }
 
   @override
   Text build(context) {

@@ -3,10 +3,12 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:niku/niku.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp();
+
   build(context) {
     return MaterialApp(
       title: "Niku",
@@ -14,9 +16,22 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.blue,
         primarySwatch: Colors.blue,
       ),
-      home: Counter(),
+      home: const App(),
     );
   }
+}
+
+class Styles {
+  static final button = NikuButton(SizedBox.shrink())
+    ..onPressed = () {}
+    ..useStyle((v) => v
+      ..rounded = 8
+      ..px = 24
+      ..py = 12
+      ..useTextStyle((v) => v
+        ..fontSize = 16
+        ..bold
+        ..color = Colors.white));
 }
 
 class Counter extends HookWidget {
@@ -28,32 +43,27 @@ class Counter extends HookWidget {
     return Scaffold(
         body: Center(
       child: NikuColumn([
-        NikuText(
-          "Counter: ${count.value}",
-          style: NikuTextStyle()..h3 = context,
-        ),
-        NikuButton.elevated(
-          Text("Increment"),
-          onPressed: () {
-            count.value++;
-          },
-        )..style = (NikuButtonStyle(
-            textStyleState: NikuState<NikuTextStyle>.all(
-              NikuTextStyle()
-                ..h5 = context
-                ..color = Colors.white,
-            ),
-          )
-            ..px = 24
-            ..py = 12),
+        NikuText("Counter: ${count.value}")
+          ..center
+          ..style = (NikuTextStyle()..h4 = context),
+        NikuButton.elevated(NikuText("Increment"))
+          ..apply = Styles.button
+          ..onPressed = (() => count.value++),
+        NikuButton.elevated(NikuText("Decrement"))
+          ..apply = Styles.button
+          ..onPressed = (() => count.value--)
+          ..useStyle((v) => v..bg = Colors.red)
       ])
         ..mainCenter
-        ..crossCenter,
+        ..crossCenter
+        ..gap = 16,
     ));
   }
 }
 
 class App extends StatelessWidget {
+  const App();
+
   build(context) {
     return Scaffold(
       appBar: AppBar(
@@ -63,38 +73,44 @@ class App extends StatelessWidget {
         width: double.infinity,
         child: NikuColumn([
           NikuTextFormField()
-            ..style = (NikuTextStyle(fontSize: 21))
-            ..decoration = (NikuInputDecoration()
+            ..useStyle((v) => v..fontSize = 21)
+            ..useDecoration((v) => v
               ..labelText = "Text"
               ..outlined
-              ..floatingLabelStyle = (NikuTextStyle(color: Colors.red))
+              ..allBorderWidth = 4
+              ..useFloatingLabelStyle((v) => v..color = Colors.blue)
               ..focusedBorderColor = Colors.red),
           NikuButton.elevated(Text("Hello World"))
             ..onPressed = () {}
-            ..style = (NikuButtonStyle()
+            ..useStyle((v) => v
               ..bg = Colors.blue
               ..fg = Colors.white
               ..px = 24
               ..py = 12
               ..elevationState = NikuState(pressed: 16)
-              ..textStyle = (NikuTextStyle()..fontSize = 24)),
+              ..useTextStyle((v) => v..fontSize = 18)),
           NikuButton.outlined(Text("Hello World"))
             ..onPressed = () {}
-            ..style = (NikuButtonStyle()
+            ..useStyle((v) => v
               ..fg = Colors.blue
               ..px = 24
               ..py = 12
-              ..side = BorderSide(color: Colors.blue, width: 2)
-              ..textStyle = (NikuTextStyle()..fontSize = 24)),
+              ..rounded = 4
+              ..side = BorderSide(color: Colors.blue)
+              ..useTextStyle((v) => v
+                ..fontSize = 18
+                ..bold)),
           NikuText("Hi friends~")
             ..center
-            ..style = (NikuTextStyle()
+            ..useStyle((v) => v
               ..fontSize = 24
               ..color = Colors.grey.shade700
               ..w300)
+            ..useStyle((v) => v..color = Colors.red),
         ])
           ..mainCenter
-          ..crossCenter,
+          ..crossCenter
+          ..gap = 24,
       ),
     );
   }

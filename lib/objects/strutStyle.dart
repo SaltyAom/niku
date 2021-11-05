@@ -29,20 +29,20 @@ class NikuStrutStyle with FontStyleMacro, FontWeightMacro {
     this.package,
   });
 
-  set apply(NikuStrutStyle? style) {
-    if (style == null) return;
+  set apply(NikuStrutStyle? v) {
+    if (v == null) return;
 
-    fontFamily = style.fontFamily ?? fontFamily;
-    fontFamilyFallback = style.fontFamilyFallback ?? fontFamilyFallback;
-    fontSize = style.fontSize ?? fontSize;
-    height = style.height ?? height;
-    leadingDistribution = style.leadingDistribution ?? leadingDistribution;
-    leading = style.leading ?? leading;
-    fontWeight = style.fontWeight ?? fontWeight;
-    fontStyle = style.fontStyle ?? fontStyle;
-    forceStrutHeight = style.forceStrutHeight ?? forceStrutHeight;
-    debugLabel = style.debugLabel ?? debugLabel;
-    package = style.package ?? package;
+    fontFamily = v.fontFamily ?? fontFamily;
+    fontFamilyFallback = v.fontFamilyFallback ?? fontFamilyFallback;
+    fontSize = v.fontSize ?? fontSize;
+    height = v.height ?? height;
+    leadingDistribution = v.leadingDistribution ?? leadingDistribution;
+    leading = v.leading ?? leading;
+    fontWeight = v.fontWeight ?? fontWeight;
+    fontStyle = v.fontStyle ?? fontStyle;
+    forceStrutHeight = v.forceStrutHeight ?? forceStrutHeight;
+    debugLabel = v.debugLabel ?? debugLabel;
+    package = v.package ?? package;
   }
 
   StrutStyle get value => StrutStyle(

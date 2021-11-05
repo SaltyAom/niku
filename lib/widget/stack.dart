@@ -20,13 +20,13 @@ class NikuStack extends StatelessWidget
     this.clipBehavior,
   }) : super(key: key);
 
-  set apply(NikuStack? stack) {
-    if (stack == null) return;
+  set apply(NikuStack? v) {
+    if (v == null) return;
 
-    alignment = stack.alignment;
-    textDirection = stack.textDirection;
-    fit = stack.fit;
-    clipBehavior = stack.clipBehavior;
+    alignment = v.alignment;
+    textDirection = v.textDirection;
+    fit = v.fit;
+    clipBehavior = v.clipBehavior;
   }
 
   @override

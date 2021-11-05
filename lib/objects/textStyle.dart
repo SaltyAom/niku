@@ -64,33 +64,33 @@ class NikuTextStyle
     this.package,
   });
 
-  set apply(NikuTextStyle? style) {
-    if (style == null) return;
+  set apply(NikuTextStyle? v) {
+    if (v == null) return;
 
-    inherit = style.inherit || inherit;
-    color = style.color ?? color;
-    backgroundColor = style.backgroundColor ?? backgroundColor;
-    fontFamily = style.fontFamily ?? fontFamily;
-    fontFamilyFallback = style.fontFamilyFallback ?? fontFamilyFallback;
-    fontSize = style.fontSize ?? fontSize;
-    fontWeight = style.fontWeight ?? fontWeight;
-    fontStyle = style.fontStyle ?? fontStyle;
-    letterSpacing = style.letterSpacing ?? letterSpacing;
-    wordSpacing = style.wordSpacing ?? wordSpacing;
-    textBaseline = style.textBaseline ?? textBaseline;
-    height = style.height ?? height;
-    leadingDistribution = style.leadingDistribution ?? leadingDistribution;
-    locale = style.locale ?? locale;
-    foreground = style.foreground ?? foreground;
-    background = style.background ?? background;
-    decoration = style.decoration ?? decoration;
-    decorationColor = style.decorationColor ?? decorationColor;
-    decorationStyle = style.decorationStyle ?? decorationStyle;
-    decorationThickness = style.decorationThickness ?? decorationThickness;
-    debugLabel = style.debugLabel ?? debugLabel;
-    shadows = style.shadows ?? shadows;
-    fontFeatures = style.fontFeatures ?? fontFeatures;
-    overflow = style.overflow ?? overflow;
+    inherit = v.inherit || inherit;
+    color = v.color ?? color;
+    backgroundColor = v.backgroundColor ?? backgroundColor;
+    fontFamily = v.fontFamily ?? fontFamily;
+    fontFamilyFallback = v.fontFamilyFallback ?? fontFamilyFallback;
+    fontSize = v.fontSize ?? fontSize;
+    fontWeight = v.fontWeight ?? fontWeight;
+    fontStyle = v.fontStyle ?? fontStyle;
+    letterSpacing = v.letterSpacing ?? letterSpacing;
+    wordSpacing = v.wordSpacing ?? wordSpacing;
+    textBaseline = v.textBaseline ?? textBaseline;
+    height = v.height ?? height;
+    leadingDistribution = v.leadingDistribution ?? leadingDistribution;
+    locale = v.locale ?? locale;
+    foreground = v.foreground ?? foreground;
+    background = v.background ?? background;
+    decoration = v.decoration ?? decoration;
+    decorationColor = v.decorationColor ?? decorationColor;
+    decorationStyle = v.decorationStyle ?? decorationStyle;
+    decorationThickness = v.decorationThickness ?? decorationThickness;
+    debugLabel = v.debugLabel ?? debugLabel;
+    shadows = v.shadows ?? shadows;
+    fontFeatures = v.fontFeatures ?? fontFeatures;
+    overflow = v.overflow ?? overflow;
   }
 
   TextStyle get value => TextStyle(

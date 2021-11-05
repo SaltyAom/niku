@@ -15,17 +15,13 @@ class NikuBoxConstraints with ConstraintsMacro {
     this.maxHeight,
   });
 
-  set apply(NikuBoxConstraints? constraints) {
-    if (constraints == null) return;
+  set apply(NikuBoxConstraints? v) {
+    if (v == null) return;
 
-    minWidth = constraints.minWidth != 0 ? constraints.minWidth : minWidth;
-    maxWidth = constraints.maxWidth != double.infinity
-        ? constraints.maxWidth
-        : maxWidth;
-    minHeight = constraints.minHeight != 0 ? constraints.minHeight : minHeight;
-    maxHeight = constraints.maxHeight != double.infinity
-        ? constraints.maxHeight
-        : maxHeight;
+    minWidth = v.minWidth != 0 ? v.minWidth : minWidth;
+    maxWidth = v.maxWidth != double.infinity ? v.maxWidth : maxWidth;
+    minHeight = v.minHeight != 0 ? v.minHeight : minHeight;
+    maxHeight = v.maxHeight != double.infinity ? v.maxHeight : maxHeight;
   }
 
   get value => BoxConstraints(

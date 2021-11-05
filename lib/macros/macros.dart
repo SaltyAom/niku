@@ -1,4 +1,8 @@
 export 'alignmentDirectional.dart';
+export 'applyButtonStyle.dart';
+export 'applyInputDecoration.dart';
+export 'applySturtStyle.dart';
+export 'applyText.dart';
 export 'axis.dart';
 export 'backgroundColor.dart';
 export 'clip.dart';
@@ -10,6 +14,7 @@ export 'floatingLabelBehavior.dart';
 export 'foregroundColor.dart';
 export 'fontStyle.dart';
 export 'fontWeight.dart';
+export 'gap.dart';
 export 'keyboardType.dart';
 export 'mainAxisAlignment.dart';
 export 'mainAxisSize.dart';

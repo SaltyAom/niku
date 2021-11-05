@@ -24,7 +24,36 @@ class NikuButtonStyle with AlignmentDirectionalMacro {
     this.enableFeedback,
     this.alignment,
     this.splashFactory,
-  });
+    NikuTextStyle? textStyle,
+    Color? backgroundColor,
+    Color? foregroundColor,
+    Color? overlayColor,
+    Color? shadowColor,
+    double? elevation,
+    EdgeInsets? padding,
+    Size? minimumSize,
+    Size? fixedSize,
+    Size? maximumSize,
+    BorderSide? side,
+    OutlinedBorder? shape,
+    MouseCursor? mouseCursor,
+  }) {
+    if (textStyle != null) textStyleState = NikuState.all(textStyle);
+    if (backgroundColor != null)
+      backgroundColorState = NikuState.all(backgroundColor);
+    if (foregroundColor != null)
+      foregroundColorState = NikuState.all(foregroundColor);
+    if (overlayColor != null) overlayColorState = NikuState.all(overlayColor);
+    if (shadowColor != null) shadowColorState = NikuState.all(shadowColor);
+    if (elevation != null) elevationState = NikuState.all(elevation);
+    if (padding != null) paddingState = NikuState.all(padding);
+    if (minimumSize != null) minimumSizeState = NikuState.all(minimumSize);
+    if (fixedSize != null) fixedSizeState = NikuState.all(fixedSize);
+    if (maximumSize != null) maximumSizeState = NikuState.all(maximumSize);
+    if (side != null) sideState = NikuState.all(side);
+    if (shape != null) shapeState = NikuState.all(shape);
+    if (mouseCursor != null) mouseCursorState = NikuState.all(mouseCursor);
+  }
 
   NikuState<NikuTextStyle?>? textStyleState;
   NikuState<Color?>? backgroundColorState;
@@ -63,12 +92,19 @@ class NikuButtonStyle with AlignmentDirectionalMacro {
   set mouseCursor(MouseCursor cursor) =>
       mouseCursorState = NikuState.all(cursor);
 
+  void useTextStyle(NikuTextStyle Function(NikuTextStyle) v) =>
+      textStyleState = NikuState.all(v(NikuTextStyle()));
+
   set border(BorderSide side) => sideState = NikuState.all(side);
 
   set bg(Color color) => backgroundColorState = NikuState.all(color);
   set fg(Color color) => foregroundColorState = NikuState.all(color);
   set overlay(Color color) => overlayColorState = NikuState.all(color);
   set splash(Color color) => overlayColorState = NikuState.all(color);
+
+  set rounded(double radius) => shapeState = NikuState.all(
+        RoundedRectangleBorder(borderRadius: BorderRadius.circular(radius)),
+      );
 
   set p(double padding) =>
       paddingState = NikuState.all(EdgeInsets.all(padding));

@@ -7,6 +7,7 @@ class NikuColumn extends StatelessWidget
     with
         ClipMacro,
         CrossAxisAlignmentMacro,
+        GapMacro,
         MainAxisAlignmentMacro,
         MainAxisSizeMacro,
         TextBaselineMacro,
@@ -33,29 +34,27 @@ class NikuColumn extends StatelessWidget
     this.textBaseline,
   }) : super(key: key);
 
-  set apply(NikuColumn? column) {
-    if (column == null) return;
+  set apply(NikuColumn? v) {
+    if (v == null) return;
 
-    mainAxisAlignment = column.mainAxisAlignment ?? mainAxisAlignment;
-    mainAxisSize = column.mainAxisSize ?? mainAxisSize;
-    crossAxisAlignment = column.crossAxisAlignment ?? crossAxisAlignment;
-    textDirection = column.textDirection ?? textDirection;
-    textBaseline = column.textBaseline ?? textBaseline;
+    mainAxisAlignment = v.mainAxisAlignment ?? mainAxisAlignment;
+    mainAxisSize = v.mainAxisSize ?? mainAxisSize;
+    crossAxisAlignment = v.crossAxisAlignment ?? crossAxisAlignment;
+    textDirection = v.textDirection ?? textDirection;
+    textBaseline = v.textBaseline ?? textBaseline;
   }
 
   @override
-  Column build(context) {
-    return Column(
-      children: children,
-      key: key,
-      mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.start,
-      mainAxisSize: mainAxisSize ?? MainAxisSize.max,
-      crossAxisAlignment: crossAxisAlignment ?? CrossAxisAlignment.center,
-      textDirection: textDirection,
-      verticalDirection: verticalDirection ?? VerticalDirection.down,
-      textBaseline: textBaseline,
-    );
-  }
+  Column build(context) => Column(
+        children: childrenWithGap ?? children,
+        key: key,
+        mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.start,
+        mainAxisSize: mainAxisSize ?? MainAxisSize.max,
+        crossAxisAlignment: crossAxisAlignment ?? CrossAxisAlignment.center,
+        textDirection: textDirection,
+        verticalDirection: verticalDirection ?? VerticalDirection.down,
+        textBaseline: textBaseline,
+      );
 }
 
 extension NikuColumnTransform on Column {

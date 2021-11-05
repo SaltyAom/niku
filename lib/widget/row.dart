@@ -7,6 +7,7 @@ class NikuRow extends StatelessWidget
     with
         ClipMacro,
         CrossAxisAlignmentMacro,
+        GapMacro,
         MainAxisAlignmentMacro,
         MainAxisSizeMacro,
         TextBaselineMacro,
@@ -33,29 +34,27 @@ class NikuRow extends StatelessWidget
     this.textBaseline,
   }) : super(key: key);
 
-  set apply(NikuRow? row) {
-    if (row == null) return;
+  set apply(NikuRow? v) {
+    if (v == null) return;
 
-    mainAxisAlignment = row.mainAxisAlignment ?? mainAxisAlignment;
-    mainAxisSize = row.mainAxisSize ?? mainAxisSize;
-    crossAxisAlignment = row.crossAxisAlignment ?? crossAxisAlignment;
-    textDirection = row.textDirection ?? textDirection;
-    textBaseline = row.textBaseline ?? textBaseline;
+    mainAxisAlignment = v.mainAxisAlignment ?? mainAxisAlignment;
+    mainAxisSize = v.mainAxisSize ?? mainAxisSize;
+    crossAxisAlignment = v.crossAxisAlignment ?? crossAxisAlignment;
+    textDirection = v.textDirection ?? textDirection;
+    textBaseline = v.textBaseline ?? textBaseline;
   }
 
   @override
-  Column build(context) {
-    return Column(
-      children: children,
-      key: key,
-      mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.start,
-      mainAxisSize: mainAxisSize ?? MainAxisSize.max,
-      crossAxisAlignment: crossAxisAlignment ?? CrossAxisAlignment.center,
-      textDirection: textDirection,
-      verticalDirection: verticalDirection ?? VerticalDirection.down,
-      textBaseline: textBaseline,
-    );
-  }
+  Column build(context) => Column(
+        children: childrenWithGap ?? children,
+        key: key,
+        mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.start,
+        mainAxisSize: mainAxisSize ?? MainAxisSize.max,
+        crossAxisAlignment: crossAxisAlignment ?? CrossAxisAlignment.center,
+        textDirection: textDirection,
+        verticalDirection: verticalDirection ?? VerticalDirection.down,
+        textBaseline: textBaseline,
+      );
 }
 
 extension NikuRowTransform on Column {
