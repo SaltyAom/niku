@@ -8,6 +8,7 @@ import '../macros/macros.dart';
 // ignore: must_be_immutable
 class NikuText extends StatelessWidget
     with
+        NikuBuildMacro,
         ApplyTextMacro,
         ApplyStrutStyleMacro,
         TextAlignMacro,
@@ -65,25 +66,22 @@ class NikuText extends StatelessWidget
     textHeightBehavior = v.textHeightBehavior ?? textHeightBehavior;
   }
 
-  @override
-  Text build(context) {
-    return Text(
-      this.text ?? "",
-      key: key,
-      style: this.style?.value,
-      strutStyle: this.strutStyle?.value,
-      textAlign: this.textAlign,
-      textDirection: this.textDirection,
-      locale: this.locale,
-      softWrap: this.softWrap,
-      overflow: this.overflow,
-      textScaleFactor: this.textScaleFactor,
-      maxLines: this.maxLines,
-      semanticsLabel: this.semanticsLabel,
-      textWidthBasis: this.textWidthBasis,
-      textHeightBehavior: this.textHeightBehavior,
-    );
-  }
+  Widget get value => Text(
+        this.text ?? "",
+        key: key,
+        style: this.style?.value,
+        strutStyle: this.strutStyle?.value,
+        textAlign: this.textAlign,
+        textDirection: this.textDirection,
+        locale: this.locale,
+        softWrap: this.softWrap,
+        overflow: this.overflow,
+        textScaleFactor: this.textScaleFactor,
+        maxLines: this.maxLines,
+        semanticsLabel: this.semanticsLabel,
+        textWidthBasis: this.textWidthBasis,
+        textHeightBehavior: this.textHeightBehavior,
+      );
 }
 
 extension NikuTextTransform on Text {

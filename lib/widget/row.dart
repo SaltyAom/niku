@@ -5,6 +5,7 @@ import '../../macros/macros.dart';
 // ignore: must_be_immutable
 class NikuRow extends StatelessWidget
     with
+        NikuBuildMacro,
         ClipMacro,
         CrossAxisAlignmentMacro,
         GapMacro,
@@ -44,8 +45,7 @@ class NikuRow extends StatelessWidget
     textBaseline = v.textBaseline ?? textBaseline;
   }
 
-  @override
-  Column build(context) => Column(
+  Column get value => Column(
         children: childrenWithGap ?? children,
         key: key,
         mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.start,

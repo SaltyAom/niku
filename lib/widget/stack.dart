@@ -4,7 +4,12 @@ import '../macros/macros.dart';
 
 // ignore: must_be_immutable
 class NikuStack extends StatelessWidget
-    with AlignmentDirectionalMacro, ClipMacro, FitMacro, TextDirectionMacro {
+    with
+        NikuBuildMacro,
+        AlignmentDirectionalMacro,
+        ClipMacro,
+        FitMacro,
+        TextDirectionMacro {
   List<Widget> children;
   AlignmentGeometry? alignment;
   TextDirection? textDirection;
@@ -29,17 +34,14 @@ class NikuStack extends StatelessWidget
     clipBehavior = v.clipBehavior;
   }
 
-  @override
-  Stack build(context) {
-    return Stack(
-      key: key,
-      children: children,
-      alignment: alignment ?? AlignmentDirectional.topStart,
-      textDirection: textDirection,
-      fit: fit ?? StackFit.loose,
-      clipBehavior: clipBehavior ?? Clip.hardEdge,
-    );
-  }
+  Stack get value => Stack(
+        key: key,
+        children: children,
+        alignment: alignment ?? AlignmentDirectional.topStart,
+        textDirection: textDirection,
+        fit: fit ?? StackFit.loose,
+        clipBehavior: clipBehavior ?? Clip.hardEdge,
+      );
 }
 
 extension NikuStackTransform on Stack {

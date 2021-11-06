@@ -73,7 +73,7 @@ class NikuInputBorder {
   UnderlineInputBorder get value => UnderlineInputBorder(
         borderSide: BorderSide(
           width: width ?? 1,
-          color: color ?? Colors.grey.shade600,
+          color: color ?? Colors.grey.shade500,
           style: style ?? BorderStyle.solid,
         ),
         borderRadius: borderRadius ??
@@ -85,7 +85,7 @@ class NikuInputBorder {
   UnderlineInputBorder get underline => UnderlineInputBorder(
         borderSide: BorderSide(
           width: width ?? 1,
-          color: color ?? Colors.grey.shade600,
+          color: color ?? Colors.grey.shade500,
           style: style ?? BorderStyle.solid,
         ),
         borderRadius: borderRadius ??
@@ -97,7 +97,7 @@ class NikuInputBorder {
   OutlineInputBorder get outlined => OutlineInputBorder(
         borderSide: BorderSide(
           width: width ?? 1,
-          color: color ?? Colors.grey.shade600,
+          color: color ?? Colors.grey.shade500,
           style: style ?? BorderStyle.solid,
         ),
         borderRadius: borderRadius ??

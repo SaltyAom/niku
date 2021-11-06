@@ -6,7 +6,8 @@ import '../macros/macros.dart';
 enum NikuButtonType { Text, Elevated, Outlined }
 
 // ignore: must_be_immutable
-class NikuButton extends StatelessWidget with ApplyButtonStyleMacro, ClipMacro {
+class NikuButton extends StatelessWidget
+    with NikuBuildMacro, ApplyButtonStyleMacro, ClipMacro {
   Widget child;
 
   Widget? icon;
@@ -180,8 +181,7 @@ class NikuButton extends StatelessWidget with ApplyButtonStyleMacro, ClipMacro {
     enable = v.enable;
   }
 
-  @override
-  build(context) {
+  Widget get value {
     if (type == NikuButtonType.Elevated)
       return (label != null && icon != null)
           ? ElevatedButton.icon(

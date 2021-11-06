@@ -73,22 +73,31 @@ class App extends StatelessWidget {
         width: double.infinity,
         child: NikuColumn([
           NikuTextFormField()
-            ..useStyle((v) => v..fontSize = 21)
+            ..useStyle((v) => v
+              ..fontSize = 21
+              ..w500)
             ..useDecoration((v) => v
               ..labelText = "Text"
               ..outlined
-              ..allBorderWidth = 4
-              ..useFloatingLabelStyle((v) => v..color = Colors.blue)
-              ..focusedBorderColor = Colors.red),
+              ..allBorderWidth = 2
+              ..focusedBorderColor = Colors.red
+              ..useFloatingLabelStyle((v) => v
+                ..color = Colors.blue
+                ..fontSize = 14))
+            ..useNiku((v) => v
+              ..px = 24
+              ..mb = 24),
           NikuButton.elevated(Text("Hello World"))
             ..onPressed = () {}
             ..useStyle((v) => v
               ..bg = Colors.blue
               ..fg = Colors.white
-              ..px = 24
-              ..py = 12
+              ..py = 16
               ..elevationState = NikuState(pressed: 16)
-              ..useTextStyle((v) => v..fontSize = 18)),
+              ..useTextStyle((v) => v..fontSize = 18))
+            ..useNiku((v) => v
+              ..w100
+              ..px = 24),
           NikuButton.outlined(Text("Hello World"))
             ..onPressed = () {}
             ..useStyle((v) => v
@@ -105,8 +114,12 @@ class App extends StatelessWidget {
             ..useStyle((v) => v
               ..fontSize = 24
               ..color = Colors.grey.shade700
-              ..w300)
-            ..useStyle((v) => v..color = Colors.red),
+              ..w300
+              ..color = Colors.white)
+            ..useNiku((v) => v
+              ..fullWidth
+              ..py = 24
+              ..bg = Colors.blue),
         ])
           ..mainCenter
           ..crossCenter

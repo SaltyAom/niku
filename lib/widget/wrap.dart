@@ -5,6 +5,7 @@ import '../macros/macros.dart';
 // ignore: must_be_immutable
 class NikuWrap extends StatelessWidget
     with
+        NikuBuildMacro,
         AxisMacro,
         ClipMacro,
         RunAlignmentMacro,
@@ -52,22 +53,19 @@ class NikuWrap extends StatelessWidget
     this.clipBehavior = v.clipBehavior;
   }
 
-  @override
-  Wrap build(context) {
-    return Wrap(
-      children: chidren,
-      key: key,
-      direction: direction ?? Axis.horizontal,
-      alignment: alignment ?? WrapAlignment.start,
-      spacing: spacing ?? 0,
-      runAlignment: runAlignment ?? WrapAlignment.start,
-      runSpacing: runSpacing ?? 0,
-      crossAxisAlignment: crossAxisAlignment ?? WrapCrossAlignment.start,
-      textDirection: textDirection,
-      verticalDirection: verticalDirection ?? VerticalDirection.down,
-      clipBehavior: clipBehavior ?? Clip.none,
-    );
-  }
+  Wrap get value => Wrap(
+        children: chidren,
+        key: key,
+        direction: direction ?? Axis.horizontal,
+        alignment: alignment ?? WrapAlignment.start,
+        spacing: spacing ?? 0,
+        runAlignment: runAlignment ?? WrapAlignment.start,
+        runSpacing: runSpacing ?? 0,
+        crossAxisAlignment: crossAxisAlignment ?? WrapCrossAlignment.start,
+        textDirection: textDirection,
+        verticalDirection: verticalDirection ?? VerticalDirection.down,
+        clipBehavior: clipBehavior ?? Clip.none,
+      );
 }
 
 extension TransformNikuWrap on Wrap {

@@ -18,6 +18,7 @@ export 'gap.dart';
 export 'keyboardType.dart';
 export 'mainAxisAlignment.dart';
 export 'mainAxisSize.dart';
+export 'nikuBuild.dart';
 export 'runAlignment.dart';
 export 'textAlign.dart';
 export 'textBaseline.dart';

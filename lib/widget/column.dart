@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
+import 'niku.dart';
 import '../macros/macros.dart';
 
 // ignore: must_be_immutable
 class NikuColumn extends StatelessWidget
     with
+        NikuBuildMacro,
         ClipMacro,
         CrossAxisAlignmentMacro,
         GapMacro,
@@ -44,8 +46,7 @@ class NikuColumn extends StatelessWidget
     textBaseline = v.textBaseline ?? textBaseline;
   }
 
-  @override
-  Column build(context) => Column(
+  Column get value => Column(
         children: childrenWithGap ?? children,
         key: key,
         mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.start,
