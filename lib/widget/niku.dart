@@ -97,11 +97,11 @@ extension PropertyBuilder on Niku {
   set fractionWidth(double v) =>
       _w = FractionallySizedBox(widthFactor: v, child: _w);
   set widthPercent(double v) =>
-      _w = FractionallySizedBox(widthFactor: v, child: _w);
+      _w = FractionallySizedBox(widthFactor: v / 100, child: _w);
   set fractionHeight(double v) =>
       _w = FractionallySizedBox(heightFactor: v, child: _w);
   set heightPercent(double v) =>
-      _w = FractionallySizedBox(heightFactor: v, child: _w);
+      _w = FractionallySizedBox(heightFactor: v / 100, child: _w);
 
   set constraints(BoxConstraints v) =>
       ConstrainedBox(constraints: v, child: _w);
@@ -381,4 +381,6 @@ extension PropertyBuilder on Niku {
         dragStartBehavior: dragStartBehavior,
         restorationId: restorationId,
       );
+
+  set theme(ThemeData v) => _w = Theme(data: v, child: _w);
 }

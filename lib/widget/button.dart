@@ -165,6 +165,12 @@ class NikuButton extends StatelessWidget
         enable: enable,
       );
 
+  void useTextStyle(NikuTextStyle Function(NikuTextStyle) cb) {
+    if (style == null) style = NikuButtonStyle();
+
+    style!.apply = NikuButtonStyle(textStyle: cb(NikuTextStyle()));
+  }
+
   set apply(NikuButton? v) {
     if (v == null) return;
 

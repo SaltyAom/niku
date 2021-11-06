@@ -72,18 +72,19 @@ class App extends StatelessWidget {
       body: Container(
         width: double.infinity,
         child: NikuColumn([
-          NikuTextFormField()
+          NikuTextFormField("Password")
+            ..prefixIcon = Icon(Icons.lock)
+            ..asPassword
             ..useStyle((v) => v
               ..fontSize = 21
               ..w500)
+            ..useFloatingLabelStyle((v) => v
+              ..color = Colors.red
+              ..fontSize = 14)
             ..useDecoration((v) => v
-              ..labelText = "Text"
               ..outlined
               ..allBorderWidth = 2
-              ..focusedBorderColor = Colors.red
-              ..useFloatingLabelStyle((v) => v
-                ..color = Colors.blue
-                ..fontSize = 14))
+              ..focusedBorderColor = Colors.red)
             ..useNiku((v) => v
               ..px = 24
               ..mb = 24),
@@ -98,6 +99,16 @@ class App extends StatelessWidget {
             ..useNiku((v) => v
               ..w100
               ..px = 24),
+          NikuButton.elevated(Text("Text Button"))
+            ..onPressed = () {}
+            ..useStyle((v) => v
+              ..bg = Colors.blue
+              ..py = 20)
+            ..useTextStyle((v1) => v1..fontSize = 21)
+            ..useNiku((v) => v
+              ..widthPercent = 70
+              ..tooltip = "A Text Button"
+              ..center),
           NikuButton.outlined(Text("Hello World"))
             ..onPressed = () {}
             ..useStyle((v) => v

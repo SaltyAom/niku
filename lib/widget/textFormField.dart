@@ -17,8 +17,6 @@ class NikuTextFormField extends StatelessWidget
         TextAlignMacro,
         TextCapitalizationMacro,
         TextInputActionMacro {
-  String? label;
-
   TextEditingController? controller;
   String? initialValue;
   FocusNode? focusNode;
@@ -72,7 +70,8 @@ class NikuTextFormField extends StatelessWidget
   String? restorationId;
   bool? enableIMEPersonalizedLearning;
 
-  NikuTextFormField({
+  NikuTextFormField(
+    String _label, {
     Key? key,
     this.controller,
     this.initialValue,
@@ -125,10 +124,24 @@ class NikuTextFormField extends StatelessWidget
     this.scrollController,
     this.restorationId,
     this.enableIMEPersonalizedLearning,
-  }) : super(key: key);
+  }) {
+    label = _label;
+  }
 
   void get lightKeyboard => keyboardAppearance == Brightness.light;
   void get darkKeyboard => keyboardAppearance == Brightness.dark;
+
+  bool get asPassword {
+    obscureText = true;
+    maxLines = 1;
+
+    return true;
+  }
+
+  set asPassword(bool value) {
+    obscureText = value;
+    maxLines = 1;
+  }
 
   set apply(NikuTextFormField? v) {
     if (v == null) return;
@@ -243,4 +256,96 @@ class NikuTextFormField extends StatelessWidget
         restorationId: restorationId,
         enableIMEPersonalizedLearning: enableIMEPersonalizedLearning ?? true,
       );
+
+  set label(String v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()..labelText = v;
+  }
+
+  set prefix(Widget v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()..prefix = v;
+  }
+
+  set prefixIcon(Widget v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()..prefixIcon = v;
+  }
+
+  set suffix(Widget v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()..suffix = v;
+  }
+
+  set suffixIcon(Widget v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()..suffixIcon = v;
+  }
+
+  void useLabelStyle(NikuTextStyle Function(NikuTextStyle) v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()..useLabelStyle(v);
+  }
+
+  void useFloatingLabelStyle(NikuTextStyle Function(NikuTextStyle) v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()..useFloatingLabelStyle(v);
+  }
+
+  void useHelperStyle(NikuTextStyle Function(NikuTextStyle) v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()..useHelperStyle(v);
+  }
+
+  void useHintStyle(NikuTextStyle Function(NikuTextStyle) v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()..useHintStyle(v);
+  }
+
+  void useErrorStyle(NikuTextStyle Function(NikuTextStyle) v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()..useErrorStyle(v);
+  }
+
+  void usePrefixStyle(NikuTextStyle Function(NikuTextStyle) v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()..usePrefixStyle(v);
+  }
+
+  void useSuffixStyle(NikuTextStyle Function(NikuTextStyle) v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()..useSuffixStyle(v);
+  }
+
+  void usePrefixIconConstraints(
+      NikuBoxConstraints Function(NikuBoxConstraints) v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()..usePrefixIconConstraints(v);
+  }
+
+  void useSuffixIconConstraints(
+      NikuBoxConstraints Function(NikuBoxConstraints) v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()..useSuffixIconConstraints(v);
+  }
+
+  void useConstraints(NikuBoxConstraints Function(NikuBoxConstraints) v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()..useConstraints(v);
+  }
 }
