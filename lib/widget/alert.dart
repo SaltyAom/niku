@@ -15,7 +15,7 @@ class NikuAlert extends StatelessWidget
         ContentPaddingMacro,
         InsetPaddingMacro {
   Widget? title;
-  EdgeInsetsGeometry? titlePadding;
+  NikuEdgeInsets? titlePadding;
   NikuTextStyle? titleTextStyle;
   Widget? content;
   NikuEdgeInsets? contentPadding;
@@ -61,21 +61,21 @@ class NikuAlert extends StatelessWidget
     if (v == null) return;
 
     title ??= title;
-    titlePadding ??= titlePadding;
+    titlePadding?.apply = titlePadding;
     titleTextStyle ??= titleTextStyle;
     content ??= content;
-    contentPadding ??= contentPadding;
+    contentPadding?.apply = contentPadding;
     contentTextStyle ??= contentTextStyle;
     actions ??= actions;
-    actionsPadding ??= actionsPadding;
+    actionsPadding?.apply = actionsPadding;
     actionsAlignment ??= actionsAlignment;
     actionsOverflowDirection ??= actionsOverflowDirection;
     actionsOverflowButtonSpacing ??= actionsOverflowButtonSpacing;
-    buttonPadding ??= buttonPadding;
+    buttonPadding?.apply = buttonPadding;
     backgroundColor ??= backgroundColor;
     elevation ??= elevation;
     semanticLabel ??= semanticLabel;
-    insetPadding ??= insetPadding;
+    insetPadding?.apply = insetPadding;
     clipBehavior ??= clipBehavior;
     shape ??= shape;
     scrollable ??= scrollable;
@@ -84,7 +84,7 @@ class NikuAlert extends StatelessWidget
   AlertDialog get value => AlertDialog(
         key: key,
         title: title,
-        titlePadding: titlePadding,
+        titlePadding: titlePadding?.value,
         titleTextStyle: titleTextStyle?.value,
         content: content,
         contentPadding: contentPadding?.value ??
@@ -110,7 +110,7 @@ class NikuAlert extends StatelessWidget
 extension TransformNikuAlert on AlertDialog {
   NikuAlert get asNiku => NikuAlert(
         title: title,
-        titlePadding: titlePadding,
+        titlePadding: titlePadding?.asNiku,
         titleTextStyle: titleTextStyle?.asNiku,
         content: content,
         contentPadding:

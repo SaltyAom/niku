@@ -38,11 +38,11 @@ class NikuColumn extends StatelessWidget
   set apply(NikuColumn? v) {
     if (v == null) return;
 
-    mainAxisAlignment = v.mainAxisAlignment ?? mainAxisAlignment;
-    mainAxisSize = v.mainAxisSize ?? mainAxisSize;
-    crossAxisAlignment = v.crossAxisAlignment ?? crossAxisAlignment;
-    textDirection = v.textDirection ?? textDirection;
-    textBaseline = v.textBaseline ?? textBaseline;
+    mainAxisAlignment ??= v.mainAxisAlignment;
+    mainAxisSize ??= v.mainAxisSize;
+    crossAxisAlignment ??= v.crossAxisAlignment;
+    textDirection ??= v.textDirection;
+    textBaseline ??= v.textBaseline;
   }
 
   Column get value => Column(

@@ -54,16 +54,16 @@ class NikuText extends StatelessWidget
 
     style?.apply = v.style;
     strutStyle?.apply = v.strutStyle;
-    textAlign = v.textAlign ?? textAlign;
-    textDirection = v.textDirection ?? textDirection;
-    locale = v.locale ?? locale;
-    softWrap = v.softWrap ?? softWrap;
-    overflow = v.overflow ?? overflow;
-    textScaleFactor = v.textScaleFactor ?? textScaleFactor;
-    maxLines = v.maxLines ?? maxLines;
-    semanticsLabel = v.semanticsLabel ?? semanticsLabel;
-    textWidthBasis = v.textWidthBasis ?? textWidthBasis;
-    textHeightBehavior = v.textHeightBehavior ?? textHeightBehavior;
+    textAlign ??= v.textAlign;
+    textDirection ??= v.textDirection;
+    locale ??= v.locale;
+    softWrap ??= v.softWrap;
+    overflow ??= v.overflow;
+    textScaleFactor ??= v.textScaleFactor;
+    maxLines ??= v.maxLines;
+    semanticsLabel ??= v.semanticsLabel;
+    textWidthBasis ??= v.textWidthBasis;
+    textHeightBehavior ??= v.textHeightBehavior;
   }
 
   Widget get value => Text(

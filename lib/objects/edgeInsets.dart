@@ -48,6 +48,15 @@ class NikuEdgeInsets {
         bottom: bottom ?? 0,
         right: right ?? 0,
       );
+
+  set apply(NikuEdgeInsets? v) {
+    if (v == null) return;
+
+    top ??= v.top;
+    left ??= v.left;
+    bottom ??= v.bottom;
+    right ??= v.right;
+  }
 }
 
 extension TransformNikuEdgeInsets on EdgeInsetsGeometry {

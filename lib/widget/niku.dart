@@ -398,4 +398,7 @@ extension PropertyBuilder on Niku {
   void get safeArea => _w = SafeArea(child: _w);
   void get safeAreaX => _w = SafeArea(child: _w, top: false, bottom: false);
   void get safeAreaY => _w = SafeArea(child: _w, left: false, right: false);
+
+  set gradient(Gradient v) =>
+      _w = DecoratedBox(decoration: BoxDecoration(gradient: v), child: _w);
 }

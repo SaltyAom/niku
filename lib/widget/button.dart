@@ -182,14 +182,14 @@ class NikuButton extends StatelessWidget
 
     if (style == null && v.style != null) style = NikuButtonStyle();
 
-    type = v.type ?? type;
-    onPressed = v.onPressed ?? onPressed;
-    onLongPress = v.onLongPress ?? onLongPress;
+    type ??= v.type;
+    onPressed ??= v.onPressed;
+    onLongPress ??= v.onLongPress;
     style?.apply = v.style;
-    focusNode = v.focusNode ?? focusNode;
-    clipBehavior = v.clipBehavior ?? clipBehavior;
-    icon = v.icon ?? icon;
-    label = v.label ?? label;
+    focusNode ??= v.focusNode;
+    clipBehavior ??= v.clipBehavior;
+    icon ??= v.icon;
+    label ??= v.label;
     enable = v.enable;
   }
 

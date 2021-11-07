@@ -68,29 +68,29 @@ class NikuTextStyle
     if (v == null) return;
 
     inherit = v.inherit || inherit;
-    color = v.color ?? color;
-    backgroundColor = v.backgroundColor ?? backgroundColor;
-    fontFamily = v.fontFamily ?? fontFamily;
-    fontFamilyFallback = v.fontFamilyFallback ?? fontFamilyFallback;
-    fontSize = v.fontSize ?? fontSize;
-    fontWeight = v.fontWeight ?? fontWeight;
-    fontStyle = v.fontStyle ?? fontStyle;
-    letterSpacing = v.letterSpacing ?? letterSpacing;
-    wordSpacing = v.wordSpacing ?? wordSpacing;
-    textBaseline = v.textBaseline ?? textBaseline;
-    height = v.height ?? height;
-    leadingDistribution = v.leadingDistribution ?? leadingDistribution;
-    locale = v.locale ?? locale;
-    foreground = v.foreground ?? foreground;
-    background = v.background ?? background;
-    decoration = v.decoration ?? decoration;
-    decorationColor = v.decorationColor ?? decorationColor;
-    decorationStyle = v.decorationStyle ?? decorationStyle;
-    decorationThickness = v.decorationThickness ?? decorationThickness;
-    debugLabel = v.debugLabel ?? debugLabel;
-    shadows = v.shadows ?? shadows;
-    fontFeatures = v.fontFeatures ?? fontFeatures;
-    overflow = v.overflow ?? overflow;
+    color ??= v.color;
+    backgroundColor ??= v.backgroundColor;
+    fontFamily ??= v.fontFamily;
+    fontFamilyFallback ??= v.fontFamilyFallback;
+    fontSize ??= v.fontSize;
+    fontWeight ??= v.fontWeight;
+    fontStyle ??= v.fontStyle;
+    letterSpacing ??= v.letterSpacing;
+    wordSpacing ??= v.wordSpacing;
+    textBaseline ??= v.textBaseline;
+    height ??= v.height;
+    leadingDistribution ??= v.leadingDistribution;
+    locale ??= v.locale;
+    foreground ??= v.foreground;
+    background ??= v.background;
+    decoration ??= v.decoration;
+    decorationColor ??= v.decorationColor;
+    decorationStyle ??= v.decorationStyle;
+    decorationThickness ??= v.decorationThickness;
+    debugLabel ??= v.debugLabel;
+    shadows ??= v.shadows;
+    fontFeatures ??= v.fontFeatures;
+    overflow ??= v.overflow;
   }
 
   TextStyle get value => TextStyle(

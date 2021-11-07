@@ -28,10 +28,10 @@ class NikuStack extends StatelessWidget
   set apply(NikuStack? v) {
     if (v == null) return;
 
-    alignment = v.alignment;
-    textDirection = v.textDirection;
-    fit = v.fit;
-    clipBehavior = v.clipBehavior;
+    alignment ??= v.alignment;
+    textDirection ??= v.textDirection;
+    fit ??= v.fit;
+    clipBehavior ??= v.clipBehavior;
   }
 
   Stack get value => Stack(

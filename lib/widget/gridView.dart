@@ -62,26 +62,25 @@ class NikuGridView extends StatelessWidget
     if (v == null) return;
 
     crossAxisCount = v.crossAxisCount != 1 ? v.crossAxisCount : crossAxisCount;
-    scrollDirection = v.scrollDirection ?? scrollDirection;
-    reverse = v.reverse ?? reverse;
-    controller = v.controller ?? controller;
-    primary = v.primary ?? primary;
-    physics = v.physics ?? physics;
-    shrinkWrap = v.shrinkWrap ?? shrinkWrap;
-    padding = v.padding ?? padding;
-    mainAxisSpacing = v.mainAxisSpacing ?? mainAxisSpacing;
-    crossAxisSpacing = v.crossAxisSpacing ?? crossAxisSpacing;
-    childAspectRatio = v.childAspectRatio ?? childAspectRatio;
-    addAutomaticKeepAlives = v.addAutomaticKeepAlives ?? addAutomaticKeepAlives;
-    addRepaintBoundaries = v.addRepaintBoundaries ?? addRepaintBoundaries;
-    addSemanticIndexes = v.addSemanticIndexes ?? addSemanticIndexes;
-    cacheExtent = v.cacheExtent ?? cacheExtent;
-    semanticChildCount = v.semanticChildCount ?? semanticChildCount;
-    dragStartBehavior = v.dragStartBehavior ?? dragStartBehavior;
-    keyboardDismissBehavior =
-        v.keyboardDismissBehavior ?? keyboardDismissBehavior;
-    restorationId = v.restorationId ?? restorationId;
-    clipBehavior = v.clipBehavior ?? clipBehavior;
+    scrollDirection ??= v.scrollDirection;
+    reverse ??= v.reverse;
+    controller ??= v.controller;
+    primary ??= v.primary;
+    physics ??= v.physics;
+    shrinkWrap ??= v.shrinkWrap;
+    padding ??= v.padding;
+    mainAxisSpacing ??= v.mainAxisSpacing;
+    crossAxisSpacing ??= v.crossAxisSpacing;
+    childAspectRatio ??= v.childAspectRatio;
+    addAutomaticKeepAlives ??= v.addAutomaticKeepAlives;
+    addRepaintBoundaries ??= v.addRepaintBoundaries;
+    addSemanticIndexes ??= v.addSemanticIndexes;
+    cacheExtent ??= v.cacheExtent;
+    semanticChildCount ??= v.semanticChildCount;
+    dragStartBehavior ??= v.dragStartBehavior;
+    keyboardDismissBehavior ??= v.keyboardDismissBehavior;
+    restorationId ??= v.restorationId;
+    clipBehavior ??= v.clipBehavior;
   }
 
   GridView get value => GridView.count(
