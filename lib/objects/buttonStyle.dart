@@ -225,7 +225,7 @@ class NikuButtonStyle with AlignmentDirectionalMacro {
 }
 
 extension NikuButtonStyleTransform on ButtonStyle {
-  NikuButtonStyle get niku => NikuButtonStyle(
+  NikuButtonStyle get asNiku => NikuButtonStyle(
         visualDensity: visualDensity,
         tapTargetSize: tapTargetSize,
         animationDuration: animationDuration,

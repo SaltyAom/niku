@@ -15,7 +15,7 @@ class NikuText extends StatelessWidget
         TextBaselineMacro {
   String? text;
 
-  NikuTextStyle? style;
+  NikuTextStyle? style = NikuTextStyle();
   NikuStrutStyle? strutStyle;
   TextAlign? textAlign;
   TextDirection? textDirection;
@@ -85,10 +85,10 @@ class NikuText extends StatelessWidget
 }
 
 extension NikuTextTransform on Text {
-  NikuText get niku => NikuText(
+  NikuText get asNiku => NikuText(
         this.data,
-        style: this.style?.niku,
-        strutStyle: this.strutStyle?.niku,
+        style: this.style?.asNiku,
+        strutStyle: this.strutStyle?.asNiku,
         textAlign: this.textAlign,
         textDirection: this.textDirection,
         locale: this.locale,

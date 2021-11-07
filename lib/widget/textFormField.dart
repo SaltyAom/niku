@@ -24,7 +24,7 @@ class NikuTextFormField extends StatelessWidget
   TextInputType? keyboardType;
   TextCapitalization? textCapitalization;
   TextInputAction? textInputAction;
-  NikuTextStyle? style;
+  NikuTextStyle? style = NikuTextStyle();
   NikuStrutStyle? strutStyle;
   TextDirection? textDirection;
   TextAlign? textAlign;
@@ -124,7 +124,7 @@ class NikuTextFormField extends StatelessWidget
     this.scrollController,
     this.restorationId,
     this.enableIMEPersonalizedLearning,
-  }) {
+  }) : super(key: key) {
     label = _label;
   }
 
@@ -293,10 +293,24 @@ class NikuTextFormField extends StatelessWidget
     decoration?.apply = NikuInputDecoration()..useLabelStyle(v);
   }
 
+  set applyLabelStyle(NikuTextStyle v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()
+      ..apply = NikuInputDecoration(labelStyle: v);
+  }
+
   void useFloatingLabelStyle(NikuTextStyle Function(NikuTextStyle) v) {
     if (decoration == null) decoration = NikuInputDecoration();
 
     decoration?.apply = NikuInputDecoration()..useFloatingLabelStyle(v);
+  }
+
+  set applyFloatingLabelStyle(NikuTextStyle v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()
+      ..apply = NikuInputDecoration(floatingLabelStyle: v);
   }
 
   void useHelperStyle(NikuTextStyle Function(NikuTextStyle) v) {
@@ -305,10 +319,24 @@ class NikuTextFormField extends StatelessWidget
     decoration?.apply = NikuInputDecoration()..useHelperStyle(v);
   }
 
+  set applyHelperStyle(NikuTextStyle v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()
+      ..apply = NikuInputDecoration(helperStyle: v);
+  }
+
   void useHintStyle(NikuTextStyle Function(NikuTextStyle) v) {
     if (decoration == null) decoration = NikuInputDecoration();
 
     decoration?.apply = NikuInputDecoration()..useHintStyle(v);
+  }
+
+  set applyHintStyle(NikuTextStyle v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()
+      ..apply = NikuInputDecoration(hintStyle: v);
   }
 
   void useErrorStyle(NikuTextStyle Function(NikuTextStyle) v) {
@@ -317,16 +345,37 @@ class NikuTextFormField extends StatelessWidget
     decoration?.apply = NikuInputDecoration()..useErrorStyle(v);
   }
 
+  set applyErrorStyle(NikuTextStyle v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()
+      ..apply = NikuInputDecoration(errorStyle: v);
+  }
+
   void usePrefixStyle(NikuTextStyle Function(NikuTextStyle) v) {
     if (decoration == null) decoration = NikuInputDecoration();
 
     decoration?.apply = NikuInputDecoration()..usePrefixStyle(v);
   }
 
+  set applyPrefixStyle(NikuTextStyle v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()
+      ..apply = NikuInputDecoration(prefixStyle: v);
+  }
+
   void useSuffixStyle(NikuTextStyle Function(NikuTextStyle) v) {
     if (decoration == null) decoration = NikuInputDecoration();
 
     decoration?.apply = NikuInputDecoration()..useSuffixStyle(v);
+  }
+
+  set applySuffixStyle(NikuTextStyle v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()
+      ..apply = NikuInputDecoration(suffixStyle: v);
   }
 
   void usePrefixIconConstraints(
@@ -336,6 +385,13 @@ class NikuTextFormField extends StatelessWidget
     decoration?.apply = NikuInputDecoration()..usePrefixIconConstraints(v);
   }
 
+  set applyPrefixIconConstraints(NikuBoxConstraints v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()
+      ..apply = NikuInputDecoration(prefixIconConstraints: v);
+  }
+
   void useSuffixIconConstraints(
       NikuBoxConstraints Function(NikuBoxConstraints) v) {
     if (decoration == null) decoration = NikuInputDecoration();
@@ -343,9 +399,23 @@ class NikuTextFormField extends StatelessWidget
     decoration?.apply = NikuInputDecoration()..useSuffixIconConstraints(v);
   }
 
+  set applySuffixIconConstraints(NikuBoxConstraints v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()
+      ..apply = NikuInputDecoration(suffixIconConstraints: v);
+  }
+
   void useConstraints(NikuBoxConstraints Function(NikuBoxConstraints) v) {
     if (decoration == null) decoration = NikuInputDecoration();
 
     decoration?.apply = NikuInputDecoration()..useConstraints(v);
+  }
+
+  set applyConstraints(NikuBoxConstraints v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()
+      ..apply = NikuInputDecoration(constraints: v);
   }
 }

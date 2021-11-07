@@ -241,10 +241,22 @@ class NikuInputDecoration with ContentPaddingMacro, FloatingLabelBehaviorMacro {
     labelStyle?.apply = v(labelStyle!);
   }
 
+  set applyLabelStyle(NikuTextStyle v) {
+    if (labelStyle == null) labelStyle = NikuTextStyle();
+
+    labelStyle?.apply = v;
+  }
+
   void useFloatingLabelStyle(NikuTextStyle Function(NikuTextStyle) v) {
     if (floatingLabelStyle == null) floatingLabelStyle = NikuTextStyle();
 
     floatingLabelStyle?.apply = v(floatingLabelStyle!);
+  }
+
+  set applyFloatingLabelStyle(NikuTextStyle v) {
+    if (floatingLabelStyle == null) floatingLabelStyle = NikuTextStyle();
+
+    floatingLabelStyle?.apply = v;
   }
 
   void useHelperStyle(NikuTextStyle Function(NikuTextStyle) v) {
@@ -253,10 +265,22 @@ class NikuInputDecoration with ContentPaddingMacro, FloatingLabelBehaviorMacro {
     helperStyle?.apply = v(helperStyle!);
   }
 
+  set applyHelperStyle(NikuTextStyle v) {
+    if (helperStyle == null) helperStyle = NikuTextStyle();
+
+    helperStyle?.apply = v;
+  }
+
   void useHintStyle(NikuTextStyle Function(NikuTextStyle) v) {
     if (hintStyle == null) hintStyle = NikuTextStyle();
 
     hintStyle?.apply = v(hintStyle!);
+  }
+
+  set applyHintStyle(NikuTextStyle v) {
+    if (hintStyle == null) hintStyle = NikuTextStyle();
+
+    hintStyle?.apply = v;
   }
 
   void useErrorStyle(NikuTextStyle Function(NikuTextStyle) v) {
@@ -265,16 +289,34 @@ class NikuInputDecoration with ContentPaddingMacro, FloatingLabelBehaviorMacro {
     errorStyle?.apply = v(errorStyle!);
   }
 
+  set applyErrorStyle(NikuTextStyle v) {
+    if (errorStyle == null) errorStyle = NikuTextStyle();
+
+    errorStyle?.apply = v;
+  }
+
   void usePrefixStyle(NikuTextStyle Function(NikuTextStyle) v) {
     if (prefixStyle == null) prefixStyle = NikuTextStyle();
 
     prefixStyle?.apply = v(prefixStyle!);
   }
 
+  set applyPrefixStyle(NikuTextStyle v) {
+    if (prefixStyle == null) prefixStyle = NikuTextStyle();
+
+    prefixStyle?.apply = v;
+  }
+
   void useSuffixStyle(NikuTextStyle Function(NikuTextStyle) v) {
     if (suffixStyle == null) suffixStyle = NikuTextStyle();
 
     suffixStyle?.apply = v(suffixStyle!);
+  }
+
+  set applySuffixStyle(NikuTextStyle v) {
+    if (suffixStyle == null) suffixStyle = NikuTextStyle();
+
+    suffixStyle?.apply = v;
   }
 
   void usePrefixIconConstraints(
@@ -285,6 +327,13 @@ class NikuInputDecoration with ContentPaddingMacro, FloatingLabelBehaviorMacro {
     prefixIconConstraints?.apply = v(prefixIconConstraints!);
   }
 
+  set applyPrefixIconConstraints(NikuBoxConstraints v) {
+    if (prefixIconConstraints == null)
+      prefixIconConstraints = NikuBoxConstraints();
+
+    prefixIconConstraints?.apply = v;
+  }
+
   void useSuffixIconConstraints(
       NikuBoxConstraints Function(NikuBoxConstraints) v) {
     if (suffixIconConstraints == null)
@@ -293,10 +342,23 @@ class NikuInputDecoration with ContentPaddingMacro, FloatingLabelBehaviorMacro {
     suffixIconConstraints?.apply = v(suffixIconConstraints!);
   }
 
+  set applySuffixIconConstraints(NikuBoxConstraints v) {
+    if (suffixIconConstraints == null)
+      suffixIconConstraints = NikuBoxConstraints();
+
+    suffixIconConstraints?.apply = v;
+  }
+
   void useConstraints(NikuBoxConstraints Function(NikuBoxConstraints) v) {
     if (constraints == null) constraints = NikuBoxConstraints();
 
     constraints?.apply = v(constraints!);
+  }
+
+  set applyConstraints(NikuBoxConstraints v) {
+    if (constraints == null) constraints = NikuBoxConstraints();
+
+    constraints?.apply = v;
   }
 
   set apply(NikuInputDecoration? v) {
@@ -452,49 +514,49 @@ extension TransformNikuInputDecoration on InputDecoration {
       icon: icon,
       label: label,
       labelText: labelText,
-      labelStyle: labelStyle?.niku,
-      floatingLabelStyle: floatingLabelStyle?.niku,
+      labelStyle: labelStyle?.asNiku,
+      floatingLabelStyle: floatingLabelStyle?.asNiku,
       helperText: helperText,
-      helperStyle: helperStyle?.niku,
+      helperStyle: helperStyle?.asNiku,
       helperMaxLines: helperMaxLines,
       hintText: hintText,
-      hintStyle: hintStyle?.niku,
+      hintStyle: hintStyle?.asNiku,
       hintTextDirection: hintTextDirection,
       hintMaxLines: hintMaxLines,
       errorText: errorText,
-      errorStyle: errorStyle?.niku,
+      errorStyle: errorStyle?.asNiku,
       errorMaxLines: errorMaxLines,
       floatingLabelBehavior: floatingLabelBehavior,
       isDense: isDense,
-      contentPadding: contentPadding?.niku,
+      contentPadding: contentPadding?.asNiku,
       isCollapsed: isCollapsed,
       prefixIcon: prefixIcon,
-      prefixIconConstraints: prefixIconConstraints?.niku,
+      prefixIconConstraints: prefixIconConstraints?.asNiku,
       prefix: prefix,
       prefixText: prefixText,
-      prefixStyle: prefixStyle?.niku,
+      prefixStyle: prefixStyle?.asNiku,
       suffixIcon: suffixIcon,
       suffix: suffix,
       suffixText: suffixText,
-      suffixStyle: suffixStyle?.niku,
-      suffixIconConstraints: suffixIconConstraints?.niku,
+      suffixStyle: suffixStyle?.asNiku,
+      suffixIconConstraints: suffixIconConstraints?.asNiku,
       counterText: counterText,
       counter: counter,
-      counterStyle: counterStyle?.niku,
+      counterStyle: counterStyle?.asNiku,
       filled: filled,
       fillColor: fillColor,
       focusColor: focusColor,
       hoverColor: hoverColor,
-      errorBorder: errorBorder?.niku,
-      focusedBorder: focusedBorder?.niku,
-      focusedErrorBorder: focusedErrorBorder?.niku,
-      disabledBorder: disabledBorder?.niku,
-      enabledBorder: enabledBorder?.niku,
-      border: border?.niku,
+      errorBorder: errorBorder?.asNiku,
+      focusedBorder: focusedBorder?.asNiku,
+      focusedErrorBorder: focusedErrorBorder?.asNiku,
+      disabledBorder: disabledBorder?.asNiku,
+      enabledBorder: enabledBorder?.asNiku,
+      border: border?.asNiku,
       enabled: enabled,
       semanticCounterText: semanticCounterText,
       alignLabelWithHint: alignLabelWithHint,
-      constraints: constraints?.niku,
+      constraints: constraints?.asNiku,
     );
   }
 }

@@ -45,7 +45,7 @@ class NikuStack extends StatelessWidget
 }
 
 extension NikuStackTransform on Stack {
-  NikuStack get niku => NikuStack(
+  NikuStack get asNiku => NikuStack(
         children,
         alignment:
             alignment == AlignmentDirectional.topStart ? null : alignment,

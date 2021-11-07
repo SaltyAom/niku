@@ -58,7 +58,7 @@ class NikuRow extends StatelessWidget
 }
 
 extension NikuRowTransform on Column {
-  NikuRow get niku => NikuRow(
+  NikuRow get asNiku => NikuRow(
         children,
         mainAxisAlignment: mainAxisAlignment == MainAxisAlignment.start
             ? null

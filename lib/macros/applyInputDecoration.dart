@@ -8,4 +8,10 @@ abstract class ApplyInputDecorationMacro {
 
     decoration?.apply = v(decoration!);
   }
+
+  set applyDecoration(NikuInputDecoration v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = v;
+  }
 }

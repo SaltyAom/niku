@@ -8,4 +8,10 @@ abstract class ApplyButtonStyleMacro {
 
     style?.apply = v(style!);
   }
+
+  set applyStyle(NikuButtonStyle v) {
+    if (style == null) style = NikuButtonStyle();
+
+    style?.apply = v;
+  }
 }

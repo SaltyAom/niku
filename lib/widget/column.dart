@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'niku.dart';
 import '../macros/macros.dart';
 
 // ignore: must_be_immutable
@@ -59,7 +58,7 @@ class NikuColumn extends StatelessWidget
 }
 
 extension NikuColumnTransform on Column {
-  NikuColumn get niku => NikuColumn(
+  NikuColumn get asNiku => NikuColumn(
         children,
         mainAxisAlignment: mainAxisAlignment == MainAxisAlignment.start
             ? null

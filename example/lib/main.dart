@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.blue,
         primarySwatch: Colors.blue,
       ),
-      home: const App(),
+      home: const AlertPage(),
     );
   }
 }
@@ -34,6 +34,33 @@ class Styles {
         ..color = Colors.white));
 }
 
+class CardPage extends StatelessWidget {
+  const CardPage({Key? key}) : super(key: key);
+
+  build(context) {
+    return Scaffold(
+      body: Icon(Icons.home_outlined, color: Colors.white).niku
+        ..p = 10
+        ..bg = Color(0xff7AC1E7)
+        ..rounded
+        ..p = 15
+        ..bg = Color(0xffE8F2F7)
+        ..rounded
+        ..p = 20
+        ..useParent(
+          (child) => Card(
+            elevation: 10,
+            child: child,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+          ),
+        )
+        ..center,
+    );
+  }
+}
+
 class Counter extends HookWidget {
   const Counter();
 
@@ -43,7 +70,12 @@ class Counter extends HookWidget {
     return Scaffold(
         body: Center(
       child: NikuColumn([
-        NikuText("Counter: ${count.value}")
+        Text("Some Text").asNiku
+          ..useParent((v) => v
+            ..p = 10
+            ..bg = Colors.amber
+            ..center),
+        Text("Counter: ${count.value}").asNiku
           ..center
           ..style = (NikuTextStyle()..h4 = context),
         NikuButton.elevated(NikuText("Increment"))
@@ -58,6 +90,53 @@ class Counter extends HookWidget {
         ..crossCenter
         ..gap = 16,
     ));
+  }
+}
+
+class AlertPage extends StatelessWidget {
+  const AlertPage({Key? key}) : super(key: key);
+
+  build(context) {
+    return Scaffold(
+      body: NikuButton.elevated(
+        Text("Hello World"),
+      )
+        ..onPressed = () {
+          showDialog(
+            context: context,
+            builder: (context) => NikuAlert()
+              ..title = Text("Hello World")
+              ..content = Text("This is alert dialog written in Niku"),
+          );
+        }
+        ..useTextStyle((v) => v..fontSize = 21)
+        ..useStyle((v) => v
+          ..px = 32
+          ..py = 16)
+        ..useParent((v) => v..center),
+    );
+  }
+}
+
+class Grid extends StatelessWidget {
+  const Grid();
+
+  build(context) {
+    return Scaffold(
+      body: NikuGridView(2, [
+        Niku()..bg = Colors.amber,
+        Niku()..bg = Colors.red,
+        Niku()..bg = Colors.blue,
+        Niku()..bg = Colors.green,
+        Niku()..bg = Colors.yellow,
+        Niku()..bg = Colors.cyan,
+        Niku()..bg = Colors.black,
+        Niku()..bg = Colors.indigo,
+      ])
+        ..useParent((v) => v
+          ..scrollbar
+          ..p = 16),
+    );
   }
 }
 
@@ -90,12 +169,12 @@ class App extends StatelessWidget {
               ..mb = 24),
           NikuButton.elevated(Text("Hello World"))
             ..onPressed = () {}
+            ..useTextStyle((v) => v..fontSize = 18)
             ..useStyle((v) => v
               ..bg = Colors.blue
               ..fg = Colors.white
               ..py = 16
-              ..elevationState = NikuState(pressed: 16)
-              ..useTextStyle((v) => v..fontSize = 18))
+              ..elevationState = NikuState(pressed: 16))
             ..useNiku((v) => v
               ..w100
               ..px = 24),
@@ -111,15 +190,15 @@ class App extends StatelessWidget {
               ..center),
           NikuButton.outlined(Text("Hello World"))
             ..onPressed = () {}
+            ..useTextStyle((v) => v
+              ..fontSize = 18
+              ..bold)
             ..useStyle((v) => v
               ..fg = Colors.blue
               ..px = 24
               ..py = 12
               ..rounded = 4
-              ..side = BorderSide(color: Colors.blue)
-              ..useTextStyle((v) => v
-                ..fontSize = 18
-                ..bold)),
+              ..side = BorderSide(color: Colors.blue)),
           NikuText("Hi friends~")
             ..center
             ..useStyle((v) => v
@@ -127,7 +206,7 @@ class App extends StatelessWidget {
               ..color = Colors.grey.shade700
               ..w300
               ..color = Colors.white)
-            ..useNiku((v) => v
+            ..useParent((v) => v
               ..fullWidth
               ..py = 24
               ..bg = Colors.blue),

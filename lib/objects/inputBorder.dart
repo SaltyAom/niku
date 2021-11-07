@@ -109,7 +109,7 @@ class NikuInputBorder {
 }
 
 extension TransformNikuInputBorder on InputBorder {
-  NikuInputBorder get niku => NikuInputBorder(
+  NikuInputBorder get asNiku => NikuInputBorder(
         width: borderSide.width,
         style: borderSide.style,
         color: borderSide.color,

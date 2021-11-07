@@ -15,6 +15,8 @@ class Niku extends StatelessWidget {
 
   Niku([this.widget = const SizedBox.shrink(), this.key]) : super(key: key);
 
+  Widget get value => widget;
+
   @override
   build(context) {
     if (key != null) return SizedBox(key: key, child: widget);
@@ -24,6 +26,10 @@ class Niku extends StatelessWidget {
 }
 
 typedef UseNikuCallback<T> = T Function(T);
+
+extension TransformNikuParent on Widget {
+  Niku get niku => Niku(this);
+}
 
 extension PropertyBuilder on Niku {
   set margin(EdgeInsets v) => _w = Container(margin: v, child: _w);
@@ -340,6 +346,8 @@ extension PropertyBuilder on Niku {
         onChanged: onChanged,
       );
 
+  void get scrollbar => _w = Scrollbar(child: _w);
+
   void useScrollbar({
     ScrollController? controller,
     bool? isAlwaysShown,
@@ -383,4 +391,11 @@ extension PropertyBuilder on Niku {
       );
 
   set theme(ThemeData v) => _w = Theme(data: v, child: _w);
+
+  void useBuilder(Widget Function(Widget child) builder) => _w = builder(_w);
+  void useParent(Widget Function(Widget child) builder) => _w = builder(_w);
+
+  void get safeArea => _w = SafeArea(child: _w);
+  void get safeAreaX => _w = SafeArea(child: _w, top: false, bottom: false);
+  void get safeAreaY => _w = SafeArea(child: _w, left: false, right: false);
 }

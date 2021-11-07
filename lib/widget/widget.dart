@@ -1,7 +1,9 @@
 export 'niku.dart';
 
+export 'alert.dart';
 export 'button.dart';
 export 'column.dart';
+export 'gridView.dart';
 export 'row.dart';
 export 'stack.dart';
 export 'text.dart';

@@ -123,7 +123,7 @@ class NikuTextStyle
 }
 
 extension NikuTextStyleTransform on TextStyle {
-  NikuTextStyle get niku => NikuTextStyle(
+  NikuTextStyle get asNiku => NikuTextStyle(
         inherit: this.inherit,
         color: this.color,
         backgroundColor: this.backgroundColor,

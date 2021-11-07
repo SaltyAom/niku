@@ -33,7 +33,7 @@ class NikuBoxConstraints with ConstraintsMacro {
 }
 
 extension TransformNikuBoxConstraints on BoxConstraints {
-  NikuBoxConstraints get niku => NikuBoxConstraints(
+  NikuBoxConstraints get asNiku => NikuBoxConstraints(
         minWidth: minWidth,
         maxWidth: maxWidth,
         minHeight: minHeight,

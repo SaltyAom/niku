@@ -51,7 +51,7 @@ class NikuEdgeInsets {
 }
 
 extension TransformNikuEdgeInsets on EdgeInsetsGeometry {
-  NikuEdgeInsets get niku => NikuEdgeInsets(
+  NikuEdgeInsets get asNiku => NikuEdgeInsets(
         top: (this as EdgeInsets).top,
         left: (this as EdgeInsets).left,
         bottom: (this as EdgeInsets).bottom,

@@ -171,6 +171,12 @@ class NikuButton extends StatelessWidget
     style!.apply = NikuButtonStyle(textStyle: cb(NikuTextStyle()));
   }
 
+  void applyTextStyle(NikuTextStyle v) {
+    if (style == null) style = NikuButtonStyle();
+
+    style!.apply = NikuButtonStyle(textStyle: v);
+  }
+
   set apply(NikuButton? v) {
     if (v == null) return;
 
@@ -256,36 +262,36 @@ class NikuButton extends StatelessWidget
 }
 
 extension TransformNikuTextButton on TextButton {
-  NikuButton get niku => NikuButton(
+  NikuButton get asNiku => NikuButton(
         child ?? SizedBox.shrink(),
         key: key,
         onPressed: onPressed,
         onLongPress: onLongPress,
-        style: style?.niku,
+        style: style?.asNiku,
         focusNode: focusNode,
         clipBehavior: clipBehavior,
       );
 }
 
 extension TransformNikuElevatedButton on ElevatedButton {
-  NikuButton get niku => NikuButton.elevated(
+  NikuButton get asNiku => NikuButton.elevated(
         child ?? SizedBox.shrink(),
         key: key,
         onPressed: onPressed,
         onLongPress: onLongPress,
-        style: style?.niku,
+        style: style?.asNiku,
         focusNode: focusNode,
         clipBehavior: clipBehavior,
       );
 }
 
 extension TransformNikuOutlinedButton on OutlinedButton {
-  NikuButton get niku => NikuButton.outlined(
+  NikuButton get asNiku => NikuButton.outlined(
         child ?? SizedBox.shrink(),
         key: key,
         onPressed: onPressed,
         onLongPress: onLongPress,
-        style: style?.niku,
+        style: style?.asNiku,
         focusNode: focusNode,
         clipBehavior: clipBehavior,
       );

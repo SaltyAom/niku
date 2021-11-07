@@ -61,7 +61,7 @@ class NikuStrutStyle with FontStyleMacro, FontWeightMacro {
 }
 
 extension NikuStrutStyleTransform on StrutStyle {
-  get niku => NikuStrutStyle(
+  get asNiku => NikuStrutStyle(
         fontFamily: fontFamily,
         fontFamilyFallback: fontFamilyFallback,
         fontSize: fontSize,

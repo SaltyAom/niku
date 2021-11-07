@@ -8,4 +8,10 @@ abstract class ApplyStrutStyleMacro {
 
     strutStyle?.apply = v(strutStyle!);
   }
+
+  set applySturtStyle(NikuStrutStyle v) {
+    if (strutStyle == null) strutStyle = NikuStrutStyle();
+
+    strutStyle?.apply = v;
+  }
 }
