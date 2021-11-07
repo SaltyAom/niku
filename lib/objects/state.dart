@@ -27,6 +27,19 @@ class NikuState<T> {
 
   factory NikuState.all(T all) => NikuState(all: all);
 
+  NikuState get copy => NikuState(
+        all: all,
+        disabled: disabled,
+        dragged: dragged,
+        error: error,
+        focused: focused,
+        hovered: hovered,
+        pressed: pressed,
+        scrolledUnder: scrolledUnder,
+        selected: selected,
+        base: base,
+      );
+
   MaterialStateProperty<T?> get value =>
       MaterialStateProperty.resolveWith((states) {
         if (all != null) return all;

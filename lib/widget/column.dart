@@ -45,6 +45,17 @@ class NikuColumn extends StatelessWidget
     textBaseline ??= v.textBaseline;
   }
 
+  NikuColumn get copy => NikuColumn(
+        children,
+        key: key,
+        mainAxisAlignment: mainAxisAlignment,
+        mainAxisSize: mainAxisSize,
+        crossAxisAlignment: crossAxisAlignment,
+        textDirection: textDirection,
+        verticalDirection: verticalDirection,
+        textBaseline: textBaseline,
+      );
+
   Column get value => Column(
         children: childrenWithGap ?? children,
         key: key,

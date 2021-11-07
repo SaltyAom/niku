@@ -70,6 +70,16 @@ class NikuInputBorder {
     type ??= v.type;
   }
 
+  NikuInputBorder get copy => NikuInputBorder(
+        width: width,
+        radius: radius,
+        style: style,
+        color: color,
+        gapPadding: gapPadding,
+        borderRadius: borderRadius,
+        type: type,
+      );
+
   UnderlineInputBorder get value => UnderlineInputBorder(
         borderSide: BorderSide(
           width: width ?? 1,

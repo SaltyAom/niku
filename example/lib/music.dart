@@ -1,14 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:niku/niku.dart';
 
+class Style {
+  static final subIcon = NikuIconButton(null)
+    ..onPressed = () {}
+    ..iconSize = 32
+    ..color = Colors.grey.shade600
+    ..highlightColor = Colors.white.withOpacity(.0875)
+    ..splashColor = Colors.transparent;
+
+  static final icon = subIcon.apply = subIcon.copy
+    ..iconSize = 48
+    ..color = Colors.grey.shade100;
+
+  static final sideIcon = subIcon.apply = subIcon.copy..iconSize = 24;
+}
+
 class Music extends StatelessWidget {
   const Music({Key? key}) : super(key: key);
 
-  @override
   build(context) {
     return Scaffold(
       backgroundColor: Color(0xff3b1b29),
       appBar: AppBar(
+        backgroundColor: Color(0xff3b1b29),
+        shadowColor: Colors.transparent,
         leading: IconButton(
           icon: Icon(Icons.keyboard_arrow_down_rounded),
           onPressed: () {},
@@ -33,34 +49,21 @@ class Music extends StatelessWidget {
               offset: Offset(0, 8),
               blurRadius: 24,
             )
-          ],
+          ]
+          ..mb = 36,
         NikuRow([
-          IconButton(
-            onPressed: () {},
-            icon: Icon(
-              Icons.thumb_down_alt_outlined,
-              color: Colors.grey.shade600,
-            ),
-          ),
+          NikuIconButton(Icons.thumb_down_alt_outlined)..apply = Style.sideIcon,
           NikuColumn([
             NikuText("Paradise")
-              ..useStyle((v) => v
-                ..color = Colors.white
-                ..w600
-                ..fontSize = 24),
+              ..color = Colors.white
+              ..w600
+              ..fontSize = 24,
             NikuText("Sound Souler")
-              ..useStyle((v) => v
-                ..fontSize = 18
-                ..color = Colors.grey.shade500),
+              ..fontSize = 18
+              ..color = Colors.grey.shade500,
           ])
             ..gap = 8,
-          IconButton(
-            onPressed: () {},
-            icon: Icon(
-              Icons.thumb_up_alt_outlined,
-              color: Colors.grey.shade600,
-            ),
-          ),
+          NikuIconButton(Icons.thumb_up_alt_outlined)..apply = Style.sideIcon,
         ])
           ..mainBetween
           ..crossStart,
@@ -70,66 +73,20 @@ class Music extends StatelessWidget {
           min: 0,
           max: 146,
           thumbColor: Colors.white,
-        ),
+        ).niku
+          ..my = 8,
         NikuRow([
-          IconButton(
-            onPressed: () {},
-            padding: NikuEdgeInsets().value,
-            icon: Icon(
-              Icons.shuffle_rounded,
-              size: 32,
-              color: Colors.grey.shade600,
-            ),
-          ),
-          IconButton(
-            onPressed: () {},
-            padding: NikuEdgeInsets().value,
-            icon: Icon(
-              Icons.skip_previous_rounded,
-              size: 48,
-              color: Colors.grey.shade300,
-            ),
-          ),
-          IconButton(
-            onPressed: () {},
-            padding: NikuEdgeInsets().value,
-            icon: Icon(
-              Icons.play_arrow_rounded,
-              size: 48,
-              color: Colors.grey.shade300,
-            ),
-          ),
-          IconButton(
-            onPressed: () {},
-            padding: NikuEdgeInsets().value,
-            icon: Icon(
-              Icons.skip_next_rounded,
-              size: 48,
-              color: Colors.grey.shade300,
-            ),
-          ),
-          IconButton(
-            onPressed: () {},
-            padding: NikuEdgeInsets().value,
-            icon: Icon(
-              Icons.repeat_rounded,
-              size: 32,
-              color: Colors.grey.shade600,
-            ),
-          ),
+          NikuIconButton(Icons.shuffle_rounded)..apply = Style.subIcon,
+          NikuIconButton(Icons.skip_previous_rounded)..apply = Style.icon,
+          NikuIconButton(Icons.play_arrow_rounded)..apply = Style.icon,
+          NikuIconButton(Icons.skip_next_rounded)..apply = Style.icon,
+          NikuIconButton(Icons.repeat_rounded)..apply = Style.subIcon,
         ])
           ..spaceBetween
           ..crossCenter,
       ])
         ..mainCenter
-        ..gap = 24
         ..useParent((v) => v..px = 32),
-    ).niku
-      ..theme = ThemeData(
-        appBarTheme: AppBarTheme(
-          backgroundColor: Color(0xff3b1b29),
-          shadowColor: Colors.transparent,
-        ),
-      );
+    );
   }
 }

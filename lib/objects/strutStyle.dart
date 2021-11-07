@@ -45,6 +45,20 @@ class NikuStrutStyle with FontStyleMacro, FontWeightMacro {
     package ??= v.package;
   }
 
+  NikuStrutStyle get copy => NikuStrutStyle(
+        fontFamily: fontFamily,
+        fontFamilyFallback: fontFamilyFallback,
+        fontSize: fontSize,
+        height: height,
+        leadingDistribution: leadingDistribution,
+        leading: leading,
+        fontWeight: fontWeight,
+        fontStyle: fontStyle,
+        forceStrutHeight: forceStrutHeight,
+        debugLabel: debugLabel,
+        package: package,
+      );
+
   StrutStyle get value => StrutStyle(
         fontFamily: fontFamily,
         fontFamilyFallback: fontFamilyFallback,

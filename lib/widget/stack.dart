@@ -34,6 +34,15 @@ class NikuStack extends StatelessWidget
     clipBehavior ??= v.clipBehavior;
   }
 
+  NikuStack get copy => NikuStack(
+        this.children,
+        key: key,
+        alignment: alignment,
+        textDirection: textDirection,
+        fit: fit,
+        clipBehavior: clipBehavior,
+      );
+
   Stack get value => Stack(
         key: key,
         children: children,

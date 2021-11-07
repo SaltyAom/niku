@@ -11,11 +11,13 @@ class NikuText extends StatelessWidget
         NikuBuildMacro,
         ApplyTextMacro,
         ApplyStrutStyleMacro,
+        MapTextStyleMacro,
         TextAlignMacro,
+        TextDirectionMacro,
         TextBaselineMacro {
   String? text;
 
-  NikuTextStyle? style = NikuTextStyle();
+  NikuTextStyle? style;
   NikuStrutStyle? strutStyle;
   TextAlign? textAlign;
   TextDirection? textDirection;
@@ -30,19 +32,19 @@ class NikuText extends StatelessWidget
 
   NikuText(
     this.text, {
+    Key? key,
     this.style,
     this.strutStyle,
-    this.textAlign = TextAlign.left,
-    this.textDirection = TextDirection.ltr,
+    this.textAlign,
+    this.textDirection,
     this.locale,
-    this.softWrap = true,
-    this.overflow = TextOverflow.clip,
-    this.textScaleFactor = 1.0,
-    this.maxLines = 1,
+    this.softWrap,
+    this.overflow,
+    this.textScaleFactor,
+    this.maxLines,
     this.semanticsLabel,
-    this.textWidthBasis = TextWidthBasis.parent,
+    this.textWidthBasis,
     this.textHeightBehavior,
-    Key? key,
   }) : super(key: key);
 
   set apply(NikuText? v) {
@@ -66,38 +68,56 @@ class NikuText extends StatelessWidget
     textHeightBehavior ??= v.textHeightBehavior;
   }
 
+  NikuText get copy => NikuText(
+        text,
+        style: style,
+        strutStyle: strutStyle,
+        textAlign: textAlign,
+        textDirection: textDirection,
+        locale: locale,
+        softWrap: softWrap,
+        overflow: overflow,
+        textScaleFactor: textScaleFactor,
+        maxLines: maxLines,
+        semanticsLabel: semanticsLabel,
+        textWidthBasis: textWidthBasis,
+        textHeightBehavior: textHeightBehavior,
+      );
+
   Widget get value => Text(
         this.text ?? "",
         key: key,
         style: this.style?.value,
         strutStyle: this.strutStyle?.value,
-        textAlign: this.textAlign,
-        textDirection: this.textDirection,
+        textAlign: this.textAlign ?? TextAlign.left,
+        textDirection: this.textDirection ?? TextDirection.ltr,
         locale: this.locale,
-        softWrap: this.softWrap,
-        overflow: this.overflow,
-        textScaleFactor: this.textScaleFactor,
-        maxLines: this.maxLines,
+        softWrap: this.softWrap ?? true,
+        overflow: this.overflow ?? TextOverflow.clip,
+        textScaleFactor: this.textScaleFactor ?? 1.0,
+        maxLines: this.maxLines ?? 1,
         semanticsLabel: this.semanticsLabel,
-        textWidthBasis: this.textWidthBasis,
+        textWidthBasis: this.textWidthBasis ?? TextWidthBasis.parent,
         textHeightBehavior: this.textHeightBehavior,
       );
 }
 
 extension NikuTextTransform on Text {
   NikuText get asNiku => NikuText(
-        this.data,
-        style: this.style?.asNiku,
-        strutStyle: this.strutStyle?.asNiku,
-        textAlign: this.textAlign,
-        textDirection: this.textDirection,
-        locale: this.locale,
-        softWrap: this.softWrap,
-        overflow: this.overflow,
-        textScaleFactor: this.textScaleFactor,
-        maxLines: this.maxLines,
-        semanticsLabel: this.semanticsLabel,
-        textWidthBasis: this.textWidthBasis,
-        textHeightBehavior: this.textHeightBehavior,
+        data,
+        style: style?.asNiku,
+        strutStyle: strutStyle?.asNiku,
+        textAlign: textAlign != TextAlign.left ? textAlign : null,
+        textDirection:
+            textDirection != TextDirection.ltr ? textDirection : null,
+        locale: locale,
+        softWrap: softWrap != true ? softWrap : null,
+        overflow: overflow != TextOverflow.clip ? overflow : null,
+        textScaleFactor: textScaleFactor != 1.0 ? textScaleFactor : null,
+        maxLines: maxLines != 1 ? maxLines : null,
+        semanticsLabel: semanticsLabel,
+        textWidthBasis:
+            textWidthBasis != TextWidthBasis.parent ? textWidthBasis : null,
+        textHeightBehavior: textHeightBehavior,
       );
 }

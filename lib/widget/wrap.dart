@@ -52,6 +52,20 @@ class NikuWrap extends StatelessWidget
     this.clipBehavior ??= v.clipBehavior;
   }
 
+  NikuWrap get copy => NikuWrap(
+        chidren,
+        key: key,
+        direction: direction,
+        alignment: alignment,
+        spacing: spacing,
+        runAlignment: runAlignment,
+        runSpacing: runSpacing,
+        crossAxisAlignment: crossAxisAlignment,
+        textDirection: textDirection,
+        verticalDirection: verticalDirection,
+        clipBehavior: clipBehavior,
+      );
+
   Wrap get value => Wrap(
         children: chidren,
         key: key,

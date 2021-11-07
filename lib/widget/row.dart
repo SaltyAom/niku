@@ -45,6 +45,17 @@ class NikuRow extends StatelessWidget
     textBaseline ??= v.textBaseline;
   }
 
+  NikuRow get copy => NikuRow(
+        children,
+        key: key,
+        mainAxisAlignment: mainAxisAlignment,
+        mainAxisSize: mainAxisSize,
+        crossAxisAlignment: crossAxisAlignment,
+        textDirection: textDirection,
+        verticalDirection: verticalDirection,
+        textBaseline: textBaseline,
+      );
+
   Row get value => Row(
         children: childrenWithGap ?? children,
         key: key,

@@ -171,6 +171,28 @@ class NikuButtonStyle with AlignmentDirectionalMacro {
     splashFactory ??= style.splashFactory;
   }
 
+  NikuButtonStyle get copy => NikuButtonStyle(
+        textStyleState: textStyleState,
+        backgroundColorState: backgroundColorState,
+        foregroundColorState: foregroundColorState,
+        overlayColorState: overlayColorState,
+        shadowColorState: shadowColorState,
+        elevationState: elevationState,
+        paddingState: paddingState,
+        minimumSizeState: minimumSizeState,
+        fixedSizeState: fixedSizeState,
+        maximumSizeState: maximumSizeState,
+        sideState: sideState,
+        shapeState: shapeState,
+        mouseCursorState: mouseCursorState,
+        visualDensity: visualDensity,
+        tapTargetSize: tapTargetSize,
+        animationDuration: animationDuration,
+        enableFeedback: enableFeedback,
+        alignment: alignment,
+        splashFactory: splashFactory,
+      );
+
   ButtonStyle get value => ButtonStyle(
         textStyle: NikuState<TextStyle>(
           all: textStyleState?.all?.value,

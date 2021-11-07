@@ -83,6 +83,31 @@ class NikuGridView extends StatelessWidget
     clipBehavior ??= v.clipBehavior;
   }
 
+  NikuGridView get copy => NikuGridView(
+        crossAxisCount,
+        children,
+        key: key,
+        scrollDirection: scrollDirection,
+        reverse: reverse,
+        controller: controller,
+        primary: primary,
+        physics: physics,
+        shrinkWrap: shrinkWrap,
+        padding: padding,
+        mainAxisSpacing: mainAxisSpacing,
+        crossAxisSpacing: crossAxisSpacing,
+        childAspectRatio: childAspectRatio,
+        addAutomaticKeepAlives: addAutomaticKeepAlives,
+        addRepaintBoundaries: addRepaintBoundaries,
+        addSemanticIndexes: addSemanticIndexes,
+        cacheExtent: cacheExtent,
+        semanticChildCount: semanticChildCount,
+        dragStartBehavior: dragStartBehavior,
+        keyboardDismissBehavior: keyboardDismissBehavior,
+        restorationId: restorationId,
+        clipBehavior: clipBehavior,
+      );
+
   GridView get value => GridView.count(
         key: key,
         crossAxisCount: this.crossAxisCount,

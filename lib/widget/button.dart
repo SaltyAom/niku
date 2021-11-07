@@ -193,6 +193,20 @@ class NikuButton extends StatelessWidget
     enable = v.enable;
   }
 
+  NikuButton get copy => NikuButton(
+        child,
+        key: key,
+        type: type,
+        onPressed: onPressed,
+        onLongPress: onLongPress,
+        style: style,
+        focusNode: focusNode,
+        clipBehavior: clipBehavior,
+        icon: icon,
+        label: label,
+        enable: enable,
+      );
+
   Widget get value {
     if (type == NikuButtonType.Elevated)
       return (label != null && icon != null)

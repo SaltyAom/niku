@@ -81,6 +81,29 @@ class NikuAlert extends StatelessWidget
     scrollable ??= scrollable;
   }
 
+  NikuAlert get copy => NikuAlert(
+        key: key,
+        title: title,
+        titlePadding: titlePadding,
+        titleTextStyle: titleTextStyle,
+        content: content,
+        contentPadding: contentPadding,
+        contentTextStyle: contentTextStyle,
+        actions: actions,
+        actionsPadding: actionsPadding,
+        actionsAlignment: actionsAlignment,
+        actionsOverflowDirection: actionsOverflowDirection,
+        actionsOverflowButtonSpacing: actionsOverflowButtonSpacing,
+        buttonPadding: buttonPadding,
+        backgroundColor: backgroundColor,
+        elevation: elevation,
+        semanticLabel: semanticLabel,
+        insetPadding: insetPadding,
+        clipBehavior: clipBehavior,
+        shape: shape,
+        scrollable: scrollable,
+      );
+
   AlertDialog get value => AlertDialog(
         key: key,
         title: title,

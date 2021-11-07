@@ -8,7 +8,8 @@ class NikuTextStyle
         BackgroundColorMacro,
         FontStyleMacro,
         FontWeightMacro,
-        TextDirectionMacro,
+        TextDecorationMacro,
+        TextDecorationStyleMacro,
         TextStyleThemeMacro {
   bool inherit;
   Color? color;
@@ -62,6 +63,8 @@ class NikuTextStyle
     this.fontFeatures,
     this.overflow,
     this.package,
+    double? leading,
+    bool? forceStrutHeight,
   });
 
   set apply(NikuTextStyle? v) {
@@ -92,6 +95,34 @@ class NikuTextStyle
     fontFeatures ??= v.fontFeatures;
     overflow ??= v.overflow;
   }
+
+  NikuTextStyle get copy => NikuTextStyle(
+        inherit: inherit,
+        color: color,
+        backgroundColor: backgroundColor,
+        fontFamily: fontFamily,
+        fontFamilyFallback: fontFamilyFallback,
+        fontSize: fontSize,
+        fontWeight: fontWeight,
+        fontStyle: fontStyle,
+        letterSpacing: letterSpacing,
+        wordSpacing: wordSpacing,
+        textBaseline: textBaseline,
+        height: height,
+        leadingDistribution: leadingDistribution,
+        locale: locale,
+        foreground: foreground,
+        background: background,
+        decoration: decoration,
+        decorationColor: decorationColor,
+        decorationStyle: decorationStyle,
+        decorationThickness: decorationThickness,
+        debugLabel: debugLabel,
+        shadows: shadows,
+        fontFeatures: fontFeatures,
+        overflow: overflow,
+        package: package,
+      );
 
   TextStyle get value => TextStyle(
         inherit: inherit,

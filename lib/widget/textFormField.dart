@@ -71,7 +71,7 @@ class NikuTextFormField extends StatelessWidget
   bool? enableIMEPersonalizedLearning;
 
   NikuTextFormField(
-    String _label, {
+    String? _label, {
     Key? key,
     this.controller,
     this.initialValue,
@@ -123,9 +123,10 @@ class NikuTextFormField extends StatelessWidget
     this.autofillHints,
     this.scrollController,
     this.restorationId,
+    this.autovalidateMode,
     this.enableIMEPersonalizedLearning,
   }) : super(key: key) {
-    label = _label;
+    if (_label != null) label = _label;
   }
 
   void get lightKeyboard => keyboardAppearance == Brightness.light;
@@ -202,6 +203,59 @@ class NikuTextFormField extends StatelessWidget
     restorationId ??= v.restorationId;
     enableIMEPersonalizedLearning ??= v.enableIMEPersonalizedLearning;
   }
+
+  NikuTextFormField get copy => NikuTextFormField(
+        null,
+        controller: controller,
+        initialValue: initialValue,
+        focusNode: focusNode,
+        decoration: decoration?.value,
+        keyboardType: keyboardType,
+        textCapitalization: textCapitalization,
+        textInputAction: textInputAction,
+        style: style,
+        strutStyle: strutStyle,
+        textDirection: textDirection,
+        textAlign: textAlign,
+        textAlignVertical: textAlignVertical,
+        autofocus: autofocus,
+        readOnly: readOnly,
+        toolbarOptions: toolbarOptions,
+        showCursor: showCursor,
+        obscuringCharacter: obscuringCharacter,
+        obscureText: obscureText,
+        autocorrect: autocorrect,
+        smartDashesType: smartDashesType,
+        smartQuotesType: smartQuotesType,
+        enableSuggestions: enableSuggestions,
+        maxLines: maxLines,
+        minLines: minLines,
+        expands: expands,
+        maxLength: maxLength,
+        onChanged: onChanged,
+        onTap: onTap,
+        onEditingComplete: onEditingComplete,
+        onFieldSubmitted: onFieldSubmitted,
+        onSaved: onSaved,
+        validator: validator,
+        inputFormatters: inputFormatters,
+        enabled: enabled,
+        cursorWidth: cursorWidth,
+        cursorHeight: cursorHeight,
+        cursorRadius: cursorRadius,
+        cursorColor: cursorColor,
+        keyboardAppearance: keyboardAppearance,
+        scrollPadding: scrollPadding,
+        enableInteractiveSelection: enableInteractiveSelection,
+        selectionControls: selectionControls,
+        buildCounter: buildCounter,
+        scrollPhysics: scrollPhysics,
+        autofillHints: autofillHints,
+        autovalidateMode: autovalidateMode,
+        scrollController: scrollController,
+        restorationId: restorationId,
+        enableIMEPersonalizedLearning: enableIMEPersonalizedLearning,
+      );
 
   TextFormField get value => TextFormField(
         controller: controller,
