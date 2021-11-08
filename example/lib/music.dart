@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:niku/niku.dart';
 
 class Style {
@@ -16,10 +17,12 @@ class Style {
   static final sideIcon = subIcon.apply = subIcon.copy..iconSize = 24;
 }
 
-class Music extends StatelessWidget {
+class Music extends HookWidget {
   const Music({Key? key}) : super(key: key);
 
   build(context) {
+    final time = useState<double>(73);
+
     return Scaffold(
       backgroundColor: Color(0xff3b1b29),
       appBar: AppBar(
@@ -67,14 +70,19 @@ class Music extends StatelessWidget {
         ])
           ..mainBetween
           ..crossStart,
-        Slider(
-          value: 0,
-          onChanged: (v) {},
-          min: 0,
-          max: 146,
-          thumbColor: Colors.white,
-        ).niku
-          ..my = 8,
+        NikuSlider(time.value)
+          ..onChanged = (v) {
+            time.value = v;
+          }
+          ..min = 0
+          ..max = 146
+          ..thumbColor = Colors.white
+          ..overlayColor = Colors.white.withOpacity(.125)
+          ..activeTrackColor = Colors.white.withOpacity(.75)
+          ..inactiveTrackColor = Colors.white.withOpacity(.25)
+          ..trackHeight = 2
+          ..thumbShape = RoundSliderThumbShape(enabledThumbRadius: 6)
+          ..useParent((v) => v..my = 8),
         NikuRow([
           NikuIconButton(Icons.shuffle_rounded)..apply = Style.subIcon,
           NikuIconButton(Icons.skip_previous_rounded)..apply = Style.icon,

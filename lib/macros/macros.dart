@@ -6,6 +6,7 @@ export 'applyInputDecoration.dart';
 export 'applySturtStyle.dart';
 export 'applyText.dart';
 export 'applyTitleText.dart';
+export 'applyValueIndicatorTextStyle.dart';
 export 'axis.dart';
 export 'backgroundColor.dart';
 export 'buttonPadding.dart';
