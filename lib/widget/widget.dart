@@ -5,6 +5,7 @@ export 'button.dart';
 export 'column.dart';
 export 'gridView.dart';
 export 'iconButton.dart';
+export 'image.dart';
 export 'row.dart';
 export 'slider.dart';
 export 'stack.dart';

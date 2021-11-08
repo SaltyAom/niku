@@ -40,20 +40,23 @@ class Music extends HookWidget {
         ],
       ),
       body: NikuColumn([
-        Image.network(
+        NikuImage.network(
           "https://static.wikia.nocookie.net/iowiro/images/c/c5/News_10202019a.jpg/revision/latest/scale-to-width-down/500?cb=20191021035255",
-          fit: BoxFit.cover,
-        ).niku
-          ..aspectRatio = 1
-          ..rounded = 8
-          ..shadows = [
-            BoxShadow(
-              color: Colors.black.withOpacity(.25),
-              offset: Offset(0, 8),
-              blurRadius: 24,
-            )
-          ]
-          ..mb = 36,
+        )
+          ..circleProgress = Colors.white
+          ..cover
+          ..useParent((v) => v
+            ..aspectRatio = 1
+            ..rounded = 8
+            ..shadows = [
+              BoxShadow(
+                color: Colors.black.withOpacity(.25),
+                offset: Offset(0, 8),
+                blurRadius: 24,
+              )
+            ]
+            ..mb = 36),
+        //
         NikuRow([
           NikuIconButton(Icons.thumb_down_alt_outlined)..apply = Style.sideIcon,
           NikuColumn([
@@ -70,6 +73,7 @@ class Music extends HookWidget {
         ])
           ..mainBetween
           ..crossStart,
+        //
         NikuSlider(time.value)
           ..onChanged = (v) {
             time.value = v;
@@ -94,7 +98,9 @@ class Music extends HookWidget {
           ..crossCenter,
       ])
         ..mainCenter
-        ..useParent((v) => v..px = 32),
+        ..useParent((v) => v
+          ..px = 32
+          ..safeArea),
     );
   }
 }

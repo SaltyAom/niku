@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
   build(context) {
     return MaterialApp(
       title: "Niku",
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: Colors.blue,
         primarySwatch: Colors.blue,
