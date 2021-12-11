@@ -19,7 +19,7 @@ Niku helps to solve the problem by providing a toolkit to style widgets with pro
 </p>
 
 ## Documentation
-Documentation and getting start can be find on [https://niku.saltyaom.com](niku.saltyaom.com)
+Documentation and getting start can be find on [https://niku.saltyaom.com](https://niku.saltyaom.com)
 
 - [Introduction and why](https://niku.saltyaom.com/docs/introduction)
 - [Overview](https://niku.saltyaom.com/docs/overview)
