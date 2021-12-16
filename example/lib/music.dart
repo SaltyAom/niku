@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:niku/niku.dart';
 
-class Style {
-  static final subIcon = NikuIconButton(null)
+import 'package:niku/niku.dart';
+import 'package:niku/namespace.dart' as n;
+
+import 'package:flutter_hooks/flutter_hooks.dart';
+
+class Styles {
+  static final subIcon = n.IconButton(null)
     ..onPressed = () {}
     ..iconSize = 32
     ..color = Colors.grey.shade600
@@ -18,7 +21,12 @@ class Style {
 }
 
 class Music extends HookWidget {
-  const Music({Key? key}) : super(key: key);
+  final String cover;
+
+  const Music({
+    Key? key,
+    required this.cover,
+  }) : super(key: key);
 
   build(context) {
     final time = useState<double>(73);
@@ -28,21 +36,16 @@ class Music extends HookWidget {
       appBar: AppBar(
         backgroundColor: Color(0xff3b1b29),
         shadowColor: Colors.transparent,
-        leading: IconButton(
-          icon: Icon(Icons.keyboard_arrow_down_rounded),
+        leading: n.IconButton(
+          Icons.keyboard_arrow_down_rounded,
           onPressed: () {},
         ),
         actions: [
-          IconButton(
-            icon: Icon(Icons.more_vert_rounded),
-            onPressed: () {},
-          ),
+          n.IconButton(Icons.more_vert_rounded)..onPressed = () {},
         ],
       ),
-      body: NikuColumn([
-        NikuImage.network(
-          "https://static.wikia.nocookie.net/iowiro/images/c/c5/News_10202019a.jpg/revision/latest/scale-to-width-down/500?cb=20191021035255",
-        )
+      body: n.Column([
+        n.Image.network(cover)
           ..circleProgress = Colors.white
           ..cover
           ..useParent((v) => v
@@ -57,24 +60,24 @@ class Music extends HookWidget {
             ]
             ..mb = 36),
         //
-        NikuRow([
-          NikuIconButton(Icons.thumb_down_alt_outlined)..apply = Style.sideIcon,
-          NikuColumn([
-            NikuText("Paradise")
+        n.Row([
+          n.IconButton(Icons.thumb_down_alt_outlined)..apply = Styles.sideIcon,
+          n.Column([
+            n.Text("Paradise")
               ..color = Colors.white
               ..w600
               ..fontSize = 24,
-            NikuText("Sound Souler")
+            n.Text("Sound Souler")
               ..fontSize = 18
               ..color = Colors.grey.shade500,
           ])
             ..gap = 8,
-          NikuIconButton(Icons.thumb_up_alt_outlined)..apply = Style.sideIcon,
+          n.IconButton(Icons.thumb_up_alt_outlined)..apply = Styles.sideIcon,
         ])
           ..mainBetween
           ..crossStart,
         //
-        NikuSlider(time.value)
+        n.Slider(time.value)
           ..onChanged = (v) {
             time.value = v;
           }
@@ -87,12 +90,12 @@ class Music extends HookWidget {
           ..trackHeight = 2
           ..thumbShape = RoundSliderThumbShape(enabledThumbRadius: 6)
           ..useParent((v) => v..my = 8),
-        NikuRow([
-          NikuIconButton(Icons.shuffle_rounded)..apply = Style.subIcon,
-          NikuIconButton(Icons.skip_previous_rounded)..apply = Style.icon,
-          NikuIconButton(Icons.play_arrow_rounded)..apply = Style.icon,
-          NikuIconButton(Icons.skip_next_rounded)..apply = Style.icon,
-          NikuIconButton(Icons.repeat_rounded)..apply = Style.subIcon,
+        n.Row([
+          n.IconButton(Icons.shuffle_rounded)..apply = Styles.subIcon,
+          n.IconButton(Icons.skip_previous_rounded)..apply = Styles.icon,
+          n.IconButton(Icons.play_arrow_rounded)..apply = Styles.icon,
+          n.IconButton(Icons.skip_next_rounded)..apply = Styles.icon,
+          n.IconButton(Icons.repeat_rounded)..apply = Styles.subIcon,
         ])
           ..spaceBetween
           ..crossCenter,

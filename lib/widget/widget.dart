@@ -8,6 +8,7 @@ export 'iconButton.dart';
 export 'image.dart';
 export 'row.dart';
 export 'slider.dart';
+export 'selectableText.dart';
 export 'stack.dart';
 export 'rangeSlider.dart';
 export 'text.dart';

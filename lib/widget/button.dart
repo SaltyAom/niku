@@ -33,6 +33,7 @@ class NikuButton extends StatelessWidget
     this.style,
     this.focusNode,
     this.clipBehavior,
+    this.autofocus,
 
     // For icon factory
     this.icon,
