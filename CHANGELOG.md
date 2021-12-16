@@ -1,3 +1,11 @@
+## [2.0.0-experimental.0] - 2021/12/16
+- Namespace
+- Selectable Text
+
+## [2.0.0-experimental.0] - 2021/12/16
+Heaven and Earth, batch 1.
+@see [#17](https://github.com/SaltyAom/niku/discussions/17)
+
 ## [1.1.3] - 2021/9/30
 Thanks to [y-pakron](https://github.com/y-pakorn) for fixing the bug!
 This release fix the `expanded` method to be flexible on `NikuCore` where I overlook.
