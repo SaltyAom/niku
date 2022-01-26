@@ -1,4 +1,20 @@
-## [2.0.0-experimental.0] - 2021/12/16
+## [2.0.0-experimental.2] - 2022/01/25
+Feature:
+  - Game Changing, `NikuOn`, `.on` and `.freezed` property, [read more about it here](https://twitter.com/saltyAom/status/1486337427069607938?s=20)
+  - `NikuDropdownButton` widget for `DropdownButton`
+
+Bug fixes:
+  - Change from Nullish cascade equality to nullish check to override `useStyle`'s style
+
+Breaking Change:
+  - Migrate `.useStyle` to `.useTextStyle()` on `NikuText`.
+  - Migrate `.useStyle` to `.useButtonStyle()` on `NikuButton`.
+  - Change `.useStyle` to `.useButtonStyle()` on `NikuButton`.
+  - Migrate `.useBuilder`, `useParent` to `useChild` on `Niku`.
+  - Migrate from `.value` to `.widget` on every Niku component.
+  - Migrate from `style` to `textStyle` on every Niku component.
+
+## [2.0.0-experimental.1] - 2021/12/16
 - Namespace
 - Selectable Text
 

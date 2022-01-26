@@ -61,16 +61,16 @@ class NikuInputBorder {
   set apply(NikuInputBorder? v) {
     if (v == null) return;
 
-    width ??= v.width;
-    radius ??= v.radius;
-    style ??= v.style;
-    color ??= v.color;
-    gapPadding ??= v.gapPadding;
-    borderRadius ??= v.borderRadius;
-    type ??= v.type;
+    width = v.width ?? width;
+    radius = v.radius ?? radius;
+    style = v.style ?? style;
+    color = v.color ?? color;
+    gapPadding = v.gapPadding ?? gapPadding;
+    borderRadius = v.borderRadius ?? borderRadius;
+    type = v.type ?? type;
   }
 
-  NikuInputBorder get copy => NikuInputBorder(
+  NikuInputBorder get copied => NikuInputBorder(
         width: width,
         radius: radius,
         style: style,

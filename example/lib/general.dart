@@ -1,19 +1,56 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_hooks/flutter_hooks.dart';
+
 import 'package:niku/niku.dart';
+import 'package:niku/namespace.dart' as n;
 
 class Styles {
-  static final button = NikuButton(SizedBox.shrink())
-    ..onPressed = () {}
-    ..useStyle((v) => v
+  static final button = (Color color) => n.Button(SizedBox.shrink())
+    ..useButtonStyle((v) => v
       ..rounded = 4
       ..px = 24
       ..py = 12
       ..useTextStyle((v) => v
-        ..fontSize = 16
-        ..bold
-        ..color = Colors.white));
+        ..fontSize = 18
+        ..w500
+        ..color = color));
+}
+
+class Counter extends HookWidget {
+  const Counter();
+
+  build(context) {
+    final count = useState(0);
+
+    return Scaffold(
+      body: n.Column([
+        n.Text(count.value.toString())
+          ..center
+          ..h4 = context,
+        n.On(
+          () => n.Column([
+            n.Button(n.Text("Increment"))
+              ..onPressed = (() => count.value++)
+              ..apply = Styles.button(Colors.blue.shade700)
+              ..useButtonStyle((v) => v
+                ..bg = Colors.blue.shade50
+                ..splash = Colors.blue.shade100),
+            n.Button(n.Text("Decrement"))
+              ..onPressed = (() => count.value--)
+              ..apply = Styles.button(Colors.red.shade700)
+              ..useButtonStyle((v) => v
+                ..bg = Colors.red.shade50
+                ..splash = Colors.red.shade100),
+          ]),
+        )
+      ])
+        ..mainCenter
+        ..crossCenter
+        ..gap = 16
+        ..useParent((v) => v..center),
+    );
+  }
 }
 
 class CardPage extends StatelessWidget {
@@ -29,7 +66,7 @@ class CardPage extends StatelessWidget {
         ..bg = Color(0xffE8F2F7)
         ..rounded
         ..p = 20
-        ..useParent(
+        ..useChild(
           (child) => Card(
             elevation: 10,
             child: child,
@@ -43,47 +80,16 @@ class CardPage extends StatelessWidget {
   }
 }
 
-class Counter extends HookWidget {
-  const Counter();
-
-  build(context) {
-    final count = useState(0);
-
-    return Scaffold(
-      body: NikuColumn([
-        Text("Counter: ${count.value}").asNiku
-          ..center
-          ..style = (NikuTextStyle()..h4 = context),
-        useMemoized(
-          () => NikuButton.elevated(NikuText("Increment"))
-            ..apply = Styles.button
-            ..onPressed = (() => count.value++),
-        ),
-        useMemoized(
-          () => NikuButton.elevated(NikuText("Decrement"))
-            ..apply = Styles.button
-            ..onPressed = (() => count.value--)
-            ..useStyle((v) => v..bg = Colors.red),
-        )
-      ])
-        ..mainCenter
-        ..crossCenter
-        ..gap = 16
-        ..useParent((v) => v..center),
-    );
-  }
-}
-
 class AlertPage extends StatelessWidget {
   const AlertPage({Key? key}) : super(key: key);
 
   build(context) {
     return Scaffold(
-      body: NikuButton(Text("Hello World"))
+      body: n.Button(n.Text("Hello World"))
         ..onPressed = () {
           showDialog(
             context: context,
-            builder: (context) => NikuAlert()
+            builder: (context) => n.Alert()
               ..title = Text("Hello World")
               ..content = Text("This is alert dialog written in Niku"),
           );
@@ -92,7 +98,7 @@ class AlertPage extends StatelessWidget {
           ..fontSize = 21
           ..w500
           ..color = Colors.white)
-        ..useStyle((v) => v
+        ..useButtonStyle((v) => v
           ..px = 32
           ..py = 16
           ..splash = Colors.white.withOpacity(.175)
@@ -116,7 +122,7 @@ class Grid extends StatelessWidget {
 
   build(context) {
     return Scaffold(
-      body: NikuGridView(2, [
+      body: n.GridView(2, [
         Niku()..bg = Colors.amber,
         Niku()..bg = Colors.red,
         Niku()..bg = Colors.blue,
@@ -133,81 +139,41 @@ class Grid extends StatelessWidget {
   }
 }
 
-class App extends StatelessWidget {
-  const App();
+class Freezed extends HookWidget {
+  const Freezed();
 
   build(context) {
+    final options = ["One", "Two", "Three"];
+    final option = useState(options[0]);
+
     return Scaffold(
       appBar: AppBar(
-        title: Text("Niku"),
+        title: Text("Niku: Heaven and Earth"),
       ),
-      body: Container(
-        width: double.infinity,
-        child: NikuColumn([
-          NikuTextFormField("Password")
-            ..prefixIcon = Icon(Icons.lock)
-            ..asPassword
-            ..useStyle((v) => v
-              ..fontSize = 21
-              ..w500)
-            ..useFloatingLabelStyle((v) => v
-              ..color = Colors.red
-              ..fontSize = 14)
-            ..useDecoration((v) => v
-              ..outlined
-              ..allBorderWidth = 2
-              ..focusedBorderColor = Colors.red)
-            ..useNiku((v) => v
-              ..px = 24
-              ..mb = 24),
-          NikuButton.elevated(Text("Hello World"))
-            ..onPressed = () {}
-            ..useTextStyle((v) => v..fontSize = 18)
-            ..useStyle((v) => v
-              ..bg = Colors.blue
-              ..fg = Colors.white
-              ..py = 16
-              ..elevationState = NikuState(pressed: 16))
-            ..useNiku((v) => v
-              ..w100
-              ..px = 24),
-          NikuButton.elevated(Text("Text Button"))
-            ..onPressed = () {}
-            ..useStyle((v) => v
-              ..bg = Colors.blue
-              ..py = 20)
-            ..useTextStyle((v1) => v1..fontSize = 21)
-            ..useNiku((v) => v
-              ..widthPercent = 70
-              ..tooltip = "A Text Button"
-              ..center),
-          NikuButton.outlined(Text("Hello World"))
-            ..onPressed = () {}
-            ..useTextStyle((v) => v
-              ..fontSize = 18
-              ..bold)
-            ..useStyle((v) => v
-              ..fg = Colors.blue
-              ..px = 24
-              ..py = 12
-              ..rounded = 4
-              ..side = BorderSide(color: Colors.blue)),
-          NikuText("Hi friends~")
-            ..center
-            ..useStyle((v) => v
-              ..fontSize = 24
-              ..color = Colors.grey.shade700
-              ..w300
-              ..color = Colors.white)
-            ..useParent((v) => v
-              ..fullWidth
-              ..py = 24
-              ..bg = Colors.blue),
-        ])
-          ..mainCenter
-          ..crossCenter
-          ..gap = 24,
-      ),
+      body: n.Column([
+        n.Text("Freezed: ${option.value}")
+          ..h6 = context
+          ..on,
+        n.Text("Value: ${option.value}")..h6 = context,
+        n.DropdownButton<String>()
+          ..value = option.value
+          ..onChanged = (newValue) {
+            option.value = newValue!;
+          }
+          ..elevation = 1
+          ..items = options
+              .map(
+                (option) => DropdownMenuItem(
+                  value: option,
+                  child: Text(option),
+                ),
+              )
+              .toList()
+      ])
+        ..mainCenter
+        ..crossCenter
+        ..gap = 24
+        ..useNiku((v) => v..wFull),
     );
   }
 }

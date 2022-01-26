@@ -183,18 +183,18 @@ class NikuButton extends StatelessWidget
 
     if (style == null && v.style != null) style = NikuButtonStyle();
 
-    type ??= v.type;
-    onPressed ??= v.onPressed;
-    onLongPress ??= v.onLongPress;
-    style?.apply = v.style;
-    focusNode ??= v.focusNode;
-    clipBehavior ??= v.clipBehavior;
-    icon ??= v.icon;
-    label ??= v.label;
+    type = v.type ?? type;
+    onPressed = v.onPressed ?? onPressed;
+    onLongPress = v.onLongPress ?? onLongPress;
+    style?.apply = v.style ?? style;
+    focusNode = v.focusNode ?? focusNode;
+    clipBehavior = v.clipBehavior ?? clipBehavior;
+    icon = v.icon ?? icon;
+    label = v.label ?? label;
     enable = v.enable;
   }
 
-  NikuButton get copy => NikuButton(
+  NikuButton get copied => NikuButton(
         child,
         key: key,
         type: type,
@@ -208,7 +208,7 @@ class NikuButton extends StatelessWidget
         enable: enable,
       );
 
-  Widget get value {
+  Widget get widget {
     if (type == NikuButtonType.Elevated)
       return (label != null && icon != null)
           ? ElevatedButton.icon(

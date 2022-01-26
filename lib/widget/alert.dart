@@ -60,28 +60,30 @@ class NikuAlert extends StatelessWidget
   set apply(NikuAlert? v) {
     if (v == null) return;
 
-    title ??= title;
-    titlePadding?.apply = titlePadding;
-    titleTextStyle ??= titleTextStyle;
-    content ??= content;
-    contentPadding?.apply = contentPadding;
-    contentTextStyle ??= contentTextStyle;
-    actions ??= actions;
-    actionsPadding?.apply = actionsPadding;
-    actionsAlignment ??= actionsAlignment;
-    actionsOverflowDirection ??= actionsOverflowDirection;
-    actionsOverflowButtonSpacing ??= actionsOverflowButtonSpacing;
-    buttonPadding?.apply = buttonPadding;
-    backgroundColor ??= backgroundColor;
-    elevation ??= elevation;
-    semanticLabel ??= semanticLabel;
-    insetPadding?.apply = insetPadding;
-    clipBehavior ??= clipBehavior;
-    shape ??= shape;
-    scrollable ??= scrollable;
+    title = title ?? title;
+    titlePadding?.apply = titlePadding ?? titlePadding;
+    titleTextStyle = titleTextStyle ?? titleTextStyle;
+    content = content ?? content;
+    contentPadding?.apply = contentPadding ?? contentPadding;
+    contentTextStyle = contentTextStyle ?? contentTextStyle;
+    actions = actions ?? actions;
+    actionsPadding?.apply = actionsPadding ?? actionsPadding;
+    actionsAlignment = actionsAlignment ?? actionsAlignment;
+    actionsOverflowDirection =
+        actionsOverflowDirection ?? actionsOverflowDirection;
+    actionsOverflowButtonSpacing =
+        actionsOverflowButtonSpacing ?? actionsOverflowButtonSpacing;
+    buttonPadding?.apply = buttonPadding ?? buttonPadding;
+    backgroundColor = backgroundColor ?? backgroundColor;
+    elevation = elevation ?? elevation;
+    semanticLabel = semanticLabel ?? semanticLabel;
+    insetPadding?.apply = insetPadding ?? insetPadding;
+    clipBehavior = clipBehavior ?? clipBehavior;
+    shape = shape ?? shape;
+    scrollable = scrollable ?? scrollable;
   }
 
-  NikuAlert get copy => NikuAlert(
+  NikuAlert get copied => NikuAlert(
         key: key,
         title: title,
         titlePadding: titlePadding,
@@ -104,7 +106,7 @@ class NikuAlert extends StatelessWidget
         scrollable: scrollable,
       );
 
-  AlertDialog get value => AlertDialog(
+  AlertDialog get widget => AlertDialog(
         key: key,
         title: title,
         titlePadding: titlePadding?.value,

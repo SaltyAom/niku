@@ -27,7 +27,7 @@ class NikuState<T> {
 
   factory NikuState.all(T all) => NikuState(all: all);
 
-  NikuState get copy => NikuState(
+  NikuState get copied => NikuState(
         all: all,
         disabled: disabled,
         dragged: dragged,

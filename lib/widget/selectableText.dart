@@ -18,7 +18,7 @@ class NikuSelectableText extends StatelessWidget
         TextBaselineMacro {
   String? text;
 
-  NikuTextStyle? style;
+  NikuTextStyle? textStyle;
   NikuStrutStyle? strutStyle;
   TextAlign? textAlign;
   TextDirection? textDirection;
@@ -46,7 +46,7 @@ class NikuSelectableText extends StatelessWidget
   NikuSelectableText(
     this.text, {
     Key? key,
-    this.style,
+    NikuTextStyle? style,
     this.strutStyle,
     this.textAlign,
     this.textDirection,
@@ -70,47 +70,50 @@ class NikuSelectableText extends StatelessWidget
     this.textWidthBasis,
     this.textHeightBehavior,
     this.onSelectionChanged,
-  }) : super(key: key);
+  }) : super(key: key) {
+    textStyle = style;
+  }
 
   bool? get selectionEnabled => enableInteractiveSelection;
 
   set apply(NikuSelectableText? v) {
     if (v == null) return;
 
-    if (style == null && v.style != null) style = NikuTextStyle();
+    if (style == null && v.style != null) textStyle = NikuTextStyle();
     if (strutStyle == null && v.strutStyle != null)
       strutStyle = NikuStrutStyle();
 
-    style?.apply = v.style;
+    textStyle?.apply = v.style;
     strutStyle?.apply = v.strutStyle;
-    textAlign ??= v.textAlign;
-    textDirection ??= v.textDirection;
-    textScaleFactor ??= v.textScaleFactor;
-    autofocus ??= v.autofocus;
-    minLines ??= v.minLines;
-    maxLines ??= v.maxLines;
-    showCursor ??= showCursor;
-    cursorWidth ??= cursorWidth;
-    cursorHeight ??= cursorHeight;
-    cursorRadius ??= cursorRadius;
-    cursorColor ??= cursorColor;
-    selectionHeightStyle ??= selectionHeightStyle;
-    selectionWidthStyle ??= selectionWidthStyle;
-    enableInteractiveSelection ??= enableInteractiveSelection;
-    selectionControls ??= selectionControls;
-    dragStartBehavior ??= dragStartBehavior;
-    toolbarOptions ??= toolbarOptions;
-    onTap ??= onTap;
-    scrollPhysics ??= scrollPhysics;
-    textWidthBasis ??= v.textWidthBasis;
-    textHeightBehavior ??= v.textHeightBehavior;
-    textHeightBehavior ??= v.textHeightBehavior;
+    textAlign = v.textAlign ?? textAlign;
+    textDirection = v.textDirection ?? textDirection;
+    textScaleFactor = v.textScaleFactor ?? textScaleFactor;
+    autofocus = v.autofocus ?? autofocus;
+    minLines = v.minLines ?? minLines;
+    maxLines = v.maxLines ?? maxLines;
+    showCursor = showCursor ?? showCursor;
+    cursorWidth = cursorWidth ?? cursorWidth;
+    cursorHeight = cursorHeight ?? cursorHeight;
+    cursorRadius = cursorRadius ?? cursorRadius;
+    cursorColor = cursorColor ?? cursorColor;
+    selectionHeightStyle = selectionHeightStyle ?? selectionHeightStyle;
+    selectionWidthStyle = selectionWidthStyle ?? selectionWidthStyle;
+    enableInteractiveSelection =
+        enableInteractiveSelection ?? enableInteractiveSelection;
+    selectionControls = selectionControls ?? selectionControls;
+    dragStartBehavior = dragStartBehavior ?? dragStartBehavior;
+    toolbarOptions = toolbarOptions ?? toolbarOptions;
+    onTap = onTap ?? onTap;
+    scrollPhysics = scrollPhysics ?? scrollPhysics;
+    textWidthBasis = v.textWidthBasis ?? textWidthBasis;
+    textHeightBehavior = v.textHeightBehavior ?? textHeightBehavior;
+    textHeightBehavior = v.textHeightBehavior ?? textHeightBehavior;
   }
 
-  NikuSelectableText get copy => NikuSelectableText(
+  NikuSelectableText get copied => NikuSelectableText(
         text,
         key: key,
-        style: style,
+        style: textStyle,
         strutStyle: strutStyle,
         textAlign: textAlign,
         textDirection: textDirection,
@@ -135,7 +138,7 @@ class NikuSelectableText extends StatelessWidget
         textHeightBehavior: textHeightBehavior,
       );
 
-  Widget get value => SelectableText(
+  Widget get widget => SelectableText(
         this.text ?? "",
         key: key,
         style: this.style?.value,

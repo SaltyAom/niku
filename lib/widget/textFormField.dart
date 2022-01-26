@@ -24,7 +24,7 @@ class NikuTextFormField extends StatelessWidget
   TextInputType? keyboardType;
   TextCapitalization? textCapitalization;
   TextInputAction? textInputAction;
-  NikuTextStyle? style = NikuTextStyle();
+  NikuTextStyle? textStyle = NikuTextStyle();
   NikuStrutStyle? strutStyle;
   TextDirection? textDirection;
   TextAlign? textAlign;
@@ -80,7 +80,7 @@ class NikuTextFormField extends StatelessWidget
     this.keyboardType,
     this.textCapitalization,
     this.textInputAction,
-    this.style,
+    NikuTextStyle? style,
     this.strutStyle,
     this.textDirection,
     this.textAlign,
@@ -127,6 +127,8 @@ class NikuTextFormField extends StatelessWidget
     this.enableIMEPersonalizedLearning,
   }) : super(key: key) {
     if (_label != null) label = _label;
+
+    textStyle = style;
   }
 
   void get lightKeyboard => keyboardAppearance == Brightness.light;
@@ -149,62 +151,65 @@ class NikuTextFormField extends StatelessWidget
 
     if (decoration == null && v.decoration != null)
       decoration = NikuInputDecoration();
-    if (style == null && v.style != null) style = NikuTextStyle();
+    if (textStyle == null && v.textStyle != null) textStyle = NikuTextStyle();
     if (strutStyle == null && v.strutStyle != null)
       strutStyle = NikuStrutStyle();
 
-    initialValue ??= v.initialValue;
-    focusNode ??= v.focusNode;
     decoration?.apply = v.decoration;
-    keyboardType ??= v.keyboardType;
-    textCapitalization ??= v.textCapitalization;
-    textInputAction ??= v.textInputAction;
-    style?.apply = v.style;
+    textStyle?.apply = v.textStyle;
     strutStyle?.apply = v.strutStyle;
-    textDirection ??= v.textDirection;
-    textAlign ??= v.textAlign;
-    textAlignVertical ??= v.textAlignVertical;
-    autofocus ??= v.autofocus;
-    readOnly ??= v.readOnly;
-    toolbarOptions ??= v.toolbarOptions;
-    showCursor ??= v.showCursor;
-    obscuringCharacter ??= v.obscuringCharacter;
-    obscureText ??= v.obscureText;
-    autocorrect ??= v.autocorrect;
-    smartDashesType ??= v.smartDashesType;
-    smartQuotesType ??= v.smartQuotesType;
-    enableSuggestions ??= v.enableSuggestions;
-    autovalidate ??= v.autovalidate;
-    maxLengthEnforced ??= v.maxLengthEnforced;
-    maxLengthEnforcement ??= v.maxLengthEnforcement;
-    maxLines ??= v.maxLines;
-    minLines ??= v.minLines;
-    expands ??= v.expands;
-    maxLength ??= v.maxLength;
-    onChanged ??= v.onChanged;
-    onTap ??= v.onTap;
-    onEditingComplete ??= v.onEditingComplete;
-    onFieldSubmitted ??= v.onFieldSubmitted;
-    onSaved ??= v.onSaved;
-    validator ??= v.validator;
-    inputFormatters ??= v.inputFormatters;
-    enabled ??= v.enabled;
-    cursorWidth ??= v.cursorWidth;
-    cursorHeight ??= v.cursorHeight;
-    cursorRadius ??= v.cursorRadius;
-    cursorColor ??= v.cursorColor;
-    keyboardAppearance ??= v.keyboardAppearance;
-    scrollPadding ??= v.scrollPadding;
-    enableInteractiveSelection ??= v.enableInteractiveSelection;
-    selectionControls ??= v.selectionControls;
-    buildCounter ??= v.buildCounter;
-    scrollPhysics ??= v.scrollPhysics;
-    autofillHints ??= v.autofillHints;
-    restorationId ??= v.restorationId;
-    enableIMEPersonalizedLearning ??= v.enableIMEPersonalizedLearning;
+
+    initialValue = v.initialValue ?? initialValue;
+    focusNode = v.focusNode ?? focusNode;
+    keyboardType = v.keyboardType ?? keyboardType;
+    textCapitalization = v.textCapitalization ?? textCapitalization;
+    textInputAction = v.textInputAction ?? textInputAction;
+    textDirection = v.textDirection ?? textDirection;
+    textAlign = v.textAlign ?? textAlign;
+    textAlignVertical = v.textAlignVertical ?? textAlignVertical;
+    autofocus = v.autofocus ?? autofocus;
+    readOnly = v.readOnly ?? readOnly;
+    toolbarOptions = v.toolbarOptions ?? toolbarOptions;
+    showCursor = v.showCursor ?? showCursor;
+    obscuringCharacter = v.obscuringCharacter ?? obscuringCharacter;
+    obscureText = v.obscureText ?? obscureText;
+    autocorrect = v.autocorrect ?? autocorrect;
+    smartDashesType = v.smartDashesType ?? smartDashesType;
+    smartQuotesType = v.smartQuotesType ?? smartQuotesType;
+    enableSuggestions = v.enableSuggestions ?? enableSuggestions;
+    autovalidate = v.autovalidate ?? autovalidate;
+    maxLengthEnforced = v.maxLengthEnforced ?? maxLengthEnforced;
+    maxLengthEnforcement = v.maxLengthEnforcement ?? maxLengthEnforcement;
+    maxLines = v.maxLines ?? maxLines;
+    minLines = v.minLines ?? minLines;
+    expands = v.expands ?? expands;
+    maxLength = v.maxLength ?? maxLength;
+    onChanged = v.onChanged ?? onChanged;
+    onTap = v.onTap ?? onTap;
+    onEditingComplete = v.onEditingComplete ?? onEditingComplete;
+    onFieldSubmitted = v.onFieldSubmitted ?? onFieldSubmitted;
+    onSaved = v.onSaved ?? onSaved;
+    validator = v.validator ?? validator;
+    inputFormatters = v.inputFormatters ?? inputFormatters;
+    enabled = v.enabled ?? enabled;
+    cursorWidth = v.cursorWidth ?? cursorWidth;
+    cursorHeight = v.cursorHeight ?? cursorHeight;
+    cursorRadius = v.cursorRadius ?? cursorRadius;
+    cursorColor = v.cursorColor ?? cursorColor;
+    keyboardAppearance = v.keyboardAppearance ?? keyboardAppearance;
+    scrollPadding = v.scrollPadding ?? scrollPadding;
+    enableInteractiveSelection =
+        v.enableInteractiveSelection ?? enableInteractiveSelection;
+    selectionControls = v.selectionControls ?? selectionControls;
+    buildCounter = v.buildCounter ?? buildCounter;
+    scrollPhysics = v.scrollPhysics ?? scrollPhysics;
+    autofillHints = v.autofillHints ?? autofillHints;
+    restorationId = v.restorationId ?? restorationId;
+    enableIMEPersonalizedLearning =
+        v.enableIMEPersonalizedLearning ?? enableIMEPersonalizedLearning;
   }
 
-  NikuTextFormField get copy => NikuTextFormField(
+  NikuTextFormField get copied => NikuTextFormField(
         null,
         controller: controller,
         initialValue: initialValue,
@@ -213,7 +218,7 @@ class NikuTextFormField extends StatelessWidget
         keyboardType: keyboardType,
         textCapitalization: textCapitalization,
         textInputAction: textInputAction,
-        style: style,
+        style: textStyle,
         strutStyle: strutStyle,
         textDirection: textDirection,
         textAlign: textAlign,
@@ -257,7 +262,7 @@ class NikuTextFormField extends StatelessWidget
         enableIMEPersonalizedLearning: enableIMEPersonalizedLearning,
       );
 
-  TextFormField get value => TextFormField(
+  TextFormField get widget => TextFormField(
         controller: controller,
         initialValue: initialValue,
         focusNode: focusNode,
@@ -265,7 +270,7 @@ class NikuTextFormField extends StatelessWidget
         keyboardType: keyboardType,
         textCapitalization: textCapitalization ?? TextCapitalization.none,
         textInputAction: textInputAction,
-        style: style?.value,
+        style: textStyle?.value,
         strutStyle: strutStyle?.value,
         textDirection: textDirection,
         textAlign: textAlign ?? TextAlign.start,

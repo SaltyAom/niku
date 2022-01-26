@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'music.dart';
+import 'general.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,10 +18,11 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.blue,
         primarySwatch: Colors.blue,
       ),
-      home: const Music(
-        cover:
-            "https://static.wikia.nocookie.net/iowiro/images/c/c5/News_10202019a.jpg",
-      ),
+      home: Freezed(),
+      // home: const Music(
+      //   cover:
+      //       "https://static.wikia.nocookie.net/iowiro/images/c/c5/News_10202019a.jpg",
+      // ),
     );
   }
 }

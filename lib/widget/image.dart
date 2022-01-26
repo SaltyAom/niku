@@ -4,7 +4,6 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 
 import '../macros/macros.dart';
-import '../objects/objects.dart';
 
 // ignore: must_be_immutable
 class NikuImage extends StatelessWidget
@@ -271,28 +270,10 @@ class NikuImage extends StatelessWidget
 
   void get antiAlias => isAntiAlias = true;
 
-  Color get circleProgress {
-    loadingBuilder = (
-      BuildContext context,
-      Widget child,
-      ImageChunkEvent? loadingProgress,
-    ) {
-      if (loadingProgress == null) return child;
-
-      return Center(
-        child: CircularProgressIndicator(
-          value: loadingProgress.expectedTotalBytes != null
-              ? loadingProgress.cumulativeBytesLoaded /
-                  loadingProgress.expectedTotalBytes!
-              : null,
-        ),
-      );
-    };
-
-    return Colors.transparent;
-  }
-
-  set circleProgress(Color color) => loadingBuilder = (
+  void circleProgress(
+    CircularProgressIndicator Function(double? value) builder,
+  ) =>
+      loadingBuilder = (
         BuildContext context,
         Widget child,
         ImageChunkEvent? loadingProgress,
@@ -300,9 +281,8 @@ class NikuImage extends StatelessWidget
         if (loadingProgress == null) return child;
 
         return Center(
-          child: CircularProgressIndicator(
-            color: color,
-            value: loadingProgress.expectedTotalBytes != null
+          child: builder(
+            loadingProgress.expectedTotalBytes != null
                 ? loadingProgress.cumulativeBytesLoaded /
                     loadingProgress.expectedTotalBytes!
                 : null,
@@ -310,71 +290,48 @@ class NikuImage extends StatelessWidget
         );
       };
 
-  Color get linearProgress {
-    loadingBuilder = (
-      BuildContext context,
-      Widget child,
-      ImageChunkEvent? loadingProgress,
-    ) {
-      if (loadingProgress == null) return child;
-
-      return Align(
-        alignment: Alignment.bottomLeft,
-        child: LinearProgressIndicator(
-          value: loadingProgress.expectedTotalBytes != null
-              ? loadingProgress.cumulativeBytesLoaded /
-                  loadingProgress.expectedTotalBytes!
-              : null,
-        ),
-      );
-    };
-
-    return Colors.transparent;
-  }
-
-  set linearProgress(Color color) => loadingBuilder = (
+  void linearProgress(
+    Widget Function(double? value) builder,
+  ) =>
+      loadingBuilder = (
         BuildContext context,
         Widget child,
         ImageChunkEvent? loadingProgress,
       ) {
         if (loadingProgress == null) return child;
 
-        return Align(
-          alignment: Alignment.bottomCenter,
-          child: LinearProgressIndicator(
-            color: color,
-            value: loadingProgress.expectedTotalBytes != null
-                ? loadingProgress.cumulativeBytesLoaded /
-                    loadingProgress.expectedTotalBytes!
-                : null,
-          ),
+        return builder(
+          loadingProgress.expectedTotalBytes != null
+              ? loadingProgress.cumulativeBytesLoaded /
+                  loadingProgress.expectedTotalBytes!
+              : null,
         );
       };
 
   set apply(NikuImage? v) {
     if (v == null) return;
 
-    frameBuilder ??= v.frameBuilder;
-    loadingBuilder ??= v.loadingBuilder;
-    errorBuilder ??= v.errorBuilder;
-    width ??= v.width;
-    height ??= v.height;
-    color ??= v.color;
-    opacity ??= v.opacity;
-    filterQuality ??= v.filterQuality;
-    colorBlendMode ??= v.colorBlendMode;
-    fit ??= v.fit;
-    alignment ??= v.alignment;
-    repeat ??= v.repeat;
-    centerSlice ??= v.centerSlice;
-    matchTextDirection ??= v.matchTextDirection;
-    gaplessPlayback ??= v.gaplessPlayback;
-    semanticLabel ??= v.semanticLabel;
-    excludeFromSemantics ??= v.excludeFromSemantics;
-    isAntiAlias ??= v.isAntiAlias;
+    frameBuilder = v.frameBuilder ?? frameBuilder;
+    loadingBuilder = v.loadingBuilder ?? loadingBuilder;
+    errorBuilder = v.errorBuilder ?? errorBuilder;
+    width = v.width ?? width;
+    height = v.height ?? height;
+    color = v.color ?? color;
+    opacity = v.opacity ?? opacity;
+    filterQuality = v.filterQuality ?? filterQuality;
+    colorBlendMode = v.colorBlendMode ?? colorBlendMode;
+    fit = v.fit ?? fit;
+    alignment = v.alignment ?? alignment;
+    repeat = v.repeat ?? repeat;
+    centerSlice = v.centerSlice ?? centerSlice;
+    matchTextDirection = v.matchTextDirection ?? matchTextDirection;
+    gaplessPlayback = v.gaplessPlayback ?? gaplessPlayback;
+    semanticLabel = v.semanticLabel ?? semanticLabel;
+    excludeFromSemantics = v.excludeFromSemantics ?? excludeFromSemantics;
+    isAntiAlias = v.isAntiAlias ?? isAntiAlias;
   }
 
-  Image get value => Image(
+  Image get widget => Image(
         image: image,
         frameBuilder: frameBuilder,
         loadingBuilder: loadingBuilder,

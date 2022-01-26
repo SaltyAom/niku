@@ -38,14 +38,14 @@ class NikuColumn extends StatelessWidget
   set apply(NikuColumn? v) {
     if (v == null) return;
 
-    mainAxisAlignment ??= v.mainAxisAlignment;
-    mainAxisSize ??= v.mainAxisSize;
-    crossAxisAlignment ??= v.crossAxisAlignment;
-    textDirection ??= v.textDirection;
-    textBaseline ??= v.textBaseline;
+    mainAxisAlignment = v.mainAxisAlignment ?? mainAxisAlignment;
+    mainAxisSize = v.mainAxisSize ?? mainAxisSize;
+    crossAxisAlignment = v.crossAxisAlignment ?? crossAxisAlignment;
+    textDirection = v.textDirection ?? textDirection;
+    textBaseline = v.textBaseline ?? textBaseline;
   }
 
-  NikuColumn get copy => NikuColumn(
+  NikuColumn get copied => NikuColumn(
         children,
         key: key,
         mainAxisAlignment: mainAxisAlignment,
@@ -56,7 +56,7 @@ class NikuColumn extends StatelessWidget
         textBaseline: textBaseline,
       );
 
-  Column get value => Column(
+  Column get widget => Column(
         children: childrenWithGap ?? children,
         key: key,
         mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.start,

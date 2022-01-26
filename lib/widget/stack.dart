@@ -28,13 +28,13 @@ class NikuStack extends StatelessWidget
   set apply(NikuStack? v) {
     if (v == null) return;
 
-    alignment ??= v.alignment;
-    textDirection ??= v.textDirection;
-    fit ??= v.fit;
-    clipBehavior ??= v.clipBehavior;
+    alignment = v.alignment ?? alignment;
+    textDirection = v.textDirection ?? textDirection;
+    fit = v.fit ?? fit;
+    clipBehavior = v.clipBehavior ?? clipBehavior;
   }
 
-  NikuStack get copy => NikuStack(
+  NikuStack get copied => NikuStack(
         this.children,
         key: key,
         alignment: alignment,
@@ -43,7 +43,7 @@ class NikuStack extends StatelessWidget
         clipBehavior: clipBehavior,
       );
 
-  Stack get value => Stack(
+  Stack get widget => Stack(
         key: key,
         children: children,
         alignment: alignment ?? AlignmentDirectional.topStart,

@@ -49,7 +49,7 @@ class NikuEdgeInsets {
         right: right ?? 0,
       );
 
-  NikuEdgeInsets get copy => NikuEdgeInsets(
+  NikuEdgeInsets get copied => NikuEdgeInsets(
         top: top,
         left: left,
         bottom: bottom,
@@ -59,10 +59,10 @@ class NikuEdgeInsets {
   set apply(NikuEdgeInsets? v) {
     if (v == null) return;
 
-    top ??= v.top;
-    left ??= v.left;
-    bottom ??= v.bottom;
-    right ??= v.right;
+    top = v.top ?? top;
+    left = v.left ?? left;
+    bottom = v.bottom ?? bottom;
+    right = v.right ?? right;
   }
 }
 

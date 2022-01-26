@@ -150,28 +150,28 @@ class NikuButtonStyle with AlignmentDirectionalMacro {
   set apply(NikuButtonStyle? style) {
     if (style == null) return;
 
-    textStyleState ??= style.textStyleState;
-    backgroundColorState ??= style.backgroundColorState;
-    foregroundColorState ??= style.foregroundColorState;
-    overlayColorState ??= style.overlayColorState;
-    shadowColorState ??= style.shadowColorState;
-    elevationState ??= style.elevationState;
-    paddingState ??= style.paddingState;
-    minimumSizeState ??= style.minimumSizeState;
-    fixedSizeState ??= style.fixedSizeState;
-    maximumSizeState ??= style.maximumSizeState;
-    sideState ??= style.sideState;
-    shapeState ??= style.shapeState;
-    mouseCursorState ??= style.mouseCursorState;
-    visualDensity ??= style.visualDensity;
-    tapTargetSize ??= style.tapTargetSize;
-    animationDuration ??= style.animationDuration;
-    enableFeedback ??= style.enableFeedback;
-    alignment ??= style.alignment;
-    splashFactory ??= style.splashFactory;
+    textStyleState = style.textStyleState ?? textStyleState;
+    backgroundColorState = style.backgroundColorState ?? backgroundColorState;
+    foregroundColorState = style.foregroundColorState ?? foregroundColorState;
+    overlayColorState = style.overlayColorState ?? overlayColorState;
+    shadowColorState = style.shadowColorState ?? shadowColorState;
+    elevationState = style.elevationState ?? elevationState;
+    paddingState = style.paddingState ?? paddingState;
+    minimumSizeState = style.minimumSizeState ?? minimumSizeState;
+    fixedSizeState = style.fixedSizeState ?? fixedSizeState;
+    maximumSizeState = style.maximumSizeState ?? maximumSizeState;
+    sideState = style.sideState ?? sideState;
+    shapeState = style.shapeState ?? shapeState;
+    mouseCursorState = style.mouseCursorState ?? mouseCursorState;
+    visualDensity = style.visualDensity ?? visualDensity;
+    tapTargetSize = style.tapTargetSize ?? tapTargetSize;
+    animationDuration = style.animationDuration ?? animationDuration;
+    enableFeedback = style.enableFeedback ?? enableFeedback;
+    alignment = style.alignment ?? alignment;
+    splashFactory = style.splashFactory ?? splashFactory;
   }
 
-  NikuButtonStyle get copy => NikuButtonStyle(
+  NikuButtonStyle get copied => NikuButtonStyle(
         textStyleState: textStyleState,
         backgroundColorState: backgroundColorState,
         foregroundColorState: foregroundColorState,

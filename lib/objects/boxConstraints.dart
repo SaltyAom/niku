@@ -24,7 +24,7 @@ class NikuBoxConstraints with ConstraintsMacro {
     maxHeight = v.maxHeight != double.infinity ? v.maxHeight : maxHeight;
   }
 
-  NikuBoxConstraints get copy => NikuBoxConstraints(
+  NikuBoxConstraints get copied => NikuBoxConstraints(
         minWidth: minWidth,
         maxWidth: maxWidth,
         minHeight: minHeight,

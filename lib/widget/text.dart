@@ -17,7 +17,7 @@ class NikuText extends StatelessWidget
         TextBaselineMacro {
   String? text;
 
-  NikuTextStyle? style;
+  NikuTextStyle? textStyle;
   NikuStrutStyle? strutStyle;
   TextAlign? textAlign;
   TextDirection? textDirection;
@@ -33,7 +33,7 @@ class NikuText extends StatelessWidget
   NikuText(
     this.text, {
     Key? key,
-    this.style,
+    NikuTextStyle? style,
     this.strutStyle,
     this.textAlign,
     this.textDirection,
@@ -45,32 +45,34 @@ class NikuText extends StatelessWidget
     this.semanticsLabel,
     this.textWidthBasis,
     this.textHeightBehavior,
-  }) : super(key: key);
+  }) : super(key: key) {
+    textStyle = style;
+  }
 
   set apply(NikuText? v) {
     if (v == null) return;
 
-    if (style == null && v.style != null) style = NikuTextStyle();
+    if (style == null && v.style != null) textStyle = NikuTextStyle();
     if (strutStyle == null && v.strutStyle != null)
       strutStyle = NikuStrutStyle();
 
-    style?.apply = v.style;
+    textStyle?.apply = v.style;
     strutStyle?.apply = v.strutStyle;
-    textAlign ??= v.textAlign;
-    textDirection ??= v.textDirection;
-    locale ??= v.locale;
-    softWrap ??= v.softWrap;
-    overflow ??= v.overflow;
-    textScaleFactor ??= v.textScaleFactor;
-    maxLines ??= v.maxLines;
-    semanticsLabel ??= v.semanticsLabel;
-    textWidthBasis ??= v.textWidthBasis;
-    textHeightBehavior ??= v.textHeightBehavior;
+    textAlign = v.textAlign ?? textAlign;
+    textDirection = v.textDirection ?? textDirection;
+    locale = v.locale ?? locale;
+    softWrap = v.softWrap ?? softWrap;
+    overflow = v.overflow ?? overflow;
+    textScaleFactor = v.textScaleFactor ?? textScaleFactor;
+    maxLines = v.maxLines ?? maxLines;
+    semanticsLabel = v.semanticsLabel ?? semanticsLabel;
+    textWidthBasis = v.textWidthBasis ?? textWidthBasis;
+    textHeightBehavior = v.textHeightBehavior ?? textHeightBehavior;
   }
 
-  NikuText get copy => NikuText(
+  NikuText get copied => NikuText(
         text,
-        style: style,
+        style: textStyle,
         strutStyle: strutStyle,
         textAlign: textAlign,
         textDirection: textDirection,
@@ -84,8 +86,8 @@ class NikuText extends StatelessWidget
         textHeightBehavior: textHeightBehavior,
       );
 
-  Widget get value => Text(
-        this.text ?? "",
+  Widget get widget => Text(
+        text ?? "",
         key: key,
         style: this.style?.value,
         strutStyle: this.strutStyle?.value,

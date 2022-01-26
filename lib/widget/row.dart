@@ -38,14 +38,14 @@ class NikuRow extends StatelessWidget
   set apply(NikuRow? v) {
     if (v == null) return;
 
-    mainAxisAlignment ??= v.mainAxisAlignment;
-    mainAxisSize ??= v.mainAxisSize;
-    crossAxisAlignment ??= v.crossAxisAlignment;
-    textDirection ??= v.textDirection;
-    textBaseline ??= v.textBaseline;
+    mainAxisAlignment = v.mainAxisAlignment ?? mainAxisAlignment;
+    mainAxisSize = v.mainAxisSize ?? mainAxisSize;
+    crossAxisAlignment = v.crossAxisAlignment ?? crossAxisAlignment;
+    textDirection = v.textDirection ?? textDirection;
+    textBaseline = v.textBaseline ?? textBaseline;
   }
 
-  NikuRow get copy => NikuRow(
+  NikuRow get copied => NikuRow(
         children,
         key: key,
         mainAxisAlignment: mainAxisAlignment,
@@ -56,7 +56,7 @@ class NikuRow extends StatelessWidget
         textBaseline: textBaseline,
       );
 
-  Row get value => Row(
+  Row get widget => Row(
         children: childrenWithGap ?? children,
         key: key,
         mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.start,

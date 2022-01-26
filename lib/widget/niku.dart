@@ -4,6 +4,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import '../objects/objects.dart';
+import '../on.dart';
 
 // ignore: must_be_immutable
 class Niku extends StatelessWidget {
@@ -14,8 +15,6 @@ class Niku extends StatelessWidget {
   set _w(Widget w) => widget = w;
 
   Niku([this.widget = const SizedBox.shrink(), this.key]) : super(key: key);
-
-  Widget get value => widget;
 
   @override
   build(context) {
@@ -392,8 +391,12 @@ extension PropertyBuilder on Niku {
 
   set theme(ThemeData v) => _w = Theme(data: v, child: _w);
 
-  void useBuilder(Widget Function(Widget child) builder) => _w = builder(_w);
-  void useParent(Widget Function(Widget child) builder) => _w = builder(_w);
+  set visible(bool visibility) => _w = Visibility(
+        visible: visibility,
+        child: _w,
+      );
+
+  void useChild(Widget Function(Widget child) builder) => _w = builder(_w);
 
   void get safeArea => _w = SafeArea(child: _w);
   void get safeAreaX => _w = SafeArea(child: _w, top: false, bottom: false);
@@ -401,4 +404,15 @@ extension PropertyBuilder on Niku {
 
   set gradient(Gradient v) =>
       _w = DecoratedBox(decoration: BoxDecoration(gradient: v), child: _w);
+
+  set on(List<dynamic> dependencies) =>
+      useChild((child) => NikuOn(() => child, []));
+
+  List<dynamic> get on {
+    useChild((child) => NikuOn(() => child, []));
+
+    return [];
+  }
+
+  void get freezed => useChild((child) => NikuOn(() => child, []));
 }

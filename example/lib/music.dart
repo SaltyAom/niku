@@ -13,11 +13,14 @@ class Styles {
     ..highlightColor = Colors.white.withOpacity(.0875)
     ..splashColor = Colors.transparent;
 
-  static final icon = subIcon.apply = subIcon.copy
+  static final icon = subIcon.copied
+    ..apply = subIcon
     ..iconSize = 48
     ..color = Colors.grey.shade100;
 
-  static final sideIcon = subIcon.apply = subIcon.copy..iconSize = 24;
+  static final sideIcon = subIcon.copied
+    ..apply = subIcon
+    ..iconSize = 24;
 }
 
 class Music extends HookWidget {
@@ -46,8 +49,13 @@ class Music extends HookWidget {
       ),
       body: n.Column([
         n.Image.network(cover)
-          ..circleProgress = Colors.white
           ..cover
+          ..circleProgress(
+            (progress) => CircularProgressIndicator(
+              value: progress,
+              color: Colors.white,
+            ),
+          )
           ..useParent((v) => v
             ..aspectRatio = 1
             ..rounded = 8

@@ -107,28 +107,28 @@ class NikuIconButton extends StatelessWidget
   set apply(NikuIconButton? v) {
     if (v == null) return;
 
-    onPressed ??= v.onPressed;
-    iconSize ??= v.iconSize;
-    visualDensity ??= v.visualDensity;
-    padding ??= v.padding;
-    alignment ??= v.alignment;
-    splashRadius ??= v.splashRadius;
-    color ??= v.color;
-    focusColor ??= v.focusColor;
-    hoverColor ??= v.hoverColor;
-    highlightColor ??= v.highlightColor;
-    splashColor ??= v.splashColor;
-    disabledColor ??= v.disabledColor;
-    onPressed ??= v.onPressed;
-    mouseCursor ??= v.mouseCursor;
-    focusNode ??= v.focusNode;
-    autofocus ??= v.autofocus;
-    tooltip ??= v.tooltip;
-    enableFeedback ??= v.enableFeedback;
-    constraints ??= v.constraints;
+    onPressed = v.onPressed ?? onPressed;
+    iconSize = v.iconSize ?? iconSize;
+    visualDensity = v.visualDensity ?? visualDensity;
+    padding = v.padding ?? padding;
+    alignment = v.alignment ?? alignment;
+    splashRadius = v.splashRadius ?? splashRadius;
+    color = v.color ?? color;
+    focusColor = v.focusColor ?? focusColor;
+    hoverColor = v.hoverColor ?? hoverColor;
+    highlightColor = v.highlightColor ?? highlightColor;
+    splashColor = v.splashColor ?? splashColor;
+    disabledColor = v.disabledColor ?? disabledColor;
+    onPressed = v.onPressed ?? onPressed;
+    mouseCursor = v.mouseCursor ?? mouseCursor;
+    focusNode = v.focusNode ?? focusNode;
+    autofocus = v.autofocus ?? autofocus;
+    tooltip = v.tooltip ?? tooltip;
+    enableFeedback = v.enableFeedback ?? enableFeedback;
+    constraints = v.constraints ?? constraints;
   }
 
-  NikuIconButton get copy => NikuIconButton(
+  NikuIconButton get copied => NikuIconButton(
         Icons.home,
         key: key,
         iconSize: iconSize,
@@ -151,7 +151,7 @@ class NikuIconButton extends StatelessWidget
         constraints: constraints,
       )..child = child;
 
-  IconButton get value => IconButton(
+  IconButton get widget => IconButton(
         icon: child ?? SizedBox.shrink(),
         onPressed: onPressed ?? null,
         iconSize: iconSize ?? 24,

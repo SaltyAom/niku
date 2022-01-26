@@ -107,49 +107,57 @@ class NikuRangeSlider extends StatelessWidget
     if (valueIndicatorTextStyle == null)
       valueIndicatorTextStyle = NikuTextStyle();
 
-    onChanged ??= v.onChanged;
-    onChangeStart ??= v.onChangeStart;
-    onChangeEnd ??= v.onChangeEnd;
-    min ??= v.min;
-    max ??= v.max;
-    divisions ??= v.divisions;
-    labels ??= v.labels;
-    activeColor ??= v.activeColor;
-    inactiveColor ??= v.inactiveColor;
-    thumbColor ??= v.thumbColor;
-    mouseCursor ??= v.mouseCursor;
-    semanticFormatterCallback ??= v.semanticFormatterCallback;
-    focusNode ??= v.focusNode;
-    autofocus ??= v.autofocus;
-    trackHeight ??= v.trackHeight;
-    activeTrackColor ??= v.activeTrackColor;
-    inactiveTrackColor ??= v.inactiveTrackColor;
-    disabledActiveTrackColor ??= v.disabledActiveTrackColor;
-    disabledInactiveTrackColor ??= v.disabledInactiveTrackColor;
-    activeTickMarkColor ??= v.activeTickMarkColor;
-    inactiveTickMarkColor ??= v.inactiveTickMarkColor;
-    disabledActiveTickMarkColor ??= v.disabledActiveTickMarkColor;
-    disabledInactiveTickMarkColor ??= v.disabledInactiveTickMarkColor;
-    overlappingShapeStrokeColor ??= v.overlappingShapeStrokeColor;
-    disabledThumbColor ??= v.disabledThumbColor;
-    overlayColor ??= v.overlayColor;
-    valueIndicatorColor ??= v.valueIndicatorColor;
-    overlayShape ??= v.overlayShape;
-    tickMarkShape ??= v.tickMarkShape;
-    thumbShape ??= v.thumbShape;
-    trackShape ??= v.trackShape;
-    valueIndicatorShape ??= v.valueIndicatorShape;
-    rangeTickMarkShape ??= v.rangeTickMarkShape;
-    rangeThumbShape ??= v.rangeThumbShape;
-    rangeTrackShape ??= v.rangeTrackShape;
-    rangeValueIndicatorShape ??= v.rangeValueIndicatorShape;
-    showValueIndicator ??= v.showValueIndicator;
-    valueIndicatorTextStyle?.apply = v.valueIndicatorTextStyle;
-    minThumbSeparation ??= v.minThumbSeparation;
-    thumbSelector ??= v.thumbSelector;
+    onChanged = v.onChanged ?? onChanged;
+    onChangeStart = v.onChangeStart ?? onChangeStart;
+    onChangeEnd = v.onChangeEnd ?? onChangeEnd;
+    min = v.min ?? min;
+    max = v.max ?? max;
+    divisions = v.divisions ?? divisions;
+    labels = v.labels ?? labels;
+    activeColor = v.activeColor ?? activeColor;
+    inactiveColor = v.inactiveColor ?? inactiveColor;
+    thumbColor = v.thumbColor ?? thumbColor;
+    mouseCursor = v.mouseCursor ?? mouseCursor;
+    semanticFormatterCallback =
+        v.semanticFormatterCallback ?? semanticFormatterCallback;
+    focusNode = v.focusNode ?? focusNode;
+    autofocus = v.autofocus ?? autofocus;
+    trackHeight = v.trackHeight ?? trackHeight;
+    activeTrackColor = v.activeTrackColor ?? activeTrackColor;
+    inactiveTrackColor = v.inactiveTrackColor ?? inactiveTrackColor;
+    disabledActiveTrackColor =
+        v.disabledActiveTrackColor ?? disabledActiveTrackColor;
+    disabledInactiveTrackColor =
+        v.disabledInactiveTrackColor ?? disabledInactiveTrackColor;
+    activeTickMarkColor = v.activeTickMarkColor ?? activeTickMarkColor;
+    inactiveTickMarkColor = v.inactiveTickMarkColor ?? inactiveTickMarkColor;
+    disabledActiveTickMarkColor =
+        v.disabledActiveTickMarkColor ?? disabledActiveTickMarkColor;
+    disabledInactiveTickMarkColor =
+        v.disabledInactiveTickMarkColor ?? disabledInactiveTickMarkColor;
+    overlappingShapeStrokeColor =
+        v.overlappingShapeStrokeColor ?? overlappingShapeStrokeColor;
+    disabledThumbColor = v.disabledThumbColor ?? disabledThumbColor;
+    overlayColor = v.overlayColor ?? overlayColor;
+    valueIndicatorColor = v.valueIndicatorColor ?? valueIndicatorColor;
+    overlayShape = v.overlayShape ?? overlayShape;
+    tickMarkShape = v.tickMarkShape ?? tickMarkShape;
+    thumbShape = v.thumbShape ?? thumbShape;
+    trackShape = v.trackShape ?? trackShape;
+    valueIndicatorShape = v.valueIndicatorShape ?? valueIndicatorShape;
+    rangeTickMarkShape = v.rangeTickMarkShape ?? rangeTickMarkShape;
+    rangeThumbShape = v.rangeThumbShape ?? rangeThumbShape;
+    rangeTrackShape = v.rangeTrackShape ?? rangeTrackShape;
+    rangeValueIndicatorShape =
+        v.rangeValueIndicatorShape ?? rangeValueIndicatorShape;
+    showValueIndicator = v.showValueIndicator ?? showValueIndicator;
+    valueIndicatorTextStyle?.apply =
+        v.valueIndicatorTextStyle ?? valueIndicatorTextStyle;
+    minThumbSeparation = v.minThumbSeparation ?? minThumbSeparation;
+    thumbSelector = v.thumbSelector ?? thumbSelector;
   }
 
-  SliderTheme get value => SliderTheme(
+  SliderTheme get widget => SliderTheme(
         data: SliderThemeData(
           trackHeight: trackHeight,
           activeTrackColor: activeTrackColor,
