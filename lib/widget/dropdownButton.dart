@@ -65,6 +65,10 @@ class NikuDropdownButton<T> extends StatelessWidget
     this.borderRadius,
   }) : super(key: key);
 
+  void get noUnderline {
+    underline = SizedBox.shrink();
+  }
+
   set apply(NikuDropdownButton? v) {
     if (v == null) return;
 
@@ -147,6 +151,36 @@ class NikuDropdownButton<T> extends StatelessWidget
         menuMaxHeight: menuMaxHeight,
         enableFeedback: enableFeedback,
         alignment: alignment ?? AlignmentDirectional.centerStart,
+        borderRadius: borderRadius,
+      );
+}
+
+extension NikuDropDownButtonTransform<T> on DropdownButton<T> {
+  NikuDropdownButton<T> get asNiku => NikuDropdownButton<T>(
+        items: items,
+        selectedItemBuilder: selectedItemBuilder,
+        value: value,
+        hint: hint,
+        disabledHint: disabledHint,
+        onChanged: onChanged,
+        onTap: onTap,
+        elevation: elevation,
+        style: style?.asNiku,
+        underline: underline,
+        icon: icon,
+        iconDisabledColor: iconDisabledColor,
+        iconEnabledColor: iconEnabledColor,
+        iconSize: iconSize,
+        isDense: isDense,
+        isExpanded: isExpanded,
+        itemHeight: itemHeight,
+        focusColor: focusColor,
+        focusNode: focusNode,
+        autofocus: autofocus,
+        dropdownColor: dropdownColor,
+        menuMaxHeight: menuMaxHeight,
+        enableFeedback: enableFeedback,
+        alignment: alignment,
         borderRadius: borderRadius,
       );
 }

@@ -54,10 +54,7 @@ class NikuIconButton extends StatelessWidget
     this.enableFeedback,
     this.constraints,
   }) : super(key: key) {
-    if (icon != null)
-      child = Icon(icon);
-    else
-      child = SizedBox.shrink();
+    child = icon != null ? Icon(icon) : SizedBox.shrink();
   }
 
   factory NikuIconButton.widget(
@@ -80,9 +77,11 @@ class NikuIconButton extends StatelessWidget
     String? tooltip,
     bool? enableFeedback,
     NikuBoxConstraints? constraints,
+    Key? key,
   }) =>
       NikuIconButton(
         Icons.home,
+        key: key,
         iconSize: iconSize,
         visualDensity: visualDensity,
         padding: padding,
@@ -174,5 +173,30 @@ class NikuIconButton extends StatelessWidget
         tooltip: tooltip,
         enableFeedback: enableFeedback ?? true,
         constraints: constraints?.value,
+      );
+}
+
+extension NikuIconButtonTransform on NikuIconButton {
+  NikuIconButton get asNiku => NikuIconButton.widget(
+        widget,
+        key: key,
+        iconSize: iconSize,
+        visualDensity: visualDensity,
+        padding: padding,
+        alignment: alignment,
+        splashRadius: splashRadius,
+        color: color,
+        focusColor: focusColor,
+        hoverColor: hoverColor,
+        highlightColor: highlightColor,
+        splashColor: splashColor,
+        disabledColor: disabledColor,
+        onPressed: onPressed,
+        mouseCursor: mouseCursor,
+        focusNode: focusNode,
+        autofocus: autofocus,
+        tooltip: tooltip,
+        enableFeedback: enableFeedback,
+        constraints: constraints,
       );
 }

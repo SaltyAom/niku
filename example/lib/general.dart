@@ -1,8 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import 'package:niku/niku.dart';
 import 'package:niku/namespace.dart' as n;
 
 class Styles {
@@ -127,14 +127,14 @@ class Grid extends StatelessWidget {
   build(context) {
     return Scaffold(
       body: n.GridView(2, [
-        Niku()..bg = Colors.amber,
-        Niku()..bg = Colors.red,
-        Niku()..bg = Colors.blue,
-        Niku()..bg = Colors.green,
-        Niku()..bg = Colors.yellow,
-        Niku()..bg = Colors.cyan,
-        Niku()..bg = Colors.black,
-        Niku()..bg = Colors.indigo,
+        n.Box()..bg = Colors.amber,
+        n.Box()..bg = Colors.red,
+        n.Box()..bg = Colors.blue,
+        n.Box()..bg = Colors.green,
+        n.Box()..bg = Colors.yellow,
+        n.Box()..bg = Colors.cyan,
+        n.Box()..bg = Colors.black,
+        n.Box()..bg = Colors.indigo
       ])
         ..useParent((v) => v
           ..scrollbar
@@ -149,12 +149,31 @@ class Freezed extends HookWidget {
   build(context) {
     final options = ["One", "Two", "Three"];
     final option = useState(options[0]);
+    final freezed = useState(false);
 
     return Scaffold(
       appBar: AppBar(
         title: Text("Niku: Heaven and Earth"),
       ),
       body: n.Column([
+        CupertinoSlidingSegmentedControl<bool>(
+          groupValue: freezed.value,
+          children: {
+            false: Text("Reactive").niku
+              ..useEvents(
+                tap: () => freezed.value = false,
+              ),
+            true: Text("Freezed").niku
+              ..useEvents(
+                tap: () => freezed.value = true,
+              ),
+          },
+          onValueChanged: (v) {
+            if (v != null) freezed.value = v;
+          },
+        ).niku
+          ..mb = 16
+          ..on = [freezed.value],
         n.Text("${option.value}")
           ..h6 = context
           ..bold
@@ -171,7 +190,7 @@ class Freezed extends HookWidget {
               xs: (v) => v..bg = Colors.blue.shade50,
             )
             ..rounded
-            ..on = [option.value]),
+            ..on = freezed.value ? [] : [option.value]),
         ClipRRect(
           borderRadius: BorderRadius.circular(99999),
           child: LayoutBuilder(

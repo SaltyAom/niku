@@ -196,7 +196,7 @@ extension PropertyBuilder on Niku {
   set translateY(double v) =>
       _w = Transform.translate(offset: Offset(0, v), child: _w);
 
-  void useOn({
+  void useEvents({
     void Function(TapDownDetails)? tapDown,
     void Function(TapUpDetails)? tapUp,
     VoidCallback? tap,

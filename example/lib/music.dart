@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:niku/niku.dart';
 import 'package:niku/namespace.dart' as n;
 
 import 'package:flutter_hooks/flutter_hooks.dart';

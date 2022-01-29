@@ -1,5 +1,11 @@
 import 'niku.dart';
-import 'niku.dart' as N;
+import 'widget/niku.dart' as N;
+
+export 'niku.dart';
+
+typedef Box = N.Niku;
+typedef Niku = N.Niku;
+typedef Parent = Niku;
 
 typedef On = NikuOn;
 
@@ -10,8 +16,6 @@ typedef DropdownButton<T> = NikuDropdownButton<T>;
 typedef GridView = NikuGridView;
 typedef IconButton = NikuIconButton;
 typedef Image = NikuImage;
-typedef Niku = N.Niku;
-typedef Parent = Niku;
 typedef RangeSlider = NikuRangeSlider;
 typedef Row = NikuRow;
 typedef SelectableText = NikuSelectableText;

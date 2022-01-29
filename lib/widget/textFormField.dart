@@ -25,7 +25,7 @@ class NikuTextFormField extends StatelessWidget
   TextInputType? keyboardType;
   TextCapitalization? textCapitalization;
   TextInputAction? textInputAction;
-  NikuTextStyle? style = NikuTextStyle();
+  NikuTextStyle? style;
   NikuStrutStyle? strutStyle;
   TextDirection? textDirection;
   TextAlign? textAlign;
