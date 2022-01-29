@@ -396,7 +396,7 @@ extension PropertyBuilder on Niku {
         child: _w,
       );
 
-  void useChild(Widget Function(Widget child) builder) => _w = builder(_w);
+  void useChild(Widget Function(Niku child) builder) => _w = builder(_w.niku);
 
   void get safeArea => _w = SafeArea(child: _w);
   void get safeAreaX => _w = SafeArea(child: _w, top: false, bottom: false);
@@ -406,7 +406,7 @@ extension PropertyBuilder on Niku {
       _w = DecoratedBox(decoration: BoxDecoration(gradient: v), child: _w);
 
   set on(List<dynamic> dependencies) =>
-      useChild((child) => NikuOn(() => child, []));
+      useChild((child) => NikuOn(() => child, dependencies));
 
   List<dynamic> get on {
     useChild((child) => NikuOn(() => child, []));
@@ -415,4 +415,89 @@ extension PropertyBuilder on Niku {
   }
 
   void get freezed => useChild((child) => NikuOn(() => child, []));
+
+  useScreen(Function(Niku child, Size constraints) builder) {
+    useChild(
+      (child) => LayoutBuilder(
+        builder: (context, constraints) => builder(
+          child.build(context).niku,
+          Size(constraints.maxWidth, constraints.maxHeight),
+        ),
+      ),
+    );
+  }
+
+  void useQuery({
+    // > 568px
+    Widget Function(Niku)? base,
+    // 568 - 640px
+    Widget Function(Niku)? xs,
+    // 640 - 768px
+    Widget Function(Niku)? sm,
+    // 768 - 920px
+    Widget Function(Niku)? md,
+    // 920 - 1024px
+    Widget Function(Niku)? lg,
+    // > 1024px
+    Widget Function(Niku)? xl,
+  }) {
+    useChild(
+      (_child) => LayoutBuilder(
+        builder: (context, constraints) {
+          final width = constraints.maxWidth;
+
+          final child = _child.build(context).niku;
+
+          if (width < 568) {
+            if (base != null) return base(child);
+
+            return child;
+          }
+
+          if (width < 640) {
+            if (xs != null) return xs(child);
+            if (base != null) return base(child);
+
+            return child;
+          }
+
+          if (width < 720) {
+            if (sm != null) return sm(child);
+            if (xs != null) return xs(child);
+            if (base != null) return base(child);
+
+            return child;
+          }
+
+          if (width < 920) {
+            if (md != null) return md(child);
+            if (sm != null) return sm(child);
+            if (xs != null) return xs(child);
+            if (base != null) return base(child);
+
+            return child;
+          }
+
+          if (width < 1024) {
+            if (lg != null) return lg(child);
+            if (md != null) return md(child);
+            if (sm != null) return sm(child);
+            if (xs != null) return xs(child);
+            if (base != null) return base(child);
+
+            return child;
+          }
+
+          if (xl != null) return xl(child);
+          if (lg != null) return lg(child);
+          if (md != null) return md(child);
+          if (sm != null) return sm(child);
+          if (xs != null) return xs(child);
+          if (base != null) return base(child);
+
+          return child;
+        },
+      ),
+    );
+  }
 }

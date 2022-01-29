@@ -6,6 +6,7 @@ import '../../macros/macros.dart';
 class NikuRow extends StatelessWidget
     with
         NikuBuildMacro,
+        UseQueryMacro<NikuRow>,
         ClipMacro,
         CrossAxisAlignmentMacro,
         GapMacro,

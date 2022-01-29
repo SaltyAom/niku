@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:collection/collection.dart';
 
-import 'package:niku/widget/wrap.dart';
-import './namespace.dart' as n;
-
 class NikuOn extends StatefulWidget {
   static Widget empty() => SizedBox.shrink();
 
@@ -24,10 +21,21 @@ class _NikuOnState extends State<NikuOn> {
   Widget? oldWidget;
   List<dynamic> previousDependencies = [];
 
+  double _prevWidth = 0;
+
   static final Function eq = const ListEquality().equals;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(context) {
+    final width = MediaQuery.of(context).size.width;
+
+    if (_prevWidth != width) {
+      oldWidget = widget._buildWidget();
+      _prevWidth = width;
+
+      return oldWidget!;
+    }
+
     if (oldWidget == null) {
       oldWidget = widget._buildWidget();
 

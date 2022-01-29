@@ -6,6 +6,7 @@ import '../macros/macros.dart';
 class NikuStack extends StatelessWidget
     with
         NikuBuildMacro,
+        UseQueryMacro<NikuStack>,
         AlignmentDirectionalMacro,
         ClipMacro,
         FitMacro,

@@ -8,6 +8,7 @@ import '../macros/macros.dart';
 class NikuTextFormField extends StatelessWidget
     with
         NikuBuildMacro,
+        UseQueryMacro<NikuTextFormField>,
         ApplyTextMacro,
         ApplyStrutStyleMacro,
         ApplyInputDecorationMacro,
@@ -24,7 +25,7 @@ class NikuTextFormField extends StatelessWidget
   TextInputType? keyboardType;
   TextCapitalization? textCapitalization;
   TextInputAction? textInputAction;
-  NikuTextStyle? textStyle = NikuTextStyle();
+  NikuTextStyle? style = NikuTextStyle();
   NikuStrutStyle? strutStyle;
   TextDirection? textDirection;
   TextAlign? textAlign;
@@ -127,8 +128,6 @@ class NikuTextFormField extends StatelessWidget
     this.enableIMEPersonalizedLearning,
   }) : super(key: key) {
     if (_label != null) label = _label;
-
-    textStyle = style;
   }
 
   void get lightKeyboard => keyboardAppearance == Brightness.light;
@@ -151,12 +150,12 @@ class NikuTextFormField extends StatelessWidget
 
     if (decoration == null && v.decoration != null)
       decoration = NikuInputDecoration();
-    if (textStyle == null && v.textStyle != null) textStyle = NikuTextStyle();
+    if (style == null && v.style != null) style = NikuTextStyle();
     if (strutStyle == null && v.strutStyle != null)
       strutStyle = NikuStrutStyle();
 
     decoration?.apply = v.decoration;
-    textStyle?.apply = v.textStyle;
+    style?.apply = v.style;
     strutStyle?.apply = v.strutStyle;
 
     initialValue = v.initialValue ?? initialValue;
@@ -218,7 +217,7 @@ class NikuTextFormField extends StatelessWidget
         keyboardType: keyboardType,
         textCapitalization: textCapitalization,
         textInputAction: textInputAction,
-        style: textStyle,
+        style: style,
         strutStyle: strutStyle,
         textDirection: textDirection,
         textAlign: textAlign,
@@ -270,7 +269,7 @@ class NikuTextFormField extends StatelessWidget
         keyboardType: keyboardType,
         textCapitalization: textCapitalization ?? TextCapitalization.none,
         textInputAction: textInputAction,
-        style: textStyle?.value,
+        style: style?.value,
         strutStyle: strutStyle?.value,
         textDirection: textDirection,
         textAlign: textAlign ?? TextAlign.start,

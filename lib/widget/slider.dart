@@ -8,7 +8,11 @@ enum NikuSliderType { material, adaptive, cupertino }
 
 // ignore: must_be_immutable
 class NikuSlider extends StatelessWidget
-    with NikuBuildMacro, ApplyTextMacro, ApplyValueIndicatorTextStyleMacro {
+    with
+        NikuBuildMacro,
+        UseQueryMacro<NikuSlider>,
+        ApplyTextMacro,
+        ApplyValueIndicatorTextStyleMacro {
   double data;
 
   NikuSliderType? sliderType;

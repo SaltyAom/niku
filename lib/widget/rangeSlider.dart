@@ -5,7 +5,11 @@ import '../objects/objects.dart';
 
 // ignore: must_be_immutable
 class NikuRangeSlider extends StatelessWidget
-    with NikuBuildMacro, ApplyTextMacro, ApplyValueIndicatorTextStyleMacro {
+    with
+        NikuBuildMacro,
+        UseQueryMacro<NikuRangeSlider>,
+        ApplyTextMacro,
+        ApplyValueIndicatorTextStyleMacro {
   RangeValues data;
 
   void Function(RangeValues)? onChanged;

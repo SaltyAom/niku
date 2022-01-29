@@ -1,5 +1,4 @@
 // ignore_for_file: deprecated_member_use_from_same_package
-
 import 'package:flutter/material.dart';
 
 import '../objects/objects.dart';
@@ -9,6 +8,7 @@ import '../macros/macros.dart';
 class NikuText extends StatelessWidget
     with
         NikuBuildMacro,
+        UseQueryMacro<NikuText>,
         ApplyTextMacro,
         ApplyStrutStyleMacro,
         MapTextStyleMacro,
@@ -17,7 +17,7 @@ class NikuText extends StatelessWidget
         TextBaselineMacro {
   String? text;
 
-  NikuTextStyle? textStyle;
+  NikuTextStyle? style;
   NikuStrutStyle? strutStyle;
   TextAlign? textAlign;
   TextDirection? textDirection;
@@ -33,7 +33,7 @@ class NikuText extends StatelessWidget
   NikuText(
     this.text, {
     Key? key,
-    NikuTextStyle? style,
+    this.style,
     this.strutStyle,
     this.textAlign,
     this.textDirection,
@@ -45,18 +45,16 @@ class NikuText extends StatelessWidget
     this.semanticsLabel,
     this.textWidthBasis,
     this.textHeightBehavior,
-  }) : super(key: key) {
-    textStyle = style;
-  }
+  }) : super(key: key);
 
   set apply(NikuText? v) {
     if (v == null) return;
 
-    if (style == null && v.style != null) textStyle = NikuTextStyle();
+    if (style == null && v.style != null) style = NikuTextStyle();
     if (strutStyle == null && v.strutStyle != null)
       strutStyle = NikuStrutStyle();
 
-    textStyle?.apply = v.style;
+    style?.apply = v.style;
     strutStyle?.apply = v.strutStyle;
     textAlign = v.textAlign ?? textAlign;
     textDirection = v.textDirection ?? textDirection;
@@ -72,7 +70,7 @@ class NikuText extends StatelessWidget
 
   NikuText get copied => NikuText(
         text,
-        style: textStyle,
+        style: style,
         strutStyle: strutStyle,
         textAlign: textAlign,
         textDirection: textDirection,

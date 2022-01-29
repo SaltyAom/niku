@@ -7,7 +7,7 @@ import '../objects/objects.dart';
 
 // ignore: must_be_immutable
 class NikuGridView extends StatelessWidget
-    with NikuBuildMacro, ClipMacro, PaddingMacro {
+    with NikuBuildMacro, UseQueryMacro<NikuGridView>, ClipMacro, PaddingMacro {
   List<Widget> children;
   int crossAxisCount;
 

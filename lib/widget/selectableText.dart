@@ -10,6 +10,7 @@ import '../macros/macros.dart';
 class NikuSelectableText extends StatelessWidget
     with
         NikuBuildMacro,
+        UseQueryMacro<NikuSelectableText>,
         ApplyTextMacro,
         ApplyStrutStyleMacro,
         MapTextStyleMacro,
@@ -18,7 +19,7 @@ class NikuSelectableText extends StatelessWidget
         TextBaselineMacro {
   String? text;
 
-  NikuTextStyle? textStyle;
+  NikuTextStyle? style;
   NikuStrutStyle? strutStyle;
   TextAlign? textAlign;
   TextDirection? textDirection;
@@ -46,7 +47,7 @@ class NikuSelectableText extends StatelessWidget
   NikuSelectableText(
     this.text, {
     Key? key,
-    NikuTextStyle? style,
+    this.style,
     this.strutStyle,
     this.textAlign,
     this.textDirection,
@@ -70,20 +71,18 @@ class NikuSelectableText extends StatelessWidget
     this.textWidthBasis,
     this.textHeightBehavior,
     this.onSelectionChanged,
-  }) : super(key: key) {
-    textStyle = style;
-  }
+  }) : super(key: key);
 
   bool? get selectionEnabled => enableInteractiveSelection;
 
   set apply(NikuSelectableText? v) {
     if (v == null) return;
 
-    if (style == null && v.style != null) textStyle = NikuTextStyle();
+    if (style == null && v.style != null) style = NikuTextStyle();
     if (strutStyle == null && v.strutStyle != null)
       strutStyle = NikuStrutStyle();
 
-    textStyle?.apply = v.style;
+    style?.apply = v.style;
     strutStyle?.apply = v.strutStyle;
     textAlign = v.textAlign ?? textAlign;
     textDirection = v.textDirection ?? textDirection;
@@ -113,7 +112,7 @@ class NikuSelectableText extends StatelessWidget
   NikuSelectableText get copied => NikuSelectableText(
         text,
         key: key,
-        style: textStyle,
+        style: style,
         strutStyle: strutStyle,
         textAlign: textAlign,
         textDirection: textDirection,

@@ -7,7 +7,12 @@ import '../macros/macros.dart';
 
 // ignore: must_be_immutable
 class NikuImage extends StatelessWidget
-    with NikuBuildMacro, ColorBlendModeMacro, BoxFitMacro, ImageRepeatMacro {
+    with
+        NikuBuildMacro,
+        UseQueryMacro<NikuImage>,
+        ColorBlendModeMacro,
+        BoxFitMacro,
+        ImageRepeatMacro {
   ImageProvider image;
   ImageFrameBuilder? frameBuilder;
   ImageLoadingBuilder? loadingBuilder;

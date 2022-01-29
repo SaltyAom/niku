@@ -1,3 +1,10 @@
+## [2.0.0-experimental.3] - 2022/01/29
+Feature:
+  - Add `useQuery` and `useScreen` property, [read more about it here](https://twitter.com/saltyAom/status/1487466537288044545?s=20&t=dVt070b118TnrSmVpY8LBQ)
+
+Bug fixes:
+  - `.on` property in `Niku` doesn't passing dependencies to concilation process
+
 ## [2.0.0-experimental.2] - 2022/01/25
 Feature:
   - Game Changing, `NikuOn`, `.on` and `.freezed` property, [read more about it here](https://twitter.com/saltyAom/status/1486337427069607938?s=20)

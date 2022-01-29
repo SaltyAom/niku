@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 
 import 'package:niku/macros/macros.dart';
+import 'package:niku/objects/textStyle.dart';
 
 // ignore: must_be_immutable
 class NikuDropdownButton<T> extends StatelessWidget
-    with NikuBuildMacro, ApplyTextMacro, AlignmentDirectionalMacro {
+    with
+        NikuBuildMacro,
+        UseQueryMacro<NikuDropdownButton>,
+        ApplyTextMacro,
+        AlignmentDirectionalMacro {
   List<DropdownMenuItem<T>>? items;
   T? value;
   Widget? hint;
@@ -13,7 +18,7 @@ class NikuDropdownButton<T> extends StatelessWidget
   VoidCallback? onTap;
   DropdownButtonBuilder? selectedItemBuilder;
   int? elevation;
-  TextStyle? textStyle;
+  NikuTextStyle? style;
   Widget? underline;
   Widget? icon;
   Color? iconDisabledColor;
@@ -41,7 +46,7 @@ class NikuDropdownButton<T> extends StatelessWidget
     this.onChanged,
     this.onTap,
     this.elevation,
-    TextStyle? style,
+    this.style,
     this.underline,
     this.icon,
     this.iconDisabledColor,
@@ -58,9 +63,7 @@ class NikuDropdownButton<T> extends StatelessWidget
     this.enableFeedback,
     this.alignment,
     this.borderRadius,
-  }) : super(key: key) {
-    textStyle = style;
-  }
+  }) : super(key: key);
 
   set apply(NikuDropdownButton? v) {
     if (v == null) return;
@@ -72,7 +75,7 @@ class NikuDropdownButton<T> extends StatelessWidget
     onChanged = v.onChanged ?? onChanged;
     onTap = v.onTap ?? onTap;
     elevation = v.elevation ?? elevation;
-    textStyle = v.textStyle ?? textStyle;
+    style = v.style ?? style;
     underline = v.underline ?? underline;
     icon = v.icon ?? icon;
     iconDisabledColor = v.iconDisabledColor ?? iconDisabledColor;
@@ -100,7 +103,7 @@ class NikuDropdownButton<T> extends StatelessWidget
         onChanged: onChanged,
         onTap: onTap,
         elevation: elevation,
-        style: textStyle,
+        style: style,
         underline: underline,
         icon: icon,
         iconDisabledColor: iconDisabledColor,
@@ -128,7 +131,7 @@ class NikuDropdownButton<T> extends StatelessWidget
         onChanged: onChanged,
         onTap: onTap,
         elevation: elevation ?? 8,
-        style: textStyle,
+        style: style?.value,
         underline: underline,
         icon: icon,
         iconDisabledColor: iconDisabledColor,

@@ -35,13 +35,17 @@ class Counter extends HookWidget {
               ..apply = Styles.button(Colors.blue.shade700)
               ..useButtonStyle((v) => v
                 ..bg = Colors.blue.shade50
-                ..splash = Colors.blue.shade100),
+                ..splash = Colors.blue.shade100)
+              ..freezed,
             n.Button(n.Text("Decrement"))
-              ..onPressed = (() => count.value--)
+              ..onPressed = () {
+                count.value--;
+              }
               ..apply = Styles.button(Colors.red.shade700)
               ..useButtonStyle((v) => v
                 ..bg = Colors.red.shade50
-                ..splash = Colors.red.shade100),
+                ..splash = Colors.red.shade100)
+              ..freezed,
           ]),
         )
       ])
@@ -151,10 +155,48 @@ class Freezed extends HookWidget {
         title: Text("Niku: Heaven and Earth"),
       ),
       body: n.Column([
-        n.Text("Freezed: ${option.value}")
+        n.Text("${option.value}")
           ..h6 = context
-          ..on,
-        n.Text("Value: ${option.value}")..h6 = context,
+          ..bold
+          ..useQuery(
+            context,
+            base: (v) => v..color = Colors.red,
+            xs: (v) => v..color = Colors.blue,
+          )
+          ..useParent((v) => v
+            ..px = 24
+            ..py = 12
+            ..useQuery(
+              base: (v) => v..bg = Colors.red.shade50,
+              xs: (v) => v..bg = Colors.blue.shade50,
+            )
+            ..rounded
+            ..on = [option.value]),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(99999),
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              final xs = constraints.maxWidth >= 568;
+
+              return ColoredBox(
+                color: xs ? Colors.blue.shade50 : Colors.red.shade50,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 12,
+                  ),
+                  child: Text(
+                    "${option.value}",
+                    style: Theme.of(context).textTheme.headline6?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: xs ? Colors.blue : Colors.red,
+                        ),
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
         n.DropdownButton<String>()
           ..value = option.value
           ..onChanged = (newValue) {

@@ -7,7 +7,11 @@ enum NikuButtonType { Text, Elevated, Outlined }
 
 // ignore: must_be_immutable
 class NikuButton extends StatelessWidget
-    with NikuBuildMacro, ApplyButtonStyleMacro, ClipMacro {
+    with
+        NikuBuildMacro,
+        UseQueryMacro<NikuButton>,
+        ApplyButtonStyleMacro,
+        ClipMacro {
   Widget child;
 
   Widget? icon;

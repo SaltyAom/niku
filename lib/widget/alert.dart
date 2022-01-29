@@ -7,6 +7,7 @@ import '../objects/objects.dart';
 class NikuAlert extends StatelessWidget
     with
         NikuBuildMacro,
+        UseQueryMacro<NikuAlert>,
         ActionPaddingMacro,
         ApplyTitleTextMacro,
         ApplyContentTextMacro,

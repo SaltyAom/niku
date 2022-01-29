@@ -6,6 +6,7 @@ import '../macros/macros.dart';
 class NikuColumn extends StatelessWidget
     with
         NikuBuildMacro,
+        UseQueryMacro<NikuColumn>,
         ClipMacro,
         CrossAxisAlignmentMacro,
         GapMacro,
