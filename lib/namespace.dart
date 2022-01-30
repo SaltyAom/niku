@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart' show BuildContext;
+
 import 'niku.dart';
 import 'widget/niku.dart' as N;
 
@@ -21,6 +23,7 @@ typedef Row = NikuRow;
 typedef SelectableText = NikuSelectableText;
 typedef Slider = NikuSlider;
 typedef Stack = NikuStack;
+typedef Switch = NikuSwitch;
 typedef Text = NikuText;
 typedef TextFormField = NikuTextFormField;
 typedef Wrap = NikuWrap;
@@ -33,3 +36,18 @@ typedef InputDecoration = NikuInputDecoration;
 typedef State = NikuState;
 typedef StrutStyle = NikuStrutStyle;
 typedef TextStyle = NikuTextStyle;
+
+Future<void> showDialog({
+  required BuildContext context,
+  required NikuAlert Function(BuildContext) builder,
+  String? barrierLabel,
+  bool useRootNavigator = true,
+  bool? barrierDismissible,
+}) =>
+    showNikuDialog(
+      context: context,
+      builder: builder,
+      barrierLabel: barrierLabel,
+      barrierDismissible: barrierDismissible,
+      useRootNavigator: useRootNavigator,
+    );

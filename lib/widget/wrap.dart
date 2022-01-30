@@ -81,22 +81,3 @@ class NikuWrap extends StatelessWidget
         clipBehavior: clipBehavior ?? Clip.none,
       );
 }
-
-extension TransformNikuWrap on Wrap {
-  get niku => NikuWrap(
-        children,
-        direction: direction == Axis.horizontal ? null : direction,
-        alignment: alignment == WrapAlignment.start ? null : alignment,
-        spacing: spacing == 0 ? null : spacing,
-        runAlignment: runAlignment == WrapAlignment.start ? null : runAlignment,
-        runSpacing: runSpacing == 0 ? null : runSpacing,
-        crossAxisAlignment: crossAxisAlignment == WrapCrossAlignment.start
-            ? crossAxisAlignment
-            : null,
-        textDirection: textDirection,
-        verticalDirection: verticalDirection == VerticalDirection.down
-            ? null
-            : verticalDirection,
-        clipBehavior: clipBehavior == Clip.none ? null : clipBehavior,
-      );
-}

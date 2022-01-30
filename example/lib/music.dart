@@ -65,7 +65,8 @@ class Music extends HookWidget {
                 blurRadius: 24,
               )
             ]
-            ..mb = 36),
+            ..mb = 36
+            ..freezed),
         //
         n.Row([
           n.IconButton(Icons.thumb_down_alt_outlined)..apply = Styles.sideIcon,
@@ -82,7 +83,8 @@ class Music extends HookWidget {
           n.IconButton(Icons.thumb_up_alt_outlined)..apply = Styles.sideIcon,
         ])
           ..mainBetween
-          ..crossStart,
+          ..crossStart
+          ..freezed,
         //
         n.Slider(time.value)
           ..onChanged = (v) {
@@ -105,7 +107,8 @@ class Music extends HookWidget {
           n.IconButton(Icons.repeat_rounded)..apply = Styles.subIcon,
         ])
           ..spaceBetween
-          ..crossCenter,
+          ..crossCenter
+          ..freezed,
       ])
         ..mainCenter
         ..useParent((v) => v

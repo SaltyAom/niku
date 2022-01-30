@@ -279,39 +279,3 @@ class NikuButton extends StatelessWidget
           );
   }
 }
-
-extension TransformNikuTextButton on TextButton {
-  NikuButton get asNiku => NikuButton(
-        child ?? SizedBox.shrink(),
-        key: key,
-        onPressed: onPressed,
-        onLongPress: onLongPress,
-        style: style?.asNiku,
-        focusNode: focusNode,
-        clipBehavior: clipBehavior,
-      );
-}
-
-extension TransformNikuElevatedButton on ElevatedButton {
-  NikuButton get asNiku => NikuButton.elevated(
-        child ?? SizedBox.shrink(),
-        key: key,
-        onPressed: onPressed,
-        onLongPress: onLongPress,
-        style: style?.asNiku,
-        focusNode: focusNode,
-        clipBehavior: clipBehavior,
-      );
-}
-
-extension TransformNikuOutlinedButton on OutlinedButton {
-  NikuButton get asNiku => NikuButton.outlined(
-        child ?? SizedBox.shrink(),
-        key: key,
-        onPressed: onPressed,
-        onLongPress: onLongPress,
-        style: style?.asNiku,
-        focusNode: focusNode,
-        clipBehavior: clipBehavior,
-      );
-}

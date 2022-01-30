@@ -1,3 +1,16 @@
+## [2.0.0-experimental.4] - 2022/01/30
+Breaking Change:
+  - Remove `asNiku` on Widget (still working for object).
+
+Feature:
+  - Add `.adaptive` to `NikuAlert`
+  - Add `.adaptive` to `Switch`
+  - Add `.adaptive` to `NikuTextFormField`
+  - Add `NikuShowDialog` to handle adaptive dialog
+
+Bug fixes:
+  - `.on` property in `Niku` doesn't passing dependencies to concilation process
+
 ## [2.0.0-experimental.3] - 2022/01/29
 Feature:
   - Add `useQuery` and `useScreen` property, [read more about it here](https://twitter.com/saltyAom/status/1487466537288044545?s=20&t=dVt070b118TnrSmVpY8LBQ)

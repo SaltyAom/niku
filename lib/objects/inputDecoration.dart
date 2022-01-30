@@ -485,7 +485,7 @@ class NikuInputDecoration with ContentPaddingMacro, FloatingLabelBehaviorMacro {
         constraints: constraints,
       );
 
-  get value => InputDecoration(
+  InputDecoration get value => InputDecoration(
         icon: icon,
         label: label,
         labelText: labelText,

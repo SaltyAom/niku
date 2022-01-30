@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 import 'package:flutter_hooks/flutter_hooks.dart';
 
@@ -88,32 +88,47 @@ class AlertPage extends StatelessWidget {
   const AlertPage({Key? key}) : super(key: key);
 
   build(context) {
+    final showDialog = () {
+      n.showDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (context) => n.Alert.adaptive()
+          ..title = Text("Hello World")
+          ..content = n.NikuColumn([
+            Text("This is alert dialog written in Niku"),
+            n.TextFormField.adaptive("Placeholder").niku..mt = 16,
+          ])
+          ..actions = [
+            n.Button(Text("Delete"))
+              ..onPressed = () {
+                Navigator.of(context).pop();
+              }
+              ..useTextStyle((v) => v..color = Colors.red)
+              ..useButtonStyle((v) => v..splash = Colors.red.withOpacity(.15)),
+            n.Button(Text("Cancel"))
+              ..onPressed = () {
+                Navigator.of(context).pop();
+              }
+              ..useTextStyle((v) => v..bold),
+          ],
+      );
+    };
+
     return Scaffold(
-      body: n.Button(n.Text("Hello World"))
-        ..onPressed = () {
-          showDialog(
-            context: context,
-            builder: (context) => n.Alert()
-              ..title = Text("Hello World")
-              ..content = Text("This is alert dialog written in Niku"),
-          );
-        }
+      body: n.Button(n.Text("Show Alert"))
+        ..onPressed = showDialog
         ..useTextStyle((v) => v
-          ..fontSize = 21
+          ..fontSize = 18
           ..w500
           ..color = Colors.white)
         ..useButtonStyle((v) => v
-          ..px = 32
-          ..py = 16
-          ..splash = Colors.white.withOpacity(.175)
+          ..px = 24
+          ..py = 12
+          ..splash = Colors.white.withOpacity(.25)
           ..bg = Colors.transparent)
         ..useParent((v) => v
           ..gradient = LinearGradient(
-            colors: [
-              Color(0xff7F7FD5),
-              Color(0xff86A8E7),
-              Color(0xff91EAE4),
-            ],
+            colors: [Color(0xff4A00E0), Color(0xff8E2DE2)],
           )
           ..rounded = 8
           ..center),
@@ -121,24 +136,25 @@ class AlertPage extends StatelessWidget {
   }
 }
 
-class Grid extends StatelessWidget {
-  const Grid();
+class General extends HookWidget {
+  const General({Key? key}) : super(key: key);
 
+  @override
   build(context) {
+    final active = useState(false);
+
     return Scaffold(
-      body: n.GridView(2, [
-        n.Box()..bg = Colors.amber,
-        n.Box()..bg = Colors.red,
-        n.Box()..bg = Colors.blue,
-        n.Box()..bg = Colors.green,
-        n.Box()..bg = Colors.yellow,
-        n.Box()..bg = Colors.cyan,
-        n.Box()..bg = Colors.black,
-        n.Box()..bg = Colors.indigo
+      body: n.Column([
+        n.Switch.adaptive()
+          ..value = active.value
+          ..onChanged = (v) {
+            active.value = v;
+          }
+          ..activeColor = Colors.blue,
       ])
-        ..useParent((v) => v
-          ..scrollbar
-          ..p = 16),
+        ..mainCenter
+        ..crossCenter
+        ..useParent((v) => v..wFull),
     );
   }
 }

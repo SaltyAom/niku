@@ -11,6 +11,7 @@ export 'row.dart';
 export 'slider.dart';
 export 'selectableText.dart';
 export 'stack.dart';
+export 'switch.dart';
 export 'rangeSlider.dart';
 export 'text.dart';
 export 'textFormField.dart';
