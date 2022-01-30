@@ -141,20 +141,108 @@ class General extends HookWidget {
 
   @override
   build(context) {
+    final options = ["Option 1", "Option 2", "Option 3"];
+    final option = useState(options[0]);
     final active = useState(false);
+    final slider = useState<double>(50);
+
+    final showAlert = () {
+      n.showDialog(
+        context: context,
+        builder: (context) => n.Alert.adaptive()
+          ..title = Text("Hello World")
+          ..content = n.NikuColumn([
+            Text("This is alert dialog written in Niku"),
+            n.TextFormField.adaptive("Placeholder").niku..mt = 16,
+          ])
+          ..actions = [
+            n.Button(Text("Delete"))
+              ..onPressed = () {
+                Navigator.of(context).pop();
+              }
+              ..useTextStyle((v) => v..color = Colors.red)
+              ..useButtonStyle((v) => v..splash = Colors.red.withOpacity(.15)),
+            n.Button(Text("Cancel"))
+              ..onPressed = () {
+                Navigator.of(context).pop();
+              }
+              ..useTextStyle((v) => v..bold),
+          ],
+      );
+    };
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text("General"),
+        elevation: 0,
+        actions: [
+          n.PopupMenuButton(Icon(Icons.edit, color: Colors.white))
+            ..items = [1, 2, 3]
+            ..elevation = 2
+            ..useParent((p0) => p0..mr = 12)
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: showAlert,
+        child: Icon(Icons.add, color: Colors.blue),
+        backgroundColor: Colors.blue.shade50,
+        splashColor: Colors.blue.shade100,
+        elevation: 0,
+        focusElevation: 0,
+        hoverElevation: 0,
+        highlightElevation: 0,
+        disabledElevation: 0,
+      ).niku
+        ..theme = ThemeData(highlightColor: Colors.transparent),
       body: n.Column([
+        n.Text("Awesome Niku")
+          ..h4 = context
+          ..useParent((v) => v..mb = 24),
+        n.TextFormField("Value")..useDecoration((p0) => p0..outlined),
+        n.CheckboxListTile(active.value)
+          ..leading
+          ..title = Text("General")
+          ..onChanged = (v) {
+            if (v != null) active.value = v;
+          }
+          ..splashColor = Colors.blue.shade50
+          ..highlightColor = Colors.transparent,
         n.Switch.adaptive()
           ..value = active.value
           ..onChanged = (v) {
             active.value = v;
           }
           ..activeColor = Colors.blue,
+        n.DropdownButton(option.value)
+          ..itemsValue = options
+          ..onChanged = (v) {
+            if (v != null) option.value = v;
+          }
+          ..elevation = 1,
+        n.Slider(slider.value)
+          ..onChanged = (v) {
+            slider.value = v;
+          }
+          ..min = 0
+          ..max = 100
+          ..trackHeight = 2,
+        n.Button(Text("Button"))
+          ..onPressed = () {}
+          ..useTextStyle((v) => v
+            ..fontSize = 18
+            ..w500
+            ..color = Colors.blue)
+          ..useButtonStyle((v) => v
+            ..px = 24
+            ..py = 12
+            ..bg = Colors.blue.shade50
+            ..rounded = 12),
       ])
         ..mainCenter
         ..crossCenter
-        ..useParent((v) => v..wFull),
+        ..useParent((v) => v
+          ..wFull
+          ..px = 24),
     );
   }
 }
@@ -232,8 +320,8 @@ class Freezed extends HookWidget {
             },
           ),
         ),
-        n.DropdownButton<String>()
-          ..value = option.value
+        n.DropdownButton<String>(option.value)
+          ..itemsValue = options
           ..onChanged = (newValue) {
             option.value = newValue!;
           }

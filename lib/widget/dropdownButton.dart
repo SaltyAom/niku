@@ -11,6 +11,7 @@ class NikuDropdownButton<T> extends StatelessWidget
         ApplyTextMacro,
         AlignmentDirectionalMacro {
   List<DropdownMenuItem<T>>? items;
+  List<T>? itemsValue;
   T? value;
   Widget? hint;
   Widget? disabledHint;
@@ -36,11 +37,11 @@ class NikuDropdownButton<T> extends StatelessWidget
   AlignmentGeometry? alignment;
   BorderRadius? borderRadius;
 
-  NikuDropdownButton({
+  NikuDropdownButton(
+    this.value, {
     Key? key,
-    this.items,
     this.selectedItemBuilder,
-    this.value,
+    this.items,
     this.hint,
     this.disabledHint,
     this.onChanged,
@@ -63,6 +64,7 @@ class NikuDropdownButton<T> extends StatelessWidget
     this.enableFeedback,
     this.alignment,
     this.borderRadius,
+    this.itemsValue,
   }) : super(key: key);
 
   void get noUnderline {
@@ -73,7 +75,6 @@ class NikuDropdownButton<T> extends StatelessWidget
     if (v == null) return;
 
     selectedItemBuilder = v.selectedItemBuilder ?? selectedItemBuilder;
-    value = v.value ?? value;
     hint = v.hint ?? hint;
     disabledHint = v.disabledHint ?? disabledHint;
     onChanged = v.onChanged ?? onChanged;
@@ -99,9 +100,9 @@ class NikuDropdownButton<T> extends StatelessWidget
   }
 
   get copied => NikuDropdownButton<T>(
+        value,
         items: items,
         selectedItemBuilder: selectedItemBuilder,
-        value: value,
         hint: hint,
         disabledHint: disabledHint,
         onChanged: onChanged,
@@ -124,10 +125,21 @@ class NikuDropdownButton<T> extends StatelessWidget
         enableFeedback: enableFeedback,
         alignment: alignment,
         borderRadius: borderRadius,
+        itemsValue: itemsValue,
       );
 
   get widget => DropdownButton<T>(
-        items: items,
+        items: items ??
+            itemsValue
+                ?.map(
+                  (v) => DropdownMenuItem<T>(
+                    value: v,
+                    child: Text(
+                      v.toString(),
+                    ),
+                  ),
+                )
+                .toList(),
         selectedItemBuilder: selectedItemBuilder,
         value: value,
         hint: hint,
@@ -151,36 +163,6 @@ class NikuDropdownButton<T> extends StatelessWidget
         menuMaxHeight: menuMaxHeight,
         enableFeedback: enableFeedback,
         alignment: alignment ?? AlignmentDirectional.centerStart,
-        borderRadius: borderRadius,
-      );
-}
-
-extension NikuDropDownButtonTransform<T> on DropdownButton<T> {
-  NikuDropdownButton<T> get asNiku => NikuDropdownButton<T>(
-        items: items,
-        selectedItemBuilder: selectedItemBuilder,
-        value: value,
-        hint: hint,
-        disabledHint: disabledHint,
-        onChanged: onChanged,
-        onTap: onTap,
-        elevation: elevation,
-        style: style?.asNiku,
-        underline: underline,
-        icon: icon,
-        iconDisabledColor: iconDisabledColor,
-        iconEnabledColor: iconEnabledColor,
-        iconSize: iconSize,
-        isDense: isDense,
-        isExpanded: isExpanded,
-        itemHeight: itemHeight,
-        focusColor: focusColor,
-        focusNode: focusNode,
-        autofocus: autofocus,
-        dropdownColor: dropdownColor,
-        menuMaxHeight: menuMaxHeight,
-        enableFeedback: enableFeedback,
-        alignment: alignment,
         borderRadius: borderRadius,
       );
 }

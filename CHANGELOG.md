@@ -3,6 +3,7 @@ Breaking Change:
   - Remove `asNiku` on Widget (still working for object).
 
 Feature:
+  - Add `.focusColor`, `.splashColor`, `highlightColor`, `hoverColor` to `NikuCheckboxListTile`
   - Add `.adaptive` to `NikuAlert`
   - Add `.adaptive` to `Switch`
   - Add `.adaptive` to `NikuTextFormField`

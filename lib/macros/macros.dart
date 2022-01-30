@@ -25,6 +25,7 @@ export 'gap.dart';
 export 'imageRepeat.dart';
 export 'insetPadding.dart';
 export 'keyboardType.dart';
+export 'listTileControlAffinity.dart';
 export 'mainAxisAlignment.dart';
 export 'mainAxisSize.dart';
 export 'mapTextStyle.dart';

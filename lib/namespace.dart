@@ -13,11 +13,14 @@ typedef On = NikuOn;
 
 typedef Alert = NikuAlert;
 typedef Button = NikuButton;
+typedef Checkbox = NikuCheckbox;
+typedef CheckboxListTile = NikuCheckboxListTile;
 typedef Column = NikuColumn;
 typedef DropdownButton<T> = NikuDropdownButton<T>;
 typedef GridView = NikuGridView;
 typedef IconButton = NikuIconButton;
 typedef Image = NikuImage;
+typedef PopupMenuButton = NikuPopupMenuButton;
 typedef RangeSlider = NikuRangeSlider;
 typedef Row = NikuRow;
 typedef SelectableText = NikuSelectableText;
