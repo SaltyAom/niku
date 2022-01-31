@@ -92,7 +92,7 @@ class NikuPopupMenuButton<T> extends StatelessWidget
                         value: v,
                       ),
                     )
-                    .toList()
+                    .toList(growable: false)
                 : null) ??
             (_) => [],
         onSelected: onSelected ?? (T _) {},

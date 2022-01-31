@@ -278,7 +278,7 @@ class NikuAlert extends StatelessWidget
           );
 
         return e;
-      }).toList();
+      }).toList(growable: false);
 
   Widget _buildCupertinoAlert() => CupertinoAlertDialog(
         key: key,

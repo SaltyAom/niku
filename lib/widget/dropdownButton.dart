@@ -139,7 +139,7 @@ class NikuDropdownButton<T> extends StatelessWidget
                     ),
                   ),
                 )
-                .toList(),
+                .toList(growable: false),
         selectedItemBuilder: selectedItemBuilder,
         value: value,
         hint: hint,

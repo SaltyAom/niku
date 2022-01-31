@@ -1,10 +1,11 @@
 import 'dart:ui';
 
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/gestures.dart';
 
-import '../objects/objects.dart';
-import '../on.dart';
+import 'package:niku/objects/objects.dart';
+import 'package:niku/extra/on.dart';
+import 'package:niku/extra/query.dart';
 
 // ignore: must_be_immutable
 class Niku extends StatelessWidget {
@@ -440,64 +441,14 @@ extension PropertyBuilder on Niku {
     Widget Function(Niku)? lg,
     // > 1024px
     Widget Function(Niku)? xl,
-  }) {
-    useChild(
-      (_child) => LayoutBuilder(
-        builder: (context, constraints) {
-          final width = constraints.maxWidth;
-
-          final child = _child.build(context).niku;
-
-          if (width < 568) {
-            if (base != null) return base(child);
-
-            return child;
-          }
-
-          if (width < 640) {
-            if (xs != null) return xs(child);
-            if (base != null) return base(child);
-
-            return child;
-          }
-
-          if (width < 720) {
-            if (sm != null) return sm(child);
-            if (xs != null) return xs(child);
-            if (base != null) return base(child);
-
-            return child;
-          }
-
-          if (width < 920) {
-            if (md != null) return md(child);
-            if (sm != null) return sm(child);
-            if (xs != null) return xs(child);
-            if (base != null) return base(child);
-
-            return child;
-          }
-
-          if (width < 1024) {
-            if (lg != null) return lg(child);
-            if (md != null) return md(child);
-            if (sm != null) return sm(child);
-            if (xs != null) return xs(child);
-            if (base != null) return base(child);
-
-            return child;
-          }
-
-          if (xl != null) return xl(child);
-          if (lg != null) return lg(child);
-          if (md != null) return md(child);
-          if (sm != null) return sm(child);
-          if (xs != null) return xs(child);
-          if (base != null) return base(child);
-
-          return child;
-        },
-      ),
-    );
-  }
+  }) =>
+      _w = NikuQuery(
+        base: base,
+        xs: xs,
+        sm: sm,
+        md: md,
+        lg: lg,
+        xl: xl,
+        child: _w,
+      );
 }

@@ -7,6 +7,7 @@ export 'checkboxListTile.dart';
 export 'column.dart';
 export 'dropdownButton.dart';
 export 'gridView.dart';
+export 'icon.dart';
 export 'iconButton.dart';
 export 'image.dart';
 export 'row.dart';

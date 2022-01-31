@@ -407,7 +407,8 @@ class NikuSlider extends StatelessWidget
                       divisions: divisions,
                       activeColor: activeColor,
                       thumbColor: thumbColor ?? CupertinoColors.white,
-                    ))
+                    ),
+                  )
                 : Slider(
                     value: data,
                     onChanged: onChanged,

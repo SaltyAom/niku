@@ -1,6 +1,7 @@
-## [2.0.0-experimental.4] - 2022/01/30
+## [2.0.0-experimental.4] - 2022/01/31
 Breaking Change:
-  - Remove `asNiku` on Widget (still working for object).
+  - Remove `asNiku` on Widget (still working for object)
+  - Migrate `.useOn` to `useEvents`
 
 Feature:
   - Add `.focusColor`, `.splashColor`, `highlightColor`, `hoverColor` to `NikuCheckboxListTile`
@@ -8,6 +9,7 @@ Feature:
   - Add `.adaptive` to `Switch`
   - Add `.adaptive` to `NikuTextFormField`
   - Add `NikuShowDialog` to handle adaptive dialog
+  - New `NikuQuery` widget
 
 Bug fixes:
   - `.on` property in `Niku` doesn't passing dependencies to concilation process

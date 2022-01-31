@@ -10,6 +10,7 @@ typedef Niku = N.Niku;
 typedef Parent = Niku;
 
 typedef On = NikuOn;
+typedef Query = NikuQuery;
 
 typedef Alert = NikuAlert;
 typedef Button = NikuButton;
@@ -18,6 +19,7 @@ typedef CheckboxListTile = NikuCheckboxListTile;
 typedef Column = NikuColumn;
 typedef DropdownButton<T> = NikuDropdownButton<T>;
 typedef GridView = NikuGridView;
+typedef Icon = NikuIcon;
 typedef IconButton = NikuIconButton;
 typedef Image = NikuImage;
 typedef PopupMenuButton = NikuPopupMenuButton;

@@ -1,6 +1,6 @@
 name: niku
 description: Property builder for styling Widget with SwiftUI like pattern
-version: 2.0.0-experimental.3
+version: 2.0.0-experimental.4
 homepage: https://github.com/saltyAom/niku
 
 environment:

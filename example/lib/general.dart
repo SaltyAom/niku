@@ -151,7 +151,7 @@ class General extends HookWidget {
         context: context,
         builder: (context) => n.Alert.adaptive()
           ..title = Text("Hello World")
-          ..content = n.NikuColumn([
+          ..content = n.Column([
             Text("This is alert dialog written in Niku"),
             n.TextFormField.adaptive("Placeholder").niku..mt = 16,
           ])
@@ -173,10 +173,10 @@ class General extends HookWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("General"),
+        title: const Text("General"),
         elevation: 0,
         actions: [
-          n.PopupMenuButton(Icon(Icons.edit, color: Colors.white))
+          n.PopupMenuButton(n.Icon(Icons.edit)..color = Colors.white)
             ..items = [1, 2, 3]
             ..elevation = 2
             ..useParent((p0) => p0..mr = 12)
@@ -326,14 +326,7 @@ class Freezed extends HookWidget {
             option.value = newValue!;
           }
           ..elevation = 1
-          ..items = options
-              .map(
-                (option) => DropdownMenuItem(
-                  value: option,
-                  child: Text(option),
-                ),
-              )
-              .toList()
+          ..itemsValue = options
       ])
         ..mainCenter
         ..crossCenter
