@@ -1,8 +1,8 @@
 # Niku
 Effortless property builder for composing maintainable Flutter UI
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/saltyaom/niku/main/doc/images/niku.jpg" alt="Niku" />
+<p align=center>
+  <img src=https://user-images.githubusercontent.com/35027979/153588634-ae12e46f-4fb6-4647-97fa-d1249e99a83b.jpg alt=korone-drake-format
 </p>
 
 ## Why
@@ -13,10 +13,6 @@ To create styling in Flutter, developers have to describe every detail to Widget
 When the codebase gets more complex, the syntax of Flutter itself is too verbose, nested than it should be, result being hard to maintain mostly known as "Nested Hell".
 
 Niku helps to solve the problem by providing a toolkit to style widgets with property builders. To provide a smoother, shorter yet, more straightforward and maintainable way to compose styling in Flutter.
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/saltyaom/niku/main/doc/images/drake.jpg" alt="Comparison" />
-</p>
 
 ## Documentation
 Documentation and getting start can be find on [https://niku.saltyaom.com](niku.saltyaom.com)
