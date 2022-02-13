@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart'
     show CupertinoAlertDialog, CupertinoDialogAction, showCupertinoDialog;
@@ -47,7 +49,27 @@ Future<void> showNikuDialog({
   );
 }
 
-// ignore: must_be_immutable
+/// ### Alert Property Builder
+/// Style property builder for building column
+///
+/// #### @see https://niku.saltyaom.com/widget/alert
+/// #### @example
+/// ```dart
+/// import 'package:niku/niku.dart';
+/// import 'package:niku/namespace.dart' as n;
+///
+/// n.showAlertDialog(
+///   builder: (context) => n.Alert()
+///     ..title = Text('Title')
+///     ..content = Text('Content')
+///     ..actions = [
+///       n.Button('Ok')
+///         ..onPressed = () {
+///           Navigator.of(context).pop();
+///         }
+///     ]
+/// )
+/// ```
 class NikuAlert extends StatelessWidget
     with
         NikuBuildMacro,
@@ -83,6 +105,27 @@ class NikuAlert extends StatelessWidget
   bool adaptive = false;
   List<CupertinoDialogAction>? cupertinoActions;
 
+  /// ### Alert Property Builder
+  /// Style property builder for building column
+  ///
+  /// #### @see https://niku.saltyaom.com/widget/alert
+  /// #### @example
+  /// ```dart
+  /// import 'package:niku/niku.dart';
+  /// import 'package:niku/namespace.dart' as n;
+  ///
+  /// n.showAlertDialog(
+  ///   builder: (context) => n.Alert()
+  ///     ..title = Text('Title')
+  ///     ..content = Text('Content')
+  ///     ..actions = [
+  ///       n.Button('Ok')
+  ///         ..onPressed = () {
+  ///           Navigator.of(context).pop();
+  ///         }
+  ///     ]
+  /// )
+  /// ```
   NikuAlert({
     Key? key,
     this.title,

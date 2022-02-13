@@ -153,6 +153,44 @@ class NikuInputDecoration with ContentPaddingMacro, FloatingLabelBehaviorMacro {
     errorBorder!.radius = radius;
   }
 
+  void useBorder(
+    InputBorder? all,
+    InputBorder? base,
+    InputBorder? enabled,
+    InputBorder? disabled,
+    InputBorder? focused,
+    InputBorder? focusedError,
+    InputBorder? error,
+  ) {
+    _initializeAllBorder();
+
+    border = all?.asNiku ?? border;
+    enabledBorder = enabled?.asNiku ?? enabledBorder;
+    disabledBorder = disabled?.asNiku ?? disabledBorder;
+    focusedBorder = focused?.asNiku ?? focusedBorder;
+    focusedErrorBorder = focusedError?.asNiku ?? focusedErrorBorder;
+    errorBorder = error?.asNiku ?? errorBorder;
+  }
+
+  void useNikuBorder(
+    NikuInputBorder? all,
+    NikuInputBorder? base,
+    NikuInputBorder? enabled,
+    NikuInputBorder? disabled,
+    NikuInputBorder? focused,
+    NikuInputBorder? focusedError,
+    NikuInputBorder? error,
+  ) {
+    _initializeAllBorder();
+
+    border = all ?? border!;
+    enabledBorder = enabled ?? enabledBorder!;
+    disabledBorder = disabled ?? disabledBorder!;
+    focusedBorder = focused ?? focusedBorder!;
+    focusedErrorBorder = focusedError ?? focusedErrorBorder!;
+    errorBorder = error ?? errorBorder!;
+  }
+
   void get underline {
     _initializeAllBorder();
 
@@ -173,6 +211,25 @@ class NikuInputDecoration with ContentPaddingMacro, FloatingLabelBehaviorMacro {
     focusedBorder!.type = NikuInputBorderType.Outlined;
     focusedErrorBorder!.type = NikuInputBorderType.Outlined;
     errorBorder!.type = NikuInputBorderType.Outlined;
+  }
+
+  void useBorderWidth(
+    double? all,
+    double? base,
+    double? enabled,
+    double? disabled,
+    double? focused,
+    double? focusedError,
+    double? error,
+  ) {
+    _initializeAllBorder();
+
+    border!.width = all ?? border?.width;
+    enabledBorder!.width = enabled ?? enabledBorder?.width;
+    disabledBorder!.width = disabled ?? disabledBorder?.width;
+    focusedBorder!.width = focused ?? focusedBorder?.width;
+    focusedErrorBorder!.width = focusedError ?? focusedErrorBorder?.width;
+    errorBorder!.width = error ?? errorBorder?.width;
   }
 
   set borderWidth(double width) {
@@ -205,6 +262,25 @@ class NikuInputDecoration with ContentPaddingMacro, FloatingLabelBehaviorMacro {
     errorBorder?.width = width;
   }
 
+  void useBorderColor(
+    Color? all,
+    Color? base,
+    Color? enabled,
+    Color? disabled,
+    Color? focused,
+    Color? focusedError,
+    Color? error,
+  ) {
+    _initializeAllBorder();
+
+    border!.color = all ?? border?.color;
+    enabledBorder!.color = enabled ?? enabledBorder?.color;
+    disabledBorder!.color = disabled ?? disabledBorder?.color;
+    focusedBorder!.color = focused ?? focusedBorder?.color;
+    focusedErrorBorder!.color = focusedError ?? focusedErrorBorder?.color;
+    errorBorder!.color = error ?? errorBorder?.color;
+  }
+
   set borderColor(Color color) {
     if (border == null) border = NikuInputBorder();
     border?.color = color;
@@ -225,7 +301,7 @@ class NikuInputDecoration with ContentPaddingMacro, FloatingLabelBehaviorMacro {
     focusedBorder?.color = color;
   }
 
-  set focusedErrororderColor(Color color) {
+  set focusedErrorBorderColor(Color color) {
     if (focusedErrorBorder == null) focusedErrorBorder = NikuInputBorder();
     focusedErrorBorder?.color = color;
   }

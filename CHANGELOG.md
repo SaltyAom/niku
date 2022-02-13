@@ -1,3 +1,19 @@
+## [2.0.0-rc.1] - 2022/02/13
+Breaking Change:
+  - Migrate `.useScreen` to `useSize`
+  - Migrate `.useQuery` to `.useScreen`
+  - Migrate `.useEvents` to `useGesture`
+  - Remove `TransformSelectableText`
+
+Feature:
+  - Add `.useQuery` to handle `MediaQueryData`
+  - Add `useBorder`, `useNikuBorder`, `useBorderColor`, `useBorderWidth` hook
+  - Add `.useDarkMode` to handle element styling on Dark Theme
+  - Add `n.Image.cache` to use `CacheNetworkImage`
+
+Bug fixes:
+  - Correct `focusedErrorBorder` setter name
+
 ## [2.0.0-experimental.4] - 2022/01/31
 Breaking Change:
   - Remove `asNiku` on Widget (still working for object)

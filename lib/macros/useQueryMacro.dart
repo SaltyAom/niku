@@ -7,11 +7,35 @@ abstract class UseQueryMacro<T extends Widget> {
     return SizedBox.shrink() as T;
   }
 
-  void useScreen(BuildContext context, T Function(T, Size) builder) {
+  void useQuery(BuildContext context, T Function(T, MediaQueryData) builder) {
+    apply = builder(copied, MediaQuery.of(context));
+  }
+
+  void useSize(BuildContext context, T Function(T, Size) builder) {
     apply = builder(copied, MediaQuery.of(context).size);
   }
 
-  void useQuery(
+  void useDarkMode(BuildContext context, T Function(T, bool) builder) {
+    apply = builder(copied, Theme.of(context).brightness == Brightness.dark);
+  }
+
+  /// ```dart
+  /// void useScreen({
+  ///   // > 568px
+  ///   Widget Function(Niku)? base,
+  ///   // 568 - 640px
+  ///   Widget Function(Niku)? xs,
+  ///   // 640 - 768px
+  ///   Widget Function(Niku)? sm,
+  ///   // 768 - 920px
+  ///   Widget Function(Niku)? md,
+  ///   // 920 - 1024px
+  ///   Widget Function(Niku)? lg,
+  ///   // > 1024px
+  ///   Widget Function(Niku)? xl,
+  /// })
+  /// ```
+  void useScreen(
     BuildContext context, {
     // > 568px
     T Function(T)? base,

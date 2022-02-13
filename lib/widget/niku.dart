@@ -5,7 +5,7 @@ import 'package:flutter/gestures.dart';
 
 import 'package:niku/objects/objects.dart';
 import 'package:niku/extra/on.dart';
-import 'package:niku/extra/query.dart';
+import 'package:niku/extra/screen.dart';
 
 // ignore: must_be_immutable
 class Niku extends StatelessWidget {
@@ -197,7 +197,7 @@ extension PropertyBuilder on Niku {
   set translateY(double v) =>
       _w = Transform.translate(offset: Offset(0, v), child: _w);
 
-  void useEvents({
+  void useGesture({
     void Function(TapDownDetails)? tapDown,
     void Function(TapUpDetails)? tapUp,
     VoidCallback? tap,
@@ -417,7 +417,18 @@ extension PropertyBuilder on Niku {
 
   void get freezed => useChild((child) => NikuOn(() => child, []));
 
-  useScreen(Function(Niku child, Size constraints) builder) {
+  void useQuery(Function(Niku child, MediaQueryData constraints) builder) {
+    useChild(
+      (child) => Builder(
+        builder: (context) => builder(
+          child.build(context).niku,
+          MediaQuery.of(context),
+        ),
+      ),
+    );
+  }
+
+  void useSize(Function(Niku child, Size constraints) builder) {
     useChild(
       (child) => LayoutBuilder(
         builder: (context, constraints) => builder(
@@ -428,7 +439,23 @@ extension PropertyBuilder on Niku {
     );
   }
 
-  void useQuery({
+  /// ```dart
+  /// void useScreen({
+  ///   // > 568px
+  ///   Widget Function(Niku)? base,
+  ///   // 568 - 640px
+  ///   Widget Function(Niku)? xs,
+  ///   // 640 - 768px
+  ///   Widget Function(Niku)? sm,
+  ///   // 768 - 920px
+  ///   Widget Function(Niku)? md,
+  ///   // 920 - 1024px
+  ///   Widget Function(Niku)? lg,
+  ///   // > 1024px
+  ///   Widget Function(Niku)? xl,
+  /// })
+  /// ```
+  void useScreen({
     // > 568px
     Widget Function(Niku)? base,
     // 568 - 640px
@@ -442,7 +469,7 @@ extension PropertyBuilder on Niku {
     // > 1024px
     Widget Function(Niku)? xl,
   }) =>
-      _w = NikuQuery(
+      _w = NikuScreen(
         base: base,
         xs: xs,
         sm: sm,
@@ -451,4 +478,15 @@ extension PropertyBuilder on Niku {
         xl: xl,
         child: _w,
       );
+
+  void useDarkMode(Widget Function(Niku, bool) builder) {
+    useChild(
+      (context) => Builder(
+        builder: (context) => builder(
+          _w.niku,
+          Theme.of(context).brightness == Brightness.dark,
+        ),
+      ),
+    );
+  }
 }

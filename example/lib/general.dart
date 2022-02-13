@@ -6,7 +6,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:niku/namespace.dart' as n;
 
 class Styles {
-  static final button = (Color color) => n.Button(SizedBox.shrink())
+  static button(Color color) => n.Button(SizedBox.shrink())
     ..useButtonStyle((v) => v
       ..rounded = 4
       ..px = 24
@@ -225,7 +225,8 @@ class General extends HookWidget {
           }
           ..min = 0
           ..max = 100
-          ..trackHeight = 2,
+          ..trackHeight = 2
+          ..thumbColor = Colors.white,
         n.Button(Text("Button"))
           ..onPressed = () {}
           ..useTextStyle((v) => v
@@ -247,6 +248,47 @@ class General extends HookWidget {
   }
 }
 
+class NetworkImageExample extends StatelessWidget {
+  const NetworkImageExample({Key? key}) : super(key: key);
+
+  @override
+  build(context) {
+    return Scaffold(
+      body: n.Column([
+        n.Image.cache(
+          "https://avatars.githubusercontent.com/u/35027979?s=400&u=28dbe76d9057768eed7cb2d346203b7c55c153ce&v=4",
+        )..useParent((v) => v
+          ..maxW = 420
+          ..rounded = 8
+          ..shadows = [
+            BoxShadow(
+              color: Colors.black.withOpacity(.1),
+              blurRadius: 8,
+              offset: Offset(0, 4),
+            ),
+            BoxShadow(
+              color: Colors.black.withOpacity(.1),
+              blurRadius: 32,
+              offset: Offset(0, 16),
+            ),
+          ]
+          ..px = 20),
+        n.Text("Network Image")
+          ..h6 = context
+          ..useDarkMode(
+            context,
+            (v, isDarkTheme) =>
+                v..color = isDarkTheme ? Colors.white : Colors.black,
+          ),
+      ])
+        ..mainCenter
+        ..crossCenter
+        ..gap = 24
+        ..useParent((v) => v..fullWidth),
+    );
+  }
+}
+
 class Freezed extends HookWidget {
   const Freezed();
 
@@ -264,11 +306,11 @@ class Freezed extends HookWidget {
           groupValue: freezed.value,
           children: {
             false: Text("Reactive").niku
-              ..useEvents(
+              ..useGesture(
                 tap: () => freezed.value = false,
               ),
             true: Text("Freezed").niku
-              ..useEvents(
+              ..useGesture(
                 tap: () => freezed.value = true,
               ),
           },
@@ -281,7 +323,7 @@ class Freezed extends HookWidget {
         n.Text("${option.value}")
           ..h6 = context
           ..bold
-          ..useQuery(
+          ..useScreen(
             context,
             base: (v) => v..color = Colors.red,
             xs: (v) => v..color = Colors.blue,
@@ -289,7 +331,7 @@ class Freezed extends HookWidget {
           ..useParent((v) => v
             ..px = 24
             ..py = 12
-            ..useQuery(
+            ..useScreen(
               base: (v) => v..bg = Colors.red.shade50,
               xs: (v) => v..bg = Colors.blue.shade50,
             )

@@ -10,7 +10,7 @@ typedef Niku = N.Niku;
 typedef Parent = Niku;
 
 typedef On = NikuOn;
-typedef Query = NikuQuery;
+typedef Screen = NikuScreen;
 
 typedef Alert = NikuAlert;
 typedef Button = NikuButton;

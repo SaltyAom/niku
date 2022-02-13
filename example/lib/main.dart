@@ -17,7 +17,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.blue,
         primarySwatch: Colors.blue,
+        useMaterial3: true,
       ),
+      darkTheme: ThemeData.dark(),
       home: General(),
       // home: const Music(
       //   cover:

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:niku/widget/niku.dart';
 
-class NikuQuery extends StatelessWidget {
+class NikuScreen extends StatelessWidget {
   final Widget child;
   final Widget Function(Niku)? base;
   final Widget Function(Niku)? xs;
@@ -11,7 +11,7 @@ class NikuQuery extends StatelessWidget {
   final Widget Function(Niku)? lg;
   final Widget Function(Niku)? xl;
 
-  const NikuQuery({
+  const NikuScreen({
     Key? key,
     required this.child,
     this.base,

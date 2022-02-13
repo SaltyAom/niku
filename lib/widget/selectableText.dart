@@ -166,18 +166,3 @@ class NikuSelectableText extends StatelessWidget
         onSelectionChanged: onSelectionChanged,
       );
 }
-
-extension NikuSelectableTextTransform on Text {
-  NikuSelectableText get asNiku => NikuSelectableText(
-        data,
-        key: key,
-        style: style?.asNiku,
-        strutStyle: strutStyle?.asNiku,
-        textAlign: textAlign,
-        textDirection: textDirection,
-        textScaleFactor: textScaleFactor,
-        maxLines: maxLines,
-        textWidthBasis: textWidthBasis,
-        textHeightBehavior: textHeightBehavior,
-      );
-}

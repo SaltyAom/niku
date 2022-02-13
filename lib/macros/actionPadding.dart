@@ -11,26 +11,33 @@ abstract class ActionPaddingMacro {
     callback();
   }
 
-  set pt(double padding) => _initialize(() => actionPadding!.top = padding);
-  set pl(double padding) => _initialize(() => actionPadding!.left = padding);
-  set pb(double padding) => _initialize(() => actionPadding!.bottom = padding);
-  set pr(double padding) => _initialize(() => actionPadding!.right = padding);
+  set actionPt(double padding) =>
+      _initialize(() => actionPadding!.top = padding);
 
-  set px(double padding) {
+  set actionPl(double padding) =>
+      _initialize(() => actionPadding!.left = padding);
+
+  set actinoPb(double padding) =>
+      _initialize(() => actionPadding!.bottom = padding);
+
+  set actionPr(double padding) =>
+      _initialize(() => actionPadding!.right = padding);
+
+  set actionPx(double padding) {
     _initialize(() {
       actionPadding!.left = padding;
       actionPadding!.right = padding;
     });
   }
 
-  set py(double padding) {
+  set actionPy(double padding) {
     _initialize(() {
       actionPadding!.top = padding;
       actionPadding!.bottom = padding;
     });
   }
 
-  set p(double padding) {
+  set actionP(double padding) {
     _initialize(() {
       actionPadding!.top = padding;
       actionPadding!.bottom = padding;

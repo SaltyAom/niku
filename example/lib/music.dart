@@ -47,7 +47,7 @@ class Music extends HookWidget {
         ],
       ),
       body: n.Column([
-        n.Image.network(cover)
+        n.Image.cache(cover)
           ..cover
           ..circleProgress(
             (progress) => CircularProgressIndicator(
