@@ -1,3 +1,4 @@
+###### Niku 2 rc is now released! Check it the [new documentation](https://v2.niku.saltyaom.com) or on branch [exp/heaven-and-earth](https://github.com/saltyaom/niku/tree/exp/heaven-and-earth)
 # Niku
 Effortless property builder for composing maintainable Flutter UI
 
