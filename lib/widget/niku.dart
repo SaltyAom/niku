@@ -301,12 +301,37 @@ extension PropertyBuilder on Niku {
   set backdropFilter(ImageFilter v) =>
       _w = BackdropFilter(filter: v, child: _w);
 
+  set bgBlur(double v) => _w =
+      BackdropFilter(filter: ImageFilter.blur(sigmaX: v, sigmaY: v), child: _w);
+
+  Clip get rect {
+    _w = ClipRect(child: _w);
+
+    return Clip.hardEdge;
+  }
+
+  set rect(Clip clip) => _w = ClipRect(
+        child: _w,
+        clipBehavior: clip,
+      );
+
+  Clip get oval {
+    _w = ClipOval(child: _w);
+
+    return Clip.hardEdge;
+  }
+
+  set oval(Clip clip) => _w = ClipRect(
+        child: _w,
+        clipBehavior: clip,
+      );
+
   set top(double v) => _w = Positioned(top: v, child: _w);
   set left(double v) => _w = Positioned(left: v, child: _w);
   set bottom(double v) => _w = Positioned(bottom: v, child: _w);
   set right(double v) => _w = Positioned(right: v, child: _w);
 
-  void get flex => _w = Flexible(flex: 1, child: _w);
+  void get flex => _w = Flexible(child: _w);
   set flexible(int v) => _w = Flexible(flex: v, child: _w);
 
   set shadows(List<BoxShadow> v) =>
@@ -405,6 +430,11 @@ extension PropertyBuilder on Niku {
 
   set gradient(Gradient v) =>
       _w = DecoratedBox(decoration: BoxDecoration(gradient: v), child: _w);
+
+  set quarterTurns(int turns) => _w = RotatedBox(
+        quarterTurns: turns,
+        child: _w,
+      );
 
   set on(List<dynamic> dependencies) =>
       useChild((child) => NikuOn(() => child, dependencies));

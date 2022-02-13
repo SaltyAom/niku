@@ -1,3 +1,13 @@
+## [2.0.0-rc.2] - 2022/02/13
+Feature:
+  - Add `.quarterTurns`, `bgBlur`, `clipRect`, `clipOval` to `Niku`
+
+Change:
+  - Remove default styling from `NikuText` to match default Flutter Text, eg. TextBasis.
+
+Bug fixes:
+  - `AxisMacro` not assigning wrong field name
+
 ## [2.0.0-rc.1] - 2022/02/13
 Breaking Change:
   - Migrate `.useScreen` to `useSize`
