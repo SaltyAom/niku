@@ -1,32 +1,38 @@
 # Niku
-Effortless property builder for composing maintainable Flutter UI
+Create Flutter UI, easier, faster, smarter
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/saltyaom/niku/main/doc/images/niku.jpg" alt="Niku" />
-</p>
+Fluently developing without headache and Nested Hell.
+
+![korone-drake-format](https://user-images.githubusercontent.com/35027979/153739208-a80d8ccb-84c3-4cc7-a707-3af270a4a9f2.jpeg)
 
 ## Why
-Creating UI in Flutter is easy. Its declarative enables developers to control every detail and outcome of how it should be.
+###### Recommended: See why people choose and how it get along with your codebase in [the documentation](https://v2.niku.saltyaom.com)
 
-To create styling in Flutter, developers have to describe every detail to Widget. It's like low-level programming UI, having to adapt between property is hard when some are more complex than others, for instance, MaterialStateProperty.
+Styling in Flutter is complex and verbose.
 
-When the codebase gets more complex, the syntax of Flutter itself is too verbose, nested than it should be, result being hard to maintain mostly known as "Nested Hell".
+Developers have to describe every styling detail to Widget.
+It’s like low-level programming UI, having to adapt between property is hard when some are more complex than others, for instance, MaterialStateProperty.
 
-Niku helps to solve the problem by providing a toolkit to style widgets with property builders. To provide a smoother, shorter yet, more straightforward and maintainable way to compose styling in Flutter.
+When the codebase gets more complex, the syntax of Flutter itself is too verbose, nested than it should be, result being hard to maintain mostly known as Nested Hell.
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/saltyaom/niku/main/doc/images/drake.jpg" alt="Comparison" />
-</p>
+Niku helps to solve the problem by providing a dot cascade to style widget.
+Exposing the same naming convention, shorten property, parent builder and style extraction.
+
+Providing a smoother, shorter yet, more straightforward and maintainable way to compose styling in Flutter.
 
 ## Documentation
-Documentation and getting start can be find on [https://niku.saltyaom.com](niku.saltyaom.com)
+Documentation for v2 can be found on [v2.niku.saltyaom.com](https://v2.niku.saltyaom.com)
 
-- [Introduction and why](https://niku.saltyaom.com/docs/introduction)
-- [Overview](https://niku.saltyaom.com/docs/overview)
-- [Property Builder](https://niku.saltyaom.com/docs/property-builder)
-- [Naming Convention](https://niku.saltyaom.com/docs/naming-convention)
-- [Style Property Builder](https://niku.saltyaom.com/docs/style-builder)
-- [Parent Builder](https://niku.saltyaom.com/docs/parent-builder)
+- [Documentation](https://v2.niku.saltyaom.com)
+- [Introduction and Why](https://v2.niku.saltyaom.com/docs)
+- [Quickstart](https://v2.niku.saltyaom.com/docs/quickstart)
+- [Hook](https://v2.niku.saltyaom.com/docs/hook)
+- [Parent](https://v2.niku.saltyaom.com/docs/parent)
+- [Extending Niku](https://v2.niku.saltyaom.com/docs/extending-niku)
+- [Custom Widget](https://v2.niku.saltyaom.com/docs/custom-widget)
+- [Macro](https://v2.niku.saltyaom.com/docs/macro)
+- [Repaint](https://v2.niku.saltyaom.com/docs/repaint)
+- [UseQuery](https://v2.niku.saltyaom.com/docs/use-query)
 
 ### License
 Niku is MIT Licensed.
