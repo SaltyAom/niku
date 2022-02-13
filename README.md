@@ -6,7 +6,7 @@ Fluently developing without headache and Nested Hell.
 ![korone-drake-format](https://user-images.githubusercontent.com/35027979/153739208-a80d8ccb-84c3-4cc7-a707-3af270a4a9f2.jpeg)
 
 ## Why
-###### Recommended: See why people choose and how it get along with your codebase in [the documentation](https://v2.saltyaom.com)
+###### Recommended: See why people choose and how it get along with your codebase in [the documentation](https://v2.niku.saltyaom.com)
 
 Styling in Flutter is complex and verbose.
 
