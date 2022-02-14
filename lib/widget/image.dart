@@ -3,10 +3,10 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart'
-    show ImageRenderMethodForWeb;
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+// import 'package:cached_network_image/cached_network_image.dart';
+// import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart'
+//     show ImageRenderMethodForWeb;
+// import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
 import '../macros/macros.dart';
 
@@ -114,69 +114,70 @@ class NikuImage extends StatelessWidget
         isAntiAlias: isAntiAlias,
       );
 
-  factory NikuImage.cache(
-    String src, {
-    Key? key,
-    ImageFrameBuilder? frameBuilder,
-    ImageLoadingBuilder? loadingBuilder,
-    ImageErrorWidgetBuilder? errorBuilder,
-    double? width,
-    double? height,
-    Color? color,
-    Animation<double>? opacity,
-    FilterQuality? filterQuality,
-    BlendMode? colorBlendMode,
-    BoxFit? fit,
-    AlignmentGeometry? alignment,
-    ImageRepeat? repeat,
-    Rect? centerSlice,
-    bool? matchTextDirection,
-    bool? gaplessPlayback,
-    String? semanticLabel,
-    bool? excludeFromSemantics,
-    bool? isAntiAlias,
-    Map<String, String>? headers,
-    int? maxWidth,
-    int? maxHeight,
-    double scale = 1,
-    String? cacheKey,
-    BaseCacheManager? cacheManager,
-    ImageRenderMethodForWeb imageRenderMethodForWeb =
-        ImageRenderMethodForWeb.HtmlImage,
-    void Function()? errorListener,
-  }) =>
-      NikuImage(
-        CachedNetworkImageProvider(
-          src,
-          maxWidth: maxWidth,
-          maxHeight: maxHeight,
-          scale: scale,
-          errorListener: errorListener,
-          headers: headers,
-          cacheManager: cacheManager,
-          cacheKey: cacheKey,
-          imageRenderMethodForWeb: imageRenderMethodForWeb,
-        ),
-        key: key,
-        frameBuilder: frameBuilder,
-        loadingBuilder: loadingBuilder,
-        errorBuilder: errorBuilder,
-        width: width,
-        height: height,
-        color: color,
-        opacity: opacity,
-        filterQuality: filterQuality,
-        colorBlendMode: colorBlendMode,
-        fit: fit,
-        alignment: alignment,
-        repeat: repeat,
-        centerSlice: centerSlice,
-        matchTextDirection: matchTextDirection,
-        gaplessPlayback: gaplessPlayback,
-        semanticLabel: semanticLabel,
-        excludeFromSemantics: excludeFromSemantics,
-        isAntiAlias: isAntiAlias,
-      );
+  // Cached Network Image
+  // factory NikuImage.cache(
+  //   String src, {
+  //   Key? key,
+  //   ImageFrameBuilder? frameBuilder,
+  //   ImageLoadingBuilder? loadingBuilder,
+  //   ImageErrorWidgetBuilder? errorBuilder,
+  //   double? width,
+  //   double? height,
+  //   Color? color,
+  //   Animation<double>? opacity,
+  //   FilterQuality? filterQuality,
+  //   BlendMode? colorBlendMode,
+  //   BoxFit? fit,
+  //   AlignmentGeometry? alignment,
+  //   ImageRepeat? repeat,
+  //   Rect? centerSlice,
+  //   bool? matchTextDirection,
+  //   bool? gaplessPlayback,
+  //   String? semanticLabel,
+  //   bool? excludeFromSemantics,
+  //   bool? isAntiAlias,
+  //   Map<String, String>? headers,
+  //   int? maxWidth,
+  //   int? maxHeight,
+  //   double scale = 1,
+  //   String? cacheKey,
+  //   BaseCacheManager? cacheManager,
+  //   ImageRenderMethodForWeb imageRenderMethodForWeb =
+  //       ImageRenderMethodForWeb.HtmlImage,
+  //   void Function()? errorListener,
+  // }) =>
+  //     NikuImage(
+  //       CachedNetworkImageProvider(
+  //         src,
+  //         maxWidth: maxWidth,
+  //         maxHeight: maxHeight,
+  //         scale: scale,
+  //         errorListener: errorListener,
+  //         headers: headers,
+  //         cacheManager: cacheManager,
+  //         cacheKey: cacheKey,
+  //         imageRenderMethodForWeb: imageRenderMethodForWeb,
+  //       ),
+  //       key: key,
+  //       frameBuilder: frameBuilder,
+  //       loadingBuilder: loadingBuilder,
+  //       errorBuilder: errorBuilder,
+  //       width: width,
+  //       height: height,
+  //       color: color,
+  //       opacity: opacity,
+  //       filterQuality: filterQuality,
+  //       colorBlendMode: colorBlendMode,
+  //       fit: fit,
+  //       alignment: alignment,
+  //       repeat: repeat,
+  //       centerSlice: centerSlice,
+  //       matchTextDirection: matchTextDirection,
+  //       gaplessPlayback: gaplessPlayback,
+  //       semanticLabel: semanticLabel,
+  //       excludeFromSemantics: excludeFromSemantics,
+  //       isAntiAlias: isAntiAlias,
+  //     );
 
   factory NikuImage.file(
     File file, {

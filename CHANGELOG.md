@@ -1,3 +1,7 @@
+## [2.0.0-rc.3] - 2022/02/14
+Breaking Change:
+  - Remove cached network image due to not supporting all platform yet.
+
 ## [2.0.0-rc.2] - 2022/02/13
 Feature:
   - Add `.quarterTurns`, `bgBlur`, `clipRect`, `clipOval` to `Niku`

@@ -255,7 +255,7 @@ class NetworkImageExample extends StatelessWidget {
   build(context) {
     return Scaffold(
       body: n.Column([
-        n.Image.cache(
+        n.Image.network(
           "https://avatars.githubusercontent.com/u/35027979?s=400&u=28dbe76d9057768eed7cb2d346203b7c55c153ce&v=4",
         )..useParent((v) => v
           ..maxW = 420
