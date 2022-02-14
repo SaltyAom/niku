@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
@@ -179,58 +178,58 @@ class NikuImage extends StatelessWidget
   //       isAntiAlias: isAntiAlias,
   //     );
 
-  factory NikuImage.file(
-    File file, {
-    Key? key,
-    ImageFrameBuilder? frameBuilder,
-    ImageLoadingBuilder? loadingBuilder,
-    ImageErrorWidgetBuilder? errorBuilder,
-    double? width,
-    double? height,
-    Color? color,
-    Animation<double>? opacity,
-    FilterQuality? filterQuality,
-    BlendMode? colorBlendMode,
-    BoxFit? fit,
-    AlignmentGeometry? alignment,
-    ImageRepeat? repeat,
-    Rect? centerSlice,
-    bool? matchTextDirection,
-    bool? gaplessPlayback,
-    String? semanticLabel,
-    bool? excludeFromSemantics,
-    bool? isAntiAlias,
-    Map<String, String>? headers,
-    int? cacheWidth,
-    int? cacheHeight,
-    double scale = 1,
-  }) =>
-      NikuImage(
-        ResizeImage.resizeIfNeeded(
-          cacheWidth,
-          cacheHeight,
-          FileImage(file, scale: scale),
-        ),
-        key: key,
-        frameBuilder: frameBuilder,
-        loadingBuilder: loadingBuilder,
-        errorBuilder: errorBuilder,
-        width: width,
-        height: height,
-        color: color,
-        opacity: opacity,
-        filterQuality: filterQuality,
-        colorBlendMode: colorBlendMode,
-        fit: fit,
-        alignment: alignment,
-        repeat: repeat,
-        centerSlice: centerSlice,
-        matchTextDirection: matchTextDirection,
-        gaplessPlayback: gaplessPlayback,
-        semanticLabel: semanticLabel,
-        excludeFromSemantics: excludeFromSemantics,
-        isAntiAlias: isAntiAlias,
-      );
+  // factory NikuImage.file(
+  //   File file, {
+  //   Key? key,
+  //   ImageFrameBuilder? frameBuilder,
+  //   ImageLoadingBuilder? loadingBuilder,
+  //   ImageErrorWidgetBuilder? errorBuilder,
+  //   double? width,
+  //   double? height,
+  //   Color? color,
+  //   Animation<double>? opacity,
+  //   FilterQuality? filterQuality,
+  //   BlendMode? colorBlendMode,
+  //   BoxFit? fit,
+  //   AlignmentGeometry? alignment,
+  //   ImageRepeat? repeat,
+  //   Rect? centerSlice,
+  //   bool? matchTextDirection,
+  //   bool? gaplessPlayback,
+  //   String? semanticLabel,
+  //   bool? excludeFromSemantics,
+  //   bool? isAntiAlias,
+  //   Map<String, String>? headers,
+  //   int? cacheWidth,
+  //   int? cacheHeight,
+  //   double scale = 1,
+  // }) =>
+  //     NikuImage(
+  //       ResizeImage.resizeIfNeeded(
+  //         cacheWidth,
+  //         cacheHeight,
+  //         FileImage(file, scale: scale),
+  //       ),
+  //       key: key,
+  //       frameBuilder: frameBuilder,
+  //       loadingBuilder: loadingBuilder,
+  //       errorBuilder: errorBuilder,
+  //       width: width,
+  //       height: height,
+  //       color: color,
+  //       opacity: opacity,
+  //       filterQuality: filterQuality,
+  //       colorBlendMode: colorBlendMode,
+  //       fit: fit,
+  //       alignment: alignment,
+  //       repeat: repeat,
+  //       centerSlice: centerSlice,
+  //       matchTextDirection: matchTextDirection,
+  //       gaplessPlayback: gaplessPlayback,
+  //       semanticLabel: semanticLabel,
+  //       excludeFromSemantics: excludeFromSemantics,
+  //       isAntiAlias: isAntiAlias,
+  //     );
 
   factory NikuImage.asset(
     String name, {

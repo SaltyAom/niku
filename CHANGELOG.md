@@ -1,3 +1,7 @@
+## [2.0.0-rc.4] - 2022/02/14
+Breaking Change:
+  - Remove `NikuImage.file` factory to support web platform.
+
 ## [2.0.0-rc.3] - 2022/02/14
 Breaking Change:
   - Remove cached network image due to not supporting all platform yet.
