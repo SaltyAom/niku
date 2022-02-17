@@ -17,6 +17,30 @@ class Styles {
         ..color = color));
 }
 
+class Test extends StatelessWidget {
+  @override
+  build(context) {
+    return Scaffold(
+      body: n.Column([
+        n.Column([
+          n.Text("Hi"),
+          n.Text("Ok"),
+          n.Text("Ok"),
+          n.Text("Ok"),
+        ])
+          ..gap = 24,
+        n.Column([
+          n.Text("Hi"),
+          n.Text("Ok"),
+        ])
+          ..gap = 24
+      ])
+        ..mainCenter
+        ..crossCenter,
+    );
+  }
+}
+
 class Counter extends HookWidget {
   const Counter();
 

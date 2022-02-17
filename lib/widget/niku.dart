@@ -326,6 +326,11 @@ extension PropertyBuilder on Niku {
         clipBehavior: clip,
       );
 
+  set elevation(double elevation) => _w = Card(
+        elevation: elevation,
+        child: _w,
+      );
+
   set top(double v) => _w = Positioned(top: v, child: _w);
   set left(double v) => _w = Positioned(left: v, child: _w);
   set bottom(double v) => _w = Positioned(bottom: v, child: _w);

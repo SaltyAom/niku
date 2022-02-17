@@ -102,6 +102,14 @@ class NikuButtonStyle with AlignmentDirectionalMacro {
   set overlay(Color color) => overlayColorState = NikuState.all(color);
   set splash(Color color) => overlayColorState = NikuState.all(color);
 
+  double get rounded {
+    shapeState = NikuState.all(
+      RoundedRectangleBorder(borderRadius: BorderRadius.circular(99999)),
+    );
+
+    return 99999;
+  }
+
   set rounded(double radius) => shapeState = NikuState.all(
         RoundedRectangleBorder(borderRadius: BorderRadius.circular(radius)),
       );

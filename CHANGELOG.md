@@ -1,3 +1,9 @@
+## [2.0.0-rc.5] - 2022/02/17
+Bug Fix:
+  - Add default `.rounded` to `NikuButton`
+  - Fix gap inserted to last children
+  - Fix Column with gap required at least 1 children
+
 ## [2.0.0-rc.4] - 2022/02/14
 Breaking Change:
   - Remove `NikuImage.file` factory to support web platform.
