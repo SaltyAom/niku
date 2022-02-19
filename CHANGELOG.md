@@ -1,3 +1,7 @@
+## [2.0.0-rc.6] - 2022/02/19
+Change:
+  - showNikuDialog now accepts any widget
+
 ## [2.0.0-rc.5] - 2022/02/17
 Bug Fix:
   - Add default `.rounded` to `NikuButton`

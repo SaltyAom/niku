@@ -11,17 +11,28 @@ import '../objects/objects.dart';
 
 Future<void> showNikuDialog({
   required BuildContext context,
-  required NikuAlert Function(BuildContext) builder,
+  required Widget Function(BuildContext) builder,
   String? barrierLabel,
   bool useRootNavigator = true,
   bool? barrierDismissible,
 }) async {
   final alert = builder(context);
 
-  if (alert.adaptive) {
-    final platform = Theme.of(context).platform;
+  if (alert is NikuAlert) {
+    if (alert.adaptive) {
+      final platform = Theme.of(context).platform;
 
-    if (platform == TargetPlatform.macOS || platform == TargetPlatform.iOS)
+      if (platform == TargetPlatform.macOS || platform == TargetPlatform.iOS)
+        return showCupertinoDialog(
+          context: context,
+          builder: builder,
+          barrierLabel: barrierLabel,
+          barrierDismissible: barrierDismissible ?? false,
+          useRootNavigator: useRootNavigator,
+        );
+    }
+
+    if (alert.cupertino)
       return showCupertinoDialog(
         context: context,
         builder: builder,
@@ -30,15 +41,6 @@ Future<void> showNikuDialog({
         useRootNavigator: useRootNavigator,
       );
   }
-
-  if (alert.cupertino)
-    return showCupertinoDialog(
-      context: context,
-      builder: builder,
-      barrierLabel: barrierLabel,
-      barrierDismissible: barrierDismissible ?? false,
-      useRootNavigator: useRootNavigator,
-    );
 
   return showDialog(
     context: context,
@@ -58,7 +60,7 @@ Future<void> showNikuDialog({
 /// import 'package:niku/niku.dart';
 /// import 'package:niku/namespace.dart' as n;
 ///
-/// n.showAlertDialog(
+/// n.showDialog(
 ///   builder: (context) => n.Alert()
 ///     ..title = Text('Title')
 ///     ..content = Text('Content')
