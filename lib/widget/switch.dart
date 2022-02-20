@@ -251,7 +251,7 @@ class NikuSwitch extends StatelessWidget
         overlayColorState: overlayColorState,
         adaptive: adaptive,
         cupertino: cupertino,
-      );
+      )..$internalParent.addAll($internalParent);
 
   Widget get widget {
     if (cupertino) {

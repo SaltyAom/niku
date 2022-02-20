@@ -84,7 +84,7 @@ class NikuPopupMenuButton<T> extends StatelessWidget
         iconSize: iconSize,
         items: items,
         itemBuilder: itemBuilder,
-      );
+      )..$internalParent.addAll($internalParent);
 
   PopupMenuButton get widget => PopupMenuButton<T>(
         initialValue: initialValue,

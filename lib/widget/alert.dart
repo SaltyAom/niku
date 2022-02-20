@@ -304,7 +304,7 @@ class NikuAlert extends StatelessWidget
         scrollable: scrollable,
         cupertino: cupertino,
         adaptive: adaptive,
-      );
+      )..$internalParent.addAll($internalParent);
 
   static List<Widget> _mapWidgetToCupertino(List<Widget> children) =>
       children.map((e) {

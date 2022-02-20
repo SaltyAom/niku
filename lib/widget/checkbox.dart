@@ -96,7 +96,7 @@ class NikuCheckbox extends StatelessWidget
         autofocus: autofocus,
         shape: shape,
         side: side,
-      );
+      )..$internalParent.addAll($internalParent);
 
   Checkbox get widget => Checkbox(
         value: value,

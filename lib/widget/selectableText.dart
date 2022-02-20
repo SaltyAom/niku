@@ -141,7 +141,7 @@ class NikuSelectableText extends StatelessWidget
         scrollPhysics: scrollPhysics,
         textWidthBasis: textWidthBasis,
         textHeightBehavior: textHeightBehavior,
-      );
+      )..$internalParent.addAll($internalParent);
 
   Widget get widget => SelectableText(
         this.text ?? "",

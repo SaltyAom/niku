@@ -48,7 +48,7 @@ class NikuStack extends StatelessWidget
         textDirection: textDirection,
         fit: fit,
         clipBehavior: clipBehavior,
-      );
+      )..$internalParent.addAll($internalParent);
 
   Stack get widget => Stack(
         key: key,

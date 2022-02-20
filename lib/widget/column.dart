@@ -60,7 +60,7 @@ class NikuColumn extends StatelessWidget
         textDirection: textDirection,
         verticalDirection: verticalDirection,
         textBaseline: textBaseline,
-      );
+      )..$internalParent.addAll($internalParent);
 
   Column get widget => Column(
         children: childrenWithGap ?? children,

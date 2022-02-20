@@ -1,4 +1,9 @@
-## [2.0.0-rc.7] - 2022/02/19
+## [2.0.0-rc.8] - 2022/02/20
+Bux Fix:
+  - Add `copied` to NikuImage, NikuSlider, NikuRangeSlider.
+  - Apply parent builder to `copied` method
+
+## [2.0.0-rc.7] - 2022/02/20
 Feature:
   - New `use` on `NikuWidget` to apply multiple styles at once
   - Add `useBorder`, `useRoundedBorder`

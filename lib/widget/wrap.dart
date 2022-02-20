@@ -71,7 +71,7 @@ class NikuWrap extends StatelessWidget
         textDirection: textDirection,
         verticalDirection: verticalDirection,
         clipBehavior: clipBehavior,
-      );
+      )..$internalParent.addAll($internalParent);
 
   Wrap get widget => Wrap(
         children: chidren,

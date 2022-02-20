@@ -5,7 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 import 'package:niku/namespace.dart' as n;
 
-class Styles {
+class MyStyles {
   static button(Color color) => n.Button(SizedBox.shrink())
     ..useButtonStyle((v) => v
       ..rounded = 4
@@ -17,43 +17,36 @@ class Styles {
         ..color = color));
 }
 
-class MyStyles {
+class Styles {
   static final title = n.Text("")
     ..fontSize = 24
-    ..bold
+    ..color = Colors.blue
     ..useParent((v) => v
       ..p = 12
-      ..bg = Colors.red);
+      ..bg = Colors.blue.shade50);
 
-  static final green = n.Text("")
-    ..color = Colors.green
-    ..useParent((p0) => p0..rounded);
+  static final rounded = n.Text("")
+    ..w500
+    ..useParent((v) => v
+      ..bg = Colors.blue.shade50
+      ..rounded = 8);
+
+  static final roundedTitle = Styles.title.copied..apply = rounded;
+
+  static final centerCol = n.Column([])
+    ..mainCenter
+    ..crossCenter
+    ..useParent((v) => v..w100);
 }
 
-class Test extends StatelessWidget {
+class InheritsParentBuilder extends StatelessWidget {
   @override
   build(context) {
     return Scaffold(
       body: n.Column([
-        n.Column([
-          n.Text("Hi")
-            ..use([
-              MyStyles.title,
-              MyStyles.green,
-            ]),
-          n.Text("Ok"),
-          n.Text("Ok"),
-          n.Text("Ok"),
-        ])
-          ..gap = 24,
-        n.Column([
-          n.Text("Hi"),
-          n.Text("Ok"),
-        ])
-          ..gap = 24
+        n.Text("Hello Niku")..apply = Styles.roundedTitle,
       ])
-        ..mainCenter
-        ..crossCenter,
+        ..apply = Styles.centerCol,
     );
   }
 }
@@ -73,7 +66,7 @@ class Counter extends HookWidget {
           () => n.Column([
             n.Button(n.Text("Increment"))
               ..onPressed = (() => count.value++)
-              ..apply = Styles.button(Colors.blue.shade700)
+              ..apply = MyStyles.button(Colors.blue.shade700)
               ..useButtonStyle((v) => v
                 ..bg = Colors.blue.shade50
                 ..splash = Colors.blue.shade100)
@@ -82,7 +75,7 @@ class Counter extends HookWidget {
               ..onPressed = () {
                 count.value--;
               }
-              ..apply = Styles.button(Colors.red.shade700)
+              ..apply = MyStyles.button(Colors.red.shade700)
               ..useButtonStyle((v) => v
                 ..bg = Colors.red.shade50
                 ..splash = Colors.red.shade100)

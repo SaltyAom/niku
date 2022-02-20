@@ -154,7 +154,9 @@ class NikuIconButton extends StatelessWidget
         tooltip: tooltip,
         enableFeedback: enableFeedback,
         constraints: constraints,
-      )..child = child;
+      )
+        ..child = child
+        ..$internalParent.addAll($internalParent);
 
   IconButton get widget => IconButton(
         icon: child ?? SizedBox.shrink(),

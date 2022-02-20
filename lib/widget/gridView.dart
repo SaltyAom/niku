@@ -111,7 +111,7 @@ class NikuGridView extends StatelessWidget
         keyboardDismissBehavior: keyboardDismissBehavior,
         restorationId: restorationId,
         clipBehavior: clipBehavior,
-      );
+      )..$internalParent.addAll($internalParent);
 
   GridView get widget => GridView.count(
         key: key,

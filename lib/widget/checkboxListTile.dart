@@ -126,7 +126,7 @@ class NikuCheckboxListTile extends StatelessWidget
         highlightColor: highlightColor,
         hoverColor: hoverColor,
         focusColor: focusColor,
-      );
+      )..$internalParent.addAll($internalParent);
 
   Widget get widget => Builder(
         builder: (context) => Theme(

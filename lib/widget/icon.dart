@@ -42,7 +42,7 @@ class NikuIcon extends StatelessWidget
         color: color,
         semanticLabel: semanticLabel,
         textDirection: textDirection,
-      );
+      )..$internalParent.addAll($internalParent);
 
   Icon get widget => Icon(
         icon,

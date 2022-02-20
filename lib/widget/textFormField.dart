@@ -497,7 +497,7 @@ class NikuTextFormField extends StatelessWidget
         enableIMEPersonalizedLearning: enableIMEPersonalizedLearning,
         adaptive: adaptive,
         cupertino: cupertino,
-      );
+      )..$internalParent.addAll($internalParent);
 
   TextFormField _buildMaterial() => TextFormField(
         controller: controller,

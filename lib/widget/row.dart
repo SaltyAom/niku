@@ -60,7 +60,7 @@ class NikuRow extends StatelessWidget
         textDirection: textDirection,
         verticalDirection: verticalDirection,
         textBaseline: textBaseline,
-      );
+      )..$internalParent.addAll($internalParent);
 
   Row get widget => Row(
         children: childrenWithGap ?? children,

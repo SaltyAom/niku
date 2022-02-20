@@ -411,6 +411,29 @@ class NikuImage extends StatelessWidget
     v.forEach((e) => apply = e);
   }
 
+  NikuImage get copied => NikuImage(
+        image,
+        key: key,
+        frameBuilder: frameBuilder,
+        loadingBuilder: loadingBuilder,
+        errorBuilder: errorBuilder,
+        width: width,
+        height: height,
+        color: color,
+        opacity: opacity,
+        filterQuality: filterQuality,
+        colorBlendMode: colorBlendMode,
+        fit: fit,
+        alignment: alignment,
+        repeat: repeat,
+        centerSlice: centerSlice,
+        matchTextDirection: matchTextDirection,
+        gaplessPlayback: gaplessPlayback,
+        semanticLabel: semanticLabel,
+        excludeFromSemantics: excludeFromSemantics,
+        isAntiAlias: isAntiAlias,
+      )..$internalParent.addAll($internalParent);
+
   Image get widget => Image(
         image: image,
         frameBuilder: frameBuilder,

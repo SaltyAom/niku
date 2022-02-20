@@ -215,7 +215,7 @@ class NikuButton extends StatelessWidget
         icon: icon,
         label: label,
         enable: enable,
-      );
+      )..$internalParent.addAll($internalParent);
 
   Widget get widget {
     if (type == NikuButtonType.Elevated)

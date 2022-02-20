@@ -131,7 +131,7 @@ class NikuDropdownButton<T> extends StatelessWidget
         alignment: alignment,
         borderRadius: borderRadius,
         itemsValue: itemsValue,
-      );
+      )..$internalParent.addAll($internalParent);
 
   get widget => DropdownButton<T>(
         items: items ??

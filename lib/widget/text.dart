@@ -88,7 +88,7 @@ class NikuText extends StatelessWidget
         semanticsLabel: semanticsLabel,
         textWidthBasis: textWidthBasis,
         textHeightBehavior: textHeightBehavior,
-      );
+      )..$internalParent.addAll($internalParent);
 
   Widget get widget => Text(
         text ?? "",
