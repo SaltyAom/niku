@@ -97,6 +97,11 @@ class NikuDropdownButton<T> extends StatelessWidget
     enableFeedback = v.enableFeedback ?? enableFeedback;
     alignment = v.alignment ?? alignment;
     borderRadius = v.borderRadius ?? borderRadius;
+    $internalParent..addAll(v.$internalParent);
+  }
+
+  use(List<NikuDropdownButton> v) {
+    v.forEach((e) => apply = e);
   }
 
   get copied => NikuDropdownButton<T>(

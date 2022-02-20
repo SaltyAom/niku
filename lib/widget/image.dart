@@ -16,7 +16,8 @@ class NikuImage extends StatelessWidget
         UseQueryMacro<NikuImage>,
         ColorBlendModeMacro,
         BoxFitMacro,
-        ImageRepeatMacro {
+        ImageRepeatMacro,
+        WidthHeightMacro {
   ImageProvider image;
   ImageFrameBuilder? frameBuilder;
   ImageLoadingBuilder? loadingBuilder;
@@ -403,6 +404,11 @@ class NikuImage extends StatelessWidget
     semanticLabel = v.semanticLabel ?? semanticLabel;
     excludeFromSemantics = v.excludeFromSemantics ?? excludeFromSemantics;
     isAntiAlias = v.isAntiAlias ?? isAntiAlias;
+    $internalParent..addAll(v.$internalParent);
+  }
+
+  use(List<NikuImage> v) {
+    v.forEach((e) => apply = e);
   }
 
   Image get widget => Image(

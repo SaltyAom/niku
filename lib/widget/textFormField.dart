@@ -436,6 +436,12 @@ class NikuTextFormField extends StatelessWidget
     restorationId = v.restorationId ?? restorationId;
     enableIMEPersonalizedLearning =
         v.enableIMEPersonalizedLearning ?? enableIMEPersonalizedLearning;
+
+    $internalParent..addAll(v.$internalParent);
+  }
+
+  use(List<NikuTextFormField> v) {
+    v.forEach((e) => apply = e);
   }
 
   NikuTextFormField get copied => NikuTextFormField(

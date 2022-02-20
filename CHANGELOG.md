@@ -1,3 +1,19 @@
+## [2.0.0-rc.7] - 2022/02/19
+Feature:
+  - New `use` on `NikuWidget` to apply multiple styles at once
+  - Add `useBorder`, `useRoundedBorder`
+  - Add `apply` to `NikuIcon`
+  - Add `WidthHeightMacro`
+
+Change:
+  - Add `Full Macro` conventions
+  - Use Parent Builder stack instead of direct setter to support apply parent styling
+
+Bux Fix:
+  - Fix wrong spelling of `actionPb`
+  - Use `Full Macro` on `Alert`
+  - n.showDialog now accepts any widget
+
 ## [2.0.0-rc.6] - 2022/02/19
 Change:
   - showNikuDialog now accepts any widget

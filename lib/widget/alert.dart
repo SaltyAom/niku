@@ -76,13 +76,13 @@ class NikuAlert extends StatelessWidget
     with
         NikuBuildMacro,
         UseQueryMacro<NikuAlert>,
-        ActionPaddingMacro,
+        ActionPaddingFullMacro,
         ApplyTitleTextMacro,
         ApplyContentTextMacro,
-        ButtonPaddingMacro,
+        ButtonPaddingFullMacro,
         ClipMacro,
-        ContentPaddingMacro,
-        InsetPaddingMacro {
+        ContentPaddingFullMacro,
+        InsetPaddingFullMacro {
   Widget? title;
   NikuEdgeInsets? titlePadding;
   NikuTextStyle? titleTextStyle;
@@ -273,6 +273,12 @@ class NikuAlert extends StatelessWidget
     clipBehavior = clipBehavior ?? clipBehavior;
     shape = shape ?? shape;
     scrollable = scrollable ?? scrollable;
+
+    $internalParent.addAll(v.$internalParent);
+  }
+
+  use(List<NikuAlert> v) {
+    v.forEach((e) => apply = e);
   }
 
   NikuAlert get copied => NikuAlert(

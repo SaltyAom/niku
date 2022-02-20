@@ -44,6 +44,11 @@ class NikuRow extends StatelessWidget
     crossAxisAlignment = v.crossAxisAlignment ?? crossAxisAlignment;
     textDirection = v.textDirection ?? textDirection;
     textBaseline = v.textBaseline ?? textBaseline;
+    $internalParent..addAll(v.$internalParent);
+  }
+
+  use(List<NikuRow> v) {
+    v.forEach((e) => apply = e);
   }
 
   NikuRow get copied => NikuRow(

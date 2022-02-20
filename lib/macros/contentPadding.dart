@@ -39,3 +39,47 @@ abstract class ContentPaddingMacro {
     });
   }
 }
+
+abstract class ContentPaddingFullMacro {
+  NikuEdgeInsets? contentPadding;
+
+  _initialize(Function callback) {
+    if (contentPadding == null) contentPadding = new NikuEdgeInsets.all(20);
+
+    print(contentPadding?.value);
+
+    callback();
+  }
+
+  set contentPt(double padding) =>
+      _initialize(() => contentPadding!.top = padding);
+  set contentPl(double padding) =>
+      _initialize(() => contentPadding!.left = padding);
+  set contentPb(double padding) =>
+      _initialize(() => contentPadding!.bottom = padding);
+  set contentPr(double padding) =>
+      _initialize(() => contentPadding!.right = padding);
+
+  set contentPx(double padding) {
+    _initialize(() {
+      contentPadding!.left = padding;
+      contentPadding!.right = padding;
+    });
+  }
+
+  set contentPy(double padding) {
+    _initialize(() {
+      contentPadding!.top = padding;
+      contentPadding!.bottom = padding;
+    });
+  }
+
+  set contentP(double padding) {
+    _initialize(() {
+      contentPadding!.top = padding;
+      contentPadding!.bottom = padding;
+      contentPadding!.left = padding;
+      contentPadding!.right = padding;
+    });
+  }
+}

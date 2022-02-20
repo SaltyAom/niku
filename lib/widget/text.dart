@@ -66,6 +66,12 @@ class NikuText extends StatelessWidget
     semanticsLabel = v.semanticsLabel ?? semanticsLabel;
     textWidthBasis = v.textWidthBasis ?? textWidthBasis;
     textHeightBehavior = v.textHeightBehavior ?? textHeightBehavior;
+
+    $internalParent..addAll(v.$internalParent);
+  }
+
+  use(List<NikuText> v) {
+    v.forEach((e) => apply = e);
   }
 
   NikuText get copied => NikuText(

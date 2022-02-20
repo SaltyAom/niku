@@ -17,13 +17,30 @@ class Styles {
         ..color = color));
 }
 
+class MyStyles {
+  static final title = n.Text("")
+    ..fontSize = 24
+    ..bold
+    ..useParent((v) => v
+      ..p = 12
+      ..bg = Colors.red);
+
+  static final green = n.Text("")
+    ..color = Colors.green
+    ..useParent((p0) => p0..rounded);
+}
+
 class Test extends StatelessWidget {
   @override
   build(context) {
     return Scaffold(
       body: n.Column([
         n.Column([
-          n.Text("Hi"),
+          n.Text("Hi")
+            ..use([
+              MyStyles.title,
+              MyStyles.green,
+            ]),
           n.Text("Ok"),
           n.Text("Ok"),
           n.Text("Ok"),

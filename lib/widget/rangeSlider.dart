@@ -159,6 +159,11 @@ class NikuRangeSlider extends StatelessWidget
         v.valueIndicatorTextStyle ?? valueIndicatorTextStyle;
     minThumbSeparation = v.minThumbSeparation ?? minThumbSeparation;
     thumbSelector = v.thumbSelector ?? thumbSelector;
+    $internalParent..addAll(v.$internalParent);
+  }
+
+  use(List<NikuRangeSlider> v) {
+    v.forEach((e) => apply = e);
   }
 
   SliderTheme get widget => SliderTheme(

@@ -179,6 +179,8 @@ extension PropertyBuilder on Niku {
   set boxDecoration(BoxDecoration v) =>
       _w = DecoratedBox(decoration: v, child: _w);
 
+  set decorated(BoxDecoration v) => _w = DecoratedBox(decoration: v, child: _w);
+
   set hero(String v) => _w = Hero(tag: v, child: _w);
   set heroTag(String v) => _w = Hero(tag: v, child: _w);
 
@@ -298,6 +300,40 @@ extension PropertyBuilder on Niku {
   set border(Border v) =>
       _w = DecoratedBox(decoration: BoxDecoration(border: v), child: _w);
 
+  useBorder({
+    Color? color,
+    double? width,
+    BorderStyle? style,
+  }) =>
+      _w = DecoratedBox(
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: color ?? Colors.transparent,
+            width: width ?? 0,
+            style: style ?? BorderStyle.solid,
+          ),
+        ),
+        child: _w,
+      );
+
+  useRoundedBorder({
+    double? rounded,
+    Color? color,
+    double? width,
+    BorderStyle? style,
+  }) =>
+      _w = DecoratedBox(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(rounded ?? 99999)),
+          border: Border.all(
+            color: color ?? Colors.transparent,
+            width: width ?? 0,
+            style: style ?? BorderStyle.solid,
+          ),
+        ),
+        child: _w,
+      );
+
   set backdropFilter(ImageFilter v) =>
       _w = BackdropFilter(filter: v, child: _w);
 
@@ -398,7 +434,6 @@ extension PropertyBuilder on Niku {
       );
 
   void get scrollable => _w = SingleChildScrollView(child: _w);
-  void get scrollableX => _w = SingleChildScrollView(child: _w);
 
   void useScrollView({
     ScrollController? controller,
@@ -426,6 +461,8 @@ extension PropertyBuilder on Niku {
         visible: visibility,
         child: _w,
       );
+
+  get hidden => _w = Visibility(child: _w, visible: false);
 
   void useChild(Widget Function(Niku child) builder) => _w = builder(_w.niku);
 

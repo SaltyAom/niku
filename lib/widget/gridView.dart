@@ -81,6 +81,11 @@ class NikuGridView extends StatelessWidget
         v.keyboardDismissBehavior ?? keyboardDismissBehavior;
     restorationId = v.restorationId ?? restorationId;
     clipBehavior = v.clipBehavior ?? clipBehavior;
+    $internalParent..addAll(v.$internalParent);
+  }
+
+  use(List<NikuGridView> v) {
+    v.forEach((e) => apply = e);
   }
 
   NikuGridView get copied => NikuGridView(

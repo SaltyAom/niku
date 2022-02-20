@@ -33,6 +33,12 @@ class NikuStack extends StatelessWidget
     textDirection = v.textDirection ?? textDirection;
     fit = v.fit ?? fit;
     clipBehavior = v.clipBehavior ?? clipBehavior;
+
+    $internalParent..addAll(v.$internalParent);
+  }
+
+  use(List<NikuStack> v) {
+    v.forEach((e) => apply = e);
   }
 
   NikuStack get copied => NikuStack(

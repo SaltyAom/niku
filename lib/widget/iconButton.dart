@@ -126,6 +126,11 @@ class NikuIconButton extends StatelessWidget
     tooltip = v.tooltip ?? tooltip;
     enableFeedback = v.enableFeedback ?? enableFeedback;
     constraints = v.constraints ?? constraints;
+    $internalParent..addAll(v.$internalParent);
+  }
+
+  use(List<NikuIconButton> v) {
+    v.forEach((e) => apply = e);
   }
 
   NikuIconButton get copied => NikuIconButton(

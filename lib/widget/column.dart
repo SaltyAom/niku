@@ -44,6 +44,11 @@ class NikuColumn extends StatelessWidget
     crossAxisAlignment = v.crossAxisAlignment ?? crossAxisAlignment;
     textDirection = v.textDirection ?? textDirection;
     textBaseline = v.textBaseline ?? textBaseline;
+    $internalParent..addAll(v.$internalParent);
+  }
+
+  use(List<NikuColumn> v) {
+    v.forEach((e) => apply = e);
   }
 
   NikuColumn get copied => NikuColumn(

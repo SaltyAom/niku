@@ -20,6 +20,21 @@ class NikuIcon extends StatelessWidget
     this.textDirection,
   }) : super(key: key);
 
+  set apply(NikuIcon? v) {
+    if (v == null) return;
+
+    size = v.size ?? size;
+    color = v.color ?? color;
+    semanticLabel = v.semanticLabel ?? semanticLabel;
+    textDirection = v.textDirection ?? textDirection;
+
+    $internalParent..addAll(v.$internalParent);
+  }
+
+  use(List<NikuIcon> v) {
+    v.forEach((e) => apply = e);
+  }
+
   NikuIcon get copied => NikuIcon(
         icon,
         key: key,

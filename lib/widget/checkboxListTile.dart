@@ -94,6 +94,11 @@ class NikuCheckboxListTile extends StatelessWidget
     highlightColor = v.highlightColor ?? highlightColor;
     hoverColor = v.hoverColor ?? hoverColor;
     focusColor = v.focusColor ?? focusColor;
+    $internalParent..addAll(v.$internalParent);
+  }
+
+  use(List<NikuCheckboxListTile> v) {
+    v.forEach((e) => apply = e);
   }
 
   NikuCheckboxListTile get copied => NikuCheckboxListTile(

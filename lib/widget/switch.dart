@@ -219,6 +219,12 @@ class NikuSwitch extends StatelessWidget
     thumbColorState = e.thumbColorState ?? thumbColorState;
     trackColorState = e.trackColorState ?? trackColorState;
     overlayColorState = e.overlayColorState ?? overlayColorState;
+
+    $internalParent..addAll(e.$internalParent);
+  }
+
+  use(List<NikuSwitch> v) {
+    v.forEach((e) => apply = e);
   }
 
   NikuSwitch get copied => NikuSwitch(

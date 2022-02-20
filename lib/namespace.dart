@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart' show BuildContext;
+import 'package:flutter/material.dart' show BuildContext, Widget;
 
 import 'niku.dart';
 import 'widget/niku.dart' as N;
@@ -44,7 +44,7 @@ typedef TextStyle = NikuTextStyle;
 
 Future<void> showDialog({
   required BuildContext context,
-  required NikuAlert Function(BuildContext) builder,
+  required Widget Function(BuildContext) builder,
   String? barrierLabel,
   bool useRootNavigator = true,
   bool? barrierDismissible,

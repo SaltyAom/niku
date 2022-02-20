@@ -59,6 +59,11 @@ class NikuPopupMenuButton<T> extends StatelessWidget
     color = v.color ?? color;
     enableFeedback = v.enableFeedback ?? enableFeedback;
     iconSize = v.iconSize ?? iconSize;
+    $internalParent..addAll(v.$internalParent);
+  }
+
+  use(List<NikuPopupMenuButton> v) {
+    v.forEach((e) => apply = e);
   }
 
   NikuPopupMenuButton<T> get copied => NikuPopupMenuButton<T>(

@@ -344,6 +344,12 @@ class NikuSlider extends StatelessWidget
     valueIndicatorTextStyle?.apply = v.valueIndicatorTextStyle;
     minThumbSeparation = v.minThumbSeparation ?? minThumbSeparation;
     thumbSelector = v.thumbSelector ?? thumbSelector;
+
+    $internalParent..addAll(v.$internalParent);
+  }
+
+  use(List<NikuSlider> v) {
+    v.forEach((e) => apply = e);
   }
 
   SliderTheme get widget => SliderTheme(

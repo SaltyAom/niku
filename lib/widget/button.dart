@@ -196,6 +196,11 @@ class NikuButton extends StatelessWidget
     icon = v.icon ?? icon;
     label = v.label ?? label;
     enable = v.enable;
+    $internalParent..addAll(v.$internalParent);
+  }
+
+  use(List<NikuButton> v) {
+    v.forEach((e) => apply = e);
   }
 
   NikuButton get copied => NikuButton(

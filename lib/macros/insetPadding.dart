@@ -39,3 +39,46 @@ abstract class InsetPaddingMacro {
     });
   }
 }
+
+abstract class InsetPaddingFullMacro {
+  NikuEdgeInsets? insetPadding;
+
+  _initialize(Function callback) {
+    if (insetPadding == null) insetPadding = new NikuEdgeInsets.all(20);
+
+    print(insetPadding?.value);
+
+    callback();
+  }
+
+  set insetPt(double padding) => _initialize(() => insetPadding!.top = padding);
+  set insetPl(double padding) =>
+      _initialize(() => insetPadding!.left = padding);
+  set insetPb(double padding) =>
+      _initialize(() => insetPadding!.bottom = padding);
+  set insetPr(double padding) =>
+      _initialize(() => insetPadding!.right = padding);
+
+  set insetPx(double padding) {
+    _initialize(() {
+      insetPadding!.left = padding;
+      insetPadding!.right = padding;
+    });
+  }
+
+  set insetPy(double padding) {
+    _initialize(() {
+      insetPadding!.top = padding;
+      insetPadding!.bottom = padding;
+    });
+  }
+
+  set insetP(double padding) {
+    _initialize(() {
+      insetPadding!.top = padding;
+      insetPadding!.bottom = padding;
+      insetPadding!.left = padding;
+      insetPadding!.right = padding;
+    });
+  }
+}

@@ -4,22 +4,37 @@ import '../widget/niku.dart';
 import '../extra/on.dart';
 
 abstract class NikuBuildMacro {
-  Widget? _parent;
-  Widget useNiku(Widget Function(Niku) cb) => _parent = cb(Niku(widget));
-  Widget useParent(Widget Function(Niku) cb) => _parent = cb(Niku(widget));
+  List<Widget Function(Niku)> _parent = [];
+
+  void useNiku(Widget Function(Niku) cb) {
+    useParent(cb);
+  }
+
+  void useParent(Widget Function(Niku) cb) =>
+      _parent.add((Niku widget) => cb(widget));
+
+  List<Widget Function(Niku)> get $internalParent => _parent;
 
   set on(List<dynamic> dependencies) =>
-      _parent = Niku(NikuOn(() => widget, dependencies));
+      _parent.add((w) => Niku(NikuOn(() => w, dependencies)));
 
   List<dynamic> get on {
-    _parent = Niku(NikuOn(() => widget, []));
+    _parent.add((w) => Niku(NikuOn(() => w, [])));
 
     return [];
   }
 
-  void get freezed => _parent = Niku(NikuOn(() => widget, []));
+  void get freezed => _parent.add((w) => Niku(NikuOn(() => w, [])));
 
   Widget get widget => SizedBox.shrink();
 
-  Widget build(context) => _parent ?? widget;
+  Widget build(context) {
+    Widget composed = widget;
+
+    _parent.forEach((wrap) {
+      composed = wrap(composed is Niku ? composed as Niku : composed.niku);
+    });
+
+    return composed;
+  }
 }

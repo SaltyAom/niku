@@ -70,6 +70,11 @@ class NikuCheckbox extends StatelessWidget
     autofocus = v.autofocus ?? autofocus;
     shape = v.shape ?? shape;
     side = v.side ?? side;
+    $internalParent..addAll(v.$internalParent);
+  }
+
+  use(List<NikuCheckbox> v) {
+    v.forEach((e) => apply = e);
   }
 
   NikuCheckbox get copied => NikuCheckbox(

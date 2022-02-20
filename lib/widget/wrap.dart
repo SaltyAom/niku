@@ -51,6 +51,12 @@ class NikuWrap extends StatelessWidget
     this.textDirection = v.textDirection ?? textDirection;
     this.verticalDirection = v.verticalDirection ?? verticalDirection;
     this.clipBehavior = v.clipBehavior ?? clipBehavior;
+
+    $internalParent..addAll(v.$internalParent);
+  }
+
+  use(List<NikuWrap> v) {
+    v.forEach((e) => apply = e);
   }
 
   NikuWrap get copied => NikuWrap(

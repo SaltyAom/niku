@@ -107,6 +107,12 @@ class NikuSelectableText extends StatelessWidget
     textWidthBasis = v.textWidthBasis ?? textWidthBasis;
     textHeightBehavior = v.textHeightBehavior ?? textHeightBehavior;
     textHeightBehavior = v.textHeightBehavior ?? textHeightBehavior;
+
+    $internalParent..addAll(v.$internalParent);
+  }
+
+  use(List<NikuSelectableText> v) {
+    v.forEach((e) => apply = e);
   }
 
   NikuSelectableText get copied => NikuSelectableText(
