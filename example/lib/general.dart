@@ -31,7 +31,7 @@ class Styles {
       ..bg = Colors.blue.shade50
       ..rounded = 8);
 
-  static final roundedTitle = Styles.title.copied..apply = rounded;
+  static final roundedTitle = n.Text("")..use([title, rounded]);
 
   static final centerCol = n.Column([])
     ..mainCenter
@@ -44,7 +44,7 @@ class InheritsParentBuilder extends StatelessWidget {
   build(context) {
     return Scaffold(
       body: n.Column([
-        n.Text("Hello Niku")..apply = Styles.roundedTitle,
+        n.Text("Niku Style Sheet")..apply = Styles.roundedTitle,
       ])
         ..apply = Styles.centerCol,
     );
