@@ -1,3 +1,23 @@
+## [2.0.0] - 2022/02/21
+Base on 2.0.0-rc.8
+
+Simply an entire rewrite, read more at [version 2 introduction](https://medium.com/@saltyaom/niku-2-new-fresh-restart-5a3c4270cc25)
+
+## [2.0.0-compat.0] - 2022/02/21
+Base on 2.0.0-rc.8
+
+A compatability version for working with both v1 and v2 for gradually migrate from v1.
+
+To gradually migrate from v1, simply replace all:
+```dart
+// From
+import 'package:niku/niku.dart';
+// into
+import 'package:niku/v1/niku.dart';
+```
+
+You can easily use IDE like VS Code to find and replace all `package:niku/` with `package:niku/v1/` then it should work just fine, gradually migrate from v1.
+
 ## [2.0.0-rc.8] - 2022/02/20
 Bux Fix:
   - Add `copied` to NikuImage, NikuSlider, NikuRangeSlider.
