@@ -6,7 +6,7 @@ Simply an entire rewrite, read more at [version 2 introduction](https://medium.c
 ## [2.0.0-compat.0] - 2022/02/21
 Base on 2.0.0-rc.8
 
-A compatability version for working with both v1 and v2 for gradually migrate from v1.
+A compatibility version for working with both v1 and v2 for gradually migrating from v1.
 
 To gradually migrate from v1, simply replace all:
 ```dart

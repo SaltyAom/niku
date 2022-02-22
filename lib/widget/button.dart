@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:niku/proxy/proxy.dart';
 
 import '../objects/objects.dart';
 import '../macros/macros.dart';
@@ -11,7 +12,10 @@ class NikuButton extends StatelessWidget
         NikuBuildMacro,
         UseQueryMacro<NikuButton>,
         ApplyButtonStyleMacro,
-        ClipMacro {
+        ClipMacro,
+        ButtonStyleProxy,
+        ButtonStylePaddingProxy,
+        ButtonStyleTextStyleProxy {
   Widget child;
 
   Widget? icon;
