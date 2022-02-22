@@ -10,20 +10,58 @@ class Test extends StatelessWidget {
   build(context) {
     return Scaffold(
       body: n.Column([
-        n.Button(Text("2.0 Heaven and Earth"))
+        // * 1
+        Container(
+          margin: const EdgeInsets.symmetric(vertical: 6),
+          child: OutlinedButton(
+            child: Text("Native Flutter"),
+            onPressed: () {},
+            style: ButtonStyle(
+              padding: MaterialStateProperty.all(
+                EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+              ),
+              foregroundColor: MaterialStateProperty.all(Colors.red),
+              textStyle: MaterialStateProperty.all(
+                TextStyle(
+                  fontSize: 24,
+                  color: Colors.red,
+                ),
+              ),
+              overlayColor: MaterialStateProperty.all(Colors.red.shade50),
+              side: MaterialStateProperty.all(BorderSide(color: Colors.red)),
+              shape: MaterialStateProperty.all(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(99999),
+                ),
+              ),
+            ),
+          ),
+        ),
+        // * 2
+        n.Button.outlined(Text("2.0 Heaven and Earth"))
           ..onPressed = () {}
           ..useTextStyle((v) => v
-            ..color = Colors.red
+            ..color = Colors.amber
             ..fontSize = 24)
           ..useButtonStyle((v) => v
-            ..splash = Colors.red.shade50
-            ..rounded),
-        n.Button(Text("2.1 Ga1ahad"))
+            ..px = 24
+            ..py = 12
+            ..splash = Colors.amber.shade50
+            ..border = BorderSide(color: Colors.amber)
+            ..rounded)
+          ..useParent((v) => v..my = 6),
+        // * 3
+        n.Button.outlined(Text("2.1 Ga1ahad"))
           ..onPressed = () {}
           ..fontSize = 24
           ..color = Colors.blue
           ..splash = Colors.blue.shade50
+          ..border = BorderSide(color: Colors.blue)
+          ..px = 24
+          ..py = 12
           ..rounded
+          ..my = 6
+        // ..border = BorderSide()
       ])
         ..mainCenter
         ..crossCenter

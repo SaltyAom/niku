@@ -32,23 +32,22 @@ extension TransformNikuParent on Widget {
 }
 
 extension PropertyBuilder on Niku {
-  set margin(EdgeInsets v) => _w = Container(margin: v, child: _w);
+  set margin(EdgeInsets v) => _w = Padding(padding: v, child: _w);
   set nikuMargin(UseNikuCallback<NikuEdgeInsets> cb) =>
-      _w = Container(margin: cb(NikuEdgeInsets()).value, child: _w);
+      _w = Padding(padding: cb(NikuEdgeInsets()).value, child: _w);
 
-  set m(double v) => _w = Container(margin: EdgeInsets.all(v), child: _w);
+  set m(double v) => _w = Padding(padding: EdgeInsets.all(v), child: _w);
   set mx(double v) =>
-      _w = Container(margin: EdgeInsets.symmetric(horizontal: v), child: _w);
+      _w = Padding(padding: EdgeInsets.symmetric(horizontal: v), child: _w);
   set my(double v) =>
-      _w = Container(margin: EdgeInsets.symmetric(vertical: v), child: _w);
-  set mt(double v) =>
-      _w = Container(margin: EdgeInsets.only(top: v), child: _w);
+      _w = Padding(padding: EdgeInsets.symmetric(vertical: v), child: _w);
+  set mt(double v) => _w = Padding(padding: EdgeInsets.only(top: v), child: _w);
   set mb(double v) =>
-      _w = Container(margin: EdgeInsets.only(bottom: v), child: _w);
+      _w = Padding(padding: EdgeInsets.only(bottom: v), child: _w);
   set ml(double v) =>
-      _w = Container(margin: EdgeInsets.only(left: v), child: _w);
+      _w = Padding(padding: EdgeInsets.only(left: v), child: _w);
   set mr(double v) =>
-      _w = Container(margin: EdgeInsets.only(right: v), child: _w);
+      _w = Padding(padding: EdgeInsets.only(right: v), child: _w);
 
   set padding(EdgeInsets v) => _w = Padding(padding: v, child: _w);
   set nikuPadding(UseNikuCallback<NikuEdgeInsets> cb) =>
