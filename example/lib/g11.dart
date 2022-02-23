@@ -13,7 +13,7 @@ class Test extends StatelessWidget {
         // * 1
         Container(
           margin: const EdgeInsets.symmetric(vertical: 6),
-          child: OutlinedButton(
+          child: TextButton(
             child: Text("Native Flutter"),
             onPressed: () {},
             style: ButtonStyle(
@@ -27,8 +27,8 @@ class Test extends StatelessWidget {
                   color: Colors.red,
                 ),
               ),
-              overlayColor: MaterialStateProperty.all(Colors.red.shade50),
-              side: MaterialStateProperty.all(BorderSide(color: Colors.red)),
+              overlayColor: MaterialStateProperty.all(Colors.red.shade100),
+              backgroundColor: MaterialStateProperty.all(Colors.red.shade50),
               shape: MaterialStateProperty.all(
                 RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(99999),
@@ -38,7 +38,7 @@ class Test extends StatelessWidget {
           ),
         ),
         // * 2
-        n.Button.outlined(Text("2.0 Heaven and Earth"))
+        n.Button(Text("2.0 Heaven and Earth"))
           ..onPressed = () {}
           ..useTextStyle((v) => v
             ..color = Colors.amber
@@ -46,34 +46,37 @@ class Test extends StatelessWidget {
           ..useButtonStyle((v) => v
             ..px = 24
             ..py = 12
-            ..splash = Colors.amber.shade50
-            ..border = BorderSide(color: Colors.amber)
+            ..bg = Colors.amber.shade50
+            ..splash = Colors.amber.shade100
             ..rounded)
           ..useParent((v) => v..my = 6),
         // * 3
-        n.Button.outlined(Text("2.1 Ga1ahad"))
+        n.Button(Text("2.1 Ga1ahad"))
           ..onPressed = () {}
           ..fontSize = 24
-          ..color = Colors.blue
-          ..splash = Colors.blue.shade50
-          ..border = BorderSide(color: Colors.blue)
+          ..useColor(base: Colors.blue, pressed: Colors.red)
+          ..bg = Colors.blue.shade50
+          ..splash = Colors.blue.shade100
           ..px = 24
           ..py = 12
           ..rounded
           ..my = 6,
-        n.TextFormField("2.2 Ga1ahad")
-          ..fontSize = 21
-          ..color = Colors.red
+        n.TextFormField("2.1 Ga1ahad")
+          ..fontSize = 18
+          ..color = Colors.grey.shade800
           ..outlined
           ..rounded
           ..bg = Colors.grey.shade200
-          ..allBorderColor = Colors.grey.shade200
+          ..borderColor = Colors.transparent
           ..neverFloat
           ..p = 16
+          ..mt = 20
       ])
         ..mainCenter
         ..crossCenter
-        ..useParent((v) => v..w100),
+        ..useParent((v) => v
+          ..w100
+          ..px = 16),
     );
   }
 }

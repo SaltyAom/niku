@@ -240,7 +240,7 @@ extension TextFormFieldInputDecorationProxy on NikuTextFormField {
   _initializeAllBorder() {
     _init();
 
-    if (decoration?.border == null) decoration?.border = NikuInputBorder();
+    if (decoration?.baseBorder == null) decoration?.border = NikuInputBorder();
     if (decoration?.enabledBorder == null)
       decoration?.enabledBorder = NikuInputBorder();
     if (decoration?.disabledBorder == null)
@@ -256,7 +256,7 @@ extension TextFormFieldInputDecorationProxy on NikuTextFormField {
   set allBorder(NikuInputBorder? value) {
     _initializeAllBorder();
 
-    decoration?.border!.apply = value;
+    decoration?.baseBorder!.apply = value;
     decoration?.enabledBorder!.apply = value;
     decoration?.disabledBorder!.apply = value;
     decoration?.focusedBorder!.apply = value;
@@ -267,7 +267,7 @@ extension TextFormFieldInputDecorationProxy on NikuTextFormField {
   set allBorderWidth(double? width) {
     _initializeAllBorder();
 
-    decoration?.border!.width = width;
+    decoration?.baseBorder!.width = width;
     decoration?.enabledBorder!.width = width;
     decoration?.disabledBorder!.width = width;
     decoration?.focusedBorder!.width = width;
@@ -275,10 +275,10 @@ extension TextFormFieldInputDecorationProxy on NikuTextFormField {
     decoration?.errorBorder!.width = width;
   }
 
-  set allBorderColor(Color? color) {
+  set borderColor(Color? color) {
     _initializeAllBorder();
 
-    decoration?.border!.color = color;
+    decoration?.baseBorder!.color = color;
     decoration?.enabledBorder!.color = color;
     decoration?.disabledBorder!.color = color;
     decoration?.focusedBorder!.color = color;
@@ -289,7 +289,7 @@ extension TextFormFieldInputDecorationProxy on NikuTextFormField {
   set borderRadius(double? radius) {
     _initializeAllBorder();
 
-    decoration?.border!.radius = radius;
+    decoration?.baseBorder!.radius = radius;
     decoration?.enabledBorder!.radius = radius;
     decoration?.disabledBorder!.radius = radius;
     decoration?.focusedBorder!.radius = radius;
@@ -306,7 +306,7 @@ extension TextFormFieldInputDecorationProxy on NikuTextFormField {
   double get rounded {
     _initializeAllBorder();
 
-    decoration?.border!.radius = 99999;
+    decoration?.baseBorder!.radius = 99999;
     decoration?.enabledBorder!.radius = 9999;
     decoration?.disabledBorder!.radius = 9999;
     decoration?.focusedBorder!.radius = 9999;
@@ -319,7 +319,7 @@ extension TextFormFieldInputDecorationProxy on NikuTextFormField {
   set rounded(double v) {
     _initializeAllBorder();
 
-    decoration?.border!.radius = v;
+    decoration?.baseBorder!.radius = v;
     decoration?.enabledBorder!.radius = v;
     decoration?.disabledBorder!.radius = v;
     decoration?.focusedBorder!.radius = v;
@@ -338,7 +338,7 @@ extension TextFormFieldInputDecorationProxy on NikuTextFormField {
   ) {
     _initializeAllBorder();
 
-    decoration?.border = all?.asNiku ?? decoration?.border;
+    decoration?.baseBorder = all?.asNiku ?? decoration?.baseBorder;
     decoration?.enabledBorder = enabled?.asNiku ?? decoration?.enabledBorder;
     decoration?.disabledBorder = disabled?.asNiku ?? decoration?.disabledBorder;
     decoration?.focusedBorder = focused?.asNiku ?? decoration?.focusedBorder;
@@ -358,7 +358,7 @@ extension TextFormFieldInputDecorationProxy on NikuTextFormField {
   ) {
     _initializeAllBorder();
 
-    decoration?.border = all ?? decoration?.border!;
+    decoration?.baseBorder = all ?? decoration?.baseBorder!;
     decoration?.enabledBorder = enabled ?? decoration?.enabledBorder!;
     decoration?.disabledBorder = disabled ?? decoration?.disabledBorder!;
     decoration?.focusedBorder = focused ?? decoration?.focusedBorder!;
@@ -370,7 +370,7 @@ extension TextFormFieldInputDecorationProxy on NikuTextFormField {
   void get underline {
     _initializeAllBorder();
 
-    decoration?.border!.type = NikuInputBorderType.Underline;
+    decoration?.baseBorder!.type = NikuInputBorderType.Underline;
     decoration?.enabledBorder!.type = NikuInputBorderType.Underline;
     decoration?.disabledBorder!.type = NikuInputBorderType.Underline;
     decoration?.focusedBorder!.type = NikuInputBorderType.Underline;
@@ -381,7 +381,7 @@ extension TextFormFieldInputDecorationProxy on NikuTextFormField {
   void get outlined {
     _initializeAllBorder();
 
-    decoration?.border!.type = NikuInputBorderType.Outlined;
+    decoration?.baseBorder!.type = NikuInputBorderType.Outlined;
     decoration?.enabledBorder!.type = NikuInputBorderType.Outlined;
     decoration?.disabledBorder!.type = NikuInputBorderType.Outlined;
     decoration?.focusedBorder!.type = NikuInputBorderType.Outlined;
@@ -400,7 +400,7 @@ extension TextFormFieldInputDecorationProxy on NikuTextFormField {
   ) {
     _initializeAllBorder();
 
-    decoration?.border!.width = all ?? decoration?.border?.width;
+    decoration?.baseBorder!.width = all ?? decoration?.baseBorder?.width;
     decoration?.enabledBorder!.width =
         enabled ?? decoration?.enabledBorder?.width;
     decoration?.disabledBorder!.width =
@@ -415,8 +415,8 @@ extension TextFormFieldInputDecorationProxy on NikuTextFormField {
   set borderWidth(double width) {
     _init();
 
-    if (decoration?.border == null) border = NikuInputBorder();
-    decoration?.border?.width = width;
+    if (decoration?.baseBorder == null) border = NikuInputBorder();
+    decoration?.baseBorder?.width = width;
   }
 
   set enabledBorderWidth(double width) {
@@ -466,7 +466,7 @@ extension TextFormFieldInputDecorationProxy on NikuTextFormField {
   ) {
     _initializeAllBorder();
 
-    decoration?.border!.color = all ?? decoration?.border?.color;
+    decoration?.baseBorder!.color = all ?? decoration?.baseBorder?.color;
     decoration?.enabledBorder!.color =
         enabled ?? decoration?.enabledBorder?.color;
     decoration?.disabledBorder!.color =
@@ -478,11 +478,11 @@ extension TextFormFieldInputDecorationProxy on NikuTextFormField {
     decoration?.errorBorder!.color = error ?? decoration?.errorBorder?.color;
   }
 
-  set borderColor(Color color) {
+  set baseBorderColor(Color color) {
     _init();
 
-    if (decoration?.border == null) border = NikuInputBorder();
-    decoration?.border?.color = color;
+    if (decoration?.baseBorder == null) border = NikuInputBorder();
+    decoration?.baseBorder?.color = color;
   }
 
   set enabledBorderColor(Color color) {

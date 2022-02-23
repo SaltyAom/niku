@@ -3,6 +3,12 @@ Feature:
   - Text Style Proxy, Button Proxy, TextFormField Proxy
   - Add `ConstraintsMacro` to `NikuInputDecoration`
   - Add `useTextStyle` to `DropdownButton`
+  - Add State Utility Hooks to `NikuButton`
+  - Add `color` setter to `NikuButtonStyle`
+
+Change:
+  - `border` is now `baseBorder`, and `allBorder` is now `border`
+  - margin property now use `Padding` instead of `Container` because that's how native Flutter doing it. Yes, margin is actually padding in Flutter.
 
 ## [2.0.0] - 2022/02/21
 Base on 2.0.0-rc.8

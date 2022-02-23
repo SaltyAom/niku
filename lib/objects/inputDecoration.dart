@@ -46,7 +46,7 @@ class NikuInputDecoration
   NikuInputBorder? focusedErrorBorder;
   NikuInputBorder? disabledBorder;
   NikuInputBorder? enabledBorder;
-  NikuInputBorder? border;
+  NikuInputBorder? baseBorder;
   bool? enabled;
   String? semanticCounterText;
   bool? alignLabelWithHint;
@@ -94,7 +94,7 @@ class NikuInputDecoration
     this.focusedErrorBorder,
     this.disabledBorder,
     this.enabledBorder,
-    this.border,
+    this.baseBorder,
     this.enabled,
     this.semanticCounterText,
     this.alignLabelWithHint,
@@ -102,7 +102,7 @@ class NikuInputDecoration
   });
 
   _initializeAllBorder() {
-    if (border == null) border = NikuInputBorder();
+    if (baseBorder == null) baseBorder = NikuInputBorder();
     if (enabledBorder == null) enabledBorder = NikuInputBorder();
     if (disabledBorder == null) disabledBorder = NikuInputBorder();
     if (focusedErrorBorder == null) focusedErrorBorder = NikuInputBorder();
@@ -110,10 +110,10 @@ class NikuInputDecoration
     if (errorBorder == null) errorBorder = NikuInputBorder();
   }
 
-  set allBorder(NikuInputBorder? value) {
+  set border(NikuInputBorder? value) {
     _initializeAllBorder();
 
-    border!.apply = value;
+    baseBorder!.apply = value;
     enabledBorder!.apply = value;
     disabledBorder!.apply = value;
     focusedBorder!.apply = value;
@@ -121,10 +121,10 @@ class NikuInputDecoration
     errorBorder!.apply = value;
   }
 
-  set allBorderWidth(double? width) {
+  set baseBorderWidth(double? width) {
     _initializeAllBorder();
 
-    border!.width = width;
+    baseBorder!.width = width;
     enabledBorder!.width = width;
     disabledBorder!.width = width;
     focusedBorder!.width = width;
@@ -132,10 +132,10 @@ class NikuInputDecoration
     errorBorder!.width = width;
   }
 
-  set allBorderColor(Color? color) {
+  set borderColor(Color? color) {
     _initializeAllBorder();
 
-    border!.color = color;
+    baseBorder!.color = color;
     enabledBorder!.color = color;
     disabledBorder!.color = color;
     focusedBorder!.color = color;
@@ -151,7 +151,7 @@ class NikuInputDecoration
   set borderRadius(double? radius) {
     _initializeAllBorder();
 
-    border!.radius = radius;
+    baseBorder!.radius = radius;
     enabledBorder!.radius = radius;
     disabledBorder!.radius = radius;
     focusedBorder!.radius = radius;
@@ -162,7 +162,7 @@ class NikuInputDecoration
   double get rounded {
     _initializeAllBorder();
 
-    border!.radius = 99999;
+    baseBorder!.radius = 99999;
     enabledBorder!.radius = 9999;
     disabledBorder!.radius = 9999;
     focusedBorder!.radius = 9999;
@@ -175,7 +175,7 @@ class NikuInputDecoration
   set rounded(double v) {
     _initializeAllBorder();
 
-    border!.radius = v;
+    baseBorder!.radius = v;
     enabledBorder!.radius = v;
     disabledBorder!.radius = v;
     focusedBorder!.radius = v;
@@ -194,7 +194,7 @@ class NikuInputDecoration
   ) {
     _initializeAllBorder();
 
-    border = all?.asNiku ?? border;
+    baseBorder = all?.asNiku ?? baseBorder;
     enabledBorder = enabled?.asNiku ?? enabledBorder;
     disabledBorder = disabled?.asNiku ?? disabledBorder;
     focusedBorder = focused?.asNiku ?? focusedBorder;
@@ -213,7 +213,7 @@ class NikuInputDecoration
   ) {
     _initializeAllBorder();
 
-    border = all ?? border!;
+    baseBorder = all ?? baseBorder!;
     enabledBorder = enabled ?? enabledBorder!;
     disabledBorder = disabled ?? disabledBorder!;
     focusedBorder = focused ?? focusedBorder!;
@@ -224,7 +224,7 @@ class NikuInputDecoration
   void get underline {
     _initializeAllBorder();
 
-    border!.type = NikuInputBorderType.Underline;
+    baseBorder!.type = NikuInputBorderType.Underline;
     enabledBorder!.type = NikuInputBorderType.Underline;
     disabledBorder!.type = NikuInputBorderType.Underline;
     focusedBorder!.type = NikuInputBorderType.Underline;
@@ -235,7 +235,7 @@ class NikuInputDecoration
   void get outlined {
     _initializeAllBorder();
 
-    border!.type = NikuInputBorderType.Outlined;
+    baseBorder!.type = NikuInputBorderType.Outlined;
     enabledBorder!.type = NikuInputBorderType.Outlined;
     disabledBorder!.type = NikuInputBorderType.Outlined;
     focusedBorder!.type = NikuInputBorderType.Outlined;
@@ -254,7 +254,7 @@ class NikuInputDecoration
   ) {
     _initializeAllBorder();
 
-    border!.width = all ?? border?.width;
+    baseBorder!.width = all ?? baseBorder?.width;
     enabledBorder!.width = enabled ?? enabledBorder?.width;
     disabledBorder!.width = disabled ?? disabledBorder?.width;
     focusedBorder!.width = focused ?? focusedBorder?.width;
@@ -263,8 +263,8 @@ class NikuInputDecoration
   }
 
   set borderWidth(double width) {
-    if (border == null) border = NikuInputBorder();
-    border?.width = width;
+    if (baseBorder == null) baseBorder = NikuInputBorder();
+    baseBorder?.width = width;
   }
 
   set enabledBorderWidth(double width) {
@@ -303,7 +303,7 @@ class NikuInputDecoration
   ) {
     _initializeAllBorder();
 
-    border!.color = all ?? border?.color;
+    baseBorder!.color = all ?? baseBorder?.color;
     enabledBorder!.color = enabled ?? enabledBorder?.color;
     disabledBorder!.color = disabled ?? disabledBorder?.color;
     focusedBorder!.color = focused ?? focusedBorder?.color;
@@ -311,9 +311,9 @@ class NikuInputDecoration
     errorBorder!.color = error ?? errorBorder?.color;
   }
 
-  set borderColor(Color color) {
-    if (border == null) border = NikuInputBorder();
-    border?.color = color;
+  set baseBorderColor(Color color) {
+    if (baseBorder == null) baseBorder = NikuInputBorder();
+    baseBorder?.color = color;
   }
 
   set enabledBorderColor(Color color) {
@@ -535,7 +535,7 @@ class NikuInputDecoration
     focusedErrorBorder = v.focusedErrorBorder ?? focusedErrorBorder;
     disabledBorder = v.disabledBorder ?? disabledBorder;
     enabledBorder = v.enabledBorder ?? enabledBorder;
-    border = v.border ?? border;
+    baseBorder = v.baseBorder ?? baseBorder;
     enabled = v.enabled ?? enabled;
     semanticCounterText = v.semanticCounterText ?? semanticCounterText;
     alignLabelWithHint = v.alignLabelWithHint ?? alignLabelWithHint;
@@ -584,7 +584,7 @@ class NikuInputDecoration
         focusedErrorBorder: focusedErrorBorder,
         disabledBorder: disabledBorder,
         enabledBorder: enabledBorder,
-        border: border,
+        baseBorder: baseBorder,
         enabled: enabled,
         semanticCounterText: semanticCounterText,
         alignLabelWithHint: alignLabelWithHint,
@@ -653,10 +653,10 @@ class NikuInputDecoration
                 ? enabledBorder!.outlined
                 : enabledBorder!.value)
             : null,
-        border: border != null
-            ? (border!.type == NikuInputBorderType.Outlined
-                ? border!.outlined
-                : border!.value)
+        border: baseBorder != null
+            ? (baseBorder!.type == NikuInputBorderType.Outlined
+                ? baseBorder!.outlined
+                : baseBorder!.value)
             : null,
         enabled: enabled ?? true,
         semanticCounterText: semanticCounterText,
@@ -709,7 +709,7 @@ extension TransformNikuInputDecoration on InputDecoration {
       focusedErrorBorder: focusedErrorBorder?.asNiku,
       disabledBorder: disabledBorder?.asNiku,
       enabledBorder: enabledBorder?.asNiku,
-      border: border?.asNiku,
+      baseBorder: border?.asNiku,
       enabled: enabled,
       semanticCounterText: semanticCounterText,
       alignLabelWithHint: alignLabelWithHint,
