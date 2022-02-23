@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:niku/macros/macros.dart';
 import 'package:niku/objects/textStyle.dart';
+import 'package:niku/proxy/textStyleProxy.dart';
 
 // ignore: must_be_immutable
 class NikuDropdownButton<T> extends StatelessWidget
@@ -9,7 +10,8 @@ class NikuDropdownButton<T> extends StatelessWidget
         NikuBuildMacro,
         UseQueryMacro<NikuDropdownButton>,
         ApplyTextMacro,
-        AlignmentDirectionalMacro {
+        AlignmentDirectionalMacro,
+        TextStyleProxy {
   List<DropdownMenuItem<T>>? items;
   List<T>? itemsValue;
   T? value;
@@ -66,6 +68,10 @@ class NikuDropdownButton<T> extends StatelessWidget
     this.borderRadius,
     this.itemsValue,
   }) : super(key: key);
+
+  useTextStyle(NikuTextStyle Function(NikuTextStyle) v) {
+    style = v(style ?? NikuTextStyle());
+  }
 
   void get noUnderline {
     underline = SizedBox.shrink();

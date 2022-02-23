@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart' show CupertinoTextField;
 import 'package:flutter/services.dart';
+import 'package:niku/proxy/textStyleProxy.dart';
 
 import '../objects/objects.dart';
 import '../macros/macros.dart';
+import '../proxy/textStyleProxy.dart';
 
 // ignore: must_be_immutable
 class NikuTextFormField extends StatelessWidget
@@ -18,7 +20,8 @@ class NikuTextFormField extends StatelessWidget
         KeyboardTypeMacro,
         TextAlignMacro,
         TextCapitalizationMacro,
-        TextInputActionMacro {
+        TextInputActionMacro,
+        TextStyleProxy {
   TextEditingController? controller;
   String? initialValue;
   FocusNode? focusNode;

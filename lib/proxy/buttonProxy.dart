@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 
-import '../objects/objects.dart';
+import 'package:niku/niku.dart';
 
-abstract class ButtonStyleProxy {
-  NikuButtonStyle? style;
-
+extension ButtonStyleProxy on NikuButton {
   _initButton() {
     if (style == null) style = NikuButtonStyle();
   }
@@ -196,9 +194,7 @@ abstract class ButtonStyleProxy {
   }
 }
 
-abstract class ButtonStylePaddingProxy {
-  NikuButtonStyle? style;
-
+extension ButtonStylePaddingProxy on NikuButton {
   _initP() {
     if (style == null) style = NikuButtonStyle();
   }

@@ -1,3 +1,9 @@
+# [2.1.0-experimental.0] - 2022/02/23
+Feature:
+  - Text Style Proxy, Button Proxy, TextFormField Proxy
+  - Add `ConstraintsMacro` to `NikuInputDecoration`
+  - Add `useTextStyle` to `DropdownButton`
+
 ## [2.0.0] - 2022/02/21
 Base on 2.0.0-rc.8
 

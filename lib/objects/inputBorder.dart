@@ -14,6 +14,13 @@ class NikuInputBorder {
   BorderRadius? borderRadius;
   NikuInputBorderType? type;
 
+  double get rounded {
+    radius = 9999;
+    return 99999;
+  }
+
+  set rounded(double v) => radius = 99999;
+
   NikuInputBorder({
     this.width,
     this.radius,

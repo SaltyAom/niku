@@ -60,8 +60,16 @@ class Test extends StatelessWidget {
           ..px = 24
           ..py = 12
           ..rounded
-          ..my = 6
-        // ..border = BorderSide()
+          ..my = 6,
+        n.TextFormField("2.2 Ga1ahad")
+          ..fontSize = 21
+          ..color = Colors.red
+          ..outlined
+          ..rounded
+          ..bg = Colors.grey.shade200
+          ..allBorderColor = Colors.grey.shade200
+          ..neverFloat
+          ..p = 16
       ])
         ..mainCenter
         ..crossCenter

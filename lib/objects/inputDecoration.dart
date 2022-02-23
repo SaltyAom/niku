@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import '../macros/macros.dart';
 import '../objects/objects.dart';
 
-class NikuInputDecoration with ContentPaddingMacro, FloatingLabelBehaviorMacro {
+class NikuInputDecoration
+    with ContentPaddingMacro, ConstraintsMacro, FloatingLabelBehaviorMacro {
   Widget? icon;
   Widget? label;
   String? labelText;
@@ -142,6 +143,11 @@ class NikuInputDecoration with ContentPaddingMacro, FloatingLabelBehaviorMacro {
     errorBorder!.color = color;
   }
 
+  set bg(Color color) {
+    filled = true;
+    fillColor = color;
+  }
+
   set borderRadius(double? radius) {
     _initializeAllBorder();
 
@@ -151,6 +157,30 @@ class NikuInputDecoration with ContentPaddingMacro, FloatingLabelBehaviorMacro {
     focusedBorder!.radius = radius;
     focusedErrorBorder!.radius = radius;
     errorBorder!.radius = radius;
+  }
+
+  double get rounded {
+    _initializeAllBorder();
+
+    border!.radius = 99999;
+    enabledBorder!.radius = 9999;
+    disabledBorder!.radius = 9999;
+    focusedBorder!.radius = 9999;
+    focusedErrorBorder!.radius = 9999;
+    errorBorder!.radius = 9999;
+
+    return 99999;
+  }
+
+  set rounded(double v) {
+    _initializeAllBorder();
+
+    border!.radius = v;
+    enabledBorder!.radius = v;
+    disabledBorder!.radius = v;
+    focusedBorder!.radius = v;
+    focusedErrorBorder!.radius = v;
+    errorBorder!.radius = v;
   }
 
   void useBorder(
