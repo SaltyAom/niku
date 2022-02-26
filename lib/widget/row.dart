@@ -36,6 +36,11 @@ class NikuRow extends StatelessWidget
     this.textBaseline,
   }) : super(key: key);
 
+  void get center {
+    mainAxisAlignment = MainAxisAlignment.center;
+    crossAxisAlignment = CrossAxisAlignment.center;
+  }
+
   set apply(NikuRow? v) {
     if (v == null) return;
 

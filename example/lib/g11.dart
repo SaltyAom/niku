@@ -61,6 +61,18 @@ class Test extends StatelessWidget {
           ..py = 12
           ..rounded
           ..my = 6,
+        n.Button(n.Row([])
+          ..mainBetween
+          ..crossCenter)
+          ..onPressed = () {}
+          ..splash = Colors.grey.shade200
+          ..p = 0
+          ..color = Colors.black,
+        n.GridView.count()
+          ..children = [n.Text("1"), n.Text("1"), n.Text("1")]
+          ..grid = 3
+          ..aspectRatio = 16 / 9
+          ..shrinkWrap = true,
         n.TextFormField("2.1 Ga1ahad")
           ..fontSize = 18
           ..color = Colors.grey.shade800

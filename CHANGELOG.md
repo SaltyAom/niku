@@ -1,3 +1,11 @@
+# [2.1.0-experimental.1] - 2022/02/23
+Feature:
+  - Support all factory method for `NikuGridView`  
+
+Change:
+  - Remove function allocation from `_init` of `MapTextStyleMacro`
+  - Add `center` to `NikuColumn`, and `NikuRow`
+
 # [2.1.0-experimental.0] - 2022/02/23
 Feature:
   - Text Style Proxy, Button Proxy, TextFormField Proxy
