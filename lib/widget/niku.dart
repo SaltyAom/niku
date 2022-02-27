@@ -578,9 +578,24 @@ extension PropertyBuilder on Niku {
     useChild(
       (child) => Builder(
         builder: (context) => builder(
-          child,
+          child.build(context).niku,
           Theme.of(context).brightness == Brightness.dark,
         ),
+      ),
+    );
+  }
+
+  void useThemeSelector({
+    required Widget Function(Niku) light,
+    required Widget Function(Niku) dark,
+  }) {
+    useChild(
+      (child) => Builder(
+        builder: (context) => Theme.of(context).brightness == Brightness.dark
+            ? dark(child.build(context).niku)
+            : light(
+                child.build(context).niku,
+              ),
       ),
     );
   }

@@ -1,3 +1,7 @@
+# [2.1.0-experimental.3] - 2022/02/27
+Feature:
+  - Add `useThemeSelector` for declarative `useDarkMode`
+
 # [2.1.0-experimental.2] - 2022/02/27
 Breaking Change:
   - Deprecated required value of `TextFormField` in favor of `hint`.

@@ -20,8 +20,10 @@ class S {
   static final grouped = n.ListView()
     ..p = 0
     ..useParent((v) => v
-      ..useDarkMode(
-          (v, isDark) => v..bg = isDark ? Colors.grey.shade800 : Colors.white)
+      ..useThemeSelector(
+        light: (v) => v..bg = Colors.white,
+        dark: (v) => v..bg = Colors.black,
+      )
       ..rounded = 8
       ..p = 8);
 
@@ -139,22 +141,20 @@ class G11Comparison extends StatelessWidget {
           ..py = 12
           ..rounded
           ..my = 6,
-        n.Button(Text("Hi"))
-          ..onPressed = () {}
-          ..splash = Colors.grey.shade200
-          ..p = 0
-          ..color = Colors.black,
-        n.GridView.count()
-          ..children = [n.Text("1"), n.Text("1"), n.Text("1")]
-          ..grid = 3
-          ..aspectRatio = 16 / 9
-          ..shrinkWrap = true,
         n.TextFormField.hint("2.1 Ga1ahad")
           ..fontSize = 18
           ..color = Colors.grey.shade800
           ..outlined
           ..rounded
-          ..bg = Colors.grey.shade200
+          ..useThemeSelector(
+            context,
+            light: (v) => v
+              ..bg = Colors.grey.shade200
+              ..color = Colors.grey.shade800,
+            dark: (v) => v
+              ..bg = Colors.grey.shade800
+              ..color = Colors.grey.shade200,
+          )
           ..borderColor = Colors.transparent
           ..p = 16
           ..mt = 20
