@@ -22,6 +22,7 @@ typedef GridView = NikuGridView;
 typedef Icon = NikuIcon;
 typedef IconButton = NikuIconButton;
 typedef Image = NikuImage;
+typedef ListView = NikuListView;
 typedef PopupMenuButton = NikuPopupMenuButton;
 typedef RangeSlider = NikuRangeSlider;
 typedef Row = NikuRow;

@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       darkTheme: ThemeData.dark(),
-      home: Test(),
+      home: G11ListView(),
       // home: const Music(
       //   cover:
       //       "https://static.wikia.nocookie.net/iowiro/images/c/c5/News_10202019a.jpg",

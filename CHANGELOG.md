@@ -1,6 +1,9 @@
 # [2.1.0-experimental.1] - 2022/02/23
 Feature:
   - Support all factory method for `NikuGridView`  
+  - Add `NikuListView`
+  - Add `AxisLayoutMacro`
+  - Add `.center`, `.w100` to `AxisLayoutMacro`
 
 Change:
   - Remove function allocation from `_init` of `MapTextStyleMacro`

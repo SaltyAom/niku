@@ -3,6 +3,53 @@ import 'package:flutter/material.dart';
 import 'package:niku/niku.dart';
 import 'package:niku/namespace.dart' as n;
 
+class S {
+  static final inline = n.ListView()
+    ..shrinkWrap = true
+    ..neverScroll;
+}
+
+class G11ListView extends StatelessWidget {
+  const G11ListView();
+
+  @override
+  build(context) {
+    return Scaffold(
+      body: n.Column([
+        n.Column([
+          n.Text("Niku 2.1")
+            ..fontSize = 36
+            ..w500,
+          n.Text("Featuring List View")
+            ..color = Colors.blue
+            ..fontSize = 14,
+        ])
+          ..center
+          ..w100
+          ..gap = 8
+          ..my = 48,
+        n.Text("List View")
+          ..color = Colors.grey
+          ..ml = 16,
+        n.ListView.builder(
+          itemBuilder: (context, index) {
+            return ListTile(
+              title: n.Text('Item $index'),
+            );
+          },
+        )
+          ..apply = S.inline
+          ..total = 100
+      ])
+        ..crossStart
+        ..gap = 8
+        ..w100
+        ..scrollable
+        ..useParent((v) => v..safeTop),
+    );
+  }
+}
+
 class Test extends StatelessWidget {
   const Test({Key? key}) : super(key: key);
 

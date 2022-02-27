@@ -466,8 +466,32 @@ extension PropertyBuilder on Niku {
   void useChild(Widget Function(Niku child) builder) => _w = builder(_w.niku);
 
   void get safeArea => _w = SafeArea(child: _w);
+
   void get safeAreaX => _w = SafeArea(child: _w, top: false, bottom: false);
   void get safeAreaY => _w = SafeArea(child: _w, left: false, right: false);
+
+  void get safeAreaTop =>
+      _w = SafeArea(child: _w, bottom: false, left: false, right: false);
+  void get safeAreaBottom =>
+      _w = SafeArea(child: _w, top: false, left: false, right: false);
+  void get safeAreaLeft =>
+      _w = SafeArea(child: _w, right: false, top: false, bottom: false);
+  void get safeAreaRight =>
+      _w = SafeArea(child: _w, left: false, top: false, bottom: false);
+
+  void get safe => _w = SafeArea(child: _w);
+
+  void get safeX => _w = SafeArea(child: _w, top: false, bottom: false);
+  void get safeY => _w = SafeArea(child: _w, left: false, right: false);
+
+  void get safeTop =>
+      _w = SafeArea(child: _w, bottom: false, left: false, right: false);
+  void get safeBottom =>
+      _w = SafeArea(child: _w, top: false, left: false, right: false);
+  void get safeLeft =>
+      _w = SafeArea(child: _w, right: false, top: false, bottom: false);
+  void get safeRight =>
+      _w = SafeArea(child: _w, left: false, top: false, bottom: false);
 
   set gradient(Gradient v) =>
       _w = DecoratedBox(decoration: BoxDecoration(gradient: v), child: _w);

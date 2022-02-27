@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
+import '../widget/niku.dart';
 import '../macros/macros.dart';
 
 // ignore: must_be_immutable
 class NikuColumn extends StatelessWidget
     with
+        AxisLayout,
         NikuBuildMacro,
         UseQueryMacro<NikuColumn>,
         ClipMacro,
@@ -35,11 +37,6 @@ class NikuColumn extends StatelessWidget
     this.verticalDirection,
     this.textBaseline,
   }) : super(key: key);
-
-  void get center {
-    mainAxisAlignment = MainAxisAlignment.center;
-    crossAxisAlignment = CrossAxisAlignment.center;
-  }
 
   set apply(NikuColumn? v) {
     if (v == null) return;

@@ -5,6 +5,7 @@ import '../../macros/macros.dart';
 // ignore: must_be_immutable
 class NikuRow extends StatelessWidget
     with
+        AxisLayout,
         NikuBuildMacro,
         UseQueryMacro<NikuRow>,
         ClipMacro,
@@ -35,11 +36,6 @@ class NikuRow extends StatelessWidget
     this.verticalDirection,
     this.textBaseline,
   }) : super(key: key);
-
-  void get center {
-    mainAxisAlignment = MainAxisAlignment.center;
-    crossAxisAlignment = CrossAxisAlignment.center;
-  }
 
   set apply(NikuRow? v) {
     if (v == null) return;

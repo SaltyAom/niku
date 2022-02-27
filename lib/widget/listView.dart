@@ -1,25 +1,17 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:niku/macros/macros.dart';
+import 'package:flutter/gestures.dart';
 
+import '../macros/macros.dart';
 import '../objects/objects.dart';
 
-enum NikuGridViewType {
-  children,
-  builder,
-  count,
-  custom,
-  extent,
-}
+enum NikuListViewType { children, builder, separated, custom }
 
 // ignore: must_be_immutable
-class NikuGridView extends StatelessWidget
-    with NikuBuildMacro, UseQueryMacro<NikuGridView>, ClipMacro, PaddingMacro {
-  NikuGridViewType? type = NikuGridViewType.count;
+class NikuListView extends StatelessWidget
+    with NikuBuildMacro, UseQueryMacro<NikuListView>, ClipMacro, PaddingMacro {
+  NikuListViewType? type;
 
-  List<Widget>? children;
-  int? itemCount;
-
+  Key? key;
   Axis? scrollDirection;
   bool? reverse;
   ScrollController? controller;
@@ -27,31 +19,27 @@ class NikuGridView extends StatelessWidget
   ScrollPhysics? physics;
   bool? shrinkWrap;
   NikuEdgeInsets? padding;
-  double? mainAxisSpacing;
-  double? crossAxisSpacing;
-  double? childAspectRatio;
+  double? itemExtent;
+  Widget? prototypeItem;
   bool? addAutomaticKeepAlives;
   bool? addRepaintBoundaries;
   bool? addSemanticIndexes;
   double? cacheExtent;
+  List<Widget>? children;
   int? semanticChildCount;
   DragStartBehavior? dragStartBehavior;
   ScrollViewKeyboardDismissBehavior? keyboardDismissBehavior;
   String? restorationId;
   Clip? clipBehavior;
 
+  int? itemCount;
   IndexedWidgetBuilder? itemBuilder;
-  double? maxCrossExtent;
-  double? maxCrossAxisExtent;
+  IndexedWidgetBuilder? separatorBuilder;
+  SliverChildDelegate? childrenDelegate;
 
-  SliverGridDelegate? gridDelegate;
-  SliverChildBuilderDelegate? childrenDelegate;
-
-  NikuGridView({
-    Key? key,
+  NikuListView({
     this.type,
-    this.itemCount,
-    this.children,
+    this.key,
     this.scrollDirection,
     this.reverse,
     this.controller,
@@ -59,26 +47,25 @@ class NikuGridView extends StatelessWidget
     this.physics,
     this.shrinkWrap,
     this.padding,
-    this.mainAxisSpacing,
-    this.crossAxisSpacing,
-    this.childAspectRatio,
+    this.itemExtent,
+    this.prototypeItem,
     this.addAutomaticKeepAlives,
     this.addRepaintBoundaries,
     this.addSemanticIndexes,
     this.cacheExtent,
+    this.children,
     this.semanticChildCount,
     this.dragStartBehavior,
     this.keyboardDismissBehavior,
     this.restorationId,
     this.clipBehavior,
+    this.itemCount,
     this.itemBuilder,
-    this.maxCrossAxisExtent,
-    this.maxCrossExtent,
-    this.gridDelegate,
+    this.separatorBuilder,
     this.childrenDelegate,
   }) : super(key: key);
 
-  factory NikuGridView.children({
+  factory NikuListView.children({
     Key? key,
     Axis? scrollDirection,
     bool? reverse,
@@ -87,7 +74,8 @@ class NikuGridView extends StatelessWidget
     ScrollPhysics? physics,
     bool? shrinkWrap,
     NikuEdgeInsets? padding,
-    required SliverGridDelegate gridDelegate,
+    double? itemExtent,
+    Widget? prototypeItem,
     bool? addAutomaticKeepAlives,
     bool? addRepaintBoundaries,
     bool? addSemanticIndexes,
@@ -95,13 +83,13 @@ class NikuGridView extends StatelessWidget
     List<Widget>? children,
     int? semanticChildCount,
     DragStartBehavior? dragStartBehavior,
-    Clip? clipBehavior,
     ScrollViewKeyboardDismissBehavior? keyboardDismissBehavior,
     String? restorationId,
+    Clip? clipBehavior,
   }) =>
-      NikuGridView(
+      NikuListView(
         key: key,
-        type: NikuGridViewType.children,
+        type: NikuListViewType.children,
         scrollDirection: scrollDirection,
         reverse: reverse,
         controller: controller,
@@ -109,62 +97,13 @@ class NikuGridView extends StatelessWidget
         physics: physics,
         shrinkWrap: shrinkWrap,
         padding: padding,
-        gridDelegate: gridDelegate,
-        addRepaintBoundaries: addRepaintBoundaries,
-        addAutomaticKeepAlives: addAutomaticKeepAlives,
-        addSemanticIndexes: addSemanticIndexes,
-        cacheExtent: cacheExtent,
-        children: children,
-        semanticChildCount: semanticChildCount,
-        dragStartBehavior: dragStartBehavior,
-        clipBehavior: clipBehavior,
-        keyboardDismissBehavior: keyboardDismissBehavior,
-        restorationId: restorationId,
-      );
-
-  factory NikuGridView.count({
-    List<Widget>? children,
-    int? crossAxisCount,
-    Key? key,
-    Axis? scrollDirection,
-    bool? reverse,
-    ScrollController? controller,
-    bool? primary,
-    ScrollPhysics? physics,
-    bool? shrinkWrap,
-    EdgeInsetsGeometry? padding,
-    double? mainAxisSpacing,
-    double? crossAxisSpacing,
-    double? childAspectRatio,
-    bool? addAutomaticKeepAlives,
-    bool? addRepaintBoundaries,
-    bool? addSemanticIndexes,
-    double? cacheExtent,
-    int? semanticChildCount,
-    DragStartBehavior? dragStartBehavior,
-    ScrollViewKeyboardDismissBehavior? keyboardDismissBehavior,
-    String? restorationId,
-    Clip? clipBehavior,
-  }) =>
-      NikuGridView(
-        type: NikuGridViewType.count,
-        key: key,
-        itemCount: crossAxisCount ?? 1,
-        children: children,
-        scrollDirection: scrollDirection,
-        reverse: reverse,
-        controller: controller,
-        primary: primary,
-        physics: physics,
-        shrinkWrap: shrinkWrap,
-        padding: padding?.asNiku,
-        mainAxisSpacing: mainAxisSpacing,
-        crossAxisSpacing: crossAxisSpacing,
-        childAspectRatio: childAspectRatio,
+        itemExtent: itemExtent,
+        prototypeItem: prototypeItem,
         addAutomaticKeepAlives: addAutomaticKeepAlives,
         addRepaintBoundaries: addRepaintBoundaries,
         addSemanticIndexes: addSemanticIndexes,
         cacheExtent: cacheExtent,
+        children: children,
         semanticChildCount: semanticChildCount,
         dragStartBehavior: dragStartBehavior,
         keyboardDismissBehavior: keyboardDismissBehavior,
@@ -172,11 +111,8 @@ class NikuGridView extends StatelessWidget
         clipBehavior: clipBehavior,
       );
 
-  factory NikuGridView.builder({
+  factory NikuListView.builder({
     Key? key,
-    required IndexedWidgetBuilder itemBuilder,
-    required SliverGridDelegate? gridDelegate,
-    int? itemCount,
     Axis? scrollDirection,
     bool? reverse,
     ScrollController? controller,
@@ -184,64 +120,8 @@ class NikuGridView extends StatelessWidget
     ScrollPhysics? physics,
     bool? shrinkWrap,
     NikuEdgeInsets? padding,
-    double? mainAxisSpacing,
-    double? crossAxisSpacing,
-    double? childAspectRatio,
-    bool? addAutomaticKeepAlives,
-    bool? addRepaintBoundaries,
-    bool? addSemanticIndexes,
-    double? cacheExtent,
-    int? semanticChildCount,
-    DragStartBehavior? dragStartBehavior,
-    ScrollViewKeyboardDismissBehavior? keyboardDismissBehavior,
-    String? restorationId,
-    Clip? clipBehavior,
-    double? maxCrossExtent,
-  }) =>
-      NikuGridView(
-        type: NikuGridViewType.builder,
-        key: key,
-        itemCount: itemCount,
-        scrollDirection: scrollDirection,
-        reverse: reverse,
-        controller: controller,
-        primary: primary,
-        physics: physics,
-        shrinkWrap: shrinkWrap,
-        padding: padding,
-        mainAxisSpacing: mainAxisSpacing,
-        crossAxisSpacing: crossAxisSpacing,
-        childAspectRatio: childAspectRatio,
-        addAutomaticKeepAlives: addAutomaticKeepAlives,
-        addRepaintBoundaries: addRepaintBoundaries,
-        addSemanticIndexes: addSemanticIndexes,
-        cacheExtent: cacheExtent,
-        semanticChildCount: semanticChildCount,
-        dragStartBehavior: dragStartBehavior,
-        keyboardDismissBehavior: keyboardDismissBehavior,
-        restorationId: restorationId,
-        clipBehavior: clipBehavior,
-        maxCrossExtent: maxCrossExtent,
-        itemBuilder: itemBuilder,
-        childrenDelegate: SliverChildBuilderDelegate(
-          itemBuilder,
-          childCount: itemCount,
-          addAutomaticKeepAlives: addAutomaticKeepAlives ?? true,
-          addRepaintBoundaries: addRepaintBoundaries ?? true,
-          addSemanticIndexes: addSemanticIndexes ?? true,
-        ),
-      );
-
-  factory NikuGridView.custom({
-    Key? key,
-    Axis? scrollDirection,
-    bool? reverse,
-    ScrollController? controller,
-    bool? primary,
-    ScrollPhysics? physics,
-    bool? shrinkWrap,
-    EdgeInsetsGeometry? padding,
-    required SliverGridDelegate gridDelegate,
+    double? itemExtent,
+    Widget? prototypeItem,
     required IndexedWidgetBuilder itemBuilder,
     int? itemCount,
     bool? addAutomaticKeepAlives,
@@ -254,17 +134,18 @@ class NikuGridView extends StatelessWidget
     String? restorationId,
     Clip? clipBehavior,
   }) =>
-      NikuGridView(
-        type: NikuGridViewType.custom,
+      NikuListView(
         key: key,
+        type: NikuListViewType.builder,
         scrollDirection: scrollDirection,
         reverse: reverse,
         controller: controller,
         primary: primary,
         physics: physics,
         shrinkWrap: shrinkWrap,
-        padding: padding?.asNiku,
-        gridDelegate: gridDelegate,
+        padding: padding,
+        itemExtent: itemExtent,
+        prototypeItem: prototypeItem,
         itemBuilder: itemBuilder,
         itemCount: itemCount,
         addAutomaticKeepAlives: addAutomaticKeepAlives,
@@ -278,7 +159,7 @@ class NikuGridView extends StatelessWidget
         clipBehavior: clipBehavior,
       );
 
-  factory NikuGridView.extent({
+  factory NikuListView.separated({
     Key? key,
     Axis? scrollDirection,
     bool? reverse,
@@ -286,41 +167,75 @@ class NikuGridView extends StatelessWidget
     bool? primary,
     ScrollPhysics? physics,
     bool? shrinkWrap,
-    EdgeInsetsGeometry? padding,
-    required double maxCrossAxisExtent,
-    double? mainAxisSpacing,
-    double? crossAxisSpacing,
-    double? childAspectRatio,
+    NikuEdgeInsets? padding,
+    required IndexedWidgetBuilder itemBuilder,
+    required IndexedWidgetBuilder separatorBuilder,
+    required int itemCount,
     bool? addAutomaticKeepAlives,
     bool? addRepaintBoundaries,
     bool? addSemanticIndexes,
     double? cacheExtent,
-    List<Widget>? children,
-    int? semanticChildCount,
     DragStartBehavior? dragStartBehavior,
     ScrollViewKeyboardDismissBehavior? keyboardDismissBehavior,
     String? restorationId,
     Clip? clipBehavior,
   }) =>
-      NikuGridView(
-        type: NikuGridViewType.extent,
+      NikuListView(
         key: key,
+        type: NikuListViewType.separated,
         scrollDirection: scrollDirection,
         reverse: reverse,
         controller: controller,
         primary: primary,
         physics: physics,
         shrinkWrap: shrinkWrap,
-        padding: padding?.asNiku,
-        maxCrossAxisExtent: maxCrossAxisExtent,
-        mainAxisSpacing: mainAxisSpacing,
-        crossAxisSpacing: crossAxisSpacing,
-        childAspectRatio: childAspectRatio,
+        padding: padding,
+        itemBuilder: itemBuilder,
+        separatorBuilder: separatorBuilder,
+        itemCount: itemCount,
         addAutomaticKeepAlives: addAutomaticKeepAlives,
         addRepaintBoundaries: addRepaintBoundaries,
         addSemanticIndexes: addSemanticIndexes,
         cacheExtent: cacheExtent,
-        children: children,
+        dragStartBehavior: dragStartBehavior,
+        keyboardDismissBehavior: keyboardDismissBehavior,
+        restorationId: restorationId,
+        clipBehavior: clipBehavior,
+      );
+
+  factory NikuListView.custom({
+    Key? key,
+    Axis? scrollDirection,
+    bool? reverse,
+    ScrollController? controller,
+    bool? primary,
+    ScrollPhysics? physics,
+    bool? shrinkWrap,
+    NikuEdgeInsets? padding,
+    double? itemExtent,
+    Widget? prototypeItem,
+    required SliverChildDelegate childrenDelegate,
+    double? cacheExtent,
+    int? semanticChildCount,
+    DragStartBehavior? dragStartBehavior,
+    ScrollViewKeyboardDismissBehavior? keyboardDismissBehavior,
+    String? restorationId,
+    Clip? clipBehavior,
+  }) =>
+      NikuListView(
+        key: key,
+        type: NikuListViewType.custom,
+        scrollDirection: scrollDirection,
+        reverse: reverse,
+        controller: controller,
+        primary: primary,
+        physics: physics,
+        shrinkWrap: shrinkWrap,
+        padding: padding,
+        itemExtent: itemExtent,
+        prototypeItem: prototypeItem,
+        childrenDelegate: childrenDelegate,
+        cacheExtent: cacheExtent,
         semanticChildCount: semanticChildCount,
         dragStartBehavior: dragStartBehavior,
         keyboardDismissBehavior: keyboardDismissBehavior,
@@ -328,19 +243,15 @@ class NikuGridView extends StatelessWidget
         clipBehavior: clipBehavior,
       );
 
-  set count(int value) => itemCount = value;
-  set grid(int value) => itemCount = value;
+  void get neverScroll => physics = NeverScrollableScrollPhysics();
 
-  set aspectRatio(double value) => childAspectRatio = value;
-  set aspect(double value) => childAspectRatio = value;
-  set ratio(double value) => childAspectRatio = value;
+  set total(int value) => itemCount = value;
 
-  set apply(NikuGridView? v) {
+  set apply(NikuListView? v) {
     if (v == null) return;
 
     type = v.type ?? type;
-    itemCount = v.itemCount ?? itemCount;
-    children = v.children ?? children;
+    key = v.key ?? key;
     scrollDirection = v.scrollDirection ?? scrollDirection;
     reverse = v.reverse ?? reverse;
     controller = v.controller ?? controller;
@@ -348,37 +259,30 @@ class NikuGridView extends StatelessWidget
     physics = v.physics ?? physics;
     shrinkWrap = v.shrinkWrap ?? shrinkWrap;
     padding = v.padding ?? padding;
-    mainAxisSpacing = v.mainAxisSpacing ?? mainAxisSpacing;
-    crossAxisSpacing = v.crossAxisSpacing ?? crossAxisSpacing;
-    childAspectRatio = v.childAspectRatio ?? childAspectRatio;
+    itemExtent = v.itemExtent ?? itemExtent;
+    prototypeItem = v.prototypeItem ?? prototypeItem;
     addAutomaticKeepAlives = v.addAutomaticKeepAlives ?? addAutomaticKeepAlives;
     addRepaintBoundaries = v.addRepaintBoundaries ?? addRepaintBoundaries;
     addSemanticIndexes = v.addSemanticIndexes ?? addSemanticIndexes;
     cacheExtent = v.cacheExtent ?? cacheExtent;
+    children = v.children ?? children;
     semanticChildCount = v.semanticChildCount ?? semanticChildCount;
     dragStartBehavior = v.dragStartBehavior ?? dragStartBehavior;
     keyboardDismissBehavior =
         v.keyboardDismissBehavior ?? keyboardDismissBehavior;
     restorationId = v.restorationId ?? restorationId;
     clipBehavior = v.clipBehavior ?? clipBehavior;
+    itemCount = v.itemCount ?? itemCount;
     itemBuilder = v.itemBuilder ?? itemBuilder;
-    maxCrossAxisExtent = v.maxCrossAxisExtent ?? maxCrossAxisExtent;
-    maxCrossExtent = v.maxCrossExtent ?? maxCrossExtent;
-    gridDelegate = v.gridDelegate ?? gridDelegate;
+    separatorBuilder = v.separatorBuilder ?? separatorBuilder;
     childrenDelegate = v.childrenDelegate ?? childrenDelegate;
 
     $internalParent..addAll(v.$internalParent);
   }
 
-  use(List<NikuGridView> v) {
-    v.forEach((e) => apply = e);
-  }
-
-  NikuGridView get copied => NikuGridView(
-        key: key,
+  get copied => NikuListView(
         type: type,
-        itemCount: itemCount,
-        children: children,
+        key: key,
         scrollDirection: scrollDirection,
         reverse: reverse,
         controller: controller,
@@ -386,29 +290,28 @@ class NikuGridView extends StatelessWidget
         physics: physics,
         shrinkWrap: shrinkWrap,
         padding: padding,
-        mainAxisSpacing: mainAxisSpacing,
-        crossAxisSpacing: crossAxisSpacing,
-        childAspectRatio: childAspectRatio,
+        itemExtent: itemExtent,
+        prototypeItem: prototypeItem,
         addAutomaticKeepAlives: addAutomaticKeepAlives,
         addRepaintBoundaries: addRepaintBoundaries,
         addSemanticIndexes: addSemanticIndexes,
         cacheExtent: cacheExtent,
+        children: children,
         semanticChildCount: semanticChildCount,
         dragStartBehavior: dragStartBehavior,
         keyboardDismissBehavior: keyboardDismissBehavior,
         restorationId: restorationId,
         clipBehavior: clipBehavior,
+        itemCount: itemCount,
         itemBuilder: itemBuilder,
-        maxCrossAxisExtent: maxCrossAxisExtent,
-        maxCrossExtent: maxCrossExtent,
-        gridDelegate: gridDelegate,
+        separatorBuilder: separatorBuilder,
         childrenDelegate: childrenDelegate,
       )..$internalParent.addAll($internalParent);
 
-  GridView get widget {
+  get widget {
     switch (type) {
-      case NikuGridViewType.builder:
-        return GridView.builder(
+      case NikuListViewType.children:
+        return ListView(
           key: key,
           scrollDirection: scrollDirection ?? Axis.vertical,
           reverse: reverse ?? false,
@@ -417,7 +320,33 @@ class NikuGridView extends StatelessWidget
           physics: physics,
           shrinkWrap: shrinkWrap ?? false,
           padding: padding?.value,
-          gridDelegate: gridDelegate!,
+          itemExtent: itemExtent,
+          prototypeItem: prototypeItem,
+          addAutomaticKeepAlives: addAutomaticKeepAlives ?? true,
+          addRepaintBoundaries: addRepaintBoundaries ?? true,
+          addSemanticIndexes: addSemanticIndexes ?? true,
+          cacheExtent: cacheExtent,
+          children: children ?? [],
+          semanticChildCount: semanticChildCount,
+          dragStartBehavior: dragStartBehavior ?? DragStartBehavior.start,
+          keyboardDismissBehavior: keyboardDismissBehavior ??
+              ScrollViewKeyboardDismissBehavior.manual,
+          restorationId: restorationId,
+          clipBehavior: clipBehavior ?? Clip.hardEdge,
+        );
+
+      case NikuListViewType.builder:
+        return ListView.builder(
+          key: key,
+          scrollDirection: scrollDirection ?? Axis.vertical,
+          reverse: reverse ?? false,
+          controller: controller,
+          primary: primary,
+          physics: physics,
+          shrinkWrap: shrinkWrap ?? false,
+          padding: padding?.value,
+          itemExtent: itemExtent,
+          prototypeItem: prototypeItem,
           itemBuilder: itemBuilder!,
           itemCount: itemCount,
           addAutomaticKeepAlives: addAutomaticKeepAlives ?? true,
@@ -432,8 +361,8 @@ class NikuGridView extends StatelessWidget
           clipBehavior: clipBehavior ?? Clip.hardEdge,
         );
 
-      case NikuGridViewType.custom:
-        return GridView.custom(
+      case NikuListViewType.separated:
+        return ListView.separated(
           key: key,
           scrollDirection: scrollDirection ?? Axis.vertical,
           reverse: reverse ?? false,
@@ -442,7 +371,32 @@ class NikuGridView extends StatelessWidget
           physics: physics,
           shrinkWrap: shrinkWrap ?? false,
           padding: padding?.value,
-          gridDelegate: gridDelegate!,
+          itemBuilder: itemBuilder!,
+          separatorBuilder: separatorBuilder!,
+          itemCount: itemCount ?? 0,
+          addAutomaticKeepAlives: addAutomaticKeepAlives ?? true,
+          addRepaintBoundaries: addRepaintBoundaries ?? true,
+          addSemanticIndexes: addSemanticIndexes ?? true,
+          cacheExtent: cacheExtent,
+          dragStartBehavior: dragStartBehavior ?? DragStartBehavior.start,
+          keyboardDismissBehavior: keyboardDismissBehavior ??
+              ScrollViewKeyboardDismissBehavior.manual,
+          restorationId: restorationId,
+          clipBehavior: clipBehavior ?? Clip.hardEdge,
+        );
+
+      case NikuListViewType.custom:
+        return ListView.custom(
+          key: key,
+          scrollDirection: scrollDirection ?? Axis.vertical,
+          reverse: reverse ?? false,
+          controller: controller,
+          primary: primary,
+          physics: physics,
+          shrinkWrap: shrinkWrap ?? false,
+          padding: padding?.value,
+          itemExtent: itemExtent,
+          prototypeItem: prototypeItem,
           childrenDelegate: childrenDelegate!,
           cacheExtent: cacheExtent,
           semanticChildCount: semanticChildCount,
@@ -453,63 +407,8 @@ class NikuGridView extends StatelessWidget
           clipBehavior: clipBehavior ?? Clip.hardEdge,
         );
 
-      case NikuGridViewType.extent:
-        return GridView.extent(
-          key: key,
-          scrollDirection: scrollDirection ?? Axis.vertical,
-          reverse: reverse ?? false,
-          controller: controller,
-          primary: primary,
-          physics: physics,
-          shrinkWrap: shrinkWrap ?? false,
-          padding: padding?.value,
-          maxCrossAxisExtent: maxCrossAxisExtent!,
-          mainAxisSpacing: mainAxisSpacing ?? 0.0,
-          crossAxisSpacing: crossAxisSpacing ?? 0.0,
-          childAspectRatio: childAspectRatio ?? 1.0,
-          addAutomaticKeepAlives: addAutomaticKeepAlives ?? true,
-          addRepaintBoundaries: addRepaintBoundaries ?? true,
-          addSemanticIndexes: addSemanticIndexes ?? true,
-          cacheExtent: cacheExtent,
-          children: children ?? [],
-          semanticChildCount: semanticChildCount,
-          dragStartBehavior: dragStartBehavior ?? DragStartBehavior.start,
-          keyboardDismissBehavior: keyboardDismissBehavior ??
-              ScrollViewKeyboardDismissBehavior.manual,
-          restorationId: restorationId,
-          clipBehavior: clipBehavior ?? Clip.hardEdge,
-        );
-
-      case NikuGridViewType.count:
-        return GridView.count(
-          key: key,
-          crossAxisCount: this.itemCount ?? 0,
-          children: this.children ?? [],
-          scrollDirection: this.scrollDirection ?? Axis.vertical,
-          reverse: this.reverse ?? false,
-          controller: this.controller,
-          primary: this.primary,
-          physics: this.physics,
-          shrinkWrap: this.shrinkWrap ?? false,
-          padding: this.padding?.value,
-          mainAxisSpacing: this.mainAxisSpacing ?? 0.0,
-          crossAxisSpacing: this.crossAxisSpacing ?? 0.0,
-          childAspectRatio: this.childAspectRatio ?? 1.0,
-          addAutomaticKeepAlives: this.addAutomaticKeepAlives ?? true,
-          addRepaintBoundaries: this.addRepaintBoundaries ?? true,
-          addSemanticIndexes: this.addSemanticIndexes ?? true,
-          cacheExtent: this.cacheExtent,
-          semanticChildCount: this.semanticChildCount,
-          dragStartBehavior: this.dragStartBehavior ?? DragStartBehavior.start,
-          keyboardDismissBehavior: this.keyboardDismissBehavior ??
-              ScrollViewKeyboardDismissBehavior.manual,
-          restorationId: this.restorationId,
-          clipBehavior: this.clipBehavior ?? Clip.hardEdge,
-        );
-
-      case NikuGridViewType.children:
       default:
-        return GridView(
+        return ListView(
           key: key,
           scrollDirection: scrollDirection ?? Axis.vertical,
           reverse: reverse ?? false,
@@ -518,18 +417,19 @@ class NikuGridView extends StatelessWidget
           physics: physics,
           shrinkWrap: shrinkWrap ?? false,
           padding: padding?.value,
-          gridDelegate: gridDelegate!,
-          addRepaintBoundaries: addRepaintBoundaries ?? true,
+          itemExtent: itemExtent,
+          prototypeItem: prototypeItem,
           addAutomaticKeepAlives: addAutomaticKeepAlives ?? true,
+          addRepaintBoundaries: addRepaintBoundaries ?? true,
           addSemanticIndexes: addSemanticIndexes ?? true,
           cacheExtent: cacheExtent,
           children: children ?? [],
           semanticChildCount: semanticChildCount,
           dragStartBehavior: dragStartBehavior ?? DragStartBehavior.start,
-          clipBehavior: clipBehavior ?? Clip.hardEdge,
           keyboardDismissBehavior: keyboardDismissBehavior ??
               ScrollViewKeyboardDismissBehavior.manual,
           restorationId: restorationId,
+          clipBehavior: clipBehavior ?? Clip.hardEdge,
         );
     }
   }

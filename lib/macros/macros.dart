@@ -8,6 +8,7 @@ export 'applyText.dart';
 export 'applyTitleText.dart';
 export 'applyValueIndicatorTextStyle.dart';
 export 'axis.dart';
+export 'axisLayout.dart';
 export 'backgroundColor.dart';
 export 'blendMode.dart';
 export 'boxFit.dart';
