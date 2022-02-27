@@ -2,24 +2,24 @@ import 'package:flutter/material.dart';
 
 abstract class GapMacro {
   List<Widget> children = [];
-  List<Widget>? childrenWithGap;
+  double? gap;
 
-  set gap(double? height) {
-    if (height == null) return childrenWithGap = null;
+  List<Widget> $internalComposeGap(double? height) {
+    if (height == null || children.length == 0) return children;
 
-    if (children.length == 0) return;
-
-    childrenWithGap = [...children];
+    final childrenWithGap = [...children];
 
     for (int index = 1; index < children.length - 1; index++)
-      childrenWithGap!.insert(
+      childrenWithGap.insert(
         index * 2,
         SizedBox(height: height),
       );
 
-    childrenWithGap!.insert(
+    childrenWithGap.insert(
       1,
       SizedBox(height: height),
     );
+
+    return childrenWithGap;
   }
 }

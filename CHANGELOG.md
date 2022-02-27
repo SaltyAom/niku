@@ -3,11 +3,18 @@ Feature:
   - Support all factory method for `NikuGridView`  
   - Add `NikuListView`
   - Add `AxisLayoutMacro`
-  - Add `.center`, `.w100` to `AxisLayoutMacro`
+  - Add `.center`, `.w100`, `safeArea` to `AxisLayoutMacro`
 
 Change:
   - Remove function allocation from `_init` of `MapTextStyleMacro`
   - Add `center` to `NikuColumn`, and `NikuRow`
+  - Replace `childrenWithGap` with `$internalComposeGap` in `GapMacro`
+  - Add `gap` property to AxisLayout
+  - gap can now be applied
+  - `childrenWithGap` now only composed on build
+
+Bug fix:
+  - Remove `print` from `PaddingMacro`
 
 # [2.1.0-experimental.0] - 2022/02/23
 Feature:

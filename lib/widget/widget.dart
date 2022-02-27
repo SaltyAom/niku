@@ -10,6 +10,7 @@ export 'gridView.dart';
 export 'icon.dart';
 export 'iconButton.dart';
 export 'image.dart';
+export 'listTile.dart';
 export 'listView.dart';
 export 'popupMenuButton.dart';
 export 'rangeSlider.dart';

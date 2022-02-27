@@ -6,7 +6,44 @@ import 'package:niku/namespace.dart' as n;
 class S {
   static final inline = n.ListView()
     ..shrinkWrap = true
-    ..neverScroll;
+    ..neverScroll
+    ..useSeparatorBuilder((context, index) => Divider(height: 1));
+
+  static final listBuilder = (String title) => n.ListView()
+    ..useItemBuilder(
+      (context, index) => n.ListTile()
+        ..title = n.Text('${title} $index')
+        ..dense = true,
+    )
+    ..useSeparatorBuilder((context, index) => Divider(height: 1));
+
+  static final grouped = n.ListView()
+    ..p = 0
+    ..useParent((v) => v
+      ..bg = Colors.white
+      ..rounded = 8
+      ..p = 8);
+
+  static final inlineGroup = n.ListView()
+    ..use([inline, grouped])
+    ..mb = 16;
+
+  static final listHeader = n.Text("")
+    ..color = Colors.grey
+    ..ml = 16;
+
+  static final header = n.Column([])
+    ..center
+    ..w100
+    ..gap = 4
+    ..my = 48;
+
+  static final mainCol = n.Column([])
+    ..crossStart
+    ..w100
+    ..px = 8
+    ..scrollable
+    ..safeTop;
 }
 
 class G11ListView extends StatelessWidget {
@@ -15,43 +52,33 @@ class G11ListView extends StatelessWidget {
   @override
   build(context) {
     return Scaffold(
+      backgroundColor: Colors.grey.shade100,
       body: n.Column([
         n.Column([
           n.Text("Niku 2.1")
             ..fontSize = 36
             ..w500,
           n.Text("Featuring List View")
-            ..color = Colors.blue
-            ..fontSize = 14,
+            ..fontSize = 14
+            ..color = Colors.blue,
         ])
-          ..center
-          ..w100
-          ..gap = 8
-          ..my = 48,
-        n.Text("List View")
-          ..color = Colors.grey
-          ..ml = 16,
-        n.ListView.builder(
-          itemBuilder: (context, index) {
-            return ListTile(
-              title: n.Text('Item $index'),
-            );
-          },
-        )
-          ..apply = S.inline
+          ..of(S.header),
+        n.Text("Table of Content")..of(S.listHeader),
+        n.ListView.separated()
+          ..total = 5
+          ..use([S.inlineGroup, S.listBuilder('Title')]),
+        n.Text("List View")..of(S.listHeader),
+        n.ListView.separated()
           ..total = 100
+          ..use([S.inlineGroup, S.listBuilder('Item')]),
       ])
-        ..crossStart
-        ..gap = 8
-        ..w100
-        ..scrollable
-        ..useParent((v) => v..safeTop),
+        ..of(S.mainCol),
     );
   }
 }
 
-class Test extends StatelessWidget {
-  const Test({Key? key}) : super(key: key);
+class G11Comparison extends StatelessWidget {
+  const G11Comparison({Key? key}) : super(key: key);
 
   @override
   build(context) {

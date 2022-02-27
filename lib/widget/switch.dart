@@ -16,7 +16,7 @@ const double _kSwitchHeightCollapsed = _kSwitchMinSize;
 
 // ignore: must_be_immutable
 class NikuSwitch extends StatelessWidget
-    with NikuBuildMacro, UseQueryMacro<NikuSwitch> {
+    with NikuBuildMacro<NikuSwitch>, UseQueryMacro<NikuSwitch> {
   bool adaptive = false;
   bool cupertino = false;
 
@@ -221,10 +221,6 @@ class NikuSwitch extends StatelessWidget
     overlayColorState = e.overlayColorState ?? overlayColorState;
 
     $internalParent..addAll(e.$internalParent);
-  }
-
-  use(List<NikuSwitch> v) {
-    v.forEach((e) => apply = e);
   }
 
   NikuSwitch get copied => NikuSwitch(

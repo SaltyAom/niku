@@ -6,7 +6,7 @@ import '../objects/objects.dart';
 // ignore: must_be_immutable
 class NikuIconButton extends StatelessWidget
     with
-        NikuBuildMacro,
+        NikuBuildMacro<NikuIconButton>,
         UseQueryMacro<NikuIconButton>,
         AlignmentDirectionalMacro,
         ConstraintsMacro,
@@ -127,10 +127,6 @@ class NikuIconButton extends StatelessWidget
     enableFeedback = v.enableFeedback ?? enableFeedback;
     constraints = v.constraints ?? constraints;
     $internalParent..addAll(v.$internalParent);
-  }
-
-  use(List<NikuIconButton> v) {
-    v.forEach((e) => apply = e);
   }
 
   NikuIconButton get copied => NikuIconButton(

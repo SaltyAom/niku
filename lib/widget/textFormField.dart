@@ -10,7 +10,7 @@ import '../proxy/textStyleProxy.dart';
 // ignore: must_be_immutable
 class NikuTextFormField extends StatelessWidget
     with
-        NikuBuildMacro,
+        NikuBuildMacro<NikuTextFormField>,
         UseQueryMacro<NikuTextFormField>,
         ApplyTextMacro,
         ApplyStrutStyleMacro,
@@ -441,10 +441,6 @@ class NikuTextFormField extends StatelessWidget
         v.enableIMEPersonalizedLearning ?? enableIMEPersonalizedLearning;
 
     $internalParent..addAll(v.$internalParent);
-  }
-
-  use(List<NikuTextFormField> v) {
-    v.forEach((e) => apply = e);
   }
 
   NikuTextFormField get copied => NikuTextFormField(

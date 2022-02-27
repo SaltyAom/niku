@@ -14,7 +14,11 @@ enum NikuGridViewType {
 
 // ignore: must_be_immutable
 class NikuGridView extends StatelessWidget
-    with NikuBuildMacro, UseQueryMacro<NikuGridView>, ClipMacro, PaddingMacro {
+    with
+        NikuBuildMacro<NikuGridView>,
+        UseQueryMacro<NikuGridView>,
+        ClipMacro,
+        PaddingMacro {
   NikuGridViewType? type = NikuGridViewType.count;
 
   List<Widget>? children;
@@ -335,10 +339,13 @@ class NikuGridView extends StatelessWidget
   set aspect(double value) => childAspectRatio = value;
   set ratio(double value) => childAspectRatio = value;
 
+  void useItemBuilder(Widget Function(BuildContext, int) builder) {
+    itemBuilder = builder;
+  }
+
   set apply(NikuGridView? v) {
     if (v == null) return;
 
-    type = v.type ?? type;
     itemCount = v.itemCount ?? itemCount;
     children = v.children ?? children;
     scrollDirection = v.scrollDirection ?? scrollDirection;
@@ -368,10 +375,6 @@ class NikuGridView extends StatelessWidget
     childrenDelegate = v.childrenDelegate ?? childrenDelegate;
 
     $internalParent..addAll(v.$internalParent);
-  }
-
-  use(List<NikuGridView> v) {
-    v.forEach((e) => apply = e);
   }
 
   NikuGridView get copied => NikuGridView(

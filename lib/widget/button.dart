@@ -9,7 +9,7 @@ enum NikuButtonType { Text, Elevated, Outlined }
 // ignore: must_be_immutable
 class NikuButton extends StatelessWidget
     with
-        NikuBuildMacro,
+        NikuBuildMacro<NikuButton>,
         UseQueryMacro<NikuButton>,
         ApplyButtonStyleMacro,
         ClipMacro,
@@ -199,10 +199,6 @@ class NikuButton extends StatelessWidget
     label = v.label ?? label;
     enable = v.enable;
     $internalParent..addAll(v.$internalParent);
-  }
-
-  use(List<NikuButton> v) {
-    v.forEach((e) => apply = e);
   }
 
   NikuButton get copied => NikuButton(

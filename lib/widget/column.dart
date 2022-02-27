@@ -7,7 +7,7 @@ import '../macros/macros.dart';
 class NikuColumn extends StatelessWidget
     with
         AxisLayout,
-        NikuBuildMacro,
+        NikuBuildMacro<NikuColumn>,
         UseQueryMacro<NikuColumn>,
         ClipMacro,
         CrossAxisAlignmentMacro,
@@ -26,6 +26,7 @@ class NikuColumn extends StatelessWidget
   VerticalDirection? verticalDirection;
   TextBaseline? textBaseline;
   Clip? clipBehavior;
+  double? gap;
 
   NikuColumn(
     this.children, {
@@ -36,6 +37,7 @@ class NikuColumn extends StatelessWidget
     this.textDirection,
     this.verticalDirection,
     this.textBaseline,
+    this.gap,
   }) : super(key: key);
 
   set apply(NikuColumn? v) {
@@ -46,11 +48,9 @@ class NikuColumn extends StatelessWidget
     crossAxisAlignment = v.crossAxisAlignment ?? crossAxisAlignment;
     textDirection = v.textDirection ?? textDirection;
     textBaseline = v.textBaseline ?? textBaseline;
-    $internalParent..addAll(v.$internalParent);
-  }
+    gap = v.gap ?? gap;
 
-  use(List<NikuColumn> v) {
-    v.forEach((e) => apply = e);
+    $internalParent..addAll(v.$internalParent);
   }
 
   NikuColumn get copied => NikuColumn(
@@ -65,7 +65,7 @@ class NikuColumn extends StatelessWidget
       )..$internalParent.addAll($internalParent);
 
   Column get widget => Column(
-        children: childrenWithGap ?? children,
+        children: $internalComposeGap(gap),
         key: key,
         mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.start,
         mainAxisSize: mainAxisSize ?? MainAxisSize.max,

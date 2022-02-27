@@ -6,7 +6,7 @@ import '../objects/objects.dart';
 // ignore: must_be_immutable
 class NikuRangeSlider extends StatelessWidget
     with
-        NikuBuildMacro,
+        NikuBuildMacro<NikuRangeSlider>,
         UseQueryMacro<NikuRangeSlider>,
         ApplyTextMacro,
         ApplyValueIndicatorTextStyleMacro {
@@ -160,10 +160,6 @@ class NikuRangeSlider extends StatelessWidget
     minThumbSeparation = v.minThumbSeparation ?? minThumbSeparation;
     thumbSelector = v.thumbSelector ?? thumbSelector;
     $internalParent..addAll(v.$internalParent);
-  }
-
-  use(List<NikuRangeSlider> v) {
-    v.forEach((e) => apply = e);
   }
 
   NikuRangeSlider get copied => NikuRangeSlider(

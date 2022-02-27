@@ -4,11 +4,18 @@ import 'package:niku/objects/objects.dart';
 import '../widget/niku.dart';
 import '../extra/on.dart';
 
-abstract class NikuBuildMacro {
+abstract class NikuBuildMacro<T extends Widget> {
   List<Widget Function(Niku)> _parent = [];
 
   void useNiku(Widget Function(Niku) cb) {
     useParent(cb);
+  }
+
+  set apply(T? v) {}
+  void of(T? v) => apply = v;
+
+  use(List<T> v) {
+    v.forEach((e) => apply = e);
   }
 
   void useParent(Widget Function(Niku) cb) =>

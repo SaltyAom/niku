@@ -9,7 +9,7 @@ enum NikuSliderType { material, adaptive, cupertino }
 // ignore: must_be_immutable
 class NikuSlider extends StatelessWidget
     with
-        NikuBuildMacro,
+        NikuBuildMacro<NikuSlider>,
         UseQueryMacro<NikuSlider>,
         ApplyTextMacro,
         ApplyValueIndicatorTextStyleMacro {
@@ -346,10 +346,6 @@ class NikuSlider extends StatelessWidget
     thumbSelector = v.thumbSelector ?? thumbSelector;
 
     $internalParent..addAll(v.$internalParent);
-  }
-
-  use(List<NikuSlider> v) {
-    v.forEach((e) => apply = e);
   }
 
   NikuSlider get copied => NikuSlider(

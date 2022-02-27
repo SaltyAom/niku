@@ -8,7 +8,11 @@ enum NikuListViewType { children, builder, separated, custom }
 
 // ignore: must_be_immutable
 class NikuListView extends StatelessWidget
-    with NikuBuildMacro, UseQueryMacro<NikuListView>, ClipMacro, PaddingMacro {
+    with
+        NikuBuildMacro<NikuListView>,
+        UseQueryMacro<NikuListView>,
+        ClipMacro,
+        PaddingMacro {
   NikuListViewType? type;
 
   Key? key;
@@ -122,7 +126,7 @@ class NikuListView extends StatelessWidget
     NikuEdgeInsets? padding,
     double? itemExtent,
     Widget? prototypeItem,
-    required IndexedWidgetBuilder itemBuilder,
+    IndexedWidgetBuilder? itemBuilder,
     int? itemCount,
     bool? addAutomaticKeepAlives,
     bool? addRepaintBoundaries,
@@ -168,9 +172,11 @@ class NikuListView extends StatelessWidget
     ScrollPhysics? physics,
     bool? shrinkWrap,
     NikuEdgeInsets? padding,
-    required IndexedWidgetBuilder itemBuilder,
-    required IndexedWidgetBuilder separatorBuilder,
-    required int itemCount,
+    IndexedWidgetBuilder? itemBuilder,
+    IndexedWidgetBuilder? separatorBuilder,
+    Color? separatorColor,
+    double? sepearatorHeight,
+    int itemCount = 0,
     bool? addAutomaticKeepAlives,
     bool? addRepaintBoundaries,
     bool? addSemanticIndexes,
@@ -191,7 +197,12 @@ class NikuListView extends StatelessWidget
         shrinkWrap: shrinkWrap,
         padding: padding,
         itemBuilder: itemBuilder,
-        separatorBuilder: separatorBuilder,
+        separatorBuilder: separatorBuilder ??
+            (context, index) => Divider(
+                  key: key,
+                  color: separatorColor,
+                  height: sepearatorHeight,
+                ),
         itemCount: itemCount,
         addAutomaticKeepAlives: addAutomaticKeepAlives,
         addRepaintBoundaries: addRepaintBoundaries,
@@ -247,10 +258,17 @@ class NikuListView extends StatelessWidget
 
   set total(int value) => itemCount = value;
 
+  void useItemBuilder(Widget Function(BuildContext, int) builder) {
+    itemBuilder = builder;
+  }
+
+  void useSeparatorBuilder(Widget Function(BuildContext, int) builder) {
+    separatorBuilder = builder;
+  }
+
   set apply(NikuListView? v) {
     if (v == null) return;
 
-    type = v.type ?? type;
     key = v.key ?? key;
     scrollDirection = v.scrollDirection ?? scrollDirection;
     reverse = v.reverse ?? reverse;

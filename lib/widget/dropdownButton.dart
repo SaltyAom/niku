@@ -7,7 +7,7 @@ import 'package:niku/proxy/textStyleProxy.dart';
 // ignore: must_be_immutable
 class NikuDropdownButton<T> extends StatelessWidget
     with
-        NikuBuildMacro,
+        NikuBuildMacro<NikuDropdownButton>,
         UseQueryMacro<NikuDropdownButton>,
         ApplyTextMacro,
         AlignmentDirectionalMacro,
@@ -104,10 +104,6 @@ class NikuDropdownButton<T> extends StatelessWidget
     alignment = v.alignment ?? alignment;
     borderRadius = v.borderRadius ?? borderRadius;
     $internalParent..addAll(v.$internalParent);
-  }
-
-  use(List<NikuDropdownButton> v) {
-    v.forEach((e) => apply = e);
   }
 
   get copied => NikuDropdownButton<T>(

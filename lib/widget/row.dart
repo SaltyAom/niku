@@ -6,7 +6,7 @@ import '../../macros/macros.dart';
 class NikuRow extends StatelessWidget
     with
         AxisLayout,
-        NikuBuildMacro,
+        NikuBuildMacro<NikuRow>,
         UseQueryMacro<NikuRow>,
         ClipMacro,
         CrossAxisAlignmentMacro,
@@ -25,6 +25,7 @@ class NikuRow extends StatelessWidget
   VerticalDirection? verticalDirection;
   TextBaseline? textBaseline;
   Clip? clipBehavior;
+  double? gap;
 
   NikuRow(
     this.children, {
@@ -35,6 +36,7 @@ class NikuRow extends StatelessWidget
     this.textDirection,
     this.verticalDirection,
     this.textBaseline,
+    this.gap,
   }) : super(key: key);
 
   set apply(NikuRow? v) {
@@ -45,11 +47,9 @@ class NikuRow extends StatelessWidget
     crossAxisAlignment = v.crossAxisAlignment ?? crossAxisAlignment;
     textDirection = v.textDirection ?? textDirection;
     textBaseline = v.textBaseline ?? textBaseline;
-    $internalParent..addAll(v.$internalParent);
-  }
+    gap = v.gap ?? gap;
 
-  use(List<NikuRow> v) {
-    v.forEach((e) => apply = e);
+    $internalParent..addAll(v.$internalParent);
   }
 
   NikuRow get copied => NikuRow(
@@ -64,7 +64,7 @@ class NikuRow extends StatelessWidget
       )..$internalParent.addAll($internalParent);
 
   Row get widget => Row(
-        children: childrenWithGap ?? children,
+        children: $internalComposeGap(gap),
         key: key,
         mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.start,
         mainAxisSize: mainAxisSize ?? MainAxisSize.max,
