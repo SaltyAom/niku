@@ -1,9 +1,21 @@
+# [2.1.0-experimental.2] - 2022/02/27
+Breaking Change:
+  - Deprecated required value of `TextFormField` in favor of `hint`.
+    - To migrate, please add factory `.hint` or add it as `named parameter`
+
+Change:
+  - `borderWidth` is now `baseBorderWidth` to follow the same convention with `border`, `borderColor`, and `borderStyle` on proxy
+
+Bug fix:
+  - Fix `'owner!._debugCurrentBuildTarget == this': is not true.` when using `useDarkMode`
+
 # [2.1.0-experimental.1] - 2022/02/23
 Feature:
   - Support all factory method for `NikuGridView`  
   - Add `NikuListView`
   - Add `AxisLayoutMacro`
   - Add `.center`, `.w100`, `safeArea` to `AxisLayoutMacro`
+  - Add `of` alias for `apply`
 
 Change:
   - Remove function allocation from `_init` of `MapTextStyleMacro`

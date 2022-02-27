@@ -264,7 +264,7 @@ extension TextFormFieldInputDecorationProxy on NikuTextFormField {
     decoration?.errorBorder!.apply = value;
   }
 
-  set allBorderWidth(double? width) {
+  set borderWidth(double? width) {
     _initializeAllBorder();
 
     decoration?.baseBorder!.width = width;
@@ -378,6 +378,12 @@ extension TextFormFieldInputDecorationProxy on NikuTextFormField {
     decoration?.errorBorder!.type = NikuInputBorderType.Underline;
   }
 
+  void get noUnderline {
+    _initializeAllBorder();
+
+    decoration?.borderWidth = 0;
+  }
+
   void get outlined {
     _initializeAllBorder();
 
@@ -412,7 +418,7 @@ extension TextFormFieldInputDecorationProxy on NikuTextFormField {
     decoration?.errorBorder!.width = error ?? decoration?.errorBorder?.width;
   }
 
-  set borderWidth(double width) {
+  set baseBorderWidth(double width) {
     _init();
 
     if (decoration?.baseBorder == null) border = NikuInputBorder();

@@ -78,9 +78,10 @@ class NikuTextFormField extends StatelessWidget
   bool adaptive = false;
   bool cupertino = false;
 
-  NikuTextFormField(
-    String? _label, {
+  NikuTextFormField({
     Key? key,
+    String? label,
+    String? hint,
     this.controller,
     this.initialValue,
     this.focusNode,
@@ -136,11 +137,248 @@ class NikuTextFormField extends StatelessWidget
     this.adaptive = false,
     this.cupertino = false,
   }) : super(key: key) {
-    if (_label != null) label = _label;
+    if (label != null) this.label = label;
+    if (hint != null) this.hint = hint;
   }
 
-  factory NikuTextFormField.adaptive(
-    String? _label, {
+  factory NikuTextFormField.label(
+    String? label, {
+    Key? key,
+    String? hint,
+    TextEditingController? controller,
+    String? initialValue,
+    FocusNode? focusNode,
+    NikuInputDecoration? decoration,
+    TextInputType? keyboardType,
+    TextCapitalization? textCapitalization,
+    TextInputAction? textInputAction,
+    NikuTextStyle? style,
+    NikuStrutStyle? strutStyle,
+    TextDirection? textDirection,
+    TextAlign? textAlign,
+    TextAlignVertical? textAlignVertical,
+    bool? autofocus,
+    bool? readOnly,
+    ToolbarOptions? toolbarOptions,
+    bool? showCursor,
+    String? obscuringCharacter,
+    bool? obscureText,
+    bool? autocorrect,
+    SmartDashesType? smartDashesType,
+    SmartQuotesType? smartQuotesType,
+    bool? enableSuggestions,
+    bool? autovalidate,
+    bool? maxLengthEnforced,
+    MaxLengthEnforcement? maxLengthEnforcement,
+    int? maxLines,
+    int? minLines,
+    bool? expands,
+    int? maxLength,
+    ValueChanged<String>? onChanged,
+    GestureTapCallback? onTap,
+    VoidCallback? onEditingComplete,
+    ValueChanged<String>? onFieldSubmitted,
+    FormFieldSetter<String>? onSaved,
+    FormFieldValidator<String>? validator,
+    List<TextInputFormatter>? inputFormatters,
+    bool? enabled,
+    double? cursorWidth,
+    double? cursorHeight,
+    Radius? cursorRadius,
+    Color? cursorColor,
+    Brightness? keyboardAppearance,
+    EdgeInsets? scrollPadding,
+    bool? enableInteractiveSelection,
+    TextSelectionControls? selectionControls,
+    InputCounterWidgetBuilder? buildCounter,
+    ScrollPhysics? scrollPhysics,
+    Iterable<String>? autofillHints,
+    AutovalidateMode? autovalidateMode,
+    ScrollController? scrollController,
+    String? restorationId,
+    bool? enableIMEPersonalizedLearning,
+    bool adaptive = false,
+    bool cupertino = false,
+  }) =>
+      NikuTextFormField(
+        controller: controller,
+        initialValue: initialValue,
+        focusNode: focusNode,
+        decoration: decoration,
+        keyboardType: keyboardType,
+        textCapitalization: textCapitalization,
+        textInputAction: textInputAction,
+        style: style,
+        label: label,
+        hint: hint,
+        strutStyle: strutStyle,
+        textDirection: textDirection,
+        textAlign: textAlign,
+        textAlignVertical: textAlignVertical,
+        autofocus: autofocus,
+        readOnly: readOnly,
+        toolbarOptions: toolbarOptions,
+        showCursor: showCursor,
+        obscuringCharacter: obscuringCharacter,
+        obscureText: obscureText,
+        autocorrect: autocorrect,
+        smartDashesType: smartDashesType,
+        smartQuotesType: smartQuotesType,
+        enableSuggestions: enableSuggestions,
+        autovalidate: autovalidate,
+        maxLengthEnforced: maxLengthEnforced,
+        maxLengthEnforcement: maxLengthEnforcement,
+        maxLines: maxLines,
+        minLines: minLines,
+        expands: expands,
+        maxLength: maxLength,
+        onChanged: onChanged,
+        onTap: onTap,
+        onEditingComplete: onEditingComplete,
+        onFieldSubmitted: onFieldSubmitted,
+        onSaved: onSaved,
+        validator: validator,
+        inputFormatters: inputFormatters,
+        enabled: enabled,
+        cursorWidth: cursorWidth,
+        cursorHeight: cursorHeight,
+        cursorRadius: cursorRadius,
+        cursorColor: cursorColor,
+        keyboardAppearance: keyboardAppearance,
+        scrollPadding: scrollPadding,
+        enableInteractiveSelection: enableInteractiveSelection,
+        selectionControls: selectionControls,
+        buildCounter: buildCounter,
+        scrollPhysics: scrollPhysics,
+        autofillHints: autofillHints,
+        autovalidateMode: autovalidateMode,
+        scrollController: scrollController,
+        restorationId: restorationId,
+        enableIMEPersonalizedLearning: enableIMEPersonalizedLearning,
+        adaptive: adaptive,
+        cupertino: cupertino,
+      );
+
+  factory NikuTextFormField.hint(
+    String? hint, {
+    Key? key,
+    String? label,
+    TextEditingController? controller,
+    String? initialValue,
+    FocusNode? focusNode,
+    NikuInputDecoration? decoration,
+    TextInputType? keyboardType,
+    TextCapitalization? textCapitalization,
+    TextInputAction? textInputAction,
+    NikuTextStyle? style,
+    NikuStrutStyle? strutStyle,
+    TextDirection? textDirection,
+    TextAlign? textAlign,
+    TextAlignVertical? textAlignVertical,
+    bool? autofocus,
+    bool? readOnly,
+    ToolbarOptions? toolbarOptions,
+    bool? showCursor,
+    String? obscuringCharacter,
+    bool? obscureText,
+    bool? autocorrect,
+    SmartDashesType? smartDashesType,
+    SmartQuotesType? smartQuotesType,
+    bool? enableSuggestions,
+    bool? autovalidate,
+    bool? maxLengthEnforced,
+    MaxLengthEnforcement? maxLengthEnforcement,
+    int? maxLines,
+    int? minLines,
+    bool? expands,
+    int? maxLength,
+    ValueChanged<String>? onChanged,
+    GestureTapCallback? onTap,
+    VoidCallback? onEditingComplete,
+    ValueChanged<String>? onFieldSubmitted,
+    FormFieldSetter<String>? onSaved,
+    FormFieldValidator<String>? validator,
+    List<TextInputFormatter>? inputFormatters,
+    bool? enabled,
+    double? cursorWidth,
+    double? cursorHeight,
+    Radius? cursorRadius,
+    Color? cursorColor,
+    Brightness? keyboardAppearance,
+    EdgeInsets? scrollPadding,
+    bool? enableInteractiveSelection,
+    TextSelectionControls? selectionControls,
+    InputCounterWidgetBuilder? buildCounter,
+    ScrollPhysics? scrollPhysics,
+    Iterable<String>? autofillHints,
+    AutovalidateMode? autovalidateMode,
+    ScrollController? scrollController,
+    String? restorationId,
+    bool? enableIMEPersonalizedLearning,
+    bool adaptive = false,
+    bool cupertino = false,
+  }) =>
+      NikuTextFormField(
+        hint: hint,
+        label: label,
+        controller: controller,
+        initialValue: initialValue,
+        focusNode: focusNode,
+        decoration: decoration,
+        keyboardType: keyboardType,
+        textCapitalization: textCapitalization,
+        textInputAction: textInputAction,
+        style: style,
+        strutStyle: strutStyle,
+        textDirection: textDirection,
+        textAlign: textAlign,
+        textAlignVertical: textAlignVertical,
+        autofocus: autofocus,
+        readOnly: readOnly,
+        toolbarOptions: toolbarOptions,
+        showCursor: showCursor,
+        obscuringCharacter: obscuringCharacter,
+        obscureText: obscureText,
+        autocorrect: autocorrect,
+        smartDashesType: smartDashesType,
+        smartQuotesType: smartQuotesType,
+        enableSuggestions: enableSuggestions,
+        autovalidate: autovalidate,
+        maxLengthEnforced: maxLengthEnforced,
+        maxLengthEnforcement: maxLengthEnforcement,
+        maxLines: maxLines,
+        minLines: minLines,
+        expands: expands,
+        maxLength: maxLength,
+        onChanged: onChanged,
+        onTap: onTap,
+        onEditingComplete: onEditingComplete,
+        onFieldSubmitted: onFieldSubmitted,
+        onSaved: onSaved,
+        validator: validator,
+        inputFormatters: inputFormatters,
+        enabled: enabled,
+        cursorWidth: cursorWidth,
+        cursorHeight: cursorHeight,
+        cursorRadius: cursorRadius,
+        cursorColor: cursorColor,
+        keyboardAppearance: keyboardAppearance,
+        scrollPadding: scrollPadding,
+        enableInteractiveSelection: enableInteractiveSelection,
+        selectionControls: selectionControls,
+        buildCounter: buildCounter,
+        scrollPhysics: scrollPhysics,
+        autofillHints: autofillHints,
+        autovalidateMode: autovalidateMode,
+        scrollController: scrollController,
+        restorationId: restorationId,
+        enableIMEPersonalizedLearning: enableIMEPersonalizedLearning,
+        adaptive: adaptive,
+        cupertino: cupertino,
+      );
+
+  factory NikuTextFormField.adaptive({
+    String? label,
     TextEditingController? controller,
     String? initialValue,
     FocusNode? focusNode,
@@ -195,7 +433,7 @@ class NikuTextFormField extends StatelessWidget
     bool? enableIMEPersonalizedLearning,
   }) =>
       NikuTextFormField(
-        _label,
+        label: label,
         controller: controller,
         initialValue: initialValue,
         focusNode: focusNode,
@@ -251,8 +489,8 @@ class NikuTextFormField extends StatelessWidget
         adaptive: true,
       );
 
-  factory NikuTextFormField.cupertino(
-    String _label, {
+  factory NikuTextFormField.cupertino({
+    String? label,
     TextEditingController? controller,
     String? initialValue,
     FocusNode? focusNode,
@@ -307,7 +545,7 @@ class NikuTextFormField extends StatelessWidget
     bool? enableIMEPersonalizedLearning,
   }) =>
       NikuTextFormField(
-        _label,
+        label: label,
         controller: controller,
         initialValue: initialValue,
         focusNode: focusNode,
@@ -444,7 +682,6 @@ class NikuTextFormField extends StatelessWidget
   }
 
   NikuTextFormField get copied => NikuTextFormField(
-        null,
         controller: controller,
         initialValue: initialValue,
         focusNode: focusNode,
@@ -618,6 +855,18 @@ class NikuTextFormField extends StatelessWidget
     if (decoration == null) decoration = NikuInputDecoration();
 
     decoration?.apply = NikuInputDecoration()..labelText = v;
+  }
+
+  set hint(String v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()..hintText = v;
+  }
+
+  set placeholder(String v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()..hintText = v;
   }
 
   set prefix(Widget v) {

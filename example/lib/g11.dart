@@ -20,7 +20,8 @@ class S {
   static final grouped = n.ListView()
     ..p = 0
     ..useParent((v) => v
-      ..bg = Colors.white
+      ..useDarkMode(
+          (v, isDark) => v..bg = isDark ? Colors.grey.shade800 : Colors.white)
       ..rounded = 8
       ..p = 8);
 
@@ -51,8 +52,11 @@ class G11ListView extends StatelessWidget {
 
   @override
   build(context) {
+    final isDarkTheme = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
-      backgroundColor: Colors.grey.shade100,
+      backgroundColor:
+          isDarkTheme ? Colors.grey.shade900 : Colors.grey.shade100,
       body: n.Column([
         n.Column([
           n.Text("Niku 2.1")
@@ -135,9 +139,7 @@ class G11Comparison extends StatelessWidget {
           ..py = 12
           ..rounded
           ..my = 6,
-        n.Button(n.Row([])
-          ..mainBetween
-          ..crossCenter)
+        n.Button(Text("Hi"))
           ..onPressed = () {}
           ..splash = Colors.grey.shade200
           ..p = 0
@@ -147,14 +149,13 @@ class G11Comparison extends StatelessWidget {
           ..grid = 3
           ..aspectRatio = 16 / 9
           ..shrinkWrap = true,
-        n.TextFormField("2.1 Ga1ahad")
+        n.TextFormField.hint("2.1 Ga1ahad")
           ..fontSize = 18
           ..color = Colors.grey.shade800
           ..outlined
           ..rounded
           ..bg = Colors.grey.shade200
           ..borderColor = Colors.transparent
-          ..neverFloat
           ..p = 16
           ..mt = 20
       ])

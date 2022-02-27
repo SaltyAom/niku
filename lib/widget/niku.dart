@@ -576,9 +576,9 @@ extension PropertyBuilder on Niku {
 
   void useDarkMode(Widget Function(Niku, bool) builder) {
     useChild(
-      (context) => Builder(
+      (child) => Builder(
         builder: (context) => builder(
-          _w.niku,
+          child,
           Theme.of(context).brightness == Brightness.dark,
         ),
       ),

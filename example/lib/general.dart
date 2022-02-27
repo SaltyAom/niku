@@ -130,7 +130,9 @@ class AlertPage extends StatelessWidget {
           ..title = Text("Hello World")
           ..content = n.NikuColumn([
             Text("This is alert dialog written in Niku"),
-            n.TextFormField.adaptive("Placeholder").niku..mt = 16,
+            n.TextFormField.adaptive()
+              ..label = "Placeholder"
+              ..mt = 16,
           ])
           ..actions = [
             n.Button(Text("Delete"))
@@ -187,7 +189,9 @@ class General extends HookWidget {
           ..title = Text("Hello World")
           ..content = n.Column([
             Text("This is alert dialog written in Niku"),
-            n.TextFormField.adaptive("Placeholder").niku..mt = 16,
+            n.TextFormField.adaptive()
+              ..label = "Placeholder"
+              ..mt = 16,
           ])
           ..actions = [
             n.Button(Text("Delete"))
@@ -232,7 +236,9 @@ class General extends HookWidget {
         n.Text("Awesome Niku")
           ..h4 = context
           ..useParent((v) => v..mb = 24),
-        n.TextFormField("Value")..useDecoration((p0) => p0..outlined),
+        n.TextFormField()
+          ..label = "Value"
+          ..useDecoration((p0) => p0..outlined),
         n.CheckboxListTile(active.value)
           ..leading
           ..title = Text("General")
