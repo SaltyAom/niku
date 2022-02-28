@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:niku/macros/macros.dart';
 import 'package:niku/objects/textStyle.dart';
-import 'package:niku/proxy/textStyleProxy.dart';
+import 'package:niku/proxy/textStyle.dart';
 
 // ignore: must_be_immutable
 class NikuDropdownButton<T> extends StatelessWidget

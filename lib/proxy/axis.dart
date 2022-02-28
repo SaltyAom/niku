@@ -3,7 +3,7 @@ import 'package:niku/objects/objects.dart';
 
 import '../widget/niku.dart';
 
-abstract class AxisLayout {
+abstract class AxisLayoutProxy {
   MainAxisAlignment? mainAxisAlignment;
   CrossAxisAlignment? crossAxisAlignment;
 
@@ -14,9 +14,30 @@ abstract class AxisLayout {
     crossAxisAlignment = CrossAxisAlignment.center;
   }
 
+  set expanded(Color bg) => useParent((v) => v..expanded);
+
+  set flex(int v) => useParent((w) => Flexible(flex: v, child: w));
+  int get flex {
+    useParent((v) => Flexible(child: v));
+
+    return 1;
+  }
+
+  set backgroundColor(Color bg) => useParent((v) => v..bg = bg);
+  set bg(Color bg) => useParent((v) => v..bg = bg);
+
+  set width(double width) => useParent((v) => v..w = width);
+  set w(double width) => useParent((v) => v..w = width);
   void get fullWidth => useParent((v) => v..w100);
   void get wFull => useParent((v) => v..w100);
   void get w100 => useParent((v) => v..w100);
+
+  set height(double height) => useParent((v) => v..h = height);
+  set h(double height) => useParent((v) => v..h = height);
+  void get fullHeight => useParent((v) => v..w100);
+  void get hFull => useParent((v) => v..w100);
+  void get h100 => useParent((v) => v..w100);
+
   void get scrollable => useParent((v) => v..scrollable);
 
   void get safeArea => useParent((v) => SafeArea(child: v));
@@ -58,6 +79,49 @@ abstract class AxisLayout {
   }
 
   set rounded(double rounded) => useParent((v) => v..rounded = rounded);
+
+  set border(Border v) => useParent(
+      (w) => DecoratedBox(decoration: BoxDecoration(border: v), child: w));
+
+  useBorder({
+    Color? color,
+    double? width,
+    BorderStyle? style,
+  }) {
+    useParent(
+      (w) => DecoratedBox(
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: color ?? Colors.transparent,
+            width: width ?? 0,
+            style: style ?? BorderStyle.solid,
+          ),
+        ),
+        child: w,
+      ),
+    );
+  }
+
+  useRoundedBorder({
+    double? rounded,
+    Color? color,
+    double? width,
+    BorderStyle? style,
+  }) {
+    useParent(
+      (w) => DecoratedBox(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(rounded ?? 99999)),
+          border: Border.all(
+            color: color ?? Colors.transparent,
+            width: width ?? 0,
+            style: style ?? BorderStyle.solid,
+          ),
+        ),
+        child: w,
+      ),
+    );
+  }
 
   // Convinient Property Builder
   set padding(EdgeInsets v) {

@@ -1,3 +1,13 @@
+# [2.1.0-experimental.4] - 2022/02/28
+Breaking Change:
+  - `flexible` is now `flex`
+
+Feature:
+  - Add mandatory shortcut to `AxisLayoutProxy`
+
+Change:
+  - `AxisLayoutMacro` is now `AxisLayoutProxy`
+
 # [2.1.0-experimental.3] - 2022/02/27
 Feature:
   - Add `useThemeSelector` for declarative `useDarkMode`
@@ -45,7 +55,7 @@ Feature:
 
 Change:
   - `border` is now `baseBorder`, and `allBorder` is now `border`
-  - margin property now use `Padding` instead of `Container` because that's how native Flutter doing it. Yes, margin is actually padding in Flutter.
+  - margin property now uses `Padding` instead of `Container` because that's how native Flutter doing it. Yes, margin is actually padding in Flutter.
 
 ## [2.0.0] - 2022/02/21
 Base on 2.0.0-rc.8

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
 import '../../macros/macros.dart';
+import '../../proxy/proxy.dart';
 
 // ignore: must_be_immutable
 class NikuRow extends StatelessWidget
     with
-        AxisLayout,
+        AxisLayoutProxy,
         NikuBuildMacro<NikuRow>,
         UseQueryMacro<NikuRow>,
         ClipMacro,

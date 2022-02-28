@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../widget/niku.dart';
 import '../macros/macros.dart';
+import '../proxy/proxy.dart';
 
 // ignore: must_be_immutable
 class NikuColumn extends StatelessWidget
     with
-        AxisLayout,
+        AxisLayoutProxy,
         NikuBuildMacro<NikuColumn>,
         UseQueryMacro<NikuColumn>,
         ClipMacro,

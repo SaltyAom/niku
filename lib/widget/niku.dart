@@ -371,8 +371,12 @@ extension PropertyBuilder on Niku {
   set bottom(double v) => _w = Positioned(bottom: v, child: _w);
   set right(double v) => _w = Positioned(right: v, child: _w);
 
-  void get flex => _w = Flexible(child: _w);
-  set flexible(int v) => _w = Flexible(flex: v, child: _w);
+  set flex(int v) => _w = Flexible(flex: v, child: _w);
+  int get flex {
+    _w = Flexible(child: _w);
+
+    return 1;
+  }
 
   set shadows(List<BoxShadow> v) =>
       _w = DecoratedBox(child: _w, decoration: BoxDecoration(boxShadow: v));

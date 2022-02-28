@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart' show CupertinoTextField;
 import 'package:flutter/services.dart';
-import 'package:niku/proxy/textStyleProxy.dart';
+import 'package:niku/proxy/textStyle.dart';
 
 import '../objects/objects.dart';
 import '../macros/macros.dart';
-import '../proxy/textStyleProxy.dart';
+import '../proxy/textStyle.dart';
 
 // ignore: must_be_immutable
 class NikuTextFormField extends StatelessWidget
