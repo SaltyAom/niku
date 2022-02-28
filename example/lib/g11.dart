@@ -141,6 +141,10 @@ class G11Comparison extends StatelessWidget {
           ..py = 12
           ..rounded
           ..my = 6,
+        n.Box()
+          ..w = 50
+          ..h = 50
+          ..useDarkMode((p0, p1) => p0..bg = p1 ? Colors.white : Colors.black),
         n.TextFormField.hint("2.1 Ga1ahad")
           ..fontSize = 18
           ..color = Colors.grey.shade800

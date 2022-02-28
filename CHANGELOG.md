@@ -2,6 +2,9 @@
 Feature:
   - Add `useThemeSelector` for declarative `useDarkMode`
 
+Bug fix:
+  - `useDarkMode` and `useThemeSelector` not switching context between
+
 # [2.1.0-experimental.2] - 2022/02/27
 Breaking Change:
   - Deprecated required value of `TextFormField` in favor of `hint`.
