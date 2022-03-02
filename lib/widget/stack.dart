@@ -5,7 +5,7 @@ import '../macros/macros.dart';
 // ignore: must_be_immutable
 class NikuStack extends StatelessWidget
     with
-        NikuBuildMacro,
+        NikuBuildMacro<NikuStack>,
         UseQueryMacro<NikuStack>,
         AlignmentDirectionalMacro,
         ClipMacro,
@@ -35,10 +35,6 @@ class NikuStack extends StatelessWidget
     clipBehavior = v.clipBehavior ?? clipBehavior;
 
     $internalParent..addAll(v.$internalParent);
-  }
-
-  use(List<NikuStack> v) {
-    v.forEach((e) => apply = e);
   }
 
   NikuStack get copied => NikuStack(

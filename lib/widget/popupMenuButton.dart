@@ -5,7 +5,10 @@ import '../objects/objects.dart';
 
 // ignore: must_be_immutable
 class NikuPopupMenuButton<T> extends StatelessWidget
-    with NikuBuildMacro, UseQueryMacro<NikuPopupMenuButton>, PaddingMacro {
+    with
+        NikuBuildMacro<NikuPopupMenuButton>,
+        UseQueryMacro<NikuPopupMenuButton>,
+        PaddingMacro {
   NikuPopupMenuButton(
     this.child, {
     Key? key,
@@ -60,10 +63,6 @@ class NikuPopupMenuButton<T> extends StatelessWidget
     enableFeedback = v.enableFeedback ?? enableFeedback;
     iconSize = v.iconSize ?? iconSize;
     $internalParent..addAll(v.$internalParent);
-  }
-
-  use(List<NikuPopupMenuButton> v) {
-    v.forEach((e) => apply = e);
   }
 
   NikuPopupMenuButton<T> get copied => NikuPopupMenuButton<T>(

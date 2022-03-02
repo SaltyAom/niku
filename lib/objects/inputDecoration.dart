@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import '../macros/macros.dart';
 import '../objects/objects.dart';
 
-class NikuInputDecoration with ContentPaddingMacro, FloatingLabelBehaviorMacro {
+class NikuInputDecoration
+    with ContentPaddingMacro, ConstraintsMacro, FloatingLabelBehaviorMacro {
   Widget? icon;
   Widget? label;
   String? labelText;
@@ -45,7 +46,7 @@ class NikuInputDecoration with ContentPaddingMacro, FloatingLabelBehaviorMacro {
   NikuInputBorder? focusedErrorBorder;
   NikuInputBorder? disabledBorder;
   NikuInputBorder? enabledBorder;
-  NikuInputBorder? border;
+  NikuInputBorder? baseBorder;
   bool? enabled;
   String? semanticCounterText;
   bool? alignLabelWithHint;
@@ -93,7 +94,7 @@ class NikuInputDecoration with ContentPaddingMacro, FloatingLabelBehaviorMacro {
     this.focusedErrorBorder,
     this.disabledBorder,
     this.enabledBorder,
-    this.border,
+    this.baseBorder,
     this.enabled,
     this.semanticCounterText,
     this.alignLabelWithHint,
@@ -101,7 +102,7 @@ class NikuInputDecoration with ContentPaddingMacro, FloatingLabelBehaviorMacro {
   });
 
   _initializeAllBorder() {
-    if (border == null) border = NikuInputBorder();
+    if (baseBorder == null) baseBorder = NikuInputBorder();
     if (enabledBorder == null) enabledBorder = NikuInputBorder();
     if (disabledBorder == null) disabledBorder = NikuInputBorder();
     if (focusedErrorBorder == null) focusedErrorBorder = NikuInputBorder();
@@ -109,10 +110,10 @@ class NikuInputDecoration with ContentPaddingMacro, FloatingLabelBehaviorMacro {
     if (errorBorder == null) errorBorder = NikuInputBorder();
   }
 
-  set allBorder(NikuInputBorder? value) {
+  set border(NikuInputBorder? value) {
     _initializeAllBorder();
 
-    border!.apply = value;
+    baseBorder!.apply = value;
     enabledBorder!.apply = value;
     disabledBorder!.apply = value;
     focusedBorder!.apply = value;
@@ -120,10 +121,10 @@ class NikuInputDecoration with ContentPaddingMacro, FloatingLabelBehaviorMacro {
     errorBorder!.apply = value;
   }
 
-  set allBorderWidth(double? width) {
+  set baseBorderWidth(double? width) {
     _initializeAllBorder();
 
-    border!.width = width;
+    baseBorder!.width = width;
     enabledBorder!.width = width;
     disabledBorder!.width = width;
     focusedBorder!.width = width;
@@ -131,10 +132,10 @@ class NikuInputDecoration with ContentPaddingMacro, FloatingLabelBehaviorMacro {
     errorBorder!.width = width;
   }
 
-  set allBorderColor(Color? color) {
+  set borderColor(Color? color) {
     _initializeAllBorder();
 
-    border!.color = color;
+    baseBorder!.color = color;
     enabledBorder!.color = color;
     disabledBorder!.color = color;
     focusedBorder!.color = color;
@@ -142,15 +143,44 @@ class NikuInputDecoration with ContentPaddingMacro, FloatingLabelBehaviorMacro {
     errorBorder!.color = color;
   }
 
+  set bg(Color color) {
+    filled = true;
+    fillColor = color;
+  }
+
   set borderRadius(double? radius) {
     _initializeAllBorder();
 
-    border!.radius = radius;
+    baseBorder!.radius = radius;
     enabledBorder!.radius = radius;
     disabledBorder!.radius = radius;
     focusedBorder!.radius = radius;
     focusedErrorBorder!.radius = radius;
     errorBorder!.radius = radius;
+  }
+
+  double get rounded {
+    _initializeAllBorder();
+
+    baseBorder!.radius = 99999;
+    enabledBorder!.radius = 9999;
+    disabledBorder!.radius = 9999;
+    focusedBorder!.radius = 9999;
+    focusedErrorBorder!.radius = 9999;
+    errorBorder!.radius = 9999;
+
+    return 99999;
+  }
+
+  set rounded(double v) {
+    _initializeAllBorder();
+
+    baseBorder!.radius = v;
+    enabledBorder!.radius = v;
+    disabledBorder!.radius = v;
+    focusedBorder!.radius = v;
+    focusedErrorBorder!.radius = v;
+    errorBorder!.radius = v;
   }
 
   void useBorder(
@@ -164,7 +194,7 @@ class NikuInputDecoration with ContentPaddingMacro, FloatingLabelBehaviorMacro {
   ) {
     _initializeAllBorder();
 
-    border = all?.asNiku ?? border;
+    baseBorder = all?.asNiku ?? baseBorder;
     enabledBorder = enabled?.asNiku ?? enabledBorder;
     disabledBorder = disabled?.asNiku ?? disabledBorder;
     focusedBorder = focused?.asNiku ?? focusedBorder;
@@ -183,7 +213,7 @@ class NikuInputDecoration with ContentPaddingMacro, FloatingLabelBehaviorMacro {
   ) {
     _initializeAllBorder();
 
-    border = all ?? border!;
+    baseBorder = all ?? baseBorder!;
     enabledBorder = enabled ?? enabledBorder!;
     disabledBorder = disabled ?? disabledBorder!;
     focusedBorder = focused ?? focusedBorder!;
@@ -194,7 +224,7 @@ class NikuInputDecoration with ContentPaddingMacro, FloatingLabelBehaviorMacro {
   void get underline {
     _initializeAllBorder();
 
-    border!.type = NikuInputBorderType.Underline;
+    baseBorder!.type = NikuInputBorderType.Underline;
     enabledBorder!.type = NikuInputBorderType.Underline;
     disabledBorder!.type = NikuInputBorderType.Underline;
     focusedBorder!.type = NikuInputBorderType.Underline;
@@ -205,7 +235,7 @@ class NikuInputDecoration with ContentPaddingMacro, FloatingLabelBehaviorMacro {
   void get outlined {
     _initializeAllBorder();
 
-    border!.type = NikuInputBorderType.Outlined;
+    baseBorder!.type = NikuInputBorderType.Outlined;
     enabledBorder!.type = NikuInputBorderType.Outlined;
     disabledBorder!.type = NikuInputBorderType.Outlined;
     focusedBorder!.type = NikuInputBorderType.Outlined;
@@ -224,7 +254,7 @@ class NikuInputDecoration with ContentPaddingMacro, FloatingLabelBehaviorMacro {
   ) {
     _initializeAllBorder();
 
-    border!.width = all ?? border?.width;
+    baseBorder!.width = all ?? baseBorder?.width;
     enabledBorder!.width = enabled ?? enabledBorder?.width;
     disabledBorder!.width = disabled ?? disabledBorder?.width;
     focusedBorder!.width = focused ?? focusedBorder?.width;
@@ -233,8 +263,8 @@ class NikuInputDecoration with ContentPaddingMacro, FloatingLabelBehaviorMacro {
   }
 
   set borderWidth(double width) {
-    if (border == null) border = NikuInputBorder();
-    border?.width = width;
+    if (baseBorder == null) baseBorder = NikuInputBorder();
+    baseBorder?.width = width;
   }
 
   set enabledBorderWidth(double width) {
@@ -273,7 +303,7 @@ class NikuInputDecoration with ContentPaddingMacro, FloatingLabelBehaviorMacro {
   ) {
     _initializeAllBorder();
 
-    border!.color = all ?? border?.color;
+    baseBorder!.color = all ?? baseBorder?.color;
     enabledBorder!.color = enabled ?? enabledBorder?.color;
     disabledBorder!.color = disabled ?? disabledBorder?.color;
     focusedBorder!.color = focused ?? focusedBorder?.color;
@@ -281,9 +311,9 @@ class NikuInputDecoration with ContentPaddingMacro, FloatingLabelBehaviorMacro {
     errorBorder!.color = error ?? errorBorder?.color;
   }
 
-  set borderColor(Color color) {
-    if (border == null) border = NikuInputBorder();
-    border?.color = color;
+  set baseBorderColor(Color color) {
+    if (baseBorder == null) baseBorder = NikuInputBorder();
+    baseBorder?.color = color;
   }
 
   set enabledBorderColor(Color color) {
@@ -505,7 +535,7 @@ class NikuInputDecoration with ContentPaddingMacro, FloatingLabelBehaviorMacro {
     focusedErrorBorder = v.focusedErrorBorder ?? focusedErrorBorder;
     disabledBorder = v.disabledBorder ?? disabledBorder;
     enabledBorder = v.enabledBorder ?? enabledBorder;
-    border = v.border ?? border;
+    baseBorder = v.baseBorder ?? baseBorder;
     enabled = v.enabled ?? enabled;
     semanticCounterText = v.semanticCounterText ?? semanticCounterText;
     alignLabelWithHint = v.alignLabelWithHint ?? alignLabelWithHint;
@@ -554,7 +584,7 @@ class NikuInputDecoration with ContentPaddingMacro, FloatingLabelBehaviorMacro {
         focusedErrorBorder: focusedErrorBorder,
         disabledBorder: disabledBorder,
         enabledBorder: enabledBorder,
-        border: border,
+        baseBorder: baseBorder,
         enabled: enabled,
         semanticCounterText: semanticCounterText,
         alignLabelWithHint: alignLabelWithHint,
@@ -623,10 +653,10 @@ class NikuInputDecoration with ContentPaddingMacro, FloatingLabelBehaviorMacro {
                 ? enabledBorder!.outlined
                 : enabledBorder!.value)
             : null,
-        border: border != null
-            ? (border!.type == NikuInputBorderType.Outlined
-                ? border!.outlined
-                : border!.value)
+        border: baseBorder != null
+            ? (baseBorder!.type == NikuInputBorderType.Outlined
+                ? baseBorder!.outlined
+                : baseBorder!.value)
             : null,
         enabled: enabled ?? true,
         semanticCounterText: semanticCounterText,
@@ -679,7 +709,7 @@ extension TransformNikuInputDecoration on InputDecoration {
       focusedErrorBorder: focusedErrorBorder?.asNiku,
       disabledBorder: disabledBorder?.asNiku,
       enabledBorder: enabledBorder?.asNiku,
-      border: border?.asNiku,
+      baseBorder: border?.asNiku,
       enabled: enabled,
       semanticCounterText: semanticCounterText,
       alignLabelWithHint: alignLabelWithHint,

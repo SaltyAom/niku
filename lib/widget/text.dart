@@ -7,7 +7,7 @@ import '../macros/macros.dart';
 // ignore: must_be_immutable
 class NikuText extends StatelessWidget
     with
-        NikuBuildMacro,
+        NikuBuildMacro<NikuText>,
         UseQueryMacro<NikuText>,
         ApplyTextMacro,
         ApplyStrutStyleMacro,
@@ -68,10 +68,6 @@ class NikuText extends StatelessWidget
     textHeightBehavior = v.textHeightBehavior ?? textHeightBehavior;
 
     $internalParent..addAll(v.$internalParent);
-  }
-
-  use(List<NikuText> v) {
-    v.forEach((e) => apply = e);
   }
 
   NikuText get copied => NikuText(

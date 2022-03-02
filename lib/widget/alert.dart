@@ -74,7 +74,7 @@ Future<void> showNikuDialog({
 /// ```
 class NikuAlert extends StatelessWidget
     with
-        NikuBuildMacro,
+        NikuBuildMacro<NikuAlert>,
         UseQueryMacro<NikuAlert>,
         ActionPaddingFullMacro,
         ApplyTitleTextMacro,
@@ -275,10 +275,6 @@ class NikuAlert extends StatelessWidget
     scrollable = scrollable ?? scrollable;
 
     $internalParent.addAll(v.$internalParent);
-  }
-
-  use(List<NikuAlert> v) {
-    v.forEach((e) => apply = e);
   }
 
   NikuAlert get copied => NikuAlert(

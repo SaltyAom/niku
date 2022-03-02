@@ -6,8 +6,6 @@ abstract class InsetPaddingMacro {
   _initialize(Function callback) {
     if (insetPadding == null) insetPadding = new NikuEdgeInsets.all(20);
 
-    print(insetPadding?.value);
-
     callback();
   }
 
@@ -45,8 +43,6 @@ abstract class InsetPaddingFullMacro {
 
   _initialize(Function callback) {
     if (insetPadding == null) insetPadding = new NikuEdgeInsets.all(20);
-
-    print(insetPadding?.value);
 
     callback();
   }

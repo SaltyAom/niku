@@ -6,7 +6,7 @@ import '../macros/macros.dart';
 // ignore: must_be_immutable
 class NikuCheckboxListTile extends StatelessWidget
     with
-        NikuBuildMacro,
+        NikuBuildMacro<NikuCheckboxListTile>,
         UseQueryMacro<NikuCheckboxListTile>,
         ContentPaddingMacro,
         ListTileControlAffinityMacro {
@@ -95,10 +95,6 @@ class NikuCheckboxListTile extends StatelessWidget
     hoverColor = v.hoverColor ?? hoverColor;
     focusColor = v.focusColor ?? focusColor;
     $internalParent..addAll(v.$internalParent);
-  }
-
-  use(List<NikuCheckboxListTile> v) {
-    v.forEach((e) => apply = e);
   }
 
   NikuCheckboxListTile get copied => NikuCheckboxListTile(

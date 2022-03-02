@@ -19,6 +19,16 @@ abstract class UseQueryMacro<T extends Widget> {
     apply = builder(copied, Theme.of(context).brightness == Brightness.dark);
   }
 
+  void useThemeSelector(
+    BuildContext context, {
+    required T Function(T) light,
+    required T Function(T) dark,
+  }) {
+    apply = Theme.of(context).brightness == Brightness.dark
+        ? dark(copied)
+        : light(copied);
+  }
+
   /// ```dart
   /// void useScreen({
   ///   // > 568px

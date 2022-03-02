@@ -6,8 +6,6 @@ abstract class ActionPaddingMacro {
   _initialize(Function callback) {
     if (actionPadding == null) actionPadding = new NikuEdgeInsets.all(20);
 
-    print(actionPadding?.value);
-
     callback();
   }
 
@@ -48,8 +46,6 @@ abstract class ActionPaddingFullMacro {
 
   _initialize(Function callback) {
     if (actionPadding == null) actionPadding = new NikuEdgeInsets.all(20);
-
-    print(actionPadding?.value);
 
     callback();
   }

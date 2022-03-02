@@ -9,7 +9,7 @@ import '../macros/macros.dart';
 // ignore: must_be_immutable
 class NikuSelectableText extends StatelessWidget
     with
-        NikuBuildMacro,
+        NikuBuildMacro<NikuSelectableText>,
         UseQueryMacro<NikuSelectableText>,
         ApplyTextMacro,
         ApplyStrutStyleMacro,
@@ -109,10 +109,6 @@ class NikuSelectableText extends StatelessWidget
     textHeightBehavior = v.textHeightBehavior ?? textHeightBehavior;
 
     $internalParent..addAll(v.$internalParent);
-  }
-
-  use(List<NikuSelectableText> v) {
-    v.forEach((e) => apply = e);
   }
 
   NikuSelectableText get copied => NikuSelectableText(

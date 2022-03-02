@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:niku/proxy/proxy.dart';
 
 import '../objects/objects.dart';
 import '../macros/macros.dart';
@@ -8,10 +9,11 @@ enum NikuButtonType { Text, Elevated, Outlined }
 // ignore: must_be_immutable
 class NikuButton extends StatelessWidget
     with
-        NikuBuildMacro,
+        NikuBuildMacro<NikuButton>,
         UseQueryMacro<NikuButton>,
         ApplyButtonStyleMacro,
-        ClipMacro {
+        ClipMacro,
+        ButtonStyleTextStyleProxy {
   Widget child;
 
   Widget? icon;
@@ -197,10 +199,6 @@ class NikuButton extends StatelessWidget
     label = v.label ?? label;
     enable = v.enable;
     $internalParent..addAll(v.$internalParent);
-  }
-
-  use(List<NikuButton> v) {
-    v.forEach((e) => apply = e);
   }
 
   NikuButton get copied => NikuButton(

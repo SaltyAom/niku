@@ -12,7 +12,7 @@ import '../macros/macros.dart';
 // ignore: must_be_immutable
 class NikuImage extends StatelessWidget
     with
-        NikuBuildMacro,
+        NikuBuildMacro<NikuImage>,
         UseQueryMacro<NikuImage>,
         ColorBlendModeMacro,
         BoxFitMacro,
@@ -405,10 +405,6 @@ class NikuImage extends StatelessWidget
     excludeFromSemantics = v.excludeFromSemantics ?? excludeFromSemantics;
     isAntiAlias = v.isAntiAlias ?? isAntiAlias;
     $internalParent..addAll(v.$internalParent);
-  }
-
-  use(List<NikuImage> v) {
-    v.forEach((e) => apply = e);
   }
 
   NikuImage get copied => NikuImage(

@@ -32,23 +32,22 @@ extension TransformNikuParent on Widget {
 }
 
 extension PropertyBuilder on Niku {
-  set margin(EdgeInsets v) => _w = Container(margin: v, child: _w);
+  set margin(EdgeInsets v) => _w = Padding(padding: v, child: _w);
   set nikuMargin(UseNikuCallback<NikuEdgeInsets> cb) =>
-      _w = Container(margin: cb(NikuEdgeInsets()).value, child: _w);
+      _w = Padding(padding: cb(NikuEdgeInsets()).value, child: _w);
 
-  set m(double v) => _w = Container(margin: EdgeInsets.all(v), child: _w);
+  set m(double v) => _w = Padding(padding: EdgeInsets.all(v), child: _w);
   set mx(double v) =>
-      _w = Container(margin: EdgeInsets.symmetric(horizontal: v), child: _w);
+      _w = Padding(padding: EdgeInsets.symmetric(horizontal: v), child: _w);
   set my(double v) =>
-      _w = Container(margin: EdgeInsets.symmetric(vertical: v), child: _w);
-  set mt(double v) =>
-      _w = Container(margin: EdgeInsets.only(top: v), child: _w);
+      _w = Padding(padding: EdgeInsets.symmetric(vertical: v), child: _w);
+  set mt(double v) => _w = Padding(padding: EdgeInsets.only(top: v), child: _w);
   set mb(double v) =>
-      _w = Container(margin: EdgeInsets.only(bottom: v), child: _w);
+      _w = Padding(padding: EdgeInsets.only(bottom: v), child: _w);
   set ml(double v) =>
-      _w = Container(margin: EdgeInsets.only(left: v), child: _w);
+      _w = Padding(padding: EdgeInsets.only(left: v), child: _w);
   set mr(double v) =>
-      _w = Container(margin: EdgeInsets.only(right: v), child: _w);
+      _w = Padding(padding: EdgeInsets.only(right: v), child: _w);
 
   set padding(EdgeInsets v) => _w = Padding(padding: v, child: _w);
   set nikuPadding(UseNikuCallback<NikuEdgeInsets> cb) =>
@@ -372,8 +371,12 @@ extension PropertyBuilder on Niku {
   set bottom(double v) => _w = Positioned(bottom: v, child: _w);
   set right(double v) => _w = Positioned(right: v, child: _w);
 
-  void get flex => _w = Flexible(child: _w);
-  set flexible(int v) => _w = Flexible(flex: v, child: _w);
+  set flex(int v) => _w = Flexible(flex: v, child: _w);
+  int get flex {
+    _w = Flexible(child: _w);
+
+    return 1;
+  }
 
   set shadows(List<BoxShadow> v) =>
       _w = DecoratedBox(child: _w, decoration: BoxDecoration(boxShadow: v));
@@ -467,8 +470,32 @@ extension PropertyBuilder on Niku {
   void useChild(Widget Function(Niku child) builder) => _w = builder(_w.niku);
 
   void get safeArea => _w = SafeArea(child: _w);
+
   void get safeAreaX => _w = SafeArea(child: _w, top: false, bottom: false);
   void get safeAreaY => _w = SafeArea(child: _w, left: false, right: false);
+
+  void get safeAreaTop =>
+      _w = SafeArea(child: _w, bottom: false, left: false, right: false);
+  void get safeAreaBottom =>
+      _w = SafeArea(child: _w, top: false, left: false, right: false);
+  void get safeAreaLeft =>
+      _w = SafeArea(child: _w, right: false, top: false, bottom: false);
+  void get safeAreaRight =>
+      _w = SafeArea(child: _w, left: false, top: false, bottom: false);
+
+  void get safe => _w = SafeArea(child: _w);
+
+  void get safeX => _w = SafeArea(child: _w, top: false, bottom: false);
+  void get safeY => _w = SafeArea(child: _w, left: false, right: false);
+
+  void get safeTop =>
+      _w = SafeArea(child: _w, bottom: false, left: false, right: false);
+  void get safeBottom =>
+      _w = SafeArea(child: _w, top: false, left: false, right: false);
+  void get safeLeft =>
+      _w = SafeArea(child: _w, right: false, top: false, bottom: false);
+  void get safeRight =>
+      _w = SafeArea(child: _w, left: false, top: false, bottom: false);
 
   set gradient(Gradient v) =>
       _w = DecoratedBox(decoration: BoxDecoration(gradient: v), child: _w);
@@ -553,11 +580,26 @@ extension PropertyBuilder on Niku {
 
   void useDarkMode(Widget Function(Niku, bool) builder) {
     useChild(
-      (context) => Builder(
+      (child) => Builder(
         builder: (context) => builder(
-          _w.niku,
+          child.build(context).niku,
           Theme.of(context).brightness == Brightness.dark,
         ),
+      ),
+    );
+  }
+
+  void useThemeSelector({
+    required Widget Function(Niku) light,
+    required Widget Function(Niku) dark,
+  }) {
+    useChild(
+      (child) => Builder(
+        builder: (context) => Theme.of(context).brightness == Brightness.dark
+            ? dark(child.build(context).niku)
+            : light(
+                child.build(context).niku,
+              ),
       ),
     );
   }

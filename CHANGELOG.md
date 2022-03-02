@@ -1,3 +1,62 @@
+# [2.1.0-experimental.4] - 2022/02/28
+Breaking Change:
+  - `flexible` is now `flex`
+
+Feature:
+  - Add mandatory shortcut to `AxisLayoutProxy`
+
+Change:
+  - `AxisLayoutMacro` is now `AxisLayoutProxy`
+
+# [2.1.0-experimental.3] - 2022/02/27
+Feature:
+  - Add `useThemeSelector` for declarative `useDarkMode`
+
+Bug fix:
+  - `useDarkMode` and `useThemeSelector` not switching context between
+
+# [2.1.0-experimental.2] - 2022/02/27
+Breaking Change:
+  - Deprecated required value of `TextFormField` in favor of `hint`.
+    - To migrate, please add factory `.hint` or add it as `named parameter`
+
+Change:
+  - `borderWidth` is now `baseBorderWidth` to follow the same convention with `border`, `borderColor`, and `borderStyle` on proxy
+
+Bug fix:
+  - Fix `'owner!._debugCurrentBuildTarget == this': is not true.` when using `useDarkMode`
+
+# [2.1.0-experimental.1] - 2022/02/23
+Feature:
+  - Support all factory method for `NikuGridView`  
+  - Add `NikuListView`
+  - Add `AxisLayoutMacro`
+  - Add `.center`, `.w100`, `safeArea` to `AxisLayoutMacro`
+  - Add `of` alias for `apply`
+
+Change:
+  - Remove function allocation from `_init` of `MapTextStyleMacro`
+  - Add `center` to `NikuColumn`, and `NikuRow`
+  - Replace `childrenWithGap` with `$internalComposeGap` in `GapMacro`
+  - Add `gap` property to AxisLayout
+  - gap can now be applied
+  - `childrenWithGap` now only composed on build
+
+Bug fix:
+  - Remove `print` from `PaddingMacro`
+
+# [2.1.0-experimental.0] - 2022/02/23
+Feature:
+  - Text Style Proxy, Button Proxy, TextFormField Proxy
+  - Add `ConstraintsMacro` to `NikuInputDecoration`
+  - Add `useTextStyle` to `DropdownButton`
+  - Add State Utility Hooks to `NikuButton`
+  - Add `color` setter to `NikuButtonStyle`
+
+Change:
+  - `border` is now `baseBorder`, and `allBorder` is now `border`
+  - margin property now uses `Padding` instead of `Container` because that's how native Flutter doing it. Yes, margin is actually padding in Flutter.
+
 ## [2.0.0] - 2022/02/21
 Base on 2.0.0-rc.8
 
@@ -6,7 +65,7 @@ Simply an entire rewrite, read more at [version 2 introduction](https://medium.c
 ## [2.0.0-compat.0] - 2022/02/21
 Base on 2.0.0-rc.8
 
-A compatability version for working with both v1 and v2 for gradually migrate from v1.
+A compatibility version for working with both v1 and v2 for gradually migrating from v1.
 
 To gradually migrate from v1, simply replace all:
 ```dart

@@ -5,7 +5,7 @@ import '../macros/macros.dart';
 
 // ignore: must_be_immutable
 class NikuCheckbox extends StatelessWidget
-    with NikuBuildMacro, UseQueryMacro<NikuCheckbox> {
+    with NikuBuildMacro<NikuCheckbox>, UseQueryMacro<NikuCheckbox> {
   bool? value;
   ValueChanged<bool?>? onChanged;
   MouseCursor? mouseCursor;
@@ -71,10 +71,6 @@ class NikuCheckbox extends StatelessWidget
     shape = v.shape ?? shape;
     side = v.side ?? side;
     $internalParent..addAll(v.$internalParent);
-  }
-
-  use(List<NikuCheckbox> v) {
-    v.forEach((e) => apply = e);
   }
 
   NikuCheckbox get copied => NikuCheckbox(
