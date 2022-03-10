@@ -1,3 +1,4 @@
+import 'package:example/angle.dart';
 import 'package:flutter/material.dart';
 
 import 'music.dart';
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       darkTheme: ThemeData.dark(),
-      home: G11Comparison(),
+      home: AngleSeeker(),
       // home: const Music(
       //   cover:
       //       "https://static.wikia.nocookie.net/iowiro/images/c/c5/News_10202019a.jpg",

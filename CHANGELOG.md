@@ -1,3 +1,34 @@
+# [2.1.0] - 2022/02/28
+Breaking Change:
+  - `flexible` is now `flex`
+  - Deprecated required value of `TextFormField` in favor of `hint`.
+    - To migrate, please add factory `.hint` or add it as `named parameter`
+
+
+Feature:
+  - Add mandatory shortcut to `AxisLayoutProxy`
+  - Add `useThemeSelector` for declarative `useDarkMode`
+  - Support all factory method for `NikuGridView`  
+  - Add `NikuListView`
+  - Add `AxisLayoutMacro`
+  - Add `.center`, `.w100`, `safeArea` to `AxisLayoutMacro`
+  - Add `of` alias for `apply`
+
+Change:
+  - `AxisLayoutMacro` is now `AxisLayoutProxy`
+  - `borderWidth` is now `baseBorderWidth` to follow the same convention with `border`, `borderColor`, and `borderStyle` on proxy
+  - Remove function allocation from `_init` of `MapTextStyleMacro`
+  - Add `center` to `NikuColumn`, and `NikuRow`
+  - Replace `childrenWithGap` with `$internalComposeGap` in `GapMacro`
+  - Add `gap` property to AxisLayout
+  - gap can now be applied
+  - `childrenWithGap` now only composed on build
+
+Bug fix:
+  - `useDarkMode` and `useThemeSelector` not switching context between
+  - Fix `'owner!._debugCurrentBuildTarget == this': is not true.` when using `useDarkMode`
+  - Remove `print` from `PaddingMacro`
+
 # [2.1.0-experimental.4] - 2022/02/28
 Breaking Change:
   - `flexible` is now `flex`

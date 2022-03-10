@@ -11,6 +11,7 @@ typedef Parent = Niku;
 
 typedef On = NikuOn;
 typedef Screen = NikuScreen;
+typedef Animated<T> = NikuAnimated<T>;
 
 typedef Alert = NikuAlert;
 typedef Button = NikuButton;
