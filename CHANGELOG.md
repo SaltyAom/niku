@@ -1,9 +1,7 @@
 # [2.1.1] - 2022/03/10
 Bug fix:
+  - Unmatch filename with capital case
   - Remove `print` from `PaddingMacro`
-
-Bug fix:
-  - Fix `'owner!._debugCurrentBuildTarget == this': is not true.` when using `useDarkMode`
 
 # [2.1.0-experimental.4] - 2022/02/28
 Breaking Change:
