@@ -1,3 +1,8 @@
+# [2.1.1] - 2022/03/10
+Bug fix:
+  - Unmatch filename with capital case
+  - Remove `print` from `PaddingMacro`
+
 # [2.1.0] - 2022/02/28
 Breaking Change:
   - `flexible` is now `flex`
@@ -27,7 +32,6 @@ Change:
 Bug fix:
   - `useDarkMode` and `useThemeSelector` not switching context between
   - Fix `'owner!._debugCurrentBuildTarget == this': is not true.` when using `useDarkMode`
-  - Remove `print` from `PaddingMacro`
 
 # [2.1.0-experimental.4] - 2022/02/28
 Breaking Change:
