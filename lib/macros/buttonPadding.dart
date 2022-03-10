@@ -44,8 +44,6 @@ abstract class ButtonPaddingFullMacro {
   _initialize(Function callback) {
     if (buttonPadding == null) buttonPadding = new NikuEdgeInsets.all(20);
 
-    print(buttonPadding?.value);
-
     callback();
   }
 
