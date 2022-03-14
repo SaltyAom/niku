@@ -69,7 +69,8 @@ class NikuListView extends StatelessWidget
     this.childrenDelegate,
   }) : super(key: key);
 
-  factory NikuListView.children({
+  factory NikuListView.children(
+    List<Widget>? children, {
     Key? key,
     Axis? scrollDirection,
     bool? reverse,
@@ -84,7 +85,6 @@ class NikuListView extends StatelessWidget
     bool? addRepaintBoundaries,
     bool? addSemanticIndexes,
     double? cacheExtent,
-    List<Widget>? children,
     int? semanticChildCount,
     DragStartBehavior? dragStartBehavior,
     ScrollViewKeyboardDismissBehavior? keyboardDismissBehavior,

@@ -5,8 +5,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 import 'package:flutter/material.dart';
 
-class AngleSeeker extends HookWidget {
-  const AngleSeeker({Key? key}) : super(key: key);
+class AegleSeeker extends HookWidget {
+  const AegleSeeker({Key? key}) : super(key: key);
 
   @override
   build(context) {
@@ -14,7 +14,7 @@ class AngleSeeker extends HookWidget {
 
     return Scaffold(
       body: n.Column([
-        n.Text("AngleSeeker")..h4 = context,
+        // n.Text("AegleSeeker")..h4 = context,
         n.Button(Text("Toggle"))
           ..onPressed = () {
             toggle.value = !toggle.value;
@@ -45,6 +45,22 @@ class AngleSeeker extends HookWidget {
               ..bg = deps[0]
               ..rounded = deps[1],
           ),
+        // --- New Widget ---
+        n.ListView.children([
+          n.RadioListTile(false)
+            ..title = Text("Blue")
+            ..groupValue = toggle.value
+            ..onChanged = (value) {
+              toggle.value = value!;
+            },
+          n.RadioListTile(true)
+            ..title = Text("Red")
+            ..groupValue = toggle.value
+            ..onChanged = (value) {
+              toggle.value = value!;
+            },
+        ])
+          ..shrinkWrap = true,
       ])
         ..center
         ..w100

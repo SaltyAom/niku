@@ -1,3 +1,9 @@
+# [2.2.0-experimental.1] - 2022/03/14
+Feature: 
+  - Add `NikuAnimated`, `NikuAnimateds`
+  - Add `useTransition`, `useTransitions`
+  - Add `NikuRadio`, `NikuRadioListTile`
+
 # [2.1.1] - 2022/03/10
 Bug fix:
   - Unmatch filename with capital case
