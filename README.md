@@ -1,3 +1,4 @@
+[![Discord Shield](https://discordapp.com/api/guilds/953233485991149588/widget.png?style=shield)](https://discord.gg/hC7v87Ff2C)
 # Niku
 Create Flutter UI, easier, faster, smarter
 
