@@ -4,9 +4,10 @@ Create Flutter UI, easier, faster, smarter
 
 Fluently developing without headache and Nested Hell.
 
-![korone-drake-format](https://user-images.githubusercontent.com/35027979/158423645-e2604862-0097-4c00-9de1-023c2e16416a.jpeg)
+![korone-drake-format](https://user-images.githubusercontent.com/35027979/158424832-2b2ccaad-61ae-44da-a7d8-9ee7c6f770e7.jpeg)
 
 ## Why
+
 ###### Recommended: See why people choose and how it get along with your codebase in [the documentation](https://niku.saltyaom.com)
 
 Styling in Flutter is complex and verbose.
