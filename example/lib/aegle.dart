@@ -1,3 +1,4 @@
+import 'package:example/progress.dart';
 import 'package:niku/niku.dart';
 import 'package:niku/namespace.dart' as n;
 
@@ -13,6 +14,18 @@ class AegleSeeker extends HookWidget {
     final toggle = useState(false);
 
     return Scaffold(
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+            label: 'Home',
+            icon: Icon(Icons.home),
+          ),
+          BottomNavigationBarItem(
+            label: 'Home',
+            icon: Icon(Icons.home),
+          ),
+        ],
+      ),
       body: n.Column([
         // n.Text("AegleSeeker")..h4 = context,
         n.Button(Text("Toggle"))
@@ -61,6 +74,11 @@ class AegleSeeker extends HookWidget {
             },
         ])
           ..shrinkWrap = true,
+        Progress(
+          progress: toggle.value ? 0 : 1,
+          color: Colors.blue,
+          background: Colors.grey.shade200,
+        )
       ])
         ..center
         ..w100

@@ -1,8 +1,10 @@
 # [2.2.0-experimental.1] - 2022/03/14
 Feature: 
-  - Add `NikuAnimated`, `NikuAnimateds`
-  - Add `useTransition`, `useTransitions`
-  - Add `NikuRadio`, `NikuRadioListTile`
+  - New widget: `NikuRadio`, `NikuRadioListTile`, `NikuDismissible`
+  - New hook: `useTransition`, `useTransitions`
+  - Add property: `splash` to `Niku`
+  - New utility widget `NikuAnimated`, `NikuAnimateds`
+  - New proxy: `ListTile` with `dismiss` for `NikuDismissible`
 
 # [2.1.1] - 2022/03/10
 Bug fix:

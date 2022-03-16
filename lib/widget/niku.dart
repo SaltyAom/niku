@@ -100,12 +100,22 @@ extension PropertyBuilder on Niku {
 
   set fractionWidth(double v) =>
       _w = FractionallySizedBox(widthFactor: v, child: _w);
+  set fractionW(double v) =>
+      _w = FractionallySizedBox(widthFactor: v, child: _w);
+  set fw(double v) => _w = FractionallySizedBox(widthFactor: v, child: _w);
+  set wFactor(double v) => _w = FractionallySizedBox(widthFactor: v, child: _w);
   set widthPercent(double v) =>
       _w = FractionallySizedBox(widthFactor: v / 100, child: _w);
   set wPercent(double v) =>
       _w = FractionallySizedBox(widthFactor: v / 100, child: _w);
+
   set fractionHeight(double v) =>
       _w = FractionallySizedBox(heightFactor: v, child: _w);
+  set fractionH(double v) =>
+      _w = FractionallySizedBox(heightFactor: v, child: _w);
+  set hFactor(double v) =>
+      _w = FractionallySizedBox(heightFactor: v, child: _w);
+  set fh(double v) => _w = FractionallySizedBox(heightFactor: v, child: _w);
   set heightPercent(double v) =>
       _w = FractionallySizedBox(heightFactor: v / 100, child: _w);
   set hPercent(double v) =>
@@ -499,6 +509,13 @@ extension PropertyBuilder on Niku {
         child: _w,
       );
 
+  set splash(Color color) {
+    _w = InkWell(
+      splashColor: color,
+      child: _w,
+    );
+  }
+
   set on(List<dynamic> dependencies) =>
       useChild((child) => NikuOn(() => child, dependencies));
 
@@ -616,8 +633,8 @@ extension PropertyBuilder on Niku {
 
   void useTransition<T>({
     Key? key,
-    required Widget Function(Niku niku, T value) builder,
     required T value,
+    required Widget Function(Niku niku, T value) builder,
     Duration duration = const Duration(milliseconds: 200),
     Curve curve = Curves.linear,
   }) {
@@ -632,8 +649,8 @@ extension PropertyBuilder on Niku {
 
   void useTransitions({
     Key? key,
-    required Widget Function(Niku niku, List dependencies) builder,
     required List dependencies,
+    required Widget Function(Niku niku, List dependencies) builder,
     Duration duration = const Duration(milliseconds: 200),
     Curve curve = Curves.linear,
   }) {
