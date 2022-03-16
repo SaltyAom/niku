@@ -1,8 +1,33 @@
+# [2.2.0-experimental.1`] - 2022/03/16
+Feature:
+  - New parent proxy available for all widget:
+    - expanded
+    - flex
+    - fullSize
+    - fullWidth, wFull, w100
+    - fullHeight, hFull, h100
+    - fractionSize, sizePercent
+    - fractionWidth, fractionW, fw, wFactor, widthPercent, wPercent
+    - fractionHeight, fractionH, hw, hFactor, heightPercent, hPercent
+    - boxConstraints
+    - nikuConstraints
+    - maxSize
+    - minSize
+    - maxWidth, maxW, wMax
+    - minWidth, minW, wMin
+    - maxHeight, maxH, hMax
+    - minHeight, minH, hMin
+    - width, w
+    - height, h
+
+Change:
+  - Move part of `AxisProxy` to `NikuBuildMacro`
+
 # [2.2.0-experimental.0] - 2022/03/14
 Feature: 
   - New widget: `NikuRadio`, `NikuRadioListTile`, `NikuDismissible`
   - New hook: `useTransition`, `useTransitions`
-  - Add property: `splash` to `Niku`
+  - Add property: `splash`, `wFactor`, `hFactor` to `Niku`
   - New utility widget `NikuAnimated`, `NikuAnimateds`
   - New proxy: `ListTile` with `dismiss` for `NikuDismissible`
 

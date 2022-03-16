@@ -101,6 +101,10 @@ class NikuInputDecoration
     this.constraints,
   });
 
+  void get isFilled {
+    filled = true;
+  }
+
   _initializeAllBorder() {
     if (baseBorder == null) baseBorder = NikuInputBorder();
     if (enabledBorder == null) enabledBorder = NikuInputBorder();

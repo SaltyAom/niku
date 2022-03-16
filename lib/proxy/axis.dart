@@ -14,29 +14,8 @@ abstract class AxisLayoutProxy {
     crossAxisAlignment = CrossAxisAlignment.center;
   }
 
-  set expanded(Color bg) => useParent((v) => v..expanded);
-
-  set flex(int v) => useParent((w) => Flexible(flex: v, child: w));
-  int get flex {
-    useParent((v) => Flexible(child: v));
-
-    return 1;
-  }
-
   set backgroundColor(Color bg) => useParent((v) => v..bg = bg);
   set bg(Color bg) => useParent((v) => v..bg = bg);
-
-  set width(double width) => useParent((v) => v..w = width);
-  set w(double width) => useParent((v) => v..w = width);
-  void get fullWidth => useParent((v) => v..w100);
-  void get wFull => useParent((v) => v..w100);
-  void get w100 => useParent((v) => v..w100);
-
-  set height(double height) => useParent((v) => v..h = height);
-  set h(double height) => useParent((v) => v..h = height);
-  void get fullHeight => useParent((v) => v..w100);
-  void get hFull => useParent((v) => v..w100);
-  void get h100 => useParent((v) => v..w100);
 
   void get scrollable => useParent((v) => v..scrollable);
 

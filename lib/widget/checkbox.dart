@@ -23,7 +23,6 @@ class NikuCheckbox extends StatelessWidget
   bool? autofocus;
   OutlinedBorder? shape;
   BorderSide? side;
-  static const double width = 18.0;
 
   NikuCheckbox(
     this.value, {
