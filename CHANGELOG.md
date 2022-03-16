@@ -1,4 +1,4 @@
-# [2.2.0-experimental.1] - 2022/03/14
+# [2.2.0-experimental.0] - 2022/03/14
 Feature: 
   - New widget: `NikuRadio`, `NikuRadioListTile`, `NikuDismissible`
   - New hook: `useTransition`, `useTransitions`
