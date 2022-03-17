@@ -1,6 +1,6 @@
 # [2.2.0-experimental.1] - 2022/03/17
 Improvement:
-  - Reduce Time Complexity of hooks from `UseQueryMacro` from O(n(2i + p)) to O(n) where n is property, p is parent total callstack, and i total invocation.
+  - Reduce Time Complexity of hooks from `UseQueryMacro` from O(n(2i + p)) to O(n) where n is property, p is parent total callstack, and i is total invocation.
   By passing widget self as reference instead of immutable copied then diffing, and apply
   The following hooks benefits in performance improvement:
     - useQuery
