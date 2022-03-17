@@ -40,6 +40,8 @@ class NikuColumn extends StatelessWidget
     this.gap,
   }) : super(key: key);
 
+  NikuColumn get self => this;
+
   set apply(NikuColumn? v) {
     if (v == null) return;
 

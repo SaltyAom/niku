@@ -39,6 +39,8 @@ class NikuWrap extends StatelessWidget
     this.clipBehavior,
   }) : super(key: key);
 
+  NikuWrap get self => this;
+
   set apply(NikuWrap? v) {
     if (v == null) return;
 

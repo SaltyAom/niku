@@ -291,6 +291,8 @@ class NikuSlider extends StatelessWidget
         thumbSelector: thumbSelector,
       );
 
+  NikuSlider get self => this;
+
   set apply(NikuSlider? v) {
     if (v == null) return;
     if (valueIndicatorTextStyle == null)

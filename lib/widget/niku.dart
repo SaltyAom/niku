@@ -1,10 +1,15 @@
 import 'dart:ui';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 
 import 'package:niku/objects/objects.dart';
 import 'package:niku/extra/extra.dart';
+
+class NikuAnimatedCollection {
+  final align = AnimatedAlign;
+}
 
 // ignore: must_be_immutable
 class Niku extends StatelessWidget {
@@ -611,6 +616,44 @@ extension PropertyBuilder on Niku {
             : light(
                 child.build(context).niku,
               ),
+      ),
+    );
+  }
+
+  void usePlatform({
+    required Widget Function(Niku) base,
+    required Widget Function(Niku) android,
+    required Widget Function(Niku) iOS,
+    required Widget Function(Niku) fuchsia,
+    required Widget Function(Niku) linux,
+    required Widget Function(Niku) macOS,
+    required Widget Function(Niku) windows,
+    required Widget Function(Niku) web,
+  }) {
+    useChild(
+      (child) => Builder(
+        builder: (context) {
+          final c = child.build(context).niku;
+
+          if (kIsWeb) return web(c);
+
+          switch (Theme.of(context).platform) {
+            case TargetPlatform.android:
+              return android(c);
+            case TargetPlatform.iOS:
+              return iOS(c);
+            case TargetPlatform.fuchsia:
+              return fuchsia(c);
+            case TargetPlatform.linux:
+              return linux(c);
+            case TargetPlatform.macOS:
+              return macOS(c);
+            case TargetPlatform.windows:
+              return windows(c);
+            default:
+              return base(c);
+          }
+        },
       ),
     );
   }

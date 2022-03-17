@@ -616,6 +616,10 @@ class NikuTextFormField extends StatelessWidget
     maxLines = 1;
   }
 
+  void get singleLine => maxLines = 1;
+
+  NikuTextFormField get self => this;
+
   set apply(NikuTextFormField? v) {
     if (v == null) return;
 
@@ -752,7 +756,7 @@ class NikuTextFormField extends StatelessWidget
         readOnly: readOnly ?? false,
         toolbarOptions: toolbarOptions,
         showCursor: showCursor,
-        obscuringCharacter: obscuringCharacter = '•',
+        obscuringCharacter: obscuringCharacter ?? '•',
         obscureText: obscureText ?? false,
         autocorrect: autocorrect ?? true,
         smartDashesType: smartDashesType,

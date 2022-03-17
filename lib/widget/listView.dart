@@ -266,6 +266,8 @@ class NikuListView extends StatelessWidget
     separatorBuilder = builder;
   }
 
+  NikuListView get self => this;
+
   set apply(NikuListView? v) {
     if (v == null) return;
 

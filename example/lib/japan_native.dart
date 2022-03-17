@@ -2,20 +2,20 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-class JapanStyleNative extends StatelessWidget {
-  const JapanStyleNative({Key? key}) : super(key: key);
+class JapanNative extends StatelessWidget {
+  const JapanNative({Key? key}) : super(key: key);
 
   @override
   build(context) {
     return Scaffold(
-      body: const Home(),
+      body: const JapanNativePage(),
     );
   }
 }
 
 // Native Flutter
-class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
+class JapanNativePage extends StatelessWidget {
+  const JapanNativePage({Key? key}) : super(key: key);
 
   @override
   build(context) {

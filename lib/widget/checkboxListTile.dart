@@ -67,6 +67,8 @@ class NikuCheckboxListTile extends StatelessWidget
   void get threeLine => isThreeLine = true;
   void get isDense => dense = true;
 
+  NikuCheckboxListTile get self => this;
+
   set apply(NikuCheckboxListTile? v) {
     if (v == null) return;
 

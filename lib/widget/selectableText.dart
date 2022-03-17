@@ -75,6 +75,8 @@ class NikuSelectableText extends StatelessWidget
 
   bool? get selectionEnabled => enableInteractiveSelection;
 
+  NikuSelectableText get self => this;
+
   set apply(NikuSelectableText? v) {
     if (v == null) return;
 

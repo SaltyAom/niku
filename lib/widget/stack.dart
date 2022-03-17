@@ -26,6 +26,8 @@ class NikuStack extends StatelessWidget
     this.clipBehavior,
   }) : super(key: key);
 
+  NikuStack get self => this;
+
   set apply(NikuStack? v) {
     if (v == null) return;
 

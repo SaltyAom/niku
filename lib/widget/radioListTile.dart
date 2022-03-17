@@ -57,6 +57,8 @@ class NikuRadioListTile<T> extends StatelessWidget
 
   bool get checked => value == groupValue;
 
+  NikuRadioListTile get self => this;
+
   set apply(NikuRadioListTile? v) {
     if (v == null) return;
 

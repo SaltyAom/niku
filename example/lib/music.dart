@@ -27,7 +27,8 @@ class Music extends HookWidget {
 
   const Music({
     Key? key,
-    required this.cover,
+    this.cover =
+        "https://static.wikia.nocookie.net/iowiro/images/c/c5/News_10202019a.jpg",
   }) : super(key: key);
 
   build(context) {
@@ -98,7 +99,7 @@ class Music extends HookWidget {
           ..inactiveTrackColor = Colors.white.withOpacity(.25)
           ..trackHeight = 2
           ..thumbShape = RoundSliderThumbShape(enabledThumbRadius: 6)
-          ..useParent((v) => v..my = 8),
+          ..my = 8,
         n.Row([
           n.IconButton(Icons.shuffle_rounded)..apply = Styles.subIcon,
           n.IconButton(Icons.skip_previous_rounded)..apply = Styles.icon,
@@ -111,9 +112,8 @@ class Music extends HookWidget {
           ..freezed,
       ])
         ..mainCenter
-        ..useParent((v) => v
-          ..px = 32
-          ..safeArea),
+        ..px = 32
+        ..safeArea,
     );
   }
 }

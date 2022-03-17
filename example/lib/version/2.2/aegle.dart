@@ -74,6 +74,12 @@ class AegleSeeker extends HookWidget {
             },
         ])
           ..shrinkWrap = true,
+        n.Text("Hello")
+          ..usePlatform(
+            context,
+            iOS: (a) => a..color = Colors.red,
+            android: (a) => a..color = Colors.blue,
+          ),
         Progress(
           progress: toggle.value ? 0 : 1,
           color: Colors.blue,

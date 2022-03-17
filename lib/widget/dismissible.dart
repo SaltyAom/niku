@@ -64,6 +64,26 @@ class NikuDismissible extends StatelessWidget
     secondaryBackground = callback(Niku());
   }
 
+  NikuDismissible get self => this;
+
+  set apply(NikuDismissible? v) {
+    if (v == null) return;
+
+    background = v.background ?? background;
+    secondaryBackground = v.secondaryBackground ?? secondaryBackground;
+    confirmDismiss = v.confirmDismiss ?? confirmDismiss;
+    onResize = v.onResize ?? onResize;
+    onUpdate = v.onUpdate ?? onUpdate;
+    onDismissed = v.onDismissed ?? onDismissed;
+    direction = v.direction ?? direction;
+    resizeDuration = v.resizeDuration ?? resizeDuration;
+    dismissThresholds = v.dismissThresholds ?? dismissThresholds;
+    movementDuration = v.movementDuration ?? movementDuration;
+    crossAxisEndOffset = v.crossAxisEndOffset ?? crossAxisEndOffset;
+    dragStartBehavior = v.dragStartBehavior ?? dragStartBehavior;
+    behavior = v.behavior ?? behavior;
+  }
+
   Dismissible get widget => Dismissible(
         key: key,
         child: child ?? SizedBox.shrink(),

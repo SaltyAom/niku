@@ -383,6 +383,8 @@ class NikuImage extends StatelessWidget
         );
       };
 
+  NikuImage get self => this;
+
   set apply(NikuImage? v) {
     if (v == null) return;
 

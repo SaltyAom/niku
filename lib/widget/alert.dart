@@ -249,6 +249,8 @@ class NikuAlert extends StatelessWidget
         cupertinoActions: cupertinoActions,
       );
 
+  NikuAlert get self => this;
+
   set apply(NikuAlert? v) {
     if (v == null) return;
 

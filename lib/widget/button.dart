@@ -184,6 +184,8 @@ class NikuButton extends StatelessWidget
     style!.apply = NikuButtonStyle(textStyle: v);
   }
 
+  NikuButton get self => this;
+
   set apply(NikuButton? v) {
     if (v == null) return;
 

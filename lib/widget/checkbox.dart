@@ -50,6 +50,8 @@ class NikuCheckbox extends StatelessWidget
     if (overlayColor != null) fillColorState = NikuState.all(overlayColor);
   }
 
+  NikuCheckbox get self => this;
+
   set apply(NikuCheckbox? v) {
     if (v == null) return;
 

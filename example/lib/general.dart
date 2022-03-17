@@ -2,175 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:flutter_hooks/flutter_hooks.dart';
-
 import 'package:niku/namespace.dart' as n;
-
-class MyStyles {
-  static button(Color color) => n.Button(SizedBox.shrink())
-    ..useButtonStyle((v) => v
-      ..rounded = 4
-      ..px = 24
-      ..py = 12
-      ..useTextStyle((v) => v
-        ..fontSize = 18
-        ..w500
-        ..color = color));
-}
-
-class Styles {
-  static final title = n.Text("")
-    ..fontSize = 24
-    ..color = Colors.blue
-    ..useParent((v) => v
-      ..p = 12
-      ..bg = Colors.blue.shade50);
-
-  static final rounded = n.Text("")
-    ..w500
-    ..useParent((v) => v
-      ..bg = Colors.blue.shade50
-      ..rounded = 8);
-
-  static final roundedTitle = Styles.title.copied..apply = rounded;
-
-  static final centerCol = n.Column([])
-    ..mainCenter
-    ..crossCenter
-    ..useParent((v) => v..w100);
-}
-
-class InheritsParentBuilder extends StatelessWidget {
-  @override
-  build(context) {
-    return Scaffold(
-      body: n.Column([
-        n.Text("Hello Niku")..apply = Styles.roundedTitle,
-      ])
-        ..apply = Styles.centerCol,
-    );
-  }
-}
-
-class Counter extends HookWidget {
-  const Counter();
-
-  build(context) {
-    final count = useState(0);
-
-    return Scaffold(
-      body: n.Column([
-        n.Text(count.value.toString())
-          ..center
-          ..h4 = context,
-        n.On(
-          () => n.Column([
-            n.Button(n.Text("Increment"))
-              ..onPressed = (() => count.value++)
-              ..apply = MyStyles.button(Colors.blue.shade700)
-              ..useButtonStyle((v) => v
-                ..bg = Colors.blue.shade50
-                ..splash = Colors.blue.shade100)
-              ..freezed,
-            n.Button(n.Text("Decrement"))
-              ..onPressed = () {
-                count.value--;
-              }
-              ..apply = MyStyles.button(Colors.red.shade700)
-              ..useButtonStyle((v) => v
-                ..bg = Colors.red.shade50
-                ..splash = Colors.red.shade100)
-              ..freezed,
-          ]),
-        )
-      ])
-        ..mainCenter
-        ..crossCenter
-        ..gap = 16
-        ..useParent((v) => v..center),
-    );
-  }
-}
-
-class CardPage extends StatelessWidget {
-  const CardPage({Key? key}) : super(key: key);
-
-  build(context) {
-    return Scaffold(
-      body: Icon(Icons.home_outlined, color: Colors.white).niku
-        ..p = 10
-        ..bg = Color(0xff7AC1E7)
-        ..rounded
-        ..p = 15
-        ..bg = Color(0xffE8F2F7)
-        ..rounded
-        ..p = 20
-        ..useChild(
-          (child) => Card(
-            elevation: 10,
-            child: child,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
-          ),
-        )
-        ..center,
-    );
-  }
-}
-
-class AlertPage extends StatelessWidget {
-  const AlertPage({Key? key}) : super(key: key);
-
-  build(context) {
-    final showDialog = () {
-      n.showDialog(
-        context: context,
-        barrierDismissible: true,
-        builder: (context) => n.Alert.adaptive()
-          ..title = Text("Hello World")
-          ..content = n.NikuColumn([
-            Text("This is alert dialog written in Niku"),
-            n.TextFormField.adaptive()
-              ..label = "Placeholder"
-              ..mt = 16,
-          ])
-          ..actions = [
-            n.Button(Text("Delete"))
-              ..onPressed = () {
-                Navigator.of(context).pop();
-              }
-              ..useTextStyle((v) => v..color = Colors.red)
-              ..useButtonStyle((v) => v..splash = Colors.red.withOpacity(.15)),
-            n.Button(Text("Cancel"))
-              ..onPressed = () {
-                Navigator.of(context).pop();
-              }
-              ..useTextStyle((v) => v..bold),
-          ],
-      );
-    };
-
-    return Scaffold(
-      body: n.Button(n.Text("Show Alert"))
-        ..onPressed = showDialog
-        ..useTextStyle((v) => v
-          ..fontSize = 18
-          ..w500
-          ..color = Colors.white)
-        ..useButtonStyle((v) => v
-          ..px = 24
-          ..py = 12
-          ..splash = Colors.white.withOpacity(.25)
-          ..bg = Colors.transparent)
-        ..useParent((v) => v
-          ..gradient = LinearGradient(
-            colors: [Color(0xff4A00E0), Color(0xff8E2DE2)],
-          )
-          ..rounded = 8
-          ..center),
-    );
-  }
-}
 
 class General extends HookWidget {
   const General({Key? key}) : super(key: key);
@@ -198,13 +30,13 @@ class General extends HookWidget {
               ..onPressed = () {
                 Navigator.of(context).pop();
               }
-              ..useTextStyle((v) => v..color = Colors.red)
-              ..useButtonStyle((v) => v..splash = Colors.red.withOpacity(.15)),
+              ..color = Colors.red
+              ..splash = Colors.red.withOpacity(.15),
             n.Button(Text("Cancel"))
               ..onPressed = () {
                 Navigator.of(context).pop();
               }
-              ..useTextStyle((v) => v..bold),
+              ..bold,
           ],
       );
     };
@@ -217,7 +49,7 @@ class General extends HookWidget {
           n.PopupMenuButton(n.Icon(Icons.edit)..color = Colors.white)
             ..items = [1, 2, 3]
             ..elevation = 2
-            ..useParent((p0) => p0..mr = 12)
+            ..mr = 12
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -235,10 +67,10 @@ class General extends HookWidget {
       body: n.Column([
         n.Text("Awesome Niku")
           ..h4 = context
-          ..useParent((v) => v..mb = 24),
+          ..mb = 24,
         n.TextFormField()
           ..label = "Value"
-          ..useDecoration((p0) => p0..outlined),
+          ..outlined,
         n.CheckboxListTile(active.value)
           ..leading
           ..title = Text("General")
@@ -269,21 +101,18 @@ class General extends HookWidget {
           ..thumbColor = Colors.white,
         n.Button(Text("Button"))
           ..onPressed = () {}
-          ..useTextStyle((v) => v
-            ..fontSize = 18
-            ..w500
-            ..color = Colors.blue)
-          ..useButtonStyle((v) => v
-            ..px = 24
-            ..py = 12
-            ..bg = Colors.blue.shade50
-            ..rounded = 12),
+          ..fontSize = 18
+          ..w500
+          ..color = Colors.blue
+          ..px = 24
+          ..py = 12
+          ..bg = Colors.blue.shade50
+          ..rounded = 12,
       ])
         ..mainCenter
         ..crossCenter
-        ..useParent((v) => v
-          ..wFull
-          ..px = 24),
+        ..wFull
+        ..mx = 24,
     );
   }
 }
@@ -324,7 +153,7 @@ class NetworkImageExample extends StatelessWidget {
         ..mainCenter
         ..crossCenter
         ..gap = 24
-        ..useParent((v) => v..fullWidth),
+        ..w100,
     );
   }
 }
@@ -413,7 +242,7 @@ class Freezed extends HookWidget {
         ..mainCenter
         ..crossCenter
         ..gap = 24
-        ..useNiku((v) => v..wFull),
+        ..w100,
     );
   }
 }

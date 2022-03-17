@@ -14,6 +14,16 @@ abstract class AxisLayoutProxy {
     crossAxisAlignment = CrossAxisAlignment.center;
   }
 
+  void get alignTopLeft => useParent((v) => v..topLeft);
+  void get alignTopCenter => useParent((v) => v..topCenter);
+  void get alignTopRight => useParent((v) => v..topRight);
+  void get alignCenterLeft => useParent((v) => v..centerLeft);
+  void get alignCenter => useParent((v) => v..center);
+  void get alignCenterRight => useParent((v) => v..centerRight);
+  void get alignBottomLeft => useParent((v) => v..bottomLeft);
+  void get alignBottomCenter => useParent((v) => v..bottomCenter);
+  void get alignBottomRight => useParent((v) => v..bottomRight);
+
   set backgroundColor(Color bg) => useParent((v) => v..bg = bg);
   set bg(Color bg) => useParent((v) => v..bg = bg);
 
@@ -102,7 +112,7 @@ abstract class AxisLayoutProxy {
     );
   }
 
-  // Convinient Property Builder
+  // Parent Proxy
   set padding(EdgeInsets v) {
     useParent((c) => Padding(padding: v, child: c));
   }

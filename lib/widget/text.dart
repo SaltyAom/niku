@@ -47,6 +47,8 @@ class NikuText extends StatelessWidget
     this.textHeightBehavior,
   }) : super(key: key);
 
+  NikuText get self => this;
+
   set apply(NikuText? v) {
     if (v == null) return;
 

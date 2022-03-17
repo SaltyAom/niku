@@ -47,6 +47,8 @@ class NikuRadio<T> extends StatelessWidget
   FocusNode? focusNode;
   bool? autofocus;
 
+  NikuRadio get self => this;
+
   set apply(NikuRadio? v) {
     if (v == null) return;
 
