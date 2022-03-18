@@ -106,6 +106,8 @@ class NikuRangeSlider extends StatelessWidget
     this.thumbSelector,
   }) : super(key: key);
 
+  NikuRangeSlider get self => this;
+
   set apply(NikuRangeSlider? v) {
     if (v == null) return;
     if (valueIndicatorTextStyle == null)

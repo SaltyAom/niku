@@ -1,11 +1,15 @@
 import 'dart:ui';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 
 import 'package:niku/objects/objects.dart';
-import 'package:niku/extra/on.dart';
-import 'package:niku/extra/screen.dart';
+import 'package:niku/extra/extra.dart';
+
+class NikuAnimatedCollection {
+  final align = AnimatedAlign;
+}
 
 // ignore: must_be_immutable
 class Niku extends StatelessWidget {
@@ -101,11 +105,25 @@ extension PropertyBuilder on Niku {
 
   set fractionWidth(double v) =>
       _w = FractionallySizedBox(widthFactor: v, child: _w);
+  set fractionW(double v) =>
+      _w = FractionallySizedBox(widthFactor: v, child: _w);
+  set fw(double v) => _w = FractionallySizedBox(widthFactor: v, child: _w);
+  set wFactor(double v) => _w = FractionallySizedBox(widthFactor: v, child: _w);
   set widthPercent(double v) =>
       _w = FractionallySizedBox(widthFactor: v / 100, child: _w);
+  set wPercent(double v) =>
+      _w = FractionallySizedBox(widthFactor: v / 100, child: _w);
+
   set fractionHeight(double v) =>
       _w = FractionallySizedBox(heightFactor: v, child: _w);
+  set fractionH(double v) =>
+      _w = FractionallySizedBox(heightFactor: v, child: _w);
+  set hFactor(double v) =>
+      _w = FractionallySizedBox(heightFactor: v, child: _w);
+  set fh(double v) => _w = FractionallySizedBox(heightFactor: v, child: _w);
   set heightPercent(double v) =>
+      _w = FractionallySizedBox(heightFactor: v / 100, child: _w);
+  set hPercent(double v) =>
       _w = FractionallySizedBox(heightFactor: v / 100, child: _w);
 
   set constraints(BoxConstraints v) =>
@@ -187,6 +205,7 @@ extension PropertyBuilder on Niku {
   set absorbPointer(bool v) => _w = AbsorbPointer(child: _w, absorbing: v);
 
   set tooltip(String v) => _w = Tooltip(message: v, child: _w);
+  set tip(String v) => _w = Tooltip(message: v, child: _w);
 
   set matrix4(Matrix4 v) => _w = Transform(transform: v, child: _w);
   set rotate(double v) => _w = Transform.rotate(angle: v, child: _w);
@@ -381,17 +400,7 @@ extension PropertyBuilder on Niku {
   set shadows(List<BoxShadow> v) =>
       _w = DecoratedBox(child: _w, decoration: BoxDecoration(boxShadow: v));
 
-  void useAnimatedBuilder({
-    required Widget Function(BuildContext context, Widget child) builder,
-    required AnimationController animation,
-  }) =>
-      _w = AnimatedBuilder(
-        animation: animation,
-        builder: (context, child) => builder(context, _w),
-        child: _w,
-      );
-
-  void useAnimated({
+  void useAnimationBuilder({
     required Widget Function(BuildContext context, Widget child) builder,
     required AnimationController animation,
   }) =>
@@ -505,6 +514,13 @@ extension PropertyBuilder on Niku {
         child: _w,
       );
 
+  set splash(Color color) {
+    _w = InkWell(
+      splashColor: color,
+      child: _w,
+    );
+  }
+
   set on(List<dynamic> dependencies) =>
       useChild((child) => NikuOn(() => child, dependencies));
 
@@ -601,6 +617,92 @@ extension PropertyBuilder on Niku {
                 child.build(context).niku,
               ),
       ),
+    );
+  }
+
+  void usePlatform({
+    required Widget Function(Niku) base,
+    required Widget Function(Niku) android,
+    required Widget Function(Niku) iOS,
+    required Widget Function(Niku) fuchsia,
+    required Widget Function(Niku) linux,
+    required Widget Function(Niku) macOS,
+    required Widget Function(Niku) windows,
+    required Widget Function(Niku) web,
+  }) {
+    useChild(
+      (child) => Builder(
+        builder: (context) {
+          final c = child.build(context).niku;
+
+          if (kIsWeb) return web(c);
+
+          switch (Theme.of(context).platform) {
+            case TargetPlatform.android:
+              return android(c);
+            case TargetPlatform.iOS:
+              return iOS(c);
+            case TargetPlatform.fuchsia:
+              return fuchsia(c);
+            case TargetPlatform.linux:
+              return linux(c);
+            case TargetPlatform.macOS:
+              return macOS(c);
+            case TargetPlatform.windows:
+              return windows(c);
+            default:
+              return base(c);
+          }
+        },
+      ),
+    );
+  }
+
+  void useAnimated<T>({
+    Key? key,
+    required Widget Function(Niku niku, T value) builder,
+    required T value,
+    Duration duration = const Duration(milliseconds: 200),
+    Curve curve = Curves.linear,
+  }) {
+    _w = NikuAnimated<T>(
+      builder: builder,
+      value: value,
+      duration: duration,
+      curve: curve,
+      child: _w,
+    );
+  }
+
+  void useTransition<T>({
+    Key? key,
+    required T value,
+    required Widget Function(Niku niku, T value) builder,
+    Duration duration = const Duration(milliseconds: 200),
+    Curve curve = Curves.linear,
+  }) {
+    _w = NikuAnimated<T>(
+      builder: builder,
+      value: value,
+      duration: duration,
+      curve: curve,
+      child: _w,
+    );
+  }
+
+  void useTransitions({
+    Key? key,
+    required List dependencies,
+    required Widget Function(Niku niku, List dependencies) builder,
+    Duration duration = const Duration(milliseconds: 200),
+    Curve curve = Curves.linear,
+  }) {
+    _w = NikuAnimateds(
+      builder: builder,
+      dependencies: dependencies,
+      duration: duration,
+      curve: curve,
+      child: _w,
     );
   }
 }

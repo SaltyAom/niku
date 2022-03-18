@@ -71,6 +71,8 @@ class NikuListTile extends StatelessWidget
     this.minLeadingWidth,
   }) : super(key: key);
 
+  NikuListTile get self => this;
+
   set apply(NikuListTile? v) {
     if (v == null) return;
 

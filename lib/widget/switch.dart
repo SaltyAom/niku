@@ -193,6 +193,8 @@ class NikuSwitch extends StatelessWidget
   set trackColor(Color? value) => trackColorState = NikuState.all(value);
   set overlayColor(Color? value) => overlayColorState = NikuState.all(value);
 
+  NikuSwitch get self => this;
+
   set apply(NikuSwitch? e) {
     if (e == null) return;
 

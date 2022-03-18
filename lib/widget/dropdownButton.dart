@@ -69,13 +69,12 @@ class NikuDropdownButton<T> extends StatelessWidget
     this.itemsValue,
   }) : super(key: key);
 
-  useTextStyle(NikuTextStyle Function(NikuTextStyle) v) {
-    style = v(style ?? NikuTextStyle());
-  }
+  useTextStyle(NikuTextStyle Function(NikuTextStyle) v) =>
+      style = v(style ?? NikuTextStyle());
 
-  void get noUnderline {
-    underline = SizedBox.shrink();
-  }
+  void get noUnderline => underline = SizedBox.shrink();
+
+  NikuDropdownButton get self => this;
 
   set apply(NikuDropdownButton? v) {
     if (v == null) return;

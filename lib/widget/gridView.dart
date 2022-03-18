@@ -343,6 +343,8 @@ class NikuGridView extends StatelessWidget
     itemBuilder = builder;
   }
 
+  NikuGridView get self => this;
+
   set apply(NikuGridView? v) {
     if (v == null) return;
 

@@ -1,18 +1,43 @@
 import 'package:flutter/material.dart';
 
-import '../objects/objects.dart';
 import '../macros/macros.dart';
+import '../objects/objects.dart';
 
 // ignore: must_be_immutable
-class NikuCheckbox extends StatelessWidget
-    with NikuBuildMacro<NikuCheckbox>, UseQueryMacro<NikuCheckbox> {
-  bool? value;
-  ValueChanged<bool?>? onChanged;
+class NikuRadio<T> extends StatelessWidget
+    with NikuBuildMacro<NikuRadio>, UseQueryMacro<NikuRadio> {
+  NikuRadio(
+    this.value, {
+    this.key,
+    this.groupValue,
+    this.onChanged,
+    this.mouseCursor,
+    this.toggleable,
+    this.activeColor,
+    this.fillColorState,
+    this.materialTapTargetSize,
+    this.visualDensity,
+    this.focusColor,
+    this.hoverColor,
+    this.overlayColorState,
+    this.splashRadius,
+    this.focusNode,
+    this.autofocus,
+    Color? fillColor,
+    Color? overlayColor,
+  }) : super(key: key) {
+    if (fillColor != null) fillColorState = NikuState.all(fillColor);
+    if (overlayColor != null) overlayColorState = NikuState.all(fillColor);
+  }
+
+  Key? key;
+  T value;
+  T? groupValue;
+  ValueChanged<T?>? onChanged;
   MouseCursor? mouseCursor;
+  bool? toggleable;
   Color? activeColor;
   NikuState<Color?>? fillColorState;
-  Color? checkColor;
-  bool? tristate;
   MaterialTapTargetSize? materialTapTargetSize;
   VisualDensity? visualDensity;
   Color? focusColor;
@@ -21,46 +46,19 @@ class NikuCheckbox extends StatelessWidget
   double? splashRadius;
   FocusNode? focusNode;
   bool? autofocus;
-  OutlinedBorder? shape;
-  BorderSide? side;
 
-  NikuCheckbox(
-    this.value, {
-    Key? key,
-    this.onChanged,
-    this.mouseCursor,
-    this.activeColor,
-    Color? fillColor,
-    this.fillColorState,
-    this.checkColor,
-    this.tristate,
-    this.materialTapTargetSize,
-    this.visualDensity,
-    this.focusColor,
-    this.hoverColor,
-    Color? overlayColor,
-    this.overlayColorState,
-    this.splashRadius,
-    this.focusNode,
-    this.autofocus,
-    this.shape,
-    this.side,
-  }) : super(key: key) {
-    if (fillColor != null) fillColorState = NikuState.all(fillColor);
-    if (overlayColor != null) fillColorState = NikuState.all(overlayColor);
-  }
+  NikuRadio get self => this;
 
-  NikuCheckbox get self => this;
-
-  set apply(NikuCheckbox? v) {
+  set apply(NikuRadio? v) {
     if (v == null) return;
 
+    value = v.value ?? value;
+    groupValue = v.groupValue ?? groupValue;
     onChanged = v.onChanged ?? onChanged;
     mouseCursor = v.mouseCursor ?? mouseCursor;
+    toggleable = v.toggleable ?? toggleable;
     activeColor = v.activeColor ?? activeColor;
     fillColorState = v.fillColorState ?? fillColorState;
-    checkColor = v.checkColor ?? checkColor;
-    tristate = v.tristate ?? tristate;
     materialTapTargetSize = v.materialTapTargetSize ?? materialTapTargetSize;
     visualDensity = v.visualDensity ?? visualDensity;
     focusColor = v.focusColor ?? focusColor;
@@ -69,20 +67,19 @@ class NikuCheckbox extends StatelessWidget
     splashRadius = v.splashRadius ?? splashRadius;
     focusNode = v.focusNode ?? focusNode;
     autofocus = v.autofocus ?? autofocus;
-    shape = v.shape ?? shape;
-    side = v.side ?? side;
+
     $internalParent..addAll(v.$internalParent);
   }
 
-  NikuCheckbox get copied => NikuCheckbox(
+  NikuRadio get copied => NikuRadio<T>(
         value,
         key: key,
+        groupValue: groupValue,
         onChanged: onChanged,
         mouseCursor: mouseCursor,
+        toggleable: toggleable,
         activeColor: activeColor,
         fillColorState: fillColorState,
-        checkColor: checkColor,
-        tristate: tristate,
         materialTapTargetSize: materialTapTargetSize,
         visualDensity: visualDensity,
         focusColor: focusColor,
@@ -91,18 +88,17 @@ class NikuCheckbox extends StatelessWidget
         splashRadius: splashRadius,
         focusNode: focusNode,
         autofocus: autofocus,
-        shape: shape,
-        side: side,
       )..$internalParent.addAll($internalParent);
 
-  Checkbox get widget => Checkbox(
-        value: value,
+  Radio get widget => Radio<T>(
+        key: key,
+        value: value!,
+        groupValue: groupValue,
         onChanged: onChanged,
         mouseCursor: mouseCursor,
+        toggleable: toggleable ?? false,
         activeColor: activeColor,
         fillColor: fillColorState?.value,
-        checkColor: checkColor,
-        tristate: tristate ?? false,
         materialTapTargetSize: materialTapTargetSize,
         visualDensity: visualDensity,
         focusColor: focusColor,
@@ -111,7 +107,5 @@ class NikuCheckbox extends StatelessWidget
         splashRadius: splashRadius,
         focusNode: focusNode,
         autofocus: autofocus ?? false,
-        shape: shape,
-        side: side,
       );
 }

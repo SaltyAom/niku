@@ -20,6 +20,8 @@ class NikuIcon extends StatelessWidget
     this.textDirection,
   }) : super(key: key);
 
+  NikuIcon get self => this;
+
   set apply(NikuIcon? v) {
     if (v == null) return;
 

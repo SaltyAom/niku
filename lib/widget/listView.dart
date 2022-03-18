@@ -69,7 +69,8 @@ class NikuListView extends StatelessWidget
     this.childrenDelegate,
   }) : super(key: key);
 
-  factory NikuListView.children({
+  factory NikuListView.children(
+    List<Widget>? children, {
     Key? key,
     Axis? scrollDirection,
     bool? reverse,
@@ -84,7 +85,6 @@ class NikuListView extends StatelessWidget
     bool? addRepaintBoundaries,
     bool? addSemanticIndexes,
     double? cacheExtent,
-    List<Widget>? children,
     int? semanticChildCount,
     DragStartBehavior? dragStartBehavior,
     ScrollViewKeyboardDismissBehavior? keyboardDismissBehavior,
@@ -265,6 +265,8 @@ class NikuListView extends StatelessWidget
   void useSeparatorBuilder(Widget Function(BuildContext, int) builder) {
     separatorBuilder = builder;
   }
+
+  NikuListView get self => this;
 
   set apply(NikuListView? v) {
     if (v == null) return;

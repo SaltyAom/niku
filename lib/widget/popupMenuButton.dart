@@ -46,6 +46,8 @@ class NikuPopupMenuButton<T> extends StatelessWidget
   bool? enableFeedback;
   double? iconSize;
 
+  NikuPopupMenuButton get self => this;
+
   set apply(NikuPopupMenuButton? v) {
     if (v == null) return;
 

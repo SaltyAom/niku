@@ -104,6 +104,8 @@ class NikuIconButton extends StatelessWidget
 
   set icon(Widget v) => child = v;
 
+  NikuIconButton get self => this;
+
   set apply(NikuIconButton? v) {
     if (v == null) return;
 

@@ -172,6 +172,11 @@ extension TextFormFieldInputDecorationProxy on NikuTextFormField {
     decoration?.filled = v;
   }
 
+  void get isFilled {
+    _init();
+    decoration?.filled = true;
+  }
+
   set fillColor(Color? v) {
     _init();
     decoration?.fillColor = v;

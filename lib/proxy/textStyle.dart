@@ -211,7 +211,7 @@ abstract class TextStyleProxy {
     style!.decoration = TextDecoration.overline;
   }
 
-  void get underline {
+  void get underlineText {
     _initText();
     style!.decoration = TextDecoration.underline;
   }

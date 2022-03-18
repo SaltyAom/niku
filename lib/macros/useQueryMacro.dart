@@ -1,22 +1,22 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 abstract class UseQueryMacro<T extends Widget> {
-  set apply(T? v) {}
-
+  T get self => this as T;
   T get copied {
     return SizedBox.shrink() as T;
   }
 
   void useQuery(BuildContext context, T Function(T, MediaQueryData) builder) {
-    apply = builder(copied, MediaQuery.of(context));
+    builder(self, MediaQuery.of(context));
   }
 
   void useSize(BuildContext context, T Function(T, Size) builder) {
-    apply = builder(copied, MediaQuery.of(context).size);
+    builder(self, MediaQuery.of(context).size);
   }
 
   void useDarkMode(BuildContext context, T Function(T, bool) builder) {
-    apply = builder(copied, Theme.of(context).brightness == Brightness.dark);
+    builder(self, Theme.of(context).brightness == Brightness.dark);
   }
 
   void useThemeSelector(
@@ -24,9 +24,7 @@ abstract class UseQueryMacro<T extends Widget> {
     required T Function(T) light,
     required T Function(T) dark,
   }) {
-    apply = Theme.of(context).brightness == Brightness.dark
-        ? dark(copied)
-        : light(copied);
+    Theme.of(context).brightness == Brightness.dark ? dark(self) : light(self);
   }
 
   /// ```dart
@@ -63,114 +61,107 @@ abstract class UseQueryMacro<T extends Widget> {
     final width = MediaQuery.of(context).size.width;
 
     if (width < 568) {
-      if (base != null) {
-        apply = base(copied);
+      if (base != null) base(copied);
 
-        return;
-      }
-
-      apply = copied;
+      return;
     }
 
     if (width < 640) {
-      if (xs != null) {
-        apply = xs(copied);
-        return;
-      }
-      if (base != null) {
-        apply = base(copied);
-        return;
-      }
+      if (xs != null)
+        xs(self);
+      else if (base != null) base(self);
 
-      apply = copied;
+      return;
     }
 
     if (width < 720) {
-      if (sm != null) {
-        apply = sm(copied);
-        return;
-      }
-      if (xs != null) {
-        apply = xs(copied);
-        return;
-      }
-      if (base != null) {
-        apply = base(copied);
-        return;
-      }
+      if (sm != null)
+        sm(self);
+      else if (xs != null)
+        xs(self);
+      else if (base != null) base(self);
 
-      apply = copied;
+      return;
     }
 
     if (width < 920) {
-      if (md != null) {
-        apply = md(copied);
-        return;
-      }
-      if (sm != null) {
-        apply = sm(copied);
-        return;
-      }
-      if (xs != null) {
-        apply = xs(copied);
-        return;
-      }
-      if (base != null) {
-        apply = base(copied);
-        return;
-      }
+      if (md != null)
+        md(self);
+      else if (sm != null)
+        sm(self);
+      else if (xs != null)
+        xs(self);
+      else if (base != null) base(self);
 
-      apply = copied;
+      return;
     }
 
     if (width < 1024) {
-      if (lg != null) {
-        apply = lg(copied);
-        return;
-      }
-      if (md != null) {
-        apply = md(copied);
-        return;
-      }
-      if (sm != null) {
-        apply = sm(copied);
-        return;
-      }
-      if (xs != null) {
-        apply = xs(copied);
-        return;
-      }
-      if (base != null) {
-        apply = base(copied);
-        return;
-      }
-
-      apply = copied;
+      if (lg != null)
+        lg(self);
+      else if (md != null)
+        md(self);
+      else if (sm != null)
+        sm(self);
+      else if (xs != null)
+        xs(self);
+      else if (base != null) base(self);
     }
 
-    if (xl != null) {
-      apply = xl(copied);
-      return;
+    if (xl != null)
+      xl(self);
+    else if (lg != null)
+      lg(self);
+    else if (md != null)
+      md(self);
+    else if (sm != null)
+      sm(self);
+    else if (xs != null)
+      xs(self);
+    else if (base != null) base(self);
+  }
+
+  void usePlatform(
+    BuildContext context, {
+    T Function(T)? android,
+    T Function(T)? iOS,
+    T Function(T)? fuchsia,
+    T Function(T)? linux,
+    T Function(T)? macOS,
+    T Function(T)? windows,
+    T Function(T)? web,
+  }) {
+    fallback(T Function(T)? builder) {
+      if (builder != null) builder(self);
     }
-    if (lg != null) {
-      apply = lg(copied);
-      return;
-    }
-    if (md != null) {
-      apply = md(copied);
-      return;
-    }
-    if (sm != null) {
-      apply = sm(copied);
-      return;
-    }
-    if (xs != null) {
-      apply = xs(copied);
-      return;
-    }
-    if (base != null) {
-      apply = base(copied);
-      return;
-    }
+
+    if (kIsWeb)
+      fallback(web);
+    else
+      switch (Theme.of(context).platform) {
+        case TargetPlatform.android:
+          fallback(android);
+          break;
+
+        case TargetPlatform.iOS:
+          fallback(iOS);
+          break;
+
+        case TargetPlatform.fuchsia:
+          fallback(fuchsia);
+          break;
+
+        case TargetPlatform.linux:
+          fallback(linux);
+          break;
+
+        case TargetPlatform.macOS:
+          fallback(macOS);
+          break;
+
+        case TargetPlatform.windows:
+          fallback(windows);
+          break;
+      }
   }
 }

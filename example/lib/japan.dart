@@ -2,22 +2,21 @@
 // @see https://github.com/ReinBentdal/styled_widget/wiki/japan-style-example
 import 'package:flutter/material.dart';
 
-import 'package:niku/niku.dart';
 import 'package:niku/namespace.dart' as n;
 
-class JapanStyle extends StatelessWidget {
-  const JapanStyle({Key? key}) : super(key: key);
+class Japan extends StatelessWidget {
+  const Japan({Key? key}) : super(key: key);
 
   @override
   build(context) {
     return Scaffold(
-      body: const Home(),
+      body: const JapanPage(),
     );
   }
 }
 
-class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
+class JapanPage extends StatelessWidget {
+  const JapanPage({Key? key}) : super(key: key);
 
   @override
   build(context) {
@@ -26,7 +25,7 @@ class Home extends StatelessWidget {
         ..color = Color(0xff44517F)
         ..fontSize = 28
         ..bold
-        ..useParent((v) => v..w = 20),
+        ..w = 20,
       n.Box()
         ..size = [200, 200]
         ..bg = Color(0xffFF6160)
@@ -35,20 +34,19 @@ class Home extends StatelessWidget {
           tap: () => showBottomSheet(
             context: context,
             backgroundColor: Colors.transparent,
-            builder: (context) => BottomSheet(),
+            builder: (context) => JapanBottomSheet(),
           ),
         ),
     ])
       ..mainEvenly
       ..crossCenter
-      ..useParent((v) => v
-        ..py = 80
-        ..topCenter);
+      ..py = 80
+      ..alignTopCenter;
   }
 }
 
-class BottomSheet extends StatelessWidget {
-  const BottomSheet({Key? key}) : super(key: key);
+class JapanBottomSheet extends StatelessWidget {
+  const JapanBottomSheet({Key? key}) : super(key: key);
 
   @override
   build(context) {
@@ -65,14 +63,14 @@ class BottomSheet extends StatelessWidget {
       n.Text('サインイン') // bottom description
         ..fontSize = 18
         ..color = Color(0xff455178)
-        ..useParent((v) => v..p = 30)
+        ..m = 30
     ])
       ..mainEnd
       ..crossCenter
+      ..h = 280
+      ..wFull
+      ..p = 10
       ..useParent((v) => v
-        ..h = 280
-        ..fullWidth
-        ..p = 10
         ..bgBlur = 20
         ..rect);
   }

@@ -16,6 +16,7 @@ export 'clip.dart';
 export 'constraints.dart';
 export 'contentPadding.dart';
 export 'crossAxisAlignment.dart';
+export 'dismissDirection.dart';
 export 'fit.dart';
 export 'floatingLabelBehavior.dart';
 export 'foregroundColor.dart';

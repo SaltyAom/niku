@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart' show BuildContext, Widget;
+import 'package:niku/widget/radio.dart';
 
 import 'niku.dart';
 import 'widget/niku.dart' as N;
@@ -11,6 +12,7 @@ typedef Parent = Niku;
 
 typedef On = NikuOn;
 typedef Screen = NikuScreen;
+typedef Animated<T> = NikuAnimated<T>;
 
 typedef Alert = NikuAlert;
 typedef Button = NikuButton;
@@ -26,6 +28,8 @@ typedef ListTile = NikuListTile;
 typedef ListView = NikuListView;
 typedef PopupMenuButton = NikuPopupMenuButton;
 typedef RangeSlider = NikuRangeSlider;
+typedef Radio<T> = NikuRadio<T>;
+typedef RadioListTile<T> = NikuRadioListTile<T>;
 typedef Row = NikuRow;
 typedef SelectableText = NikuSelectableText;
 typedef Slider = NikuSlider;

@@ -40,6 +40,8 @@ class NikuRow extends StatelessWidget
     this.gap,
   }) : super(key: key);
 
+  NikuRow get self => this;
+
   set apply(NikuRow? v) {
     if (v == null) return;
 
