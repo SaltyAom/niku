@@ -1,3 +1,59 @@
+# [2.2.0] - 2022/03/18
+Improvement:
+  - Reduce Time Complexity of hooks from `UseQueryMacro` from O(n(2i + p)) to O(n) where n is property, p is parent total callstack, and i is total invocation.
+  By passing widget self as reference instead of immutable copied then diffing, and apply
+  The following hooks benefits in performance improvement:
+    - useQuery
+    - useSize
+    - useDarkMode
+    - useThemeSelector
+    - useScreen
+
+Feature:
+  - New parent proxy available for all widget:
+    - expanded
+    - flex
+    - fullSize
+    - fullWidth, wFull, w100
+    - fullHeight, hFull, h100
+    - fractionSize, sizePercent
+    - fractionWidth, fractionW, fw, wFactor, widthPercent, wPercent
+    - fractionHeight, fractionH, hw, hFactor, heightPercent, hPercent
+    - boxConstraints
+    - nikuConstraints
+    - maxSize
+    - minSize
+    - maxWidth, maxW, wMax
+    - minWidth, minW, wMin
+    - maxHeight, maxH, hMax
+    - minHeight, minH, hMin
+    - width, w
+    - height, h
+    - useGesture
+  - New parent proxy available for AxisLayourProxy
+    - alignTopLeft
+    - alignTopCenter
+    - alignTopRight
+    - alignCenterLeft
+    - alignCenter
+    - alignCenterRight
+    - alignBottomLeft
+    - alignBottomCenter
+    - alignBottomRight
+    - New widget: `NikuRadio`, `NikuRadioListTile`, `NikuDismissible`
+  - New hook: `useTransition`, `useTransitions`
+  - Add property: `splash`, `wFactor`, `hFactor` to `Niku`
+  - New utility widget `NikuAnimated`, `NikuAnimateds`
+  - New proxy: `ListTile` with `dismiss` for `NikuDismissible`
+
+Change:
+  - Move part of `AxisProxy` to `NikuBuildMacro`
+  - Refactor, and organize examples
+
+Bug fixes:
+  - `obscureCharacter` not working in `NikuTextFormField`
+
+
 # [2.2.0-experimental.1] - 2022/03/17
 Improvement:
   - Reduce Time Complexity of hooks from `UseQueryMacro` from O(n(2i + p)) to O(n) where n is property, p is parent total callstack, and i is total invocation.
