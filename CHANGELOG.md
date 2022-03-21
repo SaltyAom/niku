@@ -1,3 +1,7 @@
+# [2.2.2] - 2022/03/21
+Bugs fix:
+  - `NikuListTile.apply` not applying parent property
+
 # [2.2.1] - 2022/03/21
 Feature:
   - Add `.rounded` to `NikuImage`

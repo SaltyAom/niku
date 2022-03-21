@@ -114,7 +114,7 @@ class NikuListTile extends StatelessWidget
     minVerticalPadding = v.minVerticalPadding ?? minVerticalPadding;
     minLeadingWidth = v.minLeadingWidth ?? minLeadingWidth;
 
-    $internalParent.addAll($internalParent);
+    $internalParent.addAll(v.$internalParent);
   }
 
   NikuListTile get copied => NikuListTile(
