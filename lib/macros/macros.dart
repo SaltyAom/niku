@@ -20,6 +20,7 @@ export 'dismissDirection.dart';
 export 'fit.dart';
 export 'floatingLabelBehavior.dart';
 export 'foregroundColor.dart';
+export 'focusNode.dart';
 export 'fontStyle.dart';
 export 'fontWeight.dart';
 export 'gap.dart';

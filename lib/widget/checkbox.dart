@@ -5,7 +5,10 @@ import '../macros/macros.dart';
 
 // ignore: must_be_immutable
 class NikuCheckbox extends StatelessWidget
-    with NikuBuildMacro<NikuCheckbox>, UseQueryMacro<NikuCheckbox> {
+    with
+        NikuBuildMacro<NikuCheckbox>,
+        UseQueryMacro<NikuCheckbox>,
+        FocusNodeMacro {
   bool? value;
   ValueChanged<bool?>? onChanged;
   MouseCursor? mouseCursor;

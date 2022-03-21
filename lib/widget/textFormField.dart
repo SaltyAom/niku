@@ -15,6 +15,7 @@ class NikuTextFormField extends StatelessWidget
         ApplyTextMacro,
         ApplyStrutStyleMacro,
         ApplyInputDecorationMacro,
+        FocusNodeMacro,
         TextAlignMacro,
         TextDirectionMacro,
         KeyboardTypeMacro,

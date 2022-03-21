@@ -8,7 +8,8 @@ class NikuListTile extends StatelessWidget
     with
         NikuBuildMacro<NikuListTile>,
         UseQueryMacro<NikuListTile>,
-        ContentPaddingMacro {
+        ContentPaddingMacro,
+        FocusNodeMacro {
   Key? key;
   Widget? leading;
   Widget? title;
@@ -70,6 +71,13 @@ class NikuListTile extends StatelessWidget
     this.minVerticalPadding,
     this.minLeadingWidth,
   }) : super(key: key);
+
+  get isDense => dense = true;
+
+  void useLeading(Widget Function() builder) => leading = builder();
+  void useTitle(Widget Function() builder) => title = builder();
+  void useSubtitle(Widget Function() builder) => subtitle = builder();
+  void useTrailing(Widget Function() builder) => trailing = builder();
 
   NikuListTile get self => this;
 

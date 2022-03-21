@@ -8,7 +8,8 @@ class NikuRadioListTile<T> extends StatelessWidget
     with
         NikuBuildMacro<NikuRadioListTile>,
         UseQueryMacro<NikuRadioListTile>,
-        ContentPaddingMacro {
+        ContentPaddingMacro,
+        FocusNodeMacro {
   NikuRadioListTile(
     this.value, {
     this.key,
