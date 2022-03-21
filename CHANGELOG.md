@@ -2,6 +2,7 @@
 Feature:
   - Add `.rounded` to `NikuImage`
   - Add `FocusNodeMacro`, adding `useFocusNode`, `useFocus`
+  - Add `useTitle`, `useSubtitle`, `useLeading`, `useTrailing`
 
 # [2.2.0] - 2022/03/18
 Improvement:
