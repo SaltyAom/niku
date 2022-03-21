@@ -13,7 +13,8 @@ class NikuButton extends StatelessWidget
         UseQueryMacro<NikuButton>,
         ApplyButtonStyleMacro,
         ClipMacro,
-        ButtonStyleTextStyleProxy {
+        ButtonStyleTextStyleProxy,
+        FocusNodeMacro {
   Widget child;
 
   Widget? icon;

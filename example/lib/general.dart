@@ -71,6 +71,13 @@ class General extends HookWidget {
         n.TextFormField()
           ..label = "Value"
           ..outlined,
+        TextFormField(
+          decoration: InputDecoration(
+            labelStyle: TextStyle(
+              fontSize: 24,
+            ),
+          ),
+        ),
         n.CheckboxListTile(active.value)
           ..leading
           ..title = Text("General")

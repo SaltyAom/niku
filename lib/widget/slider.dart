@@ -12,7 +12,8 @@ class NikuSlider extends StatelessWidget
         NikuBuildMacro<NikuSlider>,
         UseQueryMacro<NikuSlider>,
         ApplyTextMacro,
-        ApplyValueIndicatorTextStyleMacro {
+        ApplyValueIndicatorTextStyleMacro,
+        FocusNodeMacro {
   double data;
 
   NikuSliderType? sliderType;

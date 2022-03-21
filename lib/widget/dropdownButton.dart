@@ -11,6 +11,7 @@ class NikuDropdownButton<T> extends StatelessWidget
         UseQueryMacro<NikuDropdownButton>,
         ApplyTextMacro,
         AlignmentDirectionalMacro,
+        FocusNodeMacro,
         TextStyleProxy {
   List<DropdownMenuItem<T>>? items;
   List<T>? itemsValue;

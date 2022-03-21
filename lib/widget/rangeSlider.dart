@@ -9,7 +9,8 @@ class NikuRangeSlider extends StatelessWidget
         NikuBuildMacro<NikuRangeSlider>,
         UseQueryMacro<NikuRangeSlider>,
         ApplyTextMacro,
-        ApplyValueIndicatorTextStyleMacro {
+        ApplyValueIndicatorTextStyleMacro,
+        FocusNodeMacro {
   RangeValues data;
 
   void Function(RangeValues)? onChanged;

@@ -10,6 +10,7 @@ class NikuIconButton extends StatelessWidget
         UseQueryMacro<NikuIconButton>,
         AlignmentDirectionalMacro,
         ConstraintsMacro,
+        FocusNodeMacro,
         PaddingMacro {
   Widget? child;
   void Function()? onPressed;

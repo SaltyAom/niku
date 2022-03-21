@@ -1,3 +1,13 @@
+# [2.2.2] - 2022/03/21
+Bugs fix:
+  - `NikuListTile.apply` not applying parent property
+
+# [2.2.1] - 2022/03/21
+Feature:
+  - Add `.rounded` to `NikuImage`
+  - Add `FocusNodeMacro`, adding `useFocusNode`, `useFocus`
+  - Add `useTitle`, `useSubtitle`, `useLeading`, `useTrailing`
+
 # [2.2.0] - 2022/03/18
 Improvement:
   - Reduce Time Complexity of hooks from `UseQueryMacro` from O(n(2i + p)) to O(n) where n is property, p is parent total callstack, and i is total invocation.
@@ -52,7 +62,6 @@ Change:
 
 Bug fixes:
   - `obscureCharacter` not working in `NikuTextFormField`
-
 
 # [2.2.0-experimental.1] - 2022/03/17
 Improvement:

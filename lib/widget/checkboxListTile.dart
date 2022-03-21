@@ -9,6 +9,7 @@ class NikuCheckboxListTile extends StatelessWidget
         NikuBuildMacro<NikuCheckboxListTile>,
         UseQueryMacro<NikuCheckboxListTile>,
         ContentPaddingMacro,
+        FocusNodeMacro,
         ListTileControlAffinityMacro {
   bool? value;
   ValueChanged<bool?>? onChanged;

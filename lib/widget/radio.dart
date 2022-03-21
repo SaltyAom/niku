@@ -5,7 +5,7 @@ import '../objects/objects.dart';
 
 // ignore: must_be_immutable
 class NikuRadio<T> extends StatelessWidget
-    with NikuBuildMacro<NikuRadio>, UseQueryMacro<NikuRadio> {
+    with NikuBuildMacro<NikuRadio>, UseQueryMacro<NikuRadio>, FocusNodeMacro {
   NikuRadio(
     this.value, {
     this.key,

@@ -16,7 +16,7 @@ const double _kSwitchHeightCollapsed = _kSwitchMinSize;
 
 // ignore: must_be_immutable
 class NikuSwitch extends StatelessWidget
-    with NikuBuildMacro<NikuSwitch>, UseQueryMacro<NikuSwitch> {
+    with NikuBuildMacro<NikuSwitch>, UseQueryMacro<NikuSwitch>, FocusNodeMacro {
   bool adaptive = false;
   bool cupertino = false;
 
