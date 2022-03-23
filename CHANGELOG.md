@@ -1,4 +1,8 @@
-# [2.2.3] - 2022/03/21
+# [2.2.4] - 2022/03/23
+Feature:
+  - Add `sliverToBox`, `useForm`, and `formKey` to Parent Proxy
+
+# [2.2.3] - 2022/03/23
 Feature:
   - Add `useTitle`, `useContent` to `NikuAlert`
   - Add `sliverToBox`, `useForm`, and `formKey` to `Niku`

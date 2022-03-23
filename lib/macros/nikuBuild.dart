@@ -203,6 +203,25 @@ abstract class NikuBuildMacro<T extends Widget> {
   /// Cancel parent size inheritance by wrapping the widget with a [Wrap].
   get wrap => useParent((w) => Wrap(children: [w]));
 
+  void get sliverToBox => useParent((w) => SliverToBoxAdapter(child: w));
+
+  set formKey(Key v) => useParent((w) => Form(key: v, child: w));
+  void useForm({
+    Key? key,
+    AutovalidateMode? autovalidateMode,
+    Future<bool> Function()? onWillPop,
+    void Function()? onChanged,
+  }) =>
+      useParent(
+        (w) => Form(
+          key: key,
+          child: w,
+          autovalidateMode: autovalidateMode,
+          onWillPop: onWillPop,
+          onChanged: onChanged,
+        ),
+      );
+
   void useGesture({
     void Function(TapDownDetails)? tapDown,
     void Function(TapUpDetails)? tapUp,
