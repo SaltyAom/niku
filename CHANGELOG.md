@@ -1,3 +1,12 @@
+# [2.2.3] - 2022/03/21
+Feature:
+  - Add `useTitle`, `useContent` to `NikuAlert`
+  - Add `sliverToBox`, `useForm`, and `formKey` to `Niku`
+
+Bugs fix:
+  - Set `borderColor` to `transparent` on calling `noUnderline` on `TextFormField`
+  - `.gap` not working with `Row`
+
 # [2.2.2] - 2022/03/21
 Bugs fix:
   - `NikuListTile.apply` not applying parent property

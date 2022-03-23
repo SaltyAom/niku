@@ -410,6 +410,7 @@ extension PropertyBuilder on Niku {
         child: _w,
       );
 
+  set formKey(Key v) => _w = Form(key: v, child: _w);
   void useForm({
     Key? key,
     AutovalidateMode? autovalidateMode,
@@ -520,6 +521,8 @@ extension PropertyBuilder on Niku {
       child: _w,
     );
   }
+
+  void get sliverToBox => _w = SliverToBoxAdapter(child: _w);
 
   set on(List<dynamic> dependencies) =>
       useChild((child) => NikuOn(() => child, dependencies));

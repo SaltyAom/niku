@@ -200,6 +200,9 @@ abstract class NikuBuildMacro<T extends Widget> {
   set height(double v) => useParent((w) => SizedBox(height: v, child: w));
   set h(double v) => useParent((w) => SizedBox(height: v, child: w));
 
+  /// Cancel parent size inheritance by wrapping the widget with a [Wrap].
+  get wrap => useParent((w) => Wrap(children: [w]));
+
   void useGesture({
     void Function(TapDownDetails)? tapDown,
     void Function(TapUpDetails)? tapUp,
