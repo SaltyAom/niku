@@ -154,6 +154,10 @@ class NikuAlert extends StatelessWidget
     this.cupertino = false,
   }) : super(key: key);
 
+  void useTitle(Widget Function() builder) => title = builder();
+  void useContent(Widget Function() builder) => content = builder();
+  void useActions(List<Widget> Function() builder) => actions = builder();
+
   factory NikuAlert.adaptive({
     Key? key,
     Widget? title,

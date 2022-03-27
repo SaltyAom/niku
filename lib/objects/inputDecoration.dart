@@ -236,6 +236,13 @@ class NikuInputDecoration
     errorBorder!.type = NikuInputBorderType.Underline;
   }
 
+  void get noUnderline {
+    _initializeAllBorder();
+
+    borderWidth = 0;
+    borderColor = Colors.transparent;
+  }
+
   void get outlined {
     _initializeAllBorder();
 

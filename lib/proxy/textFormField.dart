@@ -387,6 +387,7 @@ extension TextFormFieldInputDecorationProxy on NikuTextFormField {
     _initializeAllBorder();
 
     decoration?.borderWidth = 0;
+    decoration?.borderColor = Colors.transparent;
   }
 
   void get outlined {
