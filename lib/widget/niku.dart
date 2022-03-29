@@ -20,34 +20,30 @@ class Niku extends StatelessWidget {
 
   Niku([this.widget = const SizedBox.shrink(), this.key]) : super(key: key);
 
-  List<Widget Function(Widget)> _$nikuParent = [];
+  List<Widget Function(Widget)> _$parent = [];
 
-  void _add(Widget Function(Widget) builder) => _$nikuParent.add(builder);
-  void _replace(Widget Function(Widget) builder) {
-    _$nikuParent[_$nikuParent.length - 1] = builder;
-  }
-
-  Widget? get _latest =>
-      _$nikuParent.isNotEmpty ? _$nikuParent.last(_empty) : null;
+  Widget? get _latest => _$parent.isNotEmpty ? _$parent.last(_empty) : null;
+  void _add(Widget Function(Widget) builder) => _$parent.add(builder);
+  void _replace(Widget Function(Widget) builder) =>
+      _$parent[_$parent.length - 1] = builder;
 
   @override
   build(context) {
     Widget composed = widget;
 
-    print("\n");
-    print("${widget.key ?? key}: ${_$nikuParent.length} properties");
-    _$nikuParent.forEach((v) {
-      print(" - ${v(_empty)}");
-    });
-
-    _$nikuParent.forEach((wrap) {
-      composed = wrap(composed);
-    });
-
     if (key != null) return SizedBox(key: key ?? widget.key, child: composed);
 
     return composed;
   }
+
+  // ? Only use in debugging Tempestissimo, will be removed on stable
+  // $debugDescribeProperty() {
+  //   print("\n");
+  //   print("${widget.key ?? key}: ${_$parent.length} properties");
+  //   _$parent.forEach((v) {
+  //     print(" - ${v(_empty)}");
+  //   });
+  // }
 }
 
 typedef UseNikuCallback<T> = T Function(T);
