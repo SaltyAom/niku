@@ -31,19 +31,23 @@ class Niku extends StatelessWidget {
   build(context) {
     Widget composed = widget;
 
+    _$parent.forEach((builder) {
+      composed = builder(composed);
+    });
+
     if (key != null) return SizedBox(key: key ?? widget.key, child: composed);
 
     return composed;
   }
 
   // ? Only use in debugging Tempestissimo, will be removed on stable
-  // $debugDescribeProperty() {
-  //   print("\n");
-  //   print("${widget.key ?? key}: ${_$parent.length} properties");
-  //   _$parent.forEach((v) {
-  //     print(" - ${v(_empty)}");
-  //   });
-  // }
+  $debugDescribeProperty() {
+    print("\n");
+    print("${widget.key ?? key}: ${_$parent.length} properties");
+    _$parent.forEach((v) {
+      print(" - ${v(_empty)}");
+    });
+  }
 }
 
 typedef UseNikuCallback<T> = T Function(T);
