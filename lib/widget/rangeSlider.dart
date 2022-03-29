@@ -7,7 +7,6 @@ import '../objects/objects.dart';
 class NikuRangeSlider extends StatelessWidget
     with
         NikuBuildMacro<NikuRangeSlider>,
-        UseQueryMacro<NikuRangeSlider>,
         ApplyTextMacro,
         ApplyValueIndicatorTextStyleMacro,
         FocusNodeMacro {

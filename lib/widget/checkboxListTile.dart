@@ -7,7 +7,6 @@ import '../macros/macros.dart';
 class NikuCheckboxListTile extends StatelessWidget
     with
         NikuBuildMacro<NikuCheckboxListTile>,
-        UseQueryMacro<NikuCheckboxListTile>,
         ContentPaddingMacro,
         FocusNodeMacro,
         ListTileControlAffinityMacro {

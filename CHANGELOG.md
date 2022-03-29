@@ -1,3 +1,21 @@
+# [2.3.0-experimental.0] - 2022/03/29
+Feature:
+  - Internal architecture changed called `Tempestissimo`.
+    - Significant performance improvement, parent builder rewrite
+    - Parent Property builder now lazily executed
+    - Flatten and parent property
+  - Add `ExplictParentBuilder` to quickly handle single use of parent builder
+  - New hook: `useShadow`, `useRoundShadow`
+  - Add new property, `borderRadius`, `shadow`
+
+Change:
+  - Parent Builder architecture rewrite, name `Tempestissimo`.
+  - `rounded` now use `NikuRounded` under the hood to auto inherits borderRadius for next builder, eg. `shadows`, and `border`.
+  - Depreacate `UseQueryMacro<T>`, merged into `NikuBuildMacro<T>`
+
+Bugs fix:
+  - Gap now doesn't use square ratio, the content cross-dimension is now preserved.
+
 # [2.2.4] - 2022/03/23
 Feature:
   - Add `sliverToBox`, `useForm`, and `formKey` to Parent Proxy

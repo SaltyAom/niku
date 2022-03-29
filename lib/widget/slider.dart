@@ -10,7 +10,6 @@ enum NikuSliderType { material, adaptive, cupertino }
 class NikuSlider extends StatelessWidget
     with
         NikuBuildMacro<NikuSlider>,
-        UseQueryMacro<NikuSlider>,
         ApplyTextMacro,
         ApplyValueIndicatorTextStyleMacro,
         FocusNodeMacro {

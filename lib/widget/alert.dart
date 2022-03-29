@@ -75,7 +75,6 @@ Future<void> showNikuDialog({
 class NikuAlert extends StatelessWidget
     with
         NikuBuildMacro<NikuAlert>,
-        UseQueryMacro<NikuAlert>,
         ActionPaddingFullMacro,
         ApplyTitleTextMacro,
         ApplyContentTextMacro,

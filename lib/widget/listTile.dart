@@ -5,11 +5,7 @@ import 'package:niku/objects/objects.dart';
 
 // ignore: must_be_immutable
 class NikuListTile extends StatelessWidget
-    with
-        NikuBuildMacro<NikuListTile>,
-        UseQueryMacro<NikuListTile>,
-        ContentPaddingMacro,
-        FocusNodeMacro {
+    with NikuBuildMacro<NikuListTile>, ContentPaddingMacro, FocusNodeMacro {
   Key? key;
   Widget? leading;
   Widget? title;

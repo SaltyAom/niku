@@ -13,7 +13,6 @@ import '../macros/macros.dart';
 class NikuImage extends StatelessWidget
     with
         NikuBuildMacro<NikuImage>,
-        UseQueryMacro<NikuImage>,
         ColorBlendModeMacro,
         BoxFitMacro,
         ImageRepeatMacro,

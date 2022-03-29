@@ -8,7 +8,6 @@ import 'package:niku/proxy/textStyle.dart';
 class NikuDropdownButton<T> extends StatelessWidget
     with
         NikuBuildMacro<NikuDropdownButton>,
-        UseQueryMacro<NikuDropdownButton>,
         ApplyTextMacro,
         AlignmentDirectionalMacro,
         FocusNodeMacro,

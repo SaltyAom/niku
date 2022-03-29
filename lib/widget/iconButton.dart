@@ -7,7 +7,6 @@ import '../objects/objects.dart';
 class NikuIconButton extends StatelessWidget
     with
         NikuBuildMacro<NikuIconButton>,
-        UseQueryMacro<NikuIconButton>,
         AlignmentDirectionalMacro,
         ConstraintsMacro,
         FocusNodeMacro,

@@ -4,7 +4,7 @@ import 'package:niku/macros/macros.dart';
 
 // ignore: must_be_immutable
 class NikuIcon extends StatelessWidget
-    with NikuBuildMacro<NikuIcon>, UseQueryMacro<NikuIcon>, TextAlignMacro {
+    with NikuBuildMacro<NikuIcon>, TextAlignMacro {
   IconData? icon;
   double? size;
   Color? color;

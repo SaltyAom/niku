@@ -1,3 +1,7 @@
+import 'dart:ui';
+
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:niku/objects/objects.dart';
 
@@ -7,20 +11,19 @@ import '../extra/on.dart';
 abstract class NikuBuildMacro<T extends Widget> {
   List<Widget Function(Niku)> _parent = [];
 
-  void useNiku(Widget Function(Niku) cb) {
-    useParent(cb);
-  }
+  void useNiku(Widget Function(Niku) cb) => useParent(cb);
 
   set apply(T? v) {}
   void of(T? v) => apply = v;
 
-  use(List<T> v) {
+  void use(List<T> v) {
     v.forEach((e) => apply = e);
   }
 
   void useParent(Widget Function(Niku) cb) =>
       _parent.add((Niku widget) => cb(widget));
 
+  // Hold parent builder (for internal usage only)
   List<Widget Function(Niku)> get $internalParent => _parent;
 
   set on(List<dynamic> dependencies) =>
@@ -46,7 +49,185 @@ abstract class NikuBuildMacro<T extends Widget> {
     return composed;
   }
 
-  // Parent Proxy
+  // ? Query Macro
+  T get self => this as T;
+  T get copied => SizedBox.shrink() as T;
+
+  void useQuery(BuildContext context, T Function(T, MediaQueryData) builder) {
+    builder(self, MediaQuery.of(context));
+  }
+
+  void useSize(BuildContext context, T Function(T, Size) builder) {
+    builder(self, MediaQuery.of(context).size);
+  }
+
+  void useDarkMode(BuildContext context, T Function(T, bool) builder) {
+    builder(self, Theme.of(context).brightness == Brightness.dark);
+  }
+
+  void useThemeSelector(
+    BuildContext context, {
+    required T Function(T) light,
+    required T Function(T) dark,
+  }) {
+    Theme.of(context).brightness == Brightness.dark ? dark(self) : light(self);
+  }
+
+  /// ```dart
+  /// void useScreen({
+  ///   // > 568px
+  ///   Widget Function(Niku)? base,
+  ///   // 568 - 640px
+  ///   Widget Function(Niku)? xs,
+  ///   // 640 - 768px
+  ///   Widget Function(Niku)? sm,
+  ///   // 768 - 920px
+  ///   Widget Function(Niku)? md,
+  ///   // 920 - 1024px
+  ///   Widget Function(Niku)? lg,
+  ///   // > 1024px
+  ///   Widget Function(Niku)? xl,
+  /// })
+  /// ```
+  void useScreen(
+    BuildContext context, {
+    // > 568px
+    T Function(T)? base,
+    // 568 - 640px
+    T Function(T)? xs,
+    // 640 - 768px
+    T Function(T)? sm,
+    // 768 - 920px
+    T Function(T)? md,
+    // 920 - 1024px
+    T Function(T)? lg,
+    // > 1024px
+    T Function(T)? xl,
+  }) {
+    final width = MediaQuery.of(context).size.width;
+
+    if (width < 568) {
+      if (base != null) base(copied);
+
+      return;
+    }
+
+    if (width < 640) {
+      if (xs != null)
+        xs(self);
+      else if (base != null) base(self);
+
+      return;
+    }
+
+    if (width < 720) {
+      if (sm != null)
+        sm(self);
+      else if (xs != null)
+        xs(self);
+      else if (base != null) base(self);
+
+      return;
+    }
+
+    if (width < 920) {
+      if (md != null)
+        md(self);
+      else if (sm != null)
+        sm(self);
+      else if (xs != null)
+        xs(self);
+      else if (base != null) base(self);
+
+      return;
+    }
+
+    if (width < 1024) {
+      if (lg != null)
+        lg(self);
+      else if (md != null)
+        md(self);
+      else if (sm != null)
+        sm(self);
+      else if (xs != null)
+        xs(self);
+      else if (base != null) base(self);
+    }
+
+    if (xl != null)
+      xl(self);
+    else if (lg != null)
+      lg(self);
+    else if (md != null)
+      md(self);
+    else if (sm != null)
+      sm(self);
+    else if (xs != null)
+      xs(self);
+    else if (base != null) base(self);
+  }
+
+  void usePlatform(
+    BuildContext context, {
+    T Function(T)? android,
+    T Function(T)? iOS,
+    T Function(T)? fuchsia,
+    T Function(T)? linux,
+    T Function(T)? macOS,
+    T Function(T)? windows,
+    T Function(T)? web,
+  }) {
+    fallback(T Function(T)? builder) {
+      if (builder != null) builder(self);
+    }
+
+    if (kIsWeb)
+      fallback(web);
+    else
+      switch (Theme.of(context).platform) {
+        case TargetPlatform.android:
+          fallback(android);
+          break;
+
+        case TargetPlatform.iOS:
+          fallback(iOS);
+          break;
+
+        case TargetPlatform.fuchsia:
+          fallback(fuchsia);
+          break;
+
+        case TargetPlatform.linux:
+          fallback(linux);
+          break;
+
+        case TargetPlatform.macOS:
+          fallback(macOS);
+          break;
+
+        case TargetPlatform.windows:
+          fallback(windows);
+          break;
+      }
+  }
+
+  // ? Parent Proxy
+  NikuExplictParentBuilder? _explictParent;
+
+  NikuExplictParentBuilder get n {
+    if (_explictParent == null)
+      _explictParent = NikuExplictParentBuilder(useParent);
+
+    return _explictParent!;
+  }
+
+  NikuExplictParentBuilder get parent {
+    if (_explictParent == null)
+      _explictParent = NikuExplictParentBuilder(useParent);
+
+    return _explictParent!;
+  }
+
   set margin(EdgeInsets v) {
     useParent((c) => Padding(padding: v, child: c));
   }
@@ -126,6 +307,8 @@ abstract class NikuBuildMacro<T extends Widget> {
   void get w100 => useParent((v) => SizedBox(width: double.infinity, child: v));
   void get h100 =>
       useParent((v) => SizedBox(height: double.infinity, child: v));
+  void get fill => useParent((v) =>
+      SizedBox(width: double.infinity, height: double.infinity, child: v));
 
   set fractionSize(List<double> v) => useParent((w) =>
       FractionallySizedBox(widthFactor: v[0], heightFactor: v[1], child: w));
@@ -321,4 +504,197 @@ abstract class NikuBuildMacro<T extends Widget> {
           child: v,
         ),
       );
+
+  void useAnimationBuilder({
+    required Widget Function(BuildContext context, Widget child) builder,
+    required AnimationController animation,
+  }) =>
+      useParent(
+        (_w) => _w
+          ..useAnimationBuilder(
+            animation: animation,
+            builder: (context, child) => builder(context, _w),
+          ),
+      );
+
+  set aspectRatio(double aspectRatio) =>
+      useParent((_w) => AspectRatio(aspectRatio: aspectRatio, child: _w));
+  set aspect(double aspectRatio) =>
+      useParent((_w) => AspectRatio(aspectRatio: aspectRatio, child: _w));
+  set ratio(double aspectRatio) =>
+      useParent((_w) => AspectRatio(aspectRatio: aspectRatio, child: _w));
+
+  void get scrollable => useParent((_w) => SingleChildScrollView(child: _w));
+
+  void useScrollView({
+    ScrollController? controller,
+    Axis scrollDirection = Axis.vertical,
+    bool? primary,
+    bool reverse = false,
+    ScrollPhysics? scrollPhysics,
+    DragStartBehavior dragStartBehavior = DragStartBehavior.start,
+    String? restorationId,
+  }) =>
+      useParent(
+        (_w) => SingleChildScrollView(
+          child: _w,
+          controller: controller,
+          scrollDirection: scrollDirection,
+          primary: primary,
+          reverse: reverse,
+          physics: scrollPhysics,
+          dragStartBehavior: dragStartBehavior,
+          restorationId: restorationId,
+        ),
+      );
+
+  set theme(ThemeData v) => useParent((_w) => _w..theme = v);
+
+  set visible(bool visibility) => useParent((_w) => _w..visible = visibility);
+  get hidden => useParent((_w) => _w..hidden);
+}
+
+class NikuExplictParentBuilder {
+  NikuExplictParentBuilder(this.useParent);
+
+  final void Function(Widget Function(Niku)) useParent;
+
+  set top(double v) => useParent((_w) => _w..top = v);
+  set left(double v) => useParent((_w) => _w..left = v);
+  set bottom(double v) => useParent((_w) => _w..bottom = v);
+  set right(double v) => useParent((_w) => _w..right = v);
+
+  set bg(Color v) => useParent((_w) => _w..bg = v);
+  set opacity(double v) => useParent((_w) => _w..opacity = v);
+  set rounded(double v) => useParent((_w) => _w..rounded = v);
+  set borderRadius(BorderRadius v) => useParent((_w) => _w..borderRadius = v);
+
+  set padding(EdgeInsets v) => useParent((_w) => _w..padding = v);
+  set nikuPadding(UseNikuCallback<NikuEdgeInsets> cb) =>
+      useParent((_w) => _w..nikuPadding = cb);
+
+  set p(double v) => useParent((_w) => _w..p = v);
+  set px(double v) => useParent((_w) => _w..px = v);
+  set py(double v) => useParent((_w) => _w..py = v);
+  set pt(double v) => useParent((_w) => _w..pt = v);
+  set pb(double v) => useParent((_w) => _w..pb = v);
+  set pl(double v) => useParent((_w) => _w..pl = v);
+  set pr(double v) => useParent((_w) => _w..pr = v);
+
+  set gradient(Gradient v) => useParent((_w) => _w..gradient = v);
+
+  set align(AlignmentGeometry v) => useParent(
+        (_w) => Align(alignment: v, child: _w),
+      );
+
+  void get topLeft => useParent((_w) => _w..topLeft);
+  void get topCenter => useParent((_w) => _w..topCenter);
+  void get topRight => useParent((_w) => _w..topRight);
+  void get centerLeft => useParent((_w) => _w..centerLeft);
+  void get center => useParent((_w) => _w..center);
+  void get centerRight => useParent((_w) => _w..centerRight);
+  void get bottomLeft => useParent((_w) => _w..bottomLeft);
+  void get bottomCenter => useParent((_w) => _w..bottomCenter);
+  void get bottomRight => useParent((_w) => _w..bottomRight);
+
+  set decorated(BoxDecoration v) => useParent((_w) => _w..decorated = v);
+  set boxDecoration(BoxDecoration v) =>
+      useParent((_w) => _w..boxDecoration = v);
+
+  set hero(String v) => useParent((_w) => _w..hero = v);
+  set heroTag(String v) => useParent((_w) => _w..heroTag = v);
+
+  set ignorePointer(bool v) => useParent((_w) => _w..ignorePointer = v);
+  set absorbPointer(bool v) => useParent((_w) => _w..absorbPointer = v);
+
+  set tooltip(String v) => useParent((_w) => _w..tooltip = v);
+  set tip(String v) => useParent((_w) => _w..tip = v);
+
+  set matrix4(Matrix4 v) => useParent((_w) => _w..matrix4 = v);
+  set rotate(double v) => useParent((_w) => _w..rotate = v);
+  set scale(double v) => useParent((_w) => _w..scale = v);
+  set translate(List<double> v) => useParent((_w) => _w..translate = v);
+  set translateX(double v) => useParent((_w) => _w..translateX = v);
+  set translateY(double v) => useParent((_w) => _w..translateY = v);
+
+  set border(Border v) => useParent((_w) => _w..border = v);
+
+  useBorder({
+    Color? color,
+    double? width,
+    BorderStyle? style,
+  }) =>
+      useParent((_w) => _w
+        ..useBorder(
+          color: color,
+          width: width,
+          style: style,
+        ));
+
+  useRoundedBorder({
+    double? rounded,
+    Color? color,
+    double? width,
+    BorderStyle? style,
+  }) =>
+      useParent(
+        (_w) => _w
+          ..useRoundedBorder(
+            rounded: rounded,
+            color: color,
+            width: width,
+            style: style,
+          ),
+      );
+
+  set backdropFilter(ImageFilter v) =>
+      useParent((_w) => _w..backdropFilter = v);
+
+  set bgBlur(double v) => useParent((_w) => _w..bgBlur = v);
+
+  set rect(Clip clip) => useParent((_w) => _w..rect = clip);
+  Clip get rect {
+    useParent((_w) => _w..rect);
+
+    return Clip.hardEdge;
+  }
+
+  set oval(Clip clip) => useParent((_w) => _w..oval = clip);
+  Clip get oval {
+    useParent((_w) => _w..oval);
+
+    return Clip.hardEdge;
+  }
+
+  set elevation(double elevation) =>
+      useParent((_w) => _w..elevation = elevation);
+
+  set splash(Color color) => useParent((_w) => InkWell(
+        splashColor: color,
+        child: _w,
+      ));
+
+  set shadow(BoxShadow v) => useParent((_w) => _w..shadow = v);
+  set shadows(List<BoxShadow> v) => useParent((_w) => _w..shadows = v);
+  void useRoundShadow({
+    required double rounded,
+    required List<BoxShadow> shadows,
+  }) =>
+      useParent((_w) => _w..useRoundShadow(rounded: rounded, shadows: shadows));
+
+  void useShadow({
+    Color color = const Color(0xFF000000),
+    Offset offset = Offset.zero,
+    double blurRadius = 0.0,
+    double spreadRadius = 0.0,
+    BlurStyle blurStyle = BlurStyle.normal,
+  }) =>
+      useParent((_w) => _w
+        ..useShadow(
+          color: color,
+          offset: offset,
+          blurRadius: blurRadius,
+          spreadRadius: spreadRadius,
+          blurStyle: blurStyle,
+        ));
 }

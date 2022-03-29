@@ -7,215 +7,456 @@ import 'package:flutter/gestures.dart';
 import 'package:niku/objects/objects.dart';
 import 'package:niku/extra/extra.dart';
 
-class NikuAnimatedCollection {
-  final align = AnimatedAlign;
+extension NikuTransform on Widget {
+  Niku get niku => Niku(this);
 }
+
+const _empty = SizedBox.shrink();
 
 // ignore: must_be_immutable
 class Niku extends StatelessWidget {
   Widget widget;
   Key? key;
 
-  Widget get _w => widget;
-  set _w(Widget w) => widget = w;
-
   Niku([this.widget = const SizedBox.shrink(), this.key]) : super(key: key);
+
+  List<Widget Function(Widget)> _$nikuParent = [];
+
+  void _add(Widget Function(Widget) builder) => _$nikuParent.add(builder);
+  void _replace(Widget Function(Widget) builder) {
+    _$nikuParent[_$nikuParent.length - 1] = builder;
+  }
+
+  Widget? get _latest =>
+      _$nikuParent.isNotEmpty ? _$nikuParent.last(_empty) : null;
 
   @override
   build(context) {
-    if (key != null) return SizedBox(key: key, child: widget);
+    Widget composed = widget;
 
-    return widget;
+    print("\n");
+    print("${widget.key ?? key}: ${_$nikuParent.length} properties");
+    _$nikuParent.forEach((v) {
+      print(" - ${v(_empty)}");
+    });
+
+    _$nikuParent.forEach((wrap) {
+      composed = wrap(composed);
+    });
+
+    if (key != null) return SizedBox(key: key ?? widget.key, child: composed);
+
+    return composed;
   }
 }
 
 typedef UseNikuCallback<T> = T Function(T);
 
-extension TransformNikuParent on Widget {
-  Niku get niku => Niku(this);
-}
-
 extension PropertyBuilder on Niku {
-  set margin(EdgeInsets v) => _w = Padding(padding: v, child: _w);
-  set nikuMargin(UseNikuCallback<NikuEdgeInsets> cb) =>
-      _w = Padding(padding: cb(NikuEdgeInsets()).value, child: _w);
+  _applyPadding({
+    double top = 0,
+    double left = 0,
+    double bottom = 0,
+    double right = 0,
+  }) {
+    final padding = (_latest as Padding).padding as EdgeInsets;
+    final _top = top + padding.top;
+    final _left = left + padding.left;
+    final _bottom = bottom + padding.bottom;
+    final _right = right + padding.right;
 
-  set m(double v) => _w = Padding(padding: EdgeInsets.all(v), child: _w);
-  set mx(double v) =>
-      _w = Padding(padding: EdgeInsets.symmetric(horizontal: v), child: _w);
-  set my(double v) =>
-      _w = Padding(padding: EdgeInsets.symmetric(vertical: v), child: _w);
-  set mt(double v) => _w = Padding(padding: EdgeInsets.only(top: v), child: _w);
-  set mb(double v) =>
-      _w = Padding(padding: EdgeInsets.only(bottom: v), child: _w);
-  set ml(double v) =>
-      _w = Padding(padding: EdgeInsets.only(left: v), child: _w);
-  set mr(double v) =>
-      _w = Padding(padding: EdgeInsets.only(right: v), child: _w);
-
-  set padding(EdgeInsets v) => _w = Padding(padding: v, child: _w);
-  set nikuPadding(UseNikuCallback<NikuEdgeInsets> cb) =>
-      _w = Padding(padding: cb(NikuEdgeInsets()).value, child: _w);
-
-  set p(double v) => _w = Padding(padding: EdgeInsets.all(v), child: _w);
-  set px(double v) =>
-      _w = Padding(padding: EdgeInsets.symmetric(horizontal: v), child: _w);
-  set py(double v) =>
-      _w = Padding(padding: EdgeInsets.symmetric(vertical: v), child: _w);
-  set pt(double v) => _w = Padding(padding: EdgeInsets.only(top: v), child: _w);
-  set pb(double v) =>
-      _w = Padding(padding: EdgeInsets.only(bottom: v), child: _w);
-  set pl(double v) =>
-      _w = Padding(padding: EdgeInsets.only(left: v), child: _w);
-  set pr(double v) =>
-      _w = Padding(padding: EdgeInsets.only(right: v), child: _w);
-
-  set align(AlignmentGeometry v) => _w = Align(alignment: v, child: _w);
-  void get topLeft => _w = Align(alignment: Alignment.topLeft, child: _w);
-  void get topCenter => _w = Align(alignment: Alignment.topCenter, child: _w);
-  void get topRight => _w = Align(alignment: Alignment.topRight, child: _w);
-  void get centerLeft => _w = Align(alignment: Alignment.centerLeft, child: _w);
-  void get center => _w = Center(child: _w);
-  void get centerRight =>
-      _w = Align(alignment: Alignment.centerRight, child: _w);
-  void get bottomLeft => _w = Align(alignment: Alignment.bottomLeft, child: _w);
-  void get bottomCenter =>
-      _w = Align(alignment: Alignment.bottomCenter, child: _w);
-  void get bottomRight =>
-      _w = Align(alignment: Alignment.bottomRight, child: _w);
-
-  void get fullSize =>
-      _w = SizedBox(width: double.infinity, height: double.infinity, child: _w);
-  void get fullWidth => _w = SizedBox(width: double.infinity, child: _w);
-  void get fullHeight => _w = SizedBox(height: double.infinity, child: _w);
-  void get wFull => _w = SizedBox(width: double.infinity, child: _w);
-  void get hFull => _w = SizedBox(height: double.infinity, child: _w);
-  void get w100 => _w = SizedBox(width: double.infinity, child: _w);
-  void get h100 => _w = SizedBox(height: double.infinity, child: _w);
-
-  set aspectRatio(double aspectRatio) =>
-      _w = AspectRatio(aspectRatio: aspectRatio, child: _w);
-  set ratio(double aspectRatio) =>
-      _w = AspectRatio(aspectRatio: aspectRatio, child: _w);
-
-  set fractionSize(List<double> v) => _w =
-      FractionallySizedBox(widthFactor: v[0], heightFactor: v[1], child: _w);
-  set sizePercent(List<double> v) => _w =
-      FractionallySizedBox(widthFactor: v[0], heightFactor: v[1], child: _w);
-
-  set fractionWidth(double v) =>
-      _w = FractionallySizedBox(widthFactor: v, child: _w);
-  set fractionW(double v) =>
-      _w = FractionallySizedBox(widthFactor: v, child: _w);
-  set fw(double v) => _w = FractionallySizedBox(widthFactor: v, child: _w);
-  set wFactor(double v) => _w = FractionallySizedBox(widthFactor: v, child: _w);
-  set widthPercent(double v) =>
-      _w = FractionallySizedBox(widthFactor: v / 100, child: _w);
-  set wPercent(double v) =>
-      _w = FractionallySizedBox(widthFactor: v / 100, child: _w);
-
-  set fractionHeight(double v) =>
-      _w = FractionallySizedBox(heightFactor: v, child: _w);
-  set fractionH(double v) =>
-      _w = FractionallySizedBox(heightFactor: v, child: _w);
-  set hFactor(double v) =>
-      _w = FractionallySizedBox(heightFactor: v, child: _w);
-  set fh(double v) => _w = FractionallySizedBox(heightFactor: v, child: _w);
-  set heightPercent(double v) =>
-      _w = FractionallySizedBox(heightFactor: v / 100, child: _w);
-  set hPercent(double v) =>
-      _w = FractionallySizedBox(heightFactor: v / 100, child: _w);
-
-  set constraints(BoxConstraints v) =>
-      ConstrainedBox(constraints: v, child: _w);
-  set nikuConstraints(UseNikuCallback<NikuBoxConstraints> cb) =>
-      ConstrainedBox(constraints: cb(NikuBoxConstraints()).value, child: _w);
-
-  set maxSize(List<double> v) => _w = ConstrainedBox(
-      constraints: BoxConstraints(maxWidth: v[0], maxHeight: v[1]), child: _w);
-  set minSize(List<double> v) => _w = ConstrainedBox(
-      constraints: BoxConstraints(minWidth: v[0], minHeight: v[1]), child: _w);
-  set max(List<double> v) => _w = ConstrainedBox(
-      constraints: BoxConstraints(maxWidth: v[0], maxHeight: v[1]), child: _w);
-  set min(List<double> v) => _w = ConstrainedBox(
-      constraints: BoxConstraints(minWidth: v[0], minHeight: v[1]), child: _w);
-
-  set maxWidth(double v) =>
-      _w = ConstrainedBox(constraints: BoxConstraints(maxWidth: v), child: _w);
-  set maxHeight(double v) =>
-      _w = ConstrainedBox(constraints: BoxConstraints(maxHeight: v), child: _w);
-  set maxW(double v) =>
-      _w = ConstrainedBox(constraints: BoxConstraints(maxWidth: v), child: _w);
-  set maxH(double v) =>
-      _w = ConstrainedBox(constraints: BoxConstraints(maxHeight: v), child: _w);
-  set wMax(double v) =>
-      _w = ConstrainedBox(constraints: BoxConstraints(maxWidth: v), child: _w);
-  set hMax(double v) =>
-      _w = ConstrainedBox(constraints: BoxConstraints(maxHeight: v), child: _w);
-
-  set minWidth(double v) =>
-      _w = ConstrainedBox(constraints: BoxConstraints(minWidth: v), child: _w);
-  set minHeight(double v) =>
-      _w = ConstrainedBox(constraints: BoxConstraints(minHeight: v), child: _w);
-  set minW(double v) =>
-      _w = ConstrainedBox(constraints: BoxConstraints(minWidth: v), child: _w);
-  set minH(double v) =>
-      _w = ConstrainedBox(constraints: BoxConstraints(minHeight: v), child: _w);
-  set wMin(double v) =>
-      _w = ConstrainedBox(constraints: BoxConstraints(minWidth: v), child: _w);
-  set hMin(double v) =>
-      _w = ConstrainedBox(constraints: BoxConstraints(minHeight: v), child: _w);
-
-  set size(List<double> v) =>
-      _w = SizedBox(width: v[0], height: v[1], child: _w);
-  set width(double v) => _w = SizedBox(width: v, child: _w);
-  set w(double v) => _w = SizedBox(width: v, child: _w);
-  set height(double v) => _w = SizedBox(height: v, child: _w);
-  set h(double v) => _w = SizedBox(height: v, child: _w);
-
-  void get fitted => _w = FittedBox(child: _w);
-  void get expanded => _w = Expanded(child: _w);
-
-  set bg(Color v) => _w = ColoredBox(color: v, child: _w);
-  set backgroundColor(Color v) => _w = ColoredBox(color: v, child: _w);
-
-  set opacity(double v) => _w = Opacity(opacity: v, child: _w);
-
-  double get rounded {
-    _w = ClipRRect(
-      borderRadius: BorderRadius.all(Radius.circular(999999)),
-      child: _w,
+    _replace(
+      (w) => Padding(
+        child: w,
+        padding: EdgeInsets.only(
+          top: _top,
+          left: _left,
+          bottom: _bottom,
+          right: _right,
+        ),
+      ),
     );
-
-    return 999999;
   }
 
-  set rounded(double v) => _w =
-      ClipRRect(borderRadius: BorderRadius.all(Radius.circular(v)), child: _w);
+  // I'm actually surprised that Flutter implemented margin by assigning it to padding.
+  set margin(EdgeInsets v) => padding = v;
+  set padding(EdgeInsets v) {
+    if (_latest is Padding)
+      return _applyPadding(
+        top: v.top,
+        bottom: v.bottom,
+        left: v.left,
+        right: v.right,
+      );
+
+    _add((w) => Padding(padding: v, child: w));
+  }
+
+  set nikuMargin(UseNikuCallback<NikuEdgeInsets> cb) => nikuPadding = cb;
+  set nikuPadding(UseNikuCallback<NikuEdgeInsets> cb) =>
+      padding = cb(NikuEdgeInsets()).value;
+
+  set m(double v) => p = v;
+  set p(double v) {
+    if (_latest is Padding)
+      return _applyPadding(top: v, left: v, bottom: v, right: v);
+
+    _add((w) => Padding(padding: EdgeInsets.all(v), child: w));
+  }
+
+  set mx(double v) => px = v;
+  set px(double v) {
+    if (_latest is Padding) return _applyPadding(left: v, right: v);
+
+    _add(
+      (w) => Padding(padding: EdgeInsets.symmetric(horizontal: v), child: w),
+    );
+  }
+
+  set my(double v) => py = v;
+  set py(double v) {
+    if (_latest is Padding) return _applyPadding(top: v, bottom: v);
+
+    _add(
+      (w) => Padding(padding: EdgeInsets.symmetric(vertical: v), child: w),
+    );
+  }
+
+  set mt(double v) => pt = v;
+  set pt(double v) {
+    if (_latest is Padding) return _applyPadding(top: v);
+
+    _add((w) => Padding(padding: EdgeInsets.only(top: v), child: w));
+  }
+
+  set mb(double v) => pb = v;
+  set pb(double v) {
+    if (_latest is Padding) return _applyPadding(bottom: v);
+
+    _add((w) => Padding(padding: EdgeInsets.only(bottom: v), child: w));
+  }
+
+  set ml(double v) => pl = v;
+  set pl(double v) {
+    if (_latest is Padding) return _applyPadding(left: v);
+
+    _add((w) => Padding(padding: EdgeInsets.only(left: v), child: w));
+  }
+
+  set mr(double v) => pr = v;
+  set pr(double v) {
+    if (_latest is Padding) return _applyPadding(right: v);
+
+    _add((w) => Padding(padding: EdgeInsets.only(right: v), child: w));
+  }
+
+  set align(AlignmentGeometry v) => _add((w) => Align(alignment: v, child: w));
+  void get topLeft =>
+      _add((w) => Align(alignment: Alignment.topLeft, child: w));
+  void get topCenter =>
+      _add((w) => Align(alignment: Alignment.topCenter, child: w));
+  void get topRight =>
+      _add((w) => Align(alignment: Alignment.topRight, child: w));
+  void get centerLeft =>
+      _add((w) => Align(alignment: Alignment.centerLeft, child: w));
+  void get center => _add((w) => Center(child: w));
+  void get centerRight =>
+      _add((w) => Align(alignment: Alignment.centerRight, child: w));
+  void get bottomLeft =>
+      _add((w) => Align(alignment: Alignment.bottomLeft, child: w));
+  void get bottomCenter =>
+      _add((w) => Align(alignment: Alignment.bottomCenter, child: w));
+  void get bottomRight =>
+      _add((w) => Align(alignment: Alignment.bottomRight, child: w));
+
+  void get fill => fullSize;
+  void get fullSize => _add((w) => SizedBox(
+        width: double.infinity,
+        height: double.infinity,
+        child: w,
+      ));
+
+  void get wFull => fullWidth;
+  void get w100 => fullWidth;
+  void get fullWidth {
+    final l = _latest;
+
+    if (l is SizedBox)
+      return _replace((w) => SizedBox(
+            width: double.infinity,
+            height: l.height,
+            child: w,
+          ));
+
+    _add((w) => SizedBox(width: double.infinity, child: w));
+  }
+
+  void get hFull => fullHeight;
+  void get h100 => fullHeight;
+  void get fullHeight {
+    final l = _latest;
+
+    if (l is SizedBox)
+      return _replace((w) => SizedBox(
+            width: l.width ?? 0,
+            height: double.infinity,
+            child: w,
+          ));
+
+    _add((w) => SizedBox(height: double.infinity, child: w));
+  }
+
+  set aspect(double v) => aspectRatio = v;
+  set ratio(double v) => aspectRatio = v;
+  set aspectRatio(double aspectRatio) =>
+      _add((w) => AspectRatio(aspectRatio: aspectRatio, child: w));
+
+  set sizePercent(List<double> v) => fractionSize = [v[0] / 100, v[1] / 100];
+  set fractionSize(List<double> v) => _add(
+        (w) => FractionallySizedBox(
+          widthFactor: v[0],
+          heightFactor: v[1],
+          child: w,
+        ),
+      );
+
+  set fractionW(double v) => fractionWidth = v;
+  set fw(double v) => fractionWidth = v;
+  set wFactor(double v) => fractionWidth = v;
+  set widthPercent(double v) => fractionWidth = v / 100;
+  set wPercent(double v) => fractionWidth = v / 100;
+  set fractionWidth(double v) {
+    final l = _latest;
+
+    if (l is FractionallySizedBox)
+      return _replace((w) => FractionallySizedBox(
+            widthFactor: v,
+            heightFactor: l.heightFactor,
+            child: w,
+          ));
+
+    _add((w) => FractionallySizedBox(widthFactor: v, child: w));
+  }
+
+  set fractionH(double v) => fractionHeight = v;
+  set hFactor(double v) =>
+      _add((w) => FractionallySizedBox(heightFactor: v, child: w));
+  set fh(double v) => fractionHeight = v;
+  set heightPercent(double v) => fractionHeight = v / 100;
+  set hPercent(double v) => fractionHeight = v / 100;
+  set fractionHeight(double v) {
+    final l = _latest;
+
+    if (l is FractionallySizedBox)
+      return _replace((w) => FractionallySizedBox(
+            widthFactor: l.widthFactor,
+            heightFactor: v,
+            child: w,
+          ));
+
+    _add((w) => FractionallySizedBox(heightFactor: v, child: w));
+  }
+
+  _applyConstraints({
+    double? minWidth,
+    double? maxWidth,
+    double? minHeight,
+    double? maxHeight,
+  }) {
+    final constraints = (_latest as ConstrainedBox).constraints;
+    final _maxWidth = maxWidth ?? constraints.maxWidth;
+    final _minWidth = minWidth ?? constraints.minWidth;
+    final _maxHeight = maxHeight ?? constraints.maxHeight;
+    final _minHeight = minHeight ?? constraints.minHeight;
+
+    _replace(
+      (w) => ConstrainedBox(
+        child: w,
+        constraints: BoxConstraints(
+          maxWidth: _maxWidth,
+          minWidth: _minWidth,
+          maxHeight: _maxHeight,
+          minHeight: _minHeight,
+        ),
+      ),
+    );
+  }
+
+  set constraints(BoxConstraints v) {
+    if (!(_latest is ConstrainedBox))
+      return _applyConstraints(
+        maxWidth: !v.maxWidth.isFinite ? v.maxWidth : null,
+        maxHeight: !v.maxWidth.isFinite ? v.maxWidth : null,
+        minWidth: v.minWidth != 0 ? v.minWidth : null,
+        minHeight: v.minHeight != 0 ? v.minHeight : null,
+      );
+
+    _add((w) => ConstrainedBox(constraints: v, child: w));
+  }
+
+  set nikuConstraints(UseNikuCallback<NikuBoxConstraints> cb) =>
+      constraints = cb(NikuBoxConstraints()).value;
+
+  set max(List<double> v) => maxSize = v;
+  set maxSize(List<double> v) {
+    if (!(_latest is ConstrainedBox))
+      return _applyConstraints(
+        maxWidth: v[0],
+        maxHeight: v[1],
+      );
+
+    _add(
+      (w) => ConstrainedBox(
+        constraints: BoxConstraints(maxWidth: v[0], maxHeight: v[1]),
+        child: w,
+      ),
+    );
+  }
+
+  set min(List<double> v) => minSize = v;
+  set minSize(List<double> v) {
+    if (_latest is ConstrainedBox)
+      return _applyConstraints(
+        minWidth: v[0],
+        maxWidth: v[1],
+      );
+
+    _add(
+      (w) => ConstrainedBox(
+        constraints: BoxConstraints(maxWidth: v[0], maxHeight: v[1]),
+        child: w,
+      ),
+    );
+  }
+
+  set maxW(double v) => maxWidth = v;
+  set wMax(double v) => maxWidth = v;
+  set maxWidth(double v) {
+    if (_latest is ConstrainedBox) return _applyConstraints(maxWidth: v);
+
+    return _add(
+      (w) => ConstrainedBox(
+        constraints: BoxConstraints(maxWidth: v),
+        child: w,
+      ),
+    );
+  }
+
+  set maxH(double v) => maxHeight = v;
+  set hMax(double v) => maxHeight = v;
+  set maxHeight(double v) {
+    if (_latest is ConstrainedBox) return _applyConstraints(maxHeight: v);
+
+    _add(
+      (w) => ConstrainedBox(
+        constraints: BoxConstraints(maxHeight: v),
+        child: w,
+      ),
+    );
+  }
+
+  set minW(double v) => minWidth = v;
+  set wMin(double v) => minWidth = v;
+  set minWidth(double v) {
+    if (_latest is ConstrainedBox) return _applyConstraints(minWidth: v);
+
+    _add((w) => ConstrainedBox(
+          constraints: BoxConstraints(minWidth: v),
+          child: w,
+        ));
+  }
+
+  set minH(double v) => minHeight = v;
+  set hMin(double v) => minHeight = v;
+  set minHeight(double v) {
+    if (_latest is ConstrainedBox) return _applyConstraints(minHeight: v);
+
+    _add((w) => ConstrainedBox(
+          constraints: BoxConstraints(minHeight: v),
+          child: w,
+        ));
+  }
+
+  set size(List<double> v) =>
+      _add((w) => SizedBox(width: v[0], height: v[1], child: w));
+
+  set w(double v) => width = v;
+  set width(double v) {
+    final l = _latest;
+
+    if (l is SizedBox)
+      return _replace((w) => SizedBox(
+            width: v,
+            height: l.height,
+            child: w,
+          ));
+
+    _add((w) => SizedBox(width: v, child: w));
+  }
+
+  set h(double v) => height = v;
+  set height(double v) {
+    final l = _latest;
+
+    if (l is SizedBox)
+      return _replace((w) => SizedBox(
+            width: l.width,
+            height: v,
+            child: w,
+          ));
+
+    _add((w) => SizedBox(height: v, child: w));
+  }
+
+  void get fitted => _add((w) => FittedBox(child: w));
+  void get expanded => _add((w) => Expanded(child: w));
+
+  set bg(Color v) => _add((w) => ColoredBox(color: v, child: w));
+  set backgroundColor(Color v) => _add((w) => ColoredBox(color: v, child: w));
+
+  set opacity(double v) => _add((w) => Opacity(opacity: v, child: w));
+
+  double get rounded => rounded = 999999.0;
+  set rounded(double v) => _add(
+        (w) => ClipRRect(
+          borderRadius: BorderRadius.all(Radius.circular(v)),
+          child: w,
+        ),
+      );
+
+  set borderRadius(BorderRadius v) => _add(
+        (w) => ClipRRect(
+          borderRadius: v,
+          child: w,
+        ),
+      );
 
   set boxDecoration(BoxDecoration v) =>
-      _w = DecoratedBox(decoration: v, child: _w);
+      _add((w) => DecoratedBox(decoration: v, child: w));
 
-  set decorated(BoxDecoration v) => _w = DecoratedBox(decoration: v, child: _w);
+  set decorated(BoxDecoration v) =>
+      _add((w) => DecoratedBox(decoration: v, child: w));
 
-  set hero(String v) => _w = Hero(tag: v, child: _w);
-  set heroTag(String v) => _w = Hero(tag: v, child: _w);
+  set hero(String v) => _add((w) => Hero(tag: v, child: w));
+  set heroTag(String v) => _add((w) => Hero(tag: v, child: w));
 
-  set ignorePointer(bool v) => _w = IgnorePointer(child: _w, ignoring: v);
-  set absorbPointer(bool v) => _w = AbsorbPointer(child: _w, absorbing: v);
+  set ignorePointer(bool v) =>
+      _add((w) => IgnorePointer(child: w, ignoring: v));
+  set absorbPointer(bool v) =>
+      _add((w) => AbsorbPointer(child: w, absorbing: v));
 
-  set tooltip(String v) => _w = Tooltip(message: v, child: _w);
-  set tip(String v) => _w = Tooltip(message: v, child: _w);
+  set tooltip(String v) => _add((w) => Tooltip(message: v, child: w));
+  set tip(String v) => _add((w) => Tooltip(message: v, child: w));
 
-  set matrix4(Matrix4 v) => _w = Transform(transform: v, child: _w);
-  set rotate(double v) => _w = Transform.rotate(angle: v, child: _w);
-  set scale(double v) => _w = Transform.scale(scale: v, child: _w);
+  set matrix4(Matrix4 v) => _add((w) => Transform(transform: v, child: w));
+  set rotate(double v) => _add((w) => Transform.rotate(angle: v, child: w));
+  set scale(double v) => _add((w) => Transform.scale(scale: v, child: w));
   set translate(List<double> v) =>
-      _w = Transform.translate(offset: Offset(v[0], v[1]), child: _w);
+      _add((w) => Transform.translate(offset: Offset(v[0], v[1]), child: w));
   set translateX(double v) =>
-      _w = Transform.translate(offset: Offset(v, 0), child: _w);
+      _add((w) => Transform.translate(offset: Offset(v, 0), child: w));
   set translateY(double v) =>
-      _w = Transform.translate(offset: Offset(0, v), child: _w);
+      _add((w) => Transform.translate(offset: Offset(0, v), child: w));
 
   void useGesture({
     void Function(TapDownDetails)? tapDown,
@@ -265,74 +506,96 @@ extension PropertyBuilder on Niku {
     void Function(ScaleUpdateDetails)? scaleUpdate,
     void Function(ScaleEndDetails)? scaleEnd,
   }) =>
-      _w = GestureDetector(
-        onTapDown: tapDown,
-        onTapUp: tapUp,
-        onTap: tap,
-        onTapCancel: tapCancel,
-        onSecondaryTap: secondaryTap,
-        onSecondaryTapDown: secondaryTapDown,
-        onSecondaryTapUp: secondaryTapUp,
-        onSecondaryTapCancel: secondaryTapCancel,
-        onTertiaryTapDown: tertiaryTapDown,
-        onTertiaryTapUp: tertiaryTapUp,
-        onTertiaryTapCancel: tertiaryTapCancel,
-        onDoubleTapDown: doubleTapDown,
-        onDoubleTap: doubleTap,
-        onDoubleTapCancel: doubleTapCancel,
-        onLongPress: longPress,
-        onLongPressStart: longPressStart,
-        onLongPressMoveUpdate: longPressMoveUpdate,
-        onLongPressUp: longPressUp,
-        onLongPressEnd: longPressEnd,
-        onSecondaryLongPress: secondaryLongPress,
-        onSecondaryLongPressStart: secondaryLongPressStart,
-        onSecondaryLongPressMoveUpdate: secondaryLongPressMoveUpdate,
-        onSecondaryLongPressUp: secondaryLongPressUp,
-        onSecondaryLongPressEnd: secondaryLongPressEnd,
-        onVerticalDragDown: verticalDragDown,
-        onVerticalDragStart: verticalDragStart,
-        onVerticalDragUpdate: verticalDragUpdate,
-        onVerticalDragEnd: verticalDragEnd,
-        onVerticalDragCancel: verticalDragCancel,
-        onHorizontalDragDown: horizontalDragDown,
-        onHorizontalDragStart: horizontalDragStart,
-        onHorizontalDragUpdate: horizontalDragUpdate,
-        onHorizontalDragEnd: horizontalDragEnd,
-        onHorizontalDragCancel: horizontalDragCancel,
-        onForcePressStart: forcePressStart,
-        onForcePressPeak: forcePressPeak,
-        onForcePressUpdate: forcePressUpdate,
-        onForcePressEnd: forcePressEnd,
-        onPanDown: panDown,
-        onPanStart: panStart,
-        onPanUpdate: panUpdate,
-        onPanEnd: panEnd,
-        onPanCancel: panCancel,
-        onScaleStart: scaleStart,
-        onScaleUpdate: scaleUpdate,
-        onScaleEnd: scaleEnd,
-        child: _w,
-      );
+      _add((w) => GestureDetector(
+            onTapDown: tapDown,
+            onTapUp: tapUp,
+            onTap: tap,
+            onTapCancel: tapCancel,
+            onSecondaryTap: secondaryTap,
+            onSecondaryTapDown: secondaryTapDown,
+            onSecondaryTapUp: secondaryTapUp,
+            onSecondaryTapCancel: secondaryTapCancel,
+            onTertiaryTapDown: tertiaryTapDown,
+            onTertiaryTapUp: tertiaryTapUp,
+            onTertiaryTapCancel: tertiaryTapCancel,
+            onDoubleTapDown: doubleTapDown,
+            onDoubleTap: doubleTap,
+            onDoubleTapCancel: doubleTapCancel,
+            onLongPress: longPress,
+            onLongPressStart: longPressStart,
+            onLongPressMoveUpdate: longPressMoveUpdate,
+            onLongPressUp: longPressUp,
+            onLongPressEnd: longPressEnd,
+            onSecondaryLongPress: secondaryLongPress,
+            onSecondaryLongPressStart: secondaryLongPressStart,
+            onSecondaryLongPressMoveUpdate: secondaryLongPressMoveUpdate,
+            onSecondaryLongPressUp: secondaryLongPressUp,
+            onSecondaryLongPressEnd: secondaryLongPressEnd,
+            onVerticalDragDown: verticalDragDown,
+            onVerticalDragStart: verticalDragStart,
+            onVerticalDragUpdate: verticalDragUpdate,
+            onVerticalDragEnd: verticalDragEnd,
+            onVerticalDragCancel: verticalDragCancel,
+            onHorizontalDragDown: horizontalDragDown,
+            onHorizontalDragStart: horizontalDragStart,
+            onHorizontalDragUpdate: horizontalDragUpdate,
+            onHorizontalDragEnd: horizontalDragEnd,
+            onHorizontalDragCancel: horizontalDragCancel,
+            onForcePressStart: forcePressStart,
+            onForcePressPeak: forcePressPeak,
+            onForcePressUpdate: forcePressUpdate,
+            onForcePressEnd: forcePressEnd,
+            onPanDown: panDown,
+            onPanStart: panStart,
+            onPanUpdate: panUpdate,
+            onPanEnd: panEnd,
+            onPanCancel: panCancel,
+            onScaleStart: scaleStart,
+            onScaleUpdate: scaleUpdate,
+            onScaleEnd: scaleEnd,
+            child: w,
+          ));
 
-  set border(Border v) =>
-      _w = DecoratedBox(decoration: BoxDecoration(border: v), child: _w);
+  set border(Border v) {
+    final double? rounded = 0;
+
+    _add(
+      (w) => DecoratedBox(
+          decoration: BoxDecoration(
+            border: v,
+            borderRadius: rounded != null
+                ? BorderRadius.all(
+                    Radius.circular(rounded),
+                  )
+                : null,
+          ),
+          child: w),
+    );
+  }
 
   useBorder({
     Color? color,
     double? width,
     BorderStyle? style,
-  }) =>
-      _w = DecoratedBox(
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: color ?? Colors.transparent,
-            width: width ?? 0,
-            style: style ?? BorderStyle.solid,
+  }) {
+    final double? rounded = 0;
+
+    _add((w) => DecoratedBox(
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: color ?? Colors.transparent,
+              width: width ?? 0,
+              style: style ?? BorderStyle.solid,
+            ),
+            borderRadius: rounded != null
+                ? BorderRadius.all(
+                    Radius.circular(rounded),
+                  )
+                : null,
           ),
-        ),
-        child: _w,
-      );
+          child: w,
+        ));
+  }
 
   useRoundedBorder({
     double? rounded,
@@ -340,92 +603,212 @@ extension PropertyBuilder on Niku {
     double? width,
     BorderStyle? style,
   }) =>
-      _w = DecoratedBox(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(rounded ?? 99999)),
-          border: Border.all(
-            color: color ?? Colors.transparent,
-            width: width ?? 0,
-            style: style ?? BorderStyle.solid,
-          ),
-        ),
-        child: _w,
-      );
+      _add((w) => DecoratedBox(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(rounded ?? 99999)),
+              border: Border.all(
+                color: color ?? Colors.transparent,
+                width: width ?? 0,
+                style: style ?? BorderStyle.solid,
+              ),
+            ),
+            child: w,
+          ));
 
   set backdropFilter(ImageFilter v) =>
-      _w = BackdropFilter(filter: v, child: _w);
+      _add((w) => BackdropFilter(filter: v, child: w));
 
-  set bgBlur(double v) => _w =
-      BackdropFilter(filter: ImageFilter.blur(sigmaX: v, sigmaY: v), child: _w);
+  set bgBlur(double v) => _add((w) =>
+      BackdropFilter(filter: ImageFilter.blur(sigmaX: v, sigmaY: v), child: w));
 
   Clip get rect {
-    _w = ClipRect(child: _w);
+    _add((w) => ClipRect(child: w));
 
     return Clip.hardEdge;
   }
 
-  set rect(Clip clip) => _w = ClipRect(
-        child: _w,
-        clipBehavior: clip,
+  set rect(Clip clip) => _add(
+        (w) => ClipRect(
+          child: w,
+          clipBehavior: clip,
+        ),
       );
 
   Clip get oval {
-    _w = ClipOval(child: _w);
+    _add((w) => ClipOval(child: w));
 
     return Clip.hardEdge;
   }
 
-  set oval(Clip clip) => _w = ClipRect(
-        child: _w,
-        clipBehavior: clip,
+  set oval(Clip clip) => _add(
+        (w) => ClipRect(
+          child: w,
+          clipBehavior: clip,
+        ),
       );
 
-  set elevation(double elevation) => _w = Card(
-        elevation: elevation,
-        child: _w,
-      );
+  _applyPositioned({
+    double? top,
+    double? left,
+    double? bottom,
+    double? right,
+  }) {
+    final position = _latest as Positioned;
+    final _top = top ?? position.top;
+    final _left = left ?? position.left;
+    final _bottom = bottom ?? position.bottom;
+    final _right = right ?? position.right;
 
-  set top(double v) => _w = Positioned(top: v, child: _w);
-  set left(double v) => _w = Positioned(left: v, child: _w);
-  set bottom(double v) => _w = Positioned(bottom: v, child: _w);
-  set right(double v) => _w = Positioned(right: v, child: _w);
+    _replace(
+      (w) => Positioned(
+        child: w,
+        top: _top,
+        left: _left,
+        bottom: _bottom,
+        right: _right,
+      ),
+    );
+  }
 
-  set flex(int v) => _w = Flexible(flex: v, child: _w);
+  set top(double v) {
+    if (_latest is Positioned)
+      _applyPositioned(top: v);
+    else
+      _add((w) => Positioned(top: v, child: w));
+  }
+
+  set left(double v) {
+    if (_latest is Positioned)
+      _applyPositioned(left: v);
+    else
+      _add((w) => Positioned(left: v, child: w));
+  }
+
+  set bottom(double v) {
+    if (_latest is Positioned)
+      _applyPositioned(bottom: v);
+    else
+      _add((w) => Positioned(bottom: v, child: w));
+  }
+
+  set right(double v) {
+    if (_latest is Positioned)
+      _applyPositioned(right: v);
+    else
+      _add((w) => Positioned(right: v, child: w));
+  }
+
+  set flex(int v) => _add((w) => Flexible(flex: v, child: w));
   int get flex {
-    _w = Flexible(child: _w);
+    _add((w) => Flexible(child: w));
 
     return 1;
   }
 
-  set shadows(List<BoxShadow> v) =>
-      _w = DecoratedBox(child: _w, decoration: BoxDecoration(boxShadow: v));
+  set shadow(BoxShadow v) {
+    final double? rounded = 0;
+
+    _add(
+      (w) => DecoratedBox(
+        child: w,
+        decoration: BoxDecoration(
+          boxShadow: [v],
+          borderRadius: rounded != null
+              ? BorderRadius.all(
+                  Radius.circular(rounded),
+                )
+              : null,
+        ),
+      ),
+    );
+  }
+
+  void useShadow({
+    Color color = const Color(0xFF000000),
+    Offset offset = Offset.zero,
+    double blurRadius = 0.0,
+    double spreadRadius = 0.0,
+    BlurStyle blurStyle = BlurStyle.normal,
+  }) =>
+      _add(
+        (w) => DecoratedBox(
+          child: w,
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: color,
+                offset: offset,
+                blurRadius: blurRadius,
+                spreadRadius: spreadRadius,
+                blurStyle: blurStyle,
+              ),
+            ],
+          ),
+        ),
+      );
+
+  set shadows(List<BoxShadow> v) {
+    final double? rounded = 0;
+
+    _add(
+      (w) => DecoratedBox(
+        child: w,
+        decoration: BoxDecoration(
+          boxShadow: v,
+          borderRadius: rounded != null
+              ? BorderRadius.all(
+                  Radius.circular(rounded),
+                )
+              : null,
+        ),
+      ),
+    );
+  }
+
+  void useRoundShadow({
+    required double rounded,
+    required List<BoxShadow> shadows,
+  }) =>
+      _add(
+        (w) => DecoratedBox(
+          child: w,
+          decoration: BoxDecoration(
+            boxShadow: shadows,
+            borderRadius: BorderRadius.circular(rounded),
+          ),
+        ),
+      );
 
   void useAnimationBuilder({
     required Widget Function(BuildContext context, Widget child) builder,
     required AnimationController animation,
   }) =>
-      _w = AnimatedBuilder(
-        animation: animation,
-        builder: (context, child) => builder(context, _w),
-        child: _w,
+      _add(
+        (w) => AnimatedBuilder(
+          animation: animation,
+          builder: (context, child) => builder(context, w),
+          child: w,
+        ),
       );
 
-  set formKey(Key v) => _w = Form(key: v, child: _w);
+  set formKey(Key v) => _add((w) => Form(key: v, child: w));
   void useForm({
     Key? key,
     AutovalidateMode? autovalidateMode,
     Future<bool> Function()? onWillPop,
     void Function()? onChanged,
   }) =>
-      _w = Form(
-        key: key,
-        child: _w,
-        autovalidateMode: autovalidateMode,
-        onWillPop: onWillPop,
-        onChanged: onChanged,
+      _add(
+        (w) => Form(
+          key: key,
+          child: w,
+          autovalidateMode: autovalidateMode,
+          onWillPop: onWillPop,
+          onChanged: onChanged,
+        ),
       );
 
-  void get scrollbar => _w = Scrollbar(child: _w);
+  void get scrollbar => _add((w) => Scrollbar(child: w));
 
   void useScrollbar({
     ScrollController? controller,
@@ -436,17 +819,17 @@ extension PropertyBuilder on Niku {
     Radius? radius,
     ScrollNotificationPredicate? notificationPredicate,
   }) =>
-      _w = Scrollbar(
-        child: _w,
-        controller: controller,
-        isAlwaysShown: isAlwaysShown,
-        hoverThickness: hoverThickness,
-        thickness: thickness,
-        radius: radius,
-        notificationPredicate: notificationPredicate,
-      );
+      _add((w) => Scrollbar(
+            child: w,
+            controller: controller,
+            isAlwaysShown: isAlwaysShown,
+            hoverThickness: hoverThickness,
+            thickness: thickness,
+            radius: radius,
+            notificationPredicate: notificationPredicate,
+          ));
 
-  void get scrollable => _w = SingleChildScrollView(child: _w);
+  void get scrollable => _add((w) => SingleChildScrollView(child: w));
 
   void useScrollView({
     ScrollController? controller,
@@ -457,72 +840,123 @@ extension PropertyBuilder on Niku {
     DragStartBehavior dragStartBehavior = DragStartBehavior.start,
     String? restorationId,
   }) =>
-      _w = SingleChildScrollView(
-        child: _w,
-        controller: controller,
-        scrollDirection: scrollDirection,
-        primary: primary,
-        reverse: reverse,
-        physics: scrollPhysics,
-        dragStartBehavior: dragStartBehavior,
-        restorationId: restorationId,
-      );
+      _add((w) => SingleChildScrollView(
+            child: w,
+            controller: controller,
+            scrollDirection: scrollDirection,
+            primary: primary,
+            reverse: reverse,
+            physics: scrollPhysics,
+            dragStartBehavior: dragStartBehavior,
+            restorationId: restorationId,
+          ));
 
-  set theme(ThemeData v) => _w = Theme(data: v, child: _w);
+  set theme(ThemeData v) => _add((w) => Theme(data: v, child: w));
 
-  set visible(bool visibility) => _w = Visibility(
+  set visible(bool visibility) => _add((w) => Visibility(
         visible: visibility,
-        child: _w,
-      );
+        child: w,
+      ));
 
-  get hidden => _w = Visibility(child: _w, visible: false);
+  get hidden => _add((w) => Visibility(child: w, visible: false));
 
-  void useChild(Widget Function(Niku child) builder) => _w = builder(_w.niku);
+  void useChild(Widget Function(Niku child) builder) =>
+      _add((w) => builder(w.niku));
 
-  void get safeArea => _w = SafeArea(child: _w);
+  void get safeArea => _add((w) => SafeArea(child: w));
 
-  void get safeAreaX => _w = SafeArea(child: _w, top: false, bottom: false);
-  void get safeAreaY => _w = SafeArea(child: _w, left: false, right: false);
+  void get safeAreaX =>
+      _add((w) => SafeArea(child: w, top: false, bottom: false));
+  void get safeAreaY =>
+      _add((w) => SafeArea(child: w, left: false, right: false));
 
   void get safeAreaTop =>
-      _w = SafeArea(child: _w, bottom: false, left: false, right: false);
+      _add((w) => SafeArea(child: w, bottom: false, left: false, right: false));
   void get safeAreaBottom =>
-      _w = SafeArea(child: _w, top: false, left: false, right: false);
+      _add((w) => SafeArea(child: w, top: false, left: false, right: false));
   void get safeAreaLeft =>
-      _w = SafeArea(child: _w, right: false, top: false, bottom: false);
+      _add((w) => SafeArea(child: w, right: false, top: false, bottom: false));
   void get safeAreaRight =>
-      _w = SafeArea(child: _w, left: false, top: false, bottom: false);
+      _add((w) => SafeArea(child: w, left: false, top: false, bottom: false));
 
-  void get safe => _w = SafeArea(child: _w);
+  void get safe => _add((w) => SafeArea(child: w));
 
-  void get safeX => _w = SafeArea(child: _w, top: false, bottom: false);
-  void get safeY => _w = SafeArea(child: _w, left: false, right: false);
+  void get safeX => _add((w) => SafeArea(child: w, top: false, bottom: false));
+  void get safeY => _add((w) => SafeArea(child: w, left: false, right: false));
 
   void get safeTop =>
-      _w = SafeArea(child: _w, bottom: false, left: false, right: false);
+      _add((w) => SafeArea(child: w, bottom: false, left: false, right: false));
   void get safeBottom =>
-      _w = SafeArea(child: _w, top: false, left: false, right: false);
+      _add((w) => SafeArea(child: w, top: false, left: false, right: false));
   void get safeLeft =>
-      _w = SafeArea(child: _w, right: false, top: false, bottom: false);
+      _add((w) => SafeArea(child: w, right: false, top: false, bottom: false));
   void get safeRight =>
-      _w = SafeArea(child: _w, left: false, top: false, bottom: false);
+      _add((w) => SafeArea(child: w, left: false, top: false, bottom: false));
 
-  set gradient(Gradient v) =>
-      _w = DecoratedBox(decoration: BoxDecoration(gradient: v), child: _w);
+  set gradient(Gradient v) => _add(
+      (w) => DecoratedBox(decoration: BoxDecoration(gradient: v), child: w));
 
-  set quarterTurns(int turns) => _w = RotatedBox(
+  set quarterTurns(int turns) => _add((w) => RotatedBox(
         quarterTurns: turns,
-        child: _w,
-      );
+        child: w,
+      ));
+
+  set elevation(double elevation) => _add((w) => Material(
+        elevation: elevation,
+        child: w,
+      ));
 
   set splash(Color color) {
-    _w = InkWell(
-      splashColor: color,
-      child: _w,
+    final highlightColor = Colors.transparent;
+
+    _add(
+      (w) => InkWell(
+        highlightColor: highlightColor,
+        splashColor: color,
+        child: w,
+        onTap: () {},
+      ),
     );
   }
 
-  void get sliverToBox => _w = SliverToBoxAdapter(child: _w);
+  Color get highlight {
+    final splashColor = Colors.transparent;
+
+    _add(
+      (w) => InkWell(
+        child: w,
+        splashColor: splashColor,
+        onTap: () {},
+      ),
+    );
+
+    return Colors.transparent;
+  }
+
+  set highlight(Color color) {
+    final splashColor = Colors.transparent;
+
+    _add(
+      (w) => InkWell(
+        highlightColor: Colors.transparent,
+        splashColor: splashColor,
+        child: w,
+        onTap: () {},
+      ),
+    );
+  }
+
+  set useSplash(Color color) {
+    _add(
+      (w) => InkWell(
+        splashColor: color,
+        child: w,
+        onTap: () {},
+      ),
+    );
+  }
+
+  void get sliverToBox => _add((w) => SliverToBoxAdapter(child: w));
 
   set on(List<dynamic> dependencies) =>
       useChild((child) => NikuOn(() => child, dependencies));
@@ -587,14 +1021,16 @@ extension PropertyBuilder on Niku {
     // > 1024px
     Widget Function(Niku)? xl,
   }) =>
-      _w = NikuScreen(
-        base: base,
-        xs: xs,
-        sm: sm,
-        md: md,
-        lg: lg,
-        xl: xl,
-        child: _w,
+      _add(
+        (w) => NikuScreen(
+          base: base,
+          xs: xs,
+          sm: sm,
+          md: md,
+          lg: lg,
+          xl: xl,
+          child: w,
+        ),
       );
 
   void useDarkMode(Widget Function(Niku, bool) builder) {
@@ -668,12 +1104,14 @@ extension PropertyBuilder on Niku {
     Duration duration = const Duration(milliseconds: 200),
     Curve curve = Curves.linear,
   }) {
-    _w = NikuAnimated<T>(
-      builder: builder,
-      value: value,
-      duration: duration,
-      curve: curve,
-      child: _w,
+    _add(
+      (w) => NikuAnimated<T>(
+        builder: builder,
+        value: value,
+        duration: duration,
+        curve: curve,
+        child: w,
+      ),
     );
   }
 
@@ -684,12 +1122,14 @@ extension PropertyBuilder on Niku {
     Duration duration = const Duration(milliseconds: 200),
     Curve curve = Curves.linear,
   }) {
-    _w = NikuAnimated<T>(
-      builder: builder,
-      value: value,
-      duration: duration,
-      curve: curve,
-      child: _w,
+    _add(
+      (w) => NikuAnimated<T>(
+        builder: builder,
+        value: value,
+        duration: duration,
+        curve: curve,
+        child: w,
+      ),
     );
   }
 
@@ -700,12 +1140,14 @@ extension PropertyBuilder on Niku {
     Duration duration = const Duration(milliseconds: 200),
     Curve curve = Curves.linear,
   }) {
-    _w = NikuAnimateds(
-      builder: builder,
-      dependencies: dependencies,
-      duration: duration,
-      curve: curve,
-      child: _w,
+    _add(
+      (w) => NikuAnimateds(
+        builder: builder,
+        dependencies: dependencies,
+        duration: duration,
+        curve: curve,
+        child: w,
+      ),
     );
   }
 }

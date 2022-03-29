@@ -10,7 +10,6 @@ import '../macros/macros.dart';
 class NikuSelectableText extends StatelessWidget
     with
         NikuBuildMacro<NikuSelectableText>,
-        UseQueryMacro<NikuSelectableText>,
         ApplyTextMacro,
         ApplyStrutStyleMacro,
         MapTextStyleMacro,

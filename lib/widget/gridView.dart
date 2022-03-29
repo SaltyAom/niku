@@ -14,11 +14,7 @@ enum NikuGridViewType {
 
 // ignore: must_be_immutable
 class NikuGridView extends StatelessWidget
-    with
-        NikuBuildMacro<NikuGridView>,
-        UseQueryMacro<NikuGridView>,
-        ClipMacro,
-        PaddingMacro {
+    with NikuBuildMacro<NikuGridView>, ClipMacro, PaddingMacro {
   NikuGridViewType? type = NikuGridViewType.count;
 
   List<Widget>? children;

@@ -1,14 +1,16 @@
 // ignore_for_file: deprecated_member_use_from_same_package
 import 'package:flutter/material.dart';
+import 'dart:ui' as ui;
 
+import 'richText.dart';
 import '../objects/objects.dart';
 import '../macros/macros.dart';
+import 'textSpan.dart';
 
 // ignore: must_be_immutable
 class NikuText extends StatelessWidget
     with
         NikuBuildMacro<NikuText>,
-        UseQueryMacro<NikuText>,
         ApplyTextMacro,
         ApplyStrutStyleMacro,
         MapTextStyleMacro,
@@ -46,6 +48,35 @@ class NikuText extends StatelessWidget
     this.textWidthBasis,
     this.textHeightBehavior,
   }) : super(key: key);
+
+  static NikuRichText rich({
+    Key? key,
+    NikuTextSpan? text,
+    TextAlign? textAlign,
+    TextDirection? textDirection,
+    bool? softWrap,
+    TextOverflow? overflow,
+    double? textScaleFactor,
+    int? maxLines,
+    Locale? locale,
+    NikuStrutStyle? strutStyle,
+    TextWidthBasis? textWidthBasis,
+    ui.TextHeightBehavior? textHeightBehavior,
+  }) =>
+      NikuRichText(
+        text ?? NikuTextSpan(""),
+        key: key,
+        textAlign: textAlign,
+        textDirection: textDirection,
+        softWrap: softWrap,
+        overflow: overflow,
+        textScaleFactor: textScaleFactor,
+        maxLines: maxLines,
+        locale: locale,
+        strutStyle: strutStyle,
+        textWidthBasis: textWidthBasis,
+        textHeightBehavior: textHeightBehavior,
+      );
 
   NikuText get self => this;
 

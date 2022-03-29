@@ -10,7 +10,6 @@ enum NikuButtonType { Text, Elevated, Outlined }
 class NikuButton extends StatelessWidget
     with
         NikuBuildMacro<NikuButton>,
-        UseQueryMacro<NikuButton>,
         ApplyButtonStyleMacro,
         ClipMacro,
         ButtonStyleTextStyleProxy,

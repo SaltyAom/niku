@@ -11,7 +11,6 @@ import '../proxy/textStyle.dart';
 class NikuTextFormField extends StatelessWidget
     with
         NikuBuildMacro<NikuTextFormField>,
-        UseQueryMacro<NikuTextFormField>,
         ApplyTextMacro,
         ApplyStrutStyleMacro,
         ApplyInputDecorationMacro,

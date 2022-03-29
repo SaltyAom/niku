@@ -8,11 +8,7 @@ enum NikuListViewType { children, builder, separated, custom }
 
 // ignore: must_be_immutable
 class NikuListView extends StatelessWidget
-    with
-        NikuBuildMacro<NikuListView>,
-        UseQueryMacro<NikuListView>,
-        ClipMacro,
-        PaddingMacro {
+    with NikuBuildMacro<NikuListView>, ClipMacro, PaddingMacro {
   NikuListViewType? type;
 
   Key? key;

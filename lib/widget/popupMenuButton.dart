@@ -5,10 +5,7 @@ import '../objects/objects.dart';
 
 // ignore: must_be_immutable
 class NikuPopupMenuButton<T> extends StatelessWidget
-    with
-        NikuBuildMacro<NikuPopupMenuButton>,
-        UseQueryMacro<NikuPopupMenuButton>,
-        PaddingMacro {
+    with NikuBuildMacro<NikuPopupMenuButton>, PaddingMacro {
   NikuPopupMenuButton(
     this.child, {
     Key? key,

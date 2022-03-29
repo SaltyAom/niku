@@ -6,10 +6,7 @@ import 'niku.dart';
 
 // ignore: must_be_immutable
 class NikuDismissible extends StatelessWidget
-    with
-        NikuBuildMacro<NikuDismissible>,
-        UseQueryMacro<NikuDismissible>,
-        DismissDirectionMacro {
+    with NikuBuildMacro<NikuDismissible>, DismissDirectionMacro {
   NikuDismissible(
     this.key, {
     this.child,

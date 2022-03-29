@@ -42,7 +42,6 @@ export 'textDecorationStyle.dart';
 export 'textDirection.dart';
 export 'textInputAction.dart';
 export 'textStyleTheme.dart';
-export 'useQueryMacro.dart';
 export 'verticalDirection.dart';
 export 'widthHeight.dart';
 export 'wrapAlignment.dart';

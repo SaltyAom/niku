@@ -7,7 +7,6 @@ import 'package:niku/objects/objects.dart';
 class NikuRadioListTile<T> extends StatelessWidget
     with
         NikuBuildMacro<NikuRadioListTile>,
-        UseQueryMacro<NikuRadioListTile>,
         ContentPaddingMacro,
         FocusNodeMacro {
   NikuRadioListTile(
