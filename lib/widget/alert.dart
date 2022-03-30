@@ -279,7 +279,7 @@ class NikuAlert extends StatelessWidget
     shape = shape ?? shape;
     scrollable = scrollable ?? scrollable;
 
-    $internalParent.addAll(v.$internalParent);
+    $internalParent.$merge(v.$internalParent);
   }
 
   NikuAlert get copied => NikuAlert(
@@ -305,7 +305,7 @@ class NikuAlert extends StatelessWidget
         scrollable: scrollable,
         cupertino: cupertino,
         adaptive: adaptive,
-      )..$internalParent.addAll($internalParent);
+      )..$internalParent.$merge($internalParent);
 
   static List<Widget> _mapWidgetToCupertino(List<Widget> children) =>
       children.map((e) {

@@ -682,7 +682,7 @@ class NikuTextFormField extends StatelessWidget
     enableIMEPersonalizedLearning =
         v.enableIMEPersonalizedLearning ?? enableIMEPersonalizedLearning;
 
-    $internalParent..addAll(v.$internalParent);
+    $internalParent..$merge(v.$internalParent);
   }
 
   NikuTextFormField get copied => NikuTextFormField(
@@ -737,7 +737,7 @@ class NikuTextFormField extends StatelessWidget
         enableIMEPersonalizedLearning: enableIMEPersonalizedLearning,
         adaptive: adaptive,
         cupertino: cupertino,
-      )..$internalParent.addAll($internalParent);
+      )..$internalParent.$merge($internalParent);
 
   TextFormField _buildMaterial() => TextFormField(
         controller: controller,

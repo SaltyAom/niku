@@ -63,7 +63,7 @@ class NikuRichText extends StatelessWidget
     textWidthBasis = v.textWidthBasis ?? textWidthBasis;
     textHeightBehavior = v.textHeightBehavior ?? textHeightBehavior;
 
-    $internalParent..addAll(v.$internalParent);
+    $internalParent..$merge(v.$internalParent);
   }
 
   NikuRichText get copied => NikuRichText(
@@ -79,7 +79,7 @@ class NikuRichText extends StatelessWidget
         strutStyle: strutStyle,
         textWidthBasis: textWidthBasis,
         textHeightBehavior: textHeightBehavior,
-      )..$internalParent.addAll($internalParent);
+      )..$internalParent.$merge($internalParent);
 
   RichText get widget => RichText(
         key: key,

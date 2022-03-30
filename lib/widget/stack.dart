@@ -35,7 +35,7 @@ class NikuStack extends StatelessWidget
     fit = v.fit ?? fit;
     clipBehavior = v.clipBehavior ?? clipBehavior;
 
-    $internalParent..addAll(v.$internalParent);
+    $internalParent..$merge(v.$internalParent);
   }
 
   NikuStack get copied => NikuStack(
@@ -45,7 +45,7 @@ class NikuStack extends StatelessWidget
         textDirection: textDirection,
         fit: fit,
         clipBehavior: clipBehavior,
-      )..$internalParent.addAll($internalParent);
+      )..$internalParent.$merge($internalParent);
 
   Stack get widget => Stack(
         key: key,

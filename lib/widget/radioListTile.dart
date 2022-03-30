@@ -83,7 +83,7 @@ class NikuRadioListTile<T> extends StatelessWidget
     focusNode = v.focusNode ?? focusNode;
     enableFeedback = v.enableFeedback ?? enableFeedback;
 
-    $internalParent..addAll(v.$internalParent);
+    $internalParent..$merge(v.$internalParent);
   }
 
   NikuRadioListTile get copied => NikuRadioListTile<T>(
@@ -107,7 +107,7 @@ class NikuRadioListTile<T> extends StatelessWidget
         visualDensity: visualDensity,
         focusNode: focusNode,
         enableFeedback: enableFeedback,
-      )..$internalParent.addAll($internalParent);
+      )..$internalParent.$merge($internalParent);
 
   RadioListTile get widget => RadioListTile<T>(
         value: value!,

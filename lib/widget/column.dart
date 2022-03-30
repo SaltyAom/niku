@@ -52,7 +52,7 @@ class NikuColumn extends StatelessWidget
     textBaseline = v.textBaseline ?? textBaseline;
     gap = v.gap ?? gap;
 
-    $internalParent..addAll(v.$internalParent);
+    $internalParent..$merge(v.$internalParent);
   }
 
   NikuColumn get copied => NikuColumn(
@@ -64,7 +64,7 @@ class NikuColumn extends StatelessWidget
         textDirection: textDirection,
         verticalDirection: verticalDirection,
         textBaseline: textBaseline,
-      )..$internalParent.addAll($internalParent);
+      )..$internalParent.$merge($internalParent);
 
   Column get widget => Column(
         children: $internalComposeGap(GapType.column, gap),

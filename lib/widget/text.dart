@@ -100,7 +100,7 @@ class NikuText extends StatelessWidget
     textWidthBasis = v.textWidthBasis ?? textWidthBasis;
     textHeightBehavior = v.textHeightBehavior ?? textHeightBehavior;
 
-    $internalParent..addAll(v.$internalParent);
+    $internalParent..$merge(v.$internalParent);
   }
 
   NikuText get copied => NikuText(
@@ -117,7 +117,7 @@ class NikuText extends StatelessWidget
         semanticsLabel: semanticsLabel,
         textWidthBasis: textWidthBasis,
         textHeightBehavior: textHeightBehavior,
-      )..$internalParent.addAll($internalParent);
+      )..$internalParent.$merge($internalParent);
 
   Widget get widget => Text(
         text ?? "",

@@ -71,7 +71,7 @@ class NikuCheckbox extends StatelessWidget
     autofocus = v.autofocus ?? autofocus;
     shape = v.shape ?? shape;
     side = v.side ?? side;
-    $internalParent..addAll(v.$internalParent);
+    $internalParent..$merge(v.$internalParent);
   }
 
   NikuCheckbox get copied => NikuCheckbox(
@@ -93,7 +93,7 @@ class NikuCheckbox extends StatelessWidget
         autofocus: autofocus,
         shape: shape,
         side: side,
-      )..$internalParent.addAll($internalParent);
+      )..$internalParent.$merge($internalParent);
 
   Checkbox get widget => Checkbox(
         value: value,

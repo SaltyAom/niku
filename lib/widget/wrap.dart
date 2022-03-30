@@ -53,7 +53,7 @@ class NikuWrap extends StatelessWidget
     this.verticalDirection = v.verticalDirection ?? verticalDirection;
     this.clipBehavior = v.clipBehavior ?? clipBehavior;
 
-    $internalParent..addAll(v.$internalParent);
+    $internalParent..$merge(v.$internalParent);
   }
 
   NikuWrap get copied => NikuWrap(
@@ -68,7 +68,7 @@ class NikuWrap extends StatelessWidget
         textDirection: textDirection,
         verticalDirection: verticalDirection,
         clipBehavior: clipBehavior,
-      )..$internalParent.addAll($internalParent);
+      )..$internalParent.$merge($internalParent);
 
   Wrap get widget => Wrap(
         children: chidren,

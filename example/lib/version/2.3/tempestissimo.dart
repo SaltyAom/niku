@@ -13,6 +13,56 @@ class Tempestissimo extends StatelessWidget {
   build(context) {
     return Scaffold(
       body: n.Column([
+        n.Image.network(bebe)
+          ..key = Key("cover")
+          ..cover
+          ..aspect = 4 / 5
+          ..n.bg = Colors.grey.shade100
+          ..rounded = 16
+          // ? Using Explict Parent Builder by `n` prefix
+          ..n.useShadow(
+            color: Colors.black.withOpacity(.25),
+            blurRadius: 16,
+            offset: Offset(0, 4),
+          )
+          ..mx = 40
+          ..my = 16,
+        n.Box()
+          ..key = Key("Box")
+          ..wFull
+          ..hFull
+          ..minH = 25
+          ..maxH = 50
+          ..maxW = 50
+          ..p = 10
+          ..px = 10
+          ..py = 10
+          ..pt = 10
+          ..pb = 10
+          ..pl = 10
+          ..pr = 10
+          ..splash = Colors.white.withOpacity(.5)
+          ..highlight = Colors.transparent
+          ..hover = Colors.blue.shade100
+          ..focus = Colors.blue.shade100
+          ..material
+          ..bg = Colors.blue
+          ..rounded = 16
+          ..shadow = BoxShadow(
+            color: Colors.black.withOpacity(.125),
+            blurRadius: 8,
+            offset: Offset(0, 8),
+          )
+          ..mt = 20
+          ..mb = 12
+      ])
+        ..key = Key("Column")
+        ..center
+        ..wFull,
+    );
+
+    return Scaffold(
+      body: n.Column([
         // * Primitive Transform
         "Primitive Transform".n
           ..fontSize = 24
@@ -22,7 +72,7 @@ class Tempestissimo extends StatelessWidget {
           ..cover
           ..rounded = 16
           // ? Using Explict Parent Builder by `n` prefix
-          ..n.useShadow(
+          ..n.shadow = BoxShadow(
             color: Colors.black.withOpacity(.4),
             blurRadius: 16,
             offset: Offset(0, 4),

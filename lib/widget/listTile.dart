@@ -110,7 +110,7 @@ class NikuListTile extends StatelessWidget
     minVerticalPadding = v.minVerticalPadding ?? minVerticalPadding;
     minLeadingWidth = v.minLeadingWidth ?? minLeadingWidth;
 
-    $internalParent.addAll(v.$internalParent);
+    $internalParent..$merge(v.$internalParent);
   }
 
   NikuListTile get copied => NikuListTile(
@@ -143,7 +143,7 @@ class NikuListTile extends StatelessWidget
         horizontalTitleGap: horizontalTitleGap,
         minVerticalPadding: minVerticalPadding,
         minLeadingWidth: minLeadingWidth,
-      )..$internalParent.addAll($internalParent);
+      )..$internalParent.$merge($internalParent);
 
   ListTile get widget => ListTile(
         key: key,

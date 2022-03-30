@@ -109,7 +109,7 @@ class NikuSelectableText extends StatelessWidget
     textHeightBehavior = v.textHeightBehavior ?? textHeightBehavior;
     textHeightBehavior = v.textHeightBehavior ?? textHeightBehavior;
 
-    $internalParent..addAll(v.$internalParent);
+    $internalParent..$merge(v.$internalParent);
   }
 
   NikuSelectableText get copied => NikuSelectableText(
@@ -138,7 +138,7 @@ class NikuSelectableText extends StatelessWidget
         scrollPhysics: scrollPhysics,
         textWidthBasis: textWidthBasis,
         textHeightBehavior: textHeightBehavior,
-      )..$internalParent.addAll($internalParent);
+      )..$internalParent.$merge($internalParent);
 
   Widget get widget => SelectableText(
         this.text ?? "",

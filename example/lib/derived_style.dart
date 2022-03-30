@@ -24,6 +24,8 @@ class DerivedStyles {
 }
 
 class DerivedStylesPage extends StatelessWidget {
+  const DerivedStylesPage();
+
   @override
   build(context) {
     return Scaffold(

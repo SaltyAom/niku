@@ -5,8 +5,8 @@ Feature:
     - Parent Property builder now lazily executed
     - Flatten and parent property
   - Add `ExplictParentBuilder` to quickly handle single use of parent builder
-  - New hook: `useShadow`, `useRoundShadow`
-  - Add new property, `borderRadius`, `shadow`
+  - New hook: `useShadow`
+  - Add new property, `borderRadius`, `shadow`, `highlightColor`, `focusColor`, `hoverColor`
 
 Change:
   - Parent Builder architecture rewrite, name `Tempestissimo`.

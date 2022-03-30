@@ -128,7 +128,7 @@ class NikuIconButton extends StatelessWidget
     tooltip = v.tooltip ?? tooltip;
     enableFeedback = v.enableFeedback ?? enableFeedback;
     constraints = v.constraints ?? constraints;
-    $internalParent..addAll(v.$internalParent);
+    $internalParent..$merge(v.$internalParent);
   }
 
   NikuIconButton get copied => NikuIconButton(
@@ -154,7 +154,7 @@ class NikuIconButton extends StatelessWidget
         constraints: constraints,
       )
         ..child = child
-        ..$internalParent.addAll($internalParent);
+        ..$internalParent.$merge($internalParent);
 
   IconButton get widget => IconButton(
         icon: child ?? SizedBox.shrink(),

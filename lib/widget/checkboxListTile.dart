@@ -96,7 +96,7 @@ class NikuCheckboxListTile extends StatelessWidget
     highlightColor = v.highlightColor ?? highlightColor;
     hoverColor = v.hoverColor ?? hoverColor;
     focusColor = v.focusColor ?? focusColor;
-    $internalParent..addAll(v.$internalParent);
+    $internalParent..$merge(v.$internalParent);
   }
 
   NikuCheckboxListTile get copied => NikuCheckboxListTile(
@@ -124,7 +124,7 @@ class NikuCheckboxListTile extends StatelessWidget
         highlightColor: highlightColor,
         hoverColor: hoverColor,
         focusColor: focusColor,
-      )..$internalParent.addAll($internalParent);
+      )..$internalParent.$merge($internalParent);
 
   Widget get widget => Builder(
         builder: (context) => Theme(

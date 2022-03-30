@@ -1,3 +1,4 @@
+// ignore_for_file: must_be_immutable
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
@@ -13,7 +14,7 @@ extension NikuTransform on Widget {
 
 const _empty = SizedBox.shrink();
 
-// ignore: must_be_immutable
+// ? Tempest Engine// ignore: must_be_immutable
 class Niku extends StatelessWidget {
   Widget widget;
   Key? key;
@@ -27,6 +28,8 @@ class Niku extends StatelessWidget {
   void _replace(Widget Function(Widget) builder) =>
       _$parent[_$parent.length - 1] = builder;
 
+  $merge(Niku others) => useChild((w) => others..widget = w);
+
   @override
   build(context) {
     Widget composed = widget;
@@ -35,6 +38,8 @@ class Niku extends StatelessWidget {
       composed = builder(composed);
     });
 
+    // $debugDescribeProperty();
+
     if (key != null) return SizedBox(key: key ?? widget.key, child: composed);
 
     return composed;
@@ -42,8 +47,6 @@ class Niku extends StatelessWidget {
 
   // ? Only use in debugging Tempestissimo, will be removed on stable
   $debugDescribeProperty() {
-    print("\n");
-    print("${widget.key ?? key}: ${_$parent.length} properties");
     _$parent.forEach((v) {
       print(" - ${v(_empty)}");
     });
@@ -283,7 +286,7 @@ extension PropertyBuilder on Niku {
   }
 
   set constraints(BoxConstraints v) {
-    if (!(_latest is ConstrainedBox))
+    if (_latest is ConstrainedBox)
       return _applyConstraints(
         maxWidth: !v.maxWidth.isFinite ? v.maxWidth : null,
         maxHeight: !v.maxWidth.isFinite ? v.maxWidth : null,
@@ -417,13 +420,8 @@ extension PropertyBuilder on Niku {
   set opacity(double v) => _add((w) => Opacity(opacity: v, child: w));
 
   double get rounded => rounded = 999999.0;
-  set rounded(double v) => _add(
-        (w) => ClipRRect(
-          borderRadius: BorderRadius.all(Radius.circular(v)),
-          child: w,
-        ),
-      );
 
+  set rounded(double v) => borderRadius = BorderRadius.all(Radius.circular(v));
   set borderRadius(BorderRadius v) => _add(
         (w) => ClipRRect(
           borderRadius: v,
@@ -431,22 +429,199 @@ extension PropertyBuilder on Niku {
         ),
       );
 
-  set boxDecoration(BoxDecoration v) =>
-      _add((w) => DecoratedBox(decoration: v, child: w));
+  static Border? _mergeBoxBorder(BoxBorder? newBorder, BoxBorder? oldBorder) =>
+      _mergeBorder(newBorder as Border?, oldBorder as Border?);
 
-  set decorated(BoxDecoration v) =>
-      _add((w) => DecoratedBox(decoration: v, child: w));
+  static Border? _mergeBorder(Border? newBorder, Border? oldBorder) {
+    if (newBorder == null || oldBorder == null) return newBorder ?? oldBorder;
 
-  set hero(String v) => _add((w) => Hero(tag: v, child: w));
+    final top = _mergeBorderSide(newBorder.top, oldBorder.top);
+    final bottom = _mergeBorderSide(newBorder.bottom, oldBorder.bottom);
+    final left = _mergeBorderSide(newBorder.left, oldBorder.left);
+    final right = _mergeBorderSide(newBorder.right, oldBorder.right);
+
+    return Border(
+      top: top,
+      bottom: bottom,
+      left: left,
+      right: right,
+    );
+  }
+
+  static BorderSide _mergeBorderSide(
+      BorderSide newBorder, BorderSide oldBorder) {
+    if (newBorder == BorderSide.none) return oldBorder;
+
+    return oldBorder.copyWith(
+      color:
+          newBorder.color != const Color(0xFF000000) ? newBorder.color : null,
+      width: newBorder.width != 1 ? newBorder.width : null,
+      style: newBorder.style != BorderStyle.solid ? newBorder.style : null,
+    );
+  }
+
+  static _mergeBorderRadiusGeometry(
+    BorderRadiusGeometry? newBorder,
+    BorderRadiusGeometry? oldBorder,
+  ) =>
+      _mergeBorderRadius(
+          newBorder as BorderRadius?, oldBorder as BorderRadius?);
+
+  static _mergeBorderRadius(BorderRadius? newBorder, BorderRadius? oldBorder) {
+    if (newBorder == null || oldBorder == null) return newBorder ?? oldBorder;
+
+    return newBorder.copyWith(
+      topLeft: newBorder.topLeft != const Radius.circular(0.0)
+          ? newBorder.topLeft
+          : null,
+      topRight: newBorder.topRight != const Radius.circular(0.0)
+          ? newBorder.topRight
+          : null,
+      bottomLeft: newBorder.bottomLeft != const Radius.circular(0.0)
+          ? newBorder.bottomLeft
+          : null,
+      bottomRight: newBorder.bottomRight != const Radius.circular(0.0)
+          ? newBorder.bottomRight
+          : null,
+    );
+  }
+
+  List<BoxShadow>? _mergeBoxShadows(
+          List<BoxShadow>? newShadows, List<BoxShadow>? oldShadows) =>
+      newShadows != null && oldShadows != null
+          ? (newShadows..addAll(oldShadows))
+          : (newShadows ?? oldShadows);
+
+  void _applyBoxDecoration(BoxDecoration v) {
+    final l = _latest;
+
+    if (l is DecoratedBox) {
+      final self = l.decoration as BoxDecoration;
+
+      return _replace(
+        (w) => DecoratedBox(
+          child: w,
+          decoration: self.copyWith(
+            color: v.color ?? self.color,
+            image: v.image ?? self.image,
+            border: _mergeBoxBorder(v.border, self.border),
+            borderRadius:
+                _mergeBorderRadiusGeometry(v.borderRadius, self.borderRadius),
+            boxShadow: _mergeBoxShadows(v.boxShadow, self.boxShadow),
+            gradient: v.gradient ?? self.gradient,
+            backgroundBlendMode:
+                v.backgroundBlendMode ?? self.backgroundBlendMode,
+            shape: v.shape != BoxShape.rectangle ? v.shape : self.shape,
+          ),
+        ),
+      );
+    }
+
+    if (l is ClipRRect) {
+      return _replace(
+        (w) => DecoratedBox(
+          decoration: v.copyWith(
+            borderRadius: v.borderRadius ?? l.borderRadius,
+          ),
+          child: w,
+        ),
+      );
+    }
+
+    _add((w) => DecoratedBox(decoration: v, child: w));
+  }
+
+  void _applyBoxDecorationProperty({
+    Color? color,
+    DecorationImage? image,
+    BoxBorder? border,
+    BorderRadiusGeometry? borderRadius,
+    List<BoxShadow>? boxShadow,
+    Gradient? gradient,
+    BlendMode? backgroundBlendMode,
+    BoxShape? shape,
+  }) {
+    final l = _latest;
+
+    if (l is DecoratedBox) {
+      final self = l.decoration as BoxDecoration;
+
+      return _replace(
+        (w) => DecoratedBox(
+          child: w,
+          decoration: self.copyWith(
+            color: color ?? self.color,
+            image: image ?? self.image,
+            border: _mergeBoxBorder(border, self.border),
+            borderRadius:
+                _mergeBorderRadiusGeometry(borderRadius, self.borderRadius),
+            boxShadow: _mergeBoxShadows(boxShadow, self.boxShadow),
+            gradient: gradient ?? self.gradient,
+            backgroundBlendMode:
+                backgroundBlendMode ?? self.backgroundBlendMode,
+            shape: shape != BoxShape.rectangle ? shape : self.shape,
+          ),
+        ),
+      );
+    }
+
+    if (l is ClipRRect) {
+      return _add(
+        (w) => DecoratedBox(
+          decoration: BoxDecoration(
+            color: color,
+            image: image,
+            border: border,
+            borderRadius: borderRadius ?? l.borderRadius,
+            boxShadow: boxShadow,
+            gradient: gradient,
+            backgroundBlendMode: backgroundBlendMode,
+            shape: shape ?? BoxShape.rectangle,
+          ),
+          child: w,
+        ),
+      );
+    }
+
+    _add(
+      (w) => DecoratedBox(
+        child: w,
+        decoration: BoxDecoration(
+          color: color,
+          image: image,
+          border: border,
+          borderRadius: borderRadius,
+          boxShadow: boxShadow,
+          gradient: gradient,
+          backgroundBlendMode: backgroundBlendMode,
+          shape: shape ?? BoxShape.rectangle,
+        ),
+      ),
+    );
+  }
+
+  set boxDecoration(BoxDecoration v) => _applyBoxDecoration(v);
+  set decorated(BoxDecoration v) => boxDecoration = v;
+
+  set hero(String v) => heroTag = v;
   set heroTag(String v) => _add((w) => Hero(tag: v, child: w));
 
   set ignorePointer(bool v) =>
       _add((w) => IgnorePointer(child: w, ignoring: v));
+  bool get ignorePointer {
+    _add((w) => IgnorePointer(child: w, ignoring: true));
+    return true;
+  }
+
   set absorbPointer(bool v) =>
       _add((w) => AbsorbPointer(child: w, absorbing: v));
+  bool get absorbPointer {
+    _add((w) => AbsorbPointer(child: w, absorbing: true));
+    return true;
+  }
 
+  set tip(String v) => tooltip = v;
   set tooltip(String v) => _add((w) => Tooltip(message: v, child: w));
-  set tip(String v) => _add((w) => Tooltip(message: v, child: w));
 
   set matrix4(Matrix4 v) => _add((w) => Transform(transform: v, child: w));
   set rotate(double v) => _add((w) => Transform.rotate(angle: v, child: w));
@@ -458,143 +633,20 @@ extension PropertyBuilder on Niku {
   set translateY(double v) =>
       _add((w) => Transform.translate(offset: Offset(0, v), child: w));
 
-  void useGesture({
-    void Function(TapDownDetails)? tapDown,
-    void Function(TapUpDetails)? tapUp,
-    VoidCallback? tap,
-    VoidCallback? tapCancel,
-    VoidCallback? secondaryTap,
-    void Function(TapDownDetails)? secondaryTapDown,
-    void Function(TapUpDetails)? secondaryTapUp,
-    VoidCallback? secondaryTapCancel,
-    void Function(TapDownDetails)? tertiaryTapDown,
-    void Function(TapUpDetails)? tertiaryTapUp,
-    VoidCallback? tertiaryTapCancel,
-    void Function(TapDownDetails)? doubleTapDown,
-    VoidCallback? doubleTap,
-    VoidCallback? doubleTapCancel,
-    VoidCallback? longPress,
-    void Function(LongPressStartDetails)? longPressStart,
-    void Function(LongPressMoveUpdateDetails)? longPressMoveUpdate,
-    VoidCallback? longPressUp,
-    void Function(LongPressEndDetails)? longPressEnd,
-    VoidCallback? secondaryLongPress,
-    void Function(LongPressStartDetails)? secondaryLongPressStart,
-    void Function(LongPressMoveUpdateDetails)? secondaryLongPressMoveUpdate,
-    VoidCallback? secondaryLongPressUp,
-    void Function(LongPressEndDetails)? secondaryLongPressEnd,
-    void Function(DragDownDetails)? verticalDragDown,
-    void Function(DragStartDetails)? verticalDragStart,
-    void Function(DragUpdateDetails)? verticalDragUpdate,
-    void Function(DragEndDetails)? verticalDragEnd,
-    VoidCallback? verticalDragCancel,
-    void Function(DragDownDetails)? horizontalDragDown,
-    void Function(DragStartDetails)? horizontalDragStart,
-    void Function(DragUpdateDetails)? horizontalDragUpdate,
-    void Function(DragEndDetails)? horizontalDragEnd,
-    VoidCallback? horizontalDragCancel,
-    void Function(ForcePressDetails)? forcePressStart,
-    void Function(ForcePressDetails)? forcePressPeak,
-    void Function(ForcePressDetails)? forcePressUpdate,
-    void Function(ForcePressDetails)? forcePressEnd,
-    void Function(DragDownDetails)? panDown,
-    void Function(DragStartDetails)? panStart,
-    void Function(DragUpdateDetails)? panUpdate,
-    void Function(DragEndDetails)? panEnd,
-    VoidCallback? panCancel,
-    void Function(ScaleStartDetails)? scaleStart,
-    void Function(ScaleUpdateDetails)? scaleUpdate,
-    void Function(ScaleEndDetails)? scaleEnd,
-  }) =>
-      _add((w) => GestureDetector(
-            onTapDown: tapDown,
-            onTapUp: tapUp,
-            onTap: tap,
-            onTapCancel: tapCancel,
-            onSecondaryTap: secondaryTap,
-            onSecondaryTapDown: secondaryTapDown,
-            onSecondaryTapUp: secondaryTapUp,
-            onSecondaryTapCancel: secondaryTapCancel,
-            onTertiaryTapDown: tertiaryTapDown,
-            onTertiaryTapUp: tertiaryTapUp,
-            onTertiaryTapCancel: tertiaryTapCancel,
-            onDoubleTapDown: doubleTapDown,
-            onDoubleTap: doubleTap,
-            onDoubleTapCancel: doubleTapCancel,
-            onLongPress: longPress,
-            onLongPressStart: longPressStart,
-            onLongPressMoveUpdate: longPressMoveUpdate,
-            onLongPressUp: longPressUp,
-            onLongPressEnd: longPressEnd,
-            onSecondaryLongPress: secondaryLongPress,
-            onSecondaryLongPressStart: secondaryLongPressStart,
-            onSecondaryLongPressMoveUpdate: secondaryLongPressMoveUpdate,
-            onSecondaryLongPressUp: secondaryLongPressUp,
-            onSecondaryLongPressEnd: secondaryLongPressEnd,
-            onVerticalDragDown: verticalDragDown,
-            onVerticalDragStart: verticalDragStart,
-            onVerticalDragUpdate: verticalDragUpdate,
-            onVerticalDragEnd: verticalDragEnd,
-            onVerticalDragCancel: verticalDragCancel,
-            onHorizontalDragDown: horizontalDragDown,
-            onHorizontalDragStart: horizontalDragStart,
-            onHorizontalDragUpdate: horizontalDragUpdate,
-            onHorizontalDragEnd: horizontalDragEnd,
-            onHorizontalDragCancel: horizontalDragCancel,
-            onForcePressStart: forcePressStart,
-            onForcePressPeak: forcePressPeak,
-            onForcePressUpdate: forcePressUpdate,
-            onForcePressEnd: forcePressEnd,
-            onPanDown: panDown,
-            onPanStart: panStart,
-            onPanUpdate: panUpdate,
-            onPanEnd: panEnd,
-            onPanCancel: panCancel,
-            onScaleStart: scaleStart,
-            onScaleUpdate: scaleUpdate,
-            onScaleEnd: scaleEnd,
-            child: w,
-          ));
-
-  set border(Border v) {
-    final double? rounded = 0;
-
-    _add(
-      (w) => DecoratedBox(
-          decoration: BoxDecoration(
-            border: v,
-            borderRadius: rounded != null
-                ? BorderRadius.all(
-                    Radius.circular(rounded),
-                  )
-                : null,
-          ),
-          child: w),
-    );
-  }
+  set border(Border v) => _applyBoxDecorationProperty(border: v);
 
   useBorder({
     Color? color,
     double? width,
     BorderStyle? style,
   }) {
-    final double? rounded = 0;
-
-    _add((w) => DecoratedBox(
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: color ?? Colors.transparent,
-              width: width ?? 0,
-              style: style ?? BorderStyle.solid,
-            ),
-            borderRadius: rounded != null
-                ? BorderRadius.all(
-                    Radius.circular(rounded),
-                  )
-                : null,
-          ),
-          child: w,
-        ));
+    _applyBoxDecorationProperty(
+      border: Border.all(
+        color: color ?? Colors.transparent,
+        width: width ?? 0,
+        style: style ?? BorderStyle.solid,
+      ),
+    );
   }
 
   useRoundedBorder({
@@ -602,24 +654,31 @@ extension PropertyBuilder on Niku {
     Color? color,
     double? width,
     BorderStyle? style,
-  }) =>
-      _add((w) => DecoratedBox(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(rounded ?? 99999)),
-              border: Border.all(
-                color: color ?? Colors.transparent,
-                width: width ?? 0,
-                style: style ?? BorderStyle.solid,
-              ),
-            ),
-            child: w,
-          ));
+  }) {
+    _applyBoxDecorationProperty(
+      borderRadius: rounded != null
+          ? BorderRadius.all(
+              Radius.circular(rounded),
+            )
+          : null,
+      border: Border.all(
+        color: color ?? Colors.transparent,
+        width: width ?? 0,
+        style: style ?? BorderStyle.solid,
+      ),
+    );
+  }
 
-  set backdropFilter(ImageFilter v) =>
-      _add((w) => BackdropFilter(filter: v, child: w));
+  set backdropFilter(ImageFilter v) => _add(
+        (w) => BackdropFilter(filter: v, child: w),
+      );
 
-  set bgBlur(double v) => _add((w) =>
-      BackdropFilter(filter: ImageFilter.blur(sigmaX: v, sigmaY: v), child: w));
+  set bgBlur(double v) => _add(
+        (w) => BackdropFilter(
+          child: w,
+          filter: ImageFilter.blur(sigmaX: v, sigmaY: v),
+        ),
+      );
 
   Clip get rect {
     _add((w) => ClipRect(child: w));
@@ -705,23 +764,8 @@ extension PropertyBuilder on Niku {
     return 1;
   }
 
-  set shadow(BoxShadow v) {
-    final double? rounded = 0;
-
-    _add(
-      (w) => DecoratedBox(
-        child: w,
-        decoration: BoxDecoration(
-          boxShadow: [v],
-          borderRadius: rounded != null
-              ? BorderRadius.all(
-                  Radius.circular(rounded),
-                )
-              : null,
-        ),
-      ),
-    );
-  }
+  set shadow(BoxShadow v) => _applyBoxDecorationProperty(boxShadow: [v]);
+  set shadows(List<BoxShadow> v) => _applyBoxDecorationProperty(boxShadow: v);
 
   void useShadow({
     Color color = const Color(0xFF000000),
@@ -729,54 +773,23 @@ extension PropertyBuilder on Niku {
     double blurRadius = 0.0,
     double spreadRadius = 0.0,
     BlurStyle blurStyle = BlurStyle.normal,
+    double? rounded,
   }) =>
-      _add(
-        (w) => DecoratedBox(
-          child: w,
-          decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: color,
-                offset: offset,
-                blurRadius: blurRadius,
-                spreadRadius: spreadRadius,
-                blurStyle: blurStyle,
-              ),
-            ],
+      _applyBoxDecorationProperty(
+        borderRadius: rounded != null
+            ? BorderRadius.all(
+                Radius.circular(rounded),
+              )
+            : null,
+        boxShadow: [
+          BoxShadow(
+            color: color,
+            offset: offset,
+            blurRadius: blurRadius,
+            spreadRadius: spreadRadius,
+            blurStyle: blurStyle,
           ),
-        ),
-      );
-
-  set shadows(List<BoxShadow> v) {
-    final double? rounded = 0;
-
-    _add(
-      (w) => DecoratedBox(
-        child: w,
-        decoration: BoxDecoration(
-          boxShadow: v,
-          borderRadius: rounded != null
-              ? BorderRadius.all(
-                  Radius.circular(rounded),
-                )
-              : null,
-        ),
-      ),
-    );
-  }
-
-  void useRoundShadow({
-    required double rounded,
-    required List<BoxShadow> shadows,
-  }) =>
-      _add(
-        (w) => DecoratedBox(
-          child: w,
-          decoration: BoxDecoration(
-            boxShadow: shadows,
-            borderRadius: BorderRadius.circular(rounded),
-          ),
-        ),
+        ],
       );
 
   void useAnimationBuilder({
@@ -863,98 +876,143 @@ extension PropertyBuilder on Niku {
   void useChild(Widget Function(Niku child) builder) =>
       _add((w) => builder(w.niku));
 
-  void get safeArea => _add((w) => SafeArea(child: w));
+  _applySafeArea({
+    bool top = true,
+    bool bottom = true,
+    bool left = true,
+    bool right = true,
+  }) {
+    final l = _latest;
 
-  void get safeAreaX =>
-      _add((w) => SafeArea(child: w, top: false, bottom: false));
-  void get safeAreaY =>
-      _add((w) => SafeArea(child: w, left: false, right: false));
+    if (l is SafeArea)
+      return _replace(
+        (w) => SafeArea(
+          child: w,
+          top: top || l.top,
+          bottom: bottom || l.bottom,
+          left: left || l.left,
+          right: right || l.right,
+        ),
+      );
 
+    _add(
+      (w) => SafeArea(
+        child: w,
+        top: top,
+        bottom: bottom,
+        left: left,
+        right: right,
+      ),
+    );
+  }
+
+  void get safe => safeArea;
+  void get safeArea => _applySafeArea();
+
+  void get safeX => safeAreaX;
+  void get safeAreaX => _applySafeArea(top: false, bottom: false);
+
+  void get safeY => safeAreaY;
+  void get safeAreaY => _applySafeArea(left: false, right: false);
+
+  void get safeTop => safeAreaTop;
   void get safeAreaTop =>
-      _add((w) => SafeArea(child: w, bottom: false, left: false, right: false));
+      _applySafeArea(bottom: false, left: false, right: false);
+
+  void get safeBottom => safeAreaBottom;
   void get safeAreaBottom =>
-      _add((w) => SafeArea(child: w, top: false, left: false, right: false));
+      _applySafeArea(top: false, left: false, right: false);
+
+  void get safeLeft => safeAreaLeft;
   void get safeAreaLeft =>
-      _add((w) => SafeArea(child: w, right: false, top: false, bottom: false));
+      _applySafeArea(right: false, top: false, bottom: false);
+
+  void get safeRight => safeAreaRight;
   void get safeAreaRight =>
-      _add((w) => SafeArea(child: w, left: false, top: false, bottom: false));
-
-  void get safe => _add((w) => SafeArea(child: w));
-
-  void get safeX => _add((w) => SafeArea(child: w, top: false, bottom: false));
-  void get safeY => _add((w) => SafeArea(child: w, left: false, right: false));
-
-  void get safeTop =>
-      _add((w) => SafeArea(child: w, bottom: false, left: false, right: false));
-  void get safeBottom =>
-      _add((w) => SafeArea(child: w, top: false, left: false, right: false));
-  void get safeLeft =>
-      _add((w) => SafeArea(child: w, right: false, top: false, bottom: false));
-  void get safeRight =>
-      _add((w) => SafeArea(child: w, left: false, top: false, bottom: false));
+      _applySafeArea(left: false, top: false, bottom: false);
 
   set gradient(Gradient v) => _add(
-      (w) => DecoratedBox(decoration: BoxDecoration(gradient: v), child: w));
+        (w) => DecoratedBox(
+          child: w,
+          decoration: BoxDecoration(gradient: v),
+        ),
+      );
 
   set quarterTurns(int turns) => _add((w) => RotatedBox(
         quarterTurns: turns,
         child: w,
       ));
 
-  set elevation(double elevation) => _add((w) => Material(
-        elevation: elevation,
-        child: w,
-      ));
+  set elevation(double elevation) {
+    final borderRadius =
+        _latest is ClipRRect ? (_latest as ClipRRect).borderRadius : null;
 
-  set splash(Color color) {
-    final highlightColor = Colors.transparent;
+    _add(
+      (w) => Material(
+        elevation: elevation,
+        borderRadius: borderRadius,
+        child: w,
+      ),
+    );
+  }
+
+  get material => _add(
+        (w) => Material(child: w, type: MaterialType.transparency),
+      );
+
+  _applyInkWell({
+    Color? highlightColor,
+    Color? splashColor,
+    Color? focusColor,
+    Color? hoverColor,
+  }) {
+    final l = _latest;
+
+    if (l is InkWell)
+      return _replace((w) {
+        return InkWell(
+          child: w,
+          highlightColor: highlightColor ?? l.highlightColor,
+          splashColor: splashColor ?? l.splashColor,
+          focusColor: focusColor ?? l.focusColor,
+          hoverColor: hoverColor ?? l.hoverColor,
+          borderRadius: l.borderRadius,
+          onTap: () {},
+        );
+      });
+
+    if (l is ClipRRect) {
+      final radius = l.borderRadius;
+
+      return _add(
+        (w) => InkWell(
+          highlightColor: highlightColor,
+          splashColor: splashColor,
+          focusColor: focusColor,
+          hoverColor: hoverColor,
+          child: w,
+          onTap: () {},
+          borderRadius: radius,
+        ),
+      );
+    }
 
     _add(
       (w) => InkWell(
         highlightColor: highlightColor,
-        splashColor: color,
-        child: w,
-        onTap: () {},
-      ),
-    );
-  }
-
-  Color get highlight {
-    final splashColor = Colors.transparent;
-
-    _add(
-      (w) => InkWell(
-        child: w,
         splashColor: splashColor,
-        onTap: () {},
-      ),
-    );
-
-    return Colors.transparent;
-  }
-
-  set highlight(Color color) {
-    final splashColor = Colors.transparent;
-
-    _add(
-      (w) => InkWell(
-        highlightColor: Colors.transparent,
-        splashColor: splashColor,
+        focusColor: focusColor,
+        hoverColor: hoverColor,
         child: w,
         onTap: () {},
       ),
     );
   }
 
-  set useSplash(Color color) {
-    _add(
-      (w) => InkWell(
-        splashColor: color,
-        child: w,
-        onTap: () {},
-      ),
-    );
-  }
+  set splash(Color color) => _applyInkWell(splashColor: color);
+  set highlight(Color color) => _applyInkWell(highlightColor: color);
+  set focus(Color color) => _applyInkWell(focusColor: color);
+  set hover(Color color) => _applyInkWell(hoverColor: color);
 
   void get sliverToBox => _add((w) => SliverToBoxAdapter(child: w));
 
@@ -1150,4 +1208,102 @@ extension PropertyBuilder on Niku {
       ),
     );
   }
+
+  void useGesture({
+    void Function(TapDownDetails)? tapDown,
+    void Function(TapUpDetails)? tapUp,
+    VoidCallback? tap,
+    VoidCallback? tapCancel,
+    VoidCallback? secondaryTap,
+    void Function(TapDownDetails)? secondaryTapDown,
+    void Function(TapUpDetails)? secondaryTapUp,
+    VoidCallback? secondaryTapCancel,
+    void Function(TapDownDetails)? tertiaryTapDown,
+    void Function(TapUpDetails)? tertiaryTapUp,
+    VoidCallback? tertiaryTapCancel,
+    void Function(TapDownDetails)? doubleTapDown,
+    VoidCallback? doubleTap,
+    VoidCallback? doubleTapCancel,
+    VoidCallback? longPress,
+    void Function(LongPressStartDetails)? longPressStart,
+    void Function(LongPressMoveUpdateDetails)? longPressMoveUpdate,
+    VoidCallback? longPressUp,
+    void Function(LongPressEndDetails)? longPressEnd,
+    VoidCallback? secondaryLongPress,
+    void Function(LongPressStartDetails)? secondaryLongPressStart,
+    void Function(LongPressMoveUpdateDetails)? secondaryLongPressMoveUpdate,
+    VoidCallback? secondaryLongPressUp,
+    void Function(LongPressEndDetails)? secondaryLongPressEnd,
+    void Function(DragDownDetails)? verticalDragDown,
+    void Function(DragStartDetails)? verticalDragStart,
+    void Function(DragUpdateDetails)? verticalDragUpdate,
+    void Function(DragEndDetails)? verticalDragEnd,
+    VoidCallback? verticalDragCancel,
+    void Function(DragDownDetails)? horizontalDragDown,
+    void Function(DragStartDetails)? horizontalDragStart,
+    void Function(DragUpdateDetails)? horizontalDragUpdate,
+    void Function(DragEndDetails)? horizontalDragEnd,
+    VoidCallback? horizontalDragCancel,
+    void Function(ForcePressDetails)? forcePressStart,
+    void Function(ForcePressDetails)? forcePressPeak,
+    void Function(ForcePressDetails)? forcePressUpdate,
+    void Function(ForcePressDetails)? forcePressEnd,
+    void Function(DragDownDetails)? panDown,
+    void Function(DragStartDetails)? panStart,
+    void Function(DragUpdateDetails)? panUpdate,
+    void Function(DragEndDetails)? panEnd,
+    VoidCallback? panCancel,
+    void Function(ScaleStartDetails)? scaleStart,
+    void Function(ScaleUpdateDetails)? scaleUpdate,
+    void Function(ScaleEndDetails)? scaleEnd,
+  }) =>
+      _add((w) => GestureDetector(
+            onTapDown: tapDown,
+            onTapUp: tapUp,
+            onTap: tap,
+            onTapCancel: tapCancel,
+            onSecondaryTap: secondaryTap,
+            onSecondaryTapDown: secondaryTapDown,
+            onSecondaryTapUp: secondaryTapUp,
+            onSecondaryTapCancel: secondaryTapCancel,
+            onTertiaryTapDown: tertiaryTapDown,
+            onTertiaryTapUp: tertiaryTapUp,
+            onTertiaryTapCancel: tertiaryTapCancel,
+            onDoubleTapDown: doubleTapDown,
+            onDoubleTap: doubleTap,
+            onDoubleTapCancel: doubleTapCancel,
+            onLongPress: longPress,
+            onLongPressStart: longPressStart,
+            onLongPressMoveUpdate: longPressMoveUpdate,
+            onLongPressUp: longPressUp,
+            onLongPressEnd: longPressEnd,
+            onSecondaryLongPress: secondaryLongPress,
+            onSecondaryLongPressStart: secondaryLongPressStart,
+            onSecondaryLongPressMoveUpdate: secondaryLongPressMoveUpdate,
+            onSecondaryLongPressUp: secondaryLongPressUp,
+            onSecondaryLongPressEnd: secondaryLongPressEnd,
+            onVerticalDragDown: verticalDragDown,
+            onVerticalDragStart: verticalDragStart,
+            onVerticalDragUpdate: verticalDragUpdate,
+            onVerticalDragEnd: verticalDragEnd,
+            onVerticalDragCancel: verticalDragCancel,
+            onHorizontalDragDown: horizontalDragDown,
+            onHorizontalDragStart: horizontalDragStart,
+            onHorizontalDragUpdate: horizontalDragUpdate,
+            onHorizontalDragEnd: horizontalDragEnd,
+            onHorizontalDragCancel: horizontalDragCancel,
+            onForcePressStart: forcePressStart,
+            onForcePressPeak: forcePressPeak,
+            onForcePressUpdate: forcePressUpdate,
+            onForcePressEnd: forcePressEnd,
+            onPanDown: panDown,
+            onPanStart: panStart,
+            onPanUpdate: panUpdate,
+            onPanEnd: panEnd,
+            onPanCancel: panCancel,
+            onScaleStart: scaleStart,
+            onScaleUpdate: scaleUpdate,
+            onScaleEnd: scaleEnd,
+            child: w,
+          ));
 }

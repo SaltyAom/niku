@@ -17,6 +17,7 @@ class NikuImage extends StatelessWidget
         BoxFitMacro,
         ImageRepeatMacro,
         WidthHeightMacro {
+  Key? key;
   ImageProvider image;
   ImageFrameBuilder? frameBuilder;
   ImageLoadingBuilder? loadingBuilder;
@@ -39,7 +40,7 @@ class NikuImage extends StatelessWidget
 
   NikuImage(
     this.image, {
-    Key? key,
+    this.key,
     this.frameBuilder,
     this.loadingBuilder,
     this.errorBuilder,
@@ -405,7 +406,7 @@ class NikuImage extends StatelessWidget
     semanticLabel = v.semanticLabel ?? semanticLabel;
     excludeFromSemantics = v.excludeFromSemantics ?? excludeFromSemantics;
     isAntiAlias = v.isAntiAlias ?? isAntiAlias;
-    $internalParent..addAll(v.$internalParent);
+    $internalParent..$merge(v.$internalParent);
   }
 
   NikuImage get copied => NikuImage(
@@ -429,9 +430,10 @@ class NikuImage extends StatelessWidget
         semanticLabel: semanticLabel,
         excludeFromSemantics: excludeFromSemantics,
         isAntiAlias: isAntiAlias,
-      )..$internalParent.addAll($internalParent);
+      )..$internalParent.$merge($internalParent);
 
   Image get widget => Image(
+        key: key,
         image: image,
         frameBuilder: frameBuilder,
         loadingBuilder: loadingBuilder,
