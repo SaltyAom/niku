@@ -12,9 +12,7 @@ extension NikuTransform on Widget {
   Niku get niku => Niku(this);
 }
 
-const _empty = SizedBox.shrink();
-
-// ? Tempest Engine// ignore: must_be_immutable
+// ? Tempest Engine
 class Niku extends StatelessWidget {
   Widget widget;
   Key? key;
@@ -23,7 +21,9 @@ class Niku extends StatelessWidget {
 
   List<Widget Function(Widget)> _$parent = [];
 
+  static const _empty = SizedBox.shrink();
   Widget? get _latest => _$parent.isNotEmpty ? _$parent.last(_empty) : null;
+  int get _lastIndex => _$parent.length - 1;
   void _add(Widget Function(Widget) builder) => _$parent.add(builder);
   void _replace(Widget Function(Widget) builder) =>
       _$parent[_$parent.length - 1] = builder;
@@ -182,14 +182,16 @@ extension PropertyBuilder on Niku {
   void get wFull => fullWidth;
   void get w100 => fullWidth;
   void get fullWidth {
-    final l = _latest;
+    final i = _lastIndex;
 
-    if (l is SizedBox)
-      return _replace((w) => SizedBox(
-            width: double.infinity,
-            height: l.height,
-            child: w,
-          ));
+    if (_latest is SizedBox)
+      return _replace(
+        (w) => SizedBox(
+          width: double.infinity,
+          height: (_$parent[i] as SizedBox).height,
+          child: w,
+        ),
+      );
 
     _add((w) => SizedBox(width: double.infinity, child: w));
   }
@@ -197,11 +199,11 @@ extension PropertyBuilder on Niku {
   void get hFull => fullHeight;
   void get h100 => fullHeight;
   void get fullHeight {
-    final l = _latest;
+    final i = _lastIndex;
 
-    if (l is SizedBox)
+    if (_latest is SizedBox)
       return _replace((w) => SizedBox(
-            width: l.width ?? 0,
+            width: (_$parent[i] as SizedBox).width ?? 0,
             height: double.infinity,
             child: w,
           ));
@@ -229,14 +231,16 @@ extension PropertyBuilder on Niku {
   set widthPercent(double v) => fractionWidth = v / 100;
   set wPercent(double v) => fractionWidth = v / 100;
   set fractionWidth(double v) {
-    final l = _latest;
+    final i = _lastIndex;
 
-    if (l is FractionallySizedBox)
-      return _replace((w) => FractionallySizedBox(
-            widthFactor: v,
-            heightFactor: l.heightFactor,
-            child: w,
-          ));
+    if (_latest is FractionallySizedBox)
+      return _replace(
+        (w) => FractionallySizedBox(
+          widthFactor: v,
+          heightFactor: (_$parent[i] as FractionallySizedBox).heightFactor,
+          child: w,
+        ),
+      );
 
     _add((w) => FractionallySizedBox(widthFactor: v, child: w));
   }
@@ -248,14 +252,16 @@ extension PropertyBuilder on Niku {
   set heightPercent(double v) => fractionHeight = v / 100;
   set hPercent(double v) => fractionHeight = v / 100;
   set fractionHeight(double v) {
-    final l = _latest;
+    final i = _lastIndex;
 
-    if (l is FractionallySizedBox)
-      return _replace((w) => FractionallySizedBox(
-            widthFactor: l.widthFactor,
-            heightFactor: v,
-            child: w,
-          ));
+    if (_lastIndex is FractionallySizedBox)
+      return _replace(
+        (w) => FractionallySizedBox(
+          widthFactor: (_$parent[i] as FractionallySizedBox).widthFactor,
+          heightFactor: v,
+          child: w,
+        ),
+      );
 
     _add((w) => FractionallySizedBox(heightFactor: v, child: w));
   }
@@ -285,7 +291,7 @@ extension PropertyBuilder on Niku {
     );
   }
 
-  set constraints(BoxConstraints v) {
+  set boxConstraints(BoxConstraints v) {
     if (_latest is ConstrainedBox)
       return _applyConstraints(
         maxWidth: !v.maxWidth.isFinite ? v.maxWidth : null,
@@ -298,7 +304,7 @@ extension PropertyBuilder on Niku {
   }
 
   set nikuConstraints(UseNikuCallback<NikuBoxConstraints> cb) =>
-      constraints = cb(NikuBoxConstraints()).value;
+      boxConstraints = cb(NikuBoxConstraints()).value;
 
   set max(List<double> v) => maxSize = v;
   set maxSize(List<double> v) {
@@ -385,28 +391,32 @@ extension PropertyBuilder on Niku {
 
   set w(double v) => width = v;
   set width(double v) {
-    final l = _latest;
+    final i = _lastIndex;
 
-    if (l is SizedBox)
-      return _replace((w) => SizedBox(
-            width: v,
-            height: l.height,
-            child: w,
-          ));
+    if (_latest is SizedBox)
+      return _replace(
+        (w) => SizedBox(
+          width: v,
+          height: (_$parent[i] as SizedBox).height,
+          child: w,
+        ),
+      );
 
     _add((w) => SizedBox(width: v, child: w));
   }
 
   set h(double v) => height = v;
   set height(double v) {
-    final l = _latest;
+    final i = _lastIndex;
 
-    if (l is SizedBox)
-      return _replace((w) => SizedBox(
-            width: l.width,
-            height: v,
-            child: w,
-          ));
+    if (_latest is SizedBox)
+      return _replace(
+        (w) => SizedBox(
+          width: (_$parent[i] as SizedBox).width,
+          height: v,
+          child: w,
+        ),
+      );
 
     _add((w) => SizedBox(height: v, child: w));
   }
@@ -498,8 +508,8 @@ extension PropertyBuilder on Niku {
     if (l is DecoratedBox) {
       final self = l.decoration as BoxDecoration;
 
-      return _replace(
-        (w) => DecoratedBox(
+      return _replace((w) {
+        return DecoratedBox(
           child: w,
           decoration: self.copyWith(
             color: v.color ?? self.color,
@@ -513,8 +523,8 @@ extension PropertyBuilder on Niku {
                 v.backgroundBlendMode ?? self.backgroundBlendMode,
             shape: v.shape != BoxShape.rectangle ? v.shape : self.shape,
           ),
-        ),
-      );
+        );
+      });
     }
 
     if (l is ClipRRect) {
@@ -804,6 +814,9 @@ extension PropertyBuilder on Niku {
         ),
       );
 
+  get wrap => _add((w) => Wrap(children: [w]));
+  void get sliverToBox => _add((w) => SliverToBoxAdapter(child: w));
+
   set formKey(Key v) => _add((w) => Form(key: v, child: w));
   void useForm({
     Key? key,
@@ -849,7 +862,7 @@ extension PropertyBuilder on Niku {
     Axis scrollDirection = Axis.vertical,
     bool? primary,
     bool reverse = false,
-    ScrollPhysics? scrollPhysics,
+    ScrollPhysics? physics,
     DragStartBehavior dragStartBehavior = DragStartBehavior.start,
     String? restorationId,
   }) =>
@@ -859,7 +872,7 @@ extension PropertyBuilder on Niku {
             scrollDirection: scrollDirection,
             primary: primary,
             reverse: reverse,
-            physics: scrollPhysics,
+            physics: physics,
             dragStartBehavior: dragStartBehavior,
             restorationId: restorationId,
           ));
@@ -1013,8 +1026,6 @@ extension PropertyBuilder on Niku {
   set highlight(Color color) => _applyInkWell(highlightColor: color);
   set focus(Color color) => _applyInkWell(focusColor: color);
   set hover(Color color) => _applyInkWell(hoverColor: color);
-
-  void get sliverToBox => _add((w) => SliverToBoxAdapter(child: w));
 
   set on(List<dynamic> dependencies) =>
       useChild((child) => NikuOn(() => child, dependencies));

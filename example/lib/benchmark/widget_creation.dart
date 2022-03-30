@@ -12,11 +12,8 @@ class WidgetCreation extends StatelessWidget {
 
       for (int i = 0; i < limit; i++) {
         final widget = "Hello World".n
-          ..useParent(
-            (v) => v
-              ..mx = 16
-              ..bg = Colors.white,
-          );
+          ..mx = 16
+          ..bg = Colors.white;
 
         widget.build(context);
       }

@@ -217,167 +217,85 @@ abstract class NikuBuildMacro<T extends Widget> {
     return _explictParent!;
   }
 
-  set margin(EdgeInsets v) {
-    useParent((c) => Padding(padding: v, child: c));
-  }
+  set margin(EdgeInsets v) => useParent((w) => w..margin = v);
+  set nikuMargin(UseNikuCallback<NikuEdgeInsets> v) =>
+      useParent((w) => w..nikuMargin = v);
 
-  set nikuMargin(NikuEdgeInsets v) {
-    useParent((c) => Padding(padding: v.value, child: c));
-  }
-
-  set m(double v) {
-    useParent((c) => Padding(
-          padding: EdgeInsets.all(v),
-          child: c,
-        ));
-  }
-
-  set mx(double v) {
-    useParent((c) => Padding(
-          padding: EdgeInsets.symmetric(horizontal: v),
-          child: c,
-        ));
-  }
-
-  set my(double v) {
-    useParent((c) => Padding(
-          padding: EdgeInsets.symmetric(vertical: v),
-          child: c,
-        ));
-  }
-
-  set mt(double v) {
-    useParent((c) => Padding(
-          padding: EdgeInsets.only(top: v),
-          child: c,
-        ));
-  }
-
-  set ml(double v) {
-    useParent((c) => Padding(
-          padding: EdgeInsets.only(left: v),
-          child: c,
-        ));
-  }
-
-  set mb(double v) {
-    useParent((c) => Padding(
-          padding: EdgeInsets.only(bottom: v),
-          child: c,
-        ));
-  }
-
-  set mr(double v) {
-    useParent((c) => Padding(
-          padding: EdgeInsets.only(right: v),
-          child: c,
-        ));
-  }
+  set m(double v) => useParent((w) => w..m = v);
+  set mx(double v) => useParent((w) => w..mx = v);
+  set my(double v) => useParent((w) => w..my = v);
+  set mt(double v) => useParent((w) => w..mt = v);
+  set mb(double v) => useParent((w) => w..mb = v);
+  set ml(double v) => useParent((w) => w..ml = v);
+  set mr(double v) => useParent((w) => w..mr = v);
 
   get expanded => useParent((v) => v..expanded);
 
-  set flex(int v) => useParent((w) => Flexible(flex: v, child: w));
+  set flex(int v) => useParent((w) => w..flex = v);
   int get flex {
-    useParent((v) => Flexible(child: v));
+    useParent((w) => w..flex);
 
     return 1;
   }
 
-  void get fullSize => useParent((v) =>
-      SizedBox(width: double.infinity, height: double.infinity, child: v));
-  void get fullWidth =>
-      useParent((v) => SizedBox(width: double.infinity, child: v));
-  void get fullHeight =>
-      useParent((v) => SizedBox(height: double.infinity, child: v));
-  void get wFull =>
-      useParent((v) => SizedBox(width: double.infinity, child: v));
-  void get hFull =>
-      useParent((v) => SizedBox(height: double.infinity, child: v));
-  void get w100 => useParent((v) => SizedBox(width: double.infinity, child: v));
-  void get h100 =>
-      useParent((v) => SizedBox(height: double.infinity, child: v));
-  void get fill => useParent((v) =>
-      SizedBox(width: double.infinity, height: double.infinity, child: v));
+  void get fullSize => useParent((v) => v..fullSize);
+  void get fullWidth => useParent((v) => v..fullWidth);
+  void get fullHeight => useParent((v) => v..fullHeight);
+  void get wFull => useParent((v) => v..fullWidth);
+  void get hFull => useParent((v) => v..fullHeight);
+  void get w100 => useParent((v) => v..w100);
+  void get h100 => useParent((v) => v..h100);
+  void get fill => useParent((v) => v..fill);
 
-  set fractionSize(List<double> v) => useParent((w) =>
-      FractionallySizedBox(widthFactor: v[0], heightFactor: v[1], child: w));
-  set sizePercent(List<double> v) => useParent((w) =>
-      FractionallySizedBox(widthFactor: v[0], heightFactor: v[1], child: w));
+  set fractionSize(List<double> v) => useParent((w) => w..fractionSize = v);
+  set sizePercent(List<double> v) => useParent((w) => w..sizePercent = v);
 
-  set fractionWidth(double v) =>
-      useParent((w) => FractionallySizedBox(widthFactor: v, child: w));
-  set fractionW(double v) =>
-      useParent((w) => FractionallySizedBox(widthFactor: v, child: w));
-  set fw(double v) =>
-      useParent((w) => FractionallySizedBox(widthFactor: v, child: w));
-  set wFactor(double v) =>
-      useParent((w) => FractionallySizedBox(widthFactor: v, child: w));
-  set widthPercent(double v) =>
-      useParent((w) => FractionallySizedBox(widthFactor: v / 100, child: w));
-  set wPercent(double v) =>
-      useParent((w) => FractionallySizedBox(widthFactor: v / 100, child: w));
+  set fractionWidth(double v) => useParent((w) => w..fractionWidth = v);
+  set fractionW(double v) => useParent((w) => w..fractionWidth = v);
+  set fw(double v) => useParent((w) => w..fractionWidth = v);
+  set wFactor(double v) => useParent((w) => w..fractionWidth = v);
+  set widthPercent(double v) => useParent((w) => w..widthPercent = v);
+  set wPercent(double v) => useParent((w) => w..widthPercent = v);
 
-  set fractionHeight(double v) =>
-      useParent((w) => FractionallySizedBox(heightFactor: v, child: w));
-  set fractionH(double v) =>
-      useParent((w) => FractionallySizedBox(heightFactor: v, child: w));
-  set hFactor(double v) =>
-      useParent((w) => FractionallySizedBox(heightFactor: v, child: w));
-  set fh(double v) =>
-      useParent((w) => FractionallySizedBox(heightFactor: v, child: w));
-  set heightPercent(double v) =>
-      useParent((w) => FractionallySizedBox(heightFactor: v / 100, child: w));
-  set hPercent(double v) =>
-      useParent((w) => FractionallySizedBox(heightFactor: v / 100, child: w));
+  set fractionHeight(double v) => useParent((w) => w..fractionHeight = v);
+  set fractionH(double v) => useParent((w) => w..fractionHeight = v);
+  set fh(double v) => useParent((w) => w..fractionHeight = v);
+  set hFactor(double v) => useParent((w) => w..fractionHeight = v);
+  set heightPercent(double v) => useParent((w) => w..heightPercent = v);
+  set hPercent(double v) => useParent((w) => w..heightPercent = v);
 
   set boxConstraints(BoxConstraints v) =>
-      useParent((w) => ConstrainedBox(constraints: v, child: w));
-  set nikuConstraints(UseNikuCallback<NikuBoxConstraints> cb) =>
-      useParent((w) => ConstrainedBox(
-          constraints: cb(NikuBoxConstraints()).value, child: w));
+      useParent((w) => w..boxConstraints = v);
+  set nikuConstraints(UseNikuCallback<NikuBoxConstraints> v) =>
+      useParent((w) => w..nikuConstraints = v);
 
-  set maxSize(List<double> v) => useParent((w) => ConstrainedBox(
-      constraints: BoxConstraints(maxWidth: v[0], maxHeight: v[1]), child: w));
-  set minSize(List<double> v) => useParent((w) => ConstrainedBox(
-      constraints: BoxConstraints(minWidth: v[0], minHeight: v[1]), child: w));
+  set maxSize(List<double> v) => useParent((w) => w..maxSize = v);
+  set minSize(List<double> v) => useParent((w) => w..minSize = v);
 
-  set maxWidth(double v) => useParent((w) =>
-      ConstrainedBox(constraints: BoxConstraints(maxWidth: v), child: w));
-  set maxHeight(double v) => useParent((w) =>
-      ConstrainedBox(constraints: BoxConstraints(maxHeight: v), child: w));
-  set maxW(double v) => useParent((w) =>
-      ConstrainedBox(constraints: BoxConstraints(maxWidth: v), child: w));
-  set maxH(double v) => useParent((w) =>
-      ConstrainedBox(constraints: BoxConstraints(maxHeight: v), child: w));
-  set wMax(double v) => useParent((w) =>
-      ConstrainedBox(constraints: BoxConstraints(maxWidth: v), child: w));
-  set hMax(double v) => useParent((w) =>
-      ConstrainedBox(constraints: BoxConstraints(maxHeight: v), child: w));
+  set maxWidth(double v) => useParent((w) => w..maxWidth = v);
+  set maxHeight(double v) => useParent((w) => w..maxHeight = v);
+  set maxW(double v) => useParent((w) => w..maxWidth = v);
+  set maxH(double v) => useParent((w) => w..maxHeight = v);
+  set wMax(double v) => useParent((w) => w..maxWidth = v);
+  set hMax(double v) => useParent((w) => w..maxHeight = v);
 
-  set minWidth(double v) => useParent((w) =>
-      ConstrainedBox(constraints: BoxConstraints(minWidth: v), child: w));
-  set minHeight(double v) => useParent((w) =>
-      ConstrainedBox(constraints: BoxConstraints(minHeight: v), child: w));
-  set minW(double v) => useParent((w) =>
-      ConstrainedBox(constraints: BoxConstraints(minWidth: v), child: w));
-  set minH(double v) => useParent((w) =>
-      ConstrainedBox(constraints: BoxConstraints(minHeight: v), child: w));
-  set wMin(double v) => useParent((w) =>
-      ConstrainedBox(constraints: BoxConstraints(minWidth: v), child: w));
-  set hMin(double v) => useParent((w) =>
-      ConstrainedBox(constraints: BoxConstraints(minHeight: v), child: w));
+  set minWidth(double v) => useParent((w) => w..minWidth = v);
+  set minHeight(double v) => useParent((w) => w..minHeight = v);
+  set minW(double v) => useParent((w) => w..minWidth = v);
+  set minH(double v) => useParent((w) => w..minHeight = v);
+  set wMin(double v) => useParent((w) => w..minWidth = v);
+  set hMin(double v) => useParent((w) => w..minHeight = v);
 
-  set width(double v) => useParent((w) => SizedBox(width: v, child: w));
-  set w(double v) => useParent((w) => SizedBox(width: v, child: w));
-  set height(double v) => useParent((w) => SizedBox(height: v, child: w));
-  set h(double v) => useParent((w) => SizedBox(height: v, child: w));
+  set width(double v) => useParent((w) => w..width = v);
+  set w(double v) => useParent((w) => w..width = v);
+  set height(double v) => useParent((w) => w..height = v);
+  set h(double v) => useParent((w) => w..height = v);
 
   /// Cancel parent size inheritance by wrapping the widget with a [Wrap].
-  get wrap => useParent((w) => Wrap(children: [w]));
+  get wrap => useParent((w) => w..wrap);
+  void get sliverToBox => useParent((w) => w..sliverToBox);
 
-  void get sliverToBox => useParent((w) => SliverToBoxAdapter(child: w));
-
-  set formKey(Key v) => useParent((w) => Form(key: v, child: w));
+  set formKey(Key v) => useParent((w) => w..formKey = v);
   void useForm({
     Key? key,
     AutovalidateMode? autovalidateMode,
@@ -385,14 +303,47 @@ abstract class NikuBuildMacro<T extends Widget> {
     void Function()? onChanged,
   }) =>
       useParent(
-        (w) => Form(
-          key: key,
-          child: w,
-          autovalidateMode: autovalidateMode,
-          onWillPop: onWillPop,
-          onChanged: onChanged,
-        ),
+        (w) => w
+          ..useForm(
+            key: key,
+            autovalidateMode: autovalidateMode,
+            onWillPop: onWillPop,
+            onChanged: onChanged,
+          ),
       );
+
+  set aspectRatio(double v) => useParent((w) => w..aspectRatio = v);
+  set aspect(double v) => useParent((w) => w..aspectRatio = v);
+  set ratio(double v) => useParent((w) => w..aspectRatio = v);
+
+  void get scrollable => useParent((w) => w..scrollable);
+
+  void useScrollView({
+    ScrollController? controller,
+    Axis scrollDirection = Axis.vertical,
+    bool? primary,
+    bool reverse = false,
+    ScrollPhysics? physics,
+    DragStartBehavior dragStartBehavior = DragStartBehavior.start,
+    String? restorationId,
+  }) =>
+      useParent(
+        (w) => w
+          ..useScrollView(
+            controller: controller,
+            scrollDirection: scrollDirection,
+            primary: primary,
+            reverse: reverse,
+            physics: physics,
+            dragStartBehavior: dragStartBehavior,
+            restorationId: restorationId,
+          ),
+      );
+
+  set theme(ThemeData v) => useParent((w) => w..theme = v);
+
+  set visible(bool visibility) => useParent((w) => w..visible = visibility);
+  get hidden => useParent((w) => w..hidden);
 
   void useGesture({
     void Function(TapDownDetails)? tapDown,
@@ -443,55 +394,55 @@ abstract class NikuBuildMacro<T extends Widget> {
     void Function(ScaleEndDetails)? scaleEnd,
   }) =>
       useParent(
-        (v) => GestureDetector(
-          onTapDown: tapDown,
-          onTapUp: tapUp,
-          onTap: tap,
-          onTapCancel: tapCancel,
-          onSecondaryTap: secondaryTap,
-          onSecondaryTapDown: secondaryTapDown,
-          onSecondaryTapUp: secondaryTapUp,
-          onSecondaryTapCancel: secondaryTapCancel,
-          onTertiaryTapDown: tertiaryTapDown,
-          onTertiaryTapUp: tertiaryTapUp,
-          onTertiaryTapCancel: tertiaryTapCancel,
-          onDoubleTapDown: doubleTapDown,
-          onDoubleTap: doubleTap,
-          onDoubleTapCancel: doubleTapCancel,
-          onLongPress: longPress,
-          onLongPressStart: longPressStart,
-          onLongPressMoveUpdate: longPressMoveUpdate,
-          onLongPressUp: longPressUp,
-          onLongPressEnd: longPressEnd,
-          onSecondaryLongPress: secondaryLongPress,
-          onSecondaryLongPressStart: secondaryLongPressStart,
-          onSecondaryLongPressMoveUpdate: secondaryLongPressMoveUpdate,
-          onSecondaryLongPressUp: secondaryLongPressUp,
-          onSecondaryLongPressEnd: secondaryLongPressEnd,
-          onVerticalDragDown: verticalDragDown,
-          onVerticalDragStart: verticalDragStart,
-          onVerticalDragUpdate: verticalDragUpdate,
-          onVerticalDragEnd: verticalDragEnd,
-          onVerticalDragCancel: verticalDragCancel,
-          onHorizontalDragDown: horizontalDragDown,
-          onHorizontalDragStart: horizontalDragStart,
-          onHorizontalDragUpdate: horizontalDragUpdate,
-          onHorizontalDragEnd: horizontalDragEnd,
-          onHorizontalDragCancel: horizontalDragCancel,
-          onForcePressStart: forcePressStart,
-          onForcePressPeak: forcePressPeak,
-          onForcePressUpdate: forcePressUpdate,
-          onForcePressEnd: forcePressEnd,
-          onPanDown: panDown,
-          onPanStart: panStart,
-          onPanUpdate: panUpdate,
-          onPanEnd: panEnd,
-          onPanCancel: panCancel,
-          onScaleStart: scaleStart,
-          onScaleUpdate: scaleUpdate,
-          onScaleEnd: scaleEnd,
-          child: v,
-        ),
+        (w) => w
+          ..useGesture(
+            tapDown: tapDown,
+            tapUp: tapUp,
+            tap: tap,
+            tapCancel: tapCancel,
+            secondaryTap: secondaryTap,
+            secondaryTapDown: secondaryTapDown,
+            secondaryTapUp: secondaryTapUp,
+            secondaryTapCancel: secondaryTapCancel,
+            tertiaryTapDown: tertiaryTapDown,
+            tertiaryTapUp: tertiaryTapUp,
+            tertiaryTapCancel: tertiaryTapCancel,
+            doubleTapDown: doubleTapDown,
+            doubleTap: doubleTap,
+            doubleTapCancel: doubleTapCancel,
+            longPress: longPress,
+            longPressStart: longPressStart,
+            longPressMoveUpdate: longPressMoveUpdate,
+            longPressUp: longPressUp,
+            longPressEnd: longPressEnd,
+            secondaryLongPress: secondaryLongPress,
+            secondaryLongPressStart: secondaryLongPressStart,
+            secondaryLongPressMoveUpdate: secondaryLongPressMoveUpdate,
+            secondaryLongPressUp: secondaryLongPressUp,
+            secondaryLongPressEnd: secondaryLongPressEnd,
+            verticalDragDown: verticalDragDown,
+            verticalDragStart: verticalDragStart,
+            verticalDragUpdate: verticalDragUpdate,
+            verticalDragEnd: verticalDragEnd,
+            verticalDragCancel: verticalDragCancel,
+            horizontalDragDown: horizontalDragDown,
+            horizontalDragStart: horizontalDragStart,
+            horizontalDragUpdate: horizontalDragUpdate,
+            horizontalDragEnd: horizontalDragEnd,
+            horizontalDragCancel: horizontalDragCancel,
+            forcePressStart: forcePressStart,
+            forcePressPeak: forcePressPeak,
+            forcePressUpdate: forcePressUpdate,
+            forcePressEnd: forcePressEnd,
+            panDown: panDown,
+            panStart: panStart,
+            panUpdate: panUpdate,
+            panEnd: panEnd,
+            panCancel: panCancel,
+            scaleStart: scaleStart,
+            scaleUpdate: scaleUpdate,
+            scaleEnd: scaleEnd,
+          ),
       );
 
   void useAnimationBuilder({
@@ -505,42 +456,6 @@ abstract class NikuBuildMacro<T extends Widget> {
             builder: (context, child) => builder(context, w),
           ),
       );
-
-  set aspectRatio(double aspectRatio) =>
-      useParent((w) => AspectRatio(aspectRatio: aspectRatio, child: w));
-  set aspect(double aspectRatio) =>
-      useParent((w) => AspectRatio(aspectRatio: aspectRatio, child: w));
-  set ratio(double aspectRatio) =>
-      useParent((w) => AspectRatio(aspectRatio: aspectRatio, child: w));
-
-  void get scrollable => useParent((w) => SingleChildScrollView(child: w));
-
-  void useScrollView({
-    ScrollController? controller,
-    Axis scrollDirection = Axis.vertical,
-    bool? primary,
-    bool reverse = false,
-    ScrollPhysics? scrollPhysics,
-    DragStartBehavior dragStartBehavior = DragStartBehavior.start,
-    String? restorationId,
-  }) =>
-      useParent(
-        (w) => SingleChildScrollView(
-          child: w,
-          controller: controller,
-          scrollDirection: scrollDirection,
-          primary: primary,
-          reverse: reverse,
-          physics: scrollPhysics,
-          dragStartBehavior: dragStartBehavior,
-          restorationId: restorationId,
-        ),
-      );
-
-  set theme(ThemeData v) => useParent((w) => w..theme = v);
-
-  set visible(bool visibility) => useParent((w) => w..visible = visibility);
-  get hidden => useParent((w) => w..hidden);
 }
 
 class NikuExplictParentBuilder {
@@ -636,7 +551,6 @@ class NikuExplictParentBuilder {
       );
 
   set backdropFilter(ImageFilter v) => useParent((w) => w..backdropFilter = v);
-
   set bgBlur(double v) => useParent((w) => w..bgBlur = v);
 
   set rect(Clip clip) => useParent((w) => w..rect = clip);
