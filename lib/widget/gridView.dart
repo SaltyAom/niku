@@ -372,7 +372,7 @@ class NikuGridView extends StatelessWidget
     gridDelegate = v.gridDelegate ?? gridDelegate;
     childrenDelegate = v.childrenDelegate ?? childrenDelegate;
 
-    $internalParent..$merge(v.$internalParent);
+    $parent..$merge(v.$parent);
   }
 
   NikuGridView get copied => NikuGridView(
@@ -404,7 +404,7 @@ class NikuGridView extends StatelessWidget
         maxCrossExtent: maxCrossExtent,
         gridDelegate: gridDelegate,
         childrenDelegate: childrenDelegate,
-      )..$internalParent.$merge($internalParent);
+      )..$parent.$merge($parent);
 
   GridView get widget {
     switch (type) {

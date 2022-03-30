@@ -30,7 +30,7 @@ class NikuIcon extends StatelessWidget
     semanticLabel = v.semanticLabel ?? semanticLabel;
     textDirection = v.textDirection ?? textDirection;
 
-    $internalParent..$merge(v.$internalParent);
+    $parent..$merge(v.$parent);
   }
 
   NikuIcon get copied => NikuIcon(
@@ -40,7 +40,7 @@ class NikuIcon extends StatelessWidget
         color: color,
         semanticLabel: semanticLabel,
         textDirection: textDirection,
-      )..$internalParent.$merge($internalParent);
+      )..$parent.$merge($parent);
 
   Icon get widget => Icon(
         icon,

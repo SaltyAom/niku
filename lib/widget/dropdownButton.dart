@@ -102,7 +102,7 @@ class NikuDropdownButton<T> extends StatelessWidget
     enableFeedback = v.enableFeedback ?? enableFeedback;
     alignment = v.alignment ?? alignment;
     borderRadius = v.borderRadius ?? borderRadius;
-    $internalParent..$merge(v.$internalParent);
+    $parent..$merge(v.$parent);
   }
 
   get copied => NikuDropdownButton<T>(
@@ -132,7 +132,7 @@ class NikuDropdownButton<T> extends StatelessWidget
         alignment: alignment,
         borderRadius: borderRadius,
         itemsValue: itemsValue,
-      )..$internalParent.$merge($internalParent);
+      )..$parent.$merge($parent);
 
   get widget => DropdownButton<T>(
         items: items ??

@@ -293,7 +293,7 @@ class NikuListView extends StatelessWidget
     separatorBuilder = v.separatorBuilder ?? separatorBuilder;
     childrenDelegate = v.childrenDelegate ?? childrenDelegate;
 
-    $internalParent..$merge(v.$internalParent);
+    $parent..$merge(v.$parent);
   }
 
   get copied => NikuListView(
@@ -322,7 +322,7 @@ class NikuListView extends StatelessWidget
         itemBuilder: itemBuilder,
         separatorBuilder: separatorBuilder,
         childrenDelegate: childrenDelegate,
-      )..$internalParent.$merge($internalParent);
+      )..$parent.$merge($parent);
 
   get widget {
     switch (type) {

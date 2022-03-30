@@ -61,7 +61,7 @@ class NikuPopupMenuButton<T> extends StatelessWidget
     color = v.color ?? color;
     enableFeedback = v.enableFeedback ?? enableFeedback;
     iconSize = v.iconSize ?? iconSize;
-    $internalParent..$merge(v.$internalParent);
+    $parent..$merge(v.$parent);
   }
 
   NikuPopupMenuButton<T> get copied => NikuPopupMenuButton<T>(
@@ -82,7 +82,7 @@ class NikuPopupMenuButton<T> extends StatelessWidget
         iconSize: iconSize,
         items: items,
         itemBuilder: itemBuilder,
-      )..$internalParent.$merge($internalParent);
+      )..$parent.$merge($parent);
 
   PopupMenuButton get widget => PopupMenuButton<T>(
         initialValue: initialValue,

@@ -406,7 +406,7 @@ class NikuImage extends StatelessWidget
     semanticLabel = v.semanticLabel ?? semanticLabel;
     excludeFromSemantics = v.excludeFromSemantics ?? excludeFromSemantics;
     isAntiAlias = v.isAntiAlias ?? isAntiAlias;
-    $internalParent..$merge(v.$internalParent);
+    $parent..$merge(v.$parent);
   }
 
   NikuImage get copied => NikuImage(
@@ -430,7 +430,7 @@ class NikuImage extends StatelessWidget
         semanticLabel: semanticLabel,
         excludeFromSemantics: excludeFromSemantics,
         isAntiAlias: isAntiAlias,
-      )..$internalParent.$merge($internalParent);
+      )..$parent.$merge($parent);
 
   Image get widget => Image(
         key: key,

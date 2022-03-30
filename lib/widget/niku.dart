@@ -19,14 +19,15 @@ class Niku extends StatelessWidget {
 
   Niku([this.widget = const SizedBox.shrink(), this.key]) : super(key: key);
 
-  List<Widget Function(Widget)> _$parent = [];
+  List<Widget Function(Widget)> $parent = [];
 
   static const _empty = SizedBox.shrink();
-  Widget? get _latest => _$parent.isNotEmpty ? _$parent.last(_empty) : null;
-  int get _lastIndex => _$parent.length - 1;
-  void _add(Widget Function(Widget) builder) => _$parent.add(builder);
+  Widget? get _latest => $parent.isNotEmpty ? $parent.last(_empty) : null;
+  int get _lastIndex => $parent.length - 1;
+  void _add(Widget Function(Widget) builder) => $parent.add(builder);
   void _replace(Widget Function(Widget) builder) =>
-      _$parent[_$parent.length - 1] = builder;
+      $parent[_lastIndex] = builder;
+  bool get $isEmpty => $parent.length == 0;
 
   $merge(Niku others) => useChild((w) => others..widget = w);
 
@@ -34,11 +35,11 @@ class Niku extends StatelessWidget {
   build(context) {
     Widget composed = widget;
 
-    _$parent.forEach((builder) {
-      composed = builder(composed);
-    });
-
-    // $debugDescribeProperty();
+    int i = 0;
+    while (i < $parent.length) {
+      composed = $parent[i](composed);
+      i++;
+    }
 
     if (key != null) return SizedBox(key: key ?? widget.key, child: composed);
 
@@ -47,7 +48,7 @@ class Niku extends StatelessWidget {
 
   // ? Only use in debugging Tempestissimo, will be removed on stable
   $debugDescribeProperty() {
-    _$parent.forEach((v) {
+    $parent.forEach((v) {
       print(" - ${v(_empty)}");
     });
   }
@@ -56,13 +57,14 @@ class Niku extends StatelessWidget {
 typedef UseNikuCallback<T> = T Function(T);
 
 extension PropertyBuilder on Niku {
-  _applyPadding({
+  _applyPadding(
+    EdgeInsetsGeometry latest, {
     double top = 0,
     double left = 0,
     double bottom = 0,
     double right = 0,
   }) {
-    final padding = (_latest as Padding).padding as EdgeInsets;
+    final padding = latest as EdgeInsets;
     final _top = top + padding.top;
     final _left = left + padding.left;
     final _bottom = bottom + padding.bottom;
@@ -84,8 +86,11 @@ extension PropertyBuilder on Niku {
   // I'm actually surprised that Flutter implemented margin by assigning it to padding.
   set margin(EdgeInsets v) => padding = v;
   set padding(EdgeInsets v) {
-    if (_latest is Padding)
+    final l = _latest;
+
+    if (l is Padding)
       return _applyPadding(
+        l.padding,
         top: v.top,
         bottom: v.bottom,
         left: v.left,
@@ -101,15 +106,19 @@ extension PropertyBuilder on Niku {
 
   set m(double v) => p = v;
   set p(double v) {
-    if (_latest is Padding)
-      return _applyPadding(top: v, left: v, bottom: v, right: v);
+    final l = _latest;
+
+    if (l is Padding)
+      _applyPadding(l.padding, top: v, left: v, bottom: v, right: v);
 
     _add((w) => Padding(padding: EdgeInsets.all(v), child: w));
   }
 
   set mx(double v) => px = v;
   set px(double v) {
-    if (_latest is Padding) return _applyPadding(left: v, right: v);
+    final l = _latest;
+
+    if (l is Padding) return _applyPadding(l.padding, left: v, right: v);
 
     _add(
       (w) => Padding(padding: EdgeInsets.symmetric(horizontal: v), child: w),
@@ -118,7 +127,9 @@ extension PropertyBuilder on Niku {
 
   set my(double v) => py = v;
   set py(double v) {
-    if (_latest is Padding) return _applyPadding(top: v, bottom: v);
+    final l = _latest;
+
+    if (l is Padding) return _applyPadding(l.padding, top: v, bottom: v);
 
     _add(
       (w) => Padding(padding: EdgeInsets.symmetric(vertical: v), child: w),
@@ -127,28 +138,36 @@ extension PropertyBuilder on Niku {
 
   set mt(double v) => pt = v;
   set pt(double v) {
-    if (_latest is Padding) return _applyPadding(top: v);
+    final l = _latest;
+
+    if (l is Padding) return _applyPadding(l.padding, top: v);
 
     _add((w) => Padding(padding: EdgeInsets.only(top: v), child: w));
   }
 
   set mb(double v) => pb = v;
   set pb(double v) {
-    if (_latest is Padding) return _applyPadding(bottom: v);
+    final l = _latest;
+
+    if (l is Padding) return _applyPadding(l.padding, bottom: v);
 
     _add((w) => Padding(padding: EdgeInsets.only(bottom: v), child: w));
   }
 
   set ml(double v) => pl = v;
   set pl(double v) {
-    if (_latest is Padding) return _applyPadding(left: v);
+    final l = _latest;
+
+    if (l is Padding) return _applyPadding(l.padding, left: v);
 
     _add((w) => Padding(padding: EdgeInsets.only(left: v), child: w));
   }
 
   set mr(double v) => pr = v;
   set pr(double v) {
-    if (_latest is Padding) return _applyPadding(right: v);
+    final l = _latest;
+
+    if (l is Padding) return _applyPadding(l.padding, right: v);
 
     _add((w) => Padding(padding: EdgeInsets.only(right: v), child: w));
   }
@@ -188,7 +207,7 @@ extension PropertyBuilder on Niku {
       return _replace(
         (w) => SizedBox(
           width: double.infinity,
-          height: (_$parent[i] as SizedBox).height,
+          height: ($parent[i] as SizedBox).height,
           child: w,
         ),
       );
@@ -203,7 +222,7 @@ extension PropertyBuilder on Niku {
 
     if (_latest is SizedBox)
       return _replace((w) => SizedBox(
-            width: (_$parent[i] as SizedBox).width ?? 0,
+            width: ($parent[i] as SizedBox).width ?? 0,
             height: double.infinity,
             child: w,
           ));
@@ -237,7 +256,7 @@ extension PropertyBuilder on Niku {
       return _replace(
         (w) => FractionallySizedBox(
           widthFactor: v,
-          heightFactor: (_$parent[i] as FractionallySizedBox).heightFactor,
+          heightFactor: ($parent[i] as FractionallySizedBox).heightFactor,
           child: w,
         ),
       );
@@ -257,7 +276,7 @@ extension PropertyBuilder on Niku {
     if (_lastIndex is FractionallySizedBox)
       return _replace(
         (w) => FractionallySizedBox(
-          widthFactor: (_$parent[i] as FractionallySizedBox).widthFactor,
+          widthFactor: ($parent[i] as FractionallySizedBox).widthFactor,
           heightFactor: v,
           child: w,
         ),
@@ -397,7 +416,7 @@ extension PropertyBuilder on Niku {
       return _replace(
         (w) => SizedBox(
           width: v,
-          height: (_$parent[i] as SizedBox).height,
+          height: ($parent[i] as SizedBox).height,
           child: w,
         ),
       );
@@ -412,7 +431,7 @@ extension PropertyBuilder on Niku {
     if (_latest is SizedBox)
       return _replace(
         (w) => SizedBox(
-          width: (_$parent[i] as SizedBox).width,
+          width: ($parent[i] as SizedBox).width,
           height: v,
           child: w,
         ),

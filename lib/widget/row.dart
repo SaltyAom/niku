@@ -52,7 +52,7 @@ class NikuRow extends StatelessWidget
     textBaseline = v.textBaseline ?? textBaseline;
     gap = v.gap ?? gap;
 
-    $internalParent..$merge(v.$internalParent);
+    $parent..$merge(v.$parent);
   }
 
   NikuRow get copied => NikuRow(
@@ -64,7 +64,7 @@ class NikuRow extends StatelessWidget
         textDirection: textDirection,
         verticalDirection: verticalDirection,
         textBaseline: textBaseline,
-      )..$internalParent.$merge($internalParent);
+      )..$parent.$merge($parent);
 
   Row get widget => Row(
         children: $internalComposeGap(GapType.row, gap),

@@ -68,7 +68,7 @@ class NikuRadio<T> extends StatelessWidget
     focusNode = v.focusNode ?? focusNode;
     autofocus = v.autofocus ?? autofocus;
 
-    $internalParent..$merge(v.$internalParent);
+    $parent..$merge(v.$parent);
   }
 
   NikuRadio get copied => NikuRadio<T>(
@@ -88,7 +88,7 @@ class NikuRadio<T> extends StatelessWidget
         splashRadius: splashRadius,
         focusNode: focusNode,
         autofocus: autofocus,
-      )..$internalParent.$merge($internalParent);
+      )..$parent.$merge($parent);
 
   Radio get widget => Radio<T>(
         key: key,

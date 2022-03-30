@@ -222,7 +222,7 @@ class NikuSwitch extends StatelessWidget
     trackColorState = v.trackColorState ?? trackColorState;
     overlayColorState = v.overlayColorState ?? overlayColorState;
 
-    $internalParent..$merge(v.$internalParent);
+    $parent..$merge(v.$parent);
   }
 
   NikuSwitch get copied => NikuSwitch(
@@ -249,7 +249,7 @@ class NikuSwitch extends StatelessWidget
         overlayColorState: overlayColorState,
         adaptive: adaptive,
         cupertino: cupertino,
-      )..$internalParent.$merge($internalParent);
+      )..$parent.$merge($parent);
 
   Widget get widget {
     if (cupertino) {

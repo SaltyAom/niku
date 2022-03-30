@@ -347,7 +347,7 @@ class NikuSlider extends StatelessWidget
     minThumbSeparation = v.minThumbSeparation ?? minThumbSeparation;
     thumbSelector = v.thumbSelector ?? thumbSelector;
 
-    $internalParent..$merge(v.$internalParent);
+    $parent..$merge(v.$parent);
   }
 
   NikuSlider get copied => NikuSlider(
@@ -394,7 +394,7 @@ class NikuSlider extends StatelessWidget
         valueIndicatorTextStyle: valueIndicatorTextStyle,
         minThumbSeparation: minThumbSeparation,
         thumbSelector: thumbSelector,
-      )..$internalParent.$merge($internalParent);
+      )..$parent.$merge($parent);
 
   SliderTheme get widget => SliderTheme(
         data: SliderThemeData(

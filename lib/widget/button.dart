@@ -201,7 +201,7 @@ class NikuButton extends StatelessWidget
     label = v.label ?? label;
     enable = v.enable;
 
-    $internalParent..$merge(v.$internalParent);
+    $parent..$merge(v.$parent);
   }
 
   NikuButton get copied => NikuButton(
@@ -216,7 +216,7 @@ class NikuButton extends StatelessWidget
         icon: icon,
         label: label,
         enable: enable,
-      )..$internalParent.$merge($internalParent);
+      )..$parent.$merge($parent);
 
   Widget get widget {
     if (type == NikuButtonType.Elevated)

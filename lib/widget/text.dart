@@ -19,6 +19,7 @@ class NikuText extends StatelessWidget
         TextBaselineMacro {
   String? text;
 
+  Key? key;
   NikuTextStyle? style;
   NikuStrutStyle? strutStyle;
   TextAlign? textAlign;
@@ -34,7 +35,7 @@ class NikuText extends StatelessWidget
 
   NikuText(
     this.text, {
-    Key? key,
+    this.key,
     this.style,
     this.strutStyle,
     this.textAlign,
@@ -100,7 +101,7 @@ class NikuText extends StatelessWidget
     textWidthBasis = v.textWidthBasis ?? textWidthBasis;
     textHeightBehavior = v.textHeightBehavior ?? textHeightBehavior;
 
-    $internalParent..$merge(v.$internalParent);
+    $parent..$merge(v.$parent);
   }
 
   NikuText get copied => NikuText(
@@ -117,7 +118,7 @@ class NikuText extends StatelessWidget
         semanticsLabel: semanticsLabel,
         textWidthBasis: textWidthBasis,
         textHeightBehavior: textHeightBehavior,
-      )..$internalParent.$merge($internalParent);
+      )..$parent.$merge($parent);
 
   Widget get widget => Text(
         text ?? "",
