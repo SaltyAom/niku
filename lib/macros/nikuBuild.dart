@@ -17,12 +17,12 @@ abstract class NikuBuildMacro<T extends Widget> {
     for (final e in v) apply = e;
   }
 
-  void useNiku(Widget Function(Niku) cb) => useParent(cb);
+  Widget get widget => const SizedBox.shrink();
+  Widget build(BuildContext context) =>
+      ($parent..widget = widget).build(context);
+
   void useParent(Widget Function(Niku) compose) =>
       $parent..useChild((w) => compose(w));
-
-  Widget get widget => const SizedBox.shrink();
-  Widget build(BuildContext context) => $parent..widget = widget;
 
   // ? Query Macro (must be override otherwise will result in Error)
   T get self => this as T;
@@ -457,6 +457,7 @@ class NikuExplictParentBuilder {
 
   set bg(Color v) => $parent..bg = v;
   set opacity(double v) => $parent..opacity = v;
+  double get rounded => $parent.rounded;
   set rounded(double v) => $parent..rounded = v;
   set borderRadius(BorderRadius v) => $parent..borderRadius = v;
 

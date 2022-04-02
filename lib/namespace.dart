@@ -25,6 +25,7 @@ typedef IconButton = NikuIconButton;
 typedef Image = NikuImage;
 typedef ListTile = NikuListTile;
 typedef ListView = NikuListView;
+typedef Padding = NikuPadding;
 typedef PopupMenuButton = NikuPopupMenuButton;
 typedef RangeSlider = NikuRangeSlider;
 typedef RichText = NikuRichText;
