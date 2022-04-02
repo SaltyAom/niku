@@ -5,7 +5,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 
-import 'package:niku/objects/objects.dart';
 import 'package:niku/extra/extra.dart';
 
 extension NikuTransform on Widget {
@@ -44,7 +43,6 @@ extension PropertyBuilder on Niku {
   void _add(Widget Function(Widget) builder) => $parent.add(builder);
   void _replace(Widget Function(Widget) builder) =>
       $parent[$parent.length - 1] = builder;
-  bool get $isEmpty => $parent.length == 0;
 
   // ? Only use in debugging Tempestissimo, will be removed on stable
   $debugDescribeProperty() {
@@ -95,10 +93,6 @@ extension PropertyBuilder on Niku {
 
     _add((w) => Padding(padding: v, child: w));
   }
-
-  set nikuMargin(UseNikuCallback<NikuEdgeInsets> cb) => nikuPadding = cb;
-  set nikuPadding(UseNikuCallback<NikuEdgeInsets> cb) =>
-      padding = cb(NikuEdgeInsets()).value;
 
   set m(double v) => p = v;
   set p(double v) {
@@ -317,9 +311,6 @@ extension PropertyBuilder on Niku {
 
     _add((w) => ConstrainedBox(constraints: v, child: w));
   }
-
-  set nikuConstraints(UseNikuCallback<NikuBoxConstraints> cb) =>
-      boxConstraints = cb(NikuBoxConstraints()).value;
 
   set max(List<double> v) => maxSize = v;
   set maxSize(List<double> v) {

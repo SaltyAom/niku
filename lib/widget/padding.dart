@@ -81,8 +81,12 @@ class NikuPadding extends StatelessWidget with NikuBuildMacro<NikuPadding> {
     right = padding;
   }
 
-  void add(
-      {double top = 0, double bottom = 0, double left = 0, double right = 0}) {
+  void add({
+    double top = 0,
+    double bottom = 0,
+    double left = 0,
+    double right = 0,
+  }) {
     this.top += top;
     this.bottom += bottom;
     this.left += left;

@@ -6,7 +6,8 @@ import 'package:niku/namespace.dart' as n;
 class WidgetCreation extends StatelessWidget {
   const WidgetCreation({Key? key}) : super(key: key);
 
-  static const limit = 1000000;
+  // 1666 widgets rendering 60 fps.
+  static const limit = 100000;
 
   createNikuWidget(BuildContext context) {
     return () {
@@ -39,7 +40,7 @@ class WidgetCreation extends StatelessWidget {
             vertical: random.nextDouble() * 100,
           ),
           child: Text("Hello World!"),
-        ).build(context);
+        );
       }
 
       print("Flutter: ${time.elapsedMilliseconds}ms");
@@ -56,12 +57,9 @@ class WidgetCreation extends StatelessWidget {
         ..mx = random.nextDouble() * 100
         ..bg = Colors.white;
 
-      for (int i = 0; i < limit; i++)
-        "Hello World".n
-          ..useParent(style)
-          ..build(context);
+      for (int i = 0; i < limit; i++) "Hello World".n..useParent(style);
 
-      print("Niku: ${time.elapsedMilliseconds}ms");
+      print("Niku Appiled: ${time.elapsedMilliseconds}ms");
     };
   }
 
@@ -83,30 +81,6 @@ class WidgetCreation extends StatelessWidget {
       ])
         ..center
         ..wFull,
-    );
-
-    return Scaffold(
-      body: Container(
-        width: double.infinity,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            TextButton(
-              child: Text("Create Niku Widget"),
-              onPressed: createNikuWidget(context),
-            ),
-            TextButton(
-              child: Text("Create Niku Applied Style"),
-              onPressed: createNikuAppliedStyleWidget(context),
-            ),
-            TextButton(
-              child: Text("Create Flutter Widget"),
-              onPressed: createFlutterWidget(context),
-            )
-          ],
-        ),
-      ),
     );
   }
 }
