@@ -1,4 +1,3 @@
-import 'dart:collection';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -18,12 +17,10 @@ class WidgetCreation extends StatelessWidget {
       for (int i = 0; i < limit; i++) {
         "Hello World".n
           ..mx = random.nextDouble() * 100
-          ..my = random.nextDouble() * 100
           ..my = 16
           ..my = 16
           ..my = 16
-          ..my = 16
-          ..build(context);
+          ..my = 16;
       }
 
       print("Niku: ${time.elapsedMilliseconds}ms");
@@ -73,6 +70,18 @@ class WidgetCreation extends StatelessWidget {
 
   @override
   build(context) {
+    return Scaffold(
+      body: n.Column([
+        n.Button("Create Niku Widget".n)..onPressed = createNikuWidget(context),
+        n.Button("Create Niku Applied Style".n)
+          ..onPressed = createNikuAppliedStyleWidget(context),
+        n.Button("Create Flutter Widget".n)
+          ..onPressed = createFlutterWidget(context)
+      ])
+        ..center
+        ..wFull,
+    );
+
     return Scaffold(
       body: Container(
         width: double.infinity,

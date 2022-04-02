@@ -1,6 +1,6 @@
 # [2.3.0-experimental.0] - 2022/03/29
 Breaking Change:
-  - Remove `nikuConstraints` from `Niku` and Parent Proxy.
+  - Remove `nikuConstraints`, `nikuPadding`, `nikuMargin` from `Niku` and Parent Proxy.
 
 Feature:
   - Internal architecture changed called `Tempestissimo`.

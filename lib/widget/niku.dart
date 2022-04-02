@@ -5,7 +5,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 
-import 'package:niku/objects/objects.dart';
 import 'package:niku/extra/extra.dart';
 
 extension NikuTransform on Widget {
@@ -19,72 +18,56 @@ class Niku extends StatelessWidget {
 
   Niku([this.widget = const SizedBox.shrink(), this.key]) : super(key: key);
 
-  List<Widget Function(Widget)> $parent = [];
-  // List<Widget Function(Widget)> _memo = [];
-  List<void Function()> _lazyExecutor = [];
+  List<Widget Function()> _lazyExecutor = [];
 
   $merge(Niku others) => useChild((w) => others..widget = w);
+  Widget _latest = const SizedBox.shrink();
 
   @override
   build(context) {
-    Widget composed = widget;
+    _latest = widget;
+    for (final compose in _lazyExecutor) _latest = compose();
 
-    final total = _lazyExecutor.length;
-    for (int i = 0; i <= total; i++) {
-      _lazyExecutor[i]();
-      composed = $parent[i](composed);
-    }
+    if (key != null) return SizedBox(key: key ?? widget.key, child: _latest);
 
-    if (key != null) return SizedBox(key: key ?? widget.key, child: composed);
-
-    return composed;
+    return _latest;
   }
 }
 
 typedef UseNikuCallback<T> = T Function(T);
 
 extension PropertyBuilder on Niku {
-  Widget? get _latest =>
-      $parent.isNotEmpty ? $parent.last(SizedBox.shrink()) : null;
-  int get _lastIndex => $parent.length - 1;
-  void _add(Widget Function(Widget) builder) => $parent.add(builder);
-  void _replace(Widget Function(Widget) builder) =>
-      $parent[_lastIndex] = builder;
-  bool get $isEmpty => $parent.length == 0;
-
-  void $lazy(void Function() builder) => _lazyExecutor.add(builder);
+  void $lazy(Widget Function() builder) => _lazyExecutor.add(builder);
 
   // ? Only use in debugging Tempestissimo, will be removed on stable
   $debugDescribeProperty() {
-    $parent.forEach((v) {
-      print(" - ${v(SizedBox.shrink())}");
-    });
+    // $parent.forEach((v) {
+    //   print(" - ${v(SizedBox.shrink())}");
+    // });
   }
 
-  void _applyPadding(
-    EdgeInsetsGeometry latest, {
+  Widget _applyPadding(
+    EdgeInsetsGeometry inset, {
     double top = 0,
     double left = 0,
     double bottom = 0,
     double right = 0,
   }) {
-    _replace((w) {
-      final padding = latest as EdgeInsets;
-      final _top = top + padding.top;
-      final _left = left + padding.left;
-      final _bottom = bottom + padding.bottom;
-      final _right = right + padding.right;
+    final padding = inset as EdgeInsets;
+    final _top = top + padding.top;
+    final _left = left + padding.left;
+    final _bottom = bottom + padding.bottom;
+    final _right = right + padding.right;
 
-      return Padding(
-        child: w,
-        padding: EdgeInsets.only(
-          top: _top,
-          left: _left,
-          bottom: _bottom,
-          right: _right,
-        ),
-      );
-    });
+    return Padding(
+      child: _latest,
+      padding: EdgeInsets.only(
+        top: _top,
+        left: _left,
+        bottom: _bottom,
+        right: _right,
+      ),
+    );
   }
 
   // I'm actually surprised that Flutter implemented margin by assigning it to padding.
@@ -102,14 +85,9 @@ extension PropertyBuilder on Niku {
           right: v.right,
         );
 
-      _add((w) => Padding(padding: v, child: w));
+      return Padding(padding: v, child: l);
     });
   }
-
-  set nikuMargin(UseNikuCallback<NikuEdgeInsets> cb) =>
-      $lazy(() => nikuPadding = cb);
-  set nikuPadding(UseNikuCallback<NikuEdgeInsets> cb) =>
-      $lazy(() => padding = cb(NikuEdgeInsets()).value);
 
   set m(double v) => p = v;
   set p(double v) {
@@ -119,7 +97,7 @@ extension PropertyBuilder on Niku {
       if (l is Padding)
         _applyPadding(l.padding, top: v, left: v, bottom: v, right: v);
 
-      _add((w) => Padding(padding: EdgeInsets.all(v), child: w));
+      return Padding(padding: EdgeInsets.all(v), child: l);
     });
   }
 
@@ -130,8 +108,9 @@ extension PropertyBuilder on Niku {
 
       if (l is Padding) return _applyPadding(l.padding, left: v, right: v);
 
-      _add(
-        (w) => Padding(padding: EdgeInsets.symmetric(horizontal: v), child: w),
+      return Padding(
+        padding: EdgeInsets.symmetric(horizontal: v),
+        child: l,
       );
     });
   }
@@ -143,8 +122,9 @@ extension PropertyBuilder on Niku {
 
       if (l is Padding) return _applyPadding(l.padding, top: v, bottom: v);
 
-      _add(
-        (w) => Padding(padding: EdgeInsets.symmetric(vertical: v), child: w),
+      return Padding(
+        padding: EdgeInsets.symmetric(vertical: v),
+        child: l,
       );
     });
   }
@@ -156,7 +136,7 @@ extension PropertyBuilder on Niku {
 
       if (l is Padding) return _applyPadding(l.padding, top: v);
 
-      _add((w) => Padding(padding: EdgeInsets.only(top: v), child: w));
+      return Padding(padding: EdgeInsets.only(top: v), child: l);
     });
   }
 
@@ -167,7 +147,7 @@ extension PropertyBuilder on Niku {
 
       if (l is Padding) return _applyPadding(l.padding, bottom: v);
 
-      _add((w) => Padding(padding: EdgeInsets.only(bottom: v), child: w));
+      return Padding(padding: EdgeInsets.only(bottom: v), child: l);
     });
   }
 
@@ -178,7 +158,7 @@ extension PropertyBuilder on Niku {
 
       if (l is Padding) return _applyPadding(l.padding, left: v);
 
-      _add((w) => Padding(padding: EdgeInsets.only(left: v), child: w));
+      return Padding(padding: EdgeInsets.only(left: v), child: l);
     });
   }
 
@@ -189,41 +169,39 @@ extension PropertyBuilder on Niku {
 
       if (l is Padding) return _applyPadding(l.padding, right: v);
 
-      _add((w) => Padding(padding: EdgeInsets.only(right: v), child: w));
+      return Padding(padding: EdgeInsets.only(right: v), child: l);
     });
   }
 
   set align(AlignmentGeometry v) =>
-      $lazy(() => _add((w) => Align(alignment: v, child: w)));
+      $lazy(() => Align(alignment: v, child: _latest));
   void get topLeft =>
-      $lazy(() => _add((w) => Align(alignment: Alignment.topLeft, child: w)));
+      $lazy(() => Align(alignment: Alignment.topLeft, child: _latest));
   void get topCenter =>
-      $lazy(() => _add((w) => Align(alignment: Alignment.topCenter, child: w)));
+      $lazy(() => Align(alignment: Alignment.topCenter, child: _latest));
   void get topRight =>
-      $lazy(() => _add((w) => Align(alignment: Alignment.topRight, child: w)));
-  void get centerLeft => $lazy(
-      () => _add((w) => Align(alignment: Alignment.centerLeft, child: w)));
-  void get center => $lazy(() => _add((w) => Center(child: w)));
-  void get centerRight => $lazy(
-      () => _add((w) => Align(alignment: Alignment.centerRight, child: w)));
-  void get bottomLeft => $lazy(
-      () => _add((w) => Align(alignment: Alignment.bottomLeft, child: w)));
-  void get bottomCenter => $lazy(
-      () => _add((w) => Align(alignment: Alignment.bottomCenter, child: w)));
-  void get bottomRight => $lazy(
-      () => _add((w) => Align(alignment: Alignment.bottomRight, child: w)));
+      $lazy(() => Align(alignment: Alignment.topRight, child: _latest));
+  void get centerLeft =>
+      $lazy(() => Align(alignment: Alignment.centerLeft, child: _latest));
+  void get center => $lazy(() => Center(child: _latest));
+  void get centerRight =>
+      $lazy(() => Align(alignment: Alignment.centerRight, child: _latest));
+  void get bottomLeft =>
+      $lazy(() => Align(alignment: Alignment.bottomLeft, child: _latest));
+  void get bottomCenter =>
+      $lazy(() => Align(alignment: Alignment.bottomCenter, child: _latest));
+  void get bottomRight =>
+      $lazy(() => Align(alignment: Alignment.bottomRight, child: _latest));
 
   void get fill => fullSize;
   void get fullSize {
-    $lazy(() {
-      _add(
-        (w) => SizedBox(
-          width: double.infinity,
-          height: double.infinity,
-          child: w,
-        ),
-      );
-    });
+    $lazy(
+      () => SizedBox(
+        width: double.infinity,
+        height: double.infinity,
+        child: _latest,
+      ),
+    );
   }
 
   void get wFull => fullWidth;
@@ -233,15 +211,13 @@ extension PropertyBuilder on Niku {
       final l = _latest;
 
       if (l is SizedBox)
-        return _replace(
-          (w) => SizedBox(
-            width: double.infinity,
-            height: l.height,
-            child: w,
-          ),
+        return _latest = SizedBox(
+          width: double.infinity,
+          height: l.height,
+          child: l,
         );
 
-      _add((w) => SizedBox(width: double.infinity, child: w));
+      return SizedBox(width: double.infinity, child: l);
     });
   }
 
@@ -252,33 +228,29 @@ extension PropertyBuilder on Niku {
       final l = _latest;
 
       if (l is SizedBox)
-        return _replace((w) => SizedBox(
-              width: l.width ?? 0,
-              height: double.infinity,
-              child: w,
-            ));
+        return _latest = SizedBox(
+          width: l.width ?? 0,
+          height: double.infinity,
+          child: l,
+        );
 
-      _add((w) => SizedBox(height: double.infinity, child: w));
+      return SizedBox(height: double.infinity, child: l);
     });
   }
 
   set aspect(double v) => aspectRatio = v;
   set ratio(double v) => aspectRatio = v;
   set aspectRatio(double aspectRatio) {
-    $lazy(() {
-      _add((w) => AspectRatio(aspectRatio: aspectRatio, child: w));
-    });
+    $lazy(() => AspectRatio(aspectRatio: aspectRatio, child: _latest));
   }
 
   set sizePercent(List<double> v) => fractionSize = [v[0] / 100, v[1] / 100];
   set fractionSize(List<double> v) {
     $lazy(() {
-      _add(
-        (w) => FractionallySizedBox(
-          widthFactor: v[0],
-          heightFactor: v[1],
-          child: w,
-        ),
+      return FractionallySizedBox(
+        widthFactor: v[0],
+        heightFactor: v[1],
+        child: _latest,
       );
     });
   }
@@ -293,15 +265,13 @@ extension PropertyBuilder on Niku {
       final l = _latest;
 
       if (l is FractionallySizedBox)
-        return _replace(
-          (w) => FractionallySizedBox(
-            widthFactor: v,
-            heightFactor: l.heightFactor,
-            child: w,
-          ),
+        return _latest = FractionallySizedBox(
+          widthFactor: v,
+          heightFactor: l.heightFactor,
+          child: l,
         );
 
-      _add((w) => FractionallySizedBox(widthFactor: v, child: w));
+      return FractionallySizedBox(widthFactor: v, child: l);
     });
   }
 
@@ -315,41 +285,37 @@ extension PropertyBuilder on Niku {
       final l = _latest;
 
       if (l is FractionallySizedBox)
-        return _replace(
-          (w) => FractionallySizedBox(
-            widthFactor: l.widthFactor,
-            heightFactor: v,
-            child: w,
-          ),
+        return _latest = FractionallySizedBox(
+          widthFactor: l.widthFactor,
+          heightFactor: v,
+          child: l,
         );
 
-      _add((w) => FractionallySizedBox(heightFactor: v, child: w));
+      return FractionallySizedBox(heightFactor: v, child: l);
     });
   }
 
-  void _applyConstraints({
+  ConstrainedBox _applyConstraints({
     double? minWidth,
     double? maxWidth,
     double? minHeight,
     double? maxHeight,
   }) {
-    _replace((w) {
-      final constraints = (_latest as ConstrainedBox).constraints;
-      final _maxWidth = maxWidth ?? constraints.maxWidth;
-      final _minWidth = minWidth ?? constraints.minWidth;
-      final _maxHeight = maxHeight ?? constraints.maxHeight;
-      final _minHeight = minHeight ?? constraints.minHeight;
+    final constraints = (_latest as ConstrainedBox).constraints;
+    final _maxWidth = maxWidth ?? constraints.maxWidth;
+    final _minWidth = minWidth ?? constraints.minWidth;
+    final _maxHeight = maxHeight ?? constraints.maxHeight;
+    final _minHeight = minHeight ?? constraints.minHeight;
 
-      return ConstrainedBox(
-        child: w,
-        constraints: BoxConstraints(
-          maxWidth: _maxWidth,
-          minWidth: _minWidth,
-          maxHeight: _maxHeight,
-          minHeight: _minHeight,
-        ),
-      );
-    });
+    return ConstrainedBox(
+      child: _latest,
+      constraints: BoxConstraints(
+        maxWidth: _maxWidth,
+        minWidth: _minWidth,
+        maxHeight: _maxHeight,
+        minHeight: _minHeight,
+      ),
+    );
   }
 
   set boxConstraints(BoxConstraints v) {
@@ -362,24 +328,22 @@ extension PropertyBuilder on Niku {
           minHeight: v.minHeight != 0 ? v.minHeight : null,
         );
 
-      _add((w) => ConstrainedBox(constraints: v, child: w));
+      return ConstrainedBox(constraints: v, child: _latest);
     });
   }
 
   set max(List<double> v) => maxSize = v;
   set maxSize(List<double> v) {
     $lazy(() {
-      if (!(_latest is ConstrainedBox))
+      if (_latest is ConstrainedBox)
         return _applyConstraints(
           maxWidth: v[0],
           maxHeight: v[1],
         );
 
-      _add(
-        (w) => ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: v[0], maxHeight: v[1]),
-          child: w,
-        ),
+      return ConstrainedBox(
+        constraints: BoxConstraints(maxWidth: v[0], maxHeight: v[1]),
+        child: _latest,
       );
     });
   }
@@ -393,11 +357,9 @@ extension PropertyBuilder on Niku {
           maxWidth: v[1],
         );
 
-      _add(
-        (w) => ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: v[0], maxHeight: v[1]),
-          child: w,
-        ),
+      return ConstrainedBox(
+        constraints: BoxConstraints(maxWidth: v[0], maxHeight: v[1]),
+        child: _latest,
       );
     });
   }
@@ -408,11 +370,9 @@ extension PropertyBuilder on Niku {
     $lazy(() {
       if (_latest is ConstrainedBox) return _applyConstraints(maxWidth: v);
 
-      return _add(
-        (w) => ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: v),
-          child: w,
-        ),
+      return ConstrainedBox(
+        constraints: BoxConstraints(maxWidth: v),
+        child: _latest,
       );
     });
   }
@@ -423,11 +383,9 @@ extension PropertyBuilder on Niku {
     $lazy(() {
       if (_latest is ConstrainedBox) return _applyConstraints(maxHeight: v);
 
-      _add(
-        (w) => ConstrainedBox(
-          constraints: BoxConstraints(maxHeight: v),
-          child: w,
-        ),
+      return ConstrainedBox(
+        constraints: BoxConstraints(maxHeight: v),
+        child: _latest,
       );
     });
   }
@@ -438,11 +396,9 @@ extension PropertyBuilder on Niku {
     $lazy(() {
       if (_latest is ConstrainedBox) return _applyConstraints(minWidth: v);
 
-      _add(
-        (w) => ConstrainedBox(
-          constraints: BoxConstraints(minWidth: v),
-          child: w,
-        ),
+      return ConstrainedBox(
+        constraints: BoxConstraints(minWidth: v),
+        child: _latest,
       );
     });
   }
@@ -453,19 +409,15 @@ extension PropertyBuilder on Niku {
     $lazy(() {
       if (_latest is ConstrainedBox) return _applyConstraints(minHeight: v);
 
-      _add(
-        (w) => ConstrainedBox(
-          constraints: BoxConstraints(minHeight: v),
-          child: w,
-        ),
+      return ConstrainedBox(
+        constraints: BoxConstraints(minHeight: v),
+        child: _latest,
       );
     });
   }
 
   set size(List<double> v) {
-    $lazy(() {
-      _add((w) => SizedBox(width: v[0], height: v[1], child: w));
-    });
+    $lazy(() => SizedBox(width: v[0], height: v[1], child: _latest));
   }
 
   set w(double v) => width = v;
@@ -474,15 +426,13 @@ extension PropertyBuilder on Niku {
       final l = _latest;
 
       if (l is SizedBox)
-        return _replace(
-          (w) => SizedBox(
-            width: v,
-            height: l.height,
-            child: w,
-          ),
+        return _latest = SizedBox(
+          width: v,
+          height: l.height,
+          child: l,
         );
 
-      _add((w) => SizedBox(width: v, child: w));
+      return SizedBox(width: v, child: l);
     });
   }
 
@@ -492,40 +442,35 @@ extension PropertyBuilder on Niku {
       final l = _latest;
 
       if (l is SizedBox)
-        return _replace(
-          (w) => SizedBox(
-            width: l.width,
-            height: v,
-            child: w,
-          ),
+        return _latest = SizedBox(
+          width: l.width,
+          height: v,
+          child: l,
         );
 
-      _add((w) => SizedBox(height: v, child: w));
+      return SizedBox(height: v, child: l);
     });
   }
 
-  void get fitted => $lazy(() => _add((w) => FittedBox(child: w)));
-  void get expanded => $lazy(() => _add((w) => Expanded(child: w)));
+  void get fitted => $lazy(() => FittedBox(child: _latest));
+  void get expanded => $lazy(() => Expanded(child: _latest));
 
   set bg(Color v) => backgroundColor = v;
   set backgroundColor(Color v) =>
-      $lazy(() => _add((w) => ColoredBox(color: v, child: w)));
+      $lazy(() => ColoredBox(color: v, child: _latest));
 
-  set opacity(double v) =>
-      $lazy(() => _add((w) => Opacity(opacity: v, child: w)));
+  set opacity(double v) => $lazy(() => Opacity(opacity: v, child: _latest));
 
   double get rounded => rounded = 999999.0;
 
   set rounded(double v) => borderRadius = BorderRadius.all(Radius.circular(v));
   set borderRadius(BorderRadius v) {
-    $lazy(() {
-      _add(
-        (w) => ClipRRect(
-          borderRadius: v,
-          child: w,
-        ),
-      );
-    });
+    $lazy(
+      () => ClipRRect(
+        borderRadius: v,
+        child: _latest,
+      ),
+    );
   }
 
   static Border? _mergeBoxBorder(BoxBorder? newBorder, BoxBorder? oldBorder) =>
@@ -598,36 +543,32 @@ extension PropertyBuilder on Niku {
       if (l is DecoratedBox) {
         final self = l.decoration as BoxDecoration;
 
-        return _replace((w) {
-          return DecoratedBox(
-            child: w,
-            decoration: self.copyWith(
-              color: v.color ?? self.color,
-              image: v.image ?? self.image,
-              border: _mergeBoxBorder(v.border, self.border),
-              borderRadius:
-                  _mergeBorderRadiusGeometry(v.borderRadius, self.borderRadius),
-              boxShadow: _mergeBoxShadows(v.boxShadow, self.boxShadow),
-              gradient: v.gradient ?? self.gradient,
-              backgroundBlendMode:
-                  v.backgroundBlendMode ?? self.backgroundBlendMode,
-              shape: v.shape != BoxShape.rectangle ? v.shape : self.shape,
-            ),
-          );
-        });
+        return _latest = DecoratedBox(
+          child: l,
+          decoration: self.copyWith(
+            color: v.color ?? self.color,
+            image: v.image ?? self.image,
+            border: _mergeBoxBorder(v.border, self.border),
+            borderRadius:
+                _mergeBorderRadiusGeometry(v.borderRadius, self.borderRadius),
+            boxShadow: _mergeBoxShadows(v.boxShadow, self.boxShadow),
+            gradient: v.gradient ?? self.gradient,
+            backgroundBlendMode:
+                v.backgroundBlendMode ?? self.backgroundBlendMode,
+            shape: v.shape != BoxShape.rectangle ? v.shape : self.shape,
+          ),
+        );
       }
 
       if (l is ClipRRect)
-        return _replace(
-          (w) => DecoratedBox(
-            decoration: v.copyWith(
-              borderRadius: v.borderRadius ?? l.borderRadius,
-            ),
-            child: w,
+        return _latest = DecoratedBox(
+          decoration: v.copyWith(
+            borderRadius: v.borderRadius ?? l.borderRadius,
           ),
+          child: l,
         );
 
-      _add((w) => DecoratedBox(decoration: v, child: w));
+      return DecoratedBox(decoration: v, child: _latest);
     });
   }
 
@@ -647,55 +588,49 @@ extension PropertyBuilder on Niku {
       if (l is DecoratedBox) {
         final self = l.decoration as BoxDecoration;
 
-        return _replace(
-          (w) => DecoratedBox(
-            child: w,
-            decoration: self.copyWith(
-              color: color ?? self.color,
-              image: image ?? self.image,
-              border: _mergeBoxBorder(border, self.border),
-              borderRadius:
-                  _mergeBorderRadiusGeometry(borderRadius, self.borderRadius),
-              boxShadow: _mergeBoxShadows(boxShadow, self.boxShadow),
-              gradient: gradient ?? self.gradient,
-              backgroundBlendMode:
-                  backgroundBlendMode ?? self.backgroundBlendMode,
-              shape: shape != BoxShape.rectangle ? shape : self.shape,
-            ),
+        return _latest = DecoratedBox(
+          child: l,
+          decoration: self.copyWith(
+            color: color ?? self.color,
+            image: image ?? self.image,
+            border: _mergeBoxBorder(border, self.border),
+            borderRadius:
+                _mergeBorderRadiusGeometry(borderRadius, self.borderRadius),
+            boxShadow: _mergeBoxShadows(boxShadow, self.boxShadow),
+            gradient: gradient ?? self.gradient,
+            backgroundBlendMode:
+                backgroundBlendMode ?? self.backgroundBlendMode,
+            shape: shape != BoxShape.rectangle ? shape : self.shape,
           ),
         );
       }
 
       if (l is ClipRRect)
-        return _add(
-          (w) => DecoratedBox(
-            decoration: BoxDecoration(
-              color: color,
-              image: image,
-              border: border,
-              borderRadius: borderRadius ?? l.borderRadius,
-              boxShadow: boxShadow,
-              gradient: gradient,
-              backgroundBlendMode: backgroundBlendMode,
-              shape: shape ?? BoxShape.rectangle,
-            ),
-            child: w,
-          ),
-        );
-
-      _add(
-        (w) => DecoratedBox(
-          child: w,
+        return DecoratedBox(
           decoration: BoxDecoration(
             color: color,
             image: image,
             border: border,
-            borderRadius: borderRadius,
+            borderRadius: borderRadius ?? l.borderRadius,
             boxShadow: boxShadow,
             gradient: gradient,
             backgroundBlendMode: backgroundBlendMode,
             shape: shape ?? BoxShape.rectangle,
           ),
+          child: l,
+        );
+
+      return DecoratedBox(
+        child: l,
+        decoration: BoxDecoration(
+          color: color,
+          image: image,
+          border: border,
+          borderRadius: borderRadius,
+          boxShadow: boxShadow,
+          gradient: gradient,
+          backgroundBlendMode: backgroundBlendMode,
+          shape: shape ?? BoxShape.rectangle,
         ),
       );
     });
@@ -705,7 +640,7 @@ extension PropertyBuilder on Niku {
   set decorated(BoxDecoration v) => boxDecoration = v;
 
   set hero(String v) => heroTag = v;
-  set heroTag(String v) => $lazy(() => _add((w) => Hero(tag: v, child: w)));
+  set heroTag(String v) => $lazy(() => Hero(tag: v, child: _latest));
 
   bool get ignorePointer {
     ignorePointer = true;
@@ -713,7 +648,7 @@ extension PropertyBuilder on Niku {
   }
 
   set ignorePointer(bool v) =>
-      $lazy(() => _add((w) => IgnorePointer(child: w, ignoring: v)));
+      $lazy(() => IgnorePointer(child: _latest, ignoring: v));
 
   bool get absorbPointer {
     absorbPointer = true;
@@ -721,24 +656,22 @@ extension PropertyBuilder on Niku {
   }
 
   set absorbPointer(bool v) =>
-      $lazy(() => _add((w) => AbsorbPointer(child: w, absorbing: v)));
+      $lazy(() => AbsorbPointer(child: _latest, absorbing: v));
 
   set tip(String v) => tooltip = v;
-  set tooltip(String v) =>
-      $lazy(() => _add((w) => Tooltip(message: v, child: w)));
+  set tooltip(String v) => $lazy(() => Tooltip(message: v, child: _latest));
 
   set matrix4(Matrix4 v) =>
-      $lazy(() => _add((w) => Transform(transform: v, child: w)));
+      $lazy(() => Transform(transform: v, child: _latest));
   set rotate(double v) =>
-      $lazy(() => _add((w) => Transform.rotate(angle: v, child: w)));
-  set scale(double v) =>
-      $lazy(() => _add((w) => Transform.scale(scale: v, child: w)));
-  set translate(List<double> v) => $lazy(() =>
-      _add((w) => Transform.translate(offset: Offset(v[0], v[1]), child: w)));
-  set translateX(double v) => $lazy(
-      () => _add((w) => Transform.translate(offset: Offset(v, 0), child: w)));
-  set translateY(double v) => $lazy(
-      () => _add((w) => Transform.translate(offset: Offset(0, v), child: w)));
+      $lazy(() => Transform.rotate(angle: v, child: _latest));
+  set scale(double v) => $lazy(() => Transform.scale(scale: v, child: _latest));
+  set translate(List<double> v) => $lazy(
+      () => Transform.translate(offset: Offset(v[0], v[1]), child: _latest));
+  set translateX(double v) =>
+      $lazy(() => Transform.translate(offset: Offset(v, 0), child: _latest));
+  set translateY(double v) =>
+      $lazy(() => Transform.translate(offset: Offset(0, v), child: _latest));
 
   set border(Border v) => _applyBoxDecorationProperty(border: v);
 
@@ -776,107 +709,98 @@ extension PropertyBuilder on Niku {
     );
   }
 
-  set backdropFilter(ImageFilter v) => $lazy(() => _add(
-        (w) => BackdropFilter(filter: v, child: w),
-      ));
+  set backdropFilter(ImageFilter v) =>
+      $lazy(() => BackdropFilter(filter: v, child: _latest));
 
-  set bgBlur(double v) => $lazy(() => _add(
-        (w) => BackdropFilter(
-          child: w,
-          filter: ImageFilter.blur(sigmaX: v, sigmaY: v),
-        ),
+  set bgBlur(double v) => $lazy(() => BackdropFilter(
+        child: _latest,
+        filter: ImageFilter.blur(sigmaX: v, sigmaY: v),
       ));
 
   Clip get rect {
-    $lazy(() => _add((w) => ClipRect(child: w)));
+    $lazy(() => ClipRect(child: _latest));
 
     return Clip.hardEdge;
   }
 
   set rect(Clip clip) => $lazy(
-        () => _add(
-          (w) => ClipRect(
-            child: w,
-            clipBehavior: clip,
-          ),
+        () => ClipRect(
+          child: _latest,
+          clipBehavior: clip,
         ),
       );
 
   Clip get oval {
-    $lazy(() => _add((w) => ClipOval(child: w)));
+    $lazy(() => ClipOval(child: _latest));
 
     return Clip.hardEdge;
   }
 
   set oval(Clip clip) => $lazy(
-        () => _add(
-          (w) => ClipRect(
-            child: w,
-            clipBehavior: clip,
-          ),
+        () => ClipRect(
+          child: _latest,
+          clipBehavior: clip,
         ),
       );
 
-  void _applyPositioned({
+  Positioned _applyPositioned({
     double? top,
     double? left,
     double? bottom,
     double? right,
   }) {
-    _replace((w) {
-      final position = _latest as Positioned;
-      final _top = top ?? position.top;
-      final _left = left ?? position.left;
-      final _bottom = bottom ?? position.bottom;
-      final _right = right ?? position.right;
+    final position = _latest as Positioned;
+    final _top = top ?? position.top;
+    final _left = left ?? position.left;
+    final _bottom = bottom ?? position.bottom;
+    final _right = right ?? position.right;
 
-      return Positioned(
-        child: w,
-        top: _top,
-        left: _left,
-        bottom: _bottom,
-        right: _right,
-      );
-    });
+    return Positioned(
+      child: _latest,
+      top: _top,
+      left: _left,
+      bottom: _bottom,
+      right: _right,
+    );
   }
 
   set top(double v) {
     $lazy(() {
       if (_latest is Positioned)
-        _applyPositioned(top: v);
+        return _latest = _applyPositioned(top: v);
       else
-        _add((w) => Positioned(top: v, child: w));
+        return Positioned(top: v, child: _latest);
     });
   }
 
   set left(double v) {
     $lazy(() {
       if (_latest is Positioned)
-        _applyPositioned(left: v);
+        return _latest = _applyPositioned(left: v);
       else
-        _add((w) => Positioned(left: v, child: w));
+        return Positioned(left: v, child: _latest);
     });
   }
 
   set bottom(double v) {
     $lazy(() {
       if (_latest is Positioned)
-        _applyPositioned(bottom: v);
+        return _latest = _applyPositioned(bottom: v);
       else
-        _add((w) => Positioned(bottom: v, child: w));
+        return Positioned(bottom: v, child: _latest);
     });
   }
 
   set right(double v) {
     $lazy(() {
       if (_latest is Positioned)
-        _applyPositioned(right: v);
+        return _latest = _applyPositioned(right: v);
       else
-        _add((w) => Positioned(right: v, child: w));
+        return Positioned(right: v, child: _latest);
     });
   }
 
-  set flex(int v) => $lazy(() => _add((w) => Flexible(flex: v, child: w)));
+  set flex(int v) => $lazy(() => Flexible(flex: v, child: _latest));
   int get flex {
     flex = 1;
 
@@ -916,20 +840,17 @@ extension PropertyBuilder on Niku {
     required AnimationController animation,
   }) =>
       $lazy(
-        () => _add(
-          (w) => AnimatedBuilder(
-            animation: animation,
-            builder: (context, child) => builder(context, w),
-            child: w,
-          ),
+        () => AnimatedBuilder(
+          animation: animation,
+          builder: (context, child) => builder(context, child!),
+          child: _latest,
         ),
       );
 
-  get wrap => $lazy(() => _add((w) => Wrap(children: [w])));
-  void get sliverToBox =>
-      $lazy(() => _add((w) => SliverToBoxAdapter(child: w)));
+  get wrap => $lazy(() => Wrap(children: [_latest]));
+  void get sliverToBox => $lazy(() => SliverToBoxAdapter(child: _latest));
 
-  set formKey(Key v) => $lazy(() => _add((w) => Form(key: v, child: w)));
+  set formKey(Key v) => $lazy(() => Form(key: v, child: _latest));
   void useForm({
     Key? key,
     AutovalidateMode? autovalidateMode,
@@ -937,18 +858,16 @@ extension PropertyBuilder on Niku {
     void Function()? onChanged,
   }) =>
       $lazy(
-        () => _add(
-          (w) => Form(
-            key: key,
-            child: w,
-            autovalidateMode: autovalidateMode,
-            onWillPop: onWillPop,
-            onChanged: onChanged,
-          ),
+        () => Form(
+          key: key,
+          child: _latest,
+          autovalidateMode: autovalidateMode,
+          onWillPop: onWillPop,
+          onChanged: onChanged,
         ),
       );
 
-  void get scrollbar => $lazy(() => _add((w) => Scrollbar(child: w)));
+  void get scrollbar => $lazy(() => Scrollbar(child: _latest));
 
   void useScrollbar({
     ScrollController? controller,
@@ -960,21 +879,18 @@ extension PropertyBuilder on Niku {
     ScrollNotificationPredicate? notificationPredicate,
   }) =>
       $lazy(
-        () => _add(
-          (w) => Scrollbar(
-            child: w,
-            controller: controller,
-            isAlwaysShown: isAlwaysShown,
-            hoverThickness: hoverThickness,
-            thickness: thickness,
-            radius: radius,
-            notificationPredicate: notificationPredicate,
-          ),
+        () => Scrollbar(
+          child: _latest,
+          controller: controller,
+          isAlwaysShown: isAlwaysShown,
+          hoverThickness: hoverThickness,
+          thickness: thickness,
+          radius: radius,
+          notificationPredicate: notificationPredicate,
         ),
       );
 
-  void get scrollable =>
-      $lazy(() => _add((w) => SingleChildScrollView(child: w)));
+  void get scrollable => $lazy(() => SingleChildScrollView(child: _latest));
 
   void useScrollView({
     ScrollController? controller,
@@ -986,34 +902,35 @@ extension PropertyBuilder on Niku {
     String? restorationId,
   }) =>
       $lazy(
-        () => _add(
-          (w) => SingleChildScrollView(
-            child: w,
-            controller: controller,
-            scrollDirection: scrollDirection,
-            primary: primary,
-            reverse: reverse,
-            physics: physics,
-            dragStartBehavior: dragStartBehavior,
-            restorationId: restorationId,
-          ),
+        () => SingleChildScrollView(
+          child: _latest,
+          controller: controller,
+          scrollDirection: scrollDirection,
+          primary: primary,
+          reverse: reverse,
+          physics: physics,
+          dragStartBehavior: dragStartBehavior,
+          restorationId: restorationId,
         ),
       );
 
-  set theme(ThemeData v) => $lazy(() => _add((w) => Theme(data: v, child: w)));
+  set theme(ThemeData v) => $lazy(() => Theme(data: v, child: _latest));
 
   get hidden => visible = false;
   set visible(bool visibility) => $lazy(
-        () => _add(
-          (w) => Visibility(
-            visible: visibility,
-            child: w,
-          ),
+        () => Visibility(
+          visible: visibility,
+          child: _latest,
         ),
       );
 
-  void useChild(Widget Function(Niku child) builder) =>
-      $lazy(() => _add((w) => builder(w.niku)));
+  void useChild(Widget Function(Niku child) builder) {
+    $lazy(() {
+      final l = _latest;
+
+      return builder(l is Niku ? l : l.niku);
+    });
+  }
 
   void _applySafeArea({
     bool top = true,
@@ -1025,24 +942,20 @@ extension PropertyBuilder on Niku {
       final l = _latest;
 
       if (l is SafeArea)
-        return _replace(
-          (w) => SafeArea(
-            child: w,
-            top: top || l.top,
-            bottom: bottom || l.bottom,
-            left: left || l.left,
-            right: right || l.right,
-          ),
+        return _latest = SafeArea(
+          child: _latest,
+          top: top || l.top,
+          bottom: bottom || l.bottom,
+          left: left || l.left,
+          right: right || l.right,
         );
 
-      _add(
-        (w) => SafeArea(
-          child: w,
-          top: top,
-          bottom: bottom,
-          left: left,
-          right: right,
-        ),
+      return SafeArea(
+        child: _latest,
+        top: top,
+        bottom: bottom,
+        left: left,
+        right: right,
       );
     });
   }
@@ -1073,20 +986,16 @@ extension PropertyBuilder on Niku {
       _applySafeArea(left: false, top: false, bottom: false);
 
   set gradient(Gradient v) => $lazy(
-        () => _add(
-          (w) => DecoratedBox(
-            child: w,
-            decoration: BoxDecoration(gradient: v),
-          ),
+        () => DecoratedBox(
+          child: _latest,
+          decoration: BoxDecoration(gradient: v),
         ),
       );
 
   set quarterTurns(int turns) => $lazy(
-        () => _add(
-          (w) => RotatedBox(
-            quarterTurns: turns,
-            child: w,
-          ),
+        () => RotatedBox(
+          quarterTurns: turns,
+          child: _latest,
         ),
       );
 
@@ -1095,22 +1004,16 @@ extension PropertyBuilder on Niku {
       final borderRadius =
           _latest is ClipRRect ? (_latest as ClipRRect).borderRadius : null;
 
-      _add(
-        (w) => Material(
-          elevation: elevation,
-          borderRadius: borderRadius,
-          child: w,
-        ),
+      return Material(
+        elevation: elevation,
+        borderRadius: borderRadius,
+        child: _latest,
       );
     });
   }
 
   get material {
-    $lazy(() {
-      _add(
-        (w) => Material(child: w, type: MaterialType.transparency),
-      );
-    });
+    $lazy(() => Material(child: _latest, type: MaterialType.transparency));
   }
 
   _applyInkWell({
@@ -1123,43 +1026,37 @@ extension PropertyBuilder on Niku {
       final l = _latest;
 
       if (l is InkWell)
-        return _replace((w) {
-          return InkWell(
-            child: w,
-            highlightColor: highlightColor ?? l.highlightColor,
-            splashColor: splashColor ?? l.splashColor,
-            focusColor: focusColor ?? l.focusColor,
-            hoverColor: hoverColor ?? l.hoverColor,
-            borderRadius: l.borderRadius,
-            onTap: () {},
-          );
-        });
+        return _latest = InkWell(
+          child: l,
+          highlightColor: highlightColor ?? l.highlightColor,
+          splashColor: splashColor ?? l.splashColor,
+          focusColor: focusColor ?? l.focusColor,
+          hoverColor: hoverColor ?? l.hoverColor,
+          borderRadius: l.borderRadius,
+          onTap: () {},
+        );
 
       if (l is ClipRRect) {
         final radius = l.borderRadius;
 
-        return _add(
-          (w) => InkWell(
-            highlightColor: highlightColor,
-            splashColor: splashColor,
-            focusColor: focusColor,
-            hoverColor: hoverColor,
-            child: w,
-            onTap: () {},
-            borderRadius: radius,
-          ),
-        );
-      }
-
-      _add(
-        (w) => InkWell(
+        return InkWell(
           highlightColor: highlightColor,
           splashColor: splashColor,
           focusColor: focusColor,
           hoverColor: hoverColor,
-          child: w,
+          child: l,
           onTap: () {},
-        ),
+          borderRadius: radius,
+        );
+      }
+
+      return InkWell(
+        highlightColor: highlightColor,
+        splashColor: splashColor,
+        focusColor: focusColor,
+        hoverColor: hoverColor,
+        child: _latest,
+        onTap: () {},
       );
     });
   }
@@ -1232,16 +1129,14 @@ extension PropertyBuilder on Niku {
     // > 1024px
     Widget Function(Niku)? xl,
   }) =>
-      _add(
-        (w) => NikuScreen(
-          base: base,
-          xs: xs,
-          sm: sm,
-          md: md,
-          lg: lg,
-          xl: xl,
-          child: w,
-        ),
+      NikuScreen(
+        base: base,
+        xs: xs,
+        sm: sm,
+        md: md,
+        lg: lg,
+        xl: xl,
+        child: _latest,
       );
 
   void useDarkMode(Widget Function(Niku, bool) builder) {
@@ -1315,17 +1210,15 @@ extension PropertyBuilder on Niku {
     Duration duration = const Duration(milliseconds: 200),
     Curve curve = Curves.linear,
   }) {
-    $lazy(() {
-      _add(
-        (w) => NikuAnimated<T>(
-          builder: builder,
-          value: value,
-          duration: duration,
-          curve: curve,
-          child: w,
-        ),
-      );
-    });
+    $lazy(
+      () => NikuAnimated<T>(
+        builder: builder,
+        value: value,
+        duration: duration,
+        curve: curve,
+        child: _latest,
+      ),
+    );
   }
 
   void useTransition<T>({
@@ -1350,17 +1243,15 @@ extension PropertyBuilder on Niku {
     Duration duration = const Duration(milliseconds: 200),
     Curve curve = Curves.linear,
   }) {
-    $lazy(() {
-      _add(
-        (w) => NikuAnimateds(
-          builder: builder,
-          dependencies: dependencies,
-          duration: duration,
-          curve: curve,
-          child: w,
-        ),
-      );
-    });
+    $lazy(
+      () => NikuAnimateds(
+        builder: builder,
+        dependencies: dependencies,
+        duration: duration,
+        curve: curve,
+        child: _latest,
+      ),
+    );
   }
 
   void useGesture({
@@ -1411,55 +1302,55 @@ extension PropertyBuilder on Niku {
     void Function(ScaleUpdateDetails)? scaleUpdate,
     void Function(ScaleEndDetails)? scaleEnd,
   }) =>
-      $lazy(() {
-        _add((w) => GestureDetector(
-              onTapDown: tapDown,
-              onTapUp: tapUp,
-              onTap: tap,
-              onTapCancel: tapCancel,
-              onSecondaryTap: secondaryTap,
-              onSecondaryTapDown: secondaryTapDown,
-              onSecondaryTapUp: secondaryTapUp,
-              onSecondaryTapCancel: secondaryTapCancel,
-              onTertiaryTapDown: tertiaryTapDown,
-              onTertiaryTapUp: tertiaryTapUp,
-              onTertiaryTapCancel: tertiaryTapCancel,
-              onDoubleTapDown: doubleTapDown,
-              onDoubleTap: doubleTap,
-              onDoubleTapCancel: doubleTapCancel,
-              onLongPress: longPress,
-              onLongPressStart: longPressStart,
-              onLongPressMoveUpdate: longPressMoveUpdate,
-              onLongPressUp: longPressUp,
-              onLongPressEnd: longPressEnd,
-              onSecondaryLongPress: secondaryLongPress,
-              onSecondaryLongPressStart: secondaryLongPressStart,
-              onSecondaryLongPressMoveUpdate: secondaryLongPressMoveUpdate,
-              onSecondaryLongPressUp: secondaryLongPressUp,
-              onSecondaryLongPressEnd: secondaryLongPressEnd,
-              onVerticalDragDown: verticalDragDown,
-              onVerticalDragStart: verticalDragStart,
-              onVerticalDragUpdate: verticalDragUpdate,
-              onVerticalDragEnd: verticalDragEnd,
-              onVerticalDragCancel: verticalDragCancel,
-              onHorizontalDragDown: horizontalDragDown,
-              onHorizontalDragStart: horizontalDragStart,
-              onHorizontalDragUpdate: horizontalDragUpdate,
-              onHorizontalDragEnd: horizontalDragEnd,
-              onHorizontalDragCancel: horizontalDragCancel,
-              onForcePressStart: forcePressStart,
-              onForcePressPeak: forcePressPeak,
-              onForcePressUpdate: forcePressUpdate,
-              onForcePressEnd: forcePressEnd,
-              onPanDown: panDown,
-              onPanStart: panStart,
-              onPanUpdate: panUpdate,
-              onPanEnd: panEnd,
-              onPanCancel: panCancel,
-              onScaleStart: scaleStart,
-              onScaleUpdate: scaleUpdate,
-              onScaleEnd: scaleEnd,
-              child: w,
-            ));
-      });
+      $lazy(
+        () => GestureDetector(
+          onTapDown: tapDown,
+          onTapUp: tapUp,
+          onTap: tap,
+          onTapCancel: tapCancel,
+          onSecondaryTap: secondaryTap,
+          onSecondaryTapDown: secondaryTapDown,
+          onSecondaryTapUp: secondaryTapUp,
+          onSecondaryTapCancel: secondaryTapCancel,
+          onTertiaryTapDown: tertiaryTapDown,
+          onTertiaryTapUp: tertiaryTapUp,
+          onTertiaryTapCancel: tertiaryTapCancel,
+          onDoubleTapDown: doubleTapDown,
+          onDoubleTap: doubleTap,
+          onDoubleTapCancel: doubleTapCancel,
+          onLongPress: longPress,
+          onLongPressStart: longPressStart,
+          onLongPressMoveUpdate: longPressMoveUpdate,
+          onLongPressUp: longPressUp,
+          onLongPressEnd: longPressEnd,
+          onSecondaryLongPress: secondaryLongPress,
+          onSecondaryLongPressStart: secondaryLongPressStart,
+          onSecondaryLongPressMoveUpdate: secondaryLongPressMoveUpdate,
+          onSecondaryLongPressUp: secondaryLongPressUp,
+          onSecondaryLongPressEnd: secondaryLongPressEnd,
+          onVerticalDragDown: verticalDragDown,
+          onVerticalDragStart: verticalDragStart,
+          onVerticalDragUpdate: verticalDragUpdate,
+          onVerticalDragEnd: verticalDragEnd,
+          onVerticalDragCancel: verticalDragCancel,
+          onHorizontalDragDown: horizontalDragDown,
+          onHorizontalDragStart: horizontalDragStart,
+          onHorizontalDragUpdate: horizontalDragUpdate,
+          onHorizontalDragEnd: horizontalDragEnd,
+          onHorizontalDragCancel: horizontalDragCancel,
+          onForcePressStart: forcePressStart,
+          onForcePressPeak: forcePressPeak,
+          onForcePressUpdate: forcePressUpdate,
+          onForcePressEnd: forcePressEnd,
+          onPanDown: panDown,
+          onPanStart: panStart,
+          onPanUpdate: panUpdate,
+          onPanEnd: panEnd,
+          onPanCancel: panCancel,
+          onScaleStart: scaleStart,
+          onScaleUpdate: scaleUpdate,
+          onScaleEnd: scaleEnd,
+          child: _latest,
+        ),
+      );
 }

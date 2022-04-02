@@ -3,7 +3,6 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:niku/objects/objects.dart';
 
 import '../widget/niku.dart';
 import '../extra/on.dart';
@@ -211,7 +210,6 @@ abstract class NikuBuildMacro<T extends Widget> {
   }
 
   set margin(EdgeInsets v) => $parent..margin = v;
-  set nikuMargin(UseNikuCallback<NikuEdgeInsets> v) => $parent..nikuMargin = v;
 
   set m(double v) => $parent..m = v;
   set mx(double v) => $parent..mx = v;
@@ -463,8 +461,6 @@ class NikuExplictParentBuilder {
   set borderRadius(BorderRadius v) => $parent..borderRadius = v;
 
   set padding(EdgeInsets v) => $parent..padding = v;
-  set nikuPadding(UseNikuCallback<NikuEdgeInsets> cb) =>
-      $parent..nikuPadding = cb;
 
   set p(double v) => $parent..p = v;
   set px(double v) => $parent..px = v;

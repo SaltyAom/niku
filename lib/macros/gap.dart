@@ -17,7 +17,7 @@ abstract class GapMacro {
 
     final childrenWithGap = [...children];
 
-    final widget = SizedBox(
+    final gap = SizedBox(
       width: type == GapType.row ? size : null,
       height: type == GapType.column ? size : null,
     );
@@ -25,10 +25,10 @@ abstract class GapMacro {
     for (int index = 1; index < children.length - 1; index++)
       childrenWithGap.insert(
         index * 2,
-        widget,
+        gap,
       );
 
-    childrenWithGap.insert(1, widget);
+    childrenWithGap.insert(1, gap);
 
     return childrenWithGap;
   }
