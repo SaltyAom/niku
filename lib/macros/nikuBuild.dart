@@ -19,14 +19,11 @@ abstract class NikuBuildMacro<T extends Widget> {
   }
 
   void useNiku(Widget Function(Niku) cb) => useParent(cb);
-  void useParent(Widget Function(Niku) compose) {
-    $parent
-      ..widget = widget
-      ..useChild((w) => compose(w));
-  }
+  void useParent(Widget Function(Niku) compose) =>
+      $parent..useChild((w) => compose(w));
 
   Widget get widget => const SizedBox.shrink();
-  Widget build(BuildContext context) => $parent;
+  Widget build(BuildContext context) => $parent..widget = widget;
 
   // ? Query Macro (must be override otherwise will result in Error)
   T get self => this as T;
@@ -205,42 +202,35 @@ abstract class NikuBuildMacro<T extends Widget> {
   // ? Parent Proxy
   NikuExplictParentBuilder? _explictParent;
 
+  NikuExplictParentBuilder get parent => n;
   NikuExplictParentBuilder get n {
     if (_explictParent == null)
-      _explictParent = NikuExplictParentBuilder(useParent);
+      _explictParent = NikuExplictParentBuilder($parent);
 
     return _explictParent!;
   }
 
-  NikuExplictParentBuilder get parent {
-    if (_explictParent == null)
-      _explictParent = NikuExplictParentBuilder(useParent);
+  set margin(EdgeInsets v) => $parent..margin = v;
+  set nikuMargin(UseNikuCallback<NikuEdgeInsets> v) => $parent..nikuMargin = v;
 
-    return _explictParent!;
-  }
-
-  set margin(EdgeInsets v) => useParent((w) => w..margin = v);
-  set nikuMargin(UseNikuCallback<NikuEdgeInsets> v) =>
-      useParent((w) => w..nikuMargin = v);
-
-  set m(double v) => useParent((w) => w..m = v);
-  set mx(double v) => useParent((w) => w..mx = v);
-  set my(double v) => useParent((w) => w..my = v);
-  set mt(double v) => useParent((w) => w..mt = v);
-  set mb(double v) => useParent((w) => w..mb = v);
-  set ml(double v) => useParent((w) => w..ml = v);
-  set mr(double v) => useParent((w) => w..mr = v);
+  set m(double v) => $parent..m = v;
+  set mx(double v) => $parent..mx = v;
+  set my(double v) => $parent..my = v;
+  set mt(double v) => $parent..mt = v;
+  set mb(double v) => $parent..mb = v;
+  set ml(double v) => $parent..ml = v;
+  set mr(double v) => $parent..mr = v;
 
   get expanded => useParent((v) => v..expanded);
 
-  set flex(int v) => useParent((w) => w..flex = v);
+  set flex(int v) => $parent..flex = v;
   int get flex {
-    useParent((w) => w..flex);
+    $parent..flex;
 
     return 1;
   }
 
-  void get fullSize => useParent((v) => v..fullSize);
+  void get fullSize => $parent..fullSize;
   void get fullWidth => useParent((v) => v..fullWidth);
   void get fullHeight => useParent((v) => v..fullHeight);
   void get wFull => useParent((v) => v..fullWidth);
@@ -249,55 +239,54 @@ abstract class NikuBuildMacro<T extends Widget> {
   void get h100 => useParent((v) => v..h100);
   void get fill => useParent((v) => v..fill);
 
-  set fractionSize(List<double> v) => useParent((w) => w..fractionSize = v);
-  set sizePercent(List<double> v) => useParent((w) => w..sizePercent = v);
+  set fractionSize(List<double> v) => $parent..fractionSize = v;
+  set sizePercent(List<double> v) => $parent..sizePercent = v;
 
-  set fractionWidth(double v) => useParent((w) => w..fractionWidth = v);
-  set fractionW(double v) => useParent((w) => w..fractionWidth = v);
-  set fw(double v) => useParent((w) => w..fractionWidth = v);
-  set wFactor(double v) => useParent((w) => w..fractionWidth = v);
-  set widthPercent(double v) => useParent((w) => w..widthPercent = v);
-  set wPercent(double v) => useParent((w) => w..widthPercent = v);
+  set fractionWidth(double v) => $parent..fractionWidth = v;
+  set fractionW(double v) => $parent..fractionWidth = v;
+  set fw(double v) => $parent..fractionWidth = v;
+  set wFactor(double v) => $parent..fractionWidth = v;
+  set widthPercent(double v) => $parent..widthPercent = v;
+  set wPercent(double v) => $parent..widthPercent = v;
 
-  set fractionHeight(double v) => useParent((w) => w..fractionHeight = v);
-  set fractionH(double v) => useParent((w) => w..fractionHeight = v);
-  set fh(double v) => useParent((w) => w..fractionHeight = v);
-  set hFactor(double v) => useParent((w) => w..fractionHeight = v);
-  set heightPercent(double v) => useParent((w) => w..heightPercent = v);
-  set hPercent(double v) => useParent((w) => w..heightPercent = v);
+  set fractionHeight(double v) => $parent..fractionHeight = v;
+  set fractionH(double v) => $parent..fractionHeight = v;
+  set fh(double v) => $parent..fractionHeight = v;
+  set hFactor(double v) => $parent..fractionHeight = v;
+  set heightPercent(double v) => $parent..heightPercent = v;
+  set hPercent(double v) => $parent..heightPercent = v;
 
-  set boxConstraints(BoxConstraints v) =>
-      useParent((w) => w..boxConstraints = v);
+  set boxConstraints(BoxConstraints v) => $parent..boxConstraints = v;
   set nikuConstraints(UseNikuCallback<NikuBoxConstraints> v) =>
-      useParent((w) => w..nikuConstraints = v);
+      $parent..nikuConstraints = v;
 
-  set maxSize(List<double> v) => useParent((w) => w..maxSize = v);
-  set minSize(List<double> v) => useParent((w) => w..minSize = v);
+  set maxSize(List<double> v) => $parent..maxSize = v;
+  set minSize(List<double> v) => $parent..minSize = v;
 
-  set maxWidth(double v) => useParent((w) => w..maxWidth = v);
-  set maxHeight(double v) => useParent((w) => w..maxHeight = v);
-  set maxW(double v) => useParent((w) => w..maxWidth = v);
-  set maxH(double v) => useParent((w) => w..maxHeight = v);
-  set wMax(double v) => useParent((w) => w..maxWidth = v);
-  set hMax(double v) => useParent((w) => w..maxHeight = v);
+  set maxWidth(double v) => $parent..maxWidth = v;
+  set maxHeight(double v) => $parent..maxHeight = v;
+  set maxW(double v) => $parent..maxWidth = v;
+  set maxH(double v) => $parent..maxHeight = v;
+  set wMax(double v) => $parent..maxWidth = v;
+  set hMax(double v) => $parent..maxHeight = v;
 
-  set minWidth(double v) => useParent((w) => w..minWidth = v);
-  set minHeight(double v) => useParent((w) => w..minHeight = v);
-  set minW(double v) => useParent((w) => w..minWidth = v);
-  set minH(double v) => useParent((w) => w..minHeight = v);
-  set wMin(double v) => useParent((w) => w..minWidth = v);
-  set hMin(double v) => useParent((w) => w..minHeight = v);
+  set minWidth(double v) => $parent..minWidth = v;
+  set minHeight(double v) => $parent..minHeight = v;
+  set minW(double v) => $parent..minWidth = v;
+  set minH(double v) => $parent..minHeight = v;
+  set wMin(double v) => $parent..minWidth = v;
+  set hMin(double v) => $parent..minHeight = v;
 
-  set width(double v) => useParent((w) => w..width = v);
-  set w(double v) => useParent((w) => w..width = v);
-  set height(double v) => useParent((w) => w..height = v);
-  set h(double v) => useParent((w) => w..height = v);
+  set width(double v) => $parent..width = v;
+  set w(double v) => $parent..width = v;
+  set height(double v) => $parent..height = v;
+  set h(double v) => $parent..height = v;
 
   /// Cancel parent size inheritance by wrapping the widget with a [Wrap].
-  get wrap => useParent((w) => w..wrap);
-  void get sliverToBox => useParent((w) => w..sliverToBox);
+  get wrap => $parent..wrap;
+  void get sliverToBox => $parent..sliverToBox;
 
-  set formKey(Key v) => useParent((w) => w..formKey = v);
+  set formKey(Key v) => $parent..formKey = v;
   void useForm({
     Key? key,
     AutovalidateMode? autovalidateMode,
@@ -314,11 +303,11 @@ abstract class NikuBuildMacro<T extends Widget> {
           ),
       );
 
-  set aspectRatio(double v) => useParent((w) => w..aspectRatio = v);
-  set aspect(double v) => useParent((w) => w..aspectRatio = v);
-  set ratio(double v) => useParent((w) => w..aspectRatio = v);
+  set aspectRatio(double v) => $parent..aspectRatio = v;
+  set aspect(double v) => $parent..aspectRatio = v;
+  set ratio(double v) => $parent..aspectRatio = v;
 
-  void get scrollable => useParent((w) => w..scrollable);
+  void get scrollable => $parent..scrollable;
 
   void useScrollView({
     ScrollController? controller,
@@ -342,10 +331,10 @@ abstract class NikuBuildMacro<T extends Widget> {
           ),
       );
 
-  set theme(ThemeData v) => useParent((w) => w..theme = v);
+  set theme(ThemeData v) => $parent..theme = v;
 
-  set visible(bool visibility) => useParent((w) => w..visible = visibility);
-  get hidden => useParent((w) => w..hidden);
+  set visible(bool visibility) => $parent..visible = visibility;
+  get hidden => $parent..hidden;
 
   void useGesture({
     void Function(TapDownDetails)? tapDown,
@@ -461,80 +450,78 @@ abstract class NikuBuildMacro<T extends Widget> {
 }
 
 class NikuExplictParentBuilder {
-  final void Function(Widget Function(Niku)) useParent;
+  final Niku $parent;
 
-  const NikuExplictParentBuilder(this.useParent);
+  const NikuExplictParentBuilder(this.$parent);
 
-  set top(double v) => useParent((w) => w..top = v);
-  set left(double v) => useParent((w) => w..left = v);
-  set bottom(double v) => useParent((w) => w..bottom = v);
-  set right(double v) => useParent((w) => w..right = v);
+  set top(double v) => $parent..top = v;
+  set left(double v) => $parent..left = v;
+  set bottom(double v) => $parent..bottom = v;
+  set right(double v) => $parent..right = v;
 
-  set bg(Color v) => useParent((w) => w..bg = v);
-  set opacity(double v) => useParent((w) => w..opacity = v);
-  set rounded(double v) => useParent((w) => w..rounded = v);
-  set borderRadius(BorderRadius v) => useParent((w) => w..borderRadius = v);
+  set bg(Color v) => $parent..bg = v;
+  set opacity(double v) => $parent..opacity = v;
+  set rounded(double v) => $parent..rounded = v;
+  set borderRadius(BorderRadius v) => $parent..borderRadius = v;
 
-  set padding(EdgeInsets v) => useParent((w) => w..padding = v);
+  set padding(EdgeInsets v) => $parent..padding = v;
   set nikuPadding(UseNikuCallback<NikuEdgeInsets> cb) =>
-      useParent((w) => w..nikuPadding = cb);
+      $parent..nikuPadding = cb;
 
-  set p(double v) => useParent((w) => w..p = v);
-  set px(double v) => useParent((w) => w..px = v);
-  set py(double v) => useParent((w) => w..py = v);
-  set pt(double v) => useParent((w) => w..pt = v);
-  set pb(double v) => useParent((w) => w..pb = v);
-  set pl(double v) => useParent((w) => w..pl = v);
-  set pr(double v) => useParent((w) => w..pr = v);
+  set p(double v) => $parent..p = v;
+  set px(double v) => $parent..px = v;
+  set py(double v) => $parent..py = v;
+  set pt(double v) => $parent..pt = v;
+  set pb(double v) => $parent..pb = v;
+  set pl(double v) => $parent..pl = v;
+  set pr(double v) => $parent..pr = v;
 
-  set gradient(Gradient v) => useParent((w) => w..gradient = v);
+  set gradient(Gradient v) => $parent..gradient = v;
 
-  set align(AlignmentGeometry v) => useParent(
-        (w) => Align(alignment: v, child: w),
-      );
+  set align(AlignmentGeometry v) => $parent..align = v;
 
-  void get topLeft => useParent((w) => w..topLeft);
-  void get topCenter => useParent((w) => w..topCenter);
-  void get topRight => useParent((w) => w..topRight);
-  void get centerLeft => useParent((w) => w..centerLeft);
-  void get center => useParent((w) => w..center);
-  void get centerRight => useParent((w) => w..centerRight);
-  void get bottomLeft => useParent((w) => w..bottomLeft);
-  void get bottomCenter => useParent((w) => w..bottomCenter);
-  void get bottomRight => useParent((w) => w..bottomRight);
+  void get topLeft => $parent..topLeft;
+  void get topCenter => $parent..topCenter;
+  void get topRight => $parent..topRight;
+  void get centerLeft => $parent..centerLeft;
+  void get center => $parent..center;
+  void get centerRight => $parent..centerRight;
+  void get bottomLeft => $parent..bottomLeft;
+  void get bottomCenter => $parent..bottomCenter;
+  void get bottomRight => $parent..bottomRight;
 
-  set decorated(BoxDecoration v) => useParent((w) => w..decorated = v);
-  set boxDecoration(BoxDecoration v) => useParent((w) => w..boxDecoration = v);
+  set decorated(BoxDecoration v) => $parent..decorated = v;
+  set boxDecoration(BoxDecoration v) => $parent..boxDecoration = v;
 
-  set hero(String v) => useParent((w) => w..hero = v);
-  set heroTag(String v) => useParent((w) => w..heroTag = v);
+  set hero(String v) => $parent..hero = v;
+  set heroTag(String v) => $parent..heroTag = v;
 
-  set ignorePointer(bool v) => useParent((w) => w..ignorePointer = v);
-  set absorbPointer(bool v) => useParent((w) => w..absorbPointer = v);
+  set ignorePointer(bool v) => $parent..ignorePointer = v;
+  set absorbPointer(bool v) => $parent..absorbPointer = v;
 
-  set tooltip(String v) => useParent((w) => w..tooltip = v);
-  set tip(String v) => useParent((w) => w..tip = v);
+  set tooltip(String v) => $parent..tooltip = v;
+  set tip(String v) => $parent..tip = v;
 
-  set matrix4(Matrix4 v) => useParent((w) => w..matrix4 = v);
-  set rotate(double v) => useParent((w) => w..rotate = v);
-  set scale(double v) => useParent((w) => w..scale = v);
-  set translate(List<double> v) => useParent((w) => w..translate = v);
-  set translateX(double v) => useParent((w) => w..translateX = v);
-  set translateY(double v) => useParent((w) => w..translateY = v);
+  set matrix4(Matrix4 v) => $parent..matrix4 = v;
+  set rotate(double v) => $parent..rotate = v;
+  set scale(double v) => $parent..scale = v;
+  set translate(List<double> v) => $parent..translate = v;
+  set translateX(double v) => $parent..translateX = v;
+  set translateY(double v) => $parent..translateY = v;
 
-  set border(Border v) => useParent((w) => w..border = v);
+  set border(Border v) => $parent..border = v;
 
   useBorder({
     Color? color,
     double? width,
     BorderStyle? style,
   }) =>
-      useParent((w) => w
+      $parent
         ..useBorder(
           color: color,
           width: width,
           style: style,
-        ));
+        );
 
   useRoundedBorder({
     double? rounded,
@@ -542,42 +529,40 @@ class NikuExplictParentBuilder {
     double? width,
     BorderStyle? style,
   }) =>
-      useParent(
-        (w) => w
-          ..useRoundedBorder(
-            rounded: rounded,
-            color: color,
-            width: width,
-            style: style,
-          ),
-      );
+      $parent
+        ..useRoundedBorder(
+          rounded: rounded,
+          color: color,
+          width: width,
+          style: style,
+        );
 
-  set backdropFilter(ImageFilter v) => useParent((w) => w..backdropFilter = v);
-  set bgBlur(double v) => useParent((w) => w..bgBlur = v);
+  set backdropFilter(ImageFilter v) => $parent..backdropFilter = v;
+  set bgBlur(double v) => $parent..bgBlur = v;
 
-  set rect(Clip clip) => useParent((w) => w..rect = clip);
+  set rect(Clip clip) => $parent..rect = clip;
   Clip get rect {
-    useParent((w) => w..rect);
+    $parent..rect;
 
     return Clip.hardEdge;
   }
 
-  set oval(Clip clip) => useParent((w) => w..oval = clip);
+  set oval(Clip clip) => $parent..oval = clip;
   Clip get oval {
-    useParent((w) => w..oval);
+    $parent..oval;
 
     return Clip.hardEdge;
   }
 
-  set elevation(double elevation) => useParent((w) => w..elevation = elevation);
+  set elevation(double elevation) => $parent..elevation = elevation;
 
-  set splash(Color color) => useParent((w) => w..splash = color);
-  set highlight(Color color) => useParent((w) => w..highlight = color);
-  set focus(Color color) => useParent((w) => w..focus = color);
-  set hover(Color color) => useParent((w) => w..hover = color);
+  set splash(Color color) => $parent..splash = color;
+  set highlight(Color color) => $parent..highlight = color;
+  set focus(Color color) => $parent..focus = color;
+  set hover(Color color) => $parent..hover = color;
 
-  set shadow(BoxShadow v) => useParent((w) => w..shadow = v);
-  set shadows(List<BoxShadow> v) => useParent((w) => w..shadows = v);
+  set shadow(BoxShadow v) => $parent..shadow = v;
+  set shadows(List<BoxShadow> v) => $parent..shadows = v;
 
   void useShadow({
     Color color = const Color(0xFF000000),
@@ -587,7 +572,7 @@ class NikuExplictParentBuilder {
     BlurStyle blurStyle = BlurStyle.normal,
     double? rounded,
   }) =>
-      useParent((w) => w
+      $parent
         ..useShadow(
           color: color,
           offset: offset,
@@ -595,5 +580,5 @@ class NikuExplictParentBuilder {
           spreadRadius: spreadRadius,
           blurStyle: blurStyle,
           rounded: rounded,
-        ));
+        );
 }

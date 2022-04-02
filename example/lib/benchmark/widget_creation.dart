@@ -15,12 +15,10 @@ class WidgetCreation extends StatelessWidget {
       final time = Stopwatch()..start();
 
       for (int i = 0; i < limit; i++) {
-        final widget = "Hello World".n
-          ..useParent((v) => v
-            ..mx = random.nextDouble() * 100
-            ..bg = Colors.white);
-
-        widget.build(context);
+        "Hello World".n
+          ..mx = random.nextDouble() * 100
+          ..my = random.nextDouble() * 100
+          ..build(context);
       }
 
       print("Niku: ${time.elapsedMilliseconds}ms");
@@ -34,16 +32,37 @@ class WidgetCreation extends StatelessWidget {
       final time = Stopwatch()..start();
 
       for (int i = 0; i < limit; i++) {
-        final widget = Container(
+        Container(
           color: Colors.white,
-          padding: EdgeInsets.symmetric(horizontal: random.nextDouble() * 100),
+          padding: EdgeInsets.symmetric(
+            horizontal: random.nextDouble() * 100,
+            vertical: random.nextDouble() * 100,
+          ),
           child: Text("Hello World!"),
-        );
-
-        widget.build(context);
+        ).build(context);
       }
 
       print("Flutter: ${time.elapsedMilliseconds}ms");
+    };
+  }
+
+  createNikuAppliedStyleWidget(BuildContext context) {
+    return () {
+      final random = Random();
+
+      final time = Stopwatch()..start();
+
+      final style = (n.Box v) => v
+        ..mx = random.nextDouble() * 100
+        ..my = random.nextDouble() * 100
+        ..bg = Colors.white;
+
+      for (int i = 0; i < limit; i++)
+        "Hello World".n
+          ..useParent(style)
+          ..build(context);
+
+      print("Niku: ${time.elapsedMilliseconds}ms");
     };
   }
 
@@ -56,12 +75,13 @@ class WidgetCreation extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            n.Text("H")
-              ..n.bg = Colors.red
-              ..n.rounded = 16,
             TextButton(
               child: Text("Create Niku Widget"),
               onPressed: createNikuWidget(context),
+            ),
+            TextButton(
+              child: Text("Create Niku Applied Style"),
+              onPressed: createNikuAppliedStyleWidget(context),
             ),
             TextButton(
               child: Text("Create Flutter Widget"),
