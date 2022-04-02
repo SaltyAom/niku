@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -18,6 +19,10 @@ class WidgetCreation extends StatelessWidget {
         "Hello World".n
           ..mx = random.nextDouble() * 100
           ..my = random.nextDouble() * 100
+          ..my = 16
+          ..my = 16
+          ..my = 16
+          ..my = 16
           ..build(context);
       }
 

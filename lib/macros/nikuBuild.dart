@@ -15,7 +15,7 @@ abstract class NikuBuildMacro<T extends Widget> {
   void of(T? v) => apply = v;
 
   void use(List<T> v) {
-    v.forEach((e) => apply = e);
+    for (final e in v) apply = e;
   }
 
   void useNiku(Widget Function(Niku) cb) => useParent(cb);
@@ -257,8 +257,6 @@ abstract class NikuBuildMacro<T extends Widget> {
   set hPercent(double v) => $parent..heightPercent = v;
 
   set boxConstraints(BoxConstraints v) => $parent..boxConstraints = v;
-  set nikuConstraints(UseNikuCallback<NikuBoxConstraints> v) =>
-      $parent..nikuConstraints = v;
 
   set maxSize(List<double> v) => $parent..maxSize = v;
   set minSize(List<double> v) => $parent..minSize = v;
