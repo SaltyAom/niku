@@ -16,10 +16,9 @@ class Niku extends StatelessWidget {
   Widget widget;
   Key? key;
 
-  Niku([this.widget = const SizedBox.shrink(), this.key]) : super(key: key);
+  Niku([this.widget = const SizedBox.shrink(), this.key]);
 
   List<Widget Function(Widget)> $parent = [];
-  List<Widget Function(Widget)> $memo = [];
 
   $merge(Niku others) => useChild((w) => others..widget = w);
 

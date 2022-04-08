@@ -1,3 +1,4 @@
+import 'package:example/benchmark/benchmark.dart';
 import 'package:flutter/material.dart';
 
 import 'example.dart';
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       darkTheme: ThemeData.dark(),
-      home: const WidgetCreation(),
+      home: const Tempestissimo(),
     );
   }
 }

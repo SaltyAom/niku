@@ -10,6 +10,7 @@ export 'progress.dart';
 
 export 'benchmark/1000List.dart';
 export 'benchmark/widget_creation.dart';
+export 'benchmark/animated.dart';
 
 export 'version/2.1/g11.dart';
 export 'version/2.2/aegle.dart';
