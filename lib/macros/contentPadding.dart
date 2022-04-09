@@ -3,95 +3,29 @@ import '../objects/edgeInsets.dart';
 abstract class ContentPaddingMacro {
   NikuEdgeInsets? contentPadding;
 
-  _initP() {
-    if (contentPadding == null) contentPadding = new NikuEdgeInsets.all(20);
-  }
+  NikuEdgeInsets get _contentPadding =>
+      contentPadding ??= new NikuEdgeInsets.all(20);
 
-  set pt(double padding) {
-    _initP();
-    contentPadding!.top = padding;
-  }
-
-  set pl(double padding) {
-    _initP();
-    contentPadding!.left = padding;
-  }
-
-  set pb(double padding) {
-    _initP();
-    contentPadding!.bottom = padding;
-  }
-
-  set pr(double padding) {
-    _initP();
-    contentPadding!.right = padding;
-  }
-
-  set px(double padding) {
-    _initP();
-    contentPadding!.left = padding;
-    contentPadding!.right = padding;
-  }
-
-  set py(double padding) {
-    _initP();
-    contentPadding!.top = padding;
-    contentPadding!.bottom = padding;
-  }
-
-  set p(double padding) {
-    _initP();
-    contentPadding!.top = padding;
-    contentPadding!.bottom = padding;
-    contentPadding!.left = padding;
-    contentPadding!.right = padding;
-  }
+  set p(double padding) => _contentPadding.p = padding;
+  set px(double padding) => _contentPadding.px = padding;
+  set py(double padding) => _contentPadding.py = padding;
+  set pt(double padding) => _contentPadding.pt = padding;
+  set pl(double padding) => _contentPadding.pl = padding;
+  set pb(double padding) => _contentPadding.pb = padding;
+  set pr(double padding) => _contentPadding.pr = padding;
 }
 
 abstract class ContentPaddingFullMacro {
   NikuEdgeInsets? contentPadding;
 
-  _initP() {
-    if (contentPadding == null) contentPadding = new NikuEdgeInsets.all(20);
-  }
+  NikuEdgeInsets get _contentPadding =>
+      contentPadding ??= new NikuEdgeInsets.all(20);
 
-  set contentPt(double padding) {
-    _initP();
-    contentPadding!.top = padding;
-  }
-
-  set contentPl(double padding) {
-    _initP();
-    contentPadding!.left = padding;
-  }
-
-  set contentPb(double padding) {
-    _initP();
-    contentPadding!.bottom = padding;
-  }
-
-  set contentPr(double padding) {
-    _initP();
-    contentPadding!.right = padding;
-  }
-
-  set contentPx(double padding) {
-    _initP();
-    contentPadding!.left = padding;
-    contentPadding!.right = padding;
-  }
-
-  set contentPy(double padding) {
-    _initP();
-    contentPadding!.top = padding;
-    contentPadding!.bottom = padding;
-  }
-
-  set contentP(double padding) {
-    _initP();
-    contentPadding!.top = padding;
-    contentPadding!.bottom = padding;
-    contentPadding!.left = padding;
-    contentPadding!.right = padding;
-  }
+  set contentP(double padding) => _contentPadding.p = padding;
+  set contentPx(double padding) => _contentPadding.px = padding;
+  set contentPy(double padding) => _contentPadding.py = padding;
+  set contentPt(double padding) => _contentPadding.pt = padding;
+  set contentPl(double padding) => _contentPadding.pl = padding;
+  set contentPb(double padding) => _contentPadding.pb = padding;
+  set contentPr(double padding) => _contentPadding.pr = padding;
 }

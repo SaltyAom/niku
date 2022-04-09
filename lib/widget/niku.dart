@@ -57,8 +57,9 @@ extension PropertyBuilder on Niku {
     double bottom = 0,
     double right = 0,
   }) {
+    final padding = latest as EdgeInsets;
+
     _replace((w) {
-      final padding = latest as EdgeInsets;
       final _top = top + padding.top;
       final _left = left + padding.left;
       final _bottom = bottom + padding.bottom;
@@ -280,8 +281,9 @@ extension PropertyBuilder on Niku {
     double? minHeight,
     double? maxHeight,
   }) {
+    final constraints = (_latest as ConstrainedBox).constraints;
+
     _replace((w) {
-      final constraints = (_latest as ConstrainedBox).constraints;
       final _maxWidth = maxWidth ?? constraints.maxWidth;
       final _minWidth = minWidth ?? constraints.minWidth;
       final _maxHeight = maxHeight ?? constraints.maxHeight;
@@ -725,8 +727,9 @@ extension PropertyBuilder on Niku {
     double? bottom,
     double? right,
   }) {
+    final position = _latest as Positioned;
+
     _replace((w) {
-      final position = _latest as Positioned;
       final _top = top ?? position.top;
       final _left = left ?? position.left;
       final _bottom = bottom ?? position.bottom;

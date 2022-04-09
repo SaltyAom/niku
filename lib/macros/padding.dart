@@ -3,37 +3,27 @@ import '../objects/edgeInsets.dart';
 abstract class PaddingMacro {
   NikuEdgeInsets? padding;
 
-  _initialize(Function callback) {
-    if (padding == null) padding = new NikuEdgeInsets.all(20);
+  NikuEdgeInsets get _padding => padding ??= new NikuEdgeInsets.all(20);
 
-    callback();
-  }
+  set p(double padding) => _padding.p = padding;
+  set px(double padding) => _padding.px = padding;
+  set py(double padding) => _padding.py = padding;
+  set pt(double padding) => _padding.pt = padding;
+  set pl(double padding) => _padding.pl = padding;
+  set pb(double padding) => _padding.pb = padding;
+  set pr(double padding) => _padding.pr = padding;
+}
 
-  set pt(double p) => _initialize(() => padding!.top = p);
-  set pl(double p) => _initialize(() => padding!.left = p);
-  set pb(double p) => _initialize(() => padding!.bottom = p);
-  set pr(double p) => _initialize(() => padding!.right = p);
+abstract class PaddingFullMacro {
+  NikuEdgeInsets? padding;
 
-  set px(double p) {
-    _initialize(() {
-      padding!.left = p;
-      padding!.right = p;
-    });
-  }
+  NikuEdgeInsets get _padding => padding ??= new NikuEdgeInsets.all(20);
 
-  set py(double p) {
-    _initialize(() {
-      padding!.top = p;
-      padding!.bottom = p;
-    });
-  }
-
-  set p(double p) {
-    _initialize(() {
-      padding!.top = p;
-      padding!.bottom = p;
-      padding!.left = p;
-      padding!.right = p;
-    });
-  }
+  set actionP(double padding) => _padding.p = padding;
+  set actionPx(double padding) => _padding.px = padding;
+  set actionPy(double padding) => _padding.py = padding;
+  set actionPt(double padding) => _padding.pt = padding;
+  set actionPl(double padding) => _padding.pl = padding;
+  set actionPb(double padding) => _padding.pb = padding;
+  set actionPr(double padding) => _padding.pr = padding;
 }

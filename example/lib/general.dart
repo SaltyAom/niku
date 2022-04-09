@@ -106,11 +106,10 @@ class General extends HookWidget {
           ..max = 100
           ..trackHeight = 2
           ..thumbColor = Colors.white,
-        n.Button(Text("Button"))
+        n.Button("Button".n)
           ..onPressed = () {}
           ..fontSize = 18
           ..w500
-          ..color = Colors.blue
           ..px = 24
           ..py = 12
           ..bg = Colors.blue.shade50

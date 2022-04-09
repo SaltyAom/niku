@@ -1,4 +1,15 @@
-# [2.3.0-experimental.0] - 2022/03/29
+# [2.3.0-experimental.1] - 2022/04/09
+Breaking Change:
+  - Move `useTextStyle` to `useNikuTextStyle` in `NikuButton` to add `useTextStyle` for `NikuState`
+
+Change:
+  - Refactored Proxy, now has 50% less code and much more cleaner
+
+Bugs fix:
+  - _applyConstraints, _applyPadding, _applyPositions cause Stackoverflow
+
+
+# [2.3.0-experimental.0] - 2022/04/08
 Breaking Change:
   - Remove `useNiku`, `nikuConstraints`, `nikuPadding`, `nikuMargin` from `Niku` and Parent Proxy.
 

@@ -92,7 +92,10 @@ class NikuButtonStyle with AlignmentDirectionalMacro {
   set mouseCursor(MouseCursor cursor) =>
       mouseCursorState = NikuState.all(cursor);
 
-  void useTextStyle(NikuTextStyle Function(NikuTextStyle) v) =>
+  set minSize(Size size) => minSize = size;
+  set maxSize(Size size) => maxSize = size;
+
+  void useNikuTextStyle(NikuTextStyle Function(NikuTextStyle) v) =>
       textStyleState = NikuState.all(v(NikuTextStyle()));
 
   set border(BorderSide side) => sideState = NikuState.all(side);
@@ -165,19 +168,18 @@ class NikuButtonStyle with AlignmentDirectionalMacro {
     Color? pressed,
     Color? scrolledUnder,
     Color? selected,
-  }) {
-    backgroundColorState = NikuState(
-      disabled: disabled,
-      dragged: dragged,
-      error: error,
-      focused: focused,
-      hovered: hovered,
-      pressed: pressed,
-      scrolledUnder: scrolledUnder,
-      selected: selected,
-      base: base,
-    );
-  }
+  }) =>
+      backgroundColorState = NikuState(
+        disabled: disabled,
+        dragged: dragged,
+        error: error,
+        focused: focused,
+        hovered: hovered,
+        pressed: pressed,
+        scrolledUnder: scrolledUnder,
+        selected: selected,
+        base: base,
+      );
 
   void useFg({
     Color? base,
@@ -189,19 +191,18 @@ class NikuButtonStyle with AlignmentDirectionalMacro {
     Color? pressed,
     Color? scrolledUnder,
     Color? selected,
-  }) {
-    foregroundColorState = NikuState(
-      disabled: disabled,
-      dragged: dragged,
-      error: error,
-      focused: focused,
-      hovered: hovered,
-      pressed: pressed,
-      scrolledUnder: scrolledUnder,
-      selected: selected,
-      base: base,
-    );
-  }
+  }) =>
+      foregroundColorState = NikuState(
+        disabled: disabled,
+        dragged: dragged,
+        error: error,
+        focused: focused,
+        hovered: hovered,
+        pressed: pressed,
+        scrolledUnder: scrolledUnder,
+        selected: selected,
+        base: base,
+      );
 
   void useColor({
     Color? base,
@@ -213,19 +214,18 @@ class NikuButtonStyle with AlignmentDirectionalMacro {
     Color? pressed,
     Color? scrolledUnder,
     Color? selected,
-  }) {
-    foregroundColorState = NikuState(
-      disabled: disabled,
-      dragged: dragged,
-      error: error,
-      focused: focused,
-      hovered: hovered,
-      pressed: pressed,
-      scrolledUnder: scrolledUnder,
-      selected: selected,
-      base: base,
-    );
-  }
+  }) =>
+      foregroundColorState = NikuState(
+        disabled: disabled,
+        dragged: dragged,
+        error: error,
+        focused: focused,
+        hovered: hovered,
+        pressed: pressed,
+        scrolledUnder: scrolledUnder,
+        selected: selected,
+        base: base,
+      );
 
   void useOverlayColor({
     Color? base,
@@ -237,19 +237,18 @@ class NikuButtonStyle with AlignmentDirectionalMacro {
     Color? pressed,
     Color? scrolledUnder,
     Color? selected,
-  }) {
-    overlayColorState = NikuState(
-      disabled: disabled,
-      dragged: dragged,
-      error: error,
-      focused: focused,
-      hovered: hovered,
-      pressed: pressed,
-      scrolledUnder: scrolledUnder,
-      selected: selected,
-      base: base,
-    );
-  }
+  }) =>
+      overlayColorState = NikuState(
+        disabled: disabled,
+        dragged: dragged,
+        error: error,
+        focused: focused,
+        hovered: hovered,
+        pressed: pressed,
+        scrolledUnder: scrolledUnder,
+        selected: selected,
+        base: base,
+      );
 
   void useSplash({
     Color? base,
@@ -261,19 +260,18 @@ class NikuButtonStyle with AlignmentDirectionalMacro {
     Color? pressed,
     Color? scrolledUnder,
     Color? selected,
-  }) {
-    overlayColorState = NikuState(
-      disabled: disabled,
-      dragged: dragged,
-      error: error,
-      focused: focused,
-      hovered: hovered,
-      pressed: pressed,
-      scrolledUnder: scrolledUnder,
-      selected: selected,
-      base: base,
-    );
-  }
+  }) =>
+      overlayColorState = NikuState(
+        disabled: disabled,
+        dragged: dragged,
+        error: error,
+        focused: focused,
+        hovered: hovered,
+        pressed: pressed,
+        scrolledUnder: scrolledUnder,
+        selected: selected,
+        base: base,
+      );
 
   void useShadowColor({
     Color? base,
@@ -285,19 +283,18 @@ class NikuButtonStyle with AlignmentDirectionalMacro {
     Color? pressed,
     Color? scrolledUnder,
     Color? selected,
-  }) {
-    shadowColorState = NikuState(
-      disabled: disabled,
-      dragged: dragged,
-      error: error,
-      focused: focused,
-      hovered: hovered,
-      pressed: pressed,
-      scrolledUnder: scrolledUnder,
-      selected: selected,
-      base: base,
-    );
-  }
+  }) =>
+      shadowColorState = NikuState(
+        disabled: disabled,
+        dragged: dragged,
+        error: error,
+        focused: focused,
+        hovered: hovered,
+        pressed: pressed,
+        scrolledUnder: scrolledUnder,
+        selected: selected,
+        base: base,
+      );
 
   void useElevation({
     double? base,
@@ -309,19 +306,18 @@ class NikuButtonStyle with AlignmentDirectionalMacro {
     double? pressed,
     double? scrolledUnder,
     double? selected,
-  }) {
-    elevationState = NikuState(
-      disabled: disabled,
-      dragged: dragged,
-      error: error,
-      focused: focused,
-      hovered: hovered,
-      pressed: pressed,
-      scrolledUnder: scrolledUnder,
-      selected: selected,
-      base: base,
-    );
-  }
+  }) =>
+      elevationState = NikuState(
+        disabled: disabled,
+        dragged: dragged,
+        error: error,
+        focused: focused,
+        hovered: hovered,
+        pressed: pressed,
+        scrolledUnder: scrolledUnder,
+        selected: selected,
+        base: base,
+      );
 
   void usePadding({
     EdgeInsets? base,
@@ -333,43 +329,42 @@ class NikuButtonStyle with AlignmentDirectionalMacro {
     EdgeInsets? pressed,
     EdgeInsets? scrolledUnder,
     EdgeInsets? selected,
-  }) {
-    paddingState = NikuState(
-      disabled: disabled,
-      dragged: dragged,
-      error: error,
-      focused: focused,
-      hovered: hovered,
-      pressed: pressed,
-      scrolledUnder: scrolledUnder,
-      selected: selected,
-      base: base,
-    );
-  }
+  }) =>
+      paddingState = NikuState(
+        disabled: disabled,
+        dragged: dragged,
+        error: error,
+        focused: focused,
+        hovered: hovered,
+        pressed: pressed,
+        scrolledUnder: scrolledUnder,
+        selected: selected,
+        base: base,
+      );
 
   void useP({
-    NikuEdgeInsets? base,
-    NikuEdgeInsets? disabled,
-    NikuEdgeInsets? dragged,
-    NikuEdgeInsets? error,
-    NikuEdgeInsets? focused,
-    NikuEdgeInsets? hovered,
-    NikuEdgeInsets? pressed,
-    NikuEdgeInsets? scrolledUnder,
-    NikuEdgeInsets? selected,
-  }) {
-    paddingState = NikuState(
-      disabled: disabled?.value,
-      dragged: dragged?.value,
-      error: error?.value,
-      focused: focused?.value,
-      hovered: hovered?.value,
-      pressed: pressed?.value,
-      scrolledUnder: scrolledUnder?.value,
-      selected: selected?.value,
-      base: base?.value,
-    );
-  }
+    double? base,
+    double? disabled,
+    double? dragged,
+    double? error,
+    double? focused,
+    double? hovered,
+    double? pressed,
+    double? scrolledUnder,
+    double? selected,
+  }) =>
+      paddingState = NikuState(
+        disabled: disabled != null ? EdgeInsets.all(disabled) : null,
+        dragged: dragged != null ? EdgeInsets.all(dragged) : null,
+        error: error != null ? EdgeInsets.all(error) : null,
+        focused: focused != null ? EdgeInsets.all(focused) : null,
+        hovered: hovered != null ? EdgeInsets.all(hovered) : null,
+        pressed: pressed != null ? EdgeInsets.all(pressed) : null,
+        scrolledUnder:
+            scrolledUnder != null ? EdgeInsets.all(scrolledUnder) : null,
+        selected: selected != null ? EdgeInsets.all(selected) : null,
+        base: base != null ? EdgeInsets.all(base) : null,
+      );
 
   void useMinimumSize({
     Size? base,
@@ -381,19 +376,41 @@ class NikuButtonStyle with AlignmentDirectionalMacro {
     Size? pressed,
     Size? scrolledUnder,
     Size? selected,
-  }) {
-    minimumSizeState = NikuState(
-      disabled: disabled,
-      dragged: dragged,
-      error: error,
-      focused: focused,
-      hovered: hovered,
-      pressed: pressed,
-      scrolledUnder: scrolledUnder,
-      selected: selected,
-      base: base,
-    );
-  }
+  }) =>
+      minimumSizeState = NikuState(
+        disabled: disabled,
+        dragged: dragged,
+        error: error,
+        focused: focused,
+        hovered: hovered,
+        pressed: pressed,
+        scrolledUnder: scrolledUnder,
+        selected: selected,
+        base: base,
+      );
+
+  void useMinSize({
+    Size? base,
+    Size? disabled,
+    Size? dragged,
+    Size? error,
+    Size? focused,
+    Size? hovered,
+    Size? pressed,
+    Size? scrolledUnder,
+    Size? selected,
+  }) =>
+      useMinimumSize(
+        disabled: disabled,
+        dragged: dragged,
+        error: error,
+        focused: focused,
+        hovered: hovered,
+        pressed: pressed,
+        scrolledUnder: scrolledUnder,
+        selected: selected,
+        base: base,
+      );
 
   void useMaximumSize({
     Size? base,
@@ -405,19 +422,41 @@ class NikuButtonStyle with AlignmentDirectionalMacro {
     Size? pressed,
     Size? scrolledUnder,
     Size? selected,
-  }) {
-    maximumSizeState = NikuState(
-      disabled: disabled,
-      dragged: dragged,
-      error: error,
-      focused: focused,
-      hovered: hovered,
-      pressed: pressed,
-      scrolledUnder: scrolledUnder,
-      selected: selected,
-      base: base,
-    );
-  }
+  }) =>
+      maximumSizeState = NikuState(
+        disabled: disabled,
+        dragged: dragged,
+        error: error,
+        focused: focused,
+        hovered: hovered,
+        pressed: pressed,
+        scrolledUnder: scrolledUnder,
+        selected: selected,
+        base: base,
+      );
+
+  void useMaxSize({
+    Size? base,
+    Size? disabled,
+    Size? dragged,
+    Size? error,
+    Size? focused,
+    Size? hovered,
+    Size? pressed,
+    Size? scrolledUnder,
+    Size? selected,
+  }) =>
+      useMaximumSize(
+        disabled: disabled,
+        dragged: dragged,
+        error: error,
+        focused: focused,
+        hovered: hovered,
+        pressed: pressed,
+        scrolledUnder: scrolledUnder,
+        selected: selected,
+        base: base,
+      );
 
   void useSide({
     BorderSide? base,
@@ -429,19 +468,18 @@ class NikuButtonStyle with AlignmentDirectionalMacro {
     BorderSide? pressed,
     BorderSide? scrolledUnder,
     BorderSide? selected,
-  }) {
-    sideState = NikuState(
-      disabled: disabled,
-      dragged: dragged,
-      error: error,
-      focused: focused,
-      hovered: hovered,
-      pressed: pressed,
-      scrolledUnder: scrolledUnder,
-      selected: selected,
-      base: base,
-    );
-  }
+  }) =>
+      sideState = NikuState(
+        disabled: disabled,
+        dragged: dragged,
+        error: error,
+        focused: focused,
+        hovered: hovered,
+        pressed: pressed,
+        scrolledUnder: scrolledUnder,
+        selected: selected,
+        base: base,
+      );
 
   void useShape({
     OutlinedBorder? base,
@@ -453,19 +491,18 @@ class NikuButtonStyle with AlignmentDirectionalMacro {
     OutlinedBorder? pressed,
     OutlinedBorder? scrolledUnder,
     OutlinedBorder? selected,
-  }) {
-    shapeState = NikuState(
-      disabled: disabled,
-      dragged: dragged,
-      error: error,
-      focused: focused,
-      hovered: hovered,
-      pressed: pressed,
-      scrolledUnder: scrolledUnder,
-      selected: selected,
-      base: base,
-    );
-  }
+  }) =>
+      shapeState = NikuState(
+        disabled: disabled,
+        dragged: dragged,
+        error: error,
+        focused: focused,
+        hovered: hovered,
+        pressed: pressed,
+        scrolledUnder: scrolledUnder,
+        selected: selected,
+        base: base,
+      );
 
   void useRounded({
     double base = 0,
@@ -477,37 +514,36 @@ class NikuButtonStyle with AlignmentDirectionalMacro {
     double? pressed,
     double? scrolledUnder,
     double? selected,
-  }) {
-    shapeState = NikuState(
-      disabled: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(disabled ?? base),
-      ),
-      dragged: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(dragged ?? base),
-      ),
-      error: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(error ?? base),
-      ),
-      focused: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(focused ?? base),
-      ),
-      hovered: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(hovered ?? base),
-      ),
-      pressed: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(pressed ?? base),
-      ),
-      scrolledUnder: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(scrolledUnder ?? base),
-      ),
-      selected: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(selected ?? base),
-      ),
-      base: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(base),
-      ),
-    );
-  }
+  }) =>
+      shapeState = NikuState(
+        disabled: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(disabled ?? base),
+        ),
+        dragged: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(dragged ?? base),
+        ),
+        error: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(error ?? base),
+        ),
+        focused: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(focused ?? base),
+        ),
+        hovered: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(hovered ?? base),
+        ),
+        pressed: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(pressed ?? base),
+        ),
+        scrolledUnder: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(scrolledUnder ?? base),
+        ),
+        selected: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(selected ?? base),
+        ),
+        base: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(base),
+        ),
+      );
 
   void useCursor({
     MouseCursor? base,
@@ -519,19 +555,58 @@ class NikuButtonStyle with AlignmentDirectionalMacro {
     MouseCursor? pressed,
     MouseCursor? scrolledUnder,
     MouseCursor? selected,
-  }) {
-    mouseCursorState = NikuState(
-      disabled: disabled,
-      dragged: dragged,
-      error: error,
-      focused: focused,
-      hovered: hovered,
-      pressed: pressed,
-      scrolledUnder: scrolledUnder,
-      selected: selected,
-      base: base,
-    );
-  }
+  }) =>
+      mouseCursorState = NikuState(
+        disabled: disabled,
+        dragged: dragged,
+        error: error,
+        focused: focused,
+        hovered: hovered,
+        pressed: pressed,
+        scrolledUnder: scrolledUnder,
+        selected: selected,
+        base: base,
+      );
+
+  void useTextStyle({
+    NikuTextStyle Function(NikuTextStyle)? base,
+    NikuTextStyle Function(NikuTextStyle)? disabled,
+    NikuTextStyle Function(NikuTextStyle)? dragged,
+    NikuTextStyle Function(NikuTextStyle)? error,
+    NikuTextStyle Function(NikuTextStyle)? focused,
+    NikuTextStyle Function(NikuTextStyle)? hovered,
+    NikuTextStyle Function(NikuTextStyle)? pressed,
+    NikuTextStyle Function(NikuTextStyle)? scrolledUnder,
+    NikuTextStyle Function(NikuTextStyle)? selected,
+  }) =>
+      textStyleState = NikuState(
+        disabled: disabled != null
+            ? disabled(textStyleState?.disabled ?? NikuTextStyle())
+            : null,
+        dragged: dragged != null
+            ? dragged(textStyleState?.dragged ?? NikuTextStyle())
+            : null,
+        error: error != null
+            ? error(textStyleState?.error ?? NikuTextStyle())
+            : null,
+        focused: focused != null
+            ? focused(textStyleState?.focused ?? NikuTextStyle())
+            : null,
+        hovered: hovered != null
+            ? hovered(textStyleState?.hovered ?? NikuTextStyle())
+            : null,
+        pressed: pressed != null
+            ? pressed(textStyleState?.pressed ?? NikuTextStyle())
+            : null,
+        scrolledUnder: scrolledUnder != null
+            ? scrolledUnder(textStyleState?.scrolledUnder ?? NikuTextStyle())
+            : null,
+        selected: selected != null
+            ? selected(textStyleState?.selected ?? NikuTextStyle())
+            : null,
+        base:
+            base != null ? base(textStyleState?.base ?? NikuTextStyle()) : null,
+      );
 
   set apply(NikuButtonStyle? style) {
     if (style == null) return;
