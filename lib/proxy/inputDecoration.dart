@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'package:niku/niku.dart';
 
-extension TextFormFieldInputDecorationProxy on NikuTextFormField {
+typedef _UseStyle = NikuTextStyle Function(NikuTextStyle);
+typedef _UseConstraints = NikuBoxConstraints Function(NikuBoxConstraints);
+
+abstract class InputDecorationProxy {
+  NikuInputDecoration? decoration;
+
   NikuInputDecoration get _decoration => decoration ??= NikuInputDecoration();
 
   set icon(Widget? v) => _decoration.icon = v;
@@ -70,7 +75,6 @@ extension TextFormFieldInputDecorationProxy on NikuTextFormField {
   set constraints(NikuBoxConstraints? v) => _decoration.constraints = v;
   set borderWidth(double width) => _decoration.borderWidth = width;
   set borderColor(Color color) => _decoration.borderColor = color;
-  set borderRadius(double radius) => _decoration.borderRadius = radius;
   set bg(Color color) => _decoration.bg = color;
 
   double get rounded => _decoration.rounded;
@@ -176,59 +180,41 @@ extension TextFormFieldInputDecorationProxy on NikuTextFormField {
       _decoration.focusedErrorBorderColor = color;
   set errorBorderColor(Color color) => _decoration.errorBorderColor = color;
 
-  void useLabelStyle(NikuTextStyle Function(NikuTextStyle) v) =>
-      _decoration.useLabelStyle(v);
-
+  void useLabelStyle(_UseStyle v) => _decoration.useLabelStyle(v);
   set applyLabelStyle(NikuTextStyle v) => _decoration.applyLabelStyle = v;
 
-  void useFloatingLabelStyle(NikuTextStyle Function(NikuTextStyle) v) =>
+  void useFloatingLabelStyle(_UseStyle v) =>
       _decoration.useFloatingLabelStyle(v);
 
   set applyFloatingLabelStyle(NikuTextStyle v) =>
       _decoration.applyFloatingLabelStyle = v;
 
-  void useHelperStyle(NikuTextStyle Function(NikuTextStyle) v) =>
-      _decoration.useHelperStyle(v);
-
+  void useHelperStyle(_UseStyle v) => _decoration.useHelperStyle(v);
   set applyHelperStyle(NikuTextStyle v) => _decoration.applyHelperStyle = v;
 
-  void useHintStyle(NikuTextStyle Function(NikuTextStyle) v) =>
-      _decoration.useHintStyle(v);
-
+  void useHintStyle(_UseStyle v) => _decoration.useHintStyle(v);
   set applyHintStyle(NikuTextStyle v) => _decoration.applyHintStyle = v;
 
-  void useErrorStyle(NikuTextStyle Function(NikuTextStyle) v) =>
-      _decoration.useErrorStyle(v);
-
+  void useErrorStyle(_UseStyle v) => _decoration.useErrorStyle(v);
   set applyErrorStyle(NikuTextStyle v) => _decoration.applyErrorStyle = v;
 
-  void usePrefixStyle(NikuTextStyle Function(NikuTextStyle) v) =>
-      _decoration.usePrefixStyle(v);
-
+  void usePrefixStyle(_UseStyle v) => _decoration.usePrefixStyle(v);
   set applyPrefixStyle(NikuTextStyle v) => _decoration.applyPrefixStyle = v;
 
-  void useSuffixStyle(NikuTextStyle Function(NikuTextStyle) v) =>
-      _decoration.useSuffixStyle(v);
-
+  void useSuffixStyle(_UseStyle v) => _decoration.useSuffixStyle(v);
   set applySuffixStyle(NikuTextStyle v) => _decoration.applySuffixStyle = v;
 
-  void usePrefixIconConstraints(
-          NikuBoxConstraints Function(NikuBoxConstraints) v) =>
+  void usePrefixIconConstraints(_UseConstraints v) =>
       _decoration.usePrefixIconConstraints(v);
-
   set applyPrefixIconConstraints(NikuBoxConstraints v) =>
       _decoration.applyPrefixIconConstraints = v;
 
-  void useSuffixIconConstraints(
-          NikuBoxConstraints Function(NikuBoxConstraints) v) =>
+  void useSuffixIconConstraints(_UseConstraints v) =>
       _decoration.useSuffixIconConstraints(v);
-
   set applySuffixIconConstraints(NikuBoxConstraints v) =>
       _decoration.applySuffixIconConstraints = v;
 
-  void useConstraints(NikuBoxConstraints Function(NikuBoxConstraints) v) =>
-      _decoration.useConstraints(v);
-
+  void useConstraints(_UseConstraints v) => _decoration.useConstraints(v);
   set applyConstraints(NikuBoxConstraints v) =>
       _decoration.applyConstraints = v;
 

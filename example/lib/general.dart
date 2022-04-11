@@ -22,7 +22,7 @@ class General extends HookWidget {
           ..content = n.Column([
             Text("This is alert dialog written in Niku"),
             n.TextFormField.adaptive()
-              ..label = "Placeholder"
+              ..labelText = "Placeholder"
               ..mt = 16,
           ])
           ..actions = [
@@ -69,7 +69,8 @@ class General extends HookWidget {
           ..h4 = context
           ..mb = 24,
         n.TextFormField()
-          ..label = "Value"
+          ..labelText = "Value"
+          ..usePrefixStyle((v) => v..color = Colors.white)
           ..outlined,
         TextFormField(
           decoration: InputDecoration(

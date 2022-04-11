@@ -1,3 +1,13 @@
+# [2.3.0-experimental.2] - 2022/04/11
+Breaking Change:
+  - Add `labelText` as replacement of `label` which is now accept `Widget`
+
+Change:
+  - `useThemeSelector` now can accept nullable value 
+
+Bugs fix:
+  - Extra hook doesn't work with Tempest Engine, eg. `useScreen`, `useThemeSelector`
+
 # [2.3.0-experimental.1] - 2022/04/09
 Breaking Change:
   - Move `useTextStyle` to `useNikuTextStyle` in `NikuButton` to add `useTextStyle` for `NikuState`

@@ -19,6 +19,7 @@ typedef Checkbox = NikuCheckbox;
 typedef CheckboxListTile = NikuCheckboxListTile;
 typedef Column = NikuColumn;
 typedef DropdownButton<T> = NikuDropdownButton<T>;
+typedef DropdownButtonFormField<T> = NikuDropdownButtonFormField<T>;
 typedef GridView = NikuGridView;
 typedef Icon = NikuIcon;
 typedef IconButton = NikuIconButton;

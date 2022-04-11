@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 
 import 'package:niku/macros/macros.dart';
-import 'package:niku/objects/textStyle.dart';
-import 'package:niku/proxy/textStyle.dart';
+import 'package:niku/objects/objects.dart';
+import 'package:niku/proxy/proxy.dart';
 
 // ignore: must_be_immutable
-class NikuDropdownButton<T> extends StatelessWidget
+class NikuDropdownButtonFormField<T> extends StatelessWidget
     with
-        NikuBuildMacro<NikuDropdownButton>,
+        NikuBuildMacro<NikuDropdownButtonFormField>,
         ApplyTextMacro,
+        ApplyInputDecorationMacro,
         AlignmentDirectionalMacro,
         BorderRadiusMacro,
+        InputDecorationProxy,
         FocusNodeMacro,
         TextStyleProxy {
   List<DropdownMenuItem<T>>? items;
@@ -39,8 +41,9 @@ class NikuDropdownButton<T> extends StatelessWidget
   bool? enableFeedback;
   AlignmentGeometry? alignment;
   BorderRadius? borderRadius;
+  NikuInputDecoration? decoration;
 
-  NikuDropdownButton(
+  NikuDropdownButtonFormField(
     this.value, {
     Key? key,
     this.selectedItemBuilder,
@@ -51,7 +54,6 @@ class NikuDropdownButton<T> extends StatelessWidget
     this.onTap,
     this.elevation,
     this.style,
-    this.underline,
     this.icon,
     this.iconDisabledColor,
     this.iconEnabledColor,
@@ -66,18 +68,80 @@ class NikuDropdownButton<T> extends StatelessWidget
     this.menuMaxHeight,
     this.enableFeedback,
     this.alignment,
-    this.borderRadius,
     this.itemsValue,
+    this.decoration,
   }) : super(key: key);
+
+  factory NikuDropdownButtonFormField.label(
+    String label, {
+    List<DropdownMenuItem<T>>? items,
+    List<T>? itemsValue,
+    T? value,
+    Widget? hint,
+    Widget? disabledHint,
+    ValueChanged<T?>? onChanged,
+    VoidCallback? onTap,
+    DropdownButtonBuilder? selectedItemBuilder,
+    int? elevation,
+    NikuTextStyle? style,
+    Widget? underline,
+    Widget? icon,
+    Color? iconDisabledColor,
+    Color? iconEnabledColor,
+    double? iconSize,
+    bool? isDense,
+    bool? isExpanded,
+    double? itemHeight,
+    Color? focusColor,
+    FocusNode? focusNode,
+    bool? autofocus,
+    Color? dropdownColor,
+    double? menuMaxHeight,
+    bool? enableFeedback,
+    AlignmentGeometry? alignment,
+    BorderRadius? borderRadius,
+    NikuInputDecoration? decoration,
+  }) =>
+      NikuDropdownButtonFormField<T>(
+        value,
+        items: items,
+        selectedItemBuilder: selectedItemBuilder,
+        hint: hint,
+        disabledHint: disabledHint,
+        onChanged: onChanged,
+        onTap: onTap,
+        elevation: elevation,
+        style: style,
+        icon: icon,
+        iconDisabledColor: iconDisabledColor,
+        iconEnabledColor: iconEnabledColor,
+        iconSize: iconSize,
+        isDense: isDense,
+        isExpanded: isExpanded,
+        itemHeight: itemHeight,
+        focusColor: focusColor,
+        focusNode: focusNode,
+        autofocus: autofocus,
+        dropdownColor: dropdownColor,
+        menuMaxHeight: menuMaxHeight,
+        enableFeedback: enableFeedback,
+        alignment: alignment,
+        itemsValue: itemsValue,
+        decoration: decoration,
+      );
 
   useTextStyle(NikuTextStyle Function(NikuTextStyle) v) =>
       style = v(style ?? NikuTextStyle());
 
-  void get noUnderline => underline = SizedBox.shrink();
+  void get noUnderline {
+    underline = SizedBox.shrink();
+    decoration ??= NikuInputDecoration();
+    decoration!.noUnderline;
+  }
 
-  NikuDropdownButton get self => this;
+  NikuDropdownButtonFormField get self => this;
 
-  set apply(NikuDropdownButton? v) {
+  set apply(NikuDropdownButtonFormField? v) {
     if (v == null) return;
 
     selectedItemBuilder = v.selectedItemBuilder ?? selectedItemBuilder;
@@ -103,10 +167,11 @@ class NikuDropdownButton<T> extends StatelessWidget
     enableFeedback = v.enableFeedback ?? enableFeedback;
     alignment = v.alignment ?? alignment;
     borderRadius = v.borderRadius ?? borderRadius;
+    decoration = v.decoration ?? decoration;
     $parent..$merge(v.$parent);
   }
 
-  get copied => NikuDropdownButton<T>(
+  get copied => NikuDropdownButtonFormField<T>(
         value,
         items: items,
         selectedItemBuilder: selectedItemBuilder,
@@ -116,7 +181,6 @@ class NikuDropdownButton<T> extends StatelessWidget
         onTap: onTap,
         elevation: elevation,
         style: style,
-        underline: underline,
         icon: icon,
         iconDisabledColor: iconDisabledColor,
         iconEnabledColor: iconEnabledColor,
@@ -131,11 +195,11 @@ class NikuDropdownButton<T> extends StatelessWidget
         menuMaxHeight: menuMaxHeight,
         enableFeedback: enableFeedback,
         alignment: alignment,
-        borderRadius: borderRadius,
         itemsValue: itemsValue,
+        decoration: decoration,
       )..$parent.$merge($parent);
 
-  get widget => DropdownButton<T>(
+  DropdownButtonFormField get widget => DropdownButtonFormField<T>(
         items: items ??
             itemsValue
                 ?.map(
@@ -155,7 +219,6 @@ class NikuDropdownButton<T> extends StatelessWidget
         onTap: onTap,
         elevation: elevation ?? 8,
         style: style?.value,
-        underline: underline,
         icon: icon,
         iconDisabledColor: iconDisabledColor,
         iconEnabledColor: iconEnabledColor,
@@ -170,6 +233,6 @@ class NikuDropdownButton<T> extends StatelessWidget
         menuMaxHeight: menuMaxHeight,
         enableFeedback: enableFeedback,
         alignment: alignment ?? AlignmentDirectional.centerStart,
-        borderRadius: borderRadius,
+        decoration: decoration?.value,
       );
 }

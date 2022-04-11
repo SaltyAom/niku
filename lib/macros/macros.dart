@@ -10,6 +10,7 @@ export 'applyValueIndicatorTextStyle.dart';
 export 'axis.dart';
 export 'backgroundColor.dart';
 export 'blendMode.dart';
+export 'borderRadius.dart';
 export 'boxFit.dart';
 export 'buttonPadding.dart';
 export 'clip.dart';

@@ -40,23 +40,27 @@ abstract class NikuBuildMacro<T extends Widget> {
   void get freezed => useParent((w) => Niku(NikuOn(() => w, [])));
 
   void useQuery(BuildContext context, T Function(T, MediaQueryData) builder) {
-    builder(self, MediaQuery.of(context));
+    apply = builder(self, MediaQuery.of(context));
   }
 
   void useSize(BuildContext context, T Function(T, Size) builder) {
-    builder(self, MediaQuery.of(context).size);
+    apply = builder(self, MediaQuery.of(context).size);
   }
 
   void useDarkMode(BuildContext context, T Function(T, bool) builder) {
-    builder(self, Theme.of(context).brightness == Brightness.dark);
+    apply = builder(self, Theme.of(context).brightness == Brightness.dark);
   }
 
   void useThemeSelector(
     BuildContext context, {
-    required T Function(T) light,
-    required T Function(T) dark,
+    T Function(T)? light,
+    T Function(T)? dark,
   }) {
-    Theme.of(context).brightness == Brightness.dark ? dark(self) : light(self);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    if (isDark && dark != null)
+      apply = dark(self);
+    else if (!isDark && light != null) apply = light(self);
   }
 
   /// ```dart
@@ -93,64 +97,64 @@ abstract class NikuBuildMacro<T extends Widget> {
     final width = MediaQuery.of(context).size.width;
 
     if (width < 568) {
-      if (base != null) base(copied);
+      if (base != null) apply = base(copied);
 
       return;
     }
 
     if (width < 640) {
       if (xs != null)
-        xs(self);
-      else if (base != null) base(self);
+        apply = xs(self);
+      else if (base != null) apply = base(self);
 
       return;
     }
 
     if (width < 720) {
       if (sm != null)
-        sm(self);
+        apply = sm(self);
       else if (xs != null)
-        xs(self);
-      else if (base != null) base(self);
+        apply = xs(self);
+      else if (base != null) apply = base(self);
 
       return;
     }
 
     if (width < 920) {
       if (md != null)
-        md(self);
+        apply = md(self);
       else if (sm != null)
-        sm(self);
+        apply = sm(self);
       else if (xs != null)
-        xs(self);
-      else if (base != null) base(self);
+        apply = xs(self);
+      else if (base != null) apply = base(self);
 
       return;
     }
 
     if (width < 1024) {
       if (lg != null)
-        lg(self);
+        apply = lg(self);
       else if (md != null)
-        md(self);
+        apply = md(self);
       else if (sm != null)
-        sm(self);
+        apply = sm(self);
       else if (xs != null)
-        xs(self);
-      else if (base != null) base(self);
+        apply = xs(self);
+      else if (base != null) apply = base(self);
     }
 
     if (xl != null)
-      xl(self);
+      apply = xl(self);
     else if (lg != null)
-      lg(self);
+      apply = lg(self);
     else if (md != null)
-      md(self);
+      apply = md(self);
     else if (sm != null)
-      sm(self);
+      apply = sm(self);
     else if (xs != null)
-      xs(self);
-    else if (base != null) base(self);
+      apply = xs(self);
+    else if (base != null) apply = base(self);
   }
 
   void usePlatform(
@@ -164,7 +168,7 @@ abstract class NikuBuildMacro<T extends Widget> {
     T Function(T)? web,
   }) {
     fallback(T Function(T)? builder) {
-      if (builder != null) builder(self);
+      if (builder != null) apply = builder(self);
     }
 
     if (kIsWeb)

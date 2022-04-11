@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
 import 'package:niku/niku.dart';
 import 'package:niku/namespace.dart' as n;
 
-class Tempestissimo extends StatelessWidget {
+class Tempestissimo extends HookWidget {
   const Tempestissimo({Key? key}) : super(key: key);
 
   static const bebe =
@@ -11,6 +12,9 @@ class Tempestissimo extends StatelessWidget {
 
   @override
   build(context) {
+    final options = ["Option 1", "Option 2", "Option 3"];
+    final option = useState(options[0]);
+
     return Scaffold(
       body: n.Column([
         n.Image.network(bebe)
@@ -41,7 +45,7 @@ class Tempestissimo extends StatelessWidget {
           ..pb = 10
           ..pl = 10
           ..pr = 10
-          ..splash = Colors.white.withOpacity(.5)
+          ..splash = Colors.white.withOpacity(.25)
           ..highlight = Colors.transparent
           ..hover = Colors.blue.shade100
           ..focus = Colors.blue.shade100
@@ -54,11 +58,25 @@ class Tempestissimo extends StatelessWidget {
             offset: Offset(0, 8),
           )
           ..mt = 20
-          ..mb = 12
+          ..mb = 12,
+        n.DropdownButtonFormField.label("Hi")
+          ..p = 0
+          ..value = option.value
+          ..labelText = "Hi"
+          ..itemsValue = options
+          ..onChanged = (v) {
+            if (v != null) option.value = v;
+          }
+          ..elevation = 1
+          ..wFactor = .9
+          ..wMax = 450,
       ])
         ..key = Key("Column")
         ..center
-        ..wFull,
+        ..w100
+        ..safe
+        ..scrollable
+        ..h100,
     );
 
     // return Scaffold(
