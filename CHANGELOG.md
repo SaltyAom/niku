@@ -8,6 +8,7 @@ Change:
 
 Bugs fix:
   - Extra hook doesn't work with Tempest Engine, eg. `useScreen`, `useThemeSelector`
+  - `useScreen` break BuildContext on Flutter 3
 
 # [2.3.0-experimental.1] - 2022/04/09
 Breaking Change:
