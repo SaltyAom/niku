@@ -43,10 +43,10 @@ class General extends HookWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("General"),
+        title: "General".n,
         elevation: 0,
         actions: [
-          n.PopupMenuButton(n.Icon(Icons.edit)..color = Colors.white)
+          n.PopupMenuButton(Icons.edit.n..color = Colors.white)
             ..items = [1, 2, 3]
             ..elevation = 2
             ..mr = 12

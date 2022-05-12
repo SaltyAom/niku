@@ -15,7 +15,30 @@ class Tempestissimo extends HookWidget {
     final options = ["Option 1", "Option 2", "Option 3"];
     final option = useState(options[0]);
 
+    final page = useState(0);
+
     return Scaffold(
+      bottomNavigationBar: NavigationBar(
+        onDestinationSelected: (int index) {
+          page.value = index;
+        },
+        selectedIndex: page.value,
+        backgroundColor: Colors.blue.shade50,
+        destinations: [
+          NavigationDestination(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.favorite),
+            label: 'Favorite',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.settings),
+            label: 'Settings',
+          ),
+        ],
+      ),
       body: n.Column([
         n.Image.network(bebe)
           ..key = Key("cover")

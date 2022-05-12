@@ -47,3 +47,8 @@ extension NikuListTransform on List<Widget> {
   _NikuListTransform get n => _NikuListTransform(this);
   _NikuListTransform get asNiku => _NikuListTransform(this);
 }
+
+extension NikuIconDataTransform on IconData {
+  NikuIcon get n => NikuIcon(this);
+  NikuIcon get asNiku => NikuIcon(this);
+}

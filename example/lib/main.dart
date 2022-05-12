@@ -1,4 +1,3 @@
-import 'package:example/benchmark/benchmark.dart';
 import 'package:flutter/material.dart';
 
 import 'example.dart';

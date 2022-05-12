@@ -3,6 +3,7 @@ Breaking Change:
   - Add `labelText` as replacement of `label` which is now accept `Widget`
 
 Change:
+  - Initial work with Flutter 3 and Material3.
   - `useThemeSelector` now can accept nullable value 
 
 Bugs fix:

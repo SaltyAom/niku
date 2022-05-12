@@ -168,7 +168,7 @@ abstract class NikuBuildMacro<T extends Widget> {
     T Function(T)? web,
   }) {
     fallback(T Function(T)? builder) {
-      if (builder != null) apply = builder(self);
+      if (builder != null) builder(self);
     }
 
     if (kIsWeb)
@@ -206,6 +206,7 @@ abstract class NikuBuildMacro<T extends Widget> {
 
   NikuExplictParentBuilder get parent => n;
   NikuExplictParentBuilder get n {
+    // Lazy initialize LazyExplictParentBuilder
     if (_explictParent == null)
       _explictParent = NikuExplictParentBuilder($parent);
 
