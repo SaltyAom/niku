@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
@@ -18,8 +19,8 @@ abstract class NikuBuildMacro<T extends Widget> {
   }
 
   Widget widget(BuildContext context) => const SizedBox.shrink();
-  Widget? builder(BuildContext _) => null;
-  Widget build(BuildContext context) => $parent..widget = widget(context);
+  Widget build(BuildContext _) =>
+      $parent..builder = (context) => widget(context);
 
   void useParent(Widget Function(Niku) compose) =>
       $parent..useChild((w) => compose(w));

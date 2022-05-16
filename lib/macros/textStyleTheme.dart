@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 abstract class TextStyleThemeMacro {
   TextStyle? Function(BuildContext)? themeBuilder;
 
-  static TextTheme _theme(BuildContext context) => Theme.of(context).textTheme;
+  TextTheme _theme(BuildContext context) => Theme.of(context).textTheme;
 
   get h1 => themeBuilder = (BuildContext context) => _theme(context).headline1;
   get h2 => themeBuilder = (BuildContext context) => _theme(context).headline2;

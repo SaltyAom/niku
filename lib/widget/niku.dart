@@ -22,12 +22,13 @@ class Niku extends StatelessWidget {
 
   $merge(Niku others) => useChild((w) => others..widget = w);
 
+  Widget? Function(BuildContext) builder = (_) => null;
+
   @override
   build(context) {
-    Widget composed = widget;
+    Widget composed = builder(context) ?? widget;
 
     for (final builder in $parent) composed = builder(composed);
-
     if (key != null) return SizedBox(key: key ?? widget.key, child: composed);
 
     return composed;

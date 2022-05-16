@@ -919,6 +919,8 @@ class NikuText extends StatelessWidget
 
     final mergedTheme = theme.asNiku..apply = this.style;
 
+    print(mergedTheme.value.toString());
+
     return Text(
       text ?? "",
       key: key,

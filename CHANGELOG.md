@@ -19,6 +19,9 @@ Feature:
       - labelMedium
       - labelSmall
 
+Bug fix:
+  - Text Theme doesn't update on Brightness change
+
 # [2.3.0-experimental.2] - 2022/04/11
 Breaking Change:
   - Add `labelText` as replacement of `label` which is now accept `Widget`
