@@ -145,7 +145,7 @@ class NikuListTile extends StatelessWidget
         minLeadingWidth: minLeadingWidth,
       )..$parent.$merge($parent);
 
-  ListTile get widget => ListTile(
+  widget(context) => ListTile(
         key: key,
         leading: leading,
         title: title,

@@ -850,7 +850,7 @@ class NikuTextFormField extends StatelessWidget
         enableIMEPersonalizedLearning: enableIMEPersonalizedLearning ?? true,
       );
 
-  Widget get widget {
+  widget(context) {
     if (cupertino) return _buildCupertino();
 
     if (adaptive)

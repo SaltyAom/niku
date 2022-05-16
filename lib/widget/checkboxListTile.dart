@@ -126,7 +126,7 @@ class NikuCheckboxListTile extends StatelessWidget
         focusColor: focusColor,
       )..$parent.$merge($parent);
 
-  Widget get widget => Builder(
+  widget(context) => Builder(
         builder: (context) => Theme(
           data: Theme.of(context).copyWith(
             splashColor: splashColor,

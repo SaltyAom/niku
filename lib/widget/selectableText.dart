@@ -140,7 +140,7 @@ class NikuSelectableText extends StatelessWidget
         textHeightBehavior: textHeightBehavior,
       )..$parent.$merge($parent);
 
-  Widget get widget => SelectableText(
+  widget(context) => SelectableText(
         this.text ?? "",
         key: key,
         style: this.style?.value,

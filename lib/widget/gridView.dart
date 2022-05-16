@@ -406,7 +406,7 @@ class NikuGridView extends StatelessWidget
         childrenDelegate: childrenDelegate,
       )..$parent.$merge($parent);
 
-  GridView get widget {
+  widget(context) {
     switch (type) {
       case NikuGridViewType.builder:
         return GridView.builder(

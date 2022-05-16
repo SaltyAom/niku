@@ -251,7 +251,7 @@ class NikuSwitch extends StatelessWidget
         cupertino: cupertino,
       )..$parent.$merge($parent);
 
-  Widget get widget {
+  widget(context) {
     if (cupertino) {
       Size _getSwitchSize(ThemeData theme) {
         final MaterialTapTargetSize effectiveMaterialTapTargetSize =

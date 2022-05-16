@@ -17,8 +17,9 @@ abstract class NikuBuildMacro<T extends Widget> {
     for (final e in v) apply = e;
   }
 
-  Widget get widget => const SizedBox.shrink();
-  Widget build(BuildContext context) => $parent..widget = widget;
+  Widget widget(BuildContext context) => const SizedBox.shrink();
+  Widget? builder(BuildContext _) => null;
+  Widget build(BuildContext context) => $parent..widget = widget(context);
 
   void useParent(Widget Function(Niku) compose) =>
       $parent..useChild((w) => compose(w));

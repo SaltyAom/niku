@@ -218,7 +218,7 @@ class NikuButton extends StatelessWidget
         enable: enable,
       )..$parent.$merge($parent);
 
-  Widget get widget {
+  widget(context) {
     if (type == NikuButtonType.Elevated)
       return (label != null && icon != null)
           ? ElevatedButton.icon(

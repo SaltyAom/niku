@@ -66,7 +66,7 @@ class NikuRow extends StatelessWidget
         textBaseline: textBaseline,
       )..$parent.$merge($parent);
 
-  Row get widget => Row(
+  widget(context) => Row(
         children: $internalComposeGap(GapType.row, gap),
         key: key,
         mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.start,

@@ -66,7 +66,7 @@ class General extends HookWidget {
         ..theme = ThemeData(highlightColor: Colors.transparent),
       body: n.Column([
         n.Text("Awesome Niku")
-          ..h4 = context
+          ..h4
           ..mb = 24,
         n.TextFormField()
           ..labelText = "Value"
@@ -150,7 +150,7 @@ class NetworkImageExample extends StatelessWidget {
           ]
           ..px = 20),
         n.Text("Network Image")
-          ..h6 = context
+          ..h6
           ..useDarkMode(
             context,
             (v, isDarkTheme) =>
@@ -197,7 +197,7 @@ class Freezed extends HookWidget {
           ..mb = 16
           ..on = [freezed.value],
         n.Text("${option.value}")
-          ..h6 = context
+          ..h6
           ..bold
           ..useScreen(
             context,

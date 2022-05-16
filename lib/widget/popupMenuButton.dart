@@ -84,7 +84,7 @@ class NikuPopupMenuButton<T> extends StatelessWidget
         itemBuilder: itemBuilder,
       )..$parent.$merge($parent);
 
-  PopupMenuButton get widget => PopupMenuButton<T>(
+  widget(context) => PopupMenuButton<T>(
         initialValue: initialValue,
         itemBuilder: itemBuilder ??
             (items != null

@@ -66,7 +66,7 @@ class NikuColumn extends StatelessWidget
         textBaseline: textBaseline,
       )..$parent.$merge($parent);
 
-  Column get widget => Column(
+  widget(context) => Column(
         children: $internalComposeGap(GapType.column, gap),
         key: key,
         mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.start,

@@ -81,7 +81,7 @@ class NikuRichText extends StatelessWidget
         textHeightBehavior: textHeightBehavior,
       )..$parent.$merge($parent);
 
-  RichText get widget => RichText(
+  widget(context) => RichText(
         key: key,
         text: text.value,
         textAlign: textAlign ?? TextAlign.start,

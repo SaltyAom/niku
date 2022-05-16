@@ -81,7 +81,7 @@ class NikuDismissible extends StatelessWidget
     behavior = v.behavior ?? behavior;
   }
 
-  Dismissible get widget => Dismissible(
+  widget(context) => Dismissible(
         key: key,
         child: child ?? SizedBox.shrink(),
         background: background,

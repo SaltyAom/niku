@@ -47,7 +47,7 @@ class NikuStack extends StatelessWidget
         clipBehavior: clipBehavior,
       )..$parent.$merge($parent);
 
-  Stack get widget => Stack(
+  widget(context) => Stack(
         key: key,
         children: children,
         alignment: alignment ?? AlignmentDirectional.topStart,

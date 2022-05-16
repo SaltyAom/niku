@@ -70,7 +70,7 @@ class NikuWrap extends StatelessWidget
         clipBehavior: clipBehavior,
       )..$parent.$merge($parent);
 
-  Wrap get widget => Wrap(
+  widget(context) => Wrap(
         children: chidren,
         key: key,
         direction: direction ?? Axis.horizontal,

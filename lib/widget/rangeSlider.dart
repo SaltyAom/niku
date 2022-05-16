@@ -209,7 +209,7 @@ class NikuRangeSlider extends StatelessWidget
         thumbSelector: thumbSelector,
       )..$parent.$merge($parent);
 
-  SliderTheme get widget => SliderTheme(
+  widget(context) => SliderTheme(
         data: SliderThemeData(
           trackHeight: trackHeight,
           activeTrackColor: activeTrackColor,

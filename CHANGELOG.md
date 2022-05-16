@@ -1,3 +1,24 @@
+# [2.3.0-experimental.3] - 2022/05/16
+Breaking Change:
+  - Pass context to `get widget` results in `widget(BuildContext context)`
+
+Feature:
+  - Add material 3 shortcut.
+    - `sparkle` on `NikuButton` as shortcut for `..splashFactory = InkSparkle.splashFactory`
+    - Add Material 3 Typography initialzation shortcut, and Text Factory
+      - displayLarge
+      - displayMedium
+      - displaySmall
+      - titleLarge
+      - titleMedium
+      - titleSmall
+      - bodyLarge
+      - bodyMedium
+      - bodySmall
+      - labelLarge
+      - labelMedium
+      - labelSmall
+
 # [2.3.0-experimental.2] - 2022/04/11
 Breaking Change:
   - Add `labelText` as replacement of `label` which is now accept `Widget`

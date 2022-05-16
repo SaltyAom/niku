@@ -109,7 +109,7 @@ class NikuRadioListTile<T> extends StatelessWidget
         enableFeedback: enableFeedback,
       )..$parent.$merge($parent);
 
-  RadioListTile get widget => RadioListTile<T>(
+  widget(context) => RadioListTile<T>(
         value: value!,
         groupValue: groupValue,
         onChanged: onChanged ?? (_) {},

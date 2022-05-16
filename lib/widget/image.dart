@@ -432,7 +432,7 @@ class NikuImage extends StatelessWidget
         isAntiAlias: isAntiAlias,
       )..$parent.$merge($parent);
 
-  Image get widget => Image(
+  widget(context) => Image(
         key: key,
         image: image,
         frameBuilder: frameBuilder,

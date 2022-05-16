@@ -368,7 +368,7 @@ class NikuAlert extends StatelessWidget
         scrollable: scrollable ?? false,
       );
 
-  Widget get widget {
+  widget(context) {
     if (cupertino) return _buildCupertinoAlert();
 
     if (adaptive)

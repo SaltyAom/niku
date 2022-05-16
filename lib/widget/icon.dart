@@ -42,7 +42,7 @@ class NikuIcon extends StatelessWidget
         textDirection: textDirection,
       )..$parent.$merge($parent);
 
-  Icon get widget => Icon(
+  widget(context) => Icon(
         icon,
         size: size,
         color: color,

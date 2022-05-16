@@ -56,28 +56,56 @@ abstract class TextStyleProxy {
   void get dashed => _style.decorationStyle = TextDecorationStyle.dashed;
   void get wavy => _style.decorationStyle = TextDecorationStyle.wavy;
 
+  static TextTheme _theme(BuildContext context) => _theme(context);
+
   set h1(BuildContext context) =>
-      _style.apply = Theme.of(context).textTheme.headline1?.asNiku;
+      _style.apply = _theme(context).headline1?.asNiku;
   set h2(BuildContext context) =>
-      _style.apply = Theme.of(context).textTheme.headline2?.asNiku;
+      _style.apply = _theme(context).headline2?.asNiku;
   set h3(BuildContext context) =>
-      _style.apply = Theme.of(context).textTheme.headline3?.asNiku;
+      _style.apply = _theme(context).headline3?.asNiku;
   set h4(BuildContext context) =>
-      _style.apply = Theme.of(context).textTheme.headline4?.asNiku;
+      _style.apply = _theme(context).headline4?.asNiku;
   set h5(BuildContext context) =>
-      _style.apply = Theme.of(context).textTheme.headline5?.asNiku;
+      _style.apply = _theme(context).headline5?.asNiku;
   set h6(BuildContext context) =>
-      _style.apply = Theme.of(context).textTheme.headline6?.asNiku;
+      _style.apply = _theme(context).headline6?.asNiku;
   set body1(BuildContext context) =>
-      _style.apply = Theme.of(context).textTheme.bodyText1?.asNiku;
+      _style.apply = _theme(context).bodyText1?.asNiku;
   set body2(BuildContext context) =>
-      _style.apply = Theme.of(context).textTheme.bodyText2?.asNiku;
+      _style.apply = _theme(context).bodyText2?.asNiku;
   set subtitle1(BuildContext context) =>
-      _style.apply = Theme.of(context).textTheme.subtitle1?.asNiku;
+      _style.apply = _theme(context).subtitle1?.asNiku;
   set subtitle2(BuildContext context) =>
-      _style.apply = Theme.of(context).textTheme.subtitle2?.asNiku;
+      _style.apply = _theme(context).subtitle2?.asNiku;
   set overline(BuildContext context) =>
-      _style.apply = Theme.of(context).textTheme.overline?.asNiku;
+      _style.apply = _theme(context).overline?.asNiku;
   set button(BuildContext context) =>
-      _style.apply = Theme.of(context).textTheme.button?.asNiku;
+      _style.apply = _theme(context).button?.asNiku;
+
+  /* Material 3 addition */
+  set displayLarge(BuildContext context) =>
+      _style.apply = _theme(context).displayLarge?.asNiku;
+  set displayMedium(BuildContext context) =>
+      _style.apply = _theme(context).displayMedium?.asNiku;
+  set displaySmall(BuildContext context) =>
+      _style.apply = _theme(context).displaySmall?.asNiku;
+  set titleLarge(BuildContext context) =>
+      _style.apply = _theme(context).titleLarge?.asNiku;
+  set titleMedium(BuildContext context) =>
+      _style.apply = _theme(context).titleMedium?.asNiku;
+  set titleSmall(BuildContext context) =>
+      _style.apply = _theme(context).titleSmall?.asNiku;
+  set bodyLarge(BuildContext context) =>
+      _style.apply = _theme(context).bodyLarge?.asNiku;
+  set bodyMedium(BuildContext context) =>
+      _style.apply = _theme(context).bodyMedium?.asNiku;
+  set bodySmall(BuildContext context) =>
+      _style.apply = _theme(context).bodySmall?.asNiku;
+  set labelLarge(BuildContext context) =>
+      _style.apply = _theme(context).labelLarge?.asNiku;
+  set labelMedium(BuildContext context) =>
+      _style.apply = _theme(context).labelMedium?.asNiku;
+  set labelSmall(BuildContext context) =>
+      _style.apply = _theme(context).labelSmall?.asNiku;
 }

@@ -31,6 +31,10 @@ extension ButtonStyleProxy on NikuButton {
   set splashFactory(InteractiveInkFeatureFactory? v) =>
       _style.splashFactory = v;
 
+  get sparkle => _style.splashFactory = InkSparkle.splashFactory;
+  get m2Splash => _style.splashFactory = InkSplash.splashFactory;
+  get m3Splash => _style.splashFactory = InkSparkle.splashFactory;
+
   // Shorten
   set backgroundColor(Color color) => _style.backgroundColor = color;
   set foregroundColor(Color color) => _style.foregroundColor = color;
@@ -557,16 +561,29 @@ abstract class ButtonStyleTextStyleProxy {
   void get wavy => _all.decorationStyle = TextDecorationStyle.wavy;
 
   // * textThemeStyleMacro
-  set h1(BuildContext context) => _all.h1 = context;
-  set h2(BuildContext context) => _all.h2 = context;
-  set h3(BuildContext context) => _all.h3 = context;
-  set h4(BuildContext context) => _all.h4 = context;
-  set h5(BuildContext context) => _all.h5 = context;
-  set h6(BuildContext context) => _all.h6 = context;
-  set body1(BuildContext context) => _all.body1 = context;
-  set body2(BuildContext context) => _all.body2 = context;
-  set subtitle1(BuildContext context) => _all.subtitle1 = context;
-  set subtitle2(BuildContext context) => _all.subtitle2 = context;
-  set overline(BuildContext context) => _all.overline = context;
-  set button(BuildContext context) => _all.button = context;
+  get h1 => _all.h1;
+  get h2 => _all.h2;
+  get h3 => _all.h3;
+  get h4 => _all.h4;
+  get h5 => _all.h5;
+  get h6 => _all.h6;
+  get body1 => _all.body1;
+  get body2 => _all.body2;
+  get subtitle1 => _all.subtitle1;
+  get subtitle2 => _all.subtitle2;
+  get overline => _all.overline;
+  get button => _all.button;
+
+  get displayLarge => _all.displayLarge;
+  get displayMedium => _all.displayMedium;
+  get displaySmall => _all.displaySmall;
+  get titleLarge => _all.titleLarge;
+  get titleMedium => _all.titleMedium;
+  get titleSmall => _all.titleSmall;
+  get bodyLarge => _all.bodyLarge;
+  get bodyMedium => _all.bodyMedium;
+  get bodySmall => _all.bodySmall;
+  get labelLarge => _all.labelLarge;
+  get labelMedium => _all.labelMedium;
+  get labelSmall => _all.labelSmall;
 }

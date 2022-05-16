@@ -93,7 +93,7 @@ class NikuPadding extends StatelessWidget with NikuBuildMacro<NikuPadding> {
     this.right += right;
   }
 
-  get widget => Padding(
+  widget(context) => Padding(
         key: key,
         child: child,
         padding: EdgeInsets.only(

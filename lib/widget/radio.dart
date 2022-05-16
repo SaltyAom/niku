@@ -90,7 +90,7 @@ class NikuRadio<T> extends StatelessWidget
         autofocus: autofocus,
       )..$parent.$merge($parent);
 
-  Radio get widget => Radio<T>(
+  widget(context) => Radio<T>(
         key: key,
         value: value!,
         groupValue: groupValue,

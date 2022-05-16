@@ -199,7 +199,7 @@ class NikuDropdownButtonFormField<T> extends StatelessWidget
         decoration: decoration,
       )..$parent.$merge($parent);
 
-  DropdownButtonFormField get widget => DropdownButtonFormField<T>(
+  widget(context) => DropdownButtonFormField<T>(
         items: items ??
             itemsValue
                 ?.map(

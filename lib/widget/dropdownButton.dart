@@ -135,7 +135,7 @@ class NikuDropdownButton<T> extends StatelessWidget
         itemsValue: itemsValue,
       )..$parent.$merge($parent);
 
-  get widget => DropdownButton<T>(
+  widget(context) => DropdownButton<T>(
         items: items ??
             itemsValue
                 ?.map(

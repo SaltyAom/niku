@@ -324,7 +324,7 @@ class NikuListView extends StatelessWidget
         childrenDelegate: childrenDelegate,
       )..$parent.$merge($parent);
 
-  get widget {
+  widget(context) {
     switch (type) {
       case NikuListViewType.children:
         return ListView(

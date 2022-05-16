@@ -95,7 +95,7 @@ class NikuCheckbox extends StatelessWidget
         side: side,
       )..$parent.$merge($parent);
 
-  Checkbox get widget => Checkbox(
+  widget(context) => Checkbox(
         value: value,
         onChanged: onChanged,
         mouseCursor: mouseCursor,
