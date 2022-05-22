@@ -1,6 +1,7 @@
 # [2.3.0-experimental.3] - 2022/05/16
 Breaking Change:
   - Pass context to `get widget` results in `widget(BuildContext context)`
+  - Rename `on` to `deps`, and `onGesture` to `on`.
 
 Feature:
   - Add material 3 shortcut.

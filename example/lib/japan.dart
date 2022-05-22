@@ -20,7 +20,7 @@ class JapanPage extends StatelessWidget {
 
   @override
   build(context) {
-    return n.Column([
+    return [
       n.Text('ウエルカム')
         ..color = Color(0xff44517F)
         ..fontSize = 28
@@ -30,14 +30,14 @@ class JapanPage extends StatelessWidget {
         ..size = [200, 200]
         ..bg = Color(0xffFF6160)
         ..rounded
-        ..useGesture(
+        ..on(
           tap: () => showBottomSheet(
             context: context,
             backgroundColor: Colors.transparent,
             builder: (context) => JapanBottomSheet(),
           ),
         ),
-    ])
+    ].n.col
       ..mainEvenly
       ..crossCenter
       ..py = 80
@@ -54,12 +54,11 @@ class JapanBottomSheet extends StatelessWidget {
       n.Text('サインアップ') // button
         ..color = Colors.white
         ..fontSize = 24
-        ..useParent((v) => v
-          ..px = 30
-          ..py = 15
-          ..bg = Color(0xff41508D)
-          ..rounded = 35
-          ..useGesture(tap: () => Navigator.pop(context))),
+        ..mx = 30
+        ..my = 15
+        ..bg = Color(0xff41508D)
+        ..n.rounded = 35
+        ..on(tap: () => Navigator.pop(context)),
       n.Text('サインイン') // bottom description
         ..fontSize = 18
         ..color = Color(0xff455178)
@@ -70,8 +69,7 @@ class JapanBottomSheet extends StatelessWidget {
       ..h = 280
       ..wFull
       ..p = 10
-      ..useParent((v) => v
-        ..bgBlur = 20
-        ..rect);
+      ..n.bgBlur = 20
+      ..n.rect;
   }
 }

@@ -1034,10 +1034,10 @@ extension PropertyBuilder on Niku {
   set focus(Color color) => _applyInkWell(focusColor: color);
   set hover(Color color) => _applyInkWell(hoverColor: color);
 
-  set on(List<dynamic> dependencies) =>
+  set deps(List<dynamic> dependencies) =>
       useChild((child) => NikuOn(() => child, dependencies));
 
-  List<dynamic> get on {
+  List<dynamic> get deps {
     useChild((child) => NikuOn(() => child, []));
 
     return [];
@@ -1227,7 +1227,7 @@ extension PropertyBuilder on Niku {
     );
   }
 
-  void useGesture({
+  void on({
     void Function(TapDownDetails)? tapDown,
     void Function(TapUpDetails)? tapUp,
     VoidCallback? tap,
@@ -1275,53 +1275,55 @@ extension PropertyBuilder on Niku {
     void Function(ScaleUpdateDetails)? scaleUpdate,
     void Function(ScaleEndDetails)? scaleEnd,
   }) =>
-      _add((w) => GestureDetector(
-            onTapDown: tapDown,
-            onTapUp: tapUp,
-            onTap: tap,
-            onTapCancel: tapCancel,
-            onSecondaryTap: secondaryTap,
-            onSecondaryTapDown: secondaryTapDown,
-            onSecondaryTapUp: secondaryTapUp,
-            onSecondaryTapCancel: secondaryTapCancel,
-            onTertiaryTapDown: tertiaryTapDown,
-            onTertiaryTapUp: tertiaryTapUp,
-            onTertiaryTapCancel: tertiaryTapCancel,
-            onDoubleTapDown: doubleTapDown,
-            onDoubleTap: doubleTap,
-            onDoubleTapCancel: doubleTapCancel,
-            onLongPress: longPress,
-            onLongPressStart: longPressStart,
-            onLongPressMoveUpdate: longPressMoveUpdate,
-            onLongPressUp: longPressUp,
-            onLongPressEnd: longPressEnd,
-            onSecondaryLongPress: secondaryLongPress,
-            onSecondaryLongPressStart: secondaryLongPressStart,
-            onSecondaryLongPressMoveUpdate: secondaryLongPressMoveUpdate,
-            onSecondaryLongPressUp: secondaryLongPressUp,
-            onSecondaryLongPressEnd: secondaryLongPressEnd,
-            onVerticalDragDown: verticalDragDown,
-            onVerticalDragStart: verticalDragStart,
-            onVerticalDragUpdate: verticalDragUpdate,
-            onVerticalDragEnd: verticalDragEnd,
-            onVerticalDragCancel: verticalDragCancel,
-            onHorizontalDragDown: horizontalDragDown,
-            onHorizontalDragStart: horizontalDragStart,
-            onHorizontalDragUpdate: horizontalDragUpdate,
-            onHorizontalDragEnd: horizontalDragEnd,
-            onHorizontalDragCancel: horizontalDragCancel,
-            onForcePressStart: forcePressStart,
-            onForcePressPeak: forcePressPeak,
-            onForcePressUpdate: forcePressUpdate,
-            onForcePressEnd: forcePressEnd,
-            onPanDown: panDown,
-            onPanStart: panStart,
-            onPanUpdate: panUpdate,
-            onPanEnd: panEnd,
-            onPanCancel: panCancel,
-            onScaleStart: scaleStart,
-            onScaleUpdate: scaleUpdate,
-            onScaleEnd: scaleEnd,
-            child: w,
-          ));
+      _add(
+        (w) => GestureDetector(
+          onTapDown: tapDown,
+          onTapUp: tapUp,
+          onTap: tap,
+          onTapCancel: tapCancel,
+          onSecondaryTap: secondaryTap,
+          onSecondaryTapDown: secondaryTapDown,
+          onSecondaryTapUp: secondaryTapUp,
+          onSecondaryTapCancel: secondaryTapCancel,
+          onTertiaryTapDown: tertiaryTapDown,
+          onTertiaryTapUp: tertiaryTapUp,
+          onTertiaryTapCancel: tertiaryTapCancel,
+          onDoubleTapDown: doubleTapDown,
+          onDoubleTap: doubleTap,
+          onDoubleTapCancel: doubleTapCancel,
+          onLongPress: longPress,
+          onLongPressStart: longPressStart,
+          onLongPressMoveUpdate: longPressMoveUpdate,
+          onLongPressUp: longPressUp,
+          onLongPressEnd: longPressEnd,
+          onSecondaryLongPress: secondaryLongPress,
+          onSecondaryLongPressStart: secondaryLongPressStart,
+          onSecondaryLongPressMoveUpdate: secondaryLongPressMoveUpdate,
+          onSecondaryLongPressUp: secondaryLongPressUp,
+          onSecondaryLongPressEnd: secondaryLongPressEnd,
+          onVerticalDragDown: verticalDragDown,
+          onVerticalDragStart: verticalDragStart,
+          onVerticalDragUpdate: verticalDragUpdate,
+          onVerticalDragEnd: verticalDragEnd,
+          onVerticalDragCancel: verticalDragCancel,
+          onHorizontalDragDown: horizontalDragDown,
+          onHorizontalDragStart: horizontalDragStart,
+          onHorizontalDragUpdate: horizontalDragUpdate,
+          onHorizontalDragEnd: horizontalDragEnd,
+          onHorizontalDragCancel: horizontalDragCancel,
+          onForcePressStart: forcePressStart,
+          onForcePressPeak: forcePressPeak,
+          onForcePressUpdate: forcePressUpdate,
+          onForcePressEnd: forcePressEnd,
+          onPanDown: panDown,
+          onPanStart: panStart,
+          onPanUpdate: panUpdate,
+          onPanEnd: panEnd,
+          onPanCancel: panCancel,
+          onScaleStart: scaleStart,
+          onScaleUpdate: scaleUpdate,
+          onScaleEnd: scaleEnd,
+          child: w,
+        ),
+      );
 }

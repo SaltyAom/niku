@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
@@ -30,10 +29,10 @@ abstract class NikuBuildMacro<T extends Widget> {
   T get copied => const SizedBox.shrink() as T;
 
   // ? Extra Macro
-  set on(List<dynamic> dependencies) =>
+  set deps(List<dynamic> dependencies) =>
       useParent((w) => Niku(NikuOn(() => w, dependencies)));
 
-  List<dynamic> get on {
+  List<dynamic> get deps {
     useParent((w) => Niku(NikuOn(() => w, [])));
 
     return [];
@@ -338,7 +337,7 @@ abstract class NikuBuildMacro<T extends Widget> {
   set visible(bool visibility) => $parent..visible = visibility;
   get hidden => $parent..hidden;
 
-  void useGesture({
+  void on({
     void Function(TapDownDetails)? tapDown,
     void Function(TapUpDetails)? tapUp,
     VoidCallback? tap,
@@ -388,7 +387,7 @@ abstract class NikuBuildMacro<T extends Widget> {
   }) =>
       useParent(
         (w) => w
-          ..useGesture(
+          ..on(
             tapDown: tapDown,
             tapUp: tapUp,
             tap: tap,
@@ -581,5 +580,228 @@ class NikuExplictParentBuilder {
           spreadRadius: spreadRadius,
           blurStyle: blurStyle,
           rounded: rounded,
+        );
+
+  void useQuery(Function(Niku child, MediaQueryData constraints) builder) =>
+      $parent..useQuery(builder);
+
+  void useSize(Function(Niku child, Size constraints) builder) =>
+      $parent..useSize(builder);
+
+  /// ```dart
+  /// void useScreen({
+  ///   // > 568px
+  ///   Widget Function(Niku)? base,
+  ///   // 568 - 640px
+  ///   Widget Function(Niku)? xs,
+  ///   // 640 - 768px
+  ///   Widget Function(Niku)? sm,
+  ///   // 768 - 920px
+  ///   Widget Function(Niku)? md,
+  ///   // 920 - 1024px
+  ///   Widget Function(Niku)? lg,
+  ///   // > 1024px
+  ///   Widget Function(Niku)? xl,
+  /// })
+  /// ```
+  void useScreen({
+    // > 568px
+    Widget Function(Niku)? base,
+    // 568 - 640px
+    Widget Function(Niku)? xs,
+    // 640 - 768px
+    Widget Function(Niku)? sm,
+    // 768 - 920px
+    Widget Function(Niku)? md,
+    // 920 - 1024px
+    Widget Function(Niku)? lg,
+    // > 1024px
+    Widget Function(Niku)? xl,
+  }) =>
+      $parent
+        ..useScreen(
+          base: base,
+          xs: xs,
+          sm: sm,
+          md: md,
+          lg: lg,
+          xl: xl,
+        );
+
+  void useDarkMode(Widget Function(Niku, bool) builder) =>
+      $parent..useDarkMode(builder);
+
+  void useThemeSelector({
+    required Widget Function(Niku) light,
+    required Widget Function(Niku) dark,
+  }) =>
+      $parent..useThemeSelector(light: light, dark: dark);
+
+  void usePlatform({
+    required Widget Function(Niku) base,
+    required Widget Function(Niku) android,
+    required Widget Function(Niku) iOS,
+    required Widget Function(Niku) fuchsia,
+    required Widget Function(Niku) linux,
+    required Widget Function(Niku) macOS,
+    required Widget Function(Niku) windows,
+    required Widget Function(Niku) web,
+  }) =>
+      $parent
+        ..usePlatform(
+          base: base,
+          android: android,
+          iOS: iOS,
+          fuchsia: fuchsia,
+          linux: linux,
+          macOS: macOS,
+          windows: windows,
+          web: web,
+        );
+
+  void useAnimated<T>({
+    Key? key,
+    required Widget Function(Niku niku, T value) builder,
+    required T value,
+    Duration duration = const Duration(milliseconds: 200),
+    Curve curve = Curves.linear,
+  }) =>
+      $parent
+        ..useAnimated(
+          key: key,
+          builder: builder,
+          value: value,
+          duration: duration,
+          curve: curve,
+        );
+
+  void useTransition<T>({
+    Key? key,
+    required T value,
+    required Widget Function(Niku niku, T value) builder,
+    Duration duration = const Duration(milliseconds: 200),
+    Curve curve = Curves.linear,
+  }) =>
+      $parent
+        ..useTransition(
+          key: key,
+          value: value,
+          builder: builder,
+          duration: duration,
+          curve: curve,
+        );
+
+  void useTransitions({
+    Key? key,
+    required List dependencies,
+    required Widget Function(Niku niku, List dependencies) builder,
+    Duration duration = const Duration(milliseconds: 200),
+    Curve curve = Curves.linear,
+  }) =>
+      $parent
+        ..useTransitions(
+          key: key,
+          dependencies: dependencies,
+          builder: builder,
+          duration: duration,
+          curve: curve,
+        );
+
+  void useGesture({
+    void Function(TapDownDetails)? tapDown,
+    void Function(TapUpDetails)? tapUp,
+    VoidCallback? tap,
+    VoidCallback? tapCancel,
+    VoidCallback? secondaryTap,
+    void Function(TapDownDetails)? secondaryTapDown,
+    void Function(TapUpDetails)? secondaryTapUp,
+    VoidCallback? secondaryTapCancel,
+    void Function(TapDownDetails)? tertiaryTapDown,
+    void Function(TapUpDetails)? tertiaryTapUp,
+    VoidCallback? tertiaryTapCancel,
+    void Function(TapDownDetails)? doubleTapDown,
+    VoidCallback? doubleTap,
+    VoidCallback? doubleTapCancel,
+    VoidCallback? longPress,
+    void Function(LongPressStartDetails)? longPressStart,
+    void Function(LongPressMoveUpdateDetails)? longPressMoveUpdate,
+    VoidCallback? longPressUp,
+    void Function(LongPressEndDetails)? longPressEnd,
+    VoidCallback? secondaryLongPress,
+    void Function(LongPressStartDetails)? secondaryLongPressStart,
+    void Function(LongPressMoveUpdateDetails)? secondaryLongPressMoveUpdate,
+    VoidCallback? secondaryLongPressUp,
+    void Function(LongPressEndDetails)? secondaryLongPressEnd,
+    void Function(DragDownDetails)? verticalDragDown,
+    void Function(DragStartDetails)? verticalDragStart,
+    void Function(DragUpdateDetails)? verticalDragUpdate,
+    void Function(DragEndDetails)? verticalDragEnd,
+    VoidCallback? verticalDragCancel,
+    void Function(DragDownDetails)? horizontalDragDown,
+    void Function(DragStartDetails)? horizontalDragStart,
+    void Function(DragUpdateDetails)? horizontalDragUpdate,
+    void Function(DragEndDetails)? horizontalDragEnd,
+    VoidCallback? horizontalDragCancel,
+    void Function(ForcePressDetails)? forcePressStart,
+    void Function(ForcePressDetails)? forcePressPeak,
+    void Function(ForcePressDetails)? forcePressUpdate,
+    void Function(ForcePressDetails)? forcePressEnd,
+    void Function(DragDownDetails)? panDown,
+    void Function(DragStartDetails)? panStart,
+    void Function(DragUpdateDetails)? panUpdate,
+    void Function(DragEndDetails)? panEnd,
+    VoidCallback? panCancel,
+    void Function(ScaleStartDetails)? scaleStart,
+    void Function(ScaleUpdateDetails)? scaleUpdate,
+    void Function(ScaleEndDetails)? scaleEnd,
+  }) =>
+      $parent
+        ..on(
+          tapDown: tapDown,
+          tapUp: tapUp,
+          tap: tap,
+          tapCancel: tapCancel,
+          secondaryTap: secondaryTap,
+          secondaryTapDown: secondaryTapDown,
+          secondaryTapUp: secondaryTapUp,
+          secondaryTapCancel: secondaryTapCancel,
+          tertiaryTapDown: tertiaryTapDown,
+          tertiaryTapUp: tertiaryTapUp,
+          tertiaryTapCancel: tertiaryTapCancel,
+          doubleTapDown: doubleTapDown,
+          doubleTap: doubleTap,
+          doubleTapCancel: doubleTapCancel,
+          longPress: longPress,
+          longPressStart: longPressStart,
+          longPressMoveUpdate: longPressMoveUpdate,
+          longPressUp: longPressUp,
+          longPressEnd: longPressEnd,
+          secondaryLongPress: secondaryLongPress,
+          secondaryLongPressStart: secondaryLongPressStart,
+          secondaryLongPressMoveUpdate: secondaryLongPressMoveUpdate,
+          secondaryLongPressUp: secondaryLongPressUp,
+          secondaryLongPressEnd: secondaryLongPressEnd,
+          verticalDragDown: verticalDragDown,
+          verticalDragStart: verticalDragStart,
+          verticalDragUpdate: verticalDragUpdate,
+          verticalDragEnd: verticalDragEnd,
+          verticalDragCancel: verticalDragCancel,
+          horizontalDragDown: horizontalDragDown,
+          horizontalDragStart: horizontalDragStart,
+          horizontalDragUpdate: horizontalDragUpdate,
+          horizontalDragEnd: horizontalDragEnd,
+          horizontalDragCancel: horizontalDragCancel,
+          forcePressStart: forcePressStart,
+          forcePressPeak: forcePressPeak,
+          forcePressUpdate: forcePressUpdate,
+          forcePressEnd: forcePressEnd,
+          panDown: panDown,
+          panStart: panStart,
+          panUpdate: panUpdate,
+          panEnd: panEnd,
+          panCancel: panCancel,
+          scaleStart: scaleStart,
+          scaleUpdate: scaleUpdate,
+          scaleEnd: scaleEnd,
         );
 }

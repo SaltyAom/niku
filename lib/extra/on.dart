@@ -43,8 +43,6 @@ class _NikuOnState extends State<NikuOn> {
       return oldWidget!;
     }
 
-    print(previousDependencies);
-
     if (super.widget._dependencies.isEmpty) return oldWidget!;
 
     if (!eq(previousDependencies, super.widget._dependencies)) {

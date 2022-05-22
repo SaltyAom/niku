@@ -133,10 +133,10 @@ class NetworkImageExample extends StatelessWidget {
       body: n.Column([
         n.Image.network(
           "https://avatars.githubusercontent.com/u/35027979?s=400&u=28dbe76d9057768eed7cb2d346203b7c55c153ce&v=4",
-        )..useParent((v) => v
+        )
           ..maxW = 420
           ..rounded = 8
-          ..shadows = [
+          ..n.shadows = [
             BoxShadow(
               color: Colors.black.withOpacity(.1),
               blurRadius: 8,
@@ -148,7 +148,7 @@ class NetworkImageExample extends StatelessWidget {
               offset: Offset(0, 16),
             ),
           ]
-          ..px = 20),
+          ..mx = 20,
         n.Text("Network Image")
           ..h6
           ..useDarkMode(
@@ -182,11 +182,11 @@ class Freezed extends HookWidget {
           groupValue: freezed.value,
           children: {
             false: Text("Reactive").niku
-              ..useGesture(
+              ..on(
                 tap: () => freezed.value = false,
               ),
             true: Text("Freezed").niku
-              ..useGesture(
+              ..on(
                 tap: () => freezed.value = true,
               ),
           },
@@ -195,7 +195,7 @@ class Freezed extends HookWidget {
           },
         ).niku
           ..mb = 16
-          ..on = [freezed.value],
+          ..deps = [freezed.value],
         n.Text("${option.value}")
           ..h6
           ..bold
@@ -212,7 +212,7 @@ class Freezed extends HookWidget {
               xs: (v) => v..bg = Colors.blue.shade50,
             )
             ..rounded
-            ..on = freezed.value ? [] : [option.value]),
+            ..deps = freezed.value ? [] : [option.value]),
         ClipRRect(
           borderRadius: BorderRadius.circular(99999),
           child: LayoutBuilder(
