@@ -345,9 +345,15 @@ class NikuImage extends StatelessWidget
 
   void get antiAlias => isAntiAlias = true;
 
-  void circleProgress(
-    CircularProgressIndicator Function(double? value) builder,
-  ) =>
+  void useCircleProgress({
+    Key? key,
+    Color? backgroundColor,
+    Color? color,
+    Animation<Color?>? valueColor,
+    double strokeWidth = 4.0,
+    String? semanticsLabel,
+    String? semanticsValue,
+  }) =>
       loadingBuilder = (
         BuildContext context,
         Widget child,
@@ -356,8 +362,15 @@ class NikuImage extends StatelessWidget
         if (loadingProgress == null) return child;
 
         return Center(
-          child: builder(
-            loadingProgress.expectedTotalBytes != null
+          child: CircularProgressIndicator(
+            key: key,
+            backgroundColor: backgroundColor,
+            color: color,
+            valueColor: valueColor,
+            strokeWidth: strokeWidth,
+            semanticsLabel: semanticsLabel,
+            semanticsValue: semanticsValue,
+            value: loadingProgress.expectedTotalBytes != null
                 ? loadingProgress.cumulativeBytesLoaded /
                     loadingProgress.expectedTotalBytes!
                 : null,
@@ -365,9 +378,15 @@ class NikuImage extends StatelessWidget
         );
       };
 
-  void linearProgress(
-    Widget Function(double? value) builder,
-  ) =>
+  void useLinearProgress({
+    Key? key,
+    Color? backgroundColor,
+    Color? color,
+    Animation<Color?>? valueColor,
+    double minHeight = 1,
+    String? semanticsLabel,
+    String? semanticsValue,
+  }) =>
       loadingBuilder = (
         BuildContext context,
         Widget child,
@@ -375,8 +394,15 @@ class NikuImage extends StatelessWidget
       ) {
         if (loadingProgress == null) return child;
 
-        return builder(
-          loadingProgress.expectedTotalBytes != null
+        return LinearProgressIndicator(
+          key: key,
+          backgroundColor: backgroundColor,
+          color: color,
+          valueColor: valueColor,
+          minHeight: minHeight,
+          semanticsLabel: semanticsLabel,
+          semanticsValue: semanticsValue,
+          value: loadingProgress.expectedTotalBytes != null
               ? loadingProgress.cumulativeBytesLoaded /
                   loadingProgress.expectedTotalBytes!
               : null,

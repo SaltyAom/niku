@@ -62,7 +62,8 @@ class NikuRangeSlider extends StatelessWidget
       rangeTickMarkShape = RoundRangeSliderTickMarkShape();
 
   NikuRangeSlider(
-    this.data, {
+    double start,
+    double end, {
     Key? key,
     this.onChanged,
     this.onChangeStart,
@@ -104,7 +105,8 @@ class NikuRangeSlider extends StatelessWidget
     this.valueIndicatorTextStyle,
     this.minThumbSeparation,
     this.thumbSelector,
-  }) : super(key: key);
+  })  : data = RangeValues(start, end),
+        super(key: key);
 
   NikuRangeSlider get self => this;
 
@@ -165,7 +167,8 @@ class NikuRangeSlider extends StatelessWidget
   }
 
   NikuRangeSlider get copied => NikuRangeSlider(
-        data,
+        data.start,
+        data.end,
         key: key,
         onChanged: onChanged,
         onChangeStart: onChangeStart,

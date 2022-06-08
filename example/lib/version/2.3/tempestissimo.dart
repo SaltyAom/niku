@@ -82,7 +82,7 @@ class Tempestissimo extends HookWidget {
           )
           ..mt = 20
           ..mb = 12,
-        n.DropdownButtonFormField.label("Hi")
+        n.DropdownButtonFormField<String>.label("Hi")
           ..p = 0
           ..value = option.value
           ..labelText = "Hi"
@@ -93,6 +93,16 @@ class Tempestissimo extends HookWidget {
           ..elevation = 1
           ..wFactor = .9
           ..wMax = 450,
+        "Rich Text: ".n.rich
+          ..useSpan((w) => w
+            ..text = "Span"
+            ..color = Colors.black
+            ..children = [
+              "with ".n.span,
+              "underline".n.span..underline,
+              " and ".n.span,
+              "italic".n.span..italic,
+            ])
       ])
         ..key = Key("Column")
         ..center

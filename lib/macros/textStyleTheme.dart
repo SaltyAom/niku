@@ -5,47 +5,54 @@ abstract class TextStyleThemeMacro {
 
   TextTheme _theme(BuildContext context) => Theme.of(context).textTheme;
 
-  get h1 => themeBuilder = (BuildContext context) => _theme(context).headline1;
-  get h2 => themeBuilder = (BuildContext context) => _theme(context).headline2;
-  get h3 => themeBuilder = (BuildContext context) => _theme(context).headline3;
-  get h4 => themeBuilder = (BuildContext context) => _theme(context).headline4;
-  get h5 => themeBuilder = (BuildContext context) => _theme(context).headline5;
-  get h6 => themeBuilder = (BuildContext context) => _theme(context).headline6;
-  get body1 =>
+  void get h1 =>
+      themeBuilder = (BuildContext context) => _theme(context).headline1;
+  void get h2 =>
+      themeBuilder = (BuildContext context) => _theme(context).headline2;
+  void get h3 =>
+      themeBuilder = (BuildContext context) => _theme(context).headline3;
+  void get h4 =>
+      themeBuilder = (BuildContext context) => _theme(context).headline4;
+  void get h5 =>
+      themeBuilder = (BuildContext context) => _theme(context).headline5;
+  void get h6 =>
+      themeBuilder = (BuildContext context) => _theme(context).headline6;
+  void get body1 =>
       themeBuilder = (BuildContext context) => _theme(context).bodyText1;
-  get body2 =>
+  void get body2 =>
       themeBuilder = (BuildContext context) => _theme(context).bodyText2;
-  get subtitle1 =>
+  void get subtitle1 =>
       themeBuilder = (BuildContext context) => _theme(context).subtitle1;
-  get subtitle2 =>
+  void get subtitle2 =>
       themeBuilder = (BuildContext context) => _theme(context).subtitle2;
-  get overline =>
+  void get overline =>
       themeBuilder = (BuildContext context) => _theme(context).overline;
-  get button => themeBuilder = (BuildContext context) => _theme(context).button;
+  void get button =>
+      themeBuilder = (BuildContext context) => _theme(context).button;
 
   /* Material 3 addition */
-  get displayLarge =>
+  void get displayLarge =>
       themeBuilder = (BuildContext context) => _theme(context).displayLarge;
-  get displayMedium =>
+  void get displayMedium =>
       themeBuilder = (BuildContext context) => _theme(context).displayMedium;
-  get displaySmall =>
+  void get displaySmall =>
       themeBuilder = (BuildContext context) => _theme(context).displaySmall;
-  get titleLarge =>
+  void get titleLarge =>
       themeBuilder = (BuildContext context) => _theme(context).titleLarge;
-  get titleMedium =>
+  void get titleMedium =>
       themeBuilder = (BuildContext context) => _theme(context).titleMedium;
-  get titleSmall =>
+  void get titleSmall =>
       themeBuilder = (BuildContext context) => _theme(context).titleSmall;
-  get bodyLarge =>
+  void get bodyLarge =>
       themeBuilder = (BuildContext context) => _theme(context).bodyLarge;
-  get bodyMedium =>
+  void get bodyMedium =>
       themeBuilder = (BuildContext context) => _theme(context).bodyMedium;
-  get bodySmall =>
+  void get bodySmall =>
       themeBuilder = (BuildContext context) => _theme(context).bodySmall;
-  get labelLarge =>
+  void get labelLarge =>
       themeBuilder = (BuildContext context) => _theme(context).labelLarge;
-  get labelMedium =>
+  void get labelMedium =>
       themeBuilder = (BuildContext context) => _theme(context).labelMedium;
-  get labelSmall =>
+  void get labelSmall =>
       themeBuilder = (BuildContext context) => _theme(context).labelSmall;
 }

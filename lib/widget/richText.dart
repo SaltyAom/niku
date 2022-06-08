@@ -3,9 +3,12 @@
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 
+import 'package:niku/extra/primitive.dart';
+import 'package:niku/widget/text.dart';
+
+import 'textSpan.dart';
 import '../macros/macros.dart';
 import '../objects/objects.dart';
-import 'textSpan.dart';
 
 class NikuRichText extends StatelessWidget
     with
@@ -44,6 +47,7 @@ class NikuRichText extends StatelessWidget
 
   NikuRichText get self => this;
 
+  void useSpan(NikuTextSpan Function(NikuTextSpan) w) => text = w("".n.span);
   void get singleLine => maxLines = 1;
 
   set apply(NikuRichText? v) {

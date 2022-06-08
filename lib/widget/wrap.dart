@@ -40,6 +40,11 @@ class NikuWrap extends StatelessWidget
 
   NikuWrap get self => this;
 
+  void get center {
+    runCenter;
+    crossCenter;
+  }
+
   set apply(NikuWrap? v) {
     if (v == null) return;
 

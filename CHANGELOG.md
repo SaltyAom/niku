@@ -1,3 +1,15 @@
+# [2.3.0-experimental.4] - 
+Breaking Change:
+  - Rename the following property on `Image`:
+    - `circleProgress` -> `useCircleProgress`
+    - `linearProgress` -> `useLinearProgress`
+  - Rename `on` to `deps`, and `onGesture` to `on`.
+
+Change:
+  - Add .offstage, .show shortcut
+  - Update .useScrollbar to Flutter 3
+  - .hidden now based on Offset
+
 # [2.3.0-experimental.3] - 2022/05/16
 Breaking Change:
   - Pass context to `get widget` results in `widget(BuildContext context)`

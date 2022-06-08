@@ -47,6 +47,59 @@ class NikuRadio<T> extends StatelessWidget
   FocusNode? focusNode;
   bool? autofocus;
 
+  set fillColor(Color color) => fillColorState = NikuState.all(color);
+  set overlayColor(Color color) => overlayColorState = NikuState.all(color);
+
+  void useFillColor({
+    Color? all,
+    Color? disabled,
+    Color? dragged,
+    Color? error,
+    Color? focused,
+    Color? hovered,
+    Color? pressed,
+    Color? scrolledUnder,
+    Color? selected,
+    Color? base,
+  }) =>
+      fillColorState = NikuState(
+        all: all ?? fillColorState?.all,
+        disabled: disabled ?? fillColorState?.disabled,
+        dragged: dragged ?? fillColorState?.dragged,
+        error: error ?? fillColorState?.error,
+        focused: focused ?? fillColorState?.focused,
+        hovered: hovered ?? fillColorState?.hovered,
+        pressed: pressed ?? fillColorState?.pressed,
+        scrolledUnder: scrolledUnder ?? fillColorState?.scrolledUnder,
+        selected: selected ?? fillColorState?.selected,
+        base: base ?? fillColorState?.base,
+      );
+
+  void useOverlayColor({
+    Color? all,
+    Color? disabled,
+    Color? dragged,
+    Color? error,
+    Color? focused,
+    Color? hovered,
+    Color? pressed,
+    Color? scrolledUnder,
+    Color? selected,
+    Color? base,
+  }) =>
+      overlayColorState = NikuState(
+        all: all ?? fillColorState?.all,
+        disabled: disabled ?? fillColorState?.disabled,
+        dragged: dragged ?? fillColorState?.dragged,
+        error: error ?? fillColorState?.error,
+        focused: focused ?? fillColorState?.focused,
+        hovered: hovered ?? fillColorState?.hovered,
+        pressed: pressed ?? fillColorState?.pressed,
+        scrolledUnder: scrolledUnder ?? fillColorState?.scrolledUnder,
+        selected: selected ?? fillColorState?.selected,
+        base: base ?? fillColorState?.base,
+      );
+
   NikuRadio get self => this;
 
   set apply(NikuRadio? v) {

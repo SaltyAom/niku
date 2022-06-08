@@ -44,7 +44,7 @@ extension PropertyBuilder on Niku {
   void _replace(Widget Function(Widget) builder) =>
       $parent[$parent.length - 1] = builder;
 
-  // ? Only use in debugging Tempestissimo, will be removed on stable
+  // ? Show parent stack
   $debugDescribeProperty() {
     $parent.forEach((v) {
       print(" - ${v(SizedBox.shrink())}");
@@ -781,6 +781,20 @@ extension PropertyBuilder on Niku {
     return 1;
   }
 
+  set offstage(bool offstage) => _add(
+        (w) => Offstage(
+          child: w,
+          offstage: offstage,
+        ),
+      );
+
+  set hidden(bool hidden) => offstage = hidden;
+  bool get hidden {
+    offstage = true;
+
+    return true;
+  }
+
   set shadow(BoxShadow v) => _applyBoxDecorationProperty(boxShadow: [v]);
   set shadows(List<BoxShadow> v) => _applyBoxDecorationProperty(boxShadow: v);
 
@@ -821,7 +835,7 @@ extension PropertyBuilder on Niku {
         ),
       );
 
-  get wrap => _add((w) => Wrap(children: [w]));
+  void get wrap => _add((w) => Wrap(children: [w]));
   void get sliverToBox => _add((w) => SliverToBoxAdapter(child: w));
 
   set formKey(Key v) => _add((w) => Form(key: v, child: w));
@@ -845,21 +859,42 @@ extension PropertyBuilder on Niku {
 
   void useScrollbar({
     ScrollController? controller,
-    bool? isAlwaysShown,
-    bool? showTrackOnHover,
-    double? hoverThickness,
+    bool? thumbVisibility,
+    bool? trackVisibility,
     double? thickness,
     Radius? radius,
     ScrollNotificationPredicate? notificationPredicate,
+    bool? interactive,
+    ScrollbarOrientation? scrollbarOrientation,
+    @Deprecated(
+      'Use ScrollbarThemeData.trackVisibility to resolve based on the current state instead. '
+      'This feature was deprecated after v2.9.0-1.0.pre.',
+    )
+        bool? showTrackOnHover,
+    @Deprecated(
+      'Use thumbVisibility instead. '
+      'This feature was deprecated after v2.9.0-1.0.pre.',
+    )
+        bool? isAlwaysShown,
+    @Deprecated(
+      'Use ScrollbarThemeData.trackVisibility to resolve based on the current state instead. '
+      'This feature was deprecated after v2.9.0-1.0.pre.',
+    )
+        double? hoverThickness,
   }) =>
       _add((w) => Scrollbar(
             child: w,
             controller: controller,
-            isAlwaysShown: isAlwaysShown,
-            hoverThickness: hoverThickness,
+            thumbVisibility: thumbVisibility,
+            trackVisibility: trackVisibility,
             thickness: thickness,
             radius: radius,
             notificationPredicate: notificationPredicate,
+            interactive: interactive,
+            scrollbarOrientation: scrollbarOrientation,
+            showTrackOnHover: showTrackOnHover,
+            isAlwaysShown: isAlwaysShown,
+            hoverThickness: hoverThickness,
           ));
 
   void get scrollable => _add((w) => SingleChildScrollView(child: w));
@@ -890,8 +925,6 @@ extension PropertyBuilder on Niku {
         visible: visibility,
         child: w,
       ));
-
-  get hidden => _add((w) => Visibility(child: w, visible: false));
 
   void useChild(Widget Function(Niku child) builder) =>
       _add((w) => builder(w.niku));
@@ -976,11 +1009,11 @@ extension PropertyBuilder on Niku {
     );
   }
 
-  get material => _add(
+  void get material => _add(
         (w) => Material(child: w, type: MaterialType.transparency),
       );
 
-  _applyInkWell({
+  void _applyInkWell({
     Color? highlightColor,
     Color? splashColor,
     Color? focusColor,
@@ -1136,38 +1169,45 @@ extension PropertyBuilder on Niku {
   }
 
   void usePlatform({
-    required Widget Function(Niku) base,
-    required Widget Function(Niku) android,
-    required Widget Function(Niku) iOS,
-    required Widget Function(Niku) fuchsia,
-    required Widget Function(Niku) linux,
-    required Widget Function(Niku) macOS,
-    required Widget Function(Niku) windows,
-    required Widget Function(Niku) web,
+    Widget Function(Niku)? base,
+    Widget Function(Niku)? android,
+    Widget Function(Niku)? iOS,
+    Widget Function(Niku)? fuchsia,
+    Widget Function(Niku)? linux,
+    Widget Function(Niku)? macOS,
+    Widget Function(Niku)? windows,
+    Widget Function(Niku)? web,
   }) {
     useChild(
       (child) => Builder(
         builder: (context) {
-          final c = child.build(context).niku;
-
-          if (kIsWeb) return web(c);
-
-          switch (Theme.of(context).platform) {
-            case TargetPlatform.android:
-              return android(c);
-            case TargetPlatform.iOS:
-              return iOS(c);
-            case TargetPlatform.fuchsia:
-              return fuchsia(c);
-            case TargetPlatform.linux:
-              return linux(c);
-            case TargetPlatform.macOS:
-              return macOS(c);
-            case TargetPlatform.windows:
-              return windows(c);
-            default:
-              return base(c);
+          fallback(Widget Function(Niku)? builder) {
+            if (builder != null) return builder(child);
+            return child;
           }
+
+          if (kIsWeb)
+            return fallback(web);
+          else
+            switch (Theme.of(context).platform) {
+              case TargetPlatform.android:
+                return fallback(android);
+
+              case TargetPlatform.iOS:
+                return fallback(iOS);
+
+              case TargetPlatform.fuchsia:
+                return fallback(fuchsia);
+
+              case TargetPlatform.linux:
+                return fallback(linux);
+
+              case TargetPlatform.macOS:
+                return fallback(macOS);
+
+              case TargetPlatform.windows:
+                return fallback(windows);
+            }
         },
       ),
     );
@@ -1326,4 +1366,13 @@ extension PropertyBuilder on Niku {
           child: w,
         ),
       );
+
+  onNotification(bool Function(Notification)? onNotification) {
+    _add(
+      (w) => NotificationListener(
+        child: w,
+        onNotification: onNotification,
+      ),
+    );
+  }
 }

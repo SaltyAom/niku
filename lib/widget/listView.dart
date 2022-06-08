@@ -17,7 +17,7 @@ class NikuListView extends StatelessWidget
   ScrollController? controller;
   bool? primary;
   ScrollPhysics? physics;
-  bool? shrinkWrap;
+  bool? _shrinkWrap;
   NikuEdgeInsets? padding;
   double? itemExtent;
   Widget? prototypeItem;
@@ -45,7 +45,7 @@ class NikuListView extends StatelessWidget
     this.controller,
     this.primary,
     this.physics,
-    this.shrinkWrap,
+    bool? shrinkWrap,
     this.padding,
     this.itemExtent,
     this.prototypeItem,
@@ -63,7 +63,8 @@ class NikuListView extends StatelessWidget
     this.itemBuilder,
     this.separatorBuilder,
     this.childrenDelegate,
-  }) : super(key: key);
+  })  : _shrinkWrap = shrinkWrap,
+        super(key: key);
 
   factory NikuListView.children(
     List<Widget>? children, {
@@ -250,6 +251,15 @@ class NikuListView extends StatelessWidget
         clipBehavior: clipBehavior,
       );
 
+  /// @default true
+  bool get shrinkWrap {
+    _shrinkWrap = true;
+
+    return true;
+  }
+
+  set shrinkWrap(bool value) => _shrinkWrap = value;
+
   void get neverScroll => physics = NeverScrollableScrollPhysics();
 
   set total(int value) => itemCount = value;
@@ -273,7 +283,7 @@ class NikuListView extends StatelessWidget
     controller = v.controller ?? controller;
     primary = v.primary ?? primary;
     physics = v.physics ?? physics;
-    shrinkWrap = v.shrinkWrap ?? shrinkWrap;
+    _shrinkWrap = v._shrinkWrap ?? _shrinkWrap;
     padding = v.padding ?? padding;
     itemExtent = v.itemExtent ?? itemExtent;
     prototypeItem = v.prototypeItem ?? prototypeItem;
@@ -334,7 +344,7 @@ class NikuListView extends StatelessWidget
           controller: controller,
           primary: primary,
           physics: physics,
-          shrinkWrap: shrinkWrap ?? false,
+          shrinkWrap: _shrinkWrap ?? false,
           padding: padding?.value,
           itemExtent: itemExtent,
           prototypeItem: prototypeItem,
@@ -359,7 +369,7 @@ class NikuListView extends StatelessWidget
           controller: controller,
           primary: primary,
           physics: physics,
-          shrinkWrap: shrinkWrap ?? false,
+          shrinkWrap: _shrinkWrap ?? false,
           padding: padding?.value,
           itemExtent: itemExtent,
           prototypeItem: prototypeItem,
@@ -385,7 +395,7 @@ class NikuListView extends StatelessWidget
           controller: controller,
           primary: primary,
           physics: physics,
-          shrinkWrap: shrinkWrap ?? false,
+          shrinkWrap: _shrinkWrap ?? false,
           padding: padding?.value,
           itemBuilder: itemBuilder!,
           separatorBuilder: separatorBuilder!,
@@ -409,7 +419,7 @@ class NikuListView extends StatelessWidget
           controller: controller,
           primary: primary,
           physics: physics,
-          shrinkWrap: shrinkWrap ?? false,
+          shrinkWrap: _shrinkWrap ?? false,
           padding: padding?.value,
           itemExtent: itemExtent,
           prototypeItem: prototypeItem,
@@ -431,7 +441,7 @@ class NikuListView extends StatelessWidget
           controller: controller,
           primary: primary,
           physics: physics,
-          shrinkWrap: shrinkWrap ?? false,
+          shrinkWrap: _shrinkWrap ?? false,
           padding: padding?.value,
           itemExtent: itemExtent,
           prototypeItem: prototypeItem,

@@ -56,6 +56,7 @@ class NikuRadioListTile<T> extends StatelessWidget
   bool? enableFeedback;
 
   bool get checked => value == groupValue;
+  bool get isDense => dense = true;
 
   NikuRadioListTile get self => this;
 

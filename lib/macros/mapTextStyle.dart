@@ -67,30 +67,30 @@ abstract class MapTextStyleMacro {
   set overflow(TextOverflow v) => _style.overflow = v;
   set package(String v) => _style.package = v;
 
-  get h1 => _style.h1;
-  get h2 => _style.h2;
-  get h3 => _style.h3;
-  get h4 => _style.h4;
-  get h5 => _style.h5;
-  get h6 => _style.h6;
-  get body1 => _style.body1;
-  get body2 => _style.body2;
-  get subtitle1 => _style.subtitle1;
-  get subtitle2 => _style.subtitle2;
-  get button => _style.button;
-  get overline => _style.overline;
+  void get h1 => _style.h1;
+  void get h2 => _style.h2;
+  void get h3 => _style.h3;
+  void get h4 => _style.h4;
+  void get h5 => _style.h5;
+  void get h6 => _style.h6;
+  void get body1 => _style.body1;
+  void get body2 => _style.body2;
+  void get subtitle1 => _style.subtitle1;
+  void get subtitle2 => _style.subtitle2;
+  void get button => _style.button;
+  void get overline => _style.overline;
 
   /* Material 3 Addition */
-  get displayLarge => _style..displayLarge;
-  get displayMedium => _style..displayMedium;
-  get displaySmall => _style..displaySmall;
-  get titleLarge => _style..titleLarge;
-  get titleMedium => _style..titleMedium;
-  get titleSmall => _style..titleSmall;
-  get bodyLarge => _style..bodyLarge;
-  get bodyMedium => _style..bodyMedium;
-  get bodySmall => _style..bodySmall;
-  get labelLarge => _style..labelLarge;
-  get labelMedium => _style..labelMedium;
-  get labelSmall => _style..labelSmall;
+  void get displayLarge => _style.displayLarge;
+  void get displayMedium => _style.displayMedium;
+  void get displaySmall => _style.displaySmall;
+  void get titleLarge => _style.titleLarge;
+  void get titleMedium => _style.titleMedium;
+  void get titleSmall => _style.titleSmall;
+  void get bodyLarge => _style.bodyLarge;
+  void get bodyMedium => _style.bodyMedium;
+  void get bodySmall => _style.bodySmall;
+  void get labelLarge => _style.labelLarge;
+  void get labelMedium => _style.labelMedium;
+  void get labelSmall => _style.labelSmall;
 }

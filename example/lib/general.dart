@@ -47,6 +47,7 @@ class General extends HookWidget {
         elevation: 0,
         actions: [
           n.PopupMenuButton(Icons.edit.n..color = Colors.white)
+            ..onSelected
             ..items = [1, 2, 3]
             ..elevation = 2
             ..mr = 12

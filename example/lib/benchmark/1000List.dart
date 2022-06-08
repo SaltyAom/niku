@@ -40,7 +40,7 @@ class ThousandList extends StatelessWidget {
               ..mt = 20
               ..mb = 12),
         ])
-          ..shrinkWrap = true
+          ..shrinkWrap
           ..neverScroll
       ])
         ..scrollable,

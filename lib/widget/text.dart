@@ -1,5 +1,6 @@
 // ignore_for_file: deprecated_member_use_from_same_package
 import 'package:flutter/material.dart';
+import 'package:niku/widget/selectableText.dart';
 import 'dart:ui' as ui;
 
 import 'richText.dart';
@@ -952,6 +953,44 @@ class NikuText extends StatelessWidget
         semanticsLabel: this.semanticsLabel,
         textWidthBasis: this.textWidthBasis,
         textHeightBehavior: this.textHeightBehavior,
+      );
+}
+
+extension NikuTextTransformType on NikuText {
+  NikuTextSpan get span => NikuTextSpan(
+        text,
+        key: key,
+        style: style,
+        semanticsLabel: semanticsLabel,
+        locale: locale,
+      );
+
+  NikuRichText get rich => NikuRichText(
+        NikuTextSpan(text ?? ""),
+        key: key,
+        textAlign: textAlign,
+        textDirection: textDirection,
+        softWrap: softWrap,
+        overflow: overflow,
+        textScaleFactor: textScaleFactor,
+        maxLines: maxLines,
+        locale: locale,
+        strutStyle: strutStyle,
+        textWidthBasis: textWidthBasis,
+        textHeightBehavior: textHeightBehavior,
+      );
+
+  NikuSelectableText get select => NikuSelectableText(
+        text,
+        key: key,
+        style: style,
+        strutStyle: strutStyle,
+        textAlign: textAlign,
+        textDirection: textDirection,
+        textScaleFactor: textScaleFactor,
+        maxLines: maxLines,
+        textWidthBasis: textWidthBasis,
+        textHeightBehavior: textHeightBehavior,
       );
 }
 

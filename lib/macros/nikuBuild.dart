@@ -287,6 +287,9 @@ abstract class NikuBuildMacro<T extends Widget> {
   get wrap => $parent..wrap;
   void get sliverToBox => $parent..sliverToBox;
 
+  set tooltip(String v) => $parent..tooltip = v;
+  set tip(String v) => tooltip = v;
+
   set formKey(Key v) => $parent..formKey = v;
   void useForm({
     Key? key,
@@ -638,14 +641,14 @@ class NikuExplictParentBuilder {
       $parent..useThemeSelector(light: light, dark: dark);
 
   void usePlatform({
-    required Widget Function(Niku) base,
-    required Widget Function(Niku) android,
-    required Widget Function(Niku) iOS,
-    required Widget Function(Niku) fuchsia,
-    required Widget Function(Niku) linux,
-    required Widget Function(Niku) macOS,
-    required Widget Function(Niku) windows,
-    required Widget Function(Niku) web,
+    Widget Function(Niku)? base,
+    Widget Function(Niku)? android,
+    Widget Function(Niku)? iOS,
+    Widget Function(Niku)? fuchsia,
+    Widget Function(Niku)? linux,
+    Widget Function(Niku)? macOS,
+    Widget Function(Niku)? windows,
+    Widget Function(Niku)? web,
   }) =>
       $parent
         ..usePlatform(
