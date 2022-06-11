@@ -20,7 +20,7 @@ class JapanPage extends StatelessWidget {
 
   @override
   build(context) {
-    return [
+    return n.Column([
       n.Text('ウエルカム')
         ..color = Color(0xff44517F)
         ..fontSize = 28
@@ -37,7 +37,7 @@ class JapanPage extends StatelessWidget {
             builder: (context) => JapanBottomSheet(),
           ),
         ),
-    ].n.col
+    ])
       ..mainEvenly
       ..crossCenter
       ..py = 80
