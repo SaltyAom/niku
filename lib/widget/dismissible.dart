@@ -6,10 +6,7 @@ import 'niku.dart';
 
 // ignore: must_be_immutable
 class NikuDismissible extends StatelessWidget
-    with
-        NikuBuildMacro<NikuDismissible>,
-        UseQueryMacro<NikuDismissible>,
-        DismissDirectionMacro {
+    with NikuBuildMacro<NikuDismissible>, DismissDirectionMacro {
   NikuDismissible(
     this.key, {
     this.child,
@@ -84,7 +81,7 @@ class NikuDismissible extends StatelessWidget
     behavior = v.behavior ?? behavior;
   }
 
-  Dismissible get widget => Dismissible(
+  widget(context) => Dismissible(
         key: key,
         child: child ?? SizedBox.shrink(),
         background: background,

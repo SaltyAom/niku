@@ -27,6 +27,7 @@ class _NikuOnState extends State<NikuOn> {
 
   @override
   Widget build(context) {
+    /// Screen size / Orientation change
     final width = MediaQuery.of(context).size.width;
 
     if (_prevWidth != width) {

@@ -5,10 +5,7 @@ import '../objects/objects.dart';
 
 // ignore: must_be_immutable
 class NikuPopupMenuButton<T> extends StatelessWidget
-    with
-        NikuBuildMacro<NikuPopupMenuButton>,
-        UseQueryMacro<NikuPopupMenuButton>,
-        PaddingMacro {
+    with NikuBuildMacro<NikuPopupMenuButton>, PaddingMacro {
   NikuPopupMenuButton(
     this.child, {
     Key? key,
@@ -64,7 +61,7 @@ class NikuPopupMenuButton<T> extends StatelessWidget
     color = v.color ?? color;
     enableFeedback = v.enableFeedback ?? enableFeedback;
     iconSize = v.iconSize ?? iconSize;
-    $internalParent..addAll(v.$internalParent);
+    $parent..$merge(v.$parent);
   }
 
   NikuPopupMenuButton<T> get copied => NikuPopupMenuButton<T>(
@@ -85,9 +82,9 @@ class NikuPopupMenuButton<T> extends StatelessWidget
         iconSize: iconSize,
         items: items,
         itemBuilder: itemBuilder,
-      )..$internalParent.addAll($internalParent);
+      )..$parent.$merge($parent);
 
-  PopupMenuButton get widget => PopupMenuButton<T>(
+  widget(context) => PopupMenuButton<T>(
         initialValue: initialValue,
         itemBuilder: itemBuilder ??
             (items != null

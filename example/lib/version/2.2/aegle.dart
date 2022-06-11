@@ -27,7 +27,7 @@ class AegleSeeker extends HookWidget {
         ],
       ),
       body: n.Column([
-        n.Text("AegleSeeker")..h4 = context,
+        n.Text("AegleSeeker")..h4,
         n.Button(Text("Toggle"))
           ..onPressed = () {
             toggle.value = !toggle.value;

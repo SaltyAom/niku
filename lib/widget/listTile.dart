@@ -5,11 +5,7 @@ import 'package:niku/objects/objects.dart';
 
 // ignore: must_be_immutable
 class NikuListTile extends StatelessWidget
-    with
-        NikuBuildMacro<NikuListTile>,
-        UseQueryMacro<NikuListTile>,
-        ContentPaddingMacro,
-        FocusNodeMacro {
+    with NikuBuildMacro<NikuListTile>, ContentPaddingMacro, FocusNodeMacro {
   Key? key;
   Widget? leading;
   Widget? title;
@@ -114,7 +110,7 @@ class NikuListTile extends StatelessWidget
     minVerticalPadding = v.minVerticalPadding ?? minVerticalPadding;
     minLeadingWidth = v.minLeadingWidth ?? minLeadingWidth;
 
-    $internalParent.addAll(v.$internalParent);
+    $parent..$merge(v.$parent);
   }
 
   NikuListTile get copied => NikuListTile(
@@ -147,9 +143,9 @@ class NikuListTile extends StatelessWidget
         horizontalTitleGap: horizontalTitleGap,
         minVerticalPadding: minVerticalPadding,
         minLeadingWidth: minLeadingWidth,
-      )..$internalParent.addAll($internalParent);
+      )..$parent.$merge($parent);
 
-  ListTile get widget => ListTile(
+  widget(context) => ListTile(
         key: key,
         leading: leading,
         title: title,

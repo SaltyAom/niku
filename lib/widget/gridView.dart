@@ -14,11 +14,7 @@ enum NikuGridViewType {
 
 // ignore: must_be_immutable
 class NikuGridView extends StatelessWidget
-    with
-        NikuBuildMacro<NikuGridView>,
-        UseQueryMacro<NikuGridView>,
-        ClipMacro,
-        PaddingMacro {
+    with NikuBuildMacro<NikuGridView>, ClipMacro, PaddingMacro {
   NikuGridViewType? type = NikuGridViewType.count;
 
   List<Widget>? children;
@@ -376,7 +372,7 @@ class NikuGridView extends StatelessWidget
     gridDelegate = v.gridDelegate ?? gridDelegate;
     childrenDelegate = v.childrenDelegate ?? childrenDelegate;
 
-    $internalParent..addAll(v.$internalParent);
+    $parent..$merge(v.$parent);
   }
 
   NikuGridView get copied => NikuGridView(
@@ -408,9 +404,9 @@ class NikuGridView extends StatelessWidget
         maxCrossExtent: maxCrossExtent,
         gridDelegate: gridDelegate,
         childrenDelegate: childrenDelegate,
-      )..$internalParent.addAll($internalParent);
+      )..$parent.$merge($parent);
 
-  GridView get widget {
+  widget(context) {
     switch (type) {
       case NikuGridViewType.builder:
         return GridView.builder(

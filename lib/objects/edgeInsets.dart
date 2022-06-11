@@ -13,12 +13,38 @@ class NikuEdgeInsets {
     this.right,
   });
 
+  factory NikuEdgeInsets.only({
+    double? top,
+    double? left,
+    double? bottom,
+    double? right,
+  }) =>
+      NikuEdgeInsets(
+        top: top,
+        left: left,
+        bottom: bottom,
+        right: right,
+      );
+
   factory NikuEdgeInsets.all(double value) => NikuEdgeInsets(
         top: value,
         left: value,
         bottom: value,
         right: value,
       );
+
+  factory NikuEdgeInsets.symmetric({
+    double? horizontal,
+    double? vertical,
+  }) =>
+      NikuEdgeInsets(
+        top: vertical,
+        left: horizontal,
+        bottom: vertical,
+        right: horizontal,
+      );
+
+  static const EdgeInsets zero = EdgeInsets.only();
 
   set pt(double padding) => top = padding;
   set pl(double padding) => left = padding;

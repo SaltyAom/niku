@@ -7,7 +7,6 @@ import '../objects/objects.dart';
 class NikuRangeSlider extends StatelessWidget
     with
         NikuBuildMacro<NikuRangeSlider>,
-        UseQueryMacro<NikuRangeSlider>,
         ApplyTextMacro,
         ApplyValueIndicatorTextStyleMacro,
         FocusNodeMacro {
@@ -63,7 +62,8 @@ class NikuRangeSlider extends StatelessWidget
       rangeTickMarkShape = RoundRangeSliderTickMarkShape();
 
   NikuRangeSlider(
-    this.data, {
+    double start,
+    double end, {
     Key? key,
     this.onChanged,
     this.onChangeStart,
@@ -105,7 +105,8 @@ class NikuRangeSlider extends StatelessWidget
     this.valueIndicatorTextStyle,
     this.minThumbSeparation,
     this.thumbSelector,
-  }) : super(key: key);
+  })  : data = RangeValues(start, end),
+        super(key: key);
 
   NikuRangeSlider get self => this;
 
@@ -162,11 +163,12 @@ class NikuRangeSlider extends StatelessWidget
         v.valueIndicatorTextStyle ?? valueIndicatorTextStyle;
     minThumbSeparation = v.minThumbSeparation ?? minThumbSeparation;
     thumbSelector = v.thumbSelector ?? thumbSelector;
-    $internalParent..addAll(v.$internalParent);
+    $parent..$merge(v.$parent);
   }
 
   NikuRangeSlider get copied => NikuRangeSlider(
-        data,
+        data.start,
+        data.end,
         key: key,
         onChanged: onChanged,
         onChangeStart: onChangeStart,
@@ -208,9 +210,9 @@ class NikuRangeSlider extends StatelessWidget
         valueIndicatorTextStyle: valueIndicatorTextStyle,
         minThumbSeparation: minThumbSeparation,
         thumbSelector: thumbSelector,
-      )..$internalParent.addAll($internalParent);
+      )..$parent.$merge($parent);
 
-  SliderTheme get widget => SliderTheme(
+  widget(context) => SliderTheme(
         data: SliderThemeData(
           trackHeight: trackHeight,
           activeTrackColor: activeTrackColor,

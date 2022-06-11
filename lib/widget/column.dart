@@ -8,7 +8,6 @@ class NikuColumn extends StatelessWidget
     with
         AxisLayoutProxy,
         NikuBuildMacro<NikuColumn>,
-        UseQueryMacro<NikuColumn>,
         ClipMacro,
         CrossAxisAlignmentMacro,
         GapMacro,
@@ -27,10 +26,11 @@ class NikuColumn extends StatelessWidget
   TextBaseline? textBaseline;
   Clip? clipBehavior;
   double? gap;
+  Key? key;
 
   NikuColumn(
     this.children, {
-    Key? key,
+    this.key,
     this.mainAxisAlignment,
     this.mainAxisSize,
     this.crossAxisAlignment,
@@ -52,7 +52,7 @@ class NikuColumn extends StatelessWidget
     textBaseline = v.textBaseline ?? textBaseline;
     gap = v.gap ?? gap;
 
-    $internalParent..addAll(v.$internalParent);
+    $parent..$merge(v.$parent);
   }
 
   NikuColumn get copied => NikuColumn(
@@ -64,10 +64,10 @@ class NikuColumn extends StatelessWidget
         textDirection: textDirection,
         verticalDirection: verticalDirection,
         textBaseline: textBaseline,
-      )..$internalParent.addAll($internalParent);
+      )..$parent.$merge($parent);
 
-  Column get widget => Column(
-        children: $internalComposeGap(gap),
+  widget(context) => Column(
+        children: $internalComposeGap(GapType.column, gap),
         key: key,
         mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.start,
         mainAxisSize: mainAxisSize ?? MainAxisSize.max,

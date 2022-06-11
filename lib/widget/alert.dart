@@ -75,7 +75,6 @@ Future<void> showNikuDialog({
 class NikuAlert extends StatelessWidget
     with
         NikuBuildMacro<NikuAlert>,
-        UseQueryMacro<NikuAlert>,
         ActionPaddingFullMacro,
         ApplyTitleTextMacro,
         ApplyContentTextMacro,
@@ -280,7 +279,7 @@ class NikuAlert extends StatelessWidget
     shape = shape ?? shape;
     scrollable = scrollable ?? scrollable;
 
-    $internalParent.addAll(v.$internalParent);
+    $parent.$merge(v.$parent);
   }
 
   NikuAlert get copied => NikuAlert(
@@ -306,7 +305,7 @@ class NikuAlert extends StatelessWidget
         scrollable: scrollable,
         cupertino: cupertino,
         adaptive: adaptive,
-      )..$internalParent.addAll($internalParent);
+      )..$parent.$merge($parent);
 
   static List<Widget> _mapWidgetToCupertino(List<Widget> children) =>
       children.map((e) {
@@ -369,7 +368,7 @@ class NikuAlert extends StatelessWidget
         scrollable: scrollable ?? false,
       );
 
-  Widget get widget {
+  widget(context) {
     if (cupertino) return _buildCupertinoAlert();
 
     if (adaptive)

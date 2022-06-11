@@ -10,7 +10,6 @@ enum NikuSliderType { material, adaptive, cupertino }
 class NikuSlider extends StatelessWidget
     with
         NikuBuildMacro<NikuSlider>,
-        UseQueryMacro<NikuSlider>,
         ApplyTextMacro,
         ApplyValueIndicatorTextStyleMacro,
         FocusNodeMacro {
@@ -348,7 +347,7 @@ class NikuSlider extends StatelessWidget
     minThumbSeparation = v.minThumbSeparation ?? minThumbSeparation;
     thumbSelector = v.thumbSelector ?? thumbSelector;
 
-    $internalParent..addAll(v.$internalParent);
+    $parent..$merge(v.$parent);
   }
 
   NikuSlider get copied => NikuSlider(
@@ -395,9 +394,9 @@ class NikuSlider extends StatelessWidget
         valueIndicatorTextStyle: valueIndicatorTextStyle,
         minThumbSeparation: minThumbSeparation,
         thumbSelector: thumbSelector,
-      )..$internalParent.addAll($internalParent);
+      )..$parent.$merge($parent);
 
-  SliderTheme get widget => SliderTheme(
+  widget(context) => SliderTheme(
         data: SliderThemeData(
           trackHeight: trackHeight,
           activeTrackColor: activeTrackColor,

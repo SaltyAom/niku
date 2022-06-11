@@ -6,7 +6,6 @@ import '../macros/macros.dart';
 class NikuWrap extends StatelessWidget
     with
         NikuBuildMacro<NikuWrap>,
-        UseQueryMacro<NikuWrap>,
         AxisMacro,
         ClipMacro,
         RunAlignmentMacro,
@@ -41,6 +40,11 @@ class NikuWrap extends StatelessWidget
 
   NikuWrap get self => this;
 
+  void get center {
+    runCenter;
+    crossCenter;
+  }
+
   set apply(NikuWrap? v) {
     if (v == null) return;
 
@@ -54,7 +58,7 @@ class NikuWrap extends StatelessWidget
     this.verticalDirection = v.verticalDirection ?? verticalDirection;
     this.clipBehavior = v.clipBehavior ?? clipBehavior;
 
-    $internalParent..addAll(v.$internalParent);
+    $parent..$merge(v.$parent);
   }
 
   NikuWrap get copied => NikuWrap(
@@ -69,9 +73,9 @@ class NikuWrap extends StatelessWidget
         textDirection: textDirection,
         verticalDirection: verticalDirection,
         clipBehavior: clipBehavior,
-      )..$internalParent.addAll($internalParent);
+      )..$parent.$merge($parent);
 
-  Wrap get widget => Wrap(
+  widget(context) => Wrap(
         children: chidren,
         key: key,
         direction: direction ?? Axis.horizontal,

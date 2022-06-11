@@ -1,3 +1,84 @@
+# [2.3.0-experimental.4] - 
+Breaking Change:
+  - Rename the following property on `Image`:
+    - `circleProgress` -> `useCircleProgress`
+    - `linearProgress` -> `useLinearProgress`
+  - Rename `on` to `deps`, and `onGesture` to `on`.
+
+Change:
+  - Add .offstage, .show shortcut
+  - Update .useScrollbar to Flutter 3
+  - .hidden now based on Offset
+
+# [2.3.0-experimental.3] - 2022/05/16
+Breaking Change:
+  - Pass context to `get widget` results in `widget(BuildContext context)`
+  - Rename `on` to `deps`, and `onGesture` to `on`.
+
+Feature:
+  - Add material 3 shortcut.
+    - `sparkle` on `NikuButton` as shortcut for `..splashFactory = InkSparkle.splashFactory`
+    - Add Material 3 Typography initialzation shortcut, and Text Factory
+      - displayLarge
+      - displayMedium
+      - displaySmall
+      - titleLarge
+      - titleMedium
+      - titleSmall
+      - bodyLarge
+      - bodyMedium
+      - bodySmall
+      - labelLarge
+      - labelMedium
+      - labelSmall
+
+Bug fix:
+  - Text Theme doesn't update on Brightness change
+
+# [2.3.0-experimental.2] - 2022/04/11
+Breaking Change:
+  - Add `labelText` as replacement of `label` which is now accept `Widget`
+
+Change:
+  - Initial work with Flutter 3 and Material3.
+  - `useThemeSelector` now can accept nullable value 
+
+Bugs fix:
+  - Extra hook doesn't work with Tempest Engine, eg. `useScreen`, `useThemeSelector`
+  - `useScreen` break BuildContext on Flutter 3
+
+# [2.3.0-experimental.1] - 2022/04/09
+Breaking Change:
+  - Move `useTextStyle` to `useNikuTextStyle` in `NikuButton` to add `useTextStyle` for `NikuState`
+
+Change:
+  - Refactored Proxy, now has 50% less code and much more cleaner
+
+Bugs fix:
+  - _applyConstraints, _applyPadding, _applyPositions cause Stackoverflow
+
+
+# [2.3.0-experimental.0] - 2022/04/08
+Breaking Change:
+  - Remove `useNiku`, `nikuConstraints`, `nikuPadding`, `nikuMargin` from `Niku` and Parent Proxy.
+
+Feature:
+  - Internal architecture changed called `Tempestissimo`.
+    - Significant performance improvement, parent builder rewrite
+    - Parent Property builder now lazily executed
+    - Flatten and parent property
+  - Add `ExplictParentBuilder` to quickly handle single use of parent builder
+  - New hook: `useShadow`
+  - Add new property, `borderRadius`, `shadow`, `highlightColor`, `focusColor`, `hoverColor`
+
+Change:
+  - Parent Builder architecture rewrite, name `Tempestissimo`.
+  - `rounded` now use `NikuRounded` under the hood to auto inherits borderRadius for next builder, eg. `shadows`, and `border`.
+  - Depreacate `UseQueryMacro<T>`, merged into `NikuBuildMacro<T>`
+
+Bugs fix:
+  - Gap now doesn't use square ratio, the content cross-dimension is now preserved.
+
 # [2.2.4] - 2022/03/23
 Feature:
   - Add `sliverToBox`, `useForm`, and `formKey` to Parent Proxy

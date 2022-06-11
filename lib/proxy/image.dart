@@ -7,7 +7,5 @@ extension NikuImageProxy on NikuImage {
     return 99999;
   }
 
-  set rounded(double radius) {
-    useParent((v) => v..rounded = radius);
-  }
+  set rounded(double radius) => useParent((v) => v..rounded = radius);
 }

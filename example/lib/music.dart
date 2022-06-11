@@ -50,11 +50,8 @@ class Music extends HookWidget {
       body: n.Column([
         n.Image.network(cover)
           ..cover
-          ..circleProgress(
-            (progress) => CircularProgressIndicator(
-              value: progress,
-              color: Colors.white,
-            ),
+          ..useCircleProgress(
+            color: Colors.white,
           )
           ..useParent((v) => v
             ..aspectRatio = 1

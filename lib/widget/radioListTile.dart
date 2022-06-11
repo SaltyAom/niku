@@ -7,7 +7,6 @@ import 'package:niku/objects/objects.dart';
 class NikuRadioListTile<T> extends StatelessWidget
     with
         NikuBuildMacro<NikuRadioListTile>,
-        UseQueryMacro<NikuRadioListTile>,
         ContentPaddingMacro,
         FocusNodeMacro {
   NikuRadioListTile(
@@ -57,6 +56,7 @@ class NikuRadioListTile<T> extends StatelessWidget
   bool? enableFeedback;
 
   bool get checked => value == groupValue;
+  bool get isDense => dense = true;
 
   NikuRadioListTile get self => this;
 
@@ -84,7 +84,7 @@ class NikuRadioListTile<T> extends StatelessWidget
     focusNode = v.focusNode ?? focusNode;
     enableFeedback = v.enableFeedback ?? enableFeedback;
 
-    $internalParent..addAll(v.$internalParent);
+    $parent..$merge(v.$parent);
   }
 
   NikuRadioListTile get copied => NikuRadioListTile<T>(
@@ -108,9 +108,9 @@ class NikuRadioListTile<T> extends StatelessWidget
         visualDensity: visualDensity,
         focusNode: focusNode,
         enableFeedback: enableFeedback,
-      )..$internalParent.addAll($internalParent);
+      )..$parent.$merge($parent);
 
-  RadioListTile get widget => RadioListTile<T>(
+  widget(context) => RadioListTile<T>(
         value: value!,
         groupValue: groupValue,
         onChanged: onChanged ?? (_) {},

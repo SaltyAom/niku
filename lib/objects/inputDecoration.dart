@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import '../macros/macros.dart';
 import '../objects/objects.dart';
 
+typedef _TextStyleBuilder = NikuTextStyle Function(NikuTextStyle);
+typedef _ConstraintsBuilder = NikuBoxConstraints Function(NikuBoxConstraints);
+
 class NikuInputDecoration
     with ContentPaddingMacro, ConstraintsMacro, FloatingLabelBehaviorMacro {
   Widget? icon;
@@ -101,50 +104,41 @@ class NikuInputDecoration
     this.constraints,
   });
 
-  void get isFilled {
-    filled = true;
-  }
+  NikuInputBorder get _baseBorder => baseBorder ??= NikuInputBorder();
+  NikuInputBorder get _enabledBorder => enabledBorder ??= NikuInputBorder();
+  NikuInputBorder get _disabledBorder => disabledBorder ??= NikuInputBorder();
+  NikuInputBorder get _focusedBorder => focusedBorder ??= NikuInputBorder();
+  NikuInputBorder get _focusedErrorBorder =>
+      focusedErrorBorder ??= NikuInputBorder();
+  NikuInputBorder get _errorBorder => errorBorder ??= NikuInputBorder();
 
-  _initializeAllBorder() {
-    if (baseBorder == null) baseBorder = NikuInputBorder();
-    if (enabledBorder == null) enabledBorder = NikuInputBorder();
-    if (disabledBorder == null) disabledBorder = NikuInputBorder();
-    if (focusedErrorBorder == null) focusedErrorBorder = NikuInputBorder();
-    if (focusedBorder == null) focusedBorder = NikuInputBorder();
-    if (errorBorder == null) errorBorder = NikuInputBorder();
-  }
+  void get isFilled => filled = true;
 
   set border(NikuInputBorder? value) {
-    _initializeAllBorder();
-
-    baseBorder!.apply = value;
-    enabledBorder!.apply = value;
-    disabledBorder!.apply = value;
-    focusedBorder!.apply = value;
-    focusedErrorBorder!.apply = value;
-    errorBorder!.apply = value;
+    _baseBorder.apply = value;
+    _enabledBorder.apply = value;
+    _disabledBorder.apply = value;
+    _focusedBorder.apply = value;
+    _focusedErrorBorder.apply = value;
+    _errorBorder.apply = value;
   }
 
-  set baseBorderWidth(double? width) {
-    _initializeAllBorder();
-
-    baseBorder!.width = width;
-    enabledBorder!.width = width;
-    disabledBorder!.width = width;
-    focusedBorder!.width = width;
-    focusedErrorBorder!.width = width;
-    errorBorder!.width = width;
+  set borderWidth(double width) {
+    _baseBorder.width = width;
+    _enabledBorder.width = width;
+    _disabledBorder.width = width;
+    _focusedBorder.width = width;
+    _focusedErrorBorder.width = width;
+    _errorBorder.width = width;
   }
 
   set borderColor(Color? color) {
-    _initializeAllBorder();
-
-    baseBorder!.color = color;
-    enabledBorder!.color = color;
-    disabledBorder!.color = color;
-    focusedBorder!.color = color;
-    focusedErrorBorder!.color = color;
-    errorBorder!.color = color;
+    _baseBorder.color = color;
+    _enabledBorder.color = color;
+    _disabledBorder.color = color;
+    _focusedBorder.color = color;
+    _focusedErrorBorder.color = color;
+    _errorBorder.color = color;
   }
 
   set bg(Color color) {
@@ -152,42 +146,36 @@ class NikuInputDecoration
     fillColor = color;
   }
 
-  set borderRadius(double? radius) {
-    _initializeAllBorder();
-
-    baseBorder!.radius = radius;
-    enabledBorder!.radius = radius;
-    disabledBorder!.radius = radius;
-    focusedBorder!.radius = radius;
-    focusedErrorBorder!.radius = radius;
-    errorBorder!.radius = radius;
+  set borderRadius(double radius) {
+    _baseBorder.radius = radius;
+    _enabledBorder.radius = radius;
+    _disabledBorder.radius = radius;
+    _focusedBorder.radius = radius;
+    _focusedErrorBorder.radius = radius;
+    _errorBorder.radius = radius;
   }
 
   double get rounded {
-    _initializeAllBorder();
-
-    baseBorder!.radius = 99999;
-    enabledBorder!.radius = 9999;
-    disabledBorder!.radius = 9999;
-    focusedBorder!.radius = 9999;
-    focusedErrorBorder!.radius = 9999;
-    errorBorder!.radius = 9999;
+    _baseBorder.radius = 99999;
+    _enabledBorder.radius = 9999;
+    _disabledBorder.radius = 9999;
+    _focusedBorder.radius = 9999;
+    _focusedErrorBorder.radius = 9999;
+    _errorBorder.radius = 9999;
 
     return 99999;
   }
 
   set rounded(double v) {
-    _initializeAllBorder();
-
-    baseBorder!.radius = v;
-    enabledBorder!.radius = v;
-    disabledBorder!.radius = v;
-    focusedBorder!.radius = v;
-    focusedErrorBorder!.radius = v;
-    errorBorder!.radius = v;
+    _baseBorder.radius = v;
+    _enabledBorder.radius = v;
+    _disabledBorder.radius = v;
+    _focusedBorder.radius = v;
+    _focusedErrorBorder.radius = v;
+    _errorBorder.radius = v;
   }
 
-  void useBorder(
+  void useBorder({
     InputBorder? all,
     InputBorder? base,
     InputBorder? enabled,
@@ -195,9 +183,7 @@ class NikuInputDecoration
     InputBorder? focused,
     InputBorder? focusedError,
     InputBorder? error,
-  ) {
-    _initializeAllBorder();
-
+  }) {
     baseBorder = all?.asNiku ?? baseBorder;
     enabledBorder = enabled?.asNiku ?? enabledBorder;
     disabledBorder = disabled?.asNiku ?? disabledBorder;
@@ -206,7 +192,7 @@ class NikuInputDecoration
     errorBorder = error?.asNiku ?? errorBorder;
   }
 
-  void useNikuBorder(
+  void useNikuBorder({
     NikuInputBorder? all,
     NikuInputBorder? base,
     NikuInputBorder? enabled,
@@ -214,9 +200,7 @@ class NikuInputDecoration
     NikuInputBorder? focused,
     NikuInputBorder? focusedError,
     NikuInputBorder? error,
-  ) {
-    _initializeAllBorder();
-
+  }) {
     baseBorder = all ?? baseBorder!;
     enabledBorder = enabled ?? enabledBorder!;
     disabledBorder = disabled ?? disabledBorder!;
@@ -226,35 +210,29 @@ class NikuInputDecoration
   }
 
   void get underline {
-    _initializeAllBorder();
-
-    baseBorder!.type = NikuInputBorderType.Underline;
-    enabledBorder!.type = NikuInputBorderType.Underline;
-    disabledBorder!.type = NikuInputBorderType.Underline;
-    focusedBorder!.type = NikuInputBorderType.Underline;
-    focusedErrorBorder!.type = NikuInputBorderType.Underline;
-    errorBorder!.type = NikuInputBorderType.Underline;
+    _baseBorder.type = NikuInputBorderType.Underline;
+    _enabledBorder.type = NikuInputBorderType.Underline;
+    _disabledBorder.type = NikuInputBorderType.Underline;
+    _focusedBorder.type = NikuInputBorderType.Underline;
+    _focusedErrorBorder.type = NikuInputBorderType.Underline;
+    _errorBorder.type = NikuInputBorderType.Underline;
   }
 
   void get noUnderline {
-    _initializeAllBorder();
-
     borderWidth = 0;
     borderColor = Colors.transparent;
   }
 
   void get outlined {
-    _initializeAllBorder();
-
-    baseBorder!.type = NikuInputBorderType.Outlined;
-    enabledBorder!.type = NikuInputBorderType.Outlined;
-    disabledBorder!.type = NikuInputBorderType.Outlined;
-    focusedBorder!.type = NikuInputBorderType.Outlined;
-    focusedErrorBorder!.type = NikuInputBorderType.Outlined;
-    errorBorder!.type = NikuInputBorderType.Outlined;
+    _baseBorder.type = NikuInputBorderType.Outlined;
+    _enabledBorder.type = NikuInputBorderType.Outlined;
+    _disabledBorder.type = NikuInputBorderType.Outlined;
+    _focusedBorder.type = NikuInputBorderType.Outlined;
+    _focusedErrorBorder.type = NikuInputBorderType.Outlined;
+    _errorBorder.type = NikuInputBorderType.Outlined;
   }
 
-  void useBorderWidth(
+  void useBorderWidth({
     double? all,
     double? base,
     double? enabled,
@@ -262,48 +240,24 @@ class NikuInputDecoration
     double? focused,
     double? focusedError,
     double? error,
-  ) {
-    _initializeAllBorder();
-
-    baseBorder!.width = all ?? baseBorder?.width;
-    enabledBorder!.width = enabled ?? enabledBorder?.width;
-    disabledBorder!.width = disabled ?? disabledBorder?.width;
-    focusedBorder!.width = focused ?? focusedBorder?.width;
-    focusedErrorBorder!.width = focusedError ?? focusedErrorBorder?.width;
-    errorBorder!.width = error ?? errorBorder?.width;
+  }) {
+    _baseBorder.width = all ?? baseBorder?.width;
+    _enabledBorder.width = enabled ?? enabledBorder?.width;
+    _disabledBorder.width = disabled ?? disabledBorder?.width;
+    _focusedBorder.width = focused ?? focusedBorder?.width;
+    _focusedErrorBorder.width = focusedError ?? focusedErrorBorder?.width;
+    _errorBorder.width = error ?? errorBorder?.width;
   }
 
-  set borderWidth(double width) {
-    if (baseBorder == null) baseBorder = NikuInputBorder();
-    baseBorder?.width = width;
-  }
+  set baseBorderWidth(double width) => _baseBorder.width = width;
+  set enabledBorderWidth(double width) => _enabledBorder.width = width;
+  set disabledBorderWidth(double width) => _disabledBorder.width = width;
+  set focusedBorderWidth(double width) => _focusedBorder.width = width;
+  set focusedErrorBorderWidth(double width) =>
+      _focusedErrorBorder.width = width;
+  set errorBorderWidth(double width) => _errorBorder.width = width;
 
-  set enabledBorderWidth(double width) {
-    if (enabledBorder == null) enabledBorder = NikuInputBorder();
-    enabledBorder?.width = width;
-  }
-
-  set disabledBorderWidth(double width) {
-    if (disabledBorder == null) disabledBorder = NikuInputBorder();
-    disabledBorder?.width = width;
-  }
-
-  set focusedBorderWidth(double width) {
-    if (focusedBorder == null) focusedBorder = NikuInputBorder();
-    focusedBorder?.width = width;
-  }
-
-  set focusedErrororderWidth(double width) {
-    if (focusedErrorBorder == null) focusedErrorBorder = NikuInputBorder();
-    focusedErrorBorder?.width = width;
-  }
-
-  set errorBorderWidth(double width) {
-    if (errorBorder == null) errorBorder = NikuInputBorder();
-    errorBorder?.width = width;
-  }
-
-  void useBorderColor(
+  void useBorderColor({
     Color? all,
     Color? base,
     Color? enabled,
@@ -311,9 +265,7 @@ class NikuInputDecoration
     Color? focused,
     Color? focusedError,
     Color? error,
-  ) {
-    _initializeAllBorder();
-
+  }) {
     baseBorder!.color = all ?? baseBorder?.color;
     enabledBorder!.color = enabled ?? enabledBorder?.color;
     disabledBorder!.color = disabled ?? disabledBorder?.color;
@@ -322,161 +274,62 @@ class NikuInputDecoration
     errorBorder!.color = error ?? errorBorder?.color;
   }
 
-  set baseBorderColor(Color color) {
-    if (baseBorder == null) baseBorder = NikuInputBorder();
-    baseBorder?.color = color;
-  }
+  set baseBorderColor(Color color) => _baseBorder.color = color;
+  set enabledBorderColor(Color color) => _enabledBorder.color = color;
+  set disabledBorderColor(Color color) => _disabledBorder.color = color;
+  set focusedBorderColor(Color color) => _focusedBorder.color = color;
+  set focusedErrorBorderColor(Color color) => _focusedErrorBorder.color = color;
+  set errorBorderColor(Color color) => _errorBorder.color = color;
 
-  set enabledBorderColor(Color color) {
-    if (enabledBorder == null) enabledBorder = NikuInputBorder();
-    enabledBorder?.color = color;
-  }
+  NikuTextStyle get _labelStyle => labelStyle ??= NikuTextStyle();
+  void useLabelStyle(_TextStyleBuilder v) => _labelStyle.apply = v(labelStyle!);
+  set applyLabelStyle(NikuTextStyle v) => labelStyle?.apply = v;
 
-  set disabledBorderColor(Color color) {
-    if (disabledBorder == null) disabledBorder = NikuInputBorder();
-    disabledBorder?.color = color;
-  }
+  NikuTextStyle get _floatingLabelStyle =>
+      floatingLabelStyle ??= NikuTextStyle();
+  void useFloatingLabelStyle(_TextStyleBuilder v) =>
+      _floatingLabelStyle.apply = v(floatingLabelStyle!);
+  set applyFloatingLabelStyle(NikuTextStyle v) => _floatingLabelStyle.apply = v;
 
-  set focusedBorderColor(Color color) {
-    if (focusedBorder == null) focusedBorder = NikuInputBorder();
-    focusedBorder?.color = color;
-  }
+  get _helperStyle => helperStyle ??= NikuTextStyle();
+  void useHelperStyle(_TextStyleBuilder v) =>
+      _helperStyle.apply = v(helperStyle!);
+  set applyHelperStyle(NikuTextStyle v) => _helperStyle.apply = v;
 
-  set focusedErrorBorderColor(Color color) {
-    if (focusedErrorBorder == null) focusedErrorBorder = NikuInputBorder();
-    focusedErrorBorder?.color = color;
-  }
+  get _hintStyle => hintStyle ??= NikuTextStyle();
+  void useHintStyle(_TextStyleBuilder v) => _hintStyle.apply = v(hintStyle!);
+  set applyHintStyle(NikuTextStyle v) => _hintStyle.apply = v;
 
-  set errorBorderColor(Color color) {
-    if (errorBorder == null) errorBorder = NikuInputBorder();
-    errorBorder?.color = color;
-  }
+  get _errorStyle => errorStyle ??= NikuTextStyle();
+  void useErrorStyle(_TextStyleBuilder v) => _errorStyle.apply = v(errorStyle!);
+  set applyErrorStyle(NikuTextStyle v) => _errorStyle.apply = v;
 
-  void useLabelStyle(NikuTextStyle Function(NikuTextStyle) v) {
-    if (labelStyle == null) labelStyle = NikuTextStyle();
+  get _usePrefixStyle => prefixStyle ??= NikuTextStyle();
+  void usePrefixStyle(_TextStyleBuilder v) =>
+      _usePrefixStyle.apply = v(prefixStyle!);
+  set applyPrefixStyle(NikuTextStyle v) => _usePrefixStyle.apply = v;
 
-    labelStyle?.apply = v(labelStyle!);
-  }
+  get _useSuffixStyle => suffixStyle ??= NikuTextStyle();
+  void useSuffixStyle(_TextStyleBuilder v) =>
+      _useSuffixStyle.apply = v(suffixStyle!);
+  set applySuffixStyle(NikuTextStyle v) => _useSuffixStyle.apply = v;
 
-  set applyLabelStyle(NikuTextStyle v) {
-    if (labelStyle == null) labelStyle = NikuTextStyle();
+  get _prefixIconConstraints => prefixIconConstraints ??= NikuBoxConstraints();
+  void usePrefixIconConstraints(_ConstraintsBuilder v) =>
+      _prefixIconConstraints.apply = v(prefixIconConstraints!);
+  set applyPrefixIconConstraints(NikuBoxConstraints v) =>
+      _prefixIconConstraints?.apply = v;
 
-    labelStyle?.apply = v;
-  }
+  get _suffixIconConstraints => suffixIconConstraints ??= NikuBoxConstraints();
+  void useSuffixIconConstraints(_ConstraintsBuilder v) =>
+      _suffixIconConstraints.apply = v(suffixIconConstraints!);
+  set applySuffixIconConstraints(NikuBoxConstraints v) =>
+      _suffixIconConstraints?.apply = v;
 
-  void useFloatingLabelStyle(NikuTextStyle Function(NikuTextStyle) v) {
-    if (floatingLabelStyle == null) floatingLabelStyle = NikuTextStyle();
-
-    floatingLabelStyle?.apply = v(floatingLabelStyle!);
-  }
-
-  set applyFloatingLabelStyle(NikuTextStyle v) {
-    if (floatingLabelStyle == null) floatingLabelStyle = NikuTextStyle();
-
-    floatingLabelStyle?.apply = v;
-  }
-
-  void useHelperStyle(NikuTextStyle Function(NikuTextStyle) v) {
-    if (helperStyle == null) helperStyle = NikuTextStyle();
-
-    helperStyle?.apply = v(helperStyle!);
-  }
-
-  set applyHelperStyle(NikuTextStyle v) {
-    if (helperStyle == null) helperStyle = NikuTextStyle();
-
-    helperStyle?.apply = v;
-  }
-
-  void useHintStyle(NikuTextStyle Function(NikuTextStyle) v) {
-    if (hintStyle == null) hintStyle = NikuTextStyle();
-
-    hintStyle?.apply = v(hintStyle!);
-  }
-
-  set applyHintStyle(NikuTextStyle v) {
-    if (hintStyle == null) hintStyle = NikuTextStyle();
-
-    hintStyle?.apply = v;
-  }
-
-  void useErrorStyle(NikuTextStyle Function(NikuTextStyle) v) {
-    if (errorStyle == null) errorStyle = NikuTextStyle();
-
-    errorStyle?.apply = v(errorStyle!);
-  }
-
-  set applyErrorStyle(NikuTextStyle v) {
-    if (errorStyle == null) errorStyle = NikuTextStyle();
-
-    errorStyle?.apply = v;
-  }
-
-  void usePrefixStyle(NikuTextStyle Function(NikuTextStyle) v) {
-    if (prefixStyle == null) prefixStyle = NikuTextStyle();
-
-    prefixStyle?.apply = v(prefixStyle!);
-  }
-
-  set applyPrefixStyle(NikuTextStyle v) {
-    if (prefixStyle == null) prefixStyle = NikuTextStyle();
-
-    prefixStyle?.apply = v;
-  }
-
-  void useSuffixStyle(NikuTextStyle Function(NikuTextStyle) v) {
-    if (suffixStyle == null) suffixStyle = NikuTextStyle();
-
-    suffixStyle?.apply = v(suffixStyle!);
-  }
-
-  set applySuffixStyle(NikuTextStyle v) {
-    if (suffixStyle == null) suffixStyle = NikuTextStyle();
-
-    suffixStyle?.apply = v;
-  }
-
-  void usePrefixIconConstraints(
-      NikuBoxConstraints Function(NikuBoxConstraints) v) {
-    if (prefixIconConstraints == null)
-      prefixIconConstraints = NikuBoxConstraints();
-
-    prefixIconConstraints?.apply = v(prefixIconConstraints!);
-  }
-
-  set applyPrefixIconConstraints(NikuBoxConstraints v) {
-    if (prefixIconConstraints == null)
-      prefixIconConstraints = NikuBoxConstraints();
-
-    prefixIconConstraints?.apply = v;
-  }
-
-  void useSuffixIconConstraints(
-      NikuBoxConstraints Function(NikuBoxConstraints) v) {
-    if (suffixIconConstraints == null)
-      suffixIconConstraints = NikuBoxConstraints();
-
-    suffixIconConstraints?.apply = v(suffixIconConstraints!);
-  }
-
-  set applySuffixIconConstraints(NikuBoxConstraints v) {
-    if (suffixIconConstraints == null)
-      suffixIconConstraints = NikuBoxConstraints();
-
-    suffixIconConstraints?.apply = v;
-  }
-
-  void useConstraints(NikuBoxConstraints Function(NikuBoxConstraints) v) {
-    if (constraints == null) constraints = NikuBoxConstraints();
-
-    constraints?.apply = v(constraints!);
-  }
-
-  set applyConstraints(NikuBoxConstraints v) {
-    if (constraints == null) constraints = NikuBoxConstraints();
-
-    constraints?.apply = v;
-  }
+  get _constraints => constraints ??= NikuBoxConstraints();
+  void useConstraints(_ConstraintsBuilder v) =>
+      _constraints.apply = v(constraints!);
+  set applyConstraints(NikuBoxConstraints v) => _constraints?.apply = v;
 
   set apply(NikuInputDecoration? v) {
     if (v == null) return;

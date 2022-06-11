@@ -7,7 +7,6 @@ import '../macros/macros.dart';
 class NikuCheckboxListTile extends StatelessWidget
     with
         NikuBuildMacro<NikuCheckboxListTile>,
-        UseQueryMacro<NikuCheckboxListTile>,
         ContentPaddingMacro,
         FocusNodeMacro,
         ListTileControlAffinityMacro {
@@ -97,7 +96,7 @@ class NikuCheckboxListTile extends StatelessWidget
     highlightColor = v.highlightColor ?? highlightColor;
     hoverColor = v.hoverColor ?? hoverColor;
     focusColor = v.focusColor ?? focusColor;
-    $internalParent..addAll(v.$internalParent);
+    $parent..$merge(v.$parent);
   }
 
   NikuCheckboxListTile get copied => NikuCheckboxListTile(
@@ -125,9 +124,9 @@ class NikuCheckboxListTile extends StatelessWidget
         highlightColor: highlightColor,
         hoverColor: hoverColor,
         focusColor: focusColor,
-      )..$internalParent.addAll($internalParent);
+      )..$parent.$merge($parent);
 
-  Widget get widget => Builder(
+  widget(context) => Builder(
         builder: (context) => Theme(
           data: Theme.of(context).copyWith(
             splashColor: splashColor,
