@@ -1,9 +1,61 @@
-# [2.3.0-experimental.4] - 
+# [2.3.0] - 2022/06/11
 Breaking Change:
   - Rename the following property on `Image`:
     - `circleProgress` -> `useCircleProgress`
     - `linearProgress` -> `useLinearProgress`
   - Rename `on` to `deps`, and `onGesture` to `on`.
+  - Add `labelText` as replacement of `label` which is now accept `Widget`
+  - Move `useTextStyle` to `useNikuTextStyle` in `NikuButton` to add `useTextStyle` for `NikuState`
+  - Remove `useNiku`, `nikuConstraints`, `nikuPadding`, `nikuMargin` from `Niku` and Parent Proxy.
+
+Feature:
+  - Add material 3 shortcut.
+  - `sparkle` on `NikuButton` as shortcut for `..splashFactory = InkSparkle.splashFactory`
+  - Add Material 3 Typography initialzation shortcut, and Text Factory
+    - displayLarge
+    - displayMedium
+    - displaySmall
+    - titleLarge
+    - titleMedium
+    - titleSmall
+    - bodyLarge
+    - bodyMedium
+    - bodySmall
+    - labelLarge
+    - labelMedium
+    - labelSmall
+  - Internal architecture changed called `Tempestissimo`.
+    - Significant performance improvement, parent builder rewrite
+    - Parent Property builder now lazily executed
+    - Flatten and parent property
+  - Add `ExplictParentBuilder` to quickly handle single use of parent builder
+  - New hook: `useShadow`
+  - Add new property, `borderRadius`, `shadow`, `highlightColor`, `focusColor`, `hoverColor`
+
+Change:
+  - Add .offstage, .show shortcut
+  - Update .useScrollbar to Flutter 3
+  - .hidden now based on Offset
+  - Initial work with Flutter 3 and Material3.
+  - `useThemeSelector` now can accept nullable value 
+  - Refactored Proxy, now has 50% less code and much more cleaner
+  - Parent Builder architecture rewrite, name `Tempestissimo`.
+  - `rounded` now use `NikuRounded` under the hood to auto inherits borderRadius for next builder, eg. `shadows`, and `border`.
+  - Deprecate `UseQueryMacro<T>`, merged into `NikuBuildMacro<T>`
+
+Bug fix:
+  - Text Theme doesn't update on Brightness change
+  - _applyConstraints, _applyPadding, _applyPositions cause Stackoverflow
+  - Gap now doesn't use square ratio, the content cross-dimension is now preserved.
+
+# [2.3.0-experimental.4] - 2022/06/09
+Breaking Change:
+  - Rename the following property on `Image`:
+    - `circleProgress` -> `useCircleProgress`
+    - `linearProgress` -> `useLinearProgress`
+  - Rename `on` to `deps`, and `onGesture` to `on`.
+  - Extra hook doesn't work with Tempest Engine, eg. `useScreen`, `useThemeSelector`
+  - `useScreen` break BuildContext on Flutter 3
 
 Change:
   - Add .offstage, .show shortcut
@@ -74,7 +126,7 @@ Feature:
 Change:
   - Parent Builder architecture rewrite, name `Tempestissimo`.
   - `rounded` now use `NikuRounded` under the hood to auto inherits borderRadius for next builder, eg. `shadows`, and `border`.
-  - Depreacate `UseQueryMacro<T>`, merged into `NikuBuildMacro<T>`
+  - Deprecate `UseQueryMacro<T>`, merged into `NikuBuildMacro<T>`
 
 Bugs fix:
   - Gap now doesn't use square ratio, the content cross-dimension is now preserved.

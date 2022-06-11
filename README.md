@@ -16,7 +16,7 @@ It’s like low-level programming UI, having to adapt between property is hard w
 
 When the codebase gets more complex, the syntax of Flutter itself is too verbose, nested than it should be, result being hard to maintain mostly known as Nested Hell.
 
-Niku helps to solve the problem by providing a dot cascade to style widget.
+Niku helps to solve the problem by providing a cascade notation to style widget.
 Exposing the same naming convention, shorten property, parent builder and style extraction.
 
 Providing a smoother, shorter yet, more straightforward and maintainable way to compose styling in Flutter.
