@@ -6,6 +6,7 @@ import '../macros/macros.dart';
 class NikuStack extends StatelessWidget
     with
         NikuBuildMacro<NikuStack>,
+        UseQueryMacro<NikuStack>,
         AlignmentDirectionalMacro,
         ClipMacro,
         FitMacro,
@@ -35,7 +36,7 @@ class NikuStack extends StatelessWidget
     fit = v.fit ?? fit;
     clipBehavior = v.clipBehavior ?? clipBehavior;
 
-    $parent..$merge(v.$parent);
+    $internalParent..addAll(v.$internalParent);
   }
 
   NikuStack get copied => NikuStack(
@@ -45,9 +46,9 @@ class NikuStack extends StatelessWidget
         textDirection: textDirection,
         fit: fit,
         clipBehavior: clipBehavior,
-      )..$parent.$merge($parent);
+      )..$internalParent.addAll($internalParent);
 
-  widget(context) => Stack(
+  Stack get widget => Stack(
         key: key,
         children: children,
         alignment: alignment ?? AlignmentDirectional.topStart,

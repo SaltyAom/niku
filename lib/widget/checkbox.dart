@@ -5,7 +5,10 @@ import '../macros/macros.dart';
 
 // ignore: must_be_immutable
 class NikuCheckbox extends StatelessWidget
-    with NikuBuildMacro<NikuCheckbox>, FocusNodeMacro {
+    with
+        NikuBuildMacro<NikuCheckbox>,
+        UseQueryMacro<NikuCheckbox>,
+        FocusNodeMacro {
   bool? value;
   ValueChanged<bool?>? onChanged;
   MouseCursor? mouseCursor;
@@ -71,7 +74,7 @@ class NikuCheckbox extends StatelessWidget
     autofocus = v.autofocus ?? autofocus;
     shape = v.shape ?? shape;
     side = v.side ?? side;
-    $parent..$merge(v.$parent);
+    $internalParent..addAll(v.$internalParent);
   }
 
   NikuCheckbox get copied => NikuCheckbox(
@@ -93,9 +96,9 @@ class NikuCheckbox extends StatelessWidget
         autofocus: autofocus,
         shape: shape,
         side: side,
-      )..$parent.$merge($parent);
+      )..$internalParent.addAll($internalParent);
 
-  widget(context) => Checkbox(
+  Checkbox get widget => Checkbox(
         value: value,
         onChanged: onChanged,
         mouseCursor: mouseCursor,

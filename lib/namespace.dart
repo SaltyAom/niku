@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart' show BuildContext, Widget;
+import 'package:niku/widget/radio.dart';
 
 import 'niku.dart';
 import 'widget/niku.dart' as N;
@@ -19,17 +20,14 @@ typedef Checkbox = NikuCheckbox;
 typedef CheckboxListTile = NikuCheckboxListTile;
 typedef Column = NikuColumn;
 typedef DropdownButton<T> = NikuDropdownButton<T>;
-typedef DropdownButtonFormField<T> = NikuDropdownButtonFormField<T>;
 typedef GridView = NikuGridView;
 typedef Icon = NikuIcon;
 typedef IconButton = NikuIconButton;
 typedef Image = NikuImage;
 typedef ListTile = NikuListTile;
 typedef ListView = NikuListView;
-typedef Padding = NikuPadding;
-typedef PopupMenuButton<T> = NikuPopupMenuButton<T>;
+typedef PopupMenuButton = NikuPopupMenuButton;
 typedef RangeSlider = NikuRangeSlider;
-typedef RichText = NikuRichText;
 typedef Radio<T> = NikuRadio<T>;
 typedef RadioListTile<T> = NikuRadioListTile<T>;
 typedef Row = NikuRow;
@@ -39,7 +37,6 @@ typedef Stack = NikuStack;
 typedef Switch = NikuSwitch;
 typedef Text = NikuText;
 typedef TextFormField = NikuTextFormField;
-typedef TextSpan = NikuTextSpan;
 typedef Wrap = NikuWrap;
 
 typedef BoxConstraints = NikuBoxConstraints;

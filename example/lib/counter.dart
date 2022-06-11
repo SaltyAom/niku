@@ -23,7 +23,7 @@ class Counter extends HookWidget {
       body: n.Column([
         n.Text(count.value.toString())
           ..center
-          ..h4,
+          ..h4 = context,
         n.Column([
           n.Button(n.Text("Increment"))
             ..onPressed = () {

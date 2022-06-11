@@ -8,9 +8,9 @@ import 'package:niku/proxy/textStyle.dart';
 class NikuDropdownButton<T> extends StatelessWidget
     with
         NikuBuildMacro<NikuDropdownButton>,
+        UseQueryMacro<NikuDropdownButton>,
         ApplyTextMacro,
         AlignmentDirectionalMacro,
-        BorderRadiusMacro,
         FocusNodeMacro,
         TextStyleProxy {
   List<DropdownMenuItem<T>>? items;
@@ -103,7 +103,7 @@ class NikuDropdownButton<T> extends StatelessWidget
     enableFeedback = v.enableFeedback ?? enableFeedback;
     alignment = v.alignment ?? alignment;
     borderRadius = v.borderRadius ?? borderRadius;
-    $parent..$merge(v.$parent);
+    $internalParent..addAll(v.$internalParent);
   }
 
   get copied => NikuDropdownButton<T>(
@@ -133,9 +133,9 @@ class NikuDropdownButton<T> extends StatelessWidget
         alignment: alignment,
         borderRadius: borderRadius,
         itemsValue: itemsValue,
-      )..$parent.$merge($parent);
+      )..$internalParent.addAll($internalParent);
 
-  widget(context) => DropdownButton<T>(
+  get widget => DropdownButton<T>(
         items: items ??
             itemsValue
                 ?.map(

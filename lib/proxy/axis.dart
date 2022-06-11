@@ -117,6 +117,10 @@ abstract class AxisLayoutProxy {
     useParent((c) => Padding(padding: v, child: c));
   }
 
+  set nikuPadding(NikuEdgeInsets v) {
+    useParent((c) => Padding(padding: v.value, child: c));
+  }
+
   set p(double v) {
     useParent((c) => Padding(
           padding: EdgeInsets.all(v),

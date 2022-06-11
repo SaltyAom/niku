@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart' show CupertinoTextField;
 import 'package:flutter/services.dart';
-import 'package:niku/proxy/proxy.dart';
+import 'package:niku/proxy/textStyle.dart';
 
 import '../objects/objects.dart';
 import '../macros/macros.dart';
+import '../proxy/textStyle.dart';
 
 // ignore: must_be_immutable
 class NikuTextFormField extends StatelessWidget
     with
         NikuBuildMacro<NikuTextFormField>,
+        UseQueryMacro<NikuTextFormField>,
         ApplyTextMacro,
         ApplyStrutStyleMacro,
         ApplyInputDecorationMacro,
-        InputDecorationProxy,
         FocusNodeMacro,
         TextAlignMacro,
         TextDirectionMacro,
@@ -80,9 +81,8 @@ class NikuTextFormField extends StatelessWidget
 
   NikuTextFormField({
     Key? key,
-    Widget? label,
-    String? labelText,
-    String? hintText,
+    String? label,
+    String? hint,
     this.controller,
     this.initialValue,
     this.focusNode,
@@ -138,14 +138,14 @@ class NikuTextFormField extends StatelessWidget
     this.adaptive = false,
     this.cupertino = false,
   }) : super(key: key) {
-    this.label = label ?? (labelText != null ? Text(labelText) : null);
-    this.hintText = hintText;
+    if (label != null) this.label = label;
+    if (hint != null) this.hint = hint;
   }
 
   factory NikuTextFormField.label(
     String? label, {
     Key? key,
-    String? hintText,
+    String? hint,
     TextEditingController? controller,
     String? initialValue,
     FocusNode? focusNode,
@@ -210,8 +210,8 @@ class NikuTextFormField extends StatelessWidget
         textCapitalization: textCapitalization,
         textInputAction: textInputAction,
         style: style,
-        labelText: label,
-        hintText: hintText,
+        label: label,
+        hint: hint,
         strutStyle: strutStyle,
         textDirection: textDirection,
         textAlign: textAlign,
@@ -263,8 +263,7 @@ class NikuTextFormField extends StatelessWidget
   factory NikuTextFormField.hint(
     String? hint, {
     Key? key,
-    Widget? label,
-    String? labelText,
+    String? label,
     TextEditingController? controller,
     String? initialValue,
     FocusNode? focusNode,
@@ -321,9 +320,8 @@ class NikuTextFormField extends StatelessWidget
     bool cupertino = false,
   }) =>
       NikuTextFormField(
-        hintText: hint,
+        hint: hint,
         label: label,
-        labelText: labelText,
         controller: controller,
         initialValue: initialValue,
         focusNode: focusNode,
@@ -381,9 +379,7 @@ class NikuTextFormField extends StatelessWidget
       );
 
   factory NikuTextFormField.adaptive({
-    Widget? label,
-    String? labelText,
-    String? hintText,
+    String? label,
     TextEditingController? controller,
     String? initialValue,
     FocusNode? focusNode,
@@ -439,8 +435,6 @@ class NikuTextFormField extends StatelessWidget
   }) =>
       NikuTextFormField(
         label: label,
-        labelText: labelText,
-        hintText: hintText,
         controller: controller,
         initialValue: initialValue,
         focusNode: focusNode,
@@ -497,9 +491,7 @@ class NikuTextFormField extends StatelessWidget
       );
 
   factory NikuTextFormField.cupertino({
-    Widget? label,
-    String? labelText,
-    String? hintText,
+    String? label,
     TextEditingController? controller,
     String? initialValue,
     FocusNode? focusNode,
@@ -555,8 +547,6 @@ class NikuTextFormField extends StatelessWidget
   }) =>
       NikuTextFormField(
         label: label,
-        labelText: labelText,
-        hintText: hintText,
         controller: controller,
         initialValue: initialValue,
         focusNode: focusNode,
@@ -693,7 +683,7 @@ class NikuTextFormField extends StatelessWidget
     enableIMEPersonalizedLearning =
         v.enableIMEPersonalizedLearning ?? enableIMEPersonalizedLearning;
 
-    $parent..$merge(v.$parent);
+    $internalParent..addAll(v.$internalParent);
   }
 
   NikuTextFormField get copied => NikuTextFormField(
@@ -748,7 +738,7 @@ class NikuTextFormField extends StatelessWidget
         enableIMEPersonalizedLearning: enableIMEPersonalizedLearning,
         adaptive: adaptive,
         cupertino: cupertino,
-      )..$parent.$merge($parent);
+      )..$internalParent.addAll($internalParent);
 
   TextFormField _buildMaterial() => TextFormField(
         controller: controller,
@@ -848,7 +838,7 @@ class NikuTextFormField extends StatelessWidget
         enableIMEPersonalizedLearning: enableIMEPersonalizedLearning ?? true,
       );
 
-  widget(context) {
+  Widget get widget {
     if (cupertino) return _buildCupertino();
 
     if (adaptive)
@@ -864,5 +854,179 @@ class NikuTextFormField extends StatelessWidget
       );
 
     return _buildMaterial();
+  }
+
+  set label(String v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()..labelText = v;
+  }
+
+  set hint(String v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()..hintText = v;
+  }
+
+  set placeholder(String v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()..hintText = v;
+  }
+
+  set prefix(Widget v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()..prefix = v;
+  }
+
+  set prefixIcon(Widget v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()..prefixIcon = v;
+  }
+
+  set suffix(Widget v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()..suffix = v;
+  }
+
+  set suffixIcon(Widget v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()..suffixIcon = v;
+  }
+
+  void useLabelStyle(NikuTextStyle Function(NikuTextStyle) v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()..useLabelStyle(v);
+  }
+
+  set applyLabelStyle(NikuTextStyle v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()
+      ..apply = NikuInputDecoration(labelStyle: v);
+  }
+
+  void useFloatingLabelStyle(NikuTextStyle Function(NikuTextStyle) v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()..useFloatingLabelStyle(v);
+  }
+
+  set applyFloatingLabelStyle(NikuTextStyle v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()
+      ..apply = NikuInputDecoration(floatingLabelStyle: v);
+  }
+
+  void useHelperStyle(NikuTextStyle Function(NikuTextStyle) v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()..useHelperStyle(v);
+  }
+
+  set applyHelperStyle(NikuTextStyle v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()
+      ..apply = NikuInputDecoration(helperStyle: v);
+  }
+
+  void useHintStyle(NikuTextStyle Function(NikuTextStyle) v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()..useHintStyle(v);
+  }
+
+  set applyHintStyle(NikuTextStyle v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()
+      ..apply = NikuInputDecoration(hintStyle: v);
+  }
+
+  void useErrorStyle(NikuTextStyle Function(NikuTextStyle) v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()..useErrorStyle(v);
+  }
+
+  set applyErrorStyle(NikuTextStyle v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()
+      ..apply = NikuInputDecoration(errorStyle: v);
+  }
+
+  void usePrefixStyle(NikuTextStyle Function(NikuTextStyle) v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()..usePrefixStyle(v);
+  }
+
+  set applyPrefixStyle(NikuTextStyle v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()
+      ..apply = NikuInputDecoration(prefixStyle: v);
+  }
+
+  void useSuffixStyle(NikuTextStyle Function(NikuTextStyle) v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()..useSuffixStyle(v);
+  }
+
+  set applySuffixStyle(NikuTextStyle v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()
+      ..apply = NikuInputDecoration(suffixStyle: v);
+  }
+
+  void usePrefixIconConstraints(
+      NikuBoxConstraints Function(NikuBoxConstraints) v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()..usePrefixIconConstraints(v);
+  }
+
+  set applyPrefixIconConstraints(NikuBoxConstraints v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()
+      ..apply = NikuInputDecoration(prefixIconConstraints: v);
+  }
+
+  void useSuffixIconConstraints(
+      NikuBoxConstraints Function(NikuBoxConstraints) v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()..useSuffixIconConstraints(v);
+  }
+
+  set applySuffixIconConstraints(NikuBoxConstraints v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()
+      ..apply = NikuInputDecoration(suffixIconConstraints: v);
+  }
+
+  void useConstraints(NikuBoxConstraints Function(NikuBoxConstraints) v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()..useConstraints(v);
+  }
+
+  set applyConstraints(NikuBoxConstraints v) {
+    if (decoration == null) decoration = NikuInputDecoration();
+
+    decoration?.apply = NikuInputDecoration()
+      ..apply = NikuInputDecoration(constraints: v);
   }
 }

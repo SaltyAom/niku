@@ -13,11 +13,11 @@ import '../macros/macros.dart';
 class NikuImage extends StatelessWidget
     with
         NikuBuildMacro<NikuImage>,
+        UseQueryMacro<NikuImage>,
         ColorBlendModeMacro,
         BoxFitMacro,
         ImageRepeatMacro,
         WidthHeightMacro {
-  Key? key;
   ImageProvider image;
   ImageFrameBuilder? frameBuilder;
   ImageLoadingBuilder? loadingBuilder;
@@ -40,7 +40,7 @@ class NikuImage extends StatelessWidget
 
   NikuImage(
     this.image, {
-    this.key,
+    Key? key,
     this.frameBuilder,
     this.loadingBuilder,
     this.errorBuilder,
@@ -345,15 +345,9 @@ class NikuImage extends StatelessWidget
 
   void get antiAlias => isAntiAlias = true;
 
-  void useCircleProgress({
-    Key? key,
-    Color? backgroundColor,
-    Color? color,
-    Animation<Color?>? valueColor,
-    double strokeWidth = 4.0,
-    String? semanticsLabel,
-    String? semanticsValue,
-  }) =>
+  void circleProgress(
+    CircularProgressIndicator Function(double? value) builder,
+  ) =>
       loadingBuilder = (
         BuildContext context,
         Widget child,
@@ -362,15 +356,8 @@ class NikuImage extends StatelessWidget
         if (loadingProgress == null) return child;
 
         return Center(
-          child: CircularProgressIndicator(
-            key: key,
-            backgroundColor: backgroundColor,
-            color: color,
-            valueColor: valueColor,
-            strokeWidth: strokeWidth,
-            semanticsLabel: semanticsLabel,
-            semanticsValue: semanticsValue,
-            value: loadingProgress.expectedTotalBytes != null
+          child: builder(
+            loadingProgress.expectedTotalBytes != null
                 ? loadingProgress.cumulativeBytesLoaded /
                     loadingProgress.expectedTotalBytes!
                 : null,
@@ -378,15 +365,9 @@ class NikuImage extends StatelessWidget
         );
       };
 
-  void useLinearProgress({
-    Key? key,
-    Color? backgroundColor,
-    Color? color,
-    Animation<Color?>? valueColor,
-    double minHeight = 1,
-    String? semanticsLabel,
-    String? semanticsValue,
-  }) =>
+  void linearProgress(
+    Widget Function(double? value) builder,
+  ) =>
       loadingBuilder = (
         BuildContext context,
         Widget child,
@@ -394,15 +375,8 @@ class NikuImage extends StatelessWidget
       ) {
         if (loadingProgress == null) return child;
 
-        return LinearProgressIndicator(
-          key: key,
-          backgroundColor: backgroundColor,
-          color: color,
-          valueColor: valueColor,
-          minHeight: minHeight,
-          semanticsLabel: semanticsLabel,
-          semanticsValue: semanticsValue,
-          value: loadingProgress.expectedTotalBytes != null
+        return builder(
+          loadingProgress.expectedTotalBytes != null
               ? loadingProgress.cumulativeBytesLoaded /
                   loadingProgress.expectedTotalBytes!
               : null,
@@ -432,7 +406,7 @@ class NikuImage extends StatelessWidget
     semanticLabel = v.semanticLabel ?? semanticLabel;
     excludeFromSemantics = v.excludeFromSemantics ?? excludeFromSemantics;
     isAntiAlias = v.isAntiAlias ?? isAntiAlias;
-    $parent..$merge(v.$parent);
+    $internalParent..addAll(v.$internalParent);
   }
 
   NikuImage get copied => NikuImage(
@@ -456,10 +430,9 @@ class NikuImage extends StatelessWidget
         semanticLabel: semanticLabel,
         excludeFromSemantics: excludeFromSemantics,
         isAntiAlias: isAntiAlias,
-      )..$parent.$merge($parent);
+      )..$internalParent.addAll($internalParent);
 
-  widget(context) => Image(
-        key: key,
+  Image get widget => Image(
         image: image,
         frameBuilder: frameBuilder,
         loadingBuilder: loadingBuilder,

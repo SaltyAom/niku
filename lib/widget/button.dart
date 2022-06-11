@@ -10,6 +10,7 @@ enum NikuButtonType { Text, Elevated, Outlined }
 class NikuButton extends StatelessWidget
     with
         NikuBuildMacro<NikuButton>,
+        UseQueryMacro<NikuButton>,
         ApplyButtonStyleMacro,
         ClipMacro,
         ButtonStyleTextStyleProxy,
@@ -200,8 +201,7 @@ class NikuButton extends StatelessWidget
     icon = v.icon ?? icon;
     label = v.label ?? label;
     enable = v.enable;
-
-    $parent..$merge(v.$parent);
+    $internalParent..addAll(v.$internalParent);
   }
 
   NikuButton get copied => NikuButton(
@@ -216,9 +216,9 @@ class NikuButton extends StatelessWidget
         icon: icon,
         label: label,
         enable: enable,
-      )..$parent.$merge($parent);
+      )..$internalParent.addAll($internalParent);
 
-  widget(context) {
+  Widget get widget {
     if (type == NikuButtonType.Elevated)
       return (label != null && icon != null)
           ? ElevatedButton.icon(

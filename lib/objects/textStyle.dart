@@ -37,8 +37,6 @@ class NikuTextStyle
   TextOverflow? overflow;
   String? package;
 
-  TextStyle? Function(BuildContext)? themeBuilder;
-
   NikuTextStyle({
     this.inherit = true,
     this.color,

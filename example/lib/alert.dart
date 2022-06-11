@@ -16,7 +16,7 @@ class AlertPage extends StatelessWidget {
           ..content = n.NikuColumn([
             Text("This is alert dialog written in Niku"),
             n.TextFormField.adaptive()
-              ..labelText = "Placeholder"
+              ..label = "Placeholder"
               ..mt = 16,
           ])
           ..actions = [

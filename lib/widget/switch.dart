@@ -16,7 +16,7 @@ const double _kSwitchHeightCollapsed = _kSwitchMinSize;
 
 // ignore: must_be_immutable
 class NikuSwitch extends StatelessWidget
-    with NikuBuildMacro<NikuSwitch>, FocusNodeMacro {
+    with NikuBuildMacro<NikuSwitch>, UseQueryMacro<NikuSwitch>, FocusNodeMacro {
   bool adaptive = false;
   bool cupertino = false;
 
@@ -195,34 +195,34 @@ class NikuSwitch extends StatelessWidget
 
   NikuSwitch get self => this;
 
-  set apply(NikuSwitch? v) {
-    if (v == null) return;
+  set apply(NikuSwitch? e) {
+    if (e == null) return;
 
-    value = v.value ?? value;
-    onChanged = v.onChanged ?? onChanged;
-    activeColor = v.activeColor ?? activeColor;
-    activeTrackColor = v.activeTrackColor ?? activeTrackColor;
-    inactiveThumbColor = v.inactiveThumbColor ?? inactiveThumbColor;
-    inactiveTrackColor = v.inactiveTrackColor ?? inactiveTrackColor;
-    activeThumbImage = v.activeThumbImage ?? activeThumbImage;
+    value = e.value ?? value;
+    onChanged = e.onChanged ?? onChanged;
+    activeColor = e.activeColor ?? activeColor;
+    activeTrackColor = e.activeTrackColor ?? activeTrackColor;
+    inactiveThumbColor = e.inactiveThumbColor ?? inactiveThumbColor;
+    inactiveTrackColor = e.inactiveTrackColor ?? inactiveTrackColor;
+    activeThumbImage = e.activeThumbImage ?? activeThumbImage;
     onActiveThumbImageError =
-        v.onActiveThumbImageError ?? onActiveThumbImageError;
-    inactiveThumbImage = v.inactiveThumbImage ?? inactiveThumbImage;
+        e.onActiveThumbImageError ?? onActiveThumbImageError;
+    inactiveThumbImage = e.inactiveThumbImage ?? inactiveThumbImage;
     onInactiveThumbImageError =
-        v.onInactiveThumbImageError ?? onInactiveThumbImageError;
-    materialTapTargetSize = v.materialTapTargetSize ?? materialTapTargetSize;
-    dragStartBehavior = v.dragStartBehavior ?? dragStartBehavior;
-    mouseCursor = v.mouseCursor ?? mouseCursor;
-    focusColor = v.focusColor ?? focusColor;
-    hoverColor = v.hoverColor ?? hoverColor;
-    splashRadius = v.splashRadius ?? splashRadius;
-    focusNode = v.focusNode ?? focusNode;
-    autofocus = v.autofocus ?? autofocus;
-    thumbColorState = v.thumbColorState ?? thumbColorState;
-    trackColorState = v.trackColorState ?? trackColorState;
-    overlayColorState = v.overlayColorState ?? overlayColorState;
+        e.onInactiveThumbImageError ?? onInactiveThumbImageError;
+    materialTapTargetSize = e.materialTapTargetSize ?? materialTapTargetSize;
+    dragStartBehavior = e.dragStartBehavior ?? dragStartBehavior;
+    mouseCursor = e.mouseCursor ?? mouseCursor;
+    focusColor = e.focusColor ?? focusColor;
+    hoverColor = e.hoverColor ?? hoverColor;
+    splashRadius = e.splashRadius ?? splashRadius;
+    focusNode = e.focusNode ?? focusNode;
+    autofocus = e.autofocus ?? autofocus;
+    thumbColorState = e.thumbColorState ?? thumbColorState;
+    trackColorState = e.trackColorState ?? trackColorState;
+    overlayColorState = e.overlayColorState ?? overlayColorState;
 
-    $parent..$merge(v.$parent);
+    $internalParent..addAll(e.$internalParent);
   }
 
   NikuSwitch get copied => NikuSwitch(
@@ -249,9 +249,9 @@ class NikuSwitch extends StatelessWidget
         overlayColorState: overlayColorState,
         adaptive: adaptive,
         cupertino: cupertino,
-      )..$parent.$merge($parent);
+      )..$internalParent.addAll($internalParent);
 
-  widget(context) {
+  Widget get widget {
     if (cupertino) {
       Size _getSwitchSize(ThemeData theme) {
         final MaterialTapTargetSize effectiveMaterialTapTargetSize =

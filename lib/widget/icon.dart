@@ -4,7 +4,7 @@ import 'package:niku/macros/macros.dart';
 
 // ignore: must_be_immutable
 class NikuIcon extends StatelessWidget
-    with NikuBuildMacro<NikuIcon>, TextAlignMacro {
+    with NikuBuildMacro<NikuIcon>, UseQueryMacro<NikuIcon>, TextAlignMacro {
   IconData? icon;
   double? size;
   Color? color;
@@ -30,7 +30,7 @@ class NikuIcon extends StatelessWidget
     semanticLabel = v.semanticLabel ?? semanticLabel;
     textDirection = v.textDirection ?? textDirection;
 
-    $parent..$merge(v.$parent);
+    $internalParent..addAll(v.$internalParent);
   }
 
   NikuIcon get copied => NikuIcon(
@@ -40,9 +40,9 @@ class NikuIcon extends StatelessWidget
         color: color,
         semanticLabel: semanticLabel,
         textDirection: textDirection,
-      )..$parent.$merge($parent);
+      )..$internalParent.addAll($internalParent);
 
-  widget(context) => Icon(
+  Icon get widget => Icon(
         icon,
         size: size,
         color: color,

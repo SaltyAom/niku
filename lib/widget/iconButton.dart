@@ -7,6 +7,7 @@ import '../objects/objects.dart';
 class NikuIconButton extends StatelessWidget
     with
         NikuBuildMacro<NikuIconButton>,
+        UseQueryMacro<NikuIconButton>,
         AlignmentDirectionalMacro,
         ConstraintsMacro,
         FocusNodeMacro,
@@ -128,7 +129,7 @@ class NikuIconButton extends StatelessWidget
     tooltip = v.tooltip ?? tooltip;
     enableFeedback = v.enableFeedback ?? enableFeedback;
     constraints = v.constraints ?? constraints;
-    $parent..$merge(v.$parent);
+    $internalParent..addAll(v.$internalParent);
   }
 
   NikuIconButton get copied => NikuIconButton(
@@ -154,9 +155,9 @@ class NikuIconButton extends StatelessWidget
         constraints: constraints,
       )
         ..child = child
-        ..$parent.$merge($parent);
+        ..$internalParent.addAll($internalParent);
 
-  widget(context) => IconButton(
+  IconButton get widget => IconButton(
         icon: child ?? SizedBox.shrink(),
         onPressed: onPressed ?? null,
         iconSize: iconSize ?? 24,
@@ -181,27 +182,27 @@ class NikuIconButton extends StatelessWidget
       );
 }
 
-// extension NikuIconButtonTransform on NikuIconButton {
-//   NikuIconButton get asNiku => NikuIconButton.widget(
-//         widget,
-//         key: key,
-//         iconSize: iconSize,
-//         visualDensity: visualDensity,
-//         padding: padding,
-//         alignment: alignment,
-//         splashRadius: splashRadius,
-//         color: color,
-//         focusColor: focusColor,
-//         hoverColor: hoverColor,
-//         highlightColor: highlightColor,
-//         splashColor: splashColor,
-//         disabledColor: disabledColor,
-//         onPressed: onPressed,
-//         mouseCursor: mouseCursor,
-//         focusNode: focusNode,
-//         autofocus: autofocus,
-//         tooltip: tooltip,
-//         enableFeedback: enableFeedback,
-//         constraints: constraints,
-//       );
-// }
+extension NikuIconButtonTransform on NikuIconButton {
+  NikuIconButton get asNiku => NikuIconButton.widget(
+        widget,
+        key: key,
+        iconSize: iconSize,
+        visualDensity: visualDensity,
+        padding: padding,
+        alignment: alignment,
+        splashRadius: splashRadius,
+        color: color,
+        focusColor: focusColor,
+        hoverColor: hoverColor,
+        highlightColor: highlightColor,
+        splashColor: splashColor,
+        disabledColor: disabledColor,
+        onPressed: onPressed,
+        mouseCursor: mouseCursor,
+        focusNode: focusNode,
+        autofocus: autofocus,
+        tooltip: tooltip,
+        enableFeedback: enableFeedback,
+        constraints: constraints,
+      );
+}

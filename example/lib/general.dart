@@ -22,7 +22,7 @@ class General extends HookWidget {
           ..content = n.Column([
             Text("This is alert dialog written in Niku"),
             n.TextFormField.adaptive()
-              ..labelText = "Placeholder"
+              ..label = "Placeholder"
               ..mt = 16,
           ])
           ..actions = [
@@ -43,11 +43,10 @@ class General extends HookWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: "General".n,
+        title: const Text("General"),
         elevation: 0,
         actions: [
-          n.PopupMenuButton(Icons.edit.n..color = Colors.white)
-            ..onSelected
+          n.PopupMenuButton(n.Icon(Icons.edit)..color = Colors.white)
             ..items = [1, 2, 3]
             ..elevation = 2
             ..mr = 12
@@ -67,11 +66,10 @@ class General extends HookWidget {
         ..theme = ThemeData(highlightColor: Colors.transparent),
       body: n.Column([
         n.Text("Awesome Niku")
-          ..h4
+          ..h4 = context
           ..mb = 24,
         n.TextFormField()
-          ..labelText = "Value"
-          ..usePrefixStyle((v) => v..color = Colors.white)
+          ..label = "Value"
           ..outlined,
         TextFormField(
           decoration: InputDecoration(
@@ -108,10 +106,11 @@ class General extends HookWidget {
           ..max = 100
           ..trackHeight = 2
           ..thumbColor = Colors.white,
-        n.Button("Button".n)
+        n.Button(Text("Button"))
           ..onPressed = () {}
           ..fontSize = 18
           ..w500
+          ..color = Colors.blue
           ..px = 24
           ..py = 12
           ..bg = Colors.blue.shade50
@@ -134,10 +133,10 @@ class NetworkImageExample extends StatelessWidget {
       body: n.Column([
         n.Image.network(
           "https://avatars.githubusercontent.com/u/35027979?s=400&u=28dbe76d9057768eed7cb2d346203b7c55c153ce&v=4",
-        )
+        )..useParent((v) => v
           ..maxW = 420
           ..rounded = 8
-          ..n.shadows = [
+          ..shadows = [
             BoxShadow(
               color: Colors.black.withOpacity(.1),
               blurRadius: 8,
@@ -149,9 +148,9 @@ class NetworkImageExample extends StatelessWidget {
               offset: Offset(0, 16),
             ),
           ]
-          ..mx = 20,
+          ..px = 20),
         n.Text("Network Image")
-          ..h6
+          ..h6 = context
           ..useDarkMode(
             context,
             (v, isDarkTheme) =>
@@ -183,11 +182,11 @@ class Freezed extends HookWidget {
           groupValue: freezed.value,
           children: {
             false: Text("Reactive").niku
-              ..on(
+              ..useGesture(
                 tap: () => freezed.value = false,
               ),
             true: Text("Freezed").niku
-              ..on(
+              ..useGesture(
                 tap: () => freezed.value = true,
               ),
           },
@@ -196,9 +195,9 @@ class Freezed extends HookWidget {
           },
         ).niku
           ..mb = 16
-          ..deps = [freezed.value],
+          ..on = [freezed.value],
         n.Text("${option.value}")
-          ..h6
+          ..h6 = context
           ..bold
           ..useScreen(
             context,
@@ -213,7 +212,7 @@ class Freezed extends HookWidget {
               xs: (v) => v..bg = Colors.blue.shade50,
             )
             ..rounded
-            ..deps = freezed.value ? [] : [option.value]),
+            ..on = freezed.value ? [] : [option.value]),
         ClipRRect(
           borderRadius: BorderRadius.circular(99999),
           child: LayoutBuilder(
