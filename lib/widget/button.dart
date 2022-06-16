@@ -194,7 +194,7 @@ class NikuButton extends StatelessWidget
     type = v.type ?? type;
     onPressed = v.onPressed ?? onPressed;
     onLongPress = v.onLongPress ?? onLongPress;
-    style?.apply = v.style ?? style;
+    style?.apply = v.style?.copied ?? style;
     focusNode = v.focusNode ?? focusNode;
     clipBehavior = v.clipBehavior ?? clipBehavior;
     icon = v.icon ?? icon;

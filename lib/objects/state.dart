@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:niku/namespace.dart';
 
 class NikuState<T> {
   T? all;
@@ -27,19 +28,6 @@ class NikuState<T> {
 
   factory NikuState.all(T all) => NikuState(all: all);
 
-  NikuState get copied => NikuState(
-        all: all,
-        disabled: disabled,
-        dragged: dragged,
-        error: error,
-        focused: focused,
-        hovered: hovered,
-        pressed: pressed,
-        scrolledUnder: scrolledUnder,
-        selected: selected,
-        base: base,
-      );
-
   MaterialStateProperty<T?> get value =>
       MaterialStateProperty.resolveWith((states) {
         if (all != null) return all;
@@ -55,4 +43,36 @@ class NikuState<T> {
 
         return base;
       });
+}
+
+extension NikuStateCopied<T> on NikuState<T> {
+  NikuState<T> get copied => NikuState(
+        all: all,
+        disabled: disabled,
+        dragged: dragged,
+        error: error,
+        focused: focused,
+        hovered: hovered,
+        pressed: pressed,
+        scrolledUnder: scrolledUnder,
+        selected: selected,
+        base: base,
+      );
+}
+
+extension NikuStateTextStyleCopiedDeep on NikuState<NikuTextStyle?> {
+  NikuState<NikuTextStyle?> get copiedDeep {
+    return NikuState(
+      all: all?.copied,
+      disabled: disabled?.copied,
+      dragged: dragged?.copied,
+      error: error?.copied,
+      focused: focused?.copied,
+      hovered: hovered?.copied,
+      pressed: pressed?.copied,
+      scrolledUnder: scrolledUnder?.copied,
+      selected: selected?.copied,
+      base: base?.copied,
+    );
+  }
 }
