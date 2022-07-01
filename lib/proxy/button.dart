@@ -31,9 +31,9 @@ extension ButtonStyleProxy on NikuButton {
   set splashFactory(InteractiveInkFeatureFactory? v) =>
       _style.splashFactory = v;
 
-  get sparkle => _style.splashFactory = InkSparkle.splashFactory;
-  get m2Splash => _style.splashFactory = InkSplash.splashFactory;
-  get m3Splash => _style.splashFactory = InkSparkle.splashFactory;
+  // get sparkle => _style.splashFactory = InkSparkle.splashFactory;
+  // get m2Splash => _style.splashFactory = InkSplash.splashFactory;
+  // get m3Splash => _style.splashFactory = InkSparkle.splashFactory;
 
   // Shorten
   set backgroundColor(Color color) => _style.backgroundColor = color;

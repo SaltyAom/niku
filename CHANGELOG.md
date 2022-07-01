@@ -1,3 +1,7 @@
+# [2.3.1] - 2022/06/11
+Feature:
+  - Remove `.sparkle`, `.m2Splash`, `.m3Splash` to support Flutter < 3
+
 # [2.3.0] - 2022/06/11
 Breaking Change:
   - Rename the following property on `Image`:
