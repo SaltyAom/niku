@@ -1,11 +1,18 @@
+# [2.3.3] - 2022/08/31
+Feature:
+  - Support Flutter 3.3
+  - `..bg..splash` for base now merged with into `InkWell`, and `Material`
+
+Change:
+ - Update `collection` package to `1.16.0`
+
 # [2.3.2] - 2022/06/11
 Feature:
   - Remove `.sparkle`, `.m2Splash`, `.m3Splash` to support Flutter < 3
-=======
+
 # [2.3.1] - 2022/06/16
 Bug Fix:
   - Add `.copiedDeep` to resolve StyleSheet overwrite in `NikuButton`
->>>>>>> feat/tempestissimo
 
 # [2.3.0] - 2022/06/11
 Breaking Change:
