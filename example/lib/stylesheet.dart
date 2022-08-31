@@ -23,7 +23,14 @@ class StyleSheetExample extends StatelessWidget {
           ..apply = StyleSheet.button
           ..color = Colors.green,
         n.Button("Blue Text".n)..apply = StyleSheet.button,
-      ]),
+        n.Box()
+          ..size = [100, 100]
+          ..bg = Colors.blue
+          ..splash = Colors.red
+          ..rounded = 16
+      ])
+        ..fullWidth
+        ..center,
     );
   }
 }

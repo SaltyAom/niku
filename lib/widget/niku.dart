@@ -1021,6 +1021,24 @@ extension PropertyBuilder on Niku {
   }) {
     final l = _latest;
 
+    if (l is ColoredBox) {
+      final color = l.color;
+
+      return _replace((w) {
+        return Material(
+          color: color,
+          child: InkWell(
+            highlightColor: highlightColor,
+            splashColor: splashColor,
+            focusColor: focusColor,
+            hoverColor: hoverColor,
+            onTap: () {},
+            child: w,
+          ),
+        );
+      });
+    }
+
     if (l is InkWell)
       return _replace((w) {
         return InkWell(
@@ -1033,22 +1051,6 @@ extension PropertyBuilder on Niku {
           onTap: () {},
         );
       });
-
-    if (l is ClipRRect) {
-      final radius = l.borderRadius;
-
-      return _add(
-        (w) => InkWell(
-          highlightColor: highlightColor,
-          splashColor: splashColor,
-          focusColor: focusColor,
-          hoverColor: hoverColor,
-          child: w,
-          onTap: () {},
-          borderRadius: radius,
-        ),
-      );
-    }
 
     _add(
       (w) => InkWell(

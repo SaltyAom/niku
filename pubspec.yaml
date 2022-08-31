@@ -1,6 +1,6 @@
 name: niku
 description: Property builder for styling Widget with SwiftUI like pattern
-version: 2.3.2
+version: 2.3.3
 homepage: https://github.com/saltyAom/niku
 
 environment:
@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  collection: ^1.15.0
+  collection: ^1.16.0
   # Wait until cached network image support web platform
   # cached_network_image: ^3.2.0
   # flutter_cache_manager: ^3.3.0
