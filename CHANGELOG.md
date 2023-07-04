@@ -1,3 +1,7 @@
+# [2.4.1] - 2023/07/4
+Feature:
+  - Add `thumbIcon` support for Switch
+
 # [2.4.0] - 2023/07/4
 Feature:
   - Migrate update to Material 3 (Flutter 3.10)

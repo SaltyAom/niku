@@ -29,6 +29,14 @@ class Yorugao extends HookWidget {
           ..onPressed = () {}
           ..fontSize = 16
           ..n.badge = "",
+        n.Switch(listTile.value)
+          ..useThumbIcon(
+            base: Icon(Icons.sunny),
+            selected: Icon(Icons.nightlight),
+          )
+          ..onChanged = (value) {
+            listTile.value = value;
+          },
         n.SwitchListTile(listTile.value)
           ..title = "Switch List Tile".n
           ..useThumbIcon(

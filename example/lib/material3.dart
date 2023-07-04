@@ -135,8 +135,7 @@ class M3Widgets extends HookWidget {
         ..onChanged = (value) {
           sliderValue.value = value;
         },
-      n.Switch()
-        ..value = switchValue.value
+      n.Switch(switchValue.value)
         ..onChanged = (value) {
           switchValue.value = value;
         },

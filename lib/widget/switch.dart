@@ -39,16 +39,18 @@ class NikuSwitch extends StatelessWidget
   FocusNode? focusNode;
   bool? autofocus;
 
+  NikuState<Icon?>? thumbIconState;
   NikuState<Color?>? thumbColorState;
   NikuState<Color?>? trackColorState;
   NikuState<Color?>? overlayColorState;
 
-  NikuSwitch({
+  NikuSwitch(
+    this.value, {
     Key? key,
     this.thumbColorState,
     this.trackColorState,
+    this.thumbIconState,
     this.overlayColorState,
-    this.value,
     this.onChanged,
     this.activeColor,
     this.activeTrackColor,
@@ -69,12 +71,14 @@ class NikuSwitch extends StatelessWidget
     this.splashRadius,
     this.focusNode,
     this.autofocus,
+    Icon? thumbIcon,
     this.adaptive = false,
     this.cupertino = false,
   }) : super(key: key) {
     if (thumbColor != null) thumbColorState = NikuState.all(thumbColor);
     if (trackColor != null) trackColorState = NikuState.all(trackColor);
     if (overlayColor != null) overlayColorState = NikuState.all(overlayColor);
+    if (thumbIcon != null) thumbIconState = NikuState.all(thumbIcon);
   }
 
   factory NikuSwitch.adaptive({
@@ -103,13 +107,14 @@ class NikuSwitch extends StatelessWidget
     Color? thumbColor,
     Color? trackColor,
     Color? overlayColor,
+    Icon? thumbIcon,
   }) =>
       NikuSwitch(
+        value,
         key: key,
         thumbColorState: thumbColorState,
         trackColorState: trackColorState,
         overlayColorState: overlayColorState,
-        value: value,
         onChanged: onChanged,
         activeColor: activeColor,
         activeTrackColor: activeTrackColor,
@@ -130,6 +135,7 @@ class NikuSwitch extends StatelessWidget
         thumbColor: thumbColor,
         trackColor: trackColor,
         overlayColor: overlayColor,
+        thumbIcon: thumbIcon,
         adaptive: true,
       );
 
@@ -159,13 +165,14 @@ class NikuSwitch extends StatelessWidget
     Color? thumbColor,
     Color? trackColor,
     Color? overlayColor,
+    Icon? thumbIcon,
   }) =>
       NikuSwitch(
+        value,
         key: key,
         thumbColorState: thumbColorState,
         trackColorState: trackColorState,
         overlayColorState: overlayColorState,
-        value: value,
         onChanged: onChanged,
         activeColor: activeColor,
         activeTrackColor: activeTrackColor,
@@ -186,12 +193,40 @@ class NikuSwitch extends StatelessWidget
         thumbColor: thumbColor,
         trackColor: trackColor,
         overlayColor: overlayColor,
+        thumbIcon: thumbIcon,
         cupertino: true,
       );
 
   set thumbColor(Color? value) => thumbColorState = NikuState.all(value);
   set trackColor(Color? value) => trackColorState = NikuState.all(value);
   set overlayColor(Color? value) => overlayColorState = NikuState.all(value);
+  set thumbIcon(Icon icon) => this.thumbIconState = NikuState.all(icon);
+
+  void useThumbIcon({
+    Icon? all,
+    Icon? disabled,
+    Icon? dragged,
+    Icon? error,
+    Icon? focused,
+    Icon? hovered,
+    Icon? pressed,
+    Icon? scrolledUnder,
+    Icon? selected,
+    Icon? base,
+  }) {
+    this.thumbIconState = NikuState(
+      all: all,
+      disabled: disabled,
+      dragged: dragged,
+      error: error,
+      focused: focused,
+      hovered: hovered,
+      pressed: pressed,
+      scrolledUnder: scrolledUnder,
+      selected: selected,
+      base: base,
+    );
+  }
 
   NikuSwitch get self => this;
 
@@ -221,12 +256,13 @@ class NikuSwitch extends StatelessWidget
     thumbColorState = v.thumbColorState ?? thumbColorState;
     trackColorState = v.trackColorState ?? trackColorState;
     overlayColorState = v.overlayColorState ?? overlayColorState;
+    thumbIconState = v.thumbIconState ?? thumbIconState;
 
     $parent..$merge(v.$parent);
   }
 
   NikuSwitch get copied => NikuSwitch(
-        value: value,
+        value,
         onChanged: onChanged,
         activeColor: activeColor,
         activeTrackColor: activeTrackColor,
@@ -247,6 +283,7 @@ class NikuSwitch extends StatelessWidget
         thumbColorState: thumbColorState,
         trackColorState: trackColorState,
         overlayColorState: overlayColorState,
+        thumbIconState: thumbIconState,
         adaptive: adaptive,
         cupertino: cupertino,
       )..$parent.$merge($parent);
@@ -282,6 +319,7 @@ class NikuSwitch extends StatelessWidget
               onChanged: onChanged,
               activeColor: activeColor,
               trackColor: inactiveTrackColor,
+              thumbColor: thumbColorState?.base,
             ),
           ),
         );
@@ -311,6 +349,7 @@ class NikuSwitch extends StatelessWidget
         splashRadius: splashRadius,
         focusNode: focusNode,
         autofocus: autofocus ?? false,
+        thumbIcon: thumbIconState?.value,
       );
 
     return Switch(
@@ -335,6 +374,7 @@ class NikuSwitch extends StatelessWidget
       splashRadius: splashRadius,
       focusNode: focusNode,
       autofocus: autofocus ?? false,
+      thumbIcon: thumbIconState?.value,
     );
   }
 }
