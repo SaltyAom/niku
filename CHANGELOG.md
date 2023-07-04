@@ -1,4 +1,8 @@
 # [2.4.1] - 2023/07/4
+Bug fix:
+  - .apply for `SwitchListTile`
+
+# [2.4.1] - 2023/07/4
 Feature:
   - Add `thumbIcon` support for Switch
 
