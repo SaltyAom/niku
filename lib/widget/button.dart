@@ -4,7 +4,7 @@ import 'package:niku/proxy/proxy.dart';
 import '../objects/objects.dart';
 import '../macros/macros.dart';
 
-enum NikuButtonType { Text, Elevated, Outlined }
+enum NikuButtonType { Text, Elevated, Outlined, Filled, Tonal }
 
 // ignore: must_be_immutable
 class NikuButton extends StatelessWidget
@@ -172,6 +172,104 @@ class NikuButton extends StatelessWidget
         enable: enable,
       );
 
+  factory NikuButton.filled(
+    Widget child, {
+    Key? key,
+    VoidCallback? onPressed,
+    VoidCallback? onLongPress,
+    NikuButtonStyle? style,
+    FocusNode? focusNode,
+    bool? autofocus,
+    Clip? clipBehavior,
+    bool enable = true,
+  }) =>
+      NikuButton(
+        child,
+        type: NikuButtonType.Filled,
+        onPressed: onPressed,
+        onLongPress: onLongPress,
+        style: style,
+        focusNode: focusNode,
+        clipBehavior: clipBehavior,
+        enable: enable,
+        key: key,
+      );
+
+  factory NikuButton.filledIcon(
+    Widget label,
+    Widget icon, {
+    Key? key,
+    VoidCallback? onPressed,
+    VoidCallback? onLongPress,
+    NikuButtonStyle? style,
+    FocusNode? focusNode,
+    bool? autofocus,
+    Clip? clipBehavior,
+    bool enable = true,
+  }) =>
+      NikuButton(
+        SizedBox.shrink(),
+        key: key,
+        type: NikuButtonType.Filled,
+        onPressed: onPressed,
+        onLongPress: onLongPress,
+        style: style,
+        focusNode: focusNode,
+        clipBehavior: clipBehavior,
+        label: label,
+        icon: icon,
+        enable: enable,
+      );
+
+  factory NikuButton.tonal(
+    Widget child, {
+    Key? key,
+    VoidCallback? onPressed,
+    VoidCallback? onLongPress,
+    NikuButtonStyle? style,
+    FocusNode? focusNode,
+    bool? autofocus,
+    Clip? clipBehavior,
+    bool enable = true,
+  }) =>
+      NikuButton(
+        child,
+        type: NikuButtonType.Tonal,
+        onPressed: onPressed,
+        onLongPress: onLongPress,
+        style: style,
+        focusNode: focusNode,
+        clipBehavior: clipBehavior,
+        enable: enable,
+        key: key,
+      );
+
+  factory NikuButton.tonalIcon(
+    Widget label,
+    Widget icon, {
+    Key? key,
+    VoidCallback? onPressed,
+    VoidCallback? onLongPress,
+    NikuButtonStyle? style,
+    FocusNode? focusNode,
+    bool? autofocus,
+    Clip? clipBehavior,
+    bool enable = true,
+  }) =>
+      NikuButton(
+        SizedBox.shrink(),
+        key: key,
+        type: NikuButtonType.Tonal,
+        onPressed: onPressed,
+        onLongPress: onLongPress,
+        style: style,
+        focusNode: focusNode,
+        clipBehavior: clipBehavior,
+        label: label,
+        icon: icon,
+        enable: enable,
+      );
+
   void useTextStyle(NikuTextStyle Function(NikuTextStyle) cb) {
     if (style == null) style = NikuButtonStyle();
 
@@ -219,6 +317,50 @@ class NikuButton extends StatelessWidget
       )..$parent.$merge($parent);
 
   widget(context) {
+    if (type == NikuButtonType.Filled)
+      return (label != null && icon != null)
+          ? FilledButton.icon(
+              label: label!,
+              icon: icon!,
+              onPressed: enable ? onPressed : null,
+              onLongPress: enable ? onLongPress : null,
+              style: style?.value,
+              focusNode: focusNode,
+              autofocus: autofocus ?? false,
+              clipBehavior: clipBehavior ?? Clip.none,
+            )
+          : FilledButton(
+              child: child,
+              onPressed: enable ? onPressed : null,
+              onLongPress: enable ? onLongPress : null,
+              style: style?.value,
+              focusNode: focusNode,
+              autofocus: autofocus ?? false,
+              clipBehavior: clipBehavior ?? Clip.none,
+            );
+
+    if (type == NikuButtonType.Tonal)
+      return (label != null && icon != null)
+          ? FilledButton.tonalIcon(
+              label: label!,
+              icon: icon!,
+              onPressed: enable ? onPressed : null,
+              onLongPress: enable ? onLongPress : null,
+              style: style?.value,
+              focusNode: focusNode,
+              autofocus: autofocus ?? false,
+              clipBehavior: clipBehavior ?? Clip.none,
+            )
+          : FilledButton.tonal(
+              child: child,
+              onPressed: enable ? onPressed : null,
+              onLongPress: enable ? onLongPress : null,
+              style: style?.value,
+              focusNode: focusNode,
+              autofocus: autofocus ?? false,
+              clipBehavior: clipBehavior ?? Clip.none,
+            );
+
     if (type == NikuButtonType.Elevated)
       return (label != null && icon != null)
           ? ElevatedButton.icon(

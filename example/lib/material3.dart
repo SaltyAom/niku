@@ -15,13 +15,13 @@ class Material3App extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
         colorSchemeSeed: Colors.green,
-        splashFactory: InkSparkle.splashFactory,
+        // splashFactory: InkSparkle.splashFactory,
       ),
       darkTheme: ThemeData(
         useMaterial3: true,
         colorSchemeSeed: Colors.green,
         brightness: Brightness.dark,
-        splashFactory: InkSparkle.splashFactory,
+        // splashFactory: InkSparkle.splashFactory,
       ),
       home: const Material3Page(),
     );
@@ -100,11 +100,14 @@ class M3HomePage extends StatelessWidget {
   }
 }
 
-class M3Widgets extends StatelessWidget {
+class M3Widgets extends HookWidget {
   const M3Widgets({Key? key}) : super(key: key);
 
   @override
   build(context) {
+    final sliderValue = useState(50.0);
+    final switchValue = useState(false);
+
     pop() {
       Navigator.of(context).pop();
     }
@@ -112,7 +115,7 @@ class M3Widgets extends StatelessWidget {
     showAlert() {
       n.showDialog(
         context: context,
-        builder: (context) => n.Alert.adaptive(
+        builder: (context) => n.Alert(
           title: "Alert".n,
           content: "This is an alert".n,
           actions: [
@@ -127,10 +130,46 @@ class M3Widgets extends StatelessWidget {
     }
 
     return n.Column([
-      n.Button("Show Alert".n)..onPressed = showAlert,
+      n.Slider(sliderValue.value)
+        ..max = 100
+        ..onChanged = (value) {
+          sliderValue.value = value;
+        },
+      n.Switch()
+        ..value = switchValue.value
+        ..onChanged = (value) {
+          switchValue.value = value;
+        },
+      n.Button.tonal("Show Alert".n)..onPressed = showAlert,
+      n.Row([
+        n.Button.tonal("Show date picker".n)
+          ..onPressed = () {
+            showDatePicker(
+              context: context,
+              initialDate: DateTime.now(),
+              firstDate: DateTime(2007),
+              lastDate: DateTime(2025),
+            );
+          },
+        n.Button.tonal("Show time picker".n)
+          ..onPressed = () {
+            showTimePicker(
+              context: context,
+              initialTime: TimeOfDay.now(),
+            );
+          }
+      ])
+        ..center
+        ..gap = 16
+        ..mt = 8,
+      n.TextFormField.label("Form")
+        ..isFilled
+        ..textInputAction = TextInputAction.done
     ])
       ..center
-      ..wFull;
+      ..wFull
+      ..gap = 8
+      ..px = 16;
   }
 }
 

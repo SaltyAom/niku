@@ -74,6 +74,9 @@ class NikuTextFormField extends StatelessWidget
   ScrollController? scrollController;
   String? restorationId;
   bool? enableIMEPersonalizedLearning;
+  EditableTextContextMenuBuilder? contextMenuBuilder;
+  TextMagnifierConfiguration? magnifierConfiguration;
+  SpellCheckConfiguration? spellCheckConfiguration;
 
   bool adaptive = false;
   bool cupertino = false;
@@ -135,6 +138,9 @@ class NikuTextFormField extends StatelessWidget
     this.restorationId,
     this.autovalidateMode,
     this.enableIMEPersonalizedLearning,
+    this.contextMenuBuilder,
+    this.magnifierConfiguration,
+    this.spellCheckConfiguration,
     this.adaptive = false,
     this.cupertino = false,
   }) : super(key: key) {
@@ -198,6 +204,9 @@ class NikuTextFormField extends StatelessWidget
     ScrollController? scrollController,
     String? restorationId,
     bool? enableIMEPersonalizedLearning,
+    EditableTextContextMenuBuilder? contextMenuBuilder,
+    TextMagnifierConfiguration? magnifierConfiguration,
+    SpellCheckConfiguration? spellCheckConfiguration,
     bool adaptive = false,
     bool cupertino = false,
   }) =>
@@ -256,6 +265,9 @@ class NikuTextFormField extends StatelessWidget
         scrollController: scrollController,
         restorationId: restorationId,
         enableIMEPersonalizedLearning: enableIMEPersonalizedLearning,
+        contextMenuBuilder: contextMenuBuilder,
+        magnifierConfiguration: magnifierConfiguration,
+        spellCheckConfiguration: spellCheckConfiguration,
         adaptive: adaptive,
         cupertino: cupertino,
       );
@@ -317,6 +329,9 @@ class NikuTextFormField extends StatelessWidget
     ScrollController? scrollController,
     String? restorationId,
     bool? enableIMEPersonalizedLearning,
+    EditableTextContextMenuBuilder? contextMenuBuilder,
+    TextMagnifierConfiguration? magnifierConfiguration,
+    SpellCheckConfiguration? spellCheckConfiguration,
     bool adaptive = false,
     bool cupertino = false,
   }) =>
@@ -376,6 +391,9 @@ class NikuTextFormField extends StatelessWidget
         scrollController: scrollController,
         restorationId: restorationId,
         enableIMEPersonalizedLearning: enableIMEPersonalizedLearning,
+        contextMenuBuilder: contextMenuBuilder,
+        magnifierConfiguration: magnifierConfiguration,
+        spellCheckConfiguration: spellCheckConfiguration,
         adaptive: adaptive,
         cupertino: cupertino,
       );
@@ -436,6 +454,9 @@ class NikuTextFormField extends StatelessWidget
     ScrollController? scrollController,
     String? restorationId,
     bool? enableIMEPersonalizedLearning,
+    EditableTextContextMenuBuilder? contextMenuBuilder,
+    TextMagnifierConfiguration? magnifierConfiguration,
+    SpellCheckConfiguration? spellCheckConfiguration,
   }) =>
       NikuTextFormField(
         label: label,
@@ -493,6 +514,9 @@ class NikuTextFormField extends StatelessWidget
         restorationId: restorationId,
         autovalidateMode: autovalidateMode,
         enableIMEPersonalizedLearning: enableIMEPersonalizedLearning,
+        contextMenuBuilder: contextMenuBuilder,
+        magnifierConfiguration: magnifierConfiguration,
+        spellCheckConfiguration: spellCheckConfiguration,
         adaptive: true,
       );
 
@@ -552,6 +576,9 @@ class NikuTextFormField extends StatelessWidget
     ScrollController? scrollController,
     String? restorationId,
     bool? enableIMEPersonalizedLearning,
+    EditableTextContextMenuBuilder? contextMenuBuilder,
+    TextMagnifierConfiguration? magnifierConfiguration,
+    SpellCheckConfiguration? spellCheckConfiguration,
   }) =>
       NikuTextFormField(
         label: label,
@@ -609,6 +636,9 @@ class NikuTextFormField extends StatelessWidget
         restorationId: restorationId,
         autovalidateMode: autovalidateMode,
         enableIMEPersonalizedLearning: enableIMEPersonalizedLearning,
+        contextMenuBuilder: contextMenuBuilder,
+        magnifierConfiguration: magnifierConfiguration,
+        spellCheckConfiguration: spellCheckConfiguration,
         cupertino: true,
       );
 
@@ -692,6 +722,10 @@ class NikuTextFormField extends StatelessWidget
     restorationId = v.restorationId ?? restorationId;
     enableIMEPersonalizedLearning =
         v.enableIMEPersonalizedLearning ?? enableIMEPersonalizedLearning;
+    contextMenuBuilder = v.contextMenuBuilder ?? contextMenuBuilder;
+    magnifierConfiguration = v.magnifierConfiguration ?? magnifierConfiguration;
+    spellCheckConfiguration =
+        v.spellCheckConfiguration ?? spellCheckConfiguration;
 
     $parent..$merge(v.$parent);
   }
@@ -748,6 +782,9 @@ class NikuTextFormField extends StatelessWidget
         enableIMEPersonalizedLearning: enableIMEPersonalizedLearning,
         adaptive: adaptive,
         cupertino: cupertino,
+        contextMenuBuilder: contextMenuBuilder,
+        magnifierConfiguration: magnifierConfiguration,
+        spellCheckConfiguration: spellCheckConfiguration,
       )..$parent.$merge($parent);
 
   TextFormField _buildMaterial() => TextFormField(
@@ -800,6 +837,9 @@ class NikuTextFormField extends StatelessWidget
         scrollController: scrollController,
         restorationId: restorationId,
         enableIMEPersonalizedLearning: enableIMEPersonalizedLearning ?? true,
+        contextMenuBuilder: contextMenuBuilder,
+        magnifierConfiguration: magnifierConfiguration,
+        spellCheckConfiguration: spellCheckConfiguration,
       );
 
   CupertinoTextField _buildCupertino() => CupertinoTextField(
@@ -846,6 +886,9 @@ class NikuTextFormField extends StatelessWidget
         scrollController: scrollController,
         restorationId: restorationId,
         enableIMEPersonalizedLearning: enableIMEPersonalizedLearning ?? true,
+        contextMenuBuilder: contextMenuBuilder,
+        magnifierConfiguration: magnifierConfiguration,
+        spellCheckConfiguration: spellCheckConfiguration,
       );
 
   widget(context) {

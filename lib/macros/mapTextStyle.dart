@@ -67,19 +67,6 @@ abstract class MapTextStyleMacro {
   set overflow(TextOverflow v) => _style.overflow = v;
   set package(String v) => _style.package = v;
 
-  void get h1 => _style.h1;
-  void get h2 => _style.h2;
-  void get h3 => _style.h3;
-  void get h4 => _style.h4;
-  void get h5 => _style.h5;
-  void get h6 => _style.h6;
-  void get body1 => _style.body1;
-  void get body2 => _style.body2;
-  void get subtitle1 => _style.subtitle1;
-  void get subtitle2 => _style.subtitle2;
-  void get button => _style.button;
-  void get overline => _style.overline;
-
   /* Material 3 Addition */
   void get displayLarge => _style.displayLarge;
   void get displayMedium => _style.displayMedium;

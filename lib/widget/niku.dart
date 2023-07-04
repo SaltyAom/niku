@@ -866,21 +866,6 @@ extension PropertyBuilder on Niku {
     ScrollNotificationPredicate? notificationPredicate,
     bool? interactive,
     ScrollbarOrientation? scrollbarOrientation,
-    @Deprecated(
-      'Use ScrollbarThemeData.trackVisibility to resolve based on the current state instead. '
-      'This feature was deprecated after v2.9.0-1.0.pre.',
-    )
-        bool? showTrackOnHover,
-    @Deprecated(
-      'Use thumbVisibility instead. '
-      'This feature was deprecated after v2.9.0-1.0.pre.',
-    )
-        bool? isAlwaysShown,
-    @Deprecated(
-      'Use ScrollbarThemeData.trackVisibility to resolve based on the current state instead. '
-      'This feature was deprecated after v2.9.0-1.0.pre.',
-    )
-        double? hoverThickness,
   }) =>
       _add((w) => Scrollbar(
             child: w,
@@ -892,12 +877,29 @@ extension PropertyBuilder on Niku {
             notificationPredicate: notificationPredicate,
             interactive: interactive,
             scrollbarOrientation: scrollbarOrientation,
-            showTrackOnHover: showTrackOnHover,
-            isAlwaysShown: isAlwaysShown,
-            hoverThickness: hoverThickness,
           ));
 
   void get scrollable => _add((w) => SingleChildScrollView(child: w));
+
+  void useScrollable({
+    ScrollController? controller,
+    Axis scrollDirection = Axis.vertical,
+    bool? primary,
+    bool reverse = false,
+    ScrollPhysics? physics,
+    DragStartBehavior dragStartBehavior = DragStartBehavior.start,
+    String? restorationId,
+  }) =>
+      _add((w) => SingleChildScrollView(
+            child: w,
+            controller: controller,
+            scrollDirection: scrollDirection,
+            primary: primary,
+            reverse: reverse,
+            physics: physics,
+            dragStartBehavior: dragStartBehavior,
+            restorationId: restorationId,
+          ));
 
   void useScrollView({
     ScrollController? controller,
@@ -1376,5 +1378,108 @@ extension PropertyBuilder on Niku {
         onNotification: onNotification,
       ),
     );
+  }
+
+  set highlightColor(Color color) {
+    if (_latest is Theme) {
+      final theme = (_latest as Theme).data.copyWith(highlightColor: color);
+
+      _replace(
+        (w) => Theme(
+          child: w,
+          data: theme,
+        ),
+      );
+    } else
+      _add(
+        (w) => Theme(
+          child: w,
+          data: ThemeData(highlightColor: color),
+        ),
+      );
+  }
+
+  set focusColor(Color color) {
+    if (_latest is Theme) {
+      final theme = (_latest as Theme).data.copyWith(focusColor: color);
+
+      _replace(
+        (w) => Theme(
+          child: w,
+          data: theme,
+        ),
+      );
+    } else
+      _add(
+        (w) => Theme(
+          child: w,
+          data: ThemeData(focusColor: color),
+        ),
+      );
+  }
+
+  set splashColor(Color color) {
+    if (_latest is Theme) {
+      final theme = (_latest as Theme).data.copyWith(splashColor: color);
+
+      _replace(
+        (w) => Theme(
+          child: w,
+          data: theme,
+        ),
+      );
+    } else
+      _add(
+        (w) => Theme(
+          child: w,
+          data: ThemeData(splashColor: color),
+        ),
+      );
+  }
+
+  set shadowColor(Color color) {
+    if (_latest is Theme) {
+      final theme = (_latest as Theme).data.copyWith(shadowColor: color);
+
+      _replace(
+        (w) => Theme(
+          child: w,
+          data: theme,
+        ),
+      );
+    } else
+      _add(
+        (w) => Theme(
+          child: w,
+          data: ThemeData(shadowColor: color),
+        ),
+      );
+  }
+
+  set splashFactory(InteractiveInkFeatureFactory splashFactory) {
+    if (_latest is Theme) {
+      final theme =
+          (_latest as Theme).data.copyWith(splashFactory: splashFactory);
+
+      _replace(
+        (w) => Theme(
+          child: w,
+          data: theme,
+        ),
+      );
+    } else
+      _add(
+        (w) => Theme(
+          child: w,
+          data: ThemeData(splashFactory: splashFactory),
+        ),
+      );
+  }
+
+  set badge(String label) {
+    _add((w) => Badge(
+          child: w,
+          label: label == "" ? null : Text(label),
+        ));
   }
 }

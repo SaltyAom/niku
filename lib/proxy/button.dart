@@ -560,20 +560,6 @@ abstract class ButtonStyleTextStyleProxy {
   void get dashed => _all.decorationStyle = TextDecorationStyle.dashed;
   void get wavy => _all.decorationStyle = TextDecorationStyle.wavy;
 
-  // * textThemeStyleMacro
-  get h1 => _all.h1;
-  get h2 => _all.h2;
-  get h3 => _all.h3;
-  get h4 => _all.h4;
-  get h5 => _all.h5;
-  get h6 => _all.h6;
-  get body1 => _all.body1;
-  get body2 => _all.body2;
-  get subtitle1 => _all.subtitle1;
-  get subtitle2 => _all.subtitle2;
-  get overline => _all.overline;
-  get button => _all.button;
-
   get displayLarge => _all.displayLarge;
   get displayMedium => _all.displayMedium;
   get displaySmall => _all.displaySmall;

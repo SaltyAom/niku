@@ -13,13 +13,10 @@ class Styles {
     ..splashColor = Colors.transparent;
 
   static final icon = subIcon.copied
-    ..apply = subIcon
     ..iconSize = 48
     ..color = Colors.grey.shade100;
 
-  static final sideIcon = subIcon.copied
-    ..apply = subIcon
-    ..iconSize = 24;
+  static final sideIcon = subIcon.copied..iconSize = 24;
 }
 
 class Music extends HookWidget {

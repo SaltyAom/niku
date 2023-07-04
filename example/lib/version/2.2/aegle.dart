@@ -1,4 +1,3 @@
-import 'package:example/progress.dart';
 import 'package:niku/niku.dart';
 import 'package:niku/namespace.dart' as n;
 
@@ -27,7 +26,7 @@ class AegleSeeker extends HookWidget {
         ],
       ),
       body: n.Column([
-        n.Text("AegleSeeker")..h4,
+        n.Text("AegleSeeker")..displayMedium,
         n.Button(Text("Toggle"))
           ..onPressed = () {
             toggle.value = !toggle.value;

@@ -807,4 +807,13 @@ class NikuExplictParentBuilder {
           scaleUpdate: scaleUpdate,
           scaleEnd: scaleEnd,
         );
+
+  set highlightColor(Color color) => $parent..highlightColor = color;
+  set focusColor(Color color) => $parent..focusColor = color;
+  set splashColor(Color color) => $parent..splashColor = color;
+  set shadowColor(Color color) => $parent..shadowColor = color;
+  set splashFactory(InteractiveInkFeatureFactory splashFactory) =>
+      $parent..splashFactory = splashFactory;
+
+  set badge(String badge) => $parent..badge = badge;
 }

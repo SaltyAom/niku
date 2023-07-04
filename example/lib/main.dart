@@ -10,6 +10,8 @@ class MyApp extends StatelessWidget {
   const MyApp();
 
   build(context) {
+    // return Material3App();
+
     return MaterialApp(
       title: "Niku",
       debugShowCheckedModeBanner: false,
@@ -17,9 +19,9 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.blue,
         primarySwatch: Colors.blue,
         useMaterial3: true,
+        // splashFactory: InkSparkle.splashFactory,
       ),
-      darkTheme: ThemeData.dark(),
-      home: Tempestissimo(),
+      home: Yorugao(),
     );
   }
 }

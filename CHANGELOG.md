@@ -1,3 +1,31 @@
+# [2.4.0] - 2023/07/4
+Feature:
+  - Migrate update to Material 3 (Flutter 3.10)
+  - New Widget for Material 3:
+    - ActionChip
+    - SwitchListTile
+  - Add factory method for Material 3:
+    - IconButton
+      - outlined
+      - tonal
+      - filled
+    - Button
+      - outlined
+      - tonal
+      - filled
+  - New TextFormField property:
+    - contextMenuBuilder
+    - magnifierConfiguration
+    - spellCheckConfiguration
+  - New parent builder:
+    - badge
+
+  Bug Fix:
+    - Memory leak in `useTransition`
+
+  Fix:
+    - Deprecated text factory of h1-h6, subtitle, headline, overline, button
+
 # [2.3.3] - 2022/08/31
 Feature:
   - Support Flutter 3.3

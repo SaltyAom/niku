@@ -66,9 +66,7 @@ class General extends HookWidget {
       ).niku
         ..theme = ThemeData(highlightColor: Colors.transparent),
       body: n.Column([
-        n.Text("Awesome Niku")
-          ..h4
-          ..mb = 24,
+        n.Text("Awesome Niku")..mb = 24,
         n.TextFormField()
           ..labelText = "Value"
           ..usePrefixStyle((v) => v..color = Colors.white)
@@ -151,7 +149,6 @@ class NetworkImageExample extends StatelessWidget {
           ]
           ..mx = 20,
         n.Text("Network Image")
-          ..h6
           ..useDarkMode(
             context,
             (v, isDarkTheme) =>
@@ -198,7 +195,6 @@ class Freezed extends HookWidget {
           ..mb = 16
           ..deps = [freezed.value],
         n.Text("${option.value}")
-          ..h6
           ..bold
           ..useScreen(
             context,

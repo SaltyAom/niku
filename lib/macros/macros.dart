@@ -28,6 +28,7 @@ export 'gap.dart';
 export 'imageRepeat.dart';
 export 'insetPadding.dart';
 export 'keyboardType.dart';
+export 'labelPadding.dart';
 export 'listTileControlAffinity.dart';
 export 'mainAxisAlignment.dart';
 export 'mainAxisSize.dart';

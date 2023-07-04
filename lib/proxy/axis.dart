@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:niku/objects/objects.dart';
 
 import '../widget/niku.dart';
 

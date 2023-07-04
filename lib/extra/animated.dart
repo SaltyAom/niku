@@ -33,7 +33,7 @@ class NikuAnimatedState<T> extends State<NikuAnimated>
 
   T? previous;
 
-  late final AnimationController controller;
+  late AnimationController controller;
   Animation<T>? animation;
 
   @override
@@ -43,10 +43,21 @@ class NikuAnimatedState<T> extends State<NikuAnimated>
     previous = widget.value;
 
     controller = AnimationController(vsync: this, duration: widget.duration);
-    animation = Tween<T>(
-      begin: widget.value,
-      end: widget.value,
-    ).animate(controller);
+    animation =
+        Tween<T>(begin: previous, end: widget.value).animate(CurvedAnimation(
+      parent: controller,
+      curve: widget.curve,
+    ))
+          ..addListener(() {
+            setState(() {});
+          });
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+
+    super.dispose();
   }
 
   handleChange() {
@@ -54,17 +65,19 @@ class NikuAnimatedState<T> extends State<NikuAnimated>
       return;
     }
 
-    final tween = Tween<T>(begin: previous, end: widget.value);
-    previous = widget.value;
+    controller.dispose();
+    controller = AnimationController(vsync: this, duration: widget.duration);
 
-    animation = tween.animate(
-      CurvedAnimation(
-        parent: controller,
-        curve: widget.curve,
-      ),
-    )..addListener(() {
-        setState(() {});
-      });
+    animation =
+        Tween<T>(begin: previous, end: widget.value).animate(CurvedAnimation(
+      parent: controller,
+      curve: widget.curve,
+    ))
+          ..addListener(() {
+            setState(() {});
+          });
+
+    previous = widget.value;
 
     controller.reset();
     controller.forward();
@@ -86,7 +99,7 @@ class NikuAnimatedColor extends State<NikuAnimated>
 
   Color? previous;
 
-  late final AnimationController controller;
+  late AnimationController controller;
   Animation<Color?>? animation;
 
   @override
@@ -97,7 +110,20 @@ class NikuAnimatedColor extends State<NikuAnimated>
 
     controller = AnimationController(vsync: this, duration: widget.duration);
     animation =
-        ColorTween(begin: previous, end: widget.value).animate(controller);
+        ColorTween(begin: previous, end: widget.value).animate(CurvedAnimation(
+      parent: controller,
+      curve: widget.curve,
+    ))
+          ..addListener(() {
+            setState(() {});
+          });
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+
+    super.dispose();
   }
 
   handleChange() {
@@ -105,17 +131,19 @@ class NikuAnimatedColor extends State<NikuAnimated>
       return;
     }
 
-    final tween = ColorTween(begin: previous, end: widget.value);
-    previous = widget.value;
+    controller.dispose();
+    controller = AnimationController(vsync: this, duration: widget.duration);
 
-    animation = tween.animate(
-      CurvedAnimation(
-        parent: controller,
-        curve: widget.curve,
-      ),
-    )..addListener(() {
-        setState(() {});
-      });
+    animation =
+        ColorTween(begin: previous, end: widget.value).animate(CurvedAnimation(
+      parent: controller,
+      curve: widget.curve,
+    ))
+          ..addListener(() {
+            setState(() {});
+          });
+
+    previous = widget.value;
 
     controller.reset();
     controller.forward();

@@ -13,6 +13,7 @@ typedef On = NikuOn;
 typedef Screen = NikuScreen;
 typedef Animated<T> = NikuAnimated<T>;
 
+typedef ActionChip = NikuActionChip;
 typedef Alert = NikuAlert;
 typedef Button = NikuButton;
 typedef Checkbox = NikuCheckbox;
@@ -37,6 +38,7 @@ typedef SelectableText = NikuSelectableText;
 typedef Slider = NikuSlider;
 typedef Stack = NikuStack;
 typedef Switch = NikuSwitch;
+typedef SwitchListTile = NikuSwitchListTile;
 typedef Text = NikuText;
 typedef TextFormField = NikuTextFormField;
 typedef TextSpan = NikuTextSpan;

@@ -18,6 +18,9 @@ class Tempestissimo extends HookWidget {
     final page = useState(0);
 
     return Scaffold(
+      appBar: AppBar(
+        title: "Hi".n,
+      ),
       bottomNavigationBar: NavigationBar(
         onDestinationSelected: (int index) {
           page.value = index;
@@ -96,7 +99,7 @@ class Tempestissimo extends HookWidget {
           ..wMax = 450,
         "Rich Text: ".n.rich
           ..useSpan((w) => w
-            ..text = "Span"
+            ..text = "Span "
             ..color = Colors.black
             ..children = [
               "with ".n.span,

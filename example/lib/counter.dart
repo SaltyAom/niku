@@ -21,9 +21,7 @@ class Counter extends HookWidget {
 
     return Scaffold(
       body: n.Column([
-        n.Text(count.value.toString())
-          ..center
-          ..h4,
+        n.Text(count.value.toString())..center,
         n.Column([
           n.Button(n.Text("Increment"))
             ..onPressed = () {

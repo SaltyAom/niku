@@ -6,19 +6,6 @@ extension NikuStringTransform on String {
   NikuText get n => NikuText(this);
   NikuText get asNiku => NikuText(this);
 
-  NikuText get h1 => n..h1;
-  NikuText get h2 => n..h2;
-  NikuText get h3 => n..h3;
-  NikuText get h4 => n..h4;
-  NikuText get h5 => n..h5;
-  NikuText get h6 => n..h6;
-  NikuText get body1 => n..body1;
-  NikuText get body2 => n..body2;
-  NikuText get subtitle1 => n..subtitle1;
-  NikuText get subtitle2 => n..subtitle2;
-  NikuText get overline => n..overline;
-  NikuText get button => n..button;
-
   NikuText get displayLarge => n..displayLarge;
   NikuText get displayMedium => n..displayMedium;
   NikuText get displaySmall => n..displaySmall;
