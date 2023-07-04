@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  collection: ^1.17.2
+  collection: ^1.17.1
   # Wait until cached network image support web platform
   # cached_network_image: ^3.2.0
   # flutter_cache_manager: ^3.3.0

@@ -58,31 +58,6 @@ abstract class TextStyleProxy {
 
   static TextTheme _theme(BuildContext context) => _theme(context);
 
-  set h1(BuildContext context) =>
-      _style.apply = _theme(context).headline1?.asNiku;
-  set h2(BuildContext context) =>
-      _style.apply = _theme(context).headline2?.asNiku;
-  set h3(BuildContext context) =>
-      _style.apply = _theme(context).headline3?.asNiku;
-  set h4(BuildContext context) =>
-      _style.apply = _theme(context).headline4?.asNiku;
-  set h5(BuildContext context) =>
-      _style.apply = _theme(context).headline5?.asNiku;
-  set h6(BuildContext context) =>
-      _style.apply = _theme(context).headline6?.asNiku;
-  set body1(BuildContext context) =>
-      _style.apply = _theme(context).bodyText1?.asNiku;
-  set body2(BuildContext context) =>
-      _style.apply = _theme(context).bodyText2?.asNiku;
-  set subtitle1(BuildContext context) =>
-      _style.apply = _theme(context).subtitle1?.asNiku;
-  set subtitle2(BuildContext context) =>
-      _style.apply = _theme(context).subtitle2?.asNiku;
-  set overline(BuildContext context) =>
-      _style.apply = _theme(context).overline?.asNiku;
-  set button(BuildContext context) =>
-      _style.apply = _theme(context).button?.asNiku;
-
   /* Material 3 addition */
   set displayLarge(BuildContext context) =>
       _style.apply = _theme(context).displayLarge?.asNiku;
