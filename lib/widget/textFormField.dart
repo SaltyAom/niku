@@ -874,7 +874,7 @@ class NikuTextFormField extends StatelessWidget
         onTap: onTap,
         onEditingComplete: onEditingComplete,
         inputFormatters: inputFormatters,
-        enabled: enabled,
+        enabled: enabled ?? true,
         cursorWidth: cursorWidth ?? 2,
         cursorHeight: cursorHeight,
         cursorRadius: cursorRadius ?? const Radius.circular(2.0),
