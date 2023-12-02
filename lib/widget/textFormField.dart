@@ -60,7 +60,7 @@ class NikuTextFormField extends StatelessWidget
   FormFieldSetter<String>? onSaved;
   FormFieldValidator<String>? validator;
   List<TextInputFormatter>? inputFormatters;
-  bool? enabled;
+  bool enabled;
   double? cursorWidth;
   double? cursorHeight;
   Radius? cursorRadius;
@@ -124,7 +124,6 @@ class NikuTextFormField extends StatelessWidget
     this.onSaved,
     this.validator,
     this.inputFormatters,
-    this.enabled,
     this.cursorWidth,
     this.cursorHeight,
     this.cursorRadius,
@@ -145,6 +144,7 @@ class NikuTextFormField extends StatelessWidget
     this.spellCheckConfiguration,
     this.adaptive = false,
     this.cupertino = false,
+    this.enabled = true,
   }) : super(key: key) {
     this.label = label ?? (labelText != null ? Text(labelText) : null);
     this.hintText = hintText;
