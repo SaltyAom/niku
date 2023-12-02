@@ -60,7 +60,7 @@ class NikuTextFormField extends StatelessWidget
   FormFieldSetter<String>? onSaved;
   FormFieldValidator<String>? validator;
   List<TextInputFormatter>? inputFormatters;
-  bool? enabled;
+  bool enabled;
   double? cursorWidth;
   double? cursorHeight;
   Radius? cursorRadius;
@@ -190,7 +190,7 @@ class NikuTextFormField extends StatelessWidget
     FormFieldSetter<String>? onSaved,
     FormFieldValidator<String>? validator,
     List<TextInputFormatter>? inputFormatters,
-    bool? enabled,
+    bool enabled,
     double? cursorWidth,
     double? cursorHeight,
     Radius? cursorRadius,
@@ -315,7 +315,7 @@ class NikuTextFormField extends StatelessWidget
     FormFieldSetter<String>? onSaved,
     FormFieldValidator<String>? validator,
     List<TextInputFormatter>? inputFormatters,
-    bool? enabled,
+    bool enabled,
     double? cursorWidth,
     double? cursorHeight,
     Radius? cursorRadius,
@@ -440,7 +440,7 @@ class NikuTextFormField extends StatelessWidget
     FormFieldSetter<String>? onSaved,
     FormFieldValidator<String>? validator,
     List<TextInputFormatter>? inputFormatters,
-    bool? enabled,
+    bool enabled,
     double? cursorWidth,
     double? cursorHeight,
     Radius? cursorRadius,
@@ -562,7 +562,7 @@ class NikuTextFormField extends StatelessWidget
     FormFieldSetter<String>? onSaved,
     FormFieldValidator<String>? validator,
     List<TextInputFormatter>? inputFormatters,
-    bool? enabled,
+    bool enabled,
     double? cursorWidth,
     double? cursorHeight,
     Radius? cursorRadius,
@@ -708,7 +708,7 @@ class NikuTextFormField extends StatelessWidget
     onSaved = v.onSaved ?? onSaved;
     validator = v.validator ?? validator;
     inputFormatters = v.inputFormatters ?? inputFormatters;
-    enabled = v.enabled ?? enabled;
+    enabled = v.enabled;
     cursorWidth = v.cursorWidth ?? cursorWidth;
     cursorHeight = v.cursorHeight ?? cursorHeight;
     cursorRadius = v.cursorRadius ?? cursorRadius;
