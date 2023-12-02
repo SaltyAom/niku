@@ -124,7 +124,7 @@ class NikuTextFormField extends StatelessWidget
     this.onSaved,
     this.validator,
     this.inputFormatters,
-    this.enabled,
+    this.enabled = true,
     this.cursorWidth,
     this.cursorHeight,
     this.cursorRadius,
