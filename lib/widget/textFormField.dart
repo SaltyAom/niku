@@ -60,7 +60,7 @@ class NikuTextFormField extends StatelessWidget
   FormFieldSetter<String>? onSaved;
   FormFieldValidator<String>? validator;
   List<TextInputFormatter>? inputFormatters;
-  bool enabled;
+  bool? enabled;
   double? cursorWidth;
   double? cursorHeight;
   Radius? cursorRadius;
