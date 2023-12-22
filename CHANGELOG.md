@@ -1,3 +1,7 @@
+# [2.4.3] - 2023/12/4
+Bug fix:
+  - Support Flutter 3.16
+
 # [2.4.2] - 2023/07/4
 Bug fix:
   - .apply for `SwitchListTile`
